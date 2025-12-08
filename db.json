@@ -18,7 +18,1079 @@
       "updatedAt": "2024-01-01T10:00:00.000Z"
     }
   ],
-  "attractions": [],
+  "attractions": [
+    {
+      "id": 1,
+      "name": "Great Pyramids of Giza",
+      "city": "Giza",
+      "rating": 4.9,
+      "categories": [
+        "TOP PICKS",
+        "HISTORICAL",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/pyramids.jpg",
+      "description": "The iconic pyramids of Giza, one of the Seven Wonders of the Ancient World.",
+      "paymentId": "pay_0001",
+      "price": "120 $"
+    },
+    {
+      "id": 2,
+      "name": "Karnak Temple",
+      "city": "Luxor",
+      "rating": 4.8,
+      "categories": [
+        "TOP PICKS",
+        "HISTORICAL",
+        "RELIGIOUS",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/karnak.jpg",
+      "description": "Large complex of ancient temples and monuments in Luxor.",
+      "paymentId": "pay_0002",
+      "price": "492 $"
+    },
+    {
+      "id": 3,
+      "name": "Salah El-Din Citadel",
+      "city": "Cairo",
+      "rating": 4.7,
+      "categories": [
+        "HISTORICAL",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/citadel.jpg",
+      "description": "Historic medieval Islamic fortification in Cairo with panoramic city views.",
+      "paymentId": "pay_0003",
+      "price": "28 $"
+    },
+    {
+      "id": 4,
+      "name": "Egyptian Museum",
+      "city": "Cairo",
+      "rating": 4.7,
+      "categories": [
+        "MUSEUMS",
+        "HISTORICAL",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/egyptian_museum.jpg",
+      "description": "Home to an extensive collection of ancient Egyptian antiquities.",
+      "paymentId": "pay_0004",
+      "price": "472 $"
+    },
+    {
+      "id": 5,
+      "name": "Marina Beach",
+      "city": "Alexandria",
+      "rating": 4.6,
+      "categories": [
+        "NATURE",
+        "FAMILY"
+      ],
+      "imageUrl": "/images/marina_beach.jpg",
+      "description": "Popular Alexandria seaside area and beach promenade.",
+      "paymentId": "pay_0005",
+      "price": "Free to enter "
+    },
+    {
+      "id": 6,
+      "name": "Valley of the Queens",
+      "city": "Luxor",
+      "rating": 4.7,
+      "categories": [
+        "HISTORICAL",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/queens_valley.jpg",
+      "description": "Ancient royal burial ground for the queens of Egypt near Luxor.",
+      "paymentId": "pay_0006",
+      "price": "146 $"
+    },
+    {
+      "id": 7,
+      "name": "Abu Simbel Temples",
+      "city": "Aswan",
+      "rating": 4.8,
+      "categories": [
+        "TOP PICKS",
+        "HISTORICAL",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/abu_simbel.jpg",
+      "description": "Rock-cut temples of Ramses II relocated to save them from flooding.",
+      "paymentId": "pay_0007",
+      "price": "430 $"
+    },
+    {
+      "id": 8,
+      "name": "Khan El Khalili Bazaar",
+      "city": "Cairo",
+      "rating": 4.6,
+      "categories": [
+        "CULTURE",
+        "TOP PICKS"
+      ],
+      "imageUrl": "/images/khan_el_khalili.jpg",
+      "description": "Historic souk in Islamic Cairo known for spices, crafts and antiques.",
+      "paymentId": "pay_0008",
+      "price": "Free to browse"
+    },
+    {
+      "id": 9,
+      "name": "Valley of the Kings",
+      "city": "Luxor",
+      "rating": 4.7,
+      "categories": [
+        "TOP PICKS",
+        "HISTORICAL",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/kings_valley.jpg",
+      "description": "Famous necropolis of pharaonic rulers on the Nile's west bank.",
+      "paymentId": "pay_0009",
+      "price": "288 $"
+    },
+    {
+      "id": 10,
+      "name": "Mortuary Temple of Hatshepsut",
+      "city": "Luxor",
+      "rating": 4.6,
+      "categories": [
+        "HISTORICAL",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/hatshepsut_temple.jpg",
+      "description": "Temple of the female pharaoh Hatshepsut at Deir el-Bahari.",
+      "paymentId": "pay_0010",
+      "price": "153 $"
+    },
+    {
+      "id": 11,
+      "name": "Temple of Philae",
+      "city": "Aswan",
+      "rating": 4.6,
+      "categories": [
+        "HISTORICAL",
+        "RELIGIOUS",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/philae_temple.jpg",
+      "description": "Island temple complex dedicated to goddess Isis, accessible by boat.",
+      "paymentId": "pay_0011",
+      "price": "312 $"
+    },
+    {
+      "id": 12,
+      "name": "Temple of Kom Ombo",
+      "city": "Aswan",
+      "rating": 4.5,
+      "categories": [
+        "HISTORICAL",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/kom_ombo.jpg",
+      "description": "Unique double temple dedicated to Sobek and Horus.",
+      "paymentId": "pay_0012",
+      "price": "173 $"
+    },
+    {
+      "id": 13,
+      "name": "Nubian Museum",
+      "city": "Aswan",
+      "rating": 4.5,
+      "categories": [
+        "MUSEUMS",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/nubian_museum.jpg",
+      "description": "Museum showcasing Nubian culture, artifacts and history.",
+      "paymentId": "pay_0013",
+      "price": "39 $"
+    },
+    {
+      "id": 14,
+      "name": "Museum of Islamic Art",
+      "city": "Cairo",
+      "rating": 4.6,
+      "categories": [
+        "MUSEUMS",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/islamic_art_museum.jpg",
+      "description": "Houses one of the world's most important collections of Islamic art.",
+      "paymentId": "pay_0014",
+      "price": "205 $"
+    },
+    {
+      "id": 15,
+      "name": "National Museum of Egyptian Civilization",
+      "city": "Cairo",
+      "rating": 4.5,
+      "categories": [
+        "MUSEUMS",
+        "HISTORICAL",
+        "CULTURE",
+        "TOP PICKS"
+      ],
+      "imageUrl": "/images/nmec.jpg",
+      "description": "Modern museum covering Egyptian history from prehistoric to present day.",
+      "paymentId": "pay_0015",
+      "price": "118 $"
+    },
+    {
+      "id": 16,
+      "name": "Alexandria National Museum",
+      "city": "Alexandria",
+      "rating": 4.4,
+      "categories": [
+        "MUSEUMS",
+        "HISTORICAL",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/alexandria_museum.jpg",
+      "description": "Museum showcasing Alexandria's Greco-Roman and Egyptian heritage.",
+      "paymentId": "pay_0016",
+      "price": "164 $"
+    },
+    {
+      "id": 17,
+      "name": "Maspero Museum",
+      "city": "Cairo",
+      "rating": 4.3,
+      "categories": [
+        "MUSEUMS",
+        "HISTORICAL"
+      ],
+      "imageUrl": "/images/maspero_museum.jpg",
+      "description": "Museum focusing on Egypt's archaeological finds and history.",
+      "paymentId": "pay_0017",
+      "price": "349 $"
+    },
+    {
+      "id": 18,
+      "name": "Ras Mohammed National Park",
+      "city": "Sharm El Sheikh",
+      "rating": 4.8,
+      "categories": [
+        "NATURE",
+        "TOP PICKS"
+      ],
+      "imageUrl": "/images/ras_mohamed.jpg",
+      "description": "Renowned marine reserve with world-class diving and coral reefs.",
+      "paymentId": "pay_0018",
+      "price": "402 $"
+    },
+    {
+      "id": 19,
+      "name": "Dahab Beach",
+      "city": "Dahab",
+      "rating": 4.7,
+      "categories": [
+        "NATURE",
+        "FAMILY"
+      ],
+      "imageUrl": "/images/dahab_beach.jpg",
+      "description": "Laid-back Red Sea town known for diving and relaxed beaches.",
+      "paymentId": "pay_0019",
+      "price": "Free to enter"
+    },
+    {
+      "id": 20,
+      "name": "Red Sea (Hurghada)",
+      "city": "Hurghada",
+      "rating": 4.7,
+      "categories": [
+        "NATURE",
+        "FAMILY",
+        "TOP PICKS"
+      ],
+      "imageUrl": "/images/hurghada_red_sea.jpg",
+      "description": "Popular Red Sea resort destination with beaches and diving spots.",
+      "paymentId": "pay_0020",
+      "price": "Free to enter "
+    },
+    {
+      "id": 21,
+      "name": "Wadi El Rayan",
+      "city": "Faiyum",
+      "rating": 4.5,
+      "categories": [
+        "NATURE",
+        "FAMILY"
+      ],
+      "imageUrl": "/images/wadi_el_rayan.jpg",
+      "description": "Protected area with waterfalls, lakes and desert landscapes near Faiyum.",
+      "paymentId": "pay_0021",
+      "price": "473 $"
+    },
+    {
+      "id": 22,
+      "name": "Ain Sokhna Beach",
+      "city": "Ain Sokhna",
+      "rating": 4.4,
+      "categories": [
+        "NATURE",
+        "FAMILY"
+      ],
+      "imageUrl": "/images/ain_sokhna.jpg",
+      "description": "Popular beach destination near Cairo with resorts and water sports.",
+      "paymentId": "pay_0022",
+      "price": "Free to enter"
+    },
+    {
+      "id": 23,
+      "name": "El Gouna Beach",
+      "city": "El Gouna",
+      "rating": 4.5,
+      "categories": [
+        "NATURE",
+        "FAMILY"
+      ],
+      "imageUrl": "/images/el_gouna.jpg",
+      "description": "Upscale resort town on the Red Sea with lagoons and beaches.",
+      "paymentId": "pay_0023",
+      "price": "Free to enter (Paid beach access varies)"
+    },
+    {
+      "id": 24,
+      "name": "Western Desert Safari",
+      "city": "Western Desert",
+      "rating": 4.6,
+      "categories": [
+        "NATURE",
+        "FAMILY",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/desert_safari.jpg",
+      "description": "Desert safaris and oases adventures in Egypt's Western Desert.",
+      "paymentId": "pay_0024",
+      "price": "Varies by operator"
+    },
+    {
+      "id": 25,
+      "name": "Diving in Ras Mohammed",
+      "city": "Sharm El Sheikh",
+      "rating": 4.8,
+      "categories": [
+        "NATURE",
+        "TOP PICKS"
+      ],
+      "imageUrl": "/images/ras_mohamed_diving.jpg",
+      "description": "World-class diving site with coral reefs and abundant marine life.",
+      "paymentId": "pay_0025",
+      "price": "Varies by operator"
+    },
+    {
+      "id": 26,
+      "name": "Sandboarding in Ain Sokhna",
+      "city": "Ain Sokhna",
+      "rating": 4.4,
+      "categories": [
+        "FAMILY",
+        "NATURE"
+      ],
+      "imageUrl": "/images/sandboarding.jpg",
+      "description": "Sandboarding on desert dunes close to the Red Sea coast.",
+      "paymentId": "pay_0026",
+      "price": "Varies by operator"
+    },
+    {
+      "id": 27,
+      "name": "Camel Riding near the Pyramids",
+      "city": "Giza",
+      "rating": 4.5,
+      "categories": [
+        "FAMILY",
+        "CULTURE",
+        "HISTORICAL"
+      ],
+      "imageUrl": "/images/camel_rides.jpg",
+      "description": "Traditional camel rides in the Giza desert with pyramid views.",
+      "paymentId": "pay_0027",
+      "price": "Varies by operator"
+    },
+    {
+      "id": 28,
+      "name": "Nile Kayaking",
+      "city": "Cairo",
+      "rating": 4.3,
+      "categories": [
+        "FAMILY",
+        "NATURE"
+      ],
+      "imageUrl": "/images/nile_kayaking.jpg",
+      "description": "Kayaking and small-boat activities on the Nile River in Cairo.",
+      "paymentId": "pay_0028",
+      "price": "Varies by operator"
+    },
+    {
+      "id": 29,
+      "name": "Hot Air Balloon Ride (Luxor)",
+      "city": "Luxor",
+      "rating": 4.7,
+      "categories": [
+        "TOP PICKS",
+        "FAMILY"
+      ],
+      "imageUrl": "/images/luxor_balloon.jpg",
+      "description": "Sunrise balloon flights over the Valley of the Kings and Luxor landscape.",
+      "paymentId": "pay_0029",
+      "price": "Varies by operator"
+    },
+    {
+      "id": 30,
+      "name": "Dream Park",
+      "city": "6th October City (Cairo)",
+      "rating": 4.4,
+      "categories": [
+        "FAMILY"
+      ],
+      "imageUrl": "/images/dream_park.jpg",
+      "description": "Large amusement park with rides and family attractions.",
+      "paymentId": "pay_0030",
+      "price": "456 $"
+    },
+    {
+      "id": 31,
+      "name": "Alexandria Aquarium",
+      "city": "Alexandria",
+      "rating": 4.5,
+      "categories": [
+        "FAMILY",
+        "NATURE"
+      ],
+      "imageUrl": "/images/alex_aquarium.jpg",
+      "description": "Aquarium showcasing Mediterranean and Red Sea marine life.",
+      "paymentId": "pay_0031",
+      "price": "435 $"
+    },
+    {
+      "id": 32,
+      "name": "Al-Azhar Park",
+      "city": "Cairo",
+      "rating": 4.3,
+      "categories": [
+        "FAMILY",
+        "NATURE"
+      ],
+      "imageUrl": "/images/al_azhar_park.jpg",
+      "description": "Large green park in Cairo with panoramic views over the old city.",
+      "paymentId": "pay_0032",
+      "price": "37 $"
+    },
+    {
+      "id": 33,
+      "name": "Giza Zoo",
+      "city": "Giza",
+      "rating": 4.4,
+      "categories": [
+        "FAMILY",
+        "NATURE"
+      ],
+      "imageUrl": "/images/giza_zoo.jpg",
+      "description": "Historic zoo home to a variety of animals and family-friendly attractions.",
+      "paymentId": "pay_0033",
+      "price": "311 $"
+    },
+    {
+      "id": 34,
+      "name": "KidZania Cairo",
+      "city": "Cairo",
+      "rating": 4.5,
+      "categories": [
+        "FAMILY"
+      ],
+      "imageUrl": "/images/kidzania.jpg",
+      "description": "Indoor educational entertainment center for children with role-play activities.",
+      "paymentId": "pay_0034",
+      "price": "459 $"
+    },
+    {
+      "id": 35,
+      "name": "Magic Planet (Mall of Egypt)",
+      "city": "Cairo",
+      "rating": 4.4,
+      "categories": [
+        "FAMILY"
+      ],
+      "imageUrl": "/images/magic_planet.jpg",
+      "description": "Indoor family entertainment center with games and rides.",
+      "paymentId": "pay_0035",
+      "price": "18 $"
+    },
+    {
+      "id": 36,
+      "name": "Pharaonic Village",
+      "city": "Cairo",
+      "rating": 4.4,
+      "categories": [
+        "FAMILY",
+        "CULTURE",
+        "HISTORICAL"
+      ],
+      "imageUrl": "/images/pharaonic_village.jpg",
+      "description": "Living museum recreating ancient Egyptian life and activities.",
+      "paymentId": "pay_0036",
+      "price": "109 $"
+    },
+    {
+      "id": 37,
+      "name": "Opera House Music Festivals",
+      "city": "Cairo",
+      "rating": 4.5,
+      "categories": [
+        "CULTURE"
+      ],
+      "imageUrl": "/images/opera_house.jpg",
+      "description": "Cultural music events and performances at Cairo Opera House.",
+      "paymentId": "pay_0037",
+      "price": "Varies by event"
+    },
+    {
+      "id": 38,
+      "name": "Handicraft Workshops (Luxor)",
+      "city": "Luxor",
+      "rating": 4.4,
+      "categories": [
+        "CULTURE"
+      ],
+      "imageUrl": "/images/handicraft_workshops.jpg",
+      "description": "Local workshops offering traditional crafts and souvenirs.",
+      "paymentId": "pay_0038",
+      "price": "Free to enter"
+    },
+    {
+      "id": 39,
+      "name": "Al-Azhar Mosque",
+      "city": "Cairo",
+      "rating": 4.7,
+      "categories": [
+        "RELIGIOUS",
+        "HISTORICAL",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/al_azhar_mosque.jpg",
+      "description": "One of Cairo's oldest and most significant mosques, known for its architecture and historical importance.",
+      "paymentId": "pay_0039",
+      "price": "Free"
+    },
+    {
+      "id": 40,
+      "name": "Hanging Church",
+      "city": "Cairo",
+      "rating": 4.6,
+      "categories": [
+        "RELIGIOUS",
+        "HISTORICAL",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/hanging_church.jpg",
+      "description": "Famous Coptic church suspended above a gatehouse of the Babylon Fortress in Old Cairo.",
+      "paymentId": "pay_0040",
+      "price": "Free"
+    },
+    {
+      "id": 41,
+      "name": "Muhammad Ali Mosque (Alabaster Mosque)",
+      "city": "Cairo Citadel",
+      "rating": 4.7,
+      "categories": [
+        "RELIGIOUS",
+        "HISTORICAL",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/muhammad_ali_mosque.jpg",
+      "description": "Prominent mosque inside the Cairo Citadel known for its alabaster walls.",
+      "paymentId": "pay_0041",
+      "price": "16 $"
+    },
+    {
+      "id": 42,
+      "name": "Saint Catherine's Monastery",
+      "city": "Sinai",
+      "rating": 4.8,
+      "categories": [
+        "RELIGIOUS",
+        "HISTORICAL",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/st_catherine_monastery.jpg",
+      "description": "Ancient monastery at the foot of Mount Sinai with religious significance.",
+      "paymentId": "pay_0042",
+      "price": "Free to enter"
+    },
+    {
+      "id": 43,
+      "name": "Coptic Orthodox Church (St. Mark - Alexandria)",
+      "city": "Alexandria",
+      "rating": 4.5,
+      "categories": [
+        "RELIGIOUS",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/st_mark_church.jpg",
+      "description": "Important Coptic cathedral with historical significance in Alexandria.",
+      "paymentId": "pay_0043",
+      "price": "Free"
+    },
+    {
+      "id": 44,
+      "name": "Temple of Hathor (Dendera)",
+      "city": "Dendera, Qena",
+      "rating": 4.4,
+      "categories": [
+        "HISTORICAL",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/dendera_hathor_temple.jpg",
+      "description": "Well-preserved Greco-Roman and Pharaonic temple complex dedicated to Hathor.",
+      "paymentId": "pay_0044",
+      "price": "358 $"
+    },
+    {
+      "id": 45,
+      "name": "Abu Serga Church",
+      "city": "Cairo",
+      "rating": 4.3,
+      "categories": [
+        "RELIGIOUS",
+        "HISTORICAL"
+      ],
+      "imageUrl": "/images/abu_serga_church.jpg",
+      "description": "Historic Coptic church in Old Cairo, reputedly built on the site where the Holy Family rested.",
+      "paymentId": "pay_0045",
+      "price": "Free"
+    },
+    {
+      "id": 46,
+      "name": "Mosque of Ibn Tulun",
+      "city": "Cairo",
+      "rating": 4.5,
+      "categories": [
+        "RELIGIOUS",
+        "HISTORICAL",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/ibn_tulun_mosque.jpg",
+      "description": "One of the oldest mosques in Cairo, featuring a distinctive spiral minaret.",
+      "paymentId": "pay_0046",
+      "price": "Free"
+    },
+    {
+      "id": 47,
+      "name": "Sultan Hassan Mosque",
+      "city": "Cairo",
+      "rating": 4.7,
+      "categories": [
+        "RELIGIOUS",
+        "HISTORICAL",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/sultan_hassan_mosque.jpg",
+      "description": "Majestic Mamluk-era mosque near the Citadel, known for its monumental architecture.",
+      "paymentId": "pay_0047",
+      "price": "291 $"
+    },
+    {
+      "id": 48,
+      "name": "Al-Refa'i Mosque",
+      "city": "Cairo",
+      "rating": 4.6,
+      "categories": [
+        "RELIGIOUS",
+        "HISTORICAL",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/al_refai_mosque.jpg",
+      "description": "Royal mosque and mausoleum with elaborate architecture and tombs of modern Egyptian royals.",
+      "paymentId": "pay_0048",
+      "price": "278 $"
+    },
+    {
+      "id": 49,
+      "name": "Al-Hussein Mosque",
+      "city": "Cairo",
+      "rating": 4.7,
+      "categories": [
+        "RELIGIOUS",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/al_hussein_mosque.jpg",
+      "description": "Important religious site in Islamic Cairo, associated with Imam Hussein.",
+      "paymentId": "pay_0049",
+      "price": "Free"
+    },
+    {
+      "id": 50,
+      "name": "Al-Muizz Street (Historic mosques & sites)",
+      "city": "Cairo",
+      "rating": 4.8,
+      "categories": [
+        "TOP PICKS",
+        "HISTORICAL",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/al_muizz_street.jpg",
+      "description": "Historic medieval street with many mosques, madrassas and monuments in Islamic Cairo.",
+      "paymentId": "pay_0050",
+      "price": "Free "
+    },
+    {
+      "id": 51,
+      "name": "Al-Hakim Mosque",
+      "city": "Cairo",
+      "rating": 4.5,
+      "categories": [
+        "RELIGIOUS",
+        "HISTORICAL"
+      ],
+      "imageUrl": "/images/al_hakim_mosque.jpg",
+      "description": "Historical Fatimid mosque with a distinctive façade in Old Cairo.",
+      "paymentId": "pay_0051",
+      "price": "Free"
+    },
+    {
+      "id": 52,
+      "name": "Al-Mursi Abu al-Abbas Mosque",
+      "city": "Alexandria",
+      "rating": 4.7,
+      "categories": [
+        "RELIGIOUS",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/al_mursi_mosque.jpg",
+      "description": "Famous mosque on Alexandria's Corniche with striking architecture.",
+      "paymentId": "pay_0052",
+      "price": "Free"
+    },
+    {
+      "id": 53,
+      "name": "Mosque of Amr ibn al-As",
+      "city": "Cairo (Old Cairo / Fustat)",
+      "rating": 4.5,
+      "categories": [
+        "RELIGIOUS",
+        "HISTORICAL"
+      ],
+      "imageUrl": "/images/amr_ibn_al_as_mosque.jpg",
+      "description": "The first mosque built in Egypt and a historic landmark in Fustat.",
+      "paymentId": "pay_0053",
+      "price": "Free"
+    },
+    {
+      "id": 54,
+      "name": "Sidi Gaber Mosque",
+      "city": "Alexandria",
+      "rating": 4.4,
+      "categories": [
+        "RELIGIOUS"
+      ],
+      "imageUrl": "/images/sidi_gaber_mosque.jpg",
+      "description": "Historic neighborhood mosque in Alexandria.",
+      "paymentId": "pay_0054",
+      "price": "Free"
+    },
+    {
+      "id": 55,
+      "name": "Zaghloul Mosque (Rosetta / Rashid)",
+      "city": "Rashid (Rosetta)",
+      "rating": 4.3,
+      "categories": [
+        "RELIGIOUS",
+        "HISTORICAL"
+      ],
+      "imageUrl": "/images/zaghloul_mosque.jpg",
+      "description": "Local historic mosque in the Nile Delta town of Rashid.",
+      "paymentId": "pay_0055",
+      "price": "Free"
+    },
+    {
+      "id": 56,
+      "name": "Sidi Abdel Rahman Mosque",
+      "city": "Matrouh",
+      "rating": 4.4,
+      "categories": [
+        "RELIGIOUS"
+      ],
+      "imageUrl": "/images/sidi_abdel_rahman_mosque.jpg",
+      "description": "Seaside mosque and landmark popular with visitors to Matrouh.",
+      "paymentId": "pay_0056",
+      "price": "Free"
+    },
+    {
+      "id": 57,
+      "name": "Felucca Ride on the Nile",
+      "city": "Cairo",
+      "rating": 4.5,
+      "categories": [
+        "FAMILY",
+        "NATURE",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/felucca_ride.jpg",
+      "description": "Traditional wooden felucca boats offering peaceful Nile cruises.",
+      "paymentId": "pay_0057",
+      "price": "Varies by operator"
+    },
+    {
+      "id": 58,
+      "name": "Coffee House Scene (Representative)",
+      "city": "Cairo",
+      "rating": 4.4,
+      "categories": [
+        "CULTURE"
+      ],
+      "imageUrl": "/images/coffee_house_scene.jpg",
+      "description": "Traditional Egyptian coffeehouse atmosphere representing local culture.",
+      "paymentId": "pay_0058",
+      "price": "Free to enter "
+    },
+    {
+      "id": 59,
+      "name": "Local Market Scene (Representative)",
+      "city": "Cairo",
+      "rating": 4.3,
+      "categories": [
+        "CULTURE"
+      ],
+      "imageUrl": "/images/local_market_scene.jpg",
+      "description": "Representative local market scenes (stalls, spices, crafts) commonly found in Egypt.",
+      "paymentId": "pay_0059",
+      "price": "Free to browse"
+    },
+    {
+      "id": 60,
+      "name": "Temple of Hathor (Dendera)",
+      "city": "Dendera",
+      "rating": 4.4,
+      "categories": [
+        "HISTORICAL",
+        "RELIGIOUS",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/dendera_hathor_temple_2.jpg",
+      "description": "Ancient temple dedicated to Hathor with well-preserved reliefs and columns.",
+      "paymentId": "pay_0060",
+      "price": "399 $"
+    },
+    {
+      "id": 61,
+      "name": "Grand Egyptian Museum (GEM)",
+      "city": "Giza (Cairo)",
+      "rating": 4.9,
+      "categories": [
+        "MUSEUMS",
+        "TOP PICKS",
+        "HISTORICAL",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/gem.jpg",
+      "description": "The world's largest archaeological museum, featuring King Tut's full collection.",
+      "paymentId": "pay_0061",
+      "price": "435 $"
+    },
+    {
+      "id": 62,
+      "name": "Qaitbay Citadel",
+      "city": "Alexandria",
+      "rating": 4.7,
+      "categories": [
+        "TOP PICKS",
+        "HISTORICAL",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/qaitbay_citadel.jpg",
+      "description": "A 15th-century defensive fortress located on the Mediterranean sea coast.",
+      "paymentId": "pay_0062",
+      "price": "236 $"
+    },
+    {
+      "id": 63,
+      "name": "Luxor Temple",
+      "city": "Luxor",
+      "rating": 4.8,
+      "categories": [
+        "TOP PICKS",
+        "HISTORICAL",
+        "RELIGIOUS",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/luxor_temple.jpg",
+      "description": "A large ancient Egyptian temple complex located on the east bank of the Nile River.",
+      "paymentId": "pay_0063",
+      "price": "194 $"
+    },
+    {
+      "id": 64,
+      "name": "Bibliotheca Alexandrina",
+      "city": "Alexandria",
+      "rating": 4.6,
+      "categories": [
+        "MUSEUMS",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/bibliotheca_alex.jpg",
+      "description": "The major library and cultural center built to commemorate the ancient Library of Alexandria.",
+      "paymentId": "pay_0064",
+      "price": "473 $"
+    },
+    {
+      "id": 65,
+      "name": "Wadi Degla Protectorate",
+      "city": "Maadi (Cairo)",
+      "rating": 4.5,
+      "categories": [
+        "NATURE",
+        "FAMILY"
+      ],
+      "imageUrl": "/images/wadi_degla.jpg",
+      "description": "A natural protected area perfect for hiking, cycling, and enjoying desert wildlife.",
+      "paymentId": "pay_0065",
+      "price": "326 $"
+    },
+    {
+      "id": 66,
+      "name": "Colossi of Memnon",
+      "city": "Luxor",
+      "rating": 4.6,
+      "categories": [
+        "HISTORICAL",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/memnon_colossi.jpg",
+      "description": "Two massive stone statues of Pharaoh Amenhotep III.",
+      "paymentId": "pay_0066",
+      "price": "Free to view"
+    },
+    {
+      "id": 67,
+      "name": "Coptic Museum",
+      "city": "Cairo (Old Cairo)",
+      "rating": 4.4,
+      "categories": [
+        "MUSEUMS",
+        "RELIGIOUS",
+        "HISTORICAL"
+      ],
+      "imageUrl": "/images/coptic_museum.jpg",
+      "description": "A museum dedicated to Coptic art and history in Egypt.",
+      "paymentId": "pay_0067",
+      "price": "39 $"
+    },
+    {
+      "id": 68,
+      "name": "Blue Hole",
+      "city": "Dahab",
+      "rating": 4.8,
+      "categories": [
+        "NATURE",
+        "TOP PICKS"
+      ],
+      "imageUrl": "/images/blue_hole_dahab.jpg",
+      "description": "A world-famous diving and snorkeling site, known as a natural sinkhole.",
+      "paymentId": "pay_0068",
+      "price": "Free "
+    },
+    {
+      "id": 69,
+      "name": "Aswan High Dam",
+      "city": "Aswan",
+      "rating": 4.3,
+      "categories": [
+        "HISTORICAL"
+      ],
+      "imageUrl": "/images/aswan_high_dam.jpg",
+      "description": "An embankment dam built across the Nile in Aswan, completed in 1970.",
+      "paymentId": "pay_0069",
+      "price": "184 $"
+    },
+    {
+      "id": 70,
+      "name": "Ben Ezra Synagogue",
+      "city": "Cairo (Old Cairo)",
+      "rating": 4.5,
+      "categories": [
+        "RELIGIOUS",
+        "HISTORICAL"
+      ],
+      "imageUrl": "/images/ben_ezra_synagogue.jpg",
+      "description": "A historic synagogue and an important religious landmark in Coptic Cairo.",
+      "paymentId": "pay_0070",
+      "price": "Free"
+    },
+    {
+      "id": 71,
+      "name": "Siwa Oasis",
+      "city": "Siwa (Matrouh)",
+      "rating": 4.6,
+      "categories": [
+        "NATURE",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/siwa_oasis.jpg",
+      "description": "A historical oasis known for its dates, olive groves, and unique local culture.",
+      "paymentId": "pay_0071",
+      "price": "Varies by activity"
+    },
+    {
+      "id": 72,
+      "name": "Mount Sinai / Mount Moses",
+      "city": "Saint Catherine (Sinai)",
+      "rating": 4.7,
+      "categories": [
+        "RELIGIOUS",
+        "NATURE",
+        "TOP PICKS"
+      ],
+      "imageUrl": "/images/mount_sinai.jpg",
+      "description": "A mountain of great religious importance, popular for sunrise climbs.",
+      "paymentId": "pay_0072",
+      "price": "Free"
+    },
+    {
+      "id": 73,
+      "name": "Catacombs of Kom El Shoqafa",
+      "city": "Alexandria",
+      "rating": 4.5,
+      "categories": [
+        "HISTORICAL",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/kom_el_shoqafa.jpg",
+      "description": "A historical necropolis blending Roman, Greek, and Ancient Egyptian cultural features.",
+      "paymentId": "pay_0073",
+      "price": "399 $"
+    },
+    {
+      "id": 74,
+      "name": "Colored Canyon",
+      "city": "Nuweiba (Sinai)",
+      "rating": 4.6,
+      "categories": [
+        "NATURE",
+        "FAMILY"
+      ],
+      "imageUrl": "/images/colored_canyon.jpg",
+      "description": "A stunning rock formation, popular for hiking and exploring colorful desert geology.",
+      "paymentId": "pay_0074",
+      "price": "439 $"
+    },
+    {
+      "id": 75,
+      "name": "Baron Empain Palace",
+      "city": "Heliopolis (Cairo)",
+      "rating": 4.4,
+      "categories": [
+        "HISTORICAL",
+        "CULTURE"
+      ],
+      "imageUrl": "/images/baron_palace.jpg",
+      "description": "An architectural masterpiece in Heliopolis, recently restored and open to the public.",
+      "paymentId": "pay_0075",
+      "price": "144 $"
+    }
+  ],
   "hotels": [],
   "cars": [],
   "trips": [],
