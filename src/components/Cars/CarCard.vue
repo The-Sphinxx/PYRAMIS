@@ -3,7 +3,7 @@
     <!-- Image Section -->
     <div class="relative bg-gradient-to-br from-amber-950 via-amber-900 to-amber-800 p-6 pb-8">
       <img 
-        :src="car.image"
+        :src="getImage(car.mainImage)"
         :alt="car.name"
         class="w-full h-48 object-cover rounded-2xl shadow-xl"
       />
@@ -22,17 +22,16 @@
         <svg class="w-5 h-5 text-orange-500 fill-current" viewBox="0 0 24 24">
           <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
         </svg>
-        <span class="text-sm font-semibold text-gray-800">{{ car.rating }}</span>
-        <span class="text-sm text-gray-500">({{ formatNumber(car.reviews) }} reviews)</span>
+        <span class="text-sm font-semibold text-gray-800">{{ car.reviews[0]?.rating || 0 }}</span>
+        <span class="text-sm text-gray-500">({{ car.reviews.length }} reviews)</span>
       </div>
 
-     <button 
-  @click="$emit('view', car)"
-  class="w-full bg-[#C86A41] hover:bg-[#b65c36] text-white font-semibold py-3.5 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 transform"
->
-  View Details
-</button>
-
+      <button 
+        @click="$emit('view', car)"
+        class="w-full bg-[#C86A41] hover:bg-[#b65c36] text-white font-semibold py-3.5 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 transform"
+      >
+        View Details
+      </button>
     </div>
   </div>
 </template>
@@ -41,11 +40,16 @@
 defineProps({
   car: Object
 });
+defineEmits(['view']);
 
-const emit = defineEmits(['view']);
-
-function formatNumber(num) {
-  return num.toLocaleString();
+// دالة لتحويل مسار الصورة من src/assets/images
+const getImage = (fileName) => {
+  try {
+    return require(`@/assets/images/${fileName}`);
+  } catch (e) {
+    console.error("Image not found:", fileName);
+    return ''; // لو الصورة مش موجودة يرجع فاضي بدل ما يكسر الكود
+  }
 }
 </script>
 
