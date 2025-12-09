@@ -100,17 +100,7 @@ const router = createRouter({
 
 // Navigation Guards
 router.beforeEach((to, from, next) => {
-  const authStore = useAuthStore();
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-  const isGuest = to.matched.some(record => record.meta.guest);
 
-  // تهيئة المصادقة من localStorage
-  if (!authStore.user && authStore.token) {
-    authStore.initAuth();
-  }
-
-  if (requiresAuth && !authStore.isAuthenticated) {
-    // الصفحة تحتاج تسجيل دخول والمستخدم غير مسجل
     next({
       name: 'Login',
       query: { redirect: to.fullPath }
@@ -121,12 +111,6 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
-});
 
-// After each navigation
-router.afterEach((to, from) => {
-  // يمكن إضافة تتبع analytics هنا
-  document.title = to.meta.title || 'Nile Heritage - رحلتك تبدأ من هنا';
-});
 
 export default router;
