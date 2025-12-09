@@ -1083,9 +1083,216 @@
    
   ],
 
+
+ 
   "cars": [
-    
-  ],
+    {
+      "id": 1,
+      "name": "Toyota Land Cruiser",
+      "description": "Great for families exploring Cairo, Giza, and Alexandria.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": ["GPS", "A/C"],
+            "imageUrl": "/images/ChevroletSuburban.avif",
+      "thumbnails": [
+        "Toyota_Land_Cruiser2.png",
+        "Toyota_Land_Cruiser3.avif",
+        "Toyota_Land_Cruiser4.jpg"
+      ],
+      "price": 200,
+      "basePrice": 200,
+      "reviews": [{"name": "John Doe", "rating": 5, "comment": "Perfect car for family trips!"}]
+    },
+    {
+      "id": 2,
+      "name": "Honda Pilot",
+      "description": "Perfect for family trips across major Egyptian cities.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": ["GPS", "A/C"],
+      "mainImage": "Honda_Pilot.webp",
+      "thumbnails": [
+        "Honda_Pilot2.avif",
+        "Honda_Pilot3.avif"
+      ],
+      "price": 200,
+      "basePrice": 200,
+      "reviews": [{"name": "Jane Smith", "rating": 4, "comment": "Smooth ride and comfy seats."}]
+    },
+    {
+      "id": 3,
+      "name": "Ford Explorer",
+      "description": "Spacious and comfortable SUV for family adventures.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": ["GPS", "A/C"],
+      "mainImage": "Ford_Explorer.jpg",
+      "thumbnails": [
+        "Ford_Explorer2.png",
+        "Ford_Explorer3.avif"
+      ],
+      "price": 200,
+      "basePrice": 200,
+      "reviews": [{"name": "Alex Johnson", "rating": 5, "comment": "Loved it! Will rent again."}]
+    },
+    {
+      "id": 4,
+      "name": "Chevrolet Tahoe",
+      "description": "Full-size SUV perfect for family adventures.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": ["GPS", "A/C"],
+      "mainImage": "Chevrolet_Tahoe.avif",
+      "thumbnails": [
+        "Chevrolet_Tahoe2.jpg",
+        "Chevrolet_Tahoe3.jpg",
+        "Chevrolet_Tahoe4.webp"
+      ],
+      "price": 200,
+      "basePrice": 200,
+      "reviews": [{"name": "Sarah Lee", "rating": 4, "comment": "Very spacious and comfortable."}]
+    },
+    {
+      "id": 5,
+      "name": "Chevrolet Suburban",
+      "description": "Iconic large SUV for family adventures across Egypt.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": ["GPS", "A/C"],
+      "mainImage": "Chevrolet_Suburban.avif",
+      "thumbnails": [
+        "Chevrolet_Suburban2.avif",
+        "Chevrolet_Suburban3.avif",
+        "Chevrolet_Suburban4.avif"
+      ],
+      "price": 200,
+      "basePrice": 200,
+      "reviews": [{"name": "Sophia Turner", "rating": 5, "comment": "Spacious and luxurious."}]
+    },
+    {
+      "id": 6,
+      "name": "GMC Yukon",
+      "description": "Large SUV with comfort and advanced tech.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": ["GPS", "A/C"],
+      "mainImage": "GMC_Yukon.avif",
+      "thumbnails": [
+        "GMC_Yukon2.webp",
+        "GMC_Yukon3.webp",
+        "GMC_Yukon4.avif"
+      ],
+      "price": 200,
+      "basePrice": 200,
+      "reviews": [{"name": "Chris Martin", "rating": 5, "comment": "Very reliable and comfortable."}]
+    },
+    {
+      "id": 7,
+      "name": "Hyundai Palisade",
+      "description": "Comfortable family SUV with advanced features.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": ["GPS", "A/C"],
+      "mainImage": "Hyundai_Palisade.webp",
+      "thumbnails": [
+        "Hyundai_Palisade2.avif",
+        "Hyundai_Palisade3.avif",
+        "Hyundai_Palisade4.webp"
+      ],
+      "price": 200,
+      "basePrice": 200,
+      "reviews": [{"name": "Linda Green", "rating": 4, "comment": "Good car for long trips."}]
+    },
+    {
+      "id": 8,
+      "name": "Kia Telluride",
+      "description": "Family-friendly SUV with modern amenities.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": ["GPS", "A/C"],
+      "mainImage": "Kia_Telluride.avif",
+      "thumbnails": [
+        "Kia_Telluride2.avif",
+        "Kia_Telluride3.avif",
+        "Kia_Telluride4.avif"
+      ],
+      "price": 200,
+      "basePrice": 200,
+      "reviews": [{"name": "Tom White", "rating": 5, "comment": "Perfect for family trips!"}]
+    },
+    {
+      "id": 9,
+      "name": "Mazda CX-9",
+      "description": "Elegant and spacious SUV for family trips.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": ["GPS", "A/C"],
+      "mainImage": "Mazda_CX-9.png",
+      "thumbnails": [
+        "Mazda_CX-92.jpg",
+        "Mazda_CX-93.jpg",
+        "Mazda_CX-94.jpg"
+      ],
+      "price": 200,
+      "basePrice": 200,
+      "reviews": [{"name": "Emma Davis", "rating": 4, "comment": "Smooth ride, very spacious."}]
+    },
+    {
+      "id": 10,
+      "name": "Nissan Patrol",
+      "description": "Reliable SUV with comfort and space for the whole family.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": ["GPS", "A/C"],
+      "mainImage": "Nissan_Patrol.jpg",
+      "thumbnails": [
+        "Nissan_Patrol2.jpg",
+        "Nissan_Patrol3.jpg",
+        "Nissan_Patrol4.jpg"
+      ],
+      "price": 200,
+      "basePrice": 200,
+      "reviews": [{"name": "Mike Brown", "rating": 5, "comment": "Comfortable ride and powerful engine."}]
+    },
+    {
+      "id": 11,
+      "name": "Subaru Ascent",
+      "description": "Family SUV with safety and comfort in mind.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": ["GPS", "A/C"],
+      "mainImage": "Subaru_Ascent.webp",
+      "thumbnails": [
+        "Subaru_Ascent2.avif",
+        "Subaru_Ascent3.avif",
+        "Subaru_Ascent4.avif"
+      ],
+      "price": 200,
+      "basePrice": 200,
+      "reviews": [{"name": "David Wilson", "rating": 5, "comment": "Comfortable for the whole family."}]
+    },
+    {
+      "id": 12,
+      "name": "Volkswagen Atlas",
+      "description": "Spacious SUV perfect for family road trips.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": ["GPS", "A/C"],
+      "mainImage": "Volkswagen_Atlas.webp",
+      "thumbnails": [
+        "Volkswagen_Atlas2.jpg",
+        "Volkswagen_Atlas3.avif",
+        "Volkswagen_Atlas4.avif"
+      ],
+      "price": 200,
+      "basePrice": 200,
+      "reviews": [{"name": "Anna Scott", "rating": 4, "comment": "Spacious and smooth ride."}]
+    }
+  ]
+
+
+
+,
 
   "trips": [
    

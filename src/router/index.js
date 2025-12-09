@@ -238,7 +238,7 @@ router.beforeEach((to, from, next) => {
   
   // TODO: Replace this with your actual authentication check
   // Example: const isAuthenticated = store.getters.isAuthenticated
-  const isAuthenticated = false // Placeholder - update with your auth logic
+  const isAuthenticated = true // Placeholder - update with your auth logic
   
   if (requiresAuth && !isAuthenticated) {
     // Redirect to login page if not authenticated
@@ -249,6 +249,7 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
   }
+  
 })
 
 export default router
