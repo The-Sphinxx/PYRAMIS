@@ -232,6 +232,15 @@
 
 <script setup>
 import { ref, watch } from 'vue';
+import { useFormValidation } from '@/composables/useFormValidation';
+import {
+  validateRequired,
+  validateEmail,
+  validatePhone,
+  validateCreditCard,
+  validateCVV,
+  validateExpiryDate as validateExpiryDateUtil
+} from '@/Utils/validators';
 
 const props = defineProps({
   modelValue: {
@@ -258,7 +267,25 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue', 'validate', 'submit']);
 
 const localData = ref({ ...props.modelValue });
-const errors = ref({});
+
+const { 
+  errors, 
+  validateFields, 
+  clearError 
+} = useFormValidation();
+
+// Wrapper for expiry date validation to handle MM/YY string
+const validateExpiryDateString = (value) => {
+  if (!value) return { valid: false, message: 'Expiry date is required' };
+  const [month, year] = value.split('/').map(v => v.trim());
+  // Assuming strict MM/YY format, so year needs to be 20YY or just YY depending on validator.
+  // The validator compares against current year (4 digits). 
+  // Let's assume input is YY and convert to 20YY for the validator.
+  if (!month || !year || year.length !== 2) return { valid: false, message: 'Invalid format (MM/YY)' };
+  
+  const fullYear = '20' + year;
+  return validateExpiryDateUtil(month, fullYear);
+};
 
 // Watch for changes and emit
 watch(localData, (newVal) => {
@@ -283,54 +310,23 @@ const formatExpiryDate = () => {
   clearError('expiryDate');
 };
 
-// Clear specific error
-const clearError = (field) => {
-  delete errors.value[field];
-};
-
 // Validate form
 const validate = () => {
-  errors.value = {};
+  const fieldsToValidate = {
+    firstName: { value: localData.value.firstName, validator: (v) => validateRequired(v, 'First name') },
+    lastName: { value: localData.value.lastName, validator: (v) => validateRequired(v, 'Last name') },
+    email: { value: localData.value.email, validator: validateEmail },
+    phone: { value: localData.value.phone, validator: validatePhone },
+  };
 
-  // Guest info validation
-  if (!localData.value.firstName?.trim()) {
-    errors.value.firstName = 'First name is required';
-  }
-  if (!localData.value.lastName?.trim()) {
-    errors.value.lastName = 'Last name is required';
-  }
-  if (!localData.value.email?.trim()) {
-    errors.value.email = 'Email is required';
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(localData.value.email)) {
-    errors.value.email = 'Invalid email format';
-  }
-  if (!localData.value.phone?.trim()) {
-    errors.value.phone = 'Phone number is required';
-  }
-
-  // Card payment validation
   if (localData.value.paymentMethod === 'card') {
-    if (!localData.value.cardNumber?.replace(/\s/g, '')) {
-      errors.value.cardNumber = 'Card number is required';
-    } else if (localData.value.cardNumber.replace(/\s/g, '').length < 13) {
-      errors.value.cardNumber = 'Invalid card number';
-    }
-    if (!localData.value.cardName?.trim()) {
-      errors.value.cardName = 'Name on card is required';
-    }
-    if (!localData.value.expiryDate?.trim()) {
-      errors.value.expiryDate = 'Expiry date is required';
-    } else if (!/^\d{2}\/\d{2}$/.test(localData.value.expiryDate)) {
-      errors.value.expiryDate = 'Invalid format (MM/YY)';
-    }
-    if (!localData.value.cvc?.trim()) {
-      errors.value.cvc = 'CVC is required';
-    } else if (localData.value.cvc.length < 3) {
-      errors.value.cvc = 'Invalid CVC';
-    }
+    fieldsToValidate.cardNumber = { value: localData.value.cardNumber, validator: validateCreditCard };
+    fieldsToValidate.cardName = { value: localData.value.cardName, validator: (v) => validateRequired(v, 'Name on card') };
+    fieldsToValidate.expiryDate = { value: localData.value.expiryDate, validator: validateExpiryDateString };
+    fieldsToValidate.cvc = { value: localData.value.cvc, validator: validateCVV };
   }
 
-  const isValid = Object.keys(errors.value).length === 0;
+  const isValid = validateFields(fieldsToValidate);
   emit('validate', isValid);
   return isValid;
 };

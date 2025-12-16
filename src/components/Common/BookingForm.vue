@@ -12,6 +12,7 @@
     <div v-if="type === 'attraction'" class="space-y-4">
       <DatePicker
         v-model="localBookingData.date"
+        :min-date="today"
         label="Select Date"
         placeholder="mm/dd/yyyy"
         @update:modelValue="updateField('date', $event)"
@@ -31,6 +32,7 @@
     <div v-else-if="type === 'hotel'" class="space-y-4">
       <DatePicker
         v-model="localBookingData.checkIn"
+        :min-date="today"
         label="Check-in Date"
         placeholder="mm/dd/yyyy"
         @update:modelValue="updateField('checkIn', $event)"
@@ -38,6 +40,7 @@
 
       <DatePicker
         v-model="localBookingData.checkOut"
+        :min-date="checkOutMinDate"
         label="Check-out Date"
         placeholder="mm/dd/yyyy"
         @update:modelValue="updateField('checkOut', $event)"
@@ -72,6 +75,7 @@
     <div v-else-if="type === 'car'" class="space-y-4">
       <DatePicker
         v-model="localBookingData.pickupDate"
+        :min-date="today"
         label="Pickup Date"
         placeholder="mm/dd/yyyy"
         @update:modelValue="updateField('pickupDate', $event)"
@@ -86,6 +90,7 @@
 
       <DatePicker
         v-model="localBookingData.returnDate"
+        :min-date="returnDateMinDate"
         label="Return Date"
         placeholder="mm/dd/yyyy"
         @update:modelValue="updateField('returnDate', $event)"
@@ -107,6 +112,7 @@
     <div v-else-if="type === 'trip'" class="space-y-4">
       <DatePicker
         v-model="localBookingData.date"
+        :min-date="today"
         label="Select Date"
         placeholder="mm/dd/yyyy"
         @update:modelValue="updateField('date', $event)"
@@ -211,6 +217,30 @@ const localBookingData = ref(getDefaultData());
 
 // Validation errors
 const validationErrors = ref([]);
+
+// Min dates
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const checkOutMinDate = computed(() => {
+  if (localBookingData.value.checkIn) {
+    const checkIn = new Date(localBookingData.value.checkIn);
+    const nextDay = new Date(checkIn);
+    nextDay.setDate(checkIn.getDate() + 1);
+    return nextDay;
+  }
+  return today;
+});
+
+const returnDateMinDate = computed(() => {
+  if (localBookingData.value.pickupDate) {
+    const pickup = new Date(localBookingData.value.pickupDate);
+    // Return same day is usually allowed for cars, or +1 depending on policy.
+    // Let's allow same day for now.
+    return pickup;
+  }
+  return today;
+});
 
 // Get default data based on type
 function getDefaultData() {

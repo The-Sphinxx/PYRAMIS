@@ -97,9 +97,17 @@ export const formatPrice = (price, currency = '$') => {
  */
 export const validateBookingData = (bookingType, bookingData) => {
   const errors = [];
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
   
   // Common validations
-  if (!bookingData.date) {
+  if (bookingData.date) {
+    const selectedDate = new Date(bookingData.date);
+    if (selectedDate < today) {
+      errors.push('Date cannot be in the past');
+    }
+  } else if (!bookingData.date && ['attraction', 'trip'].includes(bookingType)) {
+    // strict check for types that require single date
     errors.push('Please select a date');
   }
   
@@ -113,6 +121,8 @@ export const validateBookingData = (bookingType, bookingData) => {
     case 'hotel':
       if (!bookingData.checkIn) {
         errors.push('Please select check-in date');
+      } else if (new Date(bookingData.checkIn) < today) {
+        errors.push('Check-in date cannot be in the past');
       }
       if (!bookingData.checkOut) {
         errors.push('Please select check-out date');
@@ -133,6 +143,8 @@ export const validateBookingData = (bookingType, bookingData) => {
     case 'car':
       if (!bookingData.pickupDate) {
         errors.push('Please select pickup date');
+      } else if (new Date(bookingData.pickupDate) < today) {
+        errors.push('Pickup date cannot be in the past');
       }
       if (!bookingData.returnDate) {
         errors.push('Please select return date');
