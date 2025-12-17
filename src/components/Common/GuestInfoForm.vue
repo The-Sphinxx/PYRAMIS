@@ -224,7 +224,7 @@
       class="btn btn-primary btn-lg w-full mt-6 text-white font-bold"
       :class="{ 'loading': submitting }"
     >
-      <span v-if="!submitting">Continue</span>
+      <span v-if="!submitting">Confirm Booking</span>
       <span v-else>Processing...</span>
     </button>
   </div>

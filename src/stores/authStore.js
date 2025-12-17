@@ -1,200 +1,190 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
-import { authApi } from '@/Services/api';
 
 export const useAuthStore = defineStore('auth', () => {
-    // State
-    const user = ref(null);
-    const token = ref(localStorage.getItem('token') || null);
-    const isLoading = ref(false);
-    const error = ref(null);
+  const user = ref(null);
+  const token = ref(null);
 
-    // Getters
-    const isAuthenticated = computed(() => !!token.value && !!user.value);
-    const currentUser = computed(() => user.value);
-    const userFullName = computed(() =>
-        user.value ? `${user.value.firstName} ${user.value.lastName}` : ''
-    );
+  // Check if user is logged in
+  const isAuthenticated = computed(() => !!user.value);
 
-    // Actions
-    const setToken = (newToken) => {
-        token.value = newToken;
-        if (newToken) {
-            localStorage.setItem('token', newToken);
-        } else {
-            localStorage.removeItem('token');
+  // Initialize from localStorage
+  const initAuth = () => {
+    const savedUser = localStorage.getItem('user');
+    const savedToken = localStorage.getItem('token');
+    
+    if (savedUser && savedToken) {
+      user.value = JSON.parse(savedUser);
+      token.value = savedToken;
+    }
+  };
+
+  // Register new user
+  const register = async (userData) => {
+    try {
+      // Check if user already exists
+      const checkResponse = await fetch(`http://localhost:3000/users?email=${userData.email}`);
+      const existingUsers = await checkResponse.json();
+
+      if (existingUsers.length > 0) {
+        return {
+          success: false,
+          error: 'Email already exists'
+        };
+      }
+
+      // Create new user
+      const newUser = {
+        id: Date.now().toString(),
+        fullName: userData.fullName,
+        email: userData.email,
+        password: userData.password, // في الواقع لازم يتعمل hash
+        createdAt: new Date().toISOString()
+      };
+
+      const response = await fetch('http://localhost:3000/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newUser),
+      });
+
+      if (response.ok) {
+        const createdUser = await response.json();
+        
+        // Remove password before storing
+        const userWithoutPassword = { ...createdUser };
+        delete userWithoutPassword.password;
+
+        user.value = userWithoutPassword;
+        token.value = `token_${createdUser.id}`;
+
+        // Save to localStorage
+        localStorage.setItem('user', JSON.stringify(userWithoutPassword));
+        localStorage.setItem('token', token.value);
+
+        return { success: true };
+      } else {
+        return {
+          success: false,
+          error: 'Registration failed'
+        };
+      }
+    } catch (error) {
+      console.error('Registration error:', error);
+      return {
+        success: false,
+        error: 'Network error. Please try again.'
+      };
+    }
+  };
+
+  // Login user
+  const login = async (credentials) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/users?email=${credentials.email}&password=${credentials.password}`
+      );
+      const users = await response.json();
+
+      if (users.length > 0) {
+        const foundUser = users[0];
+        
+        // Remove password before storing
+        const userWithoutPassword = { ...foundUser };
+        delete userWithoutPassword.password;
+
+        user.value = userWithoutPassword;
+        token.value = `token_${foundUser.id}`;
+
+        // Save to localStorage if "Remember Me" is checked
+        if (credentials.rememberMe) {
+          localStorage.setItem('user', JSON.stringify(userWithoutPassword));
+          localStorage.setItem('token', token.value);
         }
-    };
 
-    const setUser = (userData) => {
-        user.value = userData;
-        if (userData) {
-            localStorage.setItem('user', JSON.stringify(userData));
-        } else {
-            localStorage.removeItem('user');
-        }
-    };
+        return { success: true };
+      } else {
+        return {
+          success: false,
+          error: 'Invalid email or password'
+        };
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      return {
+        success: false,
+        error: 'Network error. Please try again.'
+      };
+    }
+  };
 
-    // تسجيل الدخول
-    const login = async (credentials) => {
-        isLoading.value = true;
-        error.value = null;
+  // Google Sign In (Mock implementation)
+  const loginWithGoogle = async () => {
+    try {
+      // هنا المفروض تستخدمي Firebase أو Google OAuth
+      // دي mock implementation للتجربة
+      const mockGoogleUser = {
+        id: `google_${Date.now()}`,
+        fullName: 'Google User',
+        email: 'user@gmail.com',
+        provider: 'google',
+        createdAt: new Date().toISOString()
+      };
 
-        try {
-            const response = await authApi.login(credentials.email, credentials.password);
+      // Check if user exists
+      const checkResponse = await fetch(`http://localhost:3000/users?email=${mockGoogleUser.email}`);
+      const existingUsers = await checkResponse.json();
 
-            if (response.success) {
-                setToken(response.token);
-                setUser(response.user);
-                return { success: true, user: response.user };
-            } else {
-                error.value = response.message || 'فشل تسجيل الدخول';
-                return { success: false, message: error.value };
-            }
-        } catch (err) {
-            error.value = err.response?.data?.message || 'حدث خطأ في الاتصال';
-            return { success: false, message: error.value };
-        } finally {
-            isLoading.value = false;
-        }
-    };
+      let finalUser;
 
-    // إنشاء حساب جديد
-    const signup = async (userData) => {
-        isLoading.value = true;
-        error.value = null;
+      if (existingUsers.length > 0) {
+        finalUser = existingUsers[0];
+      } else {
+        // Create new user
+        const response = await fetch('http://localhost:3000/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(mockGoogleUser),
+        });
+        finalUser = await response.json();
+      }
 
-        try {
-            const response = await authApi.signup(userData);
+      user.value = finalUser;
+      token.value = `token_${finalUser.id}`;
 
-            if (response.success) {
-                setToken(response.token);
-                setUser(response.user);
-                return { success: true, user: response.user };
-            } else {
-                error.value = response.message || 'فشل إنشاء الحساب';
-                return { success: false, message: error.value };
-            }
-        } catch (err) {
-            error.value = err.response?.data?.message || 'حدث خطأ في الاتصال';
-            return { success: false, message: error.value };
-        } finally {
-            isLoading.value = false;
-        }
-    };
+      localStorage.setItem('user', JSON.stringify(finalUser));
+      localStorage.setItem('token', token.value);
 
-    // تسجيل الخروج
-    const logout = () => {
-        setToken(null);
-        setUser(null);
-        error.value = null;
-    };
+      return { success: true };
+    } catch (error) {
+      console.error('Google login error:', error);
+      return {
+        success: false,
+        error: 'Google sign in failed'
+      };
+    }
+  };
 
-    // استعادة كلمة المرور - إرسال رمز
-    const requestPasswordReset = async (email) => {
-        isLoading.value = true;
-        error.value = null;
+  // Logout
+  const logout = () => {
+    user.value = null;
+    token.value = null;
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+  };
 
-        try {
-            const response = await authApi.forgotPassword(email);
-
-            if (response.success) {
-                return { success: true, message: 'تم إرسال رمز التحقق إلى بريدك الإلكتروني' };
-            } else {
-                error.value = response.message || 'فشل إرسال رمز التحقق';
-                return { success: false, message: error.value };
-            }
-        } catch (err) {
-            error.value = err.response?.data?.message || 'حدث خطأ في الاتصال';
-            return { success: false, message: error.value };
-        } finally {
-            isLoading.value = false;
-        }
-    };
-
-    // إعادة تعيين كلمة المرور
-    const resetPassword = async (resetData) => {
-        isLoading.value = true;
-        error.value = null;
-
-        try {
-            const response = await authApi.resetPassword(
-                resetData.email,
-                resetData.resetToken,
-                resetData.newPassword
-            );
-
-            if (response.success) {
-                return { success: true, message: 'تم تغيير كلمة المرور بنجاح' };
-            } else {
-                error.value = response.message || 'فشل تغيير كلمة المرور';
-                return { success: false, message: error.value };
-            }
-        } catch (err) {
-            error.value = err.response?.data?.message || 'حدث خطأ في الاتصال';
-            return { success: false, message: error.value };
-        } finally {
-            isLoading.value = false;
-        }
-    };
-
-    // استرجاع بيانات المستخدم المحفوظة
-    const initAuth = () => {
-        const savedUser = localStorage.getItem('user');
-        if (savedUser && token.value) {
-            try {
-                user.value = JSON.parse(savedUser);
-            } catch (err) {
-                logout();
-            }
-        }
-    };
-
-    // تحديث بيانات المستخدم
-    const updateProfile = async (updates) => {
-        isLoading.value = true;
-        error.value = null;
-
-        try {
-            const response = await api.patch(`/users/${user.value.id}`, updates);
-
-            if (response.data) {
-                setUser(response.data);
-                return { success: true, user: response.data };
-            }
-        } catch (err) {
-            error.value = err.response?.data?.message || 'فشل تحديث البيانات';
-            return { success: false, message: error.value };
-        } finally {
-            isLoading.value = false;
-        }
-    };
-
-    // مسح الأخطاء
-    const clearError = () => {
-        error.value = null;
-    };
-
-    return {
-        // State
-        user,
-        token,
-        isLoading,
-        error,
-
-        // Getters
-        isAuthenticated,
-        currentUser,
-        userFullName,
-
-        // Actions
-        login,
-        signup,
-        logout,
-        requestPasswordReset,
-        resetPassword,
-        initAuth,
-        updateProfile,
-        clearError
-    };
+  return {
+    user,
+    token,
+    isAuthenticated,
+    initAuth,
+    register,
+    login,
+    loginWithGoogle,
+    logout
+  };
 });

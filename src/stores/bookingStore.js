@@ -196,7 +196,7 @@ export const useBookingStore = defineStore('booking', {
         /**
          * Submit booking
          */
-        async submitBooking(userId = null) {
+        async submitBooking(userId = null, checkoutData = {}) {
             if (!this.validateCurrentBooking()) {
                 throw new Error('Invalid booking data');
             }
@@ -207,6 +207,15 @@ export const useBookingStore = defineStore('booking', {
             try {
                 const costs = this.bookingCosts;
 
+                // Structure guest info from flat checkout data if needed
+                const guestInfo = {
+                    firstName: checkoutData.firstName,
+                    lastName: checkoutData.lastName,
+                    email: checkoutData.email,
+                    phone: checkoutData.phone,
+                    specialRequests: checkoutData.specialRequests
+                };
+
                 const bookingPayload = {
                     userId,
                     type: this.bookingInProgress.type,
@@ -214,7 +223,14 @@ export const useBookingStore = defineStore('booking', {
                     itemName: this.bookingInProgress.itemName,
                     bookingData: this.bookingInProgress.bookingData,
                     pricing: costs,
-                    status: 'pending'
+                    status: 'pending',
+                    // Pass structured guest info and other checkout data
+                    guestInfo,
+                    paymentMethod: checkoutData.paymentMethod,
+                    cardNumber: checkoutData.cardNumber,
+                    cardName: checkoutData.cardName,
+                    expiryDate: checkoutData.expiryDate,
+                    cvc: checkoutData.cvc
                 };
 
                 const result = await bookingService.createBooking(bookingPayload);

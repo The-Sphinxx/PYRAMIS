@@ -51,12 +51,14 @@
 import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useBookingStore } from '@/stores/bookingStore';
+import { useAuthStore } from '@/stores/authStore';
 import StepIndicator from '@/components/Common/StepIndicator.vue';
 import PriceSummary from '@/components/Common/PriceSummary.vue';
 import GuestInfoForm from '@/components/Common/GuestInfoForm.vue';
 
 const router = useRouter();
 const bookingStore = useBookingStore();
+const authStore = useAuthStore(); // Check if imported
 
 const guestFormRef = ref(null);
 const guestData = ref({
@@ -89,39 +91,25 @@ onMounted(() => {
       router.push({ name: 'Home' });
     }, 2000);
   }
+  
+  // Pre-fill user data if logged in
+  if (authStore.user) {
+    guestData.value.firstName = authStore.user.firstName || '';
+    guestData.value.lastName = authStore.user.lastName || '';
+    guestData.value.email = authStore.user.email || '';
+    guestData.value.phone = authStore.user.phone || '';
+  }
 });
 
 const handlePlaceOrder = async () => {
-
-
   submitting.value = true;
   error.value = null;
 
   try {
-    // Prepare booking data with guest info
-    const bookingPayload = {
-      userId: 'user_123', // TODO: Get from auth store
-      type: bookingStore.bookingInProgress.type,
-      itemId: bookingStore.bookingInProgress.itemId,
-      itemName: bookingStore.bookingInProgress.itemName,
-      bookingData: bookingStore.bookingInProgress.bookingData,
-      pricing: bookingStore.bookingCosts,
-      guestInfo: {
-        firstName: guestData.value.firstName,
-        lastName: guestData.value.lastName,
-        email: guestData.value.email,
-        phone: guestData.value.phone,
-        specialRequests: guestData.value.specialRequests
-      },
-      paymentMethod: guestData.value.paymentMethod,
-      cardNumber: guestData.value.cardNumber,
-      cardName: guestData.value.cardName,
-      expiryDate: guestData.value.expiryDate,
-      cvc: guestData.value.cvc
-    };
+    const userId = authStore.user?.id || null;
 
-    // Submit booking through service (which will sanitize payment data)
-    const result = await bookingStore.bookingInProgress.submitBooking(bookingPayload);
+    // Submit booking through store, passing user ID and guest data
+    const result = await bookingStore.submitBooking(userId, guestData.value);
     
     console.log('Booking created:', result);
 
@@ -133,7 +121,7 @@ const handlePlaceOrder = async () => {
   } catch (err) {
     error.value = err.message || 'Failed to place order';
     console.error('Order error:', err);
-    alert(`❌ Failed to place order: ${error.value}`);
+    // alert(`❌ Failed to place order: ${error.value}`); // Basic alert
   } finally {
     submitting.value = false;
   }

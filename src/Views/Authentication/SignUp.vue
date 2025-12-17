@@ -1,178 +1,211 @@
 <template>
-  <div class="signup-container">
-    <!-- Left Side - Pyramid Image -->
-    <div class="left-side">
-      <div class="pyramid-overlay"></div>
+  <div class="min-h-screen relative overflow-hidden">
+    <!-- Background Slideshow -->
+    <div class="absolute inset-0 z-0">
+      <transition-group name="fade" mode="out-in">
+        <div
+          v-for="(image, index) in backgroundImages"
+          :key="image"
+          v-show="currentImageIndex === index"
+          class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+          :style="{ backgroundImage: `url(${image})` }"
+        ></div>
+      </transition-group>
+      <!-- Overlay -->
+      <div class="absolute inset-0 bg-black/20"></div>
     </div>
 
-    <!-- Right Side - Sign Up Form -->
-    <div class="right-side">
-      <div class="form-container">
-        <!-- Logo/Title -->
-        <h1 class="brand-title">NËLARIA</h1>
-
-        <!-- Sign In / Sign Up Toggle -->
-        <div class="tab-container">
-          <button 
-            class="tab-btn" 
-            :class="{ 'active': activeTab === 'signin' }"
-            @click="navigateToSignIn"
-          >
-            Sign In
-          </button>
-          <button 
-            class="tab-btn" 
-            :class="{ 'active': activeTab === 'signup' }"
-            @click="activeTab = 'signup'"
-          >
-            Sign Up
-          </button>
+    <!-- Content -->
+    <div class="relative z-10 min-h-screen flex items-center p-4">
+      <div class="bg-base-200/80 backdrop-blur-sm w-full max-w-md p-8 rounded-lg shadow-xl">
+        <!-- Logo -->
+        <div class="text-center mb-8">
+          <h1 class="text-4xl font-bold text-primary font-cairo">PYRAMIS</h1>
         </div>
 
-        <!-- Sign Up Form -->
-        <form @submit.prevent="handleSignup" class="signup-form">
-          <!-- Full Name -->
-          <div class="form-group">
-            <label class="form-label">Full name</label>
-            <input 
-              type="text" 
-              v-model="fullName"
-              placeholder="Enter your name"
-              class="form-input"
-              :class="{ 'error': errors.fullName }"
+        <!-- Form -->
+        <form @submit.prevent="handleSignUp">
+          <!-- Full Name Field -->
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-base-content mb-2">
+              Full Name
+            </label>
+            <input
+              v-model="formData.fullName"
+              type="text"
+              placeholder="Enter your full name"
+              class="input input-bordered w-full bg-white/90 focus:bg-white"
+              required
             />
-            <span v-if="errors.fullName" class="error-message">{{ errors.fullName }}</span>
           </div>
 
-          <!-- Email -->
-          <div class="form-group">
-            <label class="form-label">E-Mail</label>
-            <input 
-              type="email" 
+          <!-- Email Field -->
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-base-content mb-2">
+              Email
+            </label>
+            <input
               v-model="formData.email"
-              placeholder="example@email.com"
-              class="form-input"
-              :class="{ 'error': errors.email }"
+              type="email"
+              placeholder="Enter your email"
+              class="input input-bordered w-full bg-white/90 focus:bg-white"
+              required
             />
-            <span v-if="errors.email" class="error-message">{{ errors.email }}</span>
           </div>
 
-          <!-- Phone Number -->
-          <div class="form-group">
-            <label class="form-label">Phone Number</label>
-            <input 
-              type="tel" 
-              v-model="formData.phone"
-              placeholder="Enter your number"
-              class="form-input"
-              :class="{ 'error': errors.phone }"
-            />
-            <span v-if="errors.phone" class="error-message">{{ errors.phone }}</span>
-          </div>
-
-          <!-- Create Password -->
-          <div class="form-group">
-            <label class="form-label">Create Password</label>
-            <div class="password-wrapper">
-              <input 
-                :type="showPassword ? 'text' : 'password'" 
-                v-model="formData.password"
-                placeholder="At least 8 characters" 
-                class="form-input"
-                :class="{ 'error': errors.password }"
-              />
+          <!-- Password Field -->
+          <div class="mb-4">
+            <div class="flex justify-between items-center mb-2">
+              <label class="text-sm font-medium text-base-content">
+                Your password
+              </label>
               <button
                 type="button"
-                @click="showPassword = !showPassword"
-                class="eye-btn"
+                @click="togglePassword"
+                class="text-sm text-primary hover:text-primary-focus flex items-center gap-1"
               >
-                <svg v-if="!showPassword" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                  <circle cx="12" cy="12" r="3"></circle>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    v-if="showPassword"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88"
+                  />
+                  <path
+                    v-else
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                  />
+                  <path
+                    v-if="!showPassword"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
                 </svg>
-                <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                  <line x1="1" y1="1" x2="23" y2="23"></line>
-                </svg>
+                {{ showPassword ? 'Hide' : 'Show' }}
               </button>
             </div>
-            <span v-if="errors.password" class="error-message">{{ errors.password }}</span>
+            <input
+              v-model="formData.password"
+              :type="showPassword ? 'text' : 'password'"
+              placeholder="Enter your password"
+              class="input input-bordered w-full bg-white/90 focus:bg-white"
+              required
+              minlength="6"
+            />
           </div>
 
-          <!-- Confirm Password -->
-          <div class="form-group">
-            <label class="form-label">Confirm Password</label>
-            <div class="password-wrapper">
-              <input 
-                :type="showConfirmPassword ? 'text' : 'password'" 
-                v-model="formData.confirmPassword"
-                placeholder="At least 8 characters" 
-                class="form-input"
-                :class="{ 'error': errors.confirmPassword }"
-              />
+          <!-- Confirm Password Field -->
+          <div class="mb-6">
+            <div class="flex justify-between items-center mb-2">
+              <label class="text-sm font-medium text-base-content">
+                Confirm Password
+              </label>
               <button
                 type="button"
-                @click="showConfirmPassword = !showConfirmPassword"
-                class="eye-btn"
+                @click="toggleConfirmPassword"
+                class="text-sm text-primary hover:text-primary-focus flex items-center gap-1"
               >
-                <svg v-if="!showConfirmPassword" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                  <circle cx="12" cy="12" r="3"></circle>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 h-4"
+                >
+                  <path
+                    v-if="showConfirmPassword"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88"
+                  />
+                  <path
+                    v-else
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                  />
+                  <path
+                    v-if="!showConfirmPassword"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
                 </svg>
-                <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                  <line x1="1" y1="1" x2="23" y2="23"></line>
-                </svg>
+                {{ showConfirmPassword ? 'Hide' : 'Show' }}
               </button>
             </div>
-            <span v-if="errors.confirmPassword" class="error-message">{{ errors.confirmPassword }}</span>
+            <input
+              v-model="formData.confirmPassword"
+              :type="showConfirmPassword ? 'text' : 'password'"
+              placeholder="Confirm your password"
+              class="input input-bordered w-full bg-white/90 focus:bg-white"
+              required
+            />
           </div>
 
           <!-- Error Message -->
-          <div v-if="errorMessage" class="alert-error">
-            {{ errorMessage }}
+          <div v-if="error" class="alert alert-error mb-4 rounded-md">
+            <span>{{ error }}</span>
           </div>
 
-          <!-- Submit Button -->
-          <button 
-            type="submit" 
-            class="submit-btn"
-            :disabled="isLoading"
+          <!-- Sign Up Button -->
+          <button
+            type="submit"
+            class="btn btn-primary w-full text-white mb-4"
+            :disabled="loading"
           >
-            <span v-if="!isLoading">Sign Up</span>
-            <span v-else>Loading...</span>
+            <span v-if="loading" class="loading loading-spinner"></span>
+            <span v-else>Sign Up</span>
           </button>
 
+          <!-- Sign In Link -->
+          <p class="text-start text-sm text-base-content mb-4">
+            Already have an account?
+            <router-link to="/authentication/login" class="text-primary hover:text-primary-focus font-medium underline">
+              Sign In
+            </router-link>
+          </p>
+
           <!-- Divider -->
-          <div class="divider">
-            <span>Or</span>
-          </div>
+          <div class="divider text-base-content/60">OR</div>
 
-          <!-- Social Login Buttons -->
-          <div class="social-buttons">
-            <button type="button" class="social-btn google-btn">
-              <svg width="18" height="18" viewBox="0 0 18 18">
-                <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/>
-                <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/>
-                <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707 0-.593.102-1.17.282-1.709V4.958H.957C.347 6.173 0 7.548 0 9c0 1.452.348 2.827.957 4.042l3.007-2.335z"/>
-                <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"/>
-              </svg>
-              Sign in with Google
-            </button>
-            
-            <button type="button" class="social-btn facebook-btn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-              </svg>
-              Sign in with Facebook
-            </button>
-          </div>
-
-          <!-- Already have account -->
-          <div class="signin-link">
-            Already have an account? 
-            <a href="#" @click.prevent="navigateToSignIn">Sign In</a>
-          </div>
+          <!-- Google Sign Up -->
+          <button
+            type="button"
+            @click="handleGoogleSignUp"
+            class="btn btn-outline w-full bg-white hover:bg-gray-50"
+          >
+            <svg class="w-5 h-5" viewBox="0 0 24 24">
+              <path
+                fill="#4285F4"
+                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+              />
+              <path
+                fill="#34A853"
+                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+              />
+              <path
+                fill="#FBBC05"
+                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+              />
+              <path
+                fill="#EA4335"
+                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+              />
+            </svg>
+            <span class="text-base-content">Continue with Google</span>
+          </button>
         </form>
       </div>
     </div>
@@ -180,410 +213,118 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/authStore';
 
 const router = useRouter();
 const authStore = useAuthStore();
 
-const activeTab = ref('signup');
-const fullName = ref('');
+// Background Images
+const backgroundImages = ref([
+  '/images/backk.png',
+  '/images/pyramids.jpg',
+  '/images/museum.jpg',
+  '/images/camelriding.png',
+]);
 
-const formData = reactive({
-  email: '',
-  phone: '',
-  password: '',
-  confirmPassword: ''
-});
+const currentImageIndex = ref(0);
+let slideInterval = null;
 
-const errors = reactive({
+// Form Data
+const formData = ref({
   fullName: '',
   email: '',
-  phone: '',
   password: '',
-  confirmPassword: ''
+  confirmPassword: '',
 });
 
 const showPassword = ref(false);
 const showConfirmPassword = ref(false);
-const isLoading = ref(false);
-const errorMessage = ref('');
+const loading = ref(false);
+const error = ref(null);
 
-const navigateToSignIn = () => {
-  router.push('/login');
+// Methods
+const togglePassword = () => {
+  showPassword.value = !showPassword.value;
 };
 
-const validateForm = () => {
-  let isValid = true;
-  Object.keys(errors).forEach(key => errors[key] = '');
-  
-  if (!fullName.value.trim()) {
-    errors.fullName = 'Full name is required';
-    isValid = false;
-  }
-  
-  if (!formData.email) {
-    errors.email = 'Email is required';
-    isValid = false;
-  } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-    errors.email = 'Email is invalid';
-    isValid = false;
-  }
-  
-  if (!formData.phone) {
-    errors.phone = 'Phone number is required';
-    isValid = false;
-  } else if (!/^\+?\d{10,15}$/.test(formData.phone.replace(/\s/g, ''))) {
-    errors.phone = 'Phone number is invalid';
-    isValid = false;
-  }
-  
-  if (!formData.password) {
-    errors.password = 'Password is required';
-    isValid = false;
-  } else if (formData.password.length < 8) {
-    errors.password = 'Password must be at least 8 characters long';
-    isValid = false;
-  }
-  
-  if (formData.password !== formData.confirmPassword) {
-    errors.confirmPassword = 'Passwords do not match';
-    isValid = false;
-  }
-  
-  return isValid;
+const toggleConfirmPassword = () => {
+  showConfirmPassword.value = !showConfirmPassword.value;
 };
 
-const handleSignup = async () => {
-  errorMessage.value = '';
-  
-  if (!validateForm()) return;
-  
-  isLoading.value = true;
-  
-  // Split full name into firstName and lastName
-  const nameParts = fullName.value.trim().split(' ');
-  const firstName = nameParts[0] || '';
-  const lastName = nameParts.slice(1).join(' ') || '';
-  
-  const userData = {
-    firstName,
-    lastName,
-    email: formData.email,
-    phone: formData.phone,
-    password: formData.password
-  };
-  
-  const result = await authStore.signup(userData);
-  
-  isLoading.value = false;
-  
+const handleSignUp = async () => {
+  error.value = null;
+
+  // Validation
+  if (formData.value.password !== formData.value.confirmPassword) {
+    error.value = 'Passwords do not match';
+    return;
+  }
+
+  if (formData.value.password.length < 6) {
+    error.value = 'Password must be at least 6 characters';
+    return;
+  }
+
+  loading.value = true;
+
+  const result = await authStore.register({
+    fullName: formData.value.fullName,
+    email: formData.value.email,
+    password: formData.value.password,
+  });
+
+  loading.value = false;
+
   if (result.success) {
     router.push('/');
   } else {
-    errorMessage.value = result.message;
+    error.value = result.error;
   }
 };
+
+const handleGoogleSignUp = async () => {
+  loading.value = true;
+  error.value = null;
+
+  const result = await authStore.loginWithGoogle();
+
+  loading.value = false;
+
+  if (result.success) {
+    router.push('/');
+  } else {
+    error.value = result.error;
+  }
+};
+
+// Slideshow
+const startSlideshow = () => {
+  slideInterval = setInterval(() => {
+    currentImageIndex.value = (currentImageIndex.value + 1) % backgroundImages.value.length;
+  }, 5000);
+};
+
+onMounted(() => {
+  startSlideshow();
+});
+
+onUnmounted(() => {
+  if (slideInterval) {
+    clearInterval(slideInterval);
+  }
+});
 </script>
 
 <style scoped>
-.signup-container {
-  display: flex;
-  min-height: 100vh;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s ease;
 }
 
-/* Left Side - Pyramid Image */
-.left-side {
-  flex: 1;
-  position: relative;
-  background-image: url('/Signuplogin forgetpassword.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  overflow: hidden;
-  border-right: 4px solid #4A90E2;
-}
-
-.pyramid-overlay {
-  position: absolute;
-  inset: 0;
-  background: 
-    radial-gradient(circle at 30% 60%, rgba(205, 154, 91, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 70% 40%, rgba(139, 111, 71, 0.4) 0%, transparent 50%),
-    linear-gradient(180deg, rgba(212, 165, 116, 0.1) 0%, rgba(139, 115, 85, 0.3) 100%);
-}
-
-.left-side::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 40%;
-  background: linear-gradient(to top, rgba(139, 115, 85, 0.6) 0%, transparent 100%);
-}
-
-/* Right Side - Form */
-.right-side {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #FAFAFA;
-  padding: 2rem;
-  overflow-y: auto;
-}
-
-.form-container {
-  width: 100%;
-  max-width: 440px;
-  padding: 1rem 0;
-}
-
-/* Brand Title */
-.brand-title {
-  font-size: 3.5rem;
-  font-weight: 700;
-  text-align: center;
-  color: #C9A96E;
-  letter-spacing: 0.1em;
-  margin-bottom: 2rem;
-  font-family: 'Georgia', serif;
-}
-
-/* Tab Container */
-.tab-container {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
-  background: #FFFFFF;
-  border-radius: 8px;
-  padding: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.tab-btn {
-  flex: 1;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  background: transparent;
-  color: #666;
-  font-weight: 500;
-  font-size: 0.95rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.tab-btn.active {
-  background: #C86A3F;
-  color: white;
-  box-shadow: 0 2px 4px rgba(200, 106, 63, 0.3);
-}
-
-.tab-btn:hover:not(.active) {
-  background: #F5F5F5;
-}
-
-/* Form */
-.signup-form {
-  width: 100%;
-}
-
-.form-group {
-  margin-bottom: 1.25rem;
-}
-
-.form-label {
-  display: block;
-  color: #333;
-  font-size: 0.9rem;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-}
-
-.form-input {
-  width: 100%;
-  padding: 0.875rem 1rem;
-  border: 1px solid #E0E0E0;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
-  background: white;
-}
-
-.form-input:focus {
-  outline: none;
-  border-color: #C86A3F;
-  box-shadow: 0 0 0 3px rgba(200, 106, 63, 0.1);
-}
-
-.form-input.error {
-  border-color: #E74C3C;
-}
-
-.form-input::placeholder {
-  color: #B0B0B0;
-}
-
-.password-wrapper {
-  position: relative;
-}
-
-.eye-btn {
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: #999;
-  cursor: pointer;
-  padding: 0.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.2s;
-}
-
-.eye-btn:hover {
-  color: #666;
-}
-
-.error-message {
-  display: block;
-  color: #E74C3C;
-  font-size: 0.8rem;
-  margin-top: 0.35rem;
-}
-
-.alert-error {
-  background: #FDEDEC;
-  color: #E74C3C;
-  padding: 0.875rem 1rem;
-  border-radius: 6px;
-  font-size: 0.875rem;
-  margin-bottom: 1.25rem;
-  border-left: 3px solid #E74C3C;
-}
-
-.submit-btn {
-  width: 100%;
-  padding: 0.875rem 1.5rem;
-  background: #C86A3F;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(200, 106, 63, 0.3);
-  margin-bottom: 1.5rem;
-}
-
-.submit-btn:hover:not(:disabled) {
-  background: #B55A30;
-  box-shadow: 0 4px 12px rgba(200, 106, 63, 0.4);
-  transform: translateY(-1px);
-}
-
-.submit-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* Divider */
-.divider {
-  display: flex;
-  align-items: center;
-  margin: 1.5rem 0;
-  color: #999;
-  font-size: 0.875rem;
-}
-
-.divider::before,
-.divider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: #E0E0E0;
-}
-
-.divider span {
-  padding: 0 1rem;
-}
-
-/* Social Buttons */
-.social-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-}
-
-.social-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  padding: 0.875rem 1.5rem;
-  border: 1px solid #E0E0E0;
-  background: white;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.social-btn:hover {
-  background: #F8F8F8;
-  border-color: #D0D0D0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
-
-.google-btn {
-  color: #444;
-}
-
-.facebook-btn {
-  color: #1877F2;
-}
-
-/* Sign In Link */
-.signin-link {
-  text-align: center;
-  font-size: 0.9rem;
-  color: #666;
-}
-
-.signin-link a {
-  color: #C86A3F;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.signin-link a:hover {
-  text-decoration: underline;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .signup-container {
-    flex-direction: column;
-  }
-  
-  .left-side {
-    min-height: 200px;
-    border-right: none;
-    border-bottom: 4px solid #4A90E2;
-  }
-  
-  .brand-title {
-    font-size: 2.5rem;
-  }
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

@@ -288,15 +288,16 @@ const router = createRouter({
   routes,
 })
 
+import { useAuthStore } from '@/stores/authStore'
+
 // Navigation guard for protected routes
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
 
-  // TODO: Replace this with your actual authentication check
-  // Example: const isAuthenticated = store.getters.isAuthenticated
-  const isAuthenticated = false // Placeholder - update with your auth logic
+  // Use auth store to check authentication status
+  const authStore = useAuthStore()
 
-  if (requiresAuth && !isAuthenticated) {
+  if (requiresAuth && !authStore.isAuthenticated) {
     // Redirect to login page if not authenticated
     next({
       name: 'Login',
