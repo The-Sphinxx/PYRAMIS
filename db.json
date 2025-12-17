@@ -1098,6 +1098,7 @@
       {
         "id": 1,
         "title": "Siwa Oasis Camping",
+        "city": "Siwa Oasis",
         "description": "Explore the remote Siwa Oasis, salt lakes, and spend nights under the stars. Perfect for those seeking tranquility and a connection with nature.",
         "price": 13700,
         "rating": 4.8,
@@ -1127,9 +1128,12 @@
           {
             "day": 1,
             "title": "Arrival & Shali Fortress",
-            "time": "08:00 AM",
-            "description": "Departure from Cairo. Arrive in Siwa, check into the eco-lodge, and visit the ancient Shali Fortress for sunset.",
             "activities": [
+              {
+                "time": "08:00 AM",
+                "title": "Departure & Arrival",
+                "desc": "Departure from Cairo. Arrive in Siwa, check into the eco-lodge, and visit the ancient Shali Fortress for sunset."
+              },
               {
                 "time": "06:00 PM",
                 "title": "Sunset at Shali",
@@ -1140,9 +1144,12 @@
           {
             "day": 2,
             "title": "Salt Lakes & Cleopatra Spring",
-            "time": "09:00 AM",
-            "description": "Visit the famous salt lakes for a float, followed by a refreshing dip in Cleopatra's Spring.",
             "activities": [
+              {
+                "time": "09:00 AM",
+                "title": "Morning Tour",
+                "desc": "Visit the famous salt lakes for a float, followed by a refreshing dip in Cleopatra's Spring."
+              },
               {
                 "time": "10:00 AM",
                 "title": "Salt Lakes Swimming",
@@ -1158,9 +1165,12 @@
           {
             "day": 3,
             "title": "Great Sand Sea Safari",
-            "time": "02:00 PM",
-            "description": " thrilling 4x4 jeep safari into the dunes, sandboarding, and camping under the stars.",
             "activities": [
+              {
+                "time": "02:00 PM",
+                "title": "Safari Start",
+                "desc": "Thrilling 4x4 jeep safari into the dunes, sandboarding, and camping under the stars."
+              },
               {
                 "time": "04:00 PM",
                 "title": "Sandboarding",
@@ -1176,9 +1186,13 @@
           {
             "day": 4,
             "title": "Return to Cairo",
-            "time": "08:00 AM",
-            "description": "Breakfast at camp and departure back to Cairo.",
-            "activities": []
+            "activities": [
+              {
+                "time": "08:00 AM",
+                "title": "Departure",
+                "desc": "Breakfast at camp and departure back to Cairo."
+              }
+            ]
           }
         ],
         "hotel": {
@@ -1210,6 +1224,7 @@
       {
         "id": 2,
         "title": "Luxor & Aswan Nile Cruise",
+        "city": "Luxor & Aswan",
         "description": "Experience ancient Egypt with visits to Valley of the Kings, Karnak Temple, and Abu Simbel. A journey through history on a luxury cruise.",
         "price": 28500,
         "rating": 4.9,
@@ -1239,37 +1254,57 @@
           {
             "day": 1,
             "title": "Boarding in Luxor",
-            "time": "11:00 AM",
-            "description": "Check-in to your cruise ship. Lunch on board followed by a visit to Karnak and Luxor Temples.",
-            "activities": []
+            "activities": [
+              {
+                "time": "11:00 AM",
+                "title": "Boarding & Lunch",
+                "desc": "Check-in to your cruise ship. Lunch on board followed by a visit to Karnak and Luxor Temples."
+              }
+            ]
           },
           {
             "day": 2,
             "title": "West Bank Tour",
-            "time": "08:00 AM",
-            "description": "Visit Valley of the Kings, Hatshepsut Temple, and Colossi of Memnon. Sail to Edfu.",
-            "activities": []
+            "activities": [
+              {
+                "time": "08:00 AM",
+                "title": "West Bank Visits",
+                "desc": "Visit Valley of the Kings, Hatshepsut Temple, and Colossi of Memnon. Sail to Edfu."
+              }
+            ]
           },
           {
             "day": 3,
             "title": "Edfu & Kom Ombo",
-            "time": "09:00 AM",
-            "description": "Visit Edfu Temple by horse carriage, then sail to Kom Ombo to visit the double temple.",
-            "activities": []
+            "activities": [
+              {
+                "time": "09:00 AM",
+                "title": "Edfu Temple",
+                "desc": "Visit Edfu Temple by horse carriage, then sail to Kom Ombo to visit the double temple."
+              }
+            ]
           },
           {
             "day": 4,
             "title": "Aswan Highlights",
-            "time": "09:00 AM",
-            "description": "Visit Philae Temple and the High Dam. Optional trip to Abu Simbel.",
-            "activities": []
+            "activities": [
+              {
+                "time": "09:00 AM",
+                "title": "Aswan Tour",
+                "desc": "Visit Philae Temple and the High Dam. Optional trip to Abu Simbel."
+              }
+            ]
           },
           {
             "day": 5,
             "title": "Disembarkation",
-            "time": "08:00 AM",
-            "description": "Breakfast and checkout in Aswan.",
-            "activities": []
+            "activities": [
+              {
+                "time": "08:00 AM",
+                "title": "Checkout",
+                "desc": "Breakfast and checkout in Aswan."
+              }
+            ]
           }
         ],
         "hotel": {
@@ -1301,7 +1336,8 @@
       },
       {
         "id": 3,
-        "title": "Sharm El Sheikh Trip",
+        "title": "Sharm El Sheikh ",
+        "city": "Sharm El Sheikh",
         "description": "Escape to the perfect beach getaway in Sharm El Sheikh, one of Egypt's most stunning Red Sea destinations. This all-inclusive package combines relaxation on pristine beaches, world-class snorkeling and diving, and luxurious resort amenities.",
         "price": 12600,
         "rating": 4.8,
@@ -1334,9 +1370,12 @@
           {
             "day": 1,
             "title": "Arrival & Beach Relaxation",
-            "time": "10:00 AM",
-            "description": "Airport Pickup & Resort Check-in. Our representative will greet you at Sharm El Sheikh International Airport and transfer you to your luxury resort. Check-in and receive your welcome drink.",
             "activities": [
+              {
+                "time": "10:00 AM",
+                "title": "Arrival",
+                "desc": "Airport Pickup & Resort Check-in. Our representative will greet you at Sharm El Sheikh International Airport and transfer you to your luxury resort. Check-in and receive your welcome drink."
+              },
               {
                 "time": "12:00 PM",
                 "title": "Welcome Lunch at Resort",
@@ -1357,9 +1396,12 @@
           {
             "day": 2,
             "title": "Snorkeling Adventure & Beach Activities",
-            "time": "09:00 AM",
-            "description": "Breakfast & Preparation. Start your day with a hearty breakfast buffet. Pick up your snorkeling equipment from the water center.",
             "activities": [
+              {
+                "time": "09:00 AM",
+                "title": "Breakfast & Preparation",
+                "desc": "Breakfast & Preparation. Start your day with a hearty breakfast buffet. Pick up your snorkeling equipment from the water center."
+              },
               {
                 "time": "11:00 AM",
                 "title": "Guided Snorkeling Tour",
@@ -1385,9 +1427,12 @@
           {
             "day": 3,
             "title": "Leisure Morning & Departure",
-            "time": "09:00 AM",
-            "description": "Farewell Breakfast. Start your day with a final breakfast. Soak up remaining sun rays before check-out.",
             "activities": [
+              {
+                "time": "09:00 AM",
+                "title": "Farewell Breakfast",
+                "desc": "Farewell Breakfast. Start your day with a final breakfast. Soak up remaining sun rays before check-out."
+              },
               {
                 "time": "11:00 AM",
                 "title": "Final Beach Time",
