@@ -3,7 +3,7 @@
     <!-- Hero Section with Search -->
     <div 
       class="relative bg-cover bg-center min-h-[585px] flex items-center"
-      style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/pyramids.jpg')"
+      style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/hero-attractions.jpg')"
     >
       <div class="page-container py-16">
         <!-- Hero Text -->
@@ -13,7 +13,7 @@
         </div>
 
         <!-- Search Bar Component -->
-        <search
+        <Search
           type="attractions"
           :show-ai-planner="true"
           :cities="availableCities"
@@ -83,10 +83,10 @@
           <AttractionCard
             v-for="attraction in paginatedAttractions"
             :key="attraction.id"
-            :id="attraction.id"
+            :id="Number(attraction.id)"
             :image="attraction.imageUrl"
             :title="attraction.name"
-            :price="attraction.paymentId"
+            :price="attraction.price"
             :location="attraction.city"
             :rating="attraction.rating"
             :reviews="getRandomReviews()"
@@ -127,10 +127,9 @@
 import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAttractionStore } from '@/stores/attractionStore';
-import Pagination from '@/components/Common/Pagination.vue';
-import Search from '@/components/Common/Search.vue';
 import AttractionCard from '@/components/Attractions/AttractionCard.vue';
-
+import Search from '@/components/Common/Search.vue';
+import Pagination from '@/components/Common/Pagination.vue';
 
 const router = useRouter();
 const attractionStore = useAttractionStore();
@@ -214,9 +213,19 @@ const filteredAttractions = computed(() => {
 
   // Filter by category
   if (selectedCategory.value !== 'all') {
-    result = result.filter(attraction => 
-      attraction.categories && attraction.categories.includes(selectedCategory.value)
-    );
+    result = result.filter(attraction => {
+      if (!attraction.categories) return false;
+      
+      // Special handling for RELIGIOUS category to match all religious types
+      if (selectedCategory.value === 'RELIGIOUS') {
+        return attraction.categories.some(cat => 
+          cat.includes('RELIGIOUS')
+        );
+      }
+      
+      // Normal category matching
+      return attraction.categories.includes(selectedCategory.value);
+    });
   }
 
   // Filter by store filters (search query from SearchBar)
@@ -292,6 +301,22 @@ const resetFilters = () => {
 };
 
 const getRandomReviews = () => {
+  return Math.floor(Math.random() * 5000) + 100;
+};
+
+// Get first image from images array or fallback to imageUrl
+const getAttractionImage = (attraction) => {
+  if (attraction.images && attraction.images.length > 0) {
+    return attraction.images[0];
+  }
+  return attraction.imageUrl || '/images/placeholder.jpg';
+};
+
+// Get reviews count from attraction data or random
+const getAttractionReviews = (attraction) => {
+  if (attraction.reviews && attraction.reviews.totalReviews) {
+    return attraction.reviews.totalReviews;
+  }
   return Math.floor(Math.random() * 5000) + 100;
 };
 

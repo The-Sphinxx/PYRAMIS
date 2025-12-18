@@ -43,7 +43,7 @@ export const useAttractionStore = defineStore('attraction', {
 
     // Get attraction by ID
     getAttractionById: (state) => (id) => {
-      return state.attractions.find(attr => attr.id === parseInt(id));
+      return state.attractions.find(attr => attr.id == id);
     },
 
     // Get unique cities
@@ -125,21 +125,40 @@ export const useAttractionStore = defineStore('attraction', {
     },
 
     // Fetch single attraction by ID
-    async fetchAttractionById(id) {
-      this.loading = true;
-      this.error = null;
-      try {
-        const data = await attractionApi.getAttractionById(id);
-        this.selectedAttraction = data;
-        return data;
-      } catch (error) {
-        this.error = error.message || 'Failed to fetch attraction';
-        console.error('Error fetching attraction:', error);
-        throw error;
-      } finally {
-        this.loading = false;
-      }
-    },
+async fetchAttractionById(id) {
+  this.loading = true;
+  this.error = null;
+
+  try {
+    // 1) تأكد أن قائمة الـ attractions محمّلة (مهمّ لحساب الـ Similar)
+    if (this.attractions.length === 0) {
+      await this.fetchAttractions();
+    }
+
+    // 2) ابحث محلياً
+    let attraction = this.attractions.find(
+      (attr) => attr.id == id
+    );
+
+    if (attraction) {
+      this.selectedAttraction = attraction;
+    } else {
+      // 3) Fetch من الـ API لو مش موجود محلياً
+      const data = await attractionApi.getAttractionById(id);
+      this.selectedAttraction = data;
+      attraction = data;
+    }
+
+    return attraction;
+  } catch (error) {
+    this.error = error.message || "Failed to fetch attraction";
+    console.error("Error fetching attraction:", error);
+    throw error;
+  } finally {
+    this.loading = false;
+  }
+},
+
 
     // Set single filter
     setFilter(filterType, value) {

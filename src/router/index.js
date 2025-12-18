@@ -30,22 +30,30 @@ import AiPlanResults from '@/Views/Ai/AiPlanResults.vue'
 // Attractions
 import AttractionsList from '@/Views/Attractions/AttractionsList.vue'
 import AttractionDetails from '@/Views/Attractions/AttractionDetails.vue'
-import AttractionBooking from '@/Views/Attractions/AttractionBooking.vue'
+import AttractionReview from '@/Views/Attractions/AttractionReview.vue'
+import AttractionCheckOut from '@/Views/Attractions/AttractionCheckOut.vue'
+import AttractionConfirmation from '@/Views/Attractions/AttractionConfirmation.vue'
 
 // Cars
 import CarsList from '@/Views/Cars/Carslist.vue'
 import CarDetails from '@/Views/Cars/CarDetails.vue'
-import CarBooking from '@/Views/Cars/CarBooking.vue'
+import CarReview from '@/Views/Cars/CarReview.vue'
+import CarCheckOut from '@/Views/Cars/CarCheckOut.vue'
+import CarConfirmation from '@/Views/Cars/CarConfirmation.vue'
 
 // Hotels
 import HotelsList from '@/Views/Hotels/HotelsList.vue'
 import HotelDetails from '@/Views/Hotels/HotelDetails.vue'
-import HotelBooking from '@/Views/Hotels/HotelBooking.vue'
+import HotelReview from '@/Views/Hotels/HotelReview.vue'
+import HotelCheckOut from '@/Views/Hotels/HotelCheckOut.vue'
+import HotelConfirmation from '@/Views/Hotels/HotelConfirmation.vue'
 
 // Trips
 import TripsList from '@/Views/Trips/TripsList.vue'
 import TripDetails from '@/Views/Trips/TripDetails.vue'
-import TripBooking from '@/Views/Trips/TripBooking.vue'
+import TripReview from '@/Views/Trips/TripReview.vue'
+import TripCheckOut from '@/Views/Trips/TripCheckOut.vue'
+import TripConfirmation from '@/Views/Trips/TripConfirmation.vue'
 
 const routes = [
   // Home Routes
@@ -93,19 +101,19 @@ const routes = [
     path: '/user-account/profile',
     name: 'Profile',
     component: Profile,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: false },
   },
   {
     path: '/user-account/wishlist',
     name: 'Wishlist',
     component: Wishlist,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: false },
   },
   {
     path: '/user-account/reservations',
     name: 'Reservations',
     component: Reservations,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: false },
   },
 
   // Dashboard Routes (Protected)
@@ -113,31 +121,31 @@ const routes = [
     path: '/dashboard/users-manage',
     name: 'UsersManage',
     component: UsersManage,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: false },
   },
   {
     path: '/dashboard/trips-manage',
     name: 'TripsManage',
     component: TripsManage,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: false },
   },
   {
     path: '/dashboard/hotels-manage',
     name: 'HotelsManage',
     component: HotelsManage,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: false },
   },
   {
     path: '/dashboard/cars-manage',
     name: 'CarsManage',
     component: CarsManage,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: false },
   },
   {
     path: '/dashboard/payment-manage',
     name: 'PaymentManage',
     component: PaymentManage,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: false },
   },
 
   // AI Routes (Protected)
@@ -145,13 +153,13 @@ const routes = [
     path: '/ai/collect-data',
     name: 'AiCollectData',
     component: AiCollectData,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: false },
   },
   {
     path: '/ai/plan-results',
     name: 'AiPlanResults',
     component: AiPlanResults,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: false },
   },
 
   // Attractions Routes
@@ -166,10 +174,22 @@ const routes = [
     component: AttractionDetails,
   },
   {
-    path: '/attractions/booking/:id',
-    name: 'AttractionBooking',
-    component: AttractionBooking,
-    meta: { requiresAuth: true },
+    path: '/attractions/review/:id',
+    name: 'AttractionReview',
+    component: AttractionReview,
+    meta: { requiresAuth: false },
+  },
+  {
+    path: '/attractions/checkout/:id',
+    name: 'AttractionCheckOut',
+    component: AttractionCheckOut,
+    meta: { requiresAuth: false },
+  },
+  {
+    path: '/attractions/confirmation/:id',
+    name: 'AttractionConfirmation',
+    component: AttractionConfirmation,
+    meta: { requiresAuth: false },
   },
 
   // Cars Routes
@@ -184,10 +204,22 @@ const routes = [
     component: CarDetails,
   },
   {
-    path: '/cars/booking/:id',
-    name: 'CarBooking',
-    component: CarBooking,
-    meta: { requiresAuth: true },
+    path: '/cars/review/:id',
+    name: 'CarReview',
+    component: CarReview,
+    meta: { requiresAuth: false },
+  },
+  {
+    path: '/cars/checkout/:id',
+    name: 'CarCheckOut',
+    component: CarCheckOut,
+    meta: { requiresAuth: false },
+  },
+  {
+    path: '/cars/confirmation/:id',
+    name: 'CarConfirmation',
+    component: CarConfirmation,
+    meta: { requiresAuth: false },
   },
 
   // Hotels Routes
@@ -202,9 +234,21 @@ const routes = [
     component: HotelDetails,
   },
   {
-    path: '/hotels/booking/:id',
-    name: 'HotelBooking',
-    component: HotelBooking,
+    path: '/hotels/review/:id',
+    name: 'HotelReview',
+    component: HotelReview,
+    meta: { requiresAuth: false },
+  },
+  {
+    path: '/hotels/checkout/:id',
+    name: 'HotelCheckOut',
+    component: HotelCheckOut,
+    meta: { requiresAuth: false },
+  },
+  {
+    path: '/hotels/confirmation/:id',
+    name: 'HotelConfirmation',
+    component: HotelConfirmation,
     meta: { requiresAuth: true },
   },
 
@@ -220,10 +264,22 @@ const routes = [
     component: TripDetails,
   },
   {
-    path: '/trips/booking/:id',
-    name: 'TripBooking',
-    component: TripBooking,
-    meta: { requiresAuth: true },
+    path: '/trips/review/:id',
+    name: 'TripReview',
+    component: TripReview,
+    meta: { requiresAuth: false },
+  },
+  {
+    path: '/trips/checkout/:id',
+    name: 'TripCheckOut',
+    component: TripCheckOut,
+    meta: { requiresAuth: false },
+  },
+  {
+    path: '/trips/confirmation/:id',
+    name: 'TripConfirmation',
+    component: TripConfirmation,
+    meta: { requiresAuth: false },
   },
 ]
 
@@ -232,15 +288,16 @@ const router = createRouter({
   routes,
 })
 
+import { useAuthStore } from '@/stores/authStore'
+
 // Navigation guard for protected routes
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
 
-  // TODO: Replace this with your actual authentication check
-  // Example: const isAuthenticated = store.getters.isAuthenticated
-  const isAuthenticated = true // Placeholder - update with your auth logic
+  // Use auth store to check authentication status
+  const authStore = useAuthStore()
 
-  if (requiresAuth && !isAuthenticated) {
+  if (requiresAuth && !authStore.isAuthenticated) {
     // Redirect to login page if not authenticated
     next({
       name: 'Login',

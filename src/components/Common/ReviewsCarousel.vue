@@ -34,15 +34,15 @@
           <div 
             v-for="review in userReviews" 
             :key="review.id"
-            class="flex-shrink-0 px-3"
+            class="flex-shrink-0 px-1 md:px-2"
             :style="{ width: `${100 / visibleCards}%` }"
           >
             <!-- Review Card -->
-            <div class="bg-base-100 rounded-lg shadow-lg p-6 h-full flex flex-col">
+            <div class="bg-base-100 rounded-lg shadow-lg p-4 md:p-6 h-full flex flex-col">
               <!-- User Info & Rating -->
-              <div class="flex items-center gap-4 mb-4">
-                <div class="avatar">
-                  <div class="w-16 h-16 rounded-full">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="avatar flex-shrink-0">
+                  <div class="w-12 h-12 md:w-14 md:h-14 rounded-full">
                     <img 
                       :src="review.userImage || '/images/users/default.jpg'" 
                       :alt="review.userName"
@@ -50,21 +50,27 @@
                     />
                   </div>
                 </div>
-                <div class="flex-1">
-                  <h3 class="font-bold text-lg">{{ review.userName }}</h3>
-                  <p class="text-sm text-base-content/60">{{ review.date }}</p>
+                <div class="flex-1 min-w-0 mr-1">
+                  <h3 class="font-bold text-sm md:text-base truncate leading-tight">
+                    {{ review.userName }}
+                  </h3>
+                  <p class="text-xs text-base-content/60 leading-tight">
+                    {{ review.date }}
+                  </p>
                 </div>
                 <!-- Rating on the right -->
-                <div class="flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-warning" viewBox="0 0 24 24">
+                <div class="flex items-center gap-1 flex-shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6 fill-warning" viewBox="0 0 24 24">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                   </svg>
-                  <span class="text-xl font-bold text-primary">{{ review.rating.toFixed(1) }}</span>
+                  <span class="text-lg md:text-xl font-bold text-primary whitespace-nowrap">
+                    {{ review.rating.toFixed(1) }}
+                  </span>
                 </div>
               </div>
 
               <!-- Review Text -->
-              <p class="text-base text-base-content/80 flex-1">
+              <p class="text-sm md:text-base text-base-content/80 flex-1 leading-relaxed">
                 {{ review.comment }}
               </p>
             </div>
@@ -117,8 +123,10 @@ const dragOffset = ref(0);
 
 // Responsive visible cards
 const visibleCards = computed(() => {
-  if (screenWidth.value >= 1280) return 3; // xl: 3 cards
+  if (screenWidth.value >= 1536) return 3; // 2xl: 3 cards (very large)
+  if (screenWidth.value >= 1280) return 2; // xl: 2 cards (inside lg:col-span-2)
   if (screenWidth.value >= 1024) return 2; // lg: 2 cards
+  if (screenWidth.value >= 768) return 2; // md: 2 cards
   return 1; // mobile: 1 card
 });
 

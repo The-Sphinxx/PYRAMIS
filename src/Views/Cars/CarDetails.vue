@@ -149,3 +149,36 @@ onMounted(loadCarData)
   </div>
 </div>
 </template>
+
+<script setup>
+import { onMounted, computed, ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { useCarsStore } from "@/stores/carsStore.js";
+import LuxurySUVCardDynamic from "@/components/Cars/CarCard.vue";
+//import { Star } from 'lucide-vue-next';
+
+const store = useCarsStore();
+const router = useRouter();
+const route = useRoute();
+const selectedImage = ref(0);
+const youMayScroll = ref(null);
+
+onMounted(async () => {
+  await store.fetchCars();
+});
+
+const car = computed(() => store.cars.find(c => c.id === parseInt(route.params.id)));
+const recommendedCars = computed(() => store.cars.filter(c => c.id !== parseInt(route.params.id)));
+
+function handleViewCar(carId) {
+  router.push({ name: 'CarDetails', params: { id: carId } });
+}
+
+// Scroll functions
+function scrollRight() {
+  youMayScroll.value.scrollBy({ left: 300, behavior: 'smooth' });
+}
+function scrollLeft() {
+  youMayScroll.value.scrollBy({ left: -300, behavior: 'smooth' });
+}
+</script>

@@ -203,7 +203,8 @@ const props = defineProps({
     type: String, 
     required: true,
     validator: (value) => ['attraction', 'hotel', 'trip', 'car'].includes(value)
-  }
+  },
+  showNearby: { type: Boolean, default: true }
 });
 
 // ==================== STATE & STORES ====================
@@ -355,7 +356,9 @@ const fetchNearbyLandmarks = async () => {
 
 // ==================== LIFECYCLE ====================
 onMounted(() => {
-  fetchNearbyLandmarks();
+  if (props.showNearby) {
+    fetchNearbyLandmarks();
+  }
 });
 </script>
 

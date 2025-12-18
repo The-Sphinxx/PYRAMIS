@@ -1,47 +1,49 @@
 <template>
-  <div class="bg-base-100 rounded-lg shadow-lg p-8">
-    <h2 class="text-3xl font-bold mb-6 text-base-content border-l-4 border-primary pl-4">
+  <div class="w-full my-6">
+    <h2 class="text-2xl md:text-3xl font-bold mb-6 text-base-content border-l-4 border-primary pl-4">
       Guest Ratings
     </h2>
-    
-    <div v-if="!reviews" class="alert alert-info">
-      <span>No reviews available yet</span>
-    </div>
-    
-    <div v-else class="flex flex-col lg:flex-row gap-8">
-      <!-- Overall Rating Section -->
-      <div class="flex flex-col items-center justify-center min-w-[220px] bg-base-200 rounded-lg p-6">
-        <div class="text-7xl font-bold text-primary mb-2">
-          {{ reviews.overallRating.toFixed(1) }}
-        </div>
-        <div class="text-xl font-semibold mb-1">{{ ratingLabel }}</div>
-        <div class="text-sm text-base-content/60">
-          Based on {{ reviews.totalReviews }} reviews
-        </div>
-      </div>
 
-      <!-- Rating Criteria Section -->
-      <div class="flex-1 space-y-4">
-        <div 
-          v-for="criterion in displayCriteria" 
-          :key="criterion.key"
-          class="flex items-center gap-4"
-        >
-          <div class="min-w-[140px] text-base font-medium">
-            {{ criterion.label }}
+    <div class="bg-base-100 rounded-lg shadow-lg p-4 md:p-6 lg:p-8">
+      <div v-if="!reviews" class="alert alert-info">
+        <span>No reviews available yet</span>
+      </div>
+      
+      <div v-else class="flex flex-col lg:flex-row gap-6 lg:gap-8">
+        <!-- Overall Rating Section -->
+        <div class="flex flex-col items-center justify-center w-full lg:min-w-[200px] lg:max-w-[220px] bg-base-200 rounded-lg p-4 md:p-6">
+          <div class="text-5xl md:text-6xl lg:text-7xl font-bold text-primary mb-2">
+            {{ reviews.overallRating.toFixed(1) }}
           </div>
-          
-          <!-- Progress Bar -->
-          <div class="flex-1 flex items-center gap-3">
-            <div class="flex-1 bg-base-200 rounded-full h-3 overflow-hidden">
-              <div 
-                class="h-full rounded-full transition-all duration-500"
-                :class="getBarColor(criterion.value)"
-                :style="{ width: `${(criterion.value / maxRating) * 100}%` }"
-              ></div>
+          <div class="text-lg md:text-xl font-semibold mb-1">{{ ratingLabel }}</div>
+          <div class="text-xs md:text-sm text-base-content/60 text-center">
+            Based on {{ reviews.totalReviews }} reviews
+          </div>
+        </div>
+
+        <!-- Rating Criteria Section -->
+        <div class="flex-1 space-y-3 md:space-y-4 w-full overflow-hidden">
+          <div 
+            v-for="criterion in displayCriteria" 
+            :key="criterion.key"
+            class="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 md:gap-4"
+          >
+            <div class="w-full sm:w-[100px] md:w-[120px] lg:w-[140px] text-sm md:text-base font-medium flex-shrink-0">
+              {{ criterion.label }}
             </div>
-            <div class="min-w-[40px] text-right font-semibold">
-              {{ criterion.value.toFixed(1) }}
+            
+            <!-- Progress Bar -->
+            <div class="flex flex-1 items-center gap-2 md:gap-3 min-w-0 w-full sm:w-auto">
+              <div class="flex-1 bg-base-200 rounded-full h-2 md:h-3 overflow-hidden">
+                <div 
+                  class="h-full rounded-full transition-all duration-500"
+                  :class="getBarColor(criterion.value)"
+                  :style="{ width: `${(criterion.value / maxRating) * 100}%` }"
+                ></div>
+              </div>
+              <div class="w-[35px] md:w-[40px] text-right font-semibold text-sm md:text-base flex-shrink-0">
+                {{ criterion.value.toFixed(1) }}
+              </div>
             </div>
           </div>
         </div>
