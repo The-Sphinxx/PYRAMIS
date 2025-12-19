@@ -30,10 +30,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/pyramids/main.jpg",
-        "/images/pyramids/view_2.jpg",
-        "/images/pyramids/view_3.jpg",
-        "/images/pyramids/view_4.jpg"
+        "/public/images/Attractions/pyramids-main.jpg",
+        "/public/images/Attractions/pyramids-view_2.jpg",
+        "/public/images/Attractions/pyramids-view_3.jpg",
+        "/public/images/Attractions/pyramids-view_4.jpg"
       ],
       "latitude": 29.9792,
       "longitude": 31.1342,
@@ -53,7 +53,7 @@
         "Entrance to select Pyramids (Paid)"
       ],
       "paymentId": "pay_0001",
-      "price": "120 $",
+      "price": "12$",
       "reviews": {
         "overallRating": 4.9,
         "totalReviews": 9875,
@@ -96,10 +96,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/karnak/main.jpg",
-        "/images/karnak/view_2.jpg",
-        "/images/karnak/view_3.jpg",
-        "/images/karnak/view_4.jpg"
+        "/public/images/Attractions/Karnak-Temple-main.png",
+        "/public/images/Attractions/karnak-view_2.jpg",
+        "/public/images/Attractions/karnak-view_3.jpg",
+        "/public/images/Attractions/karnak-view_4.jpg"
       ],
       "latitude": 25.7197,
       "longitude": 32.6587,
@@ -119,7 +119,7 @@
         "Sound and Light Show (Paid)"
       ],
       "paymentId": "pay_0002",
-      "price": "492 $",
+      "price": "20$",
       "reviews": {
         "overallRating": 4.8,
         "totalReviews": 6543,
@@ -161,10 +161,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/citadel/main.jpg",
-        "/images/citadel/view_2.jpg",
-        "/images/citadel/view_3.jpg",
-        "/images/citadel/view_4.jpg"
+        "/public/images/Attractions/Salah-El-Din-Citadel-main.png",
+        "/public/images/Attractions/Salah-El-Din-Citadel-view_2.jpg",
+        "/public/images/Attractions/Salah-El-Din-Citadel-view_3.jpg",
+        "/public/images/Attractions/Salah-El-Din-Citadel-view_4.jpg"
       ],
       "latitude": 30.0289,
       "longitude": 31.2625,
@@ -183,7 +183,7 @@
         "Parking"
       ],
       "paymentId": "pay_0003",
-      "price": "28 $",
+      "price": "28$",
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 3210,
@@ -226,10 +226,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/egyptian_museum/main.jpg",
-        "/images/egyptian_museum/view_2.jpg",
-        "Images of Egyptian Museum Tahrir interior showcasing artifacts",
-        "/images/egyptian_museum/view_4.jpg"
+        "/public/images/Attractions/Egyptian-Museum-main.png",
+        "/public/images/Attractions/Egyptian-Museum-view_2.jpg",
+        "/public/images/Attractions/Egyptian-Museum-view_3.jpg",
+        "/public/images/Attractions/Egyptian-Museum-view_4.jpg"
       ],
       "latitude": 30.0474,
       "longitude": 31.2365,
@@ -248,7 +248,7 @@
         "Guided Tours (Paid)"
       ],
       "paymentId": "pay_0004",
-      "price": "472 $",
+      "price": "45$",
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 5580,
@@ -290,10 +290,10 @@
         "BEACHES"
       ],
       "images": [
-        "/images/marina_beach/main.jpg",
-        "/images/marina_beach/view_2.jpg",
-        "/images/marina_beach/view_3.jpg",
-        "/images/marina_beach/view_4.jpg"
+        "/public/images/Attractions/Marina-Beach-main.png",
+        "/public/images/Attractions/Marina-Beach-view_2.jpg",
+        "/public/images/Attractions/Marina-Beach-view_3.jpg",
+        "/public/images/Attractions/Marina-Beach-view_4.jpg"
       ],
       "latitude": 31.2185,
       "longitude": 29.9079,
@@ -312,7 +312,7 @@
         "Parking (Limited)"
       ],
       "paymentId": "pay_0005",
-      "price": "Free to enter (Paid beach access varies)",
+      "price": "Free to enter",
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 2105,
@@ -354,10 +354,10 @@
         "ANCIENT SITES"
       ],
       "images": [
-        "/images/queens_valley/main.jpg",
-        "/images/queens_valley/view_2.jpg",
-        "/images/queens_valley/view_3.jpg",
-        "/images/queens_valley/view_4.jpg"
+        "/public/images/Attractions/Valley-of-the-Queens-main.png",
+        "/public/images/Attractions/Valley-of-the-Queens-view_2.jpg",
+        "/public/images/Attractions/Valley-of-the-Queens-view_3.jpg",
+        "/public/images/Attractions/Valley-of-the-Queens-view_4.jpg"
       ],
       "latitude": 25.7262,
       "longitude": 32.5857,
@@ -376,7 +376,7 @@
         "Parking"
       ],
       "paymentId": "pay_0006",
-      "price": "146 $",
+      "price": "25$",
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 1890,
@@ -419,10 +419,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/abu_simbel/main.jpg",
-        "/images/abu_simbel/view_2.jpg",
-        "/images/abu_simbel/view_3.jpg",
-        "/images/abu_simbel/view_4.jpg"
+        "/public/images/Attractions/AbuSimbel-Temples-main.png",
+        "/public/images/Attractions/AbuSimbel-Temples-view_2.png",
+        "/public/images/Attractions/AbuSimbel-Temples-view_3.png",
+        "/public/images/Attractions/AbuSimbel-Temples-view_4.png"
       ],
       "latitude": 22.3361,
       "longitude": 31.626,
@@ -441,7 +441,7 @@
         "Parking"
       ],
       "paymentId": "pay_0007",
-      "price": "430 $",
+      "price": "30$",
       "reviews": {
         "overallRating": 4.8,
         "totalReviews": 4120,
@@ -483,10 +483,10 @@
         "SHOPPING"
       ],
       "images": [
-        "/images/khan_el_khalili/main.jpg",
-        "/images/khan_el_khalili/view_2.jpg",
-        "/images/khan_el_khalili/view_3.jpg",
-        "/images/khan_el_khalili/view_4.jpg"
+        "/public/images/Attractions/Khan-ElKhalili-Bazaar-main.png",
+        "/public/images/Attractions/Khan-ElKhalili-Bazaar-view_2.jpg",
+        "/public/images/Attractions/Khan-ElKhalili-Bazaar-view_3.jpg",
+        "/public/images/Attractions/Khan-ElKhalili-Bazaar-view_4.jpg"
       ],
       "latitude": 30.0475,
       "longitude": 31.2644,
@@ -547,10 +547,10 @@
         "ANCIENT SITES"
       ],
       "images": [
-        "/images/kings_valley/main.jpg",
-        "/images/kings_valley/view_2.jpg",
-        "/images/kings_valley/view_3.jpg",
-        "/images/kings_valley/view_4.jpg"
+        "/public/images/Attractions/Valley-of-kings-main.png",
+        "/public/images/Attractions/Valley-of-kings-view_2.jpg",
+        "/public/images/Attractions/Valley-of-kings-view_3.jpg",
+        "/public/images/Attractions/Valley-of-kings-view_4.jpg"
       ],
       "latitude": 25.7408,
       "longitude": 32.601,
@@ -570,7 +570,7 @@
         "Parking"
       ],
       "paymentId": "pay_0009",
-      "price": "288 $",
+      "price": "28$",
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 7890,
@@ -612,10 +612,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/hatshepsut_temple/main.jpg",
-        "/images/hatshepsut_temple/view_2.jpg",
-        "/images/hatshepsut_temple/view_3.jpg",
-        "/images/hatshepsut_temple/view_4.jpg"
+        "/public/images/Attractions/Mortuary-Temple-of-Hatshepsut-main.png",
+        "/public/images/Attractions/Mortuary-Temple-of-Hatshepsut-view_2.jpg",
+        "/public/images/Attractions/Mortuary-Temple-of-Hatshepsut-view_3.jpg",
+        "/public/images/Attractions/Mortuary-Temple-of-Hatshepsut-view_4.jpg"
       ],
       "latitude": 25.7381,
       "longitude": 32.6074,
@@ -634,7 +634,7 @@
         "Parking"
       ],
       "paymentId": "pay_0010",
-      "price": "153 $",
+      "price": "15$",
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 3560,
@@ -667,7 +667,7 @@
     },
     {
       "id": "11",
-      "name": "Temple of Philae (معبد فيلة)",
+      "name": "Temple of Philae",
       "city": "Aswan",
       "rating": 4.6,
       "categories": [
@@ -677,10 +677,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/philae_temple/main.jpg",
-        "/images/philae_temple/view_2.jpg",
-        "/images/philae_temple/view_3.jpg",
-        "/images/philae_temple/view_4.jpg"
+        "/public/images/Attractions/Temple-of-Philae-main.png",
+        "/public/images/Attractions/Temple-of-Philae-view_2.png",
+        "/public/images/Attractions/Temple-of-Philae-view_3.png",
+        "/public/images/Attractions/Temple-of-Philae-view_4.png"
       ],
       "latitude": 24.0125,
       "longitude": 32.885,
@@ -698,7 +698,7 @@
         "Information Signage"
       ],
       "paymentId": "pay_0011",
-      "price": "312 $",
+      "price": "12$",
       "reviews": {
         "overallRating": 4.8,
         "totalReviews": 4900,
@@ -740,10 +740,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/kom_ombo/main.jpg",
-        "/images/kom_ombo/view_2.jpg",
-        "/images/kom_ombo/view_3.jpg",
-        "/images/kom_ombo/view_4.jpg"
+        "/public/images/Attractions/Temple-of-KomOmbo-main.png",
+        "/public/images/Attractions/Temple-of-KomOmbo-view_2.png",
+        "/public/images/Attractions/Temple-of-KomOmbo-view_3.png",
+        "/public/images/Attractions/Temple-of-KomOmbo-view_4.png"
       ],
       "latitude": 24.4552,
       "longitude": 32.9555,
@@ -762,7 +762,7 @@
         "Parking"
       ],
       "paymentId": "pay_0012",
-      "price": "173 $",
+      "price": "17$",
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 2350,
@@ -804,10 +804,10 @@
         "HISTORICAL"
       ],
       "images": [
-        "/images/nubian_museum/main.jpg",
-        "/images/nubian_museum/view_2.jpg",
-        "/images/nubian_museum/view_3.jpg",
-        "/images/nubian_museum/view_4.jpg"
+        "/public/images/Attractions/Nubian-Museum-main.png",
+        "/public/images/Attractions/Nubian-Museum-view_2.png",
+        "/public/images/Attractions/Nubian-Museum-view_3.png",
+        "/public/images/Attractions/Nubian-Museum-view_4.png"
       ],
       "latitude": 24.0863,
       "longitude": 32.8863,
@@ -827,7 +827,7 @@
         "Garden Area"
       ],
       "paymentId": "pay_0013",
-      "price": "39 $",
+      "price": "39$",
       "reviews": {
         "overallRating": 4.5,
         "totalReviews": 1120,
@@ -869,10 +869,10 @@
         "HISTORICAL"
       ],
       "images": [
-        "/images/islamic_art_museum/main.jpg",
-        "/images/islamic_art_museum/view_2.jpg",
-        "/images/islamic_art_museum/view_3.jpg",
-        "/images/islamic_art_museum/view_4.jpg"
+        "/public/images/Attractions/Museum-of-Islamic-Art-main .png",
+        "/public/images/Attractions/Museum-of-Islamic-Art-view_2.png",
+        "/public/images/Attractions/Museum-of-Islamic-Art-view_3.png",
+        "/public/images/Attractions/Museum-of-Islamic-Art-view_4.png"
       ],
       "latitude": 30.0425,
       "longitude": 31.2592,
@@ -891,7 +891,7 @@
         "Conservation Workshop"
       ],
       "paymentId": "pay_0014",
-      "price": "205 $",
+      "price": "28$",
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 980,
@@ -934,10 +934,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/nmec/main.jpg",
-        "/images/nmec/view_2.jpg",
-        "/images/nmec/view_3.jpg",
-        "/images/nmec/view_4.jpg"
+        "/public/images/Attractions/National-Museum-of-Egyptian-Civilization-main.png",
+        "/public/images/Attractions/National-Museum-of-Egyptian-Civilization-view_2.png",
+        "/public/images/Attractions/National-Museum-of-Egyptian-Civilization-view_3.png",
+        "/public/images/Attractions/National-Museum-of-Egyptian-Civilization-view_4.png"
       ],
       "latitude": 30.0191,
       "longitude": 31.2372,
@@ -958,7 +958,7 @@
         "Parking"
       ],
       "paymentId": "pay_0015",
-      "price": "118 $",
+      "price": "35$",
       "reviews": {
         "overallRating": 4.8,
         "totalReviews": 3560,
@@ -1000,10 +1000,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/alexandria_museum/main.jpg",
-        "/images/alexandria_museum/view_2.jpg",
-        "/images/alexandria_museum/view_3.jpg",
-        "/images/alexandria_museum/view_4.jpg"
+        "/public/images/Attractions/National-Museum-main.png",
+        "/public/images/Attractions/National-Museum-view_2.png",
+        "/public/images/Attractions/National-Museum-view_3.png",
+        "/public/images/Attractions/National-Museum-view_4.png"
       ],
       "latitude": 31.2001,
       "longitude": 29.9187,
@@ -1022,7 +1022,7 @@
         "Information Panels"
       ],
       "paymentId": "pay_0016",
-      "price": "164 $",
+      "price": "27$",
       "reviews": {
         "overallRating": 4.4,
         "totalReviews": 750,
@@ -1063,10 +1063,10 @@
         "HISTORICAL"
       ],
       "images": [
-        "/images/maspero_museum/main.jpg",
-        "/images/maspero_museum/view_2.jpg",
-        "/images/maspero_museum/view_3.jpg",
-        "/images/maspero_museum/view_4.jpg"
+        "/public/images/Attractions/Maspero-Museum-main.png",
+        "/public/images/Attractions/Maspero-Museum-view_2.png",
+        "/public/images/Attractions/Maspero-Museum-view_3.png",
+        "/public/images/Attractions/Maspero-Museum-view_4.png"
       ],
       "latitude": 30.0543,
       "longitude": 31.2429,
@@ -1085,7 +1085,7 @@
         "Parking"
       ],
       "paymentId": "pay_0017",
-      "price": "349 $",
+      "price": "34$",
       "reviews": {
         "overallRating": 4.3,
         "totalReviews": 510,
@@ -1127,10 +1127,10 @@
         "DIVING"
       ],
       "images": [
-        "/images/ras_mohamed/main.jpg",
-        "/images/ras_mohamed/view_2.jpg",
-        "/images/ras_mohamed/view_3.jpg",
-        "/images/ras_mohamed/view_4.jpg"
+        "/public/images/Attractions/Ras-Mohammed-National-Park-main.png",
+        "/public/images/Attractions/Ras-Mohammed-National-Park-view_2.png",
+        "/public/images/Attractions/Ras-Mohammed-National-Park-view_3.png",
+        "/public/images/Attractions/Ras-Mohammed-National-Park-view_4.png"
       ],
       "latitude": 27.75,
       "longitude": 34.25,
@@ -1149,7 +1149,7 @@
         "Entry Fee Checkpoints"
       ],
       "paymentId": "pay_0018",
-      "price": "402 $",
+      "price": "25$",
       "reviews": {
         "overallRating": 4.8,
         "totalReviews": 5100,
@@ -1191,10 +1191,10 @@
         "BEACHES"
       ],
       "images": [
-        "/images/dahab_beach/main.jpg",
-        "/images/dahab_beach/view_2.jpg",
-        "/images/dahab_beach/view_3.jpg",
-        "/images/dahab_beach/view_4.jpg"
+        "/public/images/Attractions/Dahab-Beach-main.png",
+        "/public/images/Attractions/Dahab-Beach-view_2.png",
+        "/public/images/Attractions/Dahab-Beach-view_3.png",
+        "/public/images/Attractions/Dahab-Beach-view_4.png"
       ],
       "latitude": 28.5,
       "longitude": 34.5167,
@@ -1246,7 +1246,7 @@
     },
     {
       "id": "20",
-      "name": "Red Sea (Hurghada)",
+      "name": "Red Sea",
       "city": "Hurghada",
       "rating": 4.7,
       "categories": [
@@ -1256,10 +1256,10 @@
         "BEACHES"
       ],
       "images": [
-        "/images/hurghada_red_sea/main.jpg",
-        "/images/hurghada_red_sea/view_2.jpg",
-        "/images/hurghada_red_sea/view_3.jpg",
-        "/images/hurghada_red_sea/view_4.jpg"
+        "/public/images/Attractions/Red-Sea-main.png",
+        "/public/images/Attractions/Red-Sea-view_2.png",
+        "/public/images/Attractions/Red-Sea-view_3.png",
+        "/public/images/Attractions/Red-Sea-view_4.png"
       ],
       "latitude": 27.257,
       "longitude": 33.8123,
@@ -1279,7 +1279,7 @@
         "ATM"
       ],
       "paymentId": "pay_0020",
-      "price": "Free to enter (Paid beach access varies)",
+      "price": "Free to enter",
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 7560,
@@ -1321,10 +1321,10 @@
         "ADVENTURE"
       ],
       "images": [
-        "/images/wadi_el_rayan/main.jpg",
-        "/images/wadi_el_rayan/view_2.jpg",
-        "/images/wadi_el_rayan/view_3.jpg",
-        "/images/wadi_el_rayan/view_4.jpg"
+        "/public/images/Attractions/Wadi-ElRayan-main.png",
+        "/public/images/Attractions/Wadi-ElRayan-view_2.png",
+        "/public/images/Attractions/Wadi-ElRayan-view_3.png",
+        "/public/images/Attractions/Wadi-ElRayan-view_4.png"
       ],
       "latitude": 29.1333,
       "longitude": 30.6333,
@@ -1343,7 +1343,7 @@
         "Parking (Designated Areas)"
       ],
       "paymentId": "pay_0021",
-      "price": "473 $",
+      "price": "73$",
       "reviews": {
         "overallRating": 4.5,
         "totalReviews": 1340,
@@ -1385,10 +1385,10 @@
         "BEACHES"
       ],
       "images": [
-        "/images/ain_sokhna_beach/main.jpg",
-        "/images/ain_sokhna_beach/view_2.jpg",
-        "/images/ain_sokhna_beach/view_3.jpg",
-        "/images/ain_sokhna_beach/view_4.jpg"
+        "/public/images/Attractions/AinSokhna-Beach-main.png",
+        "/public/images/Attractions/AinSokhna-Beach-view_2.png",
+        "/public/images/Attractions/AinSokhna-Beach-view_3.png",
+        "/public/images/Attractions/AinSokhna-Beach-view_4.png"
       ],
       "latitude": 29.623,
       "longitude": 32.32,
@@ -1449,10 +1449,10 @@
         "HISTORICAL"
       ],
       "images": [
-        "/images/siwa/main.jpg",
-        "/images/siwa/view_2.jpg",
-        "/images/siwa/view_3.jpg",
-        "/images/siwa/view_4.jpg"
+        "/public/images/Attractions/Siwa-Oasis-main.png",
+        "/public/images/Attractions/Siwa-Oasis-view_2.png",
+        "/public/images/Attractions/Siwa-Oasis-view_3.png",
+        "/public/images/Attractions/Siwa-Oasis-view_4.png"
       ],
       "latitude": 29.2045,
       "longitude": 25.5195,
@@ -1472,7 +1472,7 @@
         "Local Handicrafts Shops"
       ],
       "paymentId": "pay_0023",
-      "price": "Free to enter (Paid sites vary)",
+      "price": "Free to enter",
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 1670,
@@ -1513,10 +1513,10 @@
         "ANCIENT SITES"
       ],
       "images": [
-        "/images/memnon/main.jpg",
-        "/images/memnon/view_2.jpg",
-        "/images/memnon/view_3.jpg",
-        "/images/memnon/view_4.jpg"
+        "/public/images/Attractions/Colossi-Memnon-main.png",
+        "/public/images/Attractions/Colossi-Memnon-view_2.png",
+        "/public/images/Attractions/Colossi-Memnon-view_3.png",
+        "/public/images/Attractions/Colossi-Memnon-view_4.png"
       ],
       "latitude": 25.7208,
       "longitude": 32.6095,
@@ -1575,10 +1575,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/edfu_temple/main.jpg",
-        "/images/edfu_temple/view_2.jpg",
-        "/images/edfu_temple/view_3.jpg",
-        "/images/edfu_temple/view_4.jpg"
+        "/public/images/Attractions/Temple-of-Edfu-main.png",
+        "/public/images/Attractions/Temple-of-Edfu-view_2.png",
+        "/public/images/Attractions/Temple-of-Edfu-view_3.png",
+        "/public/images/Attractions/Temple-of-Edfu-view_4.png"
       ],
       "latitude": 24.9818,
       "longitude": 32.8711,
@@ -1596,7 +1596,7 @@
         "Horse-drawn carriages (Kalesh) available from the Nile port"
       ],
       "paymentId": "pay_0025",
-      "price": "210 $",
+      "price": "21$",
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 2540,
@@ -1639,10 +1639,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/luxor_temple/main.jpg",
-        "/images/luxor_temple/view_2.jpg",
-        "/images/luxor_temple/view_3.jpg",
-        "/images/luxor_temple/view_4.jpg"
+        "/public/images/Attractions/Luxor-Temple-main.png",
+        "/public/images/Attractions/Luxor-Temple-view_2.png",
+        "/public/images/Attractions/Luxor-Temple-view_3.png",
+        "/public/images/Attractions/Luxor-Temple-view_4.png"
       ],
       "latitude": 25.6989,
       "longitude": 32.6394,
@@ -1661,7 +1661,7 @@
         "Night Viewing (Recommended)"
       ],
       "paymentId": "pay_0026",
-      "price": "180 $",
+      "price": "18$",
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 4990,
@@ -1703,10 +1703,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/sphinx/main.jpg",
-        "/images/sphinx/view_2.jpg",
-        "/images/sphinx/view_3.jpg",
-        "/images/sphinx/view_4.jpg"
+        "/public/images/Attractions/Great-Sphinx-main.png",
+        "/public/images/Attractions/Great-Sphinx-view_2.png",
+        "/public/images/Attractions/Great-Sphinx-view_3.png",
+        "/public/images/Attractions/Great-Sphinx-view_4.png"
       ],
       "latitude": 29.9752,
       "longitude": 31.1376,
@@ -1765,10 +1765,10 @@
         "ANCIENT SITES"
       ],
       "images": [
-        "/images/dahshur/main.jpg",
-        "/images/dahshur/view_2.jpg",
-        "/images/dahshur/view_3.jpg",
-        "/images/dahshur/view_4.jpg"
+        "/public/images/Attractions/Dahshur-Pyramids-main.png",
+        "/public/images/Attractions/Dahshur-Pyramids-view_2.png",
+        "/public/images/Attractions/Dahshur-Pyramids-view_3.png",
+        "/public/images/Attractions/Dahshur-Pyramids-view_4.png"
       ],
       "latitude": 29.8185,
       "longitude": 31.2003,
@@ -1785,7 +1785,7 @@
         "Limited Restrooms (Basic)"
       ],
       "paymentId": "pay_0028",
-      "price": "140 $",
+      "price": "14$",
       "reviews": {
         "overallRating": 4.4,
         "totalReviews": 950,
@@ -1827,10 +1827,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/white_desert/main.jpg",
-        "/images/white_desert/view_2.jpg",
-        "/images/white_desert/view_3.jpg",
-        "/images/white_desert/view_4.jpg"
+        "/public/images/Attractions/White-Desert-main.png",
+        "/public/images/Attractions/White-Desert-view_2.png",
+        "/public/images/Attractions/White-Desert-view_3.png",
+        "/public/images/Attractions/White-Desert-view_4.png"
       ],
       "latitude": 27.0333,
       "longitude": 27.9942,
@@ -1848,7 +1848,7 @@
         "Basic Ranger Stations"
       ],
       "paymentId": "pay_0029",
-      "price": "580 $ (Tour Price)",
+      "price": "120$ (Tour Price)",
       "reviews": {
         "overallRating": 4.9,
         "totalReviews": 1400,
@@ -1890,10 +1890,10 @@
         "MUSEUMS"
       ],
       "images": [
-        "/images/bibliotheca_alexandrina/main.jpg",
-        "/images/bibliotheca_alexandrina/view_2.jpg",
-        "/images/bibliotheca_alexandrina/view_3.jpg",
-        "/images/bibliotheca_alexandrina/view_4.jpg"
+        "/public/images/Attractions/Bibliotheca-Alexandrina-main.png",
+        "/public/images/Attractions/Bibliotheca-Alexandrina-view_2.png",
+        "/public/images/Attractions/Bibliotheca-Alexandrina-view_3.png",
+        "/public/images/Attractions/Bibliotheca-Alexandrina-view_4.png"
       ],
       "latitude": 31.2084,
       "longitude": 29.9079,
@@ -1914,7 +1914,7 @@
         "Restrooms"
       ],
       "paymentId": "pay_0030",
-      "price": "50 $ (General Entry)",
+      "price": "50$ (General Entry)",
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 3500,
@@ -1956,10 +1956,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/st_catherine/main.jpg",
-        "/images/st_catherine/view_2.jpg",
-        "/images/st_catherine/view_3.jpg",
-        "/images/st_catherine/view_4.jpg"
+        "/public/images/Attractions/Saint-Catherine's-Monastery-main.png",
+        "/public/images/Attractions/Saint-Catherine's-Monastery-view_2.png",
+        "/public/images/Attractions/Saint-Catherine's-Monastery-view_3.png",
+        "/public/images/Attractions/Saint-Catherine's-Monastery-view_4.png"
       ],
       "latitude": 28.5574,
       "longitude": 33.9754,
@@ -1977,7 +1977,7 @@
         "Parking"
       ],
       "paymentId": "pay_0031",
-      "price": "Free entry to Monastery (Museum paid)",
+      "price": "Free entry to Monastery",
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 1100,
@@ -2019,10 +2019,10 @@
         "HISTORICAL"
       ],
       "images": [
-        "/images/montaza_gardens/main.jpg",
-        "/images/montaza_gardens/view_2.jpg",
-        "/images/montaza_gardens/view_3.jpg",
-        "/images/montaza_gardens/view_4.jpg"
+        "/public/images/Attractions/AlMontazah-Palace-main.png",
+        "/public/images/Attractions/AlMontazah-Palace-view_2.png",
+        "/public/images/Attractions/AlMontazah-Palace-view_3.png",
+        "/public/images/Attractions/AlMontazah-Palace-view_4.png"
       ],
       "latitude": 31.2828,
       "longitude": 30.0075,
@@ -2041,7 +2041,7 @@
         "Beach Access"
       ],
       "paymentId": "pay_0032",
-      "price": "Paid Entry (Garden)",
+      "price": "Paid Entry",
       "reviews": {
         "overallRating": 4.5,
         "totalReviews": 2100,
@@ -2083,10 +2083,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/qaitbay/main.jpg",
-        "/images/qaitbay/view_2.jpg",
-        "/images/qaitbay/view_3.jpg",
-        "/images/qaitbay/view_4.jpg"
+        "/public/images/Attractions/Qaitbay-Citadel-main.png",
+        "/public/images/Attractions/Qaitbay-Citadel-view_2.png",
+        "/public/images/Attractions/Qaitbay-Citadel-view_3.png",
+        "/public/images/Attractions/Qaitbay-Citadel-view_4.png"
       ],
       "latitude": 31.2141,
       "longitude": 29.8856,
@@ -2105,7 +2105,7 @@
         "Parking (Limited)"
       ],
       "paymentId": "pay_0033",
-      "price": "180 $",
+      "price": "30$",
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 3900,
@@ -2147,10 +2147,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/kom_el_shoqafa/main.jpg",
-        "/images/kom_el_shoqafa/view_2.jpg",
-        "/images/kom_el_shoqafa/view_3.jpg",
-        "/images/kom_el_shoqafa/view_4.jpg"
+        "/public/images/Attractions/Catacombs-of-Kom-ElShoqafa-main.png",
+        "/public/images/Attractions/Catacombs-of-Kom-ElShoqafa-view_2.png",
+        "/public/images/Attractions/Catacombs-of-Kom-ElShoqafa-view_3.png",
+        "/public/images/Attractions/Catacombs-of-Kom-ElShoqafa-view_4.png"
       ],
       "latitude": 31.1819,
       "longitude": 29.8973,
@@ -2168,7 +2168,7 @@
         "Information Signage"
       ],
       "paymentId": "pay_0034",
-      "price": "120 $",
+      "price": "50$",
       "reviews": {
         "overallRating": 4.5,
         "totalReviews": 1350,
@@ -2210,10 +2210,10 @@
         "BEACHES"
       ],
       "images": [
-        "/images/ras_el_barr/main.jpg",
-        "/images/ras_el_barr/view_2.jpg",
-        "/images/ras_el_barr/view_3.jpg",
-        "/images/ras_el_barr/view_4.jpg"
+        "/public/images/Attractions/Ras-ElBarr-main.png",
+        "/public/images/Attractions/Ras-ElBarr-view_2.png",
+        "/public/images/Attractions/Ras-ElBarr-view_3.png",
+        "/public/images/Attractions/Ras-ElBarr-view_4.png"
       ],
       "latitude": 31.503,
       "longitude": 31.839,
@@ -2274,10 +2274,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/al_azhar_park/main.jpg",
-        "/images/al_azhar_park/view_2.jpg",
-        "/images/al_azhar_park/view_3.jpg",
-        "/images/al_azhar_park/view_4.jpg"
+        "/public/images/Attractions/Al-Azhar-Park-main.png",
+        "/public/images/Attractions/Al-Azhar-Park-view_2.png",
+        "/public/images/Attractions/Al-Azhar-Park-view_3.png",
+        "/public/images/Attractions/Al-Azhar-Park-view_4.png"
       ],
       "latitude": 30.0402,
       "longitude": 31.2687,
@@ -2338,10 +2338,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/hanging_church/main.jpg",
-        "/images/hanging_church/view_2.jpg",
-        "/images/hanging_church/view_3.jpg",
-        "/images/hanging_church/view_4.jpg"
+        "/public/images/Attractions/the-Hanging-Church-main.png",
+        "/public/images/Attractions/the-Hanging-Church-view_2.png",
+        "/public/images/Attractions/the-Hanging-Church-view_3.png",
+        "/public/images/Attractions/the-Hanging-Church-view_4.png"
       ],
       "latitude": 30.006,
       "longitude": 31.2335,
@@ -2401,10 +2401,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/ibn_tulun/main.jpg",
-        "/images/ibn_tulun/view_2.jpg",
-        "/images/ibn_tulun/view_3.jpg",
-        "/images/ibn_tulun/view_4.jpg"
+        "/public/images/Attractions/Mosque-of-IbnTulun-main.png",
+        "/public/images/Attractions/Mosque-of-IbnTulun-view_2.png",
+        "/public/images/Attractions/Mosque-of-IbnTulun-view_3.png",
+        "/public/images/Attractions/Mosque-of-IbnTulun-view_4.png"
       ],
       "latitude": 30.0234,
       "longitude": 31.2372,
@@ -2463,10 +2463,10 @@
         "ADVENTURE"
       ],
       "images": [
-        "/images/wadi_degla/main.jpg",
-        "/images/wadi_degla/view_2.jpg",
-        "/images/wadi_degla/view_3.jpg",
-        "/images/wadi_degla/view_4.jpg"
+        "/public/images/Attractions/Wadi-Degla-Protectorate-main.png",
+        "/public/images/Attractions/Wadi-Degla-Protectorate-view_2.png",
+        "/public/images/Attractions/Wadi-Degla-Protectorate-view_3.png",
+        "/public/images/Attractions/Wadi-Degla-Protectorate-view_4.png"
       ],
       "latitude": 29.95,
       "longitude": 31.35,
@@ -2526,7 +2526,7 @@
         "SHOPPING"
       ],
       "images": [
-        "/images/fustat_pottery/main.jpg",
+        "/public/images/Attractions/traditional-from-Al-Fustat-main.png",
         "/images/fustat_pottery/view_2.jpg",
         "/images/fustat_pottery/view_3.jpg",
         "/images/fustat_pottery/view_4.jpg"
