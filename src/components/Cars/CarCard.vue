@@ -1,35 +1,45 @@
 <template>
-  <div class="w-full sm:w-80 bg-base-100 rounded-3xl shadow-2xl overflow-hidden hover:shadow-3xl transition-all duration-300 group font-cairo">
+  <div 
+    class="group w-full sm:w-80 bg-base-100 rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-300 hover:-translate-y-1 font-cairo flex flex-col"
+  >
     <!-- Image Section -->
-    <div class="relative w-full h-64 sm:h-80 bg-gradient-to-br from-primary via-primary-focus to-primary-content overflow-hidden rounded-2xl">
+    <div class="relative h-64 sm:h-80 overflow-hidden">
       <img 
         :src="getImage(car.images)"
         :alt="car.name"
-        class="w-full h-full object-cover object-center transition-transform duration-300 ease-in-out group-hover:scale-110"
+        class="w-full h-full object-cover object-center transition-transform duration-500 ease-in-out group-hover:scale-110"
         @error="handleImageError"
       />
+      <!-- Gradient Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
     </div>
 
     <!-- Content Section -->
-    <div class="p-6 space-y-4">
-      <div class="flex items-start justify-between">
-        <h2 class="text-2xl font-bold text-base-content">{{ car.name }}</h2>
-        <span class="text-2xl font-bold text-primary">{{ car.year || '' }}</span>
+    <div class="p-5 flex flex-col flex-1">
+      <!-- Title & Price -->
+      <div class="flex items-start justify-between mb-3 gap-2">
+        <h2 class="text-xl sm:text-2xl font-bold text-base-content flex-1 leading-tight">
+          {{ car.name }}
+        </h2>
+        <span class="text-primary font-bold text-lg sm:text-2xl flex-shrink-0">${{ car.price }}</span>
       </div>
 
-      <p class="text-sm text-base-content/70 leading-relaxed">{{ car.description }}</p>
+      <!-- Description-->
+      <p class="text-sm text-base-content/70 leading-relaxed line-clamp-2 flex-1 mb-3">
+        {{ car.overview }}
+      </p>
 
-      <div class="flex items-center gap-2">
-        <svg class="w-5 h-5 text-accent fill-current" viewBox="0 0 24 24">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <span class="text-sm font-semibold text-base-content">{{ car.reviews[0]?.rating || 0 }}</span>
-        <span class="text-sm text-base-content/60">({{ car.reviews.length }} reviews)</span>
+      <!-- Location & Rating -->
+      <div class="flex items-center gap-2 text-sm mb-4">
+        <i class="fas fa-star text-accent"></i>
+        <span class="font-semibold text-base-content">{{ car.reviews.overallRating }}</span>
+        <span class="text-base-content/60">({{ car.reviews.totalReviews }} reviews)</span>
       </div>
 
+      <!-- Button -->
       <button 
         @click="$emit('view', car)"
-        class="w-full btn bg-primary hover:bg-primary-focus text-primary-content font-semibold py-3.5 rounded-md transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 transform"
+        class="w-full bg-primary hover:bg-primary-focus text-primary-content font-bold py-3 rounded-xl transition-all duration-300 hover:shadow-lg active:scale-95 mt-auto"
       >
         View Details
       </button>
@@ -51,7 +61,14 @@ const handleImageError = (event) => {
 </script>
 
 <style scoped>
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+}
 .active\:scale-95:active {
   transform: scale(0.95);
 }
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 </style>

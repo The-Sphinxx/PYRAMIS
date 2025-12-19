@@ -16,6 +16,13 @@
       "resetTokenExpiry": null,
       "createdAt": "2024-01-01T10:00:00.000Z",
       "updatedAt": "2024-01-01T10:00:00.000Z"
+    },
+    {
+      "id": "google_1766087268401",
+      "fullName": "Google User",
+      "email": "user@gmail.com",
+      "provider": "google",
+      "createdAt": "2025-12-18T19:47:48.401Z"
     }
   ],
   "attractions": [
@@ -4980,552 +4987,1279 @@
     }
   ],
   "hotels": [],
-
-  "cars": [
-  {
-    "id": 1,
-    "name": "Toyota Corolla",
-    "description": "Reliable compact sedan suitable for 4 passengers.",
-    "seats": 4,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Bluetooth", "Backup Camera"],
-    "images":[
-      "/images-car/ToyotaCorolla.avif",
-      "/images-car/ToyotaCorolla2.jpg",
-      "/images-car/ToyotaCorolla3.jpg",
-      "/images-car/ToyotaCorolla4.jpg"
-    ],
-    "price": 120,
-    "basePrice": 120,
-    "overview": "The Toyota Corolla is a reliable compact sedan perfect for city driving and short family trips. It offers fuel efficiency, modern technology features, and smooth handling.",
-    "highlights": ["Fuel-efficient engine","Smooth city driving","Advanced safety features","Comfortable seating for 4 passengers"],
-    "amenities": ["Air Conditioning","GPS Navigation","Bluetooth Connectivity","Backup Camera","Cruise Control","USB Ports"],
-    "reviews": {
-      "overallRating": 4.8,
-      "totalReviews": 1523,
-      "ratingCriteria": {"experience": 4.8,"comfort": 4.6,"reliability": 4.9,"valueForMoney": 4.7,"features": 4.5}
-    },
-    "userReviews": [
-      {"id":1,"userName":"John Doe","userImage":"/images/users/user_m_1.jpg","rating":5,"date":"January 2025","comment":"Perfect car for city trips. Comfortable and compact."},
-      {"id":2,"userName":"Sarah Ahmed","userImage":"/images/users/user_f_2.jpg","rating":5,"date":"February 2025","comment":"Reliable and smooth ride."}
-    ]
-  },
-  {
-    "id": 2,
-    "name": "Kia Carens",
-    "description": "Family MPV suitable for 5-6 passengers.",
-    "seats": 6,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Bluetooth", "Cruise Control"],
-    "images":[
-      "/images-car/KiaCarens.avif",
-      "/images-car/KiaCarens2.webp",
-      "/images-car/KiaCarens3.jpg"
-    ],
-    "price": 150,
-    "basePrice": 150,
-    "overview": "Kia Carens is a spacious family MPV offering comfort, safety, and modern features for 5-6 passengers. Ideal for city drives and weekend trips.",
-    "highlights": ["Spacious interior","Comfortable seats","Smooth handling","Family-friendly amenities"],
-    "amenities": ["Air Conditioning","GPS Navigation","Bluetooth Connectivity","Cruise Control","Entertainment System","USB Ports"],
-    "reviews": {
-      "overallRating": 4.7,
-      "totalReviews": 987,
-      "ratingCriteria": {"experience":4.7,"comfort":4.8,"reliability":4.6,"valueForMoney":4.5,"features":4.6}
-    },
-    "userReviews": [
-      {"id":1,"userName":"Michael Chen","userImage":"/images/users/user_m_3.jpg","rating":5,"date":"March 2025","comment":"Spacious and comfortable for family trips."}
-    ]
-  },
-  {
-    "id": 3,
-    "name": "Toyota Rush",
-    "description": "Compact SUV ideal for 5-6 passengers with flexibility for city and trips.",
-    "seats": 6,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Bluetooth", "Sunroof"],
-    "images":[
-      "/images-car/ToyotaRush.jpg",
-      "/images-car/ToyotaRush2.webp",
-      "/images-car/ToyotaRush3.avif",
-      "/images-car/ToyotaRush4.jpg"
-    ],
-    "price": 160,
-    "basePrice": 160,
-    "overview": "Toyota Rush is a compact SUV combining city practicality with weekend trip capabilities. Flexible seating and modern features make it ideal for families.",
-    "highlights": ["Flexible seating","Sunroof","Modern infotainment","Reliable for trips"],
-    "amenities": ["Air Conditioning","GPS Navigation","Bluetooth Connectivity","Sunroof","Cruise Control","USB Ports"],
-    "reviews": {
-      "overallRating": 4.8,
-      "totalReviews": 1023,
-      "ratingCriteria": {"experience":4.8,"comfort":4.7,"reliability":4.8,"valueForMoney":4.6,"features":4.5}
-    },
-    "userReviews": [
-      {"id":1,"userName":"Alex Johnson","userImage":"/images/users/user_m_4.jpg","rating":5,"date":"January 2025","comment":"Versatile and smooth ride. Great for road trips."}
-    ]
-  },
-  {
-    "id": 4,
-    "name": "Mitsubishi Xpander",
-    "description": "Modern MPV for 5-6 passengers with comfortable interior.",
-    "seats": 6,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Bluetooth", "Entertainment System"],
-    "images":[
-      "/images-car/MitsubishiXpander.jpg",
-      "/images-car/MitsubishiXpander2.jpeg",
-      "/images-car/MitsubishiXpander3.webp",
-      "/images-car/MitsubishiXpander4.webp"
-    ],
-    "price": 155,
-    "basePrice": 155,
-    "overview": "Mitsubishi Xpander offers a modern interior with comfort for 5-6 passengers. Suitable for both city rides and family trips with enhanced entertainment features.",
-    "highlights": ["Modern interior","Entertainment system","Spacious seating","Smooth ride"],
-    "amenities": ["Air Conditioning","GPS Navigation","Bluetooth Connectivity","Entertainment System","USB Ports","Cruise Control"],
-    "reviews": {
-      "overallRating": 4.7,
-      "totalReviews": 876,
-      "ratingCriteria": {"experience":4.7,"comfort":4.8,"reliability":4.6,"valueForMoney":4.5,"features":4.7}
-    },
-    "userReviews": [
-      {"id":1,"userName":"Fatima Hassan","userImage":"/images/users/user_f_5.jpg","rating":5,"date":"February 2025","comment":"Comfortable and roomy. Perfect for group trips."}
-    ]
-  },
-  {
-    "id": 5,
-    "name": "Toyota Land Cruiser",
-    "description": "Great for families exploring Cairo, Giza, and Alexandria.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Bluetooth", "Backup Camera"],
-    "images":[
-      "/images-car/ToyotaLandCruiser.avif",
-      "/images-car/ToyotaLandCruiser2.png",
-      "/images-car/ToyotaLandCruiser3.avif",
-      "/images-car/ToyotaLandCruiser4.jpg"
-    ],
-    "price": 150,
-    "basePrice": 150,
-    "overview": "Toyota Land Cruiser is a full-size SUV ideal for family adventures across major Egyptian cities. Offers comfort, space, and advanced safety features.",
-    "highlights": ["Full-size SUV","Spacious interior","Advanced safety features","Perfect for long trips"],
-    "amenities": ["Air Conditioning","GPS Navigation","Bluetooth Connectivity","Backup Camera","Cruise Control","USB Ports"],
-    "reviews": {
-      "overallRating": 4.9,
-      "totalReviews": 2543,
-      "ratingCriteria": {"experience":4.9,"comfort":4.8,"reliability":4.9,"valueForMoney":4.7,"features":4.8}
-    },
-    "userReviews": [
-      {"id":1,"userName":"John Doe","userImage":"/images/users/user_m_1.jpg","rating":5,"date":"March 2025","comment":"Perfect car for family trips! Very comfortable and spacious."},
-      {"id":2,"userName":"Sarah Ahmed","userImage":"/images/users/user_f_2.jpg","rating":5,"date":"March 2025","comment":"Excellent service and the car was in pristine condition."},
-      {"id":3,"userName":"Michael Chen","userImage":"/images/users/user_m_3.jpg","rating":4,"date":"March 2025","comment":"Great vehicle, smooth ride across the desert roads."},
-      {"id":4,"userName":"Fatima Hassan","userImage":"/images/users/user_f_5.jpg","rating":5,"date":"March 2025","comment":"Highly recommend for long family journeys!"}
-    ]
-  },
-  {
-    "id": 6,
-    "name": "Honda Pilot",
-    "description": "Perfect for family trips across major Egyptian cities.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Cruise Control", "USB Ports"],
-    "images":[
-      "/images-car/HondaPilot.webp",
-      "/images-car/HondaPilot2.avif",
-      "/images-car/HondaPilot3.avif"
-    ],
-    "price": 170,
-    "basePrice": 170,
-    "overview": "Honda Pilot is a reliable SUV with ample seating for 7 passengers, perfect for family excursions across Egypt. Modern features ensure comfort and convenience.",
-    "highlights": ["Spacious seating","Comfortable ride","Family-friendly","Advanced tech features"],
-    "amenities": ["Air Conditioning","GPS Navigation","Cruise Control","USB Ports","Bluetooth Connectivity","Entertainment System"],
-    "reviews": {
-      "overallRating": 4.7,
-      "totalReviews": 1023,
-      "ratingCriteria": {"experience":4.7,"comfort":4.6,"reliability":4.8,"valueForMoney":4.6,"features":4.5}
-    },
-    "userReviews": [
-      {"id":1,"userName":"Jane Smith","userImage":"/images/users/user_f_6.jpg","rating":4,"date":"February 2025","comment":"Smooth ride and comfy seats. Perfect for our Cairo tour."}
-    ]
-  },
-  {
-    "id": 7,
-    "name": "Ford Explorer",
-    "description": "Spacious and comfortable SUV for family adventures.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Leather Seats", "Sunroof"],
-    "images":[
-       "/images-car/FordExplorer.jpg",
-      "/images-car/FordExplorer2.png",
-      "/images-car/FordExplorer3.avif"
-    ],
-    "price": 180,
-    "basePrice": 180,
-    "overview": "Ford Explorer is a versatile SUV combining luxury, space, and performance for family trips and adventures. Features leather seats and sunroof for premium comfort.",
-    "highlights": ["Spacious interior","Leather seats","Sunroof","Smooth handling"],
-    "amenities": ["Air Conditioning","GPS Navigation","Leather Seats","Sunroof","Bluetooth Connectivity","USB Ports"],
-    "reviews": {
-      "overallRating": 4.8,
-      "totalReviews": 1356,
-      "ratingCriteria": {"experience":4.8,"comfort":4.9,"reliability":4.7,"valueForMoney":4.6,"features":4.7}
-    },
-    "userReviews": [
-      {"id":1,"userName":"Alex Johnson","userImage":"/images/users/user_m_4.jpg","rating":5,"date":"January 2025","comment":"Loved it! Will rent again for our next trip."}
-    ]
-  },
-  {
-    "id": 8,
-    "name": "Chevrolet Tahoe",
-    "description": "Full-size SUV perfect for family adventures.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "4WD", "Premium Sound"],
-    "images":[
-      "/images-car/ChevroletTahoe.avif",
-      "/images-car/ChevroletTahoe2.jpg",
-      "/images-car/ChevroletTahoe3.jpg",
-      "/images-car/ChevroletTahoe4.webp"
-    ],
-    "price": 185,
-    "basePrice": 185,
-    "overview": "Chevrolet Tahoe is a full-size SUV built for comfort, space, and performance. Excellent choice for family trips and off-road adventures with 4WD capability.",
-    "highlights": ["Full-size SUV","4WD for off-road","Premium sound system","Comfortable for 7 passengers"],
-    "amenities": ["Air Conditioning","GPS Navigation","4WD","Premium Sound","Bluetooth Connectivity","USB Ports"],
-    "reviews": {
-      "overallRating": 4.7,
-      "totalReviews": 1123,
-      "ratingCriteria": {"experience":4.7,"comfort":4.8,"reliability":4.7,"valueForMoney":4.6,"features":4.7}
-    },
-    "userReviews": [
-      {"id":1,"userName":"Sarah Lee","userImage":"/images/users/user_f_7.jpg","rating":4,"date":"February 2025","comment":"Very spacious and comfortable for long drives."}
-    ]
-  }
-  ,{
-    "id": 9,
-    "name": "Chevrolet Suburban",
-    "description": "Iconic large SUV for family adventures across Egypt.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Entertainment System", "Power Liftgate"],
-    "images":[
-      "/images-car/ChevroletSuburban.avif",
-      "/images-car/ChevroletSuburban2.avif",
-      "/images-car/ChevroletSuburban3.avif",
-      "/images-car/ChevroletSuburban4.avif"
-    ],
-    "price": 250,
-    "basePrice": 250,
-    "overview": "Chevrolet Suburban is a legendary full-size SUV offering unmatched space and luxury for family trips across Egypt. Equipped with modern amenities and entertainment system.",
-    "highlights": ["Iconic SUV","Spacious interior","Luxury comfort","Entertainment system"],
-    "amenities": ["Air Conditioning","GPS Navigation","Entertainment System","Power Liftgate","Bluetooth Connectivity","USB Ports"],
-    "reviews": {
-      "overallRating": 4.9,
-      "totalReviews": 1342,
-      "ratingCriteria": {"experience":4.9,"comfort":4.9,"reliability":4.8,"valueForMoney":4.7,"features":4.8}
-    },
-    "userReviews": [
-      {"id":1,"userName":"Sophia Turner","userImage":"/images/users/user_f_8.jpg","rating":5,"date":"March 2025","comment":"Spacious and luxurious. Best choice for our family."}
-    ]
-  },
-  {
-    "id": 10,
-    "name": "GMC Yukon",
-    "description": "Large SUV with comfort and advanced tech.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Adaptive Cruise", "Lane Assist"],
-    "images":[
-       "/images-car/GMCYukon.avif",
-      "/images-car/GMCYukon2.webp",
-      "/images-car/GMCYukon3.webp",
-      "/images-car/GMCYukon4.avif"
-    ],
-    "price": 110,
-    "basePrice": 110,
-    "overview": "GMC Yukon combines comfort, technology, and space in a full-size SUV. Ideal for family trips, city rides, and long desert journeys.",
-    "highlights": ["Advanced tech features","Comfortable seating","Spacious interior","Reliable performance"],
-    "amenities": ["Air Conditioning","GPS Navigation","Adaptive Cruise Control","Lane Assist","Bluetooth Connectivity","USB Ports"],
-    "reviews": {
-      "overallRating": 4.8,
-      "totalReviews": 954,
-      "ratingCriteria": {"experience":4.8,"comfort":4.7,"reliability":4.8,"valueForMoney":4.6,"features":4.7}
-    },
-    "userReviews": [
-      {"id":1,"userName":"Chris Martin","userImage":"/images/users/user_m_9.jpg","rating":5,"date":"January 2025","comment":"Very reliable and comfortable for desert trips."}
-    ]
-  },
-  {
-    "id": 11,
-    "name": "Hyundai Palisade",
-    "description": "Comfortable family SUV with advanced features.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Wireless Charging", "Smart Trunk"],
-    "images":[
-       "/images-car/HyundaiPalisade.webp",
-      "/images-car/HyundaiPalisade2.avif",
-      "/images-car/HyundaiPalisade3.avif",
-      "/images-car/HyundaiPalisade4.webp"
-    ],
-    "price": 135,
-    "basePrice": 135,
-    "overview": "Hyundai Palisade is a family-friendly SUV with luxury and convenience in mind. Equipped with wireless charging, smart trunk, and modern amenities.",
-    "highlights": ["Luxury SUV","Advanced features","Spacious seating","Comfortable ride"],
-    "amenities": ["Air Conditioning","GPS Navigation","Wireless Charging","Smart Trunk","Bluetooth Connectivity","USB Ports"],
-    "reviews": {
-      "overallRating": 4.7,
-      "totalReviews": 1021,
-      "ratingCriteria": {"experience":4.7,"comfort":4.8,"reliability":4.6,"valueForMoney":4.6,"features":4.7}
-    },
-    "userReviews": [
-      {"id":1,"userName":"Linda Green","userImage":"/images/users/user_f_10.jpg","rating":4,"date":"March 2025","comment":"Good car for long trips. Very comfortable."}
-    ]
-  },
-  {
-    "id": 12,
-    "name": "Kia Telluride",
-    "description": "Family-friendly SUV with modern amenities.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Heated Seats", "Panoramic Roof"],
-    "images":[
-      "/images-car/KiaTelluride.avif",
-      "/images-car/KiaTelluride2.avif",
-      "/images-car/KiaTelluride3.avif",
-      "/images-car/KiaTelluride4.avif"
-    ],
-    "price": 145,
-    "basePrice": 145,
-    "overview": "Kia Telluride is a modern SUV with family comfort in mind. Features panoramic roof, heated seats, and advanced safety and infotainment systems.",
-    "highlights": ["Modern family SUV","Panoramic roof","Heated seats","Comfortable for 7 passengers"],
-    "amenities": ["Air Conditioning","GPS Navigation","Heated Seats","Panoramic Roof","Bluetooth Connectivity","USB Ports"],
-    "reviews": {
-      "overallRating": 4.8,
-      "totalReviews": 1125,
-      "ratingCriteria": {"experience":4.8,"comfort":4.8,"reliability":4.7,"valueForMoney":4.6,"features":4.8}
-    },
-    "userReviews": [
-      {"id":1,"userName":"Tom White","userImage":"/images/users/user_m_11.jpg","rating":5,"date":"January 2025","comment":"Perfect for family trips! Highly recommended."}
-    ]
-  },
-  {
-    "id": 13,
-    "name": "Mazda CX-9",
-    "description": "Elegant and spacious SUV for family trips.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Head-Up Display", "Bose Audio"],
-    "images":[
-      "/images-car/MazdaCX-9.png",
-      "/images-car/MazdaCX-92.jpg",
-      "/images-car/MazdaCX-93.jpg",
-      "/images-car/MazdaCX-94.jpg"
-    ],
-    "price": 270,
-    "basePrice": 270,
-    "overview": "Mazda CX-9 is an elegant SUV with spacious interior and premium audio. Ideal for comfortable family trips with modern technology and safety features.",
-    "highlights": ["Elegant design","Spacious seating","Premium audio","Smooth ride"],
-    "amenities": ["Air Conditioning","GPS Navigation","Head-Up Display","Bose Audio","Bluetooth Connectivity","USB Ports"],
-    "reviews": {
-      "overallRating": 4.7,
-      "totalReviews": 981,
-      "ratingCriteria": {"experience":4.7,"comfort":4.8,"reliability":4.7,"valueForMoney":4.6,"features":4.7}
-    },
-    "userReviews": [
-      {"id":1,"userName":"Emma Davis","userImage":"/images/users/user_f_12.jpg","rating":4,"date":"March 2025","comment":"Smooth ride, very spacious interior."}
-    ]
-  },
-  {
-    "id": 14,
-    "name": "Nissan Patrol",
-    "description": "Reliable SUV with comfort and space for the whole family.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Off-Road Mode", "Tow Package"],
-    "images":[
-      "/images-car/NissanPatrol.jpg",
-      "/images-car/NissanPatrol2.jpg",
-      "/images-car/NissanPatrol3.jpg",
-      "/images-car/NissanPatrol4.jpg"
-    ],
-    "price": 260,
-    "basePrice": 260,
-    "overview": "Nissan Patrol is a rugged SUV with comfort and space for families. Equipped with off-road mode and towing capacity, perfect for desert adventures.",
-    "highlights": ["Reliable SUV","Off-road capability","Spacious interior","Family-friendly"],
-    "amenities": ["Air Conditioning","GPS Navigation","Off-Road Mode","Tow Package","Bluetooth Connectivity","USB Ports"],
-    "reviews": {
-      "overallRating": 4.8,
-      "totalReviews": 1102,
-      "ratingCriteria": {"experience":4.8,"comfort":4.7,"reliability":4.9,"valueForMoney":4.6,"features":4.7}
-    },
-    "userReviews": [
-      {"id":1,"userName":"Mike Brown","userImage":"/images/users/user_m_13.jpg","rating":5,"date":"February 2025","comment":"Comfortable ride and powerful engine. Perfect!"}
-    ]
-  },
-  {
-    "id": 15,
-    "name": "Subaru Ascent",
-    "description": "Family SUV with safety and comfort in mind.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "EyeSight Safety", "All-Wheel Drive"],
-    "images":[
-       "/images-car/SubaruAscent.webp",
-      "/images-car/SubaruAscent2.avif",
-      "/images-car/SubaruAscent3.avif",
-      "/images-car/SubaruAscent4.avif"
-    ],
-    "price": 300,
-    "basePrice": 300,
-    "overview": "Subaru Ascent is a safety-focused family SUV offering comfortable seating and all-wheel drive. Ideal for city and off-road family trips.",
-    "highlights": ["All-wheel drive","EyeSight safety system","Comfortable for family","Spacious interior"],
-    "amenities": ["Air Conditioning","GPS Navigation","EyeSight Safety","All-Wheel Drive","Bluetooth Connectivity","USB Ports"],
-    "reviews": {
-      "overallRating": 4.9,
-      "totalReviews": 1243,
-      "ratingCriteria": {"experience":4.9,"comfort":4.8,"reliability":4.9,"valueForMoney":4.7,"features":4.8}
-    },
-    "userReviews": [
-      {"id":1,"userName":"David Wilson","userImage":"/images/users/user_m_14.jpg","rating":5,"date":"March 2025","comment":"Comfortable for the whole family. Great safety features."}
-    ]
-  },
-  {
-    "id": 16,
-    "name": "Volkswagen Atlas",
-    "description": "Spacious SUV perfect for family road trips.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Digital Cockpit", "Ambient Lighting"],
-    "images":[
-       "/images-car/VolkswagenAtlas.webp",
-      "/images-car/VolkswagenAtlas2.jpg",
-      "/images-car/VolkswagenAtlas3.avif",
-      "/images-car/VolkswagenAtlas4.avif"
-    ],
-    "price": 275,
-    "basePrice": 275,
-    "overview": "Volkswagen Atlas is a modern SUV with ample space, digital cockpit, and ambient lighting. Comfortable for family trips and long journeys.",
-    "highlights": ["Digital cockpit","Spacious interior","Ambient lighting","Smooth ride"],
-    "amenities": ["Air Conditioning","GPS Navigation","Digital Cockpit","Ambient Lighting","Bluetooth Connectivity","USB Ports"],
-    "reviews": {
-      "overallRating": 4.8,
-      "totalReviews": 1025,
-      "ratingCriteria": {"experience":4.8,"comfort":4.8,"reliability":4.7,"valueForMoney":4.6,"features":4.7}
-    },
-    "userReviews": [
-      {"id":1,"userName":"Anna Scott","userImage":"/images/users/user_f_15.jpg","rating":4,"date":"March 2025","comment":"Spacious and smooth ride. Family loved it!"}
-    ]
-  },
-  {
-    "id": 17,
-    "name": "Toyota RAV4",
-    "description": "Compact SUV ideal for city and weekend trips.",
-    "seats": 4,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Bluetooth", "Rear Camera"],
-    "images":[
-      "/images-car/ToyotaRAV4.avif",
-      "/images-car/ToyotaRAV42.jpg",
-      "/images-car/ToyotaRAV43.jpg"
-    ],
-    "price": 120,
-    "basePrice": 120,
-    "overview": "Toyota RAV4 is a compact SUV that is fuel-efficient and perfect for city commuting and weekend trips. Comfortable seating for 4 passengers.",
-    "highlights": ["Compact and efficient","Easy to drive in city","Bluetooth connectivity","Comfortable interior"],
-    "amenities": ["Air Conditioning","GPS Navigation","Bluetooth Connectivity","Rear Camera","Cruise Control","USB Ports"],
-    "reviews": {
-      "overallRating": 4.7,
-      "totalReviews": 954,
-      "ratingCriteria": {"experience":4.7,"comfort":4.6,"reliability":4.7,"valueForMoney":4.5,"features":4.6}
-    },
-    "userReviews": [
-      {"id":1,"userName":"Liam Brown","userImage":"/images/users/user_m_16.jpg","rating":5,"date":"January 2025","comment":"Perfect for a small family. Easy to drive in Cairo."}
-    ]
-  },
-  {
-    "id": 18,
-    "name": "Honda CR‑V",
-    "description": "Reliable SUV with excellent fuel efficiency for families.",
-    "seats": 4,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Sunroof", "Lane Assist"],
-    "images":[
-      "/images-car/HondaCR‑V.webp",
-      "/images-car/HondaCR‑V2.jpg",
-      "/images-car/HondaCR‑V3.jpg"
-    ],
-    "price": 130,
-    "basePrice": 130,
-    "overview": "Honda CR-V is a reliable, fuel-efficient SUV for small families. Features sunroof, lane assist, and comfortable interior for city and weekend trips.",
-    "highlights": ["Fuel-efficient","Compact SUV","Sunroof","Lane assist technology"],
-    "amenities": ["Air Conditioning","GPS Navigation","Sunroof","Lane Assist","Bluetooth Connectivity","USB Ports"],
-    "reviews": {
-      "overallRating": 4.6,
-      "totalReviews": 876,
-      "ratingCriteria": {"experience":4.6,"comfort":4.5,"reliability":4.7,"valueForMoney":4.5,"features":4.6}
-    },
-    "userReviews": [
-      {"id":1,"userName":"Olivia Smith","userImage":"/images/users/user_f_17.jpg","rating":4,"date":"February 2025","comment":"Compact and smooth ride. Great for family trips."}
-    ]
-  },
-  {
-    "id": 19,
-    "name": "Mazda CX‑5",
-    "description": "Stylish and comfortable SUV for smaller families.",
-    "seats": 4,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Heated Seats", "Premium Audio"],
-    "images":[
-      "/images-car/MazdaCX‑5.webp",
-      "/images-car/MazdaCX‑52.jpg",
-      "/images-car/MazdaCX‑53.avif",
-      "/images-car/MazdaCX‑54.webp"
-    ],
-    "price": 140,
-    "basePrice": 140,
-    "overview": "Mazda CX-5 is a stylish, compact SUV with premium interior and audio system. Perfect for small families and weekend trips with comfortable seating.",
-    "highlights": ["Stylish design","Heated seats","Premium audio system","Compact and comfortable"],
-    "amenities": ["Air Conditioning","GPS Navigation","Heated Seats","Premium Audio","Bluetooth Connectivity","USB Ports"],
-    "reviews": {
-      "overallRating": 4.7,
-      "totalReviews": 934,
-      "ratingCriteria": {"experience":4.7,"comfort":4.8,"reliability":4.6,"valueForMoney":4.6,"features":4.7}
-    },
-    "userReviews": [
-      {"id":1,"userName":"Ethan Davis","userImage":"/images/users/user_m_18.jpg","rating":5,"date":"March 2025","comment":"Very comfortable and smooth. Perfect for weekend trips."}
-    ]
-  },
-  {
-    "id": 20,
-    "name": "Toyota Avanza",
-    "description": "Compact MPV ideal for 5–7 passengers, perfect for city rides and family trips.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Bluetooth", "Rear Camera"],
-    "images":[
-      "/images-car/ToyotaAvanza.avif",
-      "/images-car/ToyotaAvanza2.avif",
-      "/images-car/ToyotaAvanza3.avif",
-      "/images-car/ToyotaAvanza4.png"
-    ],
-    "price": 140,
-    "basePrice": 140,
-    "overview": "Toyota Avanza is a compact MPV suitable for city rides and family trips. Flexible seating and practical features make it ideal for 5-7 passengers.",
-    "highlights": ["Compact MPV","Flexible seating","Family-friendly","Fuel-efficient"],
-    "amenities": ["Air Conditioning","GPS Navigation","Bluetooth Connectivity","Rear Camera","Cruise Control","USB Ports"],
-    "reviews": {
-      "overallRating": 4.6,
-      "totalReviews": 854,
-      "ratingCriteria": {"experience":4.6,"comfort":4.5,"reliability":4.7,"valueForMoney":4.5,"features":4.6}
-    },
-    "userReviews": [
-      {"id":1,"userName":"Sophia Lee","userImage":"/images/users/user_f_19.jpg","rating":4,"date":"March 2025","comment":"Practical and easy to drive. Good for family use."}
-    ]
-  }
-]
-,
   
-    "trips": [],
+  "cars": [
+    {
+      "id": "1",
+      "name": "Toyota Corolla",
+      "description": "Reliable compact sedan suitable for 4 passengers.",
+      "seats": 4,
+      "transmission": "Auto",
+      "features": [
+        "GPS",
+        "A/C",
+        "Bluetooth",
+        "Backup Camera"
+      ],
+      "images": [
+        "/images-car/ToyotaCorolla.avif",
+        "/images-car/ToyotaCorolla2.jpg",
+        "/images-car/ToyotaCorolla3.jpg",
+        "/images-car/ToyotaCorolla4.jpg"
+      ],
+      "price": 120,
+      "basePrice": 120,
+      "overview": "The Toyota Corolla is a reliable compact sedan perfect for city driving and short family trips. It offers fuel efficiency, modern technology features, and smooth handling.",
+      "highlights": [
+        "Fuel-efficient engine",
+        "Smooth city driving",
+        "Advanced safety features",
+        "Comfortable seating for 4 passengers"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Bluetooth Connectivity",
+        "Backup Camera",
+        "Cruise Control",
+        "USB Ports"
+      ],
+      "reviews": {
+        "overallRating": 4.8,
+        "totalReviews": 1523,
+        "ratingCriteria": {
+          "experience": 4.8,
+          "comfort": 4.6,
+          "reliability": 4.9,
+          "valueForMoney": 4.7,
+          "features": 4.5
+        }
+      },
+      "userReviews": [
+        {
+          "id": 1,
+          "userName": "John Doe",
+          "userImage": "/images/users/user_m_1.jpg",
+          "rating": 5,
+          "date": "January 2025",
+          "comment": "Perfect car for city trips. Comfortable and compact."
+        },
+        {
+          "id": 2,
+          "userName": "Sarah Ahmed",
+          "userImage": "/images/users/user_f_2.jpg",
+          "rating": 5,
+          "date": "February 2025",
+          "comment": "Reliable and smooth ride."
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Kia Carens",
+      "description": "Family MPV suitable for 5-6 passengers.",
+      "seats": 6,
+      "transmission": "Auto",
+      "features": [
+        "GPS",
+        "A/C",
+        "Bluetooth",
+        "Cruise Control"
+      ],
+      "images": [
+        "/images-car/KiaCarens.avif",
+        "/images-car/KiaCarens2.webp",
+        "/images-car/KiaCarens3.jpg"
+      ],
+      "price": 150,
+      "basePrice": 150,
+      "overview": "Kia Carens is a spacious family MPV offering comfort, safety, and modern features for 5-6 passengers. Ideal for city drives and weekend trips.",
+      "highlights": [
+        "Spacious interior",
+        "Comfortable seats",
+        "Smooth handling",
+        "Family-friendly amenities"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Bluetooth Connectivity",
+        "Cruise Control",
+        "Entertainment System",
+        "USB Ports"
+      ],
+      "reviews": {
+        "overallRating": 4.7,
+        "totalReviews": 987,
+        "ratingCriteria": {
+          "experience": 4.7,
+          "comfort": 4.8,
+          "reliability": 4.6,
+          "valueForMoney": 4.5,
+          "features": 4.6
+        }
+      },
+      "userReviews": [
+        {
+          "id": 1,
+          "userName": "Michael Chen",
+          "userImage": "/images/users/user_m_3.jpg",
+          "rating": 5,
+          "date": "March 2025",
+          "comment": "Spacious and comfortable for family trips."
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Toyota Rush",
+      "description": "Compact SUV ideal for 5-6 passengers with flexibility for city and trips.",
+      "seats": 6,
+      "transmission": "Auto",
+      "features": [
+        "GPS",
+        "A/C",
+        "Bluetooth",
+        "Sunroof"
+      ],
+      "images": [
+        "/images-car/ToyotaRush.jpg",
+        "/images-car/ToyotaRush2.webp",
+        "/images-car/ToyotaRush3.avif",
+        "/images-car/ToyotaRush4.jpg"
+      ],
+      "price": 160,
+      "basePrice": 160,
+      "overview": "Toyota Rush is a compact SUV combining city practicality with weekend trip capabilities. Flexible seating and modern features make it ideal for families.",
+      "highlights": [
+        "Flexible seating",
+        "Sunroof",
+        "Modern infotainment",
+        "Reliable for trips"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Bluetooth Connectivity",
+        "Sunroof",
+        "Cruise Control",
+        "USB Ports"
+      ],
+      "reviews": {
+        "overallRating": 4.8,
+        "totalReviews": 1023,
+        "ratingCriteria": {
+          "experience": 4.8,
+          "comfort": 4.7,
+          "reliability": 4.8,
+          "valueForMoney": 4.6,
+          "features": 4.5
+        }
+      },
+      "userReviews": [
+        {
+          "id": 1,
+          "userName": "Alex Johnson",
+          "userImage": "/images/users/user_m_4.jpg",
+          "rating": 5,
+          "date": "January 2025",
+          "comment": "Versatile and smooth ride. Great for road trips."
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Mitsubishi Xpander",
+      "description": "Modern MPV for 5-6 passengers with comfortable interior.",
+      "seats": 6,
+      "transmission": "Auto",
+      "features": [
+        "GPS",
+        "A/C",
+        "Bluetooth",
+        "Entertainment System"
+      ],
+      "images": [
+        "/images-car/MitsubishiXpander.jpg",
+        "/images-car/MitsubishiXpander2.jpeg",
+        "/images-car/MitsubishiXpander3.webp",
+        "/images-car/MitsubishiXpander4.webp"
+      ],
+      "price": 155,
+      "basePrice": 155,
+      "overview": "Mitsubishi Xpander offers a modern interior with comfort for 5-6 passengers. Suitable for both city rides and family trips with enhanced entertainment features.",
+      "highlights": [
+        "Modern interior",
+        "Entertainment system",
+        "Spacious seating",
+        "Smooth ride"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Bluetooth Connectivity",
+        "Entertainment System",
+        "USB Ports",
+        "Cruise Control"
+      ],
+      "reviews": {
+        "overallRating": 4.7,
+        "totalReviews": 876,
+        "ratingCriteria": {
+          "experience": 4.7,
+          "comfort": 4.8,
+          "reliability": 4.6,
+          "valueForMoney": 4.5,
+          "features": 4.7
+        }
+      },
+      "userReviews": [
+        {
+          "id": 1,
+          "userName": "Fatima Hassan",
+          "userImage": "/images/users/user_f_5.jpg",
+          "rating": 5,
+          "date": "February 2025",
+          "comment": "Comfortable and roomy. Perfect for group trips."
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "name": "Toyota Land Cruiser",
+      "description": "Great for families exploring Cairo, Giza, and Alexandria.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": [
+        "GPS",
+        "A/C",
+        "Bluetooth",
+        "Backup Camera"
+      ],
+      "images": [
+        "/images-car/ToyotaLandCruiser.avif",
+        "/images-car/ToyotaLandCruiser2.png",
+        "/images-car/ToyotaLandCruiser3.avif",
+        "/images-car/ToyotaLandCruiser4.jpg"
+      ],
+      "price": 150,
+      "basePrice": 150,
+      "overview": "Toyota Land Cruiser is a full-size SUV ideal for family adventures across major Egyptian cities. Offers comfort, space, and advanced safety features.",
+      "highlights": [
+        "Full-size SUV",
+        "Spacious interior",
+        "Advanced safety features",
+        "Perfect for long trips"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Bluetooth Connectivity",
+        "Backup Camera",
+        "Cruise Control",
+        "USB Ports"
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 2543,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "comfort": 4.8,
+          "reliability": 4.9,
+          "valueForMoney": 4.7,
+          "features": 4.8
+        }
+      },
+      "userReviews": [
+        {
+          "id": 1,
+          "userName": "John Doe",
+          "userImage": "/images/users/user_m_1.jpg",
+          "rating": 5,
+          "date": "March 2025",
+          "comment": "Perfect car for family trips! Very comfortable and spacious."
+        },
+        {
+          "id": 2,
+          "userName": "Sarah Ahmed",
+          "userImage": "/images/users/user_f_2.jpg",
+          "rating": 5,
+          "date": "March 2025",
+          "comment": "Excellent service and the car was in pristine condition."
+        },
+        {
+          "id": 3,
+          "userName": "Michael Chen",
+          "userImage": "/images/users/user_m_3.jpg",
+          "rating": 4,
+          "date": "March 2025",
+          "comment": "Great vehicle, smooth ride across the desert roads."
+        },
+        {
+          "id": 4,
+          "userName": "Fatima Hassan",
+          "userImage": "/images/users/user_f_5.jpg",
+          "rating": 5,
+          "date": "March 2025",
+          "comment": "Highly recommend for long family journeys!"
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "name": "Honda Pilot",
+      "description": "Perfect for family trips across major Egyptian cities.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": [
+        "GPS",
+        "A/C",
+        "Cruise Control",
+        "USB Ports"
+      ],
+      "images": [
+        "/images-car/HondaPilot.webp",
+        "/images-car/HondaPilot2.avif",
+        "/images-car/HondaPilot3.avif"
+      ],
+      "price": 170,
+      "basePrice": 170,
+      "overview": "Honda Pilot is a reliable SUV with ample seating for 7 passengers, perfect for family excursions across Egypt. Modern features ensure comfort and convenience.",
+      "highlights": [
+        "Spacious seating",
+        "Comfortable ride",
+        "Family-friendly",
+        "Advanced tech features"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Cruise Control",
+        "USB Ports",
+        "Bluetooth Connectivity",
+        "Entertainment System"
+      ],
+      "reviews": {
+        "overallRating": 4.7,
+        "totalReviews": 1023,
+        "ratingCriteria": {
+          "experience": 4.7,
+          "comfort": 4.6,
+          "reliability": 4.8,
+          "valueForMoney": 4.6,
+          "features": 4.5
+        }
+      },
+      "userReviews": [
+        {
+          "id": 1,
+          "userName": "Jane Smith",
+          "userImage": "/images/users/user_f_6.jpg",
+          "rating": 4,
+          "date": "February 2025",
+          "comment": "Smooth ride and comfy seats. Perfect for our Cairo tour."
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "name": "Ford Explorer",
+      "description": "Spacious and comfortable SUV for family adventures.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": [
+        "GPS",
+        "A/C",
+        "Leather Seats",
+        "Sunroof"
+      ],
+      "images": [
+        "/images-car/FordExplorer.jpg",
+        "/images-car/FordExplorer2.png",
+        "/images-car/FordExplorer3.avif"
+      ],
+      "price": 180,
+      "basePrice": 180,
+      "overview": "Ford Explorer is a versatile SUV combining luxury, space, and performance for family trips and adventures. Features leather seats and sunroof for premium comfort.",
+      "highlights": [
+        "Spacious interior",
+        "Leather seats",
+        "Sunroof",
+        "Smooth handling"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Leather Seats",
+        "Sunroof",
+        "Bluetooth Connectivity",
+        "USB Ports"
+      ],
+      "reviews": {
+        "overallRating": 4.8,
+        "totalReviews": 1356,
+        "ratingCriteria": {
+          "experience": 4.8,
+          "comfort": 4.9,
+          "reliability": 4.7,
+          "valueForMoney": 4.6,
+          "features": 4.7
+        }
+      },
+      "userReviews": [
+        {
+          "id": 1,
+          "userName": "Alex Johnson",
+          "userImage": "/images/users/user_m_4.jpg",
+          "rating": 5,
+          "date": "January 2025",
+          "comment": "Loved it! Will rent again for our next trip."
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "name": "Chevrolet Tahoe",
+      "description": "Full-size SUV perfect for family adventures.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": [
+        "GPS",
+        "A/C",
+        "4WD",
+        "Premium Sound"
+      ],
+      "images": [
+        "/images-car/ChevroletTahoe.avif",
+        "/images-car/ChevroletTahoe2.jpg",
+        "/images-car/ChevroletTahoe3.jpg",
+        "/images-car/ChevroletTahoe4.webp"
+      ],
+      "price": 185,
+      "basePrice": 185,
+      "overview": "Chevrolet Tahoe is a full-size SUV built for comfort, space, and performance. Excellent choice for family trips and off-road adventures with 4WD capability.",
+      "highlights": [
+        "Full-size SUV",
+        "4WD for off-road",
+        "Premium sound system",
+        "Comfortable for 7 passengers"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "4WD",
+        "Premium Sound",
+        "Bluetooth Connectivity",
+        "USB Ports"
+      ],
+      "reviews": {
+        "overallRating": 4.7,
+        "totalReviews": 1123,
+        "ratingCriteria": {
+          "experience": 4.7,
+          "comfort": 4.8,
+          "reliability": 4.7,
+          "valueForMoney": 4.6,
+          "features": 4.7
+        }
+      },
+      "userReviews": [
+        {
+          "id": 1,
+          "userName": "Sarah Lee",
+          "userImage": "/images/users/user_f_7.jpg",
+          "rating": 4,
+          "date": "February 2025",
+          "comment": "Very spacious and comfortable for long drives."
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "name": "Chevrolet Suburban",
+      "description": "Iconic large SUV for family adventures across Egypt.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": [
+        "GPS",
+        "A/C",
+        "Entertainment System",
+        "Power Liftgate"
+      ],
+      "images": [
+        "/images-car/ChevroletSuburban.avif",
+        "/images-car/ChevroletSuburban2.avif",
+        "/images-car/ChevroletSuburban3.avif",
+        "/images-car/ChevroletSuburban4.avif"
+      ],
+      "price": 250,
+      "basePrice": 250,
+      "overview": "Chevrolet Suburban is a legendary full-size SUV offering unmatched space and luxury for family trips across Egypt. Equipped with modern amenities and entertainment system.",
+      "highlights": [
+        "Iconic SUV",
+        "Spacious interior",
+        "Luxury comfort",
+        "Entertainment system"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Entertainment System",
+        "Power Liftgate",
+        "Bluetooth Connectivity",
+        "USB Ports"
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 1342,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "comfort": 4.9,
+          "reliability": 4.8,
+          "valueForMoney": 4.7,
+          "features": 4.8
+        }
+      },
+      "userReviews": [
+        {
+          "id": 1,
+          "userName": "Sophia Turner",
+          "userImage": "/images/users/user_f_8.jpg",
+          "rating": 5,
+          "date": "March 2025",
+          "comment": "Spacious and luxurious. Best choice for our family."
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "name": "GMC Yukon",
+      "description": "Large SUV with comfort and advanced tech.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": [
+        "GPS",
+        "A/C",
+        "Adaptive Cruise",
+        "Lane Assist"
+      ],
+      "images": [
+        "/images-car/GMCYukon.avif",
+        "/images-car/GMCYukon2.webp",
+        "/images-car/GMCYukon3.webp",
+        "/images-car/GMCYukon4.avif"
+      ],
+      "price": 110,
+      "basePrice": 110,
+      "overview": "GMC Yukon combines comfort, technology, and space in a full-size SUV. Ideal for family trips, city rides, and long desert journeys.",
+      "highlights": [
+        "Advanced tech features",
+        "Comfortable seating",
+        "Spacious interior",
+        "Reliable performance"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Adaptive Cruise Control",
+        "Lane Assist",
+        "Bluetooth Connectivity",
+        "USB Ports"
+      ],
+      "reviews": {
+        "overallRating": 4.8,
+        "totalReviews": 954,
+        "ratingCriteria": {
+          "experience": 4.8,
+          "comfort": 4.7,
+          "reliability": 4.8,
+          "valueForMoney": 4.6,
+          "features": 4.7
+        }
+      },
+      "userReviews": [
+        {
+          "id": 1,
+          "userName": "Chris Martin",
+          "userImage": "/images/users/user_m_9.jpg",
+          "rating": 5,
+          "date": "January 2025",
+          "comment": "Very reliable and comfortable for desert trips."
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "name": "Hyundai Palisade",
+      "description": "Comfortable family SUV with advanced features.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": [
+        "GPS",
+        "A/C",
+        "Wireless Charging",
+        "Smart Trunk"
+      ],
+      "images": [
+        "/images-car/HyundaiPalisade.webp",
+        "/images-car/HyundaiPalisade2.avif",
+        "/images-car/HyundaiPalisade3.avif",
+        "/images-car/HyundaiPalisade4.webp"
+      ],
+      "price": 135,
+      "basePrice": 135,
+      "overview": "Hyundai Palisade is a family-friendly SUV with luxury and convenience in mind. Equipped with wireless charging, smart trunk, and modern amenities.",
+      "highlights": [
+        "Luxury SUV",
+        "Advanced features",
+        "Spacious seating",
+        "Comfortable ride"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Wireless Charging",
+        "Smart Trunk",
+        "Bluetooth Connectivity",
+        "USB Ports"
+      ],
+      "reviews": {
+        "overallRating": 4.7,
+        "totalReviews": 1021,
+        "ratingCriteria": {
+          "experience": 4.7,
+          "comfort": 4.8,
+          "reliability": 4.6,
+          "valueForMoney": 4.6,
+          "features": 4.7
+        }
+      },
+      "userReviews": [
+        {
+          "id": 1,
+          "userName": "Linda Green",
+          "userImage": "/images/users/user_f_10.jpg",
+          "rating": 4,
+          "date": "March 2025",
+          "comment": "Good car for long trips. Very comfortable."
+        }
+      ]
+    },
+    {
+      "id": "12",
+      "name": "Kia Telluride",
+      "description": "Family-friendly SUV with modern amenities.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": [
+        "GPS",
+        "A/C",
+        "Heated Seats",
+        "Panoramic Roof"
+      ],
+      "images": [
+        "/images-car/KiaTelluride.avif",
+        "/images-car/KiaTelluride2.avif",
+        "/images-car/KiaTelluride3.avif",
+        "/images-car/KiaTelluride4.avif"
+      ],
+      "price": 145,
+      "basePrice": 145,
+      "overview": "Kia Telluride is a modern SUV with family comfort in mind. Features panoramic roof, heated seats, and advanced safety and infotainment systems.",
+      "highlights": [
+        "Modern family SUV",
+        "Panoramic roof",
+        "Heated seats",
+        "Comfortable for 7 passengers"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Heated Seats",
+        "Panoramic Roof",
+        "Bluetooth Connectivity",
+        "USB Ports"
+      ],
+      "reviews": {
+        "overallRating": 4.8,
+        "totalReviews": 1125,
+        "ratingCriteria": {
+          "experience": 4.8,
+          "comfort": 4.8,
+          "reliability": 4.7,
+          "valueForMoney": 4.6,
+          "features": 4.8
+        }
+      },
+      "userReviews": [
+        {
+          "id": 1,
+          "userName": "Tom White",
+          "userImage": "/images/users/user_m_11.jpg",
+          "rating": 5,
+          "date": "January 2025",
+          "comment": "Perfect for family trips! Highly recommended."
+        }
+      ]
+    },
+    {
+      "id": "13",
+      "name": "Mazda CX-9",
+      "description": "Elegant and spacious SUV for family trips.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": [
+        "GPS",
+        "A/C",
+        "Head-Up Display",
+        "Bose Audio"
+      ],
+      "images": [
+        "/images-car/MazdaCX-9.png",
+        "/images-car/MazdaCX-92.jpg",
+        "/images-car/MazdaCX-93.jpg",
+        "/images-car/MazdaCX-94.jpg"
+      ],
+      "price": 270,
+      "basePrice": 270,
+      "overview": "Mazda CX-9 is an elegant SUV with spacious interior and premium audio. Ideal for comfortable family trips with modern technology and safety features.",
+      "highlights": [
+        "Elegant design",
+        "Spacious seating",
+        "Premium audio",
+        "Smooth ride"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Head-Up Display",
+        "Bose Audio",
+        "Bluetooth Connectivity",
+        "USB Ports"
+      ],
+      "reviews": {
+        "overallRating": 4.7,
+        "totalReviews": 981,
+        "ratingCriteria": {
+          "experience": 4.7,
+          "comfort": 4.8,
+          "reliability": 4.7,
+          "valueForMoney": 4.6,
+          "features": 4.7
+        }
+      },
+      "userReviews": [
+        {
+          "id": 1,
+          "userName": "Emma Davis",
+          "userImage": "/images/users/user_f_12.jpg",
+          "rating": 4,
+          "date": "March 2025",
+          "comment": "Smooth ride, very spacious interior."
+        }
+      ]
+    },
+    {
+      "id": "14",
+      "name": "Nissan Patrol",
+      "description": "Reliable SUV with comfort and space for the whole family.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": [
+        "GPS",
+        "A/C",
+        "Off-Road Mode",
+        "Tow Package"
+      ],
+      "images": [
+        "/images-car/NissanPatrol.jpg",
+        "/images-car/NissanPatrol2.jpg",
+        "/images-car/NissanPatrol3.jpg",
+        "/images-car/NissanPatrol4.jpg"
+      ],
+      "price": 260,
+      "basePrice": 260,
+      "overview": "Nissan Patrol is a rugged SUV with comfort and space for families. Equipped with off-road mode and towing capacity, perfect for desert adventures.",
+      "highlights": [
+        "Reliable SUV",
+        "Off-road capability",
+        "Spacious interior",
+        "Family-friendly"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Off-Road Mode",
+        "Tow Package",
+        "Bluetooth Connectivity",
+        "USB Ports"
+      ],
+      "reviews": {
+        "overallRating": 4.8,
+        "totalReviews": 1102,
+        "ratingCriteria": {
+          "experience": 4.8,
+          "comfort": 4.7,
+          "reliability": 4.9,
+          "valueForMoney": 4.6,
+          "features": 4.7
+        }
+      },
+      "userReviews": [
+        {
+          "id": 1,
+          "userName": "Mike Brown",
+          "userImage": "/images/users/user_m_13.jpg",
+          "rating": 5,
+          "date": "February 2025",
+          "comment": "Comfortable ride and powerful engine. Perfect!"
+        }
+      ]
+    },
+    {
+      "id": "15",
+      "name": "Subaru Ascent",
+      "description": "Family SUV with safety and comfort in mind.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": [
+        "GPS",
+        "A/C",
+        "EyeSight Safety",
+        "All-Wheel Drive"
+      ],
+      "images": [
+        "/images-car/SubaruAscent.webp",
+        "/images-car/SubaruAscent2.avif",
+        "/images-car/SubaruAscent3.avif",
+        "/images-car/SubaruAscent4.avif"
+      ],
+      "price": 300,
+      "basePrice": 300,
+      "overview": "Subaru Ascent is a safety-focused family SUV offering comfortable seating and all-wheel drive. Ideal for city and off-road family trips.",
+      "highlights": [
+        "All-wheel drive",
+        "EyeSight safety system",
+        "Comfortable for family",
+        "Spacious interior"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "EyeSight Safety",
+        "All-Wheel Drive",
+        "Bluetooth Connectivity",
+        "USB Ports"
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 1243,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "comfort": 4.8,
+          "reliability": 4.9,
+          "valueForMoney": 4.7,
+          "features": 4.8
+        }
+      },
+      "userReviews": [
+        {
+          "id": 1,
+          "userName": "David Wilson",
+          "userImage": "/images/users/user_m_14.jpg",
+          "rating": 5,
+          "date": "March 2025",
+          "comment": "Comfortable for the whole family. Great safety features."
+        }
+      ]
+    },
+    {
+      "id": "16",
+      "name": "Volkswagen Atlas",
+      "description": "Spacious SUV perfect for family road trips.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": [
+        "GPS",
+        "A/C",
+        "Digital Cockpit",
+        "Ambient Lighting"
+      ],
+      "images": [
+        "/images-car/VolkswagenAtlas.webp",
+        "/images-car/VolkswagenAtlas2.jpg",
+        "/images-car/VolkswagenAtlas3.avif",
+        "/images-car/VolkswagenAtlas4.avif"
+      ],
+      "price": 275,
+      "basePrice": 275,
+      "overview": "Volkswagen Atlas is a modern SUV with ample space, digital cockpit, and ambient lighting. Comfortable for family trips and long journeys.",
+      "highlights": [
+        "Digital cockpit",
+        "Spacious interior",
+        "Ambient lighting",
+        "Smooth ride"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Digital Cockpit",
+        "Ambient Lighting",
+        "Bluetooth Connectivity",
+        "USB Ports"
+      ],
+      "reviews": {
+        "overallRating": 4.8,
+        "totalReviews": 1025,
+        "ratingCriteria": {
+          "experience": 4.8,
+          "comfort": 4.8,
+          "reliability": 4.7,
+          "valueForMoney": 4.6,
+          "features": 4.7
+        }
+      },
+      "userReviews": [
+        {
+          "id": 1,
+          "userName": "Anna Scott",
+          "userImage": "/images/users/user_f_15.jpg",
+          "rating": 4,
+          "date": "March 2025",
+          "comment": "Spacious and smooth ride. Family loved it!"
+        }
+      ]
+    },
+    {
+      "id": "17",
+      "name": "Toyota RAV4",
+      "description": "Compact SUV ideal for city and weekend trips.",
+      "seats": 4,
+      "transmission": "Auto",
+      "features": [
+        "GPS",
+        "A/C",
+        "Bluetooth",
+        "Rear Camera"
+      ],
+      "images": [
+        "/images-car/ToyotaRAV4.avif",
+        "/images-car/ToyotaRAV42.jpg",
+        "/images-car/ToyotaRAV43.jpg"
+      ],
+      "price": 120,
+      "basePrice": 120,
+      "overview": "Toyota RAV4 is a compact SUV that is fuel-efficient and perfect for city commuting and weekend trips. Comfortable seating for 4 passengers.",
+      "highlights": [
+        "Compact and efficient",
+        "Easy to drive in city",
+        "Bluetooth connectivity",
+        "Comfortable interior"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Bluetooth Connectivity",
+        "Rear Camera",
+        "Cruise Control",
+        "USB Ports"
+      ],
+      "reviews": {
+        "overallRating": 4.7,
+        "totalReviews": 954,
+        "ratingCriteria": {
+          "experience": 4.7,
+          "comfort": 4.6,
+          "reliability": 4.7,
+          "valueForMoney": 4.5,
+          "features": 4.6
+        }
+      },
+      "userReviews": [
+        {
+          "id": 1,
+          "userName": "Liam Brown",
+          "userImage": "/images/users/user_m_16.jpg",
+          "rating": 5,
+          "date": "January 2025",
+          "comment": "Perfect for a small family. Easy to drive in Cairo."
+        }
+      ]
+    },
+    {
+      "id": "18",
+      "name": "Honda CR‑V",
+      "description": "Reliable SUV with excellent fuel efficiency for families.",
+      "seats": 4,
+      "transmission": "Auto",
+      "features": [
+        "GPS",
+        "A/C",
+        "Sunroof",
+        "Lane Assist"
+      ],
+      "images": [
+        "/images-car/HondaCR‑V.webp",
+        "/images-car/HondaCR‑V2.jpg",
+        "/images-car/HondaCR‑V3.jpg"
+      ],
+      "price": 130,
+      "basePrice": 130,
+      "overview": "Honda CR-V is a reliable, fuel-efficient SUV for small families. Features sunroof, lane assist, and comfortable interior for city and weekend trips.",
+      "highlights": [
+        "Fuel-efficient",
+        "Compact SUV",
+        "Sunroof",
+        "Lane assist technology"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Sunroof",
+        "Lane Assist",
+        "Bluetooth Connectivity",
+        "USB Ports"
+      ],
+      "reviews": {
+        "overallRating": 4.6,
+        "totalReviews": 876,
+        "ratingCriteria": {
+          "experience": 4.6,
+          "comfort": 4.5,
+          "reliability": 4.7,
+          "valueForMoney": 4.5,
+          "features": 4.6
+        }
+      },
+      "userReviews": [
+        {
+          "id": 1,
+          "userName": "Olivia Smith",
+          "userImage": "/images/users/user_f_17.jpg",
+          "rating": 4,
+          "date": "February 2025",
+          "comment": "Compact and smooth ride. Great for family trips."
+        }
+      ]
+    },
+    {
+      "id": "19",
+      "name": "Mazda CX‑5",
+      "description": "Stylish and comfortable SUV for smaller families.",
+      "seats": 4,
+      "transmission": "Auto",
+      "features": [
+        "GPS",
+        "A/C",
+        "Heated Seats",
+        "Premium Audio"
+      ],
+      "images": [
+        "/images-car/MazdaCX‑5.webp",
+        "/images-car/MazdaCX‑52.jpg",
+        "/images-car/MazdaCX‑53.avif",
+        "/images-car/MazdaCX‑54.webp"
+      ],
+      "price": 140,
+      "basePrice": 140,
+      "overview": "Mazda CX-5 is a stylish, compact SUV with premium interior and audio system. Perfect for small families and weekend trips with comfortable seating.",
+      "highlights": [
+        "Stylish design",
+        "Heated seats",
+        "Premium audio system",
+        "Compact and comfortable"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Heated Seats",
+        "Premium Audio",
+        "Bluetooth Connectivity",
+        "USB Ports"
+      ],
+      "reviews": {
+        "overallRating": 4.7,
+        "totalReviews": 934,
+        "ratingCriteria": {
+          "experience": 4.7,
+          "comfort": 4.8,
+          "reliability": 4.6,
+          "valueForMoney": 4.6,
+          "features": 4.7
+        }
+      },
+      "userReviews": [
+        {
+          "id": 1,
+          "userName": "Ethan Davis",
+          "userImage": "/images/users/user_m_18.jpg",
+          "rating": 5,
+          "date": "March 2025",
+          "comment": "Very comfortable and smooth. Perfect for weekend trips."
+        }
+      ]
+    },
+    {
+      "id": "20",
+      "name": "Toyota Avanza",
+      "description": "Compact MPV ideal for 5–7 passengers, perfect for city rides and family trips.",
+      "seats": 7,
+      "transmission": "Auto",
+      "features": [
+        "GPS",
+        "A/C",
+        "Bluetooth",
+        "Rear Camera"
+      ],
+      "images": [
+        "/images-car/ToyotaAvanza.avif",
+        "/images-car/ToyotaAvanza2.avif",
+        "/images-car/ToyotaAvanza3.avif",
+        "/images-car/ToyotaAvanza4.png"
+      ],
+      "price": 140,
+      "basePrice": 140,
+      "overview": "Toyota Avanza is a compact MPV suitable for city rides and family trips. Flexible seating and practical features make it ideal for 5-7 passengers.",
+      "highlights": [
+        "Compact MPV",
+        "Flexible seating",
+        "Family-friendly",
+        "Fuel-efficient"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Bluetooth Connectivity",
+        "Rear Camera",
+        "Cruise Control",
+        "USB Ports"
+      ],
+      "reviews": {
+        "overallRating": 4.6,
+        "totalReviews": 854,
+        "ratingCriteria": {
+          "experience": 4.6,
+          "comfort": 4.5,
+          "reliability": 4.7,
+          "valueForMoney": 4.5,
+          "features": 4.6
+        }
+      },
+      "userReviews": [
+        {
+          "id": 1,
+          "userName": "Sophia Lee",
+          "userImage": "/images/users/user_f_19.jpg",
+          "rating": 4,
+          "date": "March 2025",
+          "comment": "Practical and easy to drive. Good for family use."
+        }
+      ]
+    }
+  ],
+  "trips": [],
   "reviews": [],
   "wishlist": [],
-  "bookings": []
+  "bookings": [
+    {
+      "id": "db8a",
+      "userId": "google_1766087268401",
+      "type": "attraction",
+      "itemId": "5",
+      "itemName": "Marina Beach",
+      "itemData": {
+        "id": "5",
+        "name": "Marina Beach",
+        "city": "Alexandria",
+        "rating": 4.6,
+        "categories": [
+          "NATURE",
+          "FAMILY",
+          "BEACHES"
+        ],
+        "images": [
+          "/images/marina_beach/main.jpg",
+          "/images/marina_beach/view_2.jpg",
+          "/images/marina_beach/view_3.jpg",
+          "/images/marina_beach/view_4.jpg"
+        ],
+        "latitude": 31.2185,
+        "longitude": 29.9079,
+        "description": "Popular Alexandria seaside area and beach promenade.",
+        "overview": "Marina Beach is one of the most famous public beaches in Alexandria, located near the Qaitbay Citadel. It offers clean sands and relatively clear Mediterranean waters, making it a favorite for local families and tourists seeking a convenient beach day. The area features a long promenade lined with cafes and facilities, though access to the private sections of the beach usually requires a paid entrance ticket.",
+        "highlights": [
+          "Clean Mediterranean water",
+          "Long seaside promenade",
+          "Proximity to Qaitbay Citadel"
+        ],
+        "amenities": [
+          "Cafes and Restaurants",
+          "Restrooms (Paid)",
+          "Beach Chairs/Umbrellas (Paid)",
+          "Changing Rooms (Paid)",
+          "Parking (Limited)"
+        ],
+        "paymentId": "pay_0005",
+        "price": "Free to enter (Paid beach access varies)",
+        "reviews": {
+          "overallRating": 4.6,
+          "totalReviews": 2105,
+          "ratingCriteria": {
+            "experience": 4.5,
+            "staff": 4.4,
+            "accessibility": 4.6,
+            "facilities": 4.3,
+            "valueForMoney": 4.7
+          }
+        },
+        "userReviews": [
+          {
+            "id": 9,
+            "userName": "Rana Sherif",
+            "userImage": "/images/users/user_f_9.jpg",
+            "rating": 4.7,
+            "date": "July 2024",
+            "comment": "A clean and beautiful beach, perfect for a fun family day out by the sea."
+          },
+          {
+            "id": 10,
+            "userName": "John O'Connell",
+            "userImage": "/images/users/user_m_10.jpg",
+            "rating": 4.5,
+            "date": "August 2024",
+            "comment": "Nice beach with clear water. Gets crowded in peak summer, but generally well-maintained."
+          }
+        ]
+      },
+      "bookingData": {
+        "date": "2025-12-25",
+        "guests": 2
+      },
+      "pricing": {
+        "basePrice": 0,
+        "subtotal": 0,
+        "serviceFee": 0,
+        "taxes": 0,
+        "total": 0,
+        "duration": 1
+      },
+      "status": "pending",
+      "guestInfo": {
+        "firstName": "ss",
+        "lastName": "aaa",
+        "email": "ssaa.@gmail.com",
+        "phone": "01147296027",
+        "specialRequests": ""
+      },
+      "bookingNumber": "BK1766093996036559",
+      "bookingDate": "2025-12-18T21:39:56.036Z",
+      "paymentStatus": "pending",
+      "paymentInfo": {
+        "method": "arrival",
+        "cardLastFour": null,
+        "cardType": null,
+        "paidAt": null
+      }
+    }
+  ]
 }
