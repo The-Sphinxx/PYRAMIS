@@ -1,217 +1,248 @@
 <template>
-  <div class="forgot-password-container">
-    <!-- Left Side - Pyramid Image -->
-    <div class="left-side">
-      <div class="pyramid-overlay"></div>
+  <div class="min-h-screen relative overflow-hidden">
+    <!-- Background Slideshow -->
+    <div class="absolute inset-0 z-0">
+      <transition-group name="fade" mode="out-in">
+        <div
+          v-for="(image, index) in backgroundImages"
+          :key="image"
+          v-show="currentImageIndex === index"
+          class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+          :style="{ backgroundImage: `url(${image})` }"
+        ></div>
+      </transition-group>
+      <!-- Overlay -->
+      <div class="absolute inset-0 bg-black/20"></div>
     </div>
 
-    <!-- Right Side - Forgot Password Form -->
-    <div class="right-side">
-      <div class="form-container">
-        <!-- Logo/Title -->
-        <h1 class="brand-title">NËLARIA</h1>
-
-        <!-- Step Indicator (optional) -->
-        <div class="step-indicator">
-          <div class="step" :class="{ 'active': currentStep === 'email' || currentStep === 'token' || currentStep === 'password' || currentStep === 'success' }">1</div>
-          <div class="step-line" :class="{ 'active': currentStep === 'token' || currentStep === 'password' || currentStep === 'success' }"></div>
-          <div class="step" :class="{ 'active': currentStep === 'token' || currentStep === 'password' || currentStep === 'success' }">2</div>
-          <div class="step-line" :class="{ 'active': currentStep === 'password' || currentStep === 'success' }"></div>
-          <div class="step" :class="{ 'active': currentStep === 'password' || currentStep === 'success' }">3</div>
+    <!-- Content -->
+    <div class="relative z-10 min-h-screen flex items-center p-4">
+      <div class="bg-base-200/80 backdrop-blur-sm w-full max-w-md p-8 rounded-lg shadow-xl">
+        <!-- Logo -->
+        <div class="text-center mb-8">
+          <h1 class="text-4xl font-bold text-primary font-cairo">PYRAMIS</h1>
         </div>
 
-        <!-- Step 1: Enter Your Code (Email) -->
-        <div v-if="currentStep === 'email'" class="form-step">
-          <h2 class="step-title">Enter Your Code</h2>
-          <p class="step-description">Enter the email associated with your account</p>
+        <!-- Step Indicator -->
+        <div class="flex items-center justify-center mb-6 gap-2">
+          <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-all"
+               :class="currentStep === 'email' || currentStep === 'token' || currentStep === 'password' || currentStep === 'success' ? 'bg-primary text-white' : 'bg-gray-300 text-gray-600'">
+            1
+          </div>
+          <div class="w-12 h-0.5 transition-all"
+               :class="currentStep === 'token' || currentStep === 'password' || currentStep === 'success' ? 'bg-primary' : 'bg-gray-300'"></div>
+          <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-all"
+               :class="currentStep === 'token' || currentStep === 'password' || currentStep === 'success' ? 'bg-primary text-white' : 'bg-gray-300 text-gray-600'">
+            2
+          </div>
+          <div class="w-12 h-0.5 transition-all"
+               :class="currentStep === 'password' || currentStep === 'success' ? 'bg-primary' : 'bg-gray-300'"></div>
+          <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-all"
+               :class="currentStep === 'password' || currentStep === 'success' ? 'bg-primary text-white' : 'bg-gray-300 text-gray-600'">
+            3
+          </div>
+        </div>
 
-          <form @submit.prevent="handleSendToken" class="forgot-form">
-            <div class="form-group">
+        <!-- Step 1: Enter Email -->
+        <div v-if="currentStep === 'email'">
+          <h2 class="text-2xl font-semibold text-center mb-2">Forgot Password</h2>
+          <p class="text-center text-base-content/70 text-sm mb-6">Enter the email associated with your account</p>
+
+          <form @submit.prevent="handleSendToken">
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-base-content mb-2">Email</label>
               <input 
                 type="email" 
                 v-model="formData.email"
-                placeholder="example@email.com"
-                class="form-input"
-                :class="{ 'error': errors.email }"
+                placeholder="Enter your email"
+                class="input input-bordered w-full bg-white/90 focus:bg-white"
+                :class="{ 'input-error': errors.email }"
               />
-              <span v-if="errors.email" class="error-message">{{ errors.email }}</span>
+              <span v-if="errors.email" class="text-error text-xs mt-1">{{ errors.email }}</span>
             </div>
 
             <!-- Error Message -->
-            <div v-if="errorMessage" class="alert-error">
-              {{ errorMessage }}
+            <div v-if="errorMessage" class="alert alert-error mb-4 rounded-md">
+              <span>{{ errorMessage }}</span>
             </div>
 
             <!-- Submit Button -->
             <button 
               type="submit" 
-              class="submit-btn"
+              class="btn btn-primary w-full text-white mb-4"
               :disabled="isLoading"
             >
-              <span v-if="!isLoading">Send Reset Code</span>
-              <span v-else>Sending...</span>
+              <span v-if="isLoading" class="loading loading-spinner"></span>
+              <span v-else>Send Reset Code</span>
             </button>
           </form>
 
           <!-- Back to login -->
-          <div class="back-link">
+          <p class="text-center text-sm text-base-content">
             Remember your password? 
-            <a href="#" @click.prevent="navigateToLogin">Back to Sign In</a>
-          </div>
+            <a href="#" @click.prevent="navigateToLogin" class="text-primary hover:text-primary-focus font-medium underline">Back to Sign In</a>
+          </p>
         </div>
 
-        <!-- Step 2: Enter Your Code (Token Verification) -->
-        <div v-if="currentStep === 'token'" class="form-step">
-          <h2 class="step-title">Enter Your Code</h2>
-          <p class="step-description">Enter the 6-digit code sent to your email</p>
+        <!-- Step 2: Enter Code -->
+        <div v-if="currentStep === 'token'">
+          <h2 class="text-2xl font-semibold text-center mb-2">Enter Code</h2>
+          <p class="text-center text-base-content/70 text-sm mb-6">Enter the 6-digit code sent to your email</p>
 
-          <form @submit.prevent="handleVerifyToken" class="forgot-form">
-            <div class="form-group">
+          <form @submit.prevent="handleVerifyToken">
+            <div class="mb-4">
               <input 
                 type="text" 
                 v-model="formData.resetToken"
                 placeholder="000000"
-                class="form-input code-input"
-                :class="{ 'error': errors.resetToken }"
+                class="input input-bordered w-full bg-white/90 focus:bg-white text-center text-2xl tracking-widest font-semibold"
+                :class="{ 'input-error': errors.resetToken }"
                 maxlength="6"
               />
-              <span v-if="errors.resetToken" class="error-message">{{ errors.resetToken }}</span>
+              <span v-if="errors.resetToken" class="text-error text-xs mt-1">{{ errors.resetToken }}</span>
             </div>
 
             <!-- Resend option -->
-            <div class="resend-container">
+            <div class="text-center mb-4">
               <button 
                 type="button" 
                 @click="handleResendToken"
-                class="resend-btn"
+                class="text-sm text-primary hover:text-primary-focus underline"
                 :disabled="resendCooldown > 0"
+                :class="{ 'opacity-50 cursor-not-allowed': resendCooldown > 0 }"
               >
                 {{ resendCooldown > 0 ? `Resend after ${resendCooldown}s` : 'Resend Code' }}
               </button>
             </div>
 
             <!-- Error Message -->
-            <div v-if="errorMessage" class="alert-error">
-              {{ errorMessage }}
+            <div v-if="errorMessage" class="alert alert-error mb-4 rounded-md">
+              <span>{{ errorMessage }}</span>
             </div>
 
             <!-- Submit Button -->
             <button 
               type="submit" 
-              class="submit-btn"
+              class="btn btn-primary w-full text-white"
               :disabled="isLoading"
             >
-              <span v-if="!isLoading">Verify Code</span>
-              <span v-else>Verifying...</span>
+              <span v-if="isLoading" class="loading loading-spinner"></span>
+              <span v-else>Verify Code</span>
             </button>
           </form>
         </div>
 
         <!-- Step 3: Reset Password -->
-        <div v-if="currentStep === 'password'" class="form-step">
-          <h2 class="step-title">Create New Password</h2>
-          <p class="step-description">Enter your new password below</p>
+        <div v-if="currentStep === 'password'">
+          <h2 class="text-2xl font-semibold text-center mb-2">Create New Password</h2>
+          <p class="text-center text-base-content/70 text-sm mb-6">Enter your new password below</p>
 
-          <form @submit.prevent="handleResetPassword" class="forgot-form">
+          <form @submit.prevent="handleResetPassword">
             <!-- New Password -->
-            <div class="form-group">
-              <label class="form-label">New Password</label>
-              <div class="password-wrapper">
-                <input 
-                  :type="showPassword ? 'text' : 'password'" 
-                  v-model="formData.newPassword"
-                  placeholder="At least 8 characters" 
-                  class="form-input"
-                  :class="{ 'error': errors.newPassword }"
-                />
+            <div class="mb-4">
+              <div class="flex justify-between items-center mb-2">
+                <label class="text-sm font-medium text-base-content">New Password</label>
                 <button
                   type="button"
                   @click="showPassword = !showPassword"
-                  class="eye-btn"
+                  class="text-sm text-primary hover:text-primary-focus flex items-center gap-1"
                 >
-                  <svg v-if="!showPassword" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-4 h-4"
+                  >
+                    <path
+                      v-if="showPassword"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88"
+                    />
+                    <path
+                      v-else
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                    />
+                    <path
+                      v-if="!showPassword"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
                   </svg>
-                  <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                    <line x1="1" y1="1" x2="23" y2="23"></line>
-                  </svg>
+                  {{ showPassword ? 'Hide' : 'Show' }}
                 </button>
               </div>
-              <span v-if="errors.newPassword" class="error-message">{{ errors.newPassword }}</span>
+              <input 
+                :type="showPassword ? 'text' : 'password'" 
+                v-model="formData.newPassword"
+                placeholder="At least 8 characters" 
+                class="input input-bordered w-full bg-white/90 focus:bg-white"
+                :class="{ 'input-error': errors.newPassword }"
+              />
+              <span v-if="errors.newPassword" class="text-error text-xs mt-1">{{ errors.newPassword }}</span>
             </div>
 
             <!-- Confirm Password -->
-            <div class="form-group">
-              <label class="form-label">Confirm Password</label>
-              <div class="password-wrapper">
-                <input 
-                  :type="showPassword ? 'text' : 'password'" 
-                  v-model="formData.confirmPassword"
-                  placeholder="At least 8 characters" 
-                  class="form-input"
-                  :class="{ 'error': errors.confirmPassword }"
-                />
-                <button
-                  type="button"
-                  @click="showPassword = !showPassword"
-                  class="eye-btn"
-                >
-                  <svg v-if="!showPassword" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                  </svg>
-                  <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                    <line x1="1" y1="1" x2="23" y2="23"></line>
-                  </svg>
-                </button>
-              </div>
-              <span v-if="errors.confirmPassword" class="error-message">{{ errors.confirmPassword }}</span>
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-base-content mb-2">Confirm Password</label>
+              <input 
+                :type="showPassword ? 'text' : 'password'" 
+                v-model="formData.confirmPassword"
+                placeholder="At least 8 characters" 
+                class="input input-bordered w-full bg-white/90 focus:bg-white"
+                :class="{ 'input-error': errors.confirmPassword }"
+              />
+              <span v-if="errors.confirmPassword" class="text-error text-xs mt-1">{{ errors.confirmPassword }}</span>
             </div>
 
             <!-- Error Message -->
-            <div v-if="errorMessage" class="alert-error">
-              {{ errorMessage }}
+            <div v-if="errorMessage" class="alert alert-error mb-4 rounded-md">
+              <span>{{ errorMessage }}</span>
             </div>
 
             <!-- Submit Button -->
             <button 
               type="submit" 
-              class="submit-btn"
+              class="btn btn-primary w-full text-white"
               :disabled="isLoading"
             >
-              <span v-if="!isLoading">Reset Password</span>
-              <span v-else>Resetting...</span>
+              <span v-if="isLoading" class="loading loading-spinner"></span>
+              <span v-else>Reset Password</span>
             </button>
           </form>
         </div>
 
         <!-- Step 4: Success -->
-        <div v-if="currentStep === 'success'" class="form-step success-step">
-          <div class="success-icon">
-            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2">
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-              <polyline points="22 4 12 14.01 9 11.01"></polyline>
-            </svg>
+        <div v-if="currentStep === 'success'" class="text-center">
+          <div class="flex justify-center mb-4">
+            <div class="w-20 h-20 rounded-full bg-success/20 flex items-center justify-center">
+              <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-success">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            </div>
           </div>
-          <h2 class="step-title">Congratulations!</h2>
-          <p class="step-description">Your password has been reset successfully</p>
+          <h2 class="text-2xl font-semibold mb-2">Congratulations!</h2>
+          <p class="text-base-content/70 text-sm mb-6">Your password has been reset successfully</p>
 
           <button 
             @click="navigateToLogin"
-            class="submit-btn"
+            class="btn btn-primary w-full text-white"
           >
             Go to Sign In
           </button>
         </div>
 
         <!-- Auth Links -->
-        <div v-if="currentStep !== 'success'" class="auth-links">
-          <a href="#" @click.prevent="navigateToLogin">Sign In</a>
-          <span class="separator">|</span>
-          <a href="#" @click.prevent="navigateToSignUp">Sign Up</a>
+        <div v-if="currentStep !== 'success'" class="text-center mt-6 text-sm">
+          <a href="#" @click.prevent="navigateToLogin" class="text-primary hover:text-primary-focus underline">Sign In</a>
+          <span class="mx-2 text-base-content/50">|</span>
+          <a href="#" @click.prevent="navigateToSignUp" class="text-primary hover:text-primary-focus underline">Sign Up</a>
         </div>
       </div>
     </div>
@@ -219,11 +250,22 @@
 </template>
 
 <script setup>
-import { ref, reactive, onUnmounted } from 'vue';
+import { ref, reactive, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { authApi } from '@/Services/api';
 
 const router = useRouter();
+
+// Background Images
+const backgroundImages = ref([
+  '/images/backk.png',
+  '/images/pyramids.jpg',
+  '/images/museum.jpg',
+  '/images/camelriding.png',
+]);
+
+const currentImageIndex = ref(0);
+let slideInterval = null;
 
 const currentStep = ref('email'); // email, token, password, success
 const formData = reactive({
@@ -247,11 +289,11 @@ const resendCooldown = ref(0);
 let cooldownInterval = null;
 
 const navigateToLogin = () => {
-  router.push('/login');
+  router.push('/authentication/login');
 };
 
 const navigateToSignUp = () => {
-  router.push('/signup');
+  router.push('/authentication/sign-up');
 };
 
 const startCooldown = () => {
@@ -353,7 +395,21 @@ const handleResetPassword = async () => {
   }
 };
 
+// Slideshow
+const startSlideshow = () => {
+  slideInterval = setInterval(() => {
+    currentImageIndex.value = (currentImageIndex.value + 1) % backgroundImages.value.length;
+  }, 5000);
+};
+
+onMounted(() => {
+  startSlideshow();
+});
+
 onUnmounted(() => {
+  if (slideInterval) {
+    clearInterval(slideInterval);
+  }
   if (cooldownInterval) {
     clearInterval(cooldownInterval);
   }
@@ -361,336 +417,13 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.forgot-password-container {
-  display: flex;
-  min-height: 100vh;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s ease;
 }
 
-/* Left Side - Pyramid Image */
-.left-side {
-  flex: 1;
-  position: relative;
-  background-image: url('/Signuplogin forgetpassword.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  overflow: hidden;
-  border-right: 4px solid #4A90E2;
-}
-
-.pyramid-overlay {
-  position: absolute;
-  inset: 0;
-  background: 
-    radial-gradient(circle at 30% 60%, rgba(205, 154, 91, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 70% 40%, rgba(139, 111, 71, 0.4) 0%, transparent 50%),
-    linear-gradient(180deg, rgba(212, 165, 116, 0.1) 0%, rgba(139, 115, 85, 0.3) 100%);
-}
-
-.left-side::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 40%;
-  background: linear-gradient(to top, rgba(139, 115, 85, 0.6) 0%, transparent 100%);
-}
-
-/* Right Side - Form */
-.right-side {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #FAFAFA;
-  padding: 2rem;
-}
-
-.form-container {
-  width: 100%;
-  max-width: 440px;
-}
-
-/* Brand Title */
-.brand-title {
-  font-size: 3.5rem;
-  font-weight: 700;
-  text-align: center;
-  color: #C9A96E;
-  letter-spacing: 0.1em;
-  margin-bottom: 2rem;
-  font-family: 'Georgia', serif;
-}
-
-/* Step Indicator */
-.step-indicator {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 2.5rem;
-  gap: 0;
-}
-
-.step {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #E0E0E0;
-  color: #999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-}
-
-.step.active {
-  background: #C86A3F;
-  color: white;
-}
-
-.step-line {
-  width: 60px;
-  height: 2px;
-  background: #E0E0E0;
-  transition: all 0.3s ease;
-}
-
-.step-line.active {
-  background: #C86A3F;
-}
-
-/* Form Step */
-.form-step {
-  text-align: center;
-}
-
-.step-title {
-  font-size: 1.75rem;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 0.75rem;
-}
-
-.step-description {
-  color: #666;
-  font-size: 0.95rem;
-  margin-bottom: 2rem;
-}
-
-/* Form */
-.forgot-form {
-  width: 100%;
-}
-
-.form-group {
-  margin-bottom: 1.5rem;
-  text-align: left;
-}
-
-.form-label {
-  display: block;
-  color: #333;
-  font-size: 0.9rem;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-}
-
-.form-input {
-  width: 100%;
-  padding: 0.875rem 1rem;
-  border: 1px solid #E0E0E0;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
-  background: white;
-}
-
-.form-input:focus {
-  outline: none;
-  border-color: #C86A3F;
-  box-shadow: 0 0 0 3px rgba(200, 106, 63, 0.1);
-}
-
-.form-input.error {
-  border-color: #E74C3C;
-}
-
-.form-input::placeholder {
-  color: #B0B0B0;
-}
-
-.code-input {
-  text-align: center;
-  font-size: 1.5rem;
-  letter-spacing: 0.5em;
-  font-weight: 600;
-}
-
-.password-wrapper {
-  position: relative;
-}
-
-.eye-btn {
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: #999;
-  cursor: pointer;
-  padding: 0.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.2s;
-}
-
-.eye-btn:hover {
-  color: #666;
-}
-
-.error-message {
-  display: block;
-  color: #E74C3C;
-  font-size: 0.8rem;
-  margin-top: 0.35rem;
-}
-
-.resend-container {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.resend-btn {
-  background: none;
-  border: none;
-  color: #C86A3F;
-  font-size: 0.9rem;
-  cursor: pointer;
-  text-decoration: underline;
-  padding: 0;
-}
-
-.resend-btn:disabled {
-  color: #999;
-  cursor: not-allowed;
-  text-decoration: none;
-}
-
-.alert-error {
-  background: #FDEDEC;
-  color: #E74C3C;
-  padding: 0.875rem 1rem;
-  border-radius: 6px;
-  font-size: 0.875rem;
-  margin-bottom: 1.5rem;
-  border-left: 3px solid #E74C3C;
-  text-align: left;
-}
-
-.submit-btn {
-  width: 100%;
-  padding: 0.875rem 1.5rem;
-  background: #C86A3F;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(200, 106, 63, 0.3);
-}
-
-.submit-btn:hover:not(:disabled) {
-  background: #B55A30;
-  box-shadow: 0 4px 12px rgba(200, 106, 63, 0.4);
-  transform: translateY(-1px);
-}
-
-.submit-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.back-link {
-  text-align: center;
-  margin-top: 1.5rem;
-  font-size: 0.9rem;
-  color: #666;
-}
-
-.back-link a {
-  color: #C86A3F;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.back-link a:hover {
-  text-decoration: underline;
-}
-
-/* Success Step */
-.success-step {
-  padding: 2rem 0;
-}
-
-.success-icon {
-  margin: 0 auto 1.5rem;
-  width: 80px;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(76, 175, 80, 0.1);
-  border-radius: 50%;
-}
-
-/* Auth Links */
-.auth-links {
-  margin-top: 2rem;
-  text-align: center;
-  font-size: 0.9rem;
-}
-
-.auth-links a {
-  color: #C86A3F;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.auth-links a:hover {
-  text-decoration: underline;
-}
-
-.separator {
-  margin: 0 1rem;
-  color: #CCC;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .forgot-password-container {
-    flex-direction: column;
-  }
-  
-  .left-side {
-    min-height: 200px;
-    border-right: none;
-    border-bottom: 4px solid #4A90E2;
-  }
-  
-  .brand-title {
-    font-size: 2.5rem;
-  }
-  
-  .step-title {
-    font-size: 1.5rem;
-  }
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
