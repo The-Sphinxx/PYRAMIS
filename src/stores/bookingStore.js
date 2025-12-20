@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import bookingService from '../Services/bookingService';
-import { calculateBookingCosts, validateBookingData } from '../Utils/bookingCalculator';
+import { calculateBookingCosts, validateBookingData, extractPrice } from '../Utils/bookingCalculator';
 
 export const useBookingStore = defineStore('booking', {
     state: () => ({
@@ -71,7 +71,7 @@ export const useBookingStore = defineStore('booking', {
                 type,
                 itemId,
                 itemName: itemData.name || itemData.title,
-                basePrice: Number(itemData.price) || 0,
+                basePrice: extractPrice(itemData.price),
                 itemData,
                 bookingData: this.getDefaultBookingData(type)
             };

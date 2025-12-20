@@ -187,9 +187,11 @@ import Carousel from '@/components/Common/Carousel.vue';
 import Rating from '@/components/Common/Rating.vue';
 import ReviewsCarousel from '@/components/Common/ReviewsCarousel.vue';
 import BookingForm from '@/components/Common/BookingForm.vue';
+import { useBookingStore } from '@/stores/bookingStore';
 
 const route = useRoute();
 const router = useRouter();
+const bookingStore = useBookingStore();
 
 // State
 const loading = ref(true);
@@ -249,8 +251,21 @@ const fetchCar = async () => {
   }
 };
 
-const handleBooking = () => {
+const handleBooking = (eventData) => {
   if (!car.value) return;
+
+  const { bookingData } = eventData;
+
+  // Initialize booking in store
+  bookingStore.initializeBooking('car', car.value.id, car.value);
+  
+  // Direct assignment to match TripDetails pattern
+  const bookingDataVal = eventData.bookingData || eventData;
+  const clonedData = JSON.parse(JSON.stringify(bookingDataVal));
+  
+  bookingStore.bookingInProgress.bookingData = clonedData;
+  bookingStore.persistState();
+  
   router.push({ 
     name: 'CarReview', 
     params: { id: car.value.id } 
