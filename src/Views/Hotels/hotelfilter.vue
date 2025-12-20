@@ -22,53 +22,20 @@
       </div>
     </div>
 
-    <!-- Categories Tabs -->
+    <!-- Results Section -->
     <div class="page-container py-8">
-      <div class="bg-base-100 rounded-2xl shadow-lg p-8 mb-8">
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
-          <button
-            v-for="category in categories"
-            :key="category.id"
-            @click="selectCategory(category.id)"
-            :class="[
-              'flex flex-col items-center gap-3 p-4 rounded-xl transition-all duration-300',
-              selectedCategory === category.id 
-                ? 'bg-primary/10 border-2 border-primary' 
-                : 'bg-base-200 hover:bg-base-300 border-2 border-transparent'
-            ]"
-          >
-            <div 
-              :class="[
-                'w-16 h-16 rounded-xl flex items-center justify-center text-3xl transition-all duration-300',
-                selectedCategory === category.id 
-                  ? 'bg-primary text-primary-content' 
-                  : 'bg-base-100 text-neutral'
-              ]"
-            >
-              <i :class="category.icon"></i>
-            </div>
-            <span 
-              :class="[
-                'text-sm font-semibold text-center leading-tight',
-                selectedCategory === category.id 
-                  ? 'text-primary' 
-                  : 'text-base-content'
-              ]"
-            >
-              {{ category.name }}
-            </span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Section Title -->
-      <div class="text-center mb-8">
-        <h2 class="text-4xl font-bold text-base-content font-cairo mb-2">
-          {{ currentCategoryTitle }}
-        </h2>
-        <p class="text-lg text-neutral">
-          {{ currentCategoryDescription }}
-        </p>
+      <!-- Header with Filter Button -->
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-3xl font-bold text-orange-600 font-cairo">All Results</h2>
+        
+        <!-- Filter Component -->
+        <Filter
+          :show-price-filter="true"
+          :price-range="{ min: 50, max: 1000 }"
+          :category-options="categoryOptions"
+          :custom-filters="customFilterOptions"
+          @filter-change="handleFilterChange"
+        />
       </div>
 
       <!-- Loading State -->
@@ -76,7 +43,7 @@
         <span class="loading loading-spinner loading-lg text-primary"></span>
       </div>
 
-      <!-- Hotels Grid -->
+      <!-- Hotels Grid (4 columns like HotelsList) -->
       <div v-else-if="paginatedHotels.length > 0" class="mb-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
           <HotelCard
@@ -100,7 +67,7 @@
         />
       </div>
 
-      <!-- No Results -->
+      <!-- No Resul ts -->
       <div v-else class="text-center py-20">
         <i class="fas fa-hotel text-6xl text-neutral mb-4"></i>
         <h3 class="text-2xl font-bold text-base-content mb-2">No hotels found</h3>
@@ -119,66 +86,56 @@ import { useRouter } from 'vue-router';
 import { useHotelStore } from '@/stores/hotelsStore';
 import HotelCard from '@/components/Hotels/HotelCard.vue';
 import Search from '@/components/Common/Search.vue';
+import Filter from '@/components/Common/Filter.vue';
 import Pagination from '@/components/Common/Pagination.vue';
 
 const router = useRouter();
 const hotelStore = useHotelStore();
 
 // State
-const selectedCategory = ref('all');
 const currentPage = ref(1);
-const itemsPerPage = ref(16);
+const itemsPerPage = ref(16); // 4 columns x 4 rows
 const loading = ref(true);
+const appliedFilters = ref({
+  maxPrice: 1000,
+  categories: [],
+  rating: [],
+  amenities: []
+});
 
-// Categories with icons and descriptions
-const categories = ref([
-  { 
-    id: 'all', 
-    name: "Luxury Hotels & Resorts", 
-    icon: 'fas fa-hotel',
-    description: 'Experience Egyptian hospitality at its finest in our handpicked selection of premium hotels'
+// Category options for filter
+const categoryOptions = ref([
+  { label: 'Luxury Hotels', value: 'LUXURY' },
+  { label: 'Resorts & Spas', value: 'RESORT' },
+  { label: 'Budget Friendly', value: 'BUDGET' },
+  { label: 'Five Star', value: 'FIVE_STAR' },
+  { label: 'Family Hotels', value: 'FAMILY' },
+  { label: 'Boutique Hotels', value: 'BOUTIQUE' },
+  { label: 'Beach Front', value: 'BEACH' }
+]);
+
+// Custom filter options
+const customFilterOptions = ref([
+  {
+    key: 'rating',
+    title: 'Rating',
+    options: [
+      { label: '5 Stars', value: 5 },
+      { label: '4+ Stars', value: 4 },
+      { label: '3+ Stars', value: 3 }
+    ]
   },
-  { 
-    id: 'LUXURY', 
-    name: 'Luxury Hotels', 
-    icon: 'fas fa-crown',
-    description: 'Indulge in world-class luxury with exceptional service and premium amenities'
-  },
-  { 
-    id: 'RESORT', 
-    name: 'Resorts & Spas', 
-    icon: 'fas fa-spa',
-    description: 'Relax and rejuvenate at Egypt\'s finest resort destinations with spa facilities'
-  },
-  { 
-    id: 'BUDGET', 
-    name: 'Budget Friendly', 
-    icon: 'fas fa-money-bill-wave',
-    description: 'Comfortable and affordable accommodations without compromising on quality'
-  },
-  { 
-    id: 'FIVE_STAR', 
-    name: 'Five Star', 
-    icon: 'fas fa-star',
-    description: 'Top-rated hotels offering unparalleled luxury and impeccable service'
-  },
-  { 
-    id: 'FAMILY', 
-    name: 'Family Hotels', 
-    icon: 'fas fa-users',
-    description: 'Family-friendly hotels with activities and amenities for all ages'
-  },
-  { 
-    id: 'BOUTIQUE', 
-    name: 'Boutique Hotels', 
-    icon: 'fas fa-building',
-    description: 'Unique and intimate hotels with distinctive character and personalized service'
-  },
-  { 
-    id: 'BEACH', 
-    name: 'Beach Front', 
-    icon: 'fas fa-umbrella-beach',
-    description: 'Wake up to stunning sea views at Egypt\'s premier beachfront properties'
+  {
+    key: 'amenities',
+    title: 'Amenities',
+    options: [
+      { label: 'Free Wi-Fi', value: 'wifi' },
+      { label: 'Swimming Pool', value: 'pool' },
+      { label: 'Fitness Center', value: 'gym' },
+      { label: 'Spa', value: 'spa' },
+      { label: 'Restaurant', value: 'restaurant' },
+      { label: 'Parking', value: 'parking' }
+    ]
   }
 ]);
 
@@ -188,28 +145,10 @@ const availableCities = computed(() => {
   return cities;
 });
 
-const currentCategoryTitle = computed(() => {
-  const category = categories.value.find(cat => cat.id === selectedCategory.value);
-  return category ? category.name : 'All Hotels';
-});
-
-const currentCategoryDescription = computed(() => {
-  const category = categories.value.find(cat => cat.id === selectedCategory.value);
-  return category ? category.description : 'Experience Egyptian hospitality at its finest';
-});
-
 const filteredHotels = computed(() => {
   let result = hotelStore.hotels;
 
-  // Filter by category
-  if (selectedCategory.value !== 'all') {
-    result = result.filter(hotel => {
-      if (!hotel.category) return false;
-      return hotel.category === selectedCategory.value;
-    });
-  }
-
-  // Filter by store filters (search query from SearchBar)
+  // Filter by search query from store
   if (hotelStore.filters.searchQuery) {
     const query = hotelStore.filters.searchQuery.toLowerCase();
     result = result.filter(hotel =>
@@ -222,6 +161,26 @@ const filteredHotels = computed(() => {
   // Filter by city from store
   if (hotelStore.filters.city && hotelStore.filters.city !== 'All' && hotelStore.filters.city !== 'All Cities') {
     result = result.filter(hotel => hotel.city === hotelStore.filters.city);
+  }
+
+  // Filter by categories
+  if (appliedFilters.value.categories?.length > 0) {
+    result = result.filter(hotel => 
+      appliedFilters.value.categories.includes(hotel.category)
+    );
+  }
+
+  // Filter by price
+  if (appliedFilters.value.maxPrice) {
+    result = result.filter(hotel => 
+      hotel.pricePerNight <= appliedFilters.value.maxPrice
+    );
+  }
+
+  // Filter by rating
+  if (appliedFilters.value.rating?.length > 0) {
+    const minRating = Math.min(...appliedFilters.value.rating);
+    result = result.filter(hotel => hotel.rating >= minRating);
   }
 
   return result;
@@ -237,7 +196,6 @@ const paginatedHotels = computed(() => {
     let amenities = ['Wifi', 'Pool', 'Gym']; // Default fallback
     
     if (hotel.amenities && hotel.amenities.length > 0) {
-      // Select up to 3 diverse amenities from the hotel's actual amenities
       const amenityMap = {
         'Free Wi-Fi': 'Wifi',
         'Wi-Fi': 'Wifi',
@@ -260,18 +218,16 @@ const paginatedHotels = computed(() => {
       };
       
       amenities = hotel.amenities
-        .slice(0, 5) // Take first 5 amenities
+        .slice(0, 5)
         .map(amenity => {
-          // Find matching amenity type
           for (const [key, value] of Object.entries(amenityMap)) {
             if (amenity.includes(key)) return value;
           }
           return null;
         })
-        .filter((a, index, self) => a && self.indexOf(a) === index) // Remove duplicates and nulls
-        .slice(0, 3); // Take only 3
+        .filter((a, index, self) => a && self.indexOf(a) === index)
+        .slice(0, 3);
       
-      // Fallback to default if we couldn't extract any
       if (amenities.length === 0) {
         amenities = ['Wifi', 'Pool', 'Gym'];
       }
@@ -291,14 +247,7 @@ const paginatedHotels = computed(() => {
 });
 
 // Methods
-const selectCategory = (categoryId) => {
-  selectedCategory.value = categoryId;
-  currentPage.value = 1;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
 const handleSearch = (searchData) => {
-  // Update store filters
   if (searchData.query) {
     hotelStore.setFilter('searchQuery', searchData.query);
   }
@@ -307,8 +256,14 @@ const handleSearch = (searchData) => {
     hotelStore.setFilter('city', searchData.city);
   }
   
-  // Navigate to filter page with search results
-  router.push({ name: 'HotelFilter' });
+  currentPage.value = 1;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+const handleFilterChange = (filters) => {
+  appliedFilters.value = { ...filters };
+  currentPage.value = 1;
+  window.scrollTo({ top: 400, behavior: 'smooth' });
 };
 
 const handlePageChange = (page) => {
@@ -322,7 +277,7 @@ const handlePerPageChange = (perPage) => {
 };
 
 const handleBookNow = (hotel) => {
-  // Navigate to hotel details page (not directly to checkout)
+  // Navigate to hotel details page
   router.push({
     name: 'HotelDetails',
     params: { id: hotel.id }
@@ -330,7 +285,12 @@ const handleBookNow = (hotel) => {
 };
 
 const resetFilters = () => {
-  selectedCategory.value = 'all';
+  appliedFilters.value = {
+    maxPrice: 1000,
+    categories: [],
+    rating: [],
+    amenities: []
+  };
   hotelStore.resetFilters();
   currentPage.value = 1;
 };

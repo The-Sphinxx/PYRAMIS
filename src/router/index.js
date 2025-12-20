@@ -43,6 +43,7 @@ import CarConfirmation from '@/Views/Cars/CarConfirmation.vue'
 
 // Hotels
 import HotelsList from '@/Views/Hotels/HotelsList.vue'
+import HotelFilter from '@/Views/Hotels/hotelfilter.vue'
 import HotelDetails from '@/Views/Hotels/HotelDetails.vue'
 import HotelReview from '@/Views/Hotels/HotelReview.vue'
 import HotelCheckOut from '@/Views/Hotels/HotelCheckOut.vue'
@@ -227,6 +228,11 @@ const routes = [
     path: '/hotels/list',
     name: 'HotelsList',
     component: HotelsList,
+  },
+  {
+    path: '/hotels/filter',
+    name: 'HotelFilter',
+    component: HotelFilter,
   },
   {
     path: '/hotels/details/:id',

@@ -4986,7 +4986,918 @@
       ]
     }
   ],
-  "hotels": [],
+  "hotels": [
+    {
+      "id": "1",
+      "name": "Marriott Mena House",
+      "city": "Giza",
+      "rating": 4.8,
+      "overview": "Marriott Mena House is a historic luxury hotel located at the foot of the Great Pyramids of Giza. Built in 1869 as a royal hunting lodge, it offers unparalleled views of the ancient wonders, lush gardens, and world-class amenities. The hotel combines historic charm with modern luxury, featuring elegant rooms, multiple restaurants, a spa, and an outdoor pool.",
+      "images": [
+        "/public/images/Hotels/marriott-mena-house-main.jpg",
+        "/public/images/Hotels/marriott-mena-house-view_2.jpg",
+        "/public/images/Hotels/marriott-mena-house-view_3.jpg",
+        "/public/images/Hotels/marriott-mena-house-view_4.jpg"
+      ],
+      "latitude": 29.9792,
+      "longitude": 31.1312,
+      "highlights": [
+        "Direct view of the Pyramids of Giza",
+        "Historic palace hotel dating back to 1869",
+        "Lush gardens and outdoor pool",
+        "Multiple dining options including Indian and Italian"
+      ],
+      "amenities": [
+        "Outdoor Swimming Pool",
+        "Spa and Wellness Center",
+        "Fitness Center",
+        "Multiple Restaurants and Bars",
+        "Free Wi-Fi",
+        "24-Hour Front Desk",
+        "Concierge Service",
+        "Airport Shuttle",
+        "Valet Parking"
+      ],
+      "roomAmenities": [
+        "Air Conditioning",
+        "Flat-screen TV",
+        "Mini Bar",
+        "Private Bathroom with Luxury Toiletries",
+        "Room Service",
+        "Safe",
+        "Work Desk",
+        "Balcony (select rooms)"
+      ],
+      "userReviews": [
+        {
+          "id": 1,
+          "userName": "Sarah Mitchell",
+          "userImage": "/images/users/user_f_1.jpg",
+          "rating": 4.9,
+          "date": "December 2024",
+          "comment": "Waking up to the view of the pyramids was surreal! The hotel staff were exceptionally helpful and the breakfast buffet was outstanding."
+        },
+        {
+          "id": 2,
+          "userName": "Ahmed Khalil",
+          "userImage": "/images/users/user_m_2.jpg",
+          "rating": 4.7,
+          "date": "November 2024",
+          "comment": "A wonderful historic hotel with an unforgettable view of the pyramids. The service is excellent and the gardens are very beautiful."
+        }
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 9875,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "staff": 4.5,
+          "accessibility": 4.2,
+          "facilities": 4,
+          "valueForMoney": 4.6
+        }
+      },
+      "nearbyLocations": [
+        "Great Pyramids of Giza - 0.5 km",
+        "The Great Sphinx - 1.2 km",
+        "Egyptian Museum - 12 km"
+      ],
+      "availability": {
+        "availableRooms": 28,
+        "totalRooms": 120
+      },
+      "pricePerNight": 185,
+      "featured": true,
+      "status": "active"
+    },
+    {
+      "id": "2",
+      "name": "Four Seasons Hotel Cairo at Nile Plaza",
+      "city": "Cairo",
+      "rating": 4.9,
+      "images": [
+        "/public/images/Hotels/four-seasons-nile-main.jpg",
+        "/public/images/Hotels/four-seasons-nile-view_2.jpg",
+        "/public/images/Hotels/four-seasons-nile-view_3.jpg",
+        "/public/images/Hotels/four-seasons-nile-view_4.jpg"
+      ],
+      "latitude": 30.0444,
+      "longitude": 31.2357,
+      "highlights": [
+        "Prime location on the Nile with panoramic river views",
+        "Rooftop pool and bar",
+        "Award-winning spa",
+        "Walking distance to Egyptian Museum"
+      ],
+      "amenities": [
+        "Rooftop Swimming Pool",
+        "Full-Service Spa",
+        "Fitness Center",
+        "7 Restaurants and Bars",
+        "Free Wi-Fi",
+        "Business Center",
+        "24-Hour Room Service",
+        "Concierge Service",
+        "Valet Parking"
+      ],
+      "roomAmenities": [
+        "Air Conditioning",
+        "Smart TV",
+        "Nespresso Machine",
+        "Marble Bathroom with Rain Shower",
+        "Luxury Linens",
+        "Mini Bar",
+        "Safe",
+        "Work Desk",
+        "Floor-to-Ceiling Windows"
+      ],
+      "userReviews": [
+        {
+          "id": 3,
+          "userName": "Mohamed Elsayed",
+          "userImage": "/images/users/user_m_3.jpg",
+          "rating": 5,
+          "date": "December 2024",
+          "comment": "The best hotel in Cairo! The service is world-class and the Nile view is imaginary. The restaurants are diverse and excellent."
+        },
+        {
+          "id": 4,
+          "userName": "Emma Thompson",
+          "userImage": "/images/users/user_f_4.jpg",
+          "rating": 4.8,
+          "date": "November 2024",
+          "comment": "Absolutely luxurious! The rooftop pool has stunning Nile views. Perfect location for exploring Cairo."
+        }
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 9875,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "staff": 4.5,
+          "accessibility": 4.2,
+          "facilities": 4,
+          "valueForMoney": 4.6
+        }
+      },
+      "nearbyLocations": [
+        "Egyptian Museum - 1.5 km",
+        "Khan El Khalili Bazaar - 3 km",
+        "Tahrir Square - 1 km"
+      ],
+      "availability": {
+        "availableRooms": 42,
+        "totalRooms": 365
+      },
+      "pricePerNight": 295,
+      "featured": true,
+      "status": "active"
+    },
+    {
+      "id": "3",
+      "name": "Sofitel Legend Old Cataract Aswan",
+      "city": "Aswan",
+      "rating": 4.8,
+      "images": [
+        "/public/images/Hotels/old-cataract-main.jpg",
+        "/public/images/Hotels/old-cataract-view_2.jpg",
+        "/public/images/Hotels/old-cataract-view_3.jpg",
+        "/public/images/Hotels/old-cataract-view_4.jpg"
+      ],
+      "latitude": 24.0875,
+      "longitude": 32.8842,
+      "highlights": [
+        "Historic Victorian hotel on the Nile",
+        "Featured in Agatha Christie's 'Death on the Nile'",
+        "Stunning views of Elephantine Island",
+        "Luxurious spa and infinity pool"
+      ],
+      "amenities": [
+        "Infinity Pool",
+        "Luxury Spa",
+        "Fitness Center",
+        "Multiple Restaurants",
+        "Afternoon Tea Service",
+        "Free Wi-Fi",
+        "24-Hour Room Service",
+        "Concierge Service",
+        "Nile Cruise Booking"
+      ],
+      "roomAmenities": [
+        "Air Conditioning",
+        "Flat-screen TV",
+        "Mini Bar",
+        "Luxury Bathroom with Bathtub",
+        "Premium Bedding",
+        "Safe",
+        "Work Desk",
+        "Nile View Balcony"
+      ],
+      "userReviews": [
+        {
+          "id": 5,
+          "userName": "Layla Hassan",
+          "userImage": "/images/users/user_f_5.jpg",
+          "rating": 4.9,
+          "date": "December 2024",
+          "comment": "A legendary hotel in every sense of the word! History and luxury in one place. The Nile view from the room was charming."
+        },
+        {
+          "id": 6,
+          "userName": "James Anderson",
+          "userImage": "/images/users/user_m_6.jpg",
+          "rating": 4.8,
+          "date": "November 2024",
+          "comment": "A true gem! The history, elegance, and service are unparalleled. Loved the afternoon tea overlooking the Nile."
+        }
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 9875,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "staff": 4.5,
+          "accessibility": 4.2,
+          "facilities": 4,
+          "valueForMoney": 4.6
+        }
+      },
+      "nearbyLocations": [
+        "Philae Temple - 8 km",
+        "Aswan High Dam - 12 km",
+        "Nubian Museum - 2 km"
+      ],
+      "availability": {
+        "availableRooms": 18,
+        "totalRooms": 138
+      },
+      "pricePerNight": 245,
+      "featured": true,
+      "status": "active"
+    },
+    {
+      "id": "4",
+      "name": "Steigenberger Hotel El Tahrir",
+      "city": "Cairo",
+      "rating": 4.5,
+      "images": [
+        "/public/images/Hotels/steigenberger-tahrir-main.jpg",
+        "/public/images/Hotels/steigenberger-tahrir-view_2.jpg",
+        "/public/images/Hotels/steigenberger-tahrir-view_3.jpg",
+        "/public/images/Hotels/steigenberger-tahrir-view_4.jpg"
+      ],
+      "latitude": 30.0478,
+      "longitude": 31.2342,
+      "highlights": [
+        "Adjacent to the Egyptian Museum",
+        "Views of Tahrir Square",
+        "Rooftop restaurant with city views",
+        "Business-friendly amenities"
+      ],
+      "amenities": [
+        "Rooftop Pool",
+        "Fitness Center",
+        "3 Restaurants",
+        "Business Center",
+        "Free Wi-Fi",
+        "Meeting Rooms",
+        "24-Hour Front Desk",
+        "Laundry Service",
+        "Airport Shuttle"
+      ],
+      "roomAmenities": [
+        "Air Conditioning",
+        "LCD TV",
+        "Mini Bar",
+        "Private Bathroom",
+        "Room Service",
+        "Safe",
+        "Work Desk",
+        "City View Windows"
+      ],
+      "userReviews": [
+        {
+          "id": 7,
+          "userName": "Youssef Ibrahim",
+          "userImage": "/images/users/user_m_7.jpg",
+          "rating": 4.6,
+          "date": "December 2024",
+          "comment": "Excellent location next to the Egyptian Museum. The hotel is clean and the staff are very helpful. The price is reasonable compared to the services."
+        },
+        {
+          "id": 8,
+          "userName": "Lisa Chen",
+          "userImage": "/images/users/user_f_8.jpg",
+          "rating": 4.5,
+          "date": "November 2024",
+          "comment": "Perfect location for museum visits. Clean, comfortable rooms and helpful staff. Great value for money."
+        }
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 9875,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "staff": 4.5,
+          "accessibility": 4.2,
+          "facilities": 4,
+          "valueForMoney": 4.6
+        }
+      },
+      "nearbyLocations": [
+        "Egyptian Museum - 0.2 km",
+        "Tahrir Square - 0.1 km",
+        "Khan El Khalili - 2.5 km"
+      ],
+      "availability": {
+        "availableRooms": 35,
+        "totalRooms": 295
+      },
+      "pricePerNight": 95,
+      "featured": false,
+      "status": "active"
+    },
+    {
+      "id": "5",
+      "name": "Hilton Luxor Resort & Spa",
+      "city": "Luxor",
+      "rating": 4.6,
+      "images": [
+        "/public/images/Hotels/hilton-luxor-main.jpg",
+        "/public/images/Hotels/hilton-luxor-view_2.jpg",
+        "/public/images/Hotels/hilton-luxor-view_3.jpg",
+        "/public/images/Hotels/hilton-luxor-view_4.jpg"
+      ],
+      "latitude": 25.6984,
+      "longitude": 32.6353,
+      "highlights": [
+        "Direct Nile views from all rooms",
+        "Walking distance to Luxor Temple",
+        "Full-service spa",
+        "Multiple pools including infinity pool"
+      ],
+      "amenities": [
+        "3 Swimming Pools",
+        "Spa and Wellness Center",
+        "Fitness Center",
+        "5 Restaurants and Bars",
+        "Free Wi-Fi",
+        "Tennis Court",
+        "Kids Club",
+        "24-Hour Room Service",
+        "Free Parking"
+      ],
+      "roomAmenities": [
+        "Air Conditioning",
+        "Satellite TV",
+        "Mini Bar",
+        "Bathroom with Shower/Tub",
+        "Balcony with Nile View",
+        "Safe",
+        "Coffee Maker",
+        "Work Desk"
+      ],
+      "userReviews": [
+        {
+          "id": 9,
+          "userName": "Nadia Farouk",
+          "userImage": "/images/users/user_f_9.jpg",
+          "rating": 4.7,
+          "date": "December 2024",
+          "comment": "A wonderful hotel on the Nile! The rooms are spacious and the view is beautiful. Close to Luxor Temple and everything is easily accessible."
+        },
+        {
+          "id": 10,
+          "userName": "Robert Williams",
+          "userImage": "/images/users/user_m_10.jpg",
+          "rating": 4.6,
+          "date": "November 2024",
+          "comment": "Great resort with excellent facilities. The pool area is beautiful and the location is perfect for exploring Luxor."
+        }
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 9875,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "staff": 4.5,
+          "accessibility": 4.2,
+          "facilities": 4,
+          "valueForMoney": 4.6
+        }
+      },
+      "nearbyLocations": [
+        "Luxor Temple - 0.8 km",
+        "Karnak Temple - 3 km",
+        "Valley of the Kings - 6 km"
+      ],
+      "availability": {
+        "availableRooms": 52,
+        "totalRooms": 236
+      },
+      "pricePerNight": 125,
+      "featured": true,
+      "status": "active"
+    },
+    {
+      "id": "6",
+      "name": "Rixos Sharm El Sheikh",
+      "city": "Sharm El Sheikh",
+      "rating": 4.7,
+      "images": [
+        "/public/images/Hotels/rixos-sharm-main.jpg",
+        "/public/images/Hotels/rixos-sharm-view_2.jpg",
+        "/public/images/Hotels/rixos-sharm-view_3.jpg",
+        "/public/images/Hotels/rixos-sharm-view_4.jpg"
+      ],
+      "latitude": 27.9158,
+      "longitude": 34.3298,
+      "highlights": [
+        "All-inclusive luxury resort",
+        "Private beach with coral reef",
+        "World-class diving center",
+        "Entertainment and kids activities"
+      ],
+      "amenities": [
+        "Private Beach",
+        "7 Swimming Pools",
+        "Aqua Park",
+        "Spa and Wellness Center",
+        "Diving Center",
+        "12 Restaurants and Bars",
+        "Kids Club",
+        "Entertainment Program",
+        "Free Wi-Fi",
+        "Free Parking"
+      ],
+      "roomAmenities": [
+        "Air Conditioning",
+        "LCD TV",
+        "Mini Bar (stocked daily)",
+        "Bathroom with Rain Shower",
+        "Balcony or Terrace",
+        "Safe",
+        "Coffee/Tea Facilities",
+        "Bathrobes and Slippers"
+      ],
+      "userReviews": [
+        {
+          "id": 11,
+          "userName": "Maha Salah",
+          "userImage": "/images/users/user_f_11.jpg",
+          "rating": 4.8,
+          "date": "December 2024",
+          "comment": "An integrated and excellent resort for families! The food is varied and delicious, and the beach is very clean. The children enjoyed the aqua park."
+        },
+        {
+          "id": 12,
+          "userName": "Thomas Mueller",
+          "userImage": "/images/users/user_m_12.jpg",
+          "rating": 4.7,
+          "date": "November 2024",
+          "comment": "Fantastic all-inclusive resort! Great food variety, beautiful beach, and plenty of activities. Perfect for families."
+        }
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 9875,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "staff": 4.5,
+          "accessibility": 4.2,
+          "facilities": 4,
+          "valueForMoney": 4.6
+        }
+      },
+      "nearbyLocations": [
+        "Naama Bay - 5 km",
+        "Ras Mohammed National Park - 18 km",
+        "Sharm El Sheikh Airport - 12 km"
+      ],
+      "availability": {
+        "availableRooms": 78,
+        "totalRooms": 420
+      },
+      "pricePerNight": 165,
+      "featured": true,
+      "status": "active"
+    },
+    {
+      "id": "7",
+      "name": "Fairmont Nile City",
+      "city": "Cairo",
+      "rating": 4.7,
+      "images": [
+        "/public/images/Hotels/fairmont-nile-city-main.jpg",
+        "/public/images/Hotels/fairmont-nile-city-view_2.jpg",
+        "/public/images/Hotels/fairmont-nile-city-view_3.jpg",
+        "/public/images/Hotels/fairmont-nile-city-view_4.jpg"
+      ],
+      "latitude": 30.0556,
+      "longitude": 31.2239,
+      "highlights": [
+        "Modern luxury tower on the Nile",
+        "Connected to Nile City shopping mall",
+        "Rooftop restaurant and bar",
+        "Executive club lounge"
+      ],
+      "amenities": [
+        "Outdoor Pool",
+        "Spa and Wellness Center",
+        "Fitness Center",
+        "6 Restaurants and Bars",
+        "Connected Shopping Mall",
+        "Business Center",
+        "Free Wi-Fi",
+        "24-Hour Room Service",
+        "Valet Parking"
+      ],
+      "roomAmenities": [
+        "Air Conditioning",
+        "Smart TV",
+        "Mini Bar",
+        "Marble Bathroom with Separate Shower",
+        "Premium Bedding",
+        "Safe",
+        "Nespresso Machine",
+        "Work Desk",
+        "Panoramic Windows"
+      ],
+      "userReviews": [
+        {
+          "id": 13,
+          "userName": "Karim Nasser",
+          "userImage": "/images/users/user_m_13.jpg",
+          "rating": 4.8,
+          "date": "December 2024",
+          "comment": "A modern and elegant hotel in an excellent location. The mall is directly connected to the hotel, which is very convenient. The view is wonderful."
+        },
+        {
+          "id": 14,
+          "userName": "Anna Kowalski",
+          "userImage": "/images/users/user_f_14.jpg",
+          "rating": 4.7,
+          "date": "November 2024",
+          "comment": "Sleek and modern hotel with excellent service. Love the convenience of the attached mall. Great Nile views!"
+        }
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 9875,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "staff": 4.5,
+          "accessibility": 4.2,
+          "facilities": 4,
+          "valueForMoney": 4.6
+        }
+      },
+      "nearbyLocations": [
+        "Cairo Tower - 2 km",
+        "Egyptian Museum - 3.5 km",
+        "Zamalek Island - 1 km"
+      ],
+      "availability": {
+        "availableRooms": 45,
+        "totalRooms": 540
+      },
+      "pricePerNight": 215,
+      "featured": true,
+      "status": "active"
+    },
+    {
+      "id": "8",
+      "name": "InterContinental Citystars Cairo",
+      "city": "Cairo",
+      "rating": 4.6,
+      "images": [
+        "/public/images/Hotels/intercontinental-citystars-main.jpg",
+        "/public/images/Hotels/intercontinental-citystars-view_2.jpg",
+        "/public/images/Hotels/intercontinental-citystars-view_3.jpg",
+        "/public/images/Hotels/intercontinental-citystars-view_4.jpg"
+      ],
+      "latitude": 30.0733,
+      "longitude": 31.3441,
+      "highlights": [
+        "Connected to Citystars mega mall",
+        "Near Cairo International Airport",
+        "Modern business facilities",
+        "Family-friendly amenities"
+      ],
+      "amenities": [
+        "Outdoor Pool",
+        "Fitness Center",
+        "4 Restaurants and Bars",
+        "Business Center",
+        "Meeting Rooms",
+        "Kids Club",
+        "Free Wi-Fi",
+        "24-Hour Front Desk",
+        "Free Parking"
+      ],
+      "roomAmenities": [
+        "Air Conditioning",
+        "LED TV",
+        "Mini Bar",
+        "Private Bathroom",
+        "Room Service",
+        "Safe",
+        "Work Desk",
+        "Blackout Curtains"
+      ],
+      "userReviews": [
+        {
+          "id": 15,
+          "userName": "Hala Mahmoud",
+          "userImage": "/images/users/user_f_15.jpg",
+          "rating": 4.6,
+          "date": "December 2024",
+          "comment": "A very practical and comfortable hotel, especially for travelers. Close to the airport and connected to Citystars Mall. The rooms are clean."
+        },
+        {
+          "id": 16,
+          "userName": "David Park",
+          "userImage": "/images/users/user_m_16.jpg",
+          "rating": 4.5,
+          "date": "November 2024",
+          "comment": "Convenient location near the airport. Great for business travelers. Mall access is a big plus!"
+        }
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 9875,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "staff": 4.5,
+          "accessibility": 4.2,
+          "facilities": 4,
+          "valueForMoney": 4.6
+        }
+      },
+      "nearbyLocations": [
+        "Cairo International Airport - 4 km",
+        "Citystars Mall - 0.1 km",
+        "Heliopolis - 2 km"
+      ],
+      "availability": {
+        "availableRooms": 68,
+        "totalRooms": 370
+      },
+      "pricePerNight": 135,
+      "featured": false,
+      "status": "active"
+    },
+    {
+      "id": "9",
+      "name": "Kempinski Nile Hotel Cairo",
+      "city": "Cairo",
+      "rating": 4.8,
+      "images": [
+        "/public/images/Hotels/kempinski-nile-main.jpg",
+        "/public/images/Hotels/kempinski-nile-view_2.jpg",
+        "/public/images/Hotels/kempinski-nile-view_3.jpg",
+        "/public/images/Hotels/kempinski-nile-view_4.jpg"
+      ],
+      "latitude": 30.0311,
+      "longitude": 31.2258,
+      "highlights": [
+        "Garden City location on the Nile",
+        "European elegance and luxury",
+        "Award-winning restaurants",
+        "Exclusive spa treatments"
+      ],
+      "amenities": [
+        "Outdoor Pool",
+        "Luxury Spa",
+        "Fitness Center",
+        "5 Restaurants and Bars",
+        "Cigar Lounge",
+        "Business Center",
+        "Free Wi-Fi",
+        "24-Hour Concierge",
+        "Valet Parking"
+      ],
+      "roomAmenities": [
+        "Air Conditioning",
+        "Smart TV",
+        "Nespresso Machine",
+        "Marble Bathroom with Premium Toiletries",
+        "Luxury Bedding",
+        "Mini Bar",
+        "Safe",
+        "Work Desk",
+        "Nile View Balcony"
+      ],
+      "userReviews": [
+        {
+          "id": 17,
+          "userName": "Dina Shafik",
+          "userImage": "/images/users/user_f_17.jpg",
+          "rating": 4.9,
+          "date": "December 2024",
+          "comment": "A luxurious hotel with excellence! Every detail is thoughtful and the service is very sophisticated. The restaurants are excellent, especially the Italian one."
+        },
+        {
+          "id": 18,
+          "userName": "Michael Schmidt",
+          "userImage": "/images/users/user_m_18.jpg",
+          "rating": 4.8,
+          "date": "November 2024",
+          "comment": "Exceptional luxury hotel! Impeccable service, beautiful rooms, and outstanding dining options."
+        }
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 9875,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "staff": 4.5,
+          "accessibility": 4.2,
+          "facilities": 4,
+          "valueForMoney": 4.6
+        }
+      },
+      "nearbyLocations": [
+        "Egyptian Museum - 2 km",
+        "Tahrir Square - 1.5 km",
+        "Garden City - 0.5 km"
+      ],
+      "availability": {
+        "availableRooms": 32,
+        "totalRooms": 191
+      },
+      "pricePerNight": 285,
+      "featured": true,
+      "status": "active"
+    },
+    {
+      "id": "10",
+      "name": "Movenpick Resort Hurghada",
+      "city": "Hurghada",
+      "rating": 4.5,
+      "images": [
+        "/public/images/Hotels/movenpick-hurghada-main.jpg",
+        "/public/images/Hotels/movenpick-hurghada-view_2.jpg",
+        "/public/images/Hotels/movenpick-hurghada-view_3.jpg",
+        "/public/images/Hotels/movenpick-hurghada-view_4.jpg"
+      ],
+      "latitude": 27.1783,
+      "longitude": 33.7681,
+      "highlights": [
+        "All-inclusive beachfront resort",
+        "House reef for snorkeling",
+        "Family-friendly facilities",
+        "Multiple dining options"
+      ],
+      "amenities": [
+        "Private Beach",
+        "5 Swimming Pools",
+        "Diving Center",
+        "Spa",
+        "Kids Club",
+        "7 Restaurants and Bars",
+        "Water Sports",
+        "Entertainment Program",
+        "Free Wi-Fi",
+        "Free Parking"
+      ],
+      "roomAmenities": [
+        "Air Conditioning",
+        "Satellite TV",
+        "Mini Bar",
+        "Bathroom with Shower",
+        "Balcony or Terrace",
+        "Safe",
+        "Coffee Maker",
+        "Sea or Pool View"
+      ],
+      "userReviews": [
+        {
+          "id": 19,
+          "userName": "Amira Hassan",
+          "userImage": "/images/users/user_f_19.jpg",
+          "rating": 4.6,
+          "date": "December 2024",
+          "comment": "Excellent family resort! The beach is beautiful and the coral reefs are close. The kids loved their club."
+        },
+        {
+          "id": 20,
+          "userName": "Peter Johnson",
+          "userImage": "/images/users/user_m_20.jpg",
+          "rating": 4.5,
+          "date": "November 2024",
+          "comment": "Great family resort with excellent house reef. Food variety is good and staff are very friendly."
+        }
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 9875,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "staff": 4.5,
+          "accessibility": 4.2,
+          "facilities": 4,
+          "valueForMoney": 4.6
+        }
+      },
+      "nearbyLocations": [
+        "Hurghada Marina - 8 km",
+        "Giftun Island - 12 km",
+        "Hurghada Airport - 15 km"
+      ],
+      "availability": {
+        "availableRooms": 95,
+        "totalRooms": 435
+      },
+      "pricePerNight": 115,
+      "featured": false,
+      "status": "active"
+    },
+    {
+      "id": "11",
+      "name": "Four Seasons Resort Sharm El Sheikh",
+      "city": "Sharm El Sheikh",
+      "rating": 4.9,
+      "images": [
+        "/public/images/Hotels/four-seasons-sharm-main.jpg",
+        "/public/images/Hotels/four-seasons-sharm-view_2.jpg",
+        "/public/images/Hotels/four-seasons-sharm-view_3.jpg",
+        "/public/images/Hotels/four-seasons-sharm-view_4.jpg"
+      ],
+      "latitude": 27.8944,
+      "longitude": 34.3389,
+      "highlights": [
+        "Luxury hillside resort",
+        "Private beach on Sharks Bay",
+        "Championship golf course nearby",
+        "Exceptional spa facilities"
+      ],
+      "amenities": [
+        "Private Beach",
+        "6 Swimming Pools",
+        "Full-Service Spa",
+        "Fitness Center",
+        "Diving Center",
+        "6 Restaurants and Bars",
+        "Kids For All Seasons",
+        "Tennis Courts",
+        "Free Wi-Fi",
+        "Valet Parking"
+      ],
+      "roomAmenities": [
+        "Air Conditioning",
+        "Smart TV",
+        "Nespresso Machine",
+        "Luxury Bathroom with Soaking Tub",
+        "Premium Linens",
+        "Mini Bar",
+        "Safe",
+        "Private Balcony",
+        "Sea or Garden View"
+      ],
+      "userReviews": [
+        {
+          "id": 21,
+          "userName": "Laila Kamel",
+          "userImage": "/images/users/user_f_21.jpg",
+          "rating": 5,
+          "date": "December 2024",
+          "comment": "Exceptional experience! Everything in this resort is at the highest level. The service, cleanliness, and food are all perfect."
+        },
+        {
+          "id": 22,
+          "userName": "Alexander Ross",
+          "userImage": "/images/users/user_m_22.jpg",
+          "rating": 4.9,
+          "date": "November 2024",
+          "comment": "The epitome of luxury! Stunning property, impeccable service, and the beach is absolutely pristine."
+        }
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 9875,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "staff": 4.5,
+          "accessibility": 4.2,
+          "facilities": 4,
+          "valueForMoney": 4.6
+        }
+      },
+      "nearbyLocations": [
+        "Sharks Bay Beach - 0.5 km",
+        "Naama Bay - 7 km",
+        "Sharm El Sheikh Airport - 8 km"
+      ],
+      "availability": {
+        "availableRooms": 24,
+        "totalRooms": 136
+      },
+      "pricePerNight": 385,
+      "featured": true,
+      "status": "active"
+    }
+  ],
   "cars": [],
   "trips": [],
   "reviews": [],
