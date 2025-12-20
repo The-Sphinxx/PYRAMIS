@@ -23,13 +23,6 @@
       "email": "user@gmail.com",
       "provider": "google",
       "createdAt": "2025-12-18T15:55:59.742Z"
-    },
-    {
-      "id": "google_1766087268401",
-      "fullName": "Google User",
-      "email": "user@gmail.com",
-      "provider": "google",
-      "createdAt": "2025-12-18T19:47:48.401Z"
     }
   ],
   "attractions": [
