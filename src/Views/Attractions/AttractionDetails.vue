@@ -263,10 +263,12 @@ const handleBooking = async (eventData) => {
     // Initialize booking in store
     bookingStore.initializeBooking('attraction', attraction.value.id, attraction.value);
     
-    // Update store with form data
-    Object.keys(bookingData).forEach(key => {
-      bookingStore.updateBookingData(key, bookingData[key]);
-    });
+    // Direct assignment to match TripDetails pattern
+    const bookingDataVal = eventData.bookingData || eventData;
+    const clonedData = JSON.parse(JSON.stringify(bookingDataVal));
+    
+    bookingStore.bookingInProgress.bookingData = clonedData;
+    bookingStore.persistState();
 
     // Validate (double check)
     if (!bookingStore.isBookingValid) {
