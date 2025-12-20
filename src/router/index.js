@@ -40,6 +40,8 @@ import CarDetails from '@/Views/Cars/CarDetails.vue'
 import CarReview from '@/Views/Cars/CarReview.vue'
 import CarCheckOut from '@/Views/Cars/CarCheckOut.vue'
 import CarConfirmation from '@/Views/Cars/CarConfirmation.vue'
+import CarBooking from '@/Views/Cars/CarBooking.vue'
+
 
 // Hotels
 import HotelsList from '@/Views/Hotels/HotelsList.vue'
@@ -194,34 +196,41 @@ const routes = [
   },
 
   // Cars Routes
-  {
-    path: '/cars/list',
-    name: 'CarsList',
-    component: CarsList,
-  },
-  {
-    path: '/cars/details/:id',
-    name: 'CarDetails',
-    component: CarDetails,
-  },
-  {
-    path: '/cars/review/:id',
-    name: 'CarReview',
-    component: CarReview,
-    meta: { requiresAuth: false },
-  },
-  {
-    path: '/cars/checkout/:id',
-    name: 'CarCheckOut',
-    component: CarCheckOut,
-    meta: { requiresAuth: false },
-  },
-  {
-    path: '/cars/confirmation/:id',
-    name: 'CarConfirmation',
-    component: CarConfirmation,
-    meta: { requiresAuth: false },
-  },
+{
+  path: '/cars/list',
+  name: 'CarsList',
+  component: CarsList,
+},
+{
+  path: '/cars/details/:id',
+  name: 'CarDetails',
+  component: CarDetails,
+},
+{
+  path: '/cars/booking',
+  name: 'CarBooking',
+  component: CarBooking,
+  meta: { requiresAuth: false },
+},
+{
+  path: '/cars/review/:id',
+  name: 'CarReview',
+  component: CarReview,
+  meta: { requiresAuth: false },
+},
+{
+  path: '/cars/checkout/:id',
+  name: 'CarCheckOut',
+  component: CarCheckOut,
+  meta: { requiresAuth: false },
+},
+{
+  path: '/cars/confirmation/:id',
+  name: 'CarConfirmation',
+  component: CarConfirmation,
+  meta: { requiresAuth: false },
+},
+
 
   // Hotels Routes
   {
