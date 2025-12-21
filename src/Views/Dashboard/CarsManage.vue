@@ -7,7 +7,7 @@
     <DataTable
       title="Cars Fleet"
       :columns="columns"
-      :data="cars"
+      :data="filteredCars"
       :show-filter="true"
       add-button-text="Add New Vehicle"
       :show-actions="{ edit: true, delete: true, view: true }"
@@ -22,8 +22,25 @@
       @toggle="handleToggle"
       @status-click="handleStatusClick"
       @status-change="handleStatusChange"
-      @filter="handleFilter"
-      v-model:data="cars"
+      @filter="openFilterModal"
+    />
+
+    <!-- Filter Modal -->
+    <FilterModal 
+      :is-open="showFilterModal"
+      v-bind="filterConfig"
+      @filter-change="applyFilters"
+      @close="showFilterModal = false"
+    />
+
+    <!-- Form Modal -->
+    <FormModal
+      :is-open="showFormModal"
+      :mode="formMode"
+      :config="formConfig"
+      :initial-data="selectedCar"
+      @close="closeFormModal"
+      @submit="handleFormSubmit"
     />
   </div>
 </template>
@@ -32,11 +49,23 @@
 import { ref, computed, onMounted } from 'vue';
 import StatsCard from '@/components/Dashboard/StatsCard.vue';
 import DataTable from '@/components/Dashboard/DataTable.vue';
+import FilterModal from '@/components/Dashboard/FilterModal.vue';
+import FormModal from '@/components/Dashboard/FormModal.vue';
 import { carsAPI } from '@/Services/dashboardApi';
+import { dashboardCarFilterConfig } from '@/Utils/dashboardFilterConfigs';
+import { carFormConfig } from '@/Utils/dashboardFormConfigs';
 
 // Component State
 const loading = ref(false);
 const cars = ref([]);
+const showFilterModal = ref(false);
+const showFormModal = ref(false);
+const formMode = ref('add');
+const selectedCar = ref({});
+const activeFilters = ref({});
+
+const filterConfig = dashboardCarFilterConfig;
+const formConfig = carFormConfig;
 
 // Table Columns Configuration
 const columns = [
@@ -66,17 +95,24 @@ const columns = [
     headerClass: 'w-1/12'
   },
   {
-    label: 'Availability',
-    field: 'status',
-    type: 'status',
-    headerClass: 'w-1/6',
-    clickable: true
-  },
-  {
     label: 'Featured',
     field: 'featured',
     type: 'toggle',
     headerClass: 'w-1/12'
+  },
+  {
+    label: 'Availability',
+    field: 'availability',
+    type: 'status',
+    headerClass: 'w-1/8',
+    clickable: true
+  },
+  {
+    label: 'Status',
+    field: 'status',
+    type: 'status-dropdown',
+    options: ['Available', 'Rented', 'Maintenance'],
+    headerClass: 'w-1/8'
   },
   {
     label: 'Actions',
@@ -130,9 +166,10 @@ const fetchCars = async () => {
       ...car,
       // Handle image array
       images: Array.isArray(car.images) ? car.images[0] : car.images,
-      // Normalize location if needed (db.json seemed to lack 'city' on some, but has it generally)
       location: car.city || 'Cairo', 
-      price: car.price || car.pricePerDay
+      price: car.price || car.pricePerDay,
+      availability: car.availability || 'Available',
+      status: car.status || 'Available'
     }));
   } catch (error) {
     console.error('Error fetching cars:', error);
@@ -141,13 +178,51 @@ const fetchCars = async () => {
   }
 };
 
+// Filtered cars
+const filteredCars = computed(() => {
+  let result = cars.value;
+
+  if (activeFilters.value.maxPrice && activeFilters.value.maxPrice < filterConfig.priceRange.max) {
+    result = result.filter(c => c.price <= activeFilters.value.maxPrice);
+  }
+
+  if (activeFilters.value.city) {
+    const searchCity = activeFilters.value.city.toLowerCase();
+    result = result.filter(c => c.city?.toLowerCase().includes(searchCity));
+  }
+
+  if (activeFilters.value.carTypeSelected) {
+    result = result.filter(c => c.type === activeFilters.value.carTypeSelected);
+  }
+
+  if (activeFilters.value.transmissionSelected) {
+    result = result.filter(c => c.transmission === activeFilters.value.transmissionSelected);
+  }
+
+  if (activeFilters.value.statusSelected) {
+    result = result.filter(c => c.status === activeFilters.value.statusSelected);
+  }
+
+  if (activeFilters.value.featuredSelected) {
+    const isFeatured = activeFilters.value.featuredSelected === 'true';
+    result = result.filter(c => c.featured === isFeatured);
+  }
+
+  return result;
+});
+
 // Actions
 const handleAdd = () => {
-  console.log('Add car');
+  formMode.value = 'add';
+  selectedCar.value = {};
+  showFormModal.value = true;
 };
 
 const handleEdit = (row) => {
-  console.log('Edit car:', row);
+  formMode.value = 'edit';
+  const fullCar = cars.value.find(c => c.id === row.id);
+  selectedCar.value = { ...fullCar };
+  showFormModal.value = true;
 };
 
 const handleDelete = async (row) => {
@@ -176,27 +251,65 @@ const handleToggle = async ({ row, field, newValue }) => {
   }
 };
 
-const handleStatusClick = async ({ row, value }) => {
-  const newStatus = value === 'available' ? 'maintenance' : 'available';
-  try {
-    await carsAPI.updateStatus(row.id, newStatus);
-    const car = cars.value.find(c => c.id === row.id);
-    if (car) car.status = newStatus;
-  } catch (error) {
-    console.error('Status update failed:', error);
+const handleStatusClick = async ({ row, field, value }) => {
+  if (field === 'availability') {
+    const newAvailability = value === 'Available' ? 'Sold Out' : 'Available';
+    const rowIndex = cars.value.findIndex(c => c.id === row.id);
+    if (rowIndex !== -1) {
+      cars.value[rowIndex].availability = newAvailability;
+    }
+    try {
+      await carsAPI.patch(row.id, { availability: newAvailability });
+    } catch (error) {
+      console.error('Error:', error);
+      if (rowIndex !== -1) {
+        cars.value[rowIndex].availability = value;
+      }
+    }
   }
 };
 
-const handleStatusChange = async ({ row, newValue }) => {
-    try {
-    await carsAPI.updateStatus(row.id, newValue);
+const handleStatusChange = async ({ row, field, newValue }) => {
+  try {
+    if (field === 'status') {
+      await carsAPI.updateStatus(row.id, newValue);
+    }
+    await fetchCars();
   } catch (error) {
-    console.error('Status update failed:', error);
+    console.error('Error:', error);
   }
-}
+};
 
-const handleFilter = () => {
-  console.log('Filter cars');
+const openFilterModal = () => {
+  showFilterModal.value = true;
+};
+
+const applyFilters = (filters) => {
+  activeFilters.value = filters;
+  showFilterModal.value = false;
+};
+
+const closeFormModal = () => {
+  showFormModal.value = false;
+  selectedCar.value = {};
+};
+
+const handleFormSubmit = async ({ mode, data }) => {
+  loading.value = true;
+  try {
+    if (mode === 'add') {
+      await carsAPI.create(data);
+    } else {
+      await carsAPI.update(selectedCar.value.id, data);
+    }
+    await fetchCars();
+    closeFormModal();
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    alert('Failed to save car');
+  } finally {
+    loading.value = false;
+  }
 };
 
 onMounted(() => {

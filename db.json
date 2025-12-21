@@ -5108,7 +5108,7 @@
       },
       "pricePerNight": 185,
       "featured": true,
-      "status": "active",
+      "status": "Active",
       "isFeatured": true
     },
     {
@@ -5192,7 +5192,7 @@
       },
       "pricePerNight": 295,
       "featured": true,
-      "status": "active"
+      "status": "Inactive"
     },
     {
       "id": "3",
@@ -5274,7 +5274,7 @@
       },
       "pricePerNight": 245,
       "featured": true,
-      "status": "active"
+      "status": "Active"
     },
     {
       "id": "4",
@@ -5356,7 +5356,7 @@
       },
       "pricePerNight": 95,
       "featured": false,
-      "status": "active"
+      "status": "Maintenance"
     },
     {
       "id": "5",
@@ -5438,7 +5438,7 @@
       },
       "pricePerNight": 125,
       "featured": true,
-      "status": "active"
+      "status": "Inactive"
     },
     {
       "id": "6",
@@ -5521,7 +5521,7 @@
       },
       "pricePerNight": 165,
       "featured": true,
-      "status": "active"
+      "status": "Active"
     },
     {
       "id": "7",
@@ -5604,7 +5604,7 @@
       },
       "pricePerNight": 215,
       "featured": true,
-      "status": "active"
+      "status": "Active"
     },
     {
       "id": "8",
@@ -5686,7 +5686,7 @@
       },
       "pricePerNight": 135,
       "featured": false,
-      "status": "active"
+      "status": "Active"
     },
     {
       "id": "9",
@@ -5769,7 +5769,7 @@
       },
       "pricePerNight": 285,
       "featured": true,
-      "status": "active"
+      "status": "Active"
     },
     {
       "id": "10",
@@ -5852,7 +5852,7 @@
       },
       "pricePerNight": 115,
       "featured": false,
-      "status": "active"
+      "status": "Maintenance"
     },
     {
       "id": "11",
@@ -5924,7 +5924,8 @@
           "facilities": 4,
           "valueForMoney": 4.6
         }
-      }
+      },
+      "status": "Maintenance"
     }
   ],
   "cars": [
@@ -5936,7 +5937,7 @@
       "transmission": "Auto",
       "nextAvailability": "2025-12-26",
       "featured": true,
-      "status": "available",
+      "status": "Available",
       "total_fleet": 20,
       "available_now": 5,
       "booked_today": 4,
@@ -5998,7 +5999,8 @@
           "date": "February 2025",
           "comment": "Reliable and smooth ride."
         }
-      ]
+      ],
+      "availability": "Available"
     },
     {
       "id": "2",
@@ -6008,7 +6010,7 @@
       "transmission": "Auto",
       "nextAvailability": "2025-12-20",
       "featured": true,
-      "status": "available",
+      "status": "Rented",
       "total_fleet": 20,
       "available_now": 4,
       "booked_today": 4,
@@ -6071,7 +6073,7 @@
       "transmission": "Auto",
       "nextAvailability": "2025-12-18",
       "featured": true,
-      "status": "available",
+      "status": "Available",
       "total_fleet": 20,
       "available_now": 5,
       "booked_today": 4,
@@ -6135,7 +6137,7 @@
       "transmission": "Auto",
       "nextAvailability": "2025-12-26",
       "featured": true,
-      "status": "maintenance",
+      "status": "Maintenance",
       "total_fleet": 20,
       "available_now": 1,
       "booked_today": 4,
@@ -6189,7 +6191,8 @@
           "date": "February 2025",
           "comment": "Comfortable and roomy. Perfect for group trips."
         }
-      ]
+      ],
+      "availability": "Available"
     },
     {
       "id": "5",
@@ -6199,7 +6202,7 @@
       "transmission": "Auto",
       "nextAvailability": "2025-12-18",
       "featured": true,
-      "status": "available",
+      "status": "Rented",
       "total_fleet": 20,
       "available_now": 5,
       "booked_today": 4,
@@ -6287,7 +6290,7 @@
       "transmission": "Auto",
       "nextAvailability": "2025-12-22",
       "featured": true,
-      "status": "available",
+      "status": "Available",
       "total_fleet": 20,
       "available_now": 3,
       "booked_today": 4,
@@ -7361,7 +7364,8 @@
         "transport": true,
         "accommodation": true,
         "meals": 3
-      }
+      },
+      "availability": "Available"
     },
     {
       "id": "2",
@@ -8215,7 +8219,7 @@
         "total": 59976,
         "duration": 5
       },
-      "status": "pending",
+      "status": "confirmed",
       "guestInfo": {
         "firstName": "ahmed",
         "lastName": "roby",
@@ -8408,7 +8412,7 @@
         "total": 52479,
         "duration": 4
       },
-      "status": "pending",
+      "status": "confirmed",
       "guestInfo": {
         "firstName": "ahmed",
         "lastName": "roby",
@@ -8434,10 +8438,11 @@
       "date": "Oct 15 - Oct 20, 2025",
       "time": "14:00",
       "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400",
-      "status": "Confirmed",
-      "type": "فندق",
+      "status": "confirmed",
+      "type": "hotel",
       "reference": "H-8842",
-      "price": 1200
+      "price": 1200,
+      "paymentStatus": "paid"
     },
     {
       "id": "sample_booking_2",
@@ -8447,8 +8452,8 @@
       "date": "Oct 22, 2025",
       "time": "08:00 AM",
       "image": "https://images.unsplash.com/photo-1553913861-c0fddf2619ee?w=400",
-      "status": "Confirmed",
-      "type": "رحلة",
+      "status": "cancelled",
+      "type": "trip",
       "reference": "T-9921",
       "price": 200
     },

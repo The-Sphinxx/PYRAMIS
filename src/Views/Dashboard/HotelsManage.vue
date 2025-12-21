@@ -7,7 +7,7 @@
     <DataTable
       title="Hotels"
       :columns="columns"
-      :data="hotels"
+      :data="filteredHotels"
       :show-filter="true"
       add-button-text="Add New Hotel"
       :show-actions="{ edit: true, delete: true, view: true }"
@@ -22,11 +22,26 @@
       @toggle="handleToggle"
       @status-click="handleStatusClick"
       @status-change="handleStatusChange"
-      @filter="handleFilter"
-      v-model:data="hotels"
+      @filter="openFilterModal"
     />
 
-    <!-- Edit/Add Modal would go here -->
+    <!-- Filter Modal -->
+    <FilterModal 
+      :is-open="showFilterModal"
+      v-bind="filterConfig"
+      @filter-change="applyFilters"
+      @close="showFilterModal = false"
+    />
+
+    <!-- Form Modal -->
+    <FormModal
+      :is-open="showFormModal"
+      :mode="formMode"
+      :config="formConfig"
+      :initial-data="selectedHotel"
+      @close="closeFormModal"
+      @submit="handleFormSubmit"
+    />
   </div>
 </template>
 
@@ -34,11 +49,24 @@
 import { ref, computed, onMounted } from 'vue';
 import StatsCard from '@/components/Dashboard/StatsCard.vue';
 import DataTable from '@/components/Dashboard/DataTable.vue';
+import FilterModal from '@/components/Dashboard/FilterModal.vue';
+import FormModal from '@/components/Dashboard/FormModal.vue';
 import { hotelsAPI } from '@/Services/dashboardApi';
+import { dashboardHotelFilterConfig } from '@/Utils/dashboardFilterConfigs';
+import { hotelFormConfig } from '@/Utils/dashboardFormConfigs';
 
 // Component State
 const loading = ref(false);
 const hotels = ref([]);
+const showFilterModal = ref(false);
+const showFormModal = ref(false);
+const formMode = ref('add');
+const selectedHotel = ref({});
+const activeFilters = ref({});
+
+// Configs
+const filterConfig = dashboardHotelFilterConfig;
+const formConfig = hotelFormConfig;
 
 // Table Columns Configuration
 const columns = [
@@ -68,11 +96,17 @@ const columns = [
     headerClass: 'w-1/6'
   },
   {
+    label: 'Availability',
+    field: 'availability',
+    type: 'text',
+    headerClass: 'w-1/8'
+  },
+  {
     label: 'Status',
     field: 'status',
-    type: 'status',
-    headerClass: 'w-1/6',
-    clickable: true
+    type: 'status-dropdown',
+    options: ['Active', 'Inactive', 'Maintenance'],
+    headerClass: 'w-1/8'
   },
   {
     label: 'Featured',
@@ -130,10 +164,11 @@ const fetchHotels = async () => {
     // Transform API data to match table requirements if needed
     hotels.value = response.data.map(hotel => ({
       ...hotel,
-      // Ensure image is the first one if it's an array
       images: Array.isArray(hotel.images) ? hotel.images[0] : hotel.images,
-      // Normalize any other fields if necessary
-      status: hotel.status || 'Draft' 
+      availability: hotel.availability 
+        ? `${hotel.availability.availableRooms}/${hotel.availability.totalRooms} room`
+        : 'N/A',
+      status: hotel.status || 'Draft'
     }));
   } catch (error) {
     console.error('Error fetching hotels:', error);
@@ -142,15 +177,47 @@ const fetchHotels = async () => {
   }
 };
 
+// Filtered hotels
+const filteredHotels = computed(() => {
+  let result = hotels.value;
+
+  if (activeFilters.value.maxPrice && activeFilters.value.maxPrice < filterConfig.priceRange.max) {
+    result = result.filter(h => h.pricePerNight <= activeFilters.value.maxPrice);
+  }
+
+  if (activeFilters.value.city) {
+    const searchCity = activeFilters.value.city.toLowerCase();
+    result = result.filter(h => h.city?.toLowerCase().includes(searchCity));
+  }
+
+  if (activeFilters.value.statusSelected) {
+    result = result.filter(h => h.status === activeFilters.value.statusSelected);
+  }
+
+  if (activeFilters.value.featuredSelected) {
+    const isFeatured = activeFilters.value.featuredSelected === 'true';
+    result = result.filter(h => h.featured === isFeatured);
+  }
+
+  if (activeFilters.value.ratingSelected) {
+    result = result.filter(h => h.stars >= parseInt(activeFilters.value.ratingSelected));
+  }
+
+  return result;
+});
+
 // Action Handlers
 const handleAdd = () => {
-  console.log('Add new hotel clicked');
-  // Implement add modal logic
+  formMode.value = 'add';
+  selectedHotel.value = {};
+  showFormModal.value = true;
 };
 
 const handleEdit = (row) => {
-  console.log('Edit hotel:', row);
-  // Implement edit modal logic
+  formMode.value = 'edit';
+  const fullHotel = hotels.value.find(h => h.id === row.id);
+  selectedHotel.value = { ...fullHotel };
+  showFormModal.value = true;
 };
 
 const handleDelete = async (row) => {
@@ -204,9 +271,36 @@ const handleStatusChange = async ({ row, newValue }) => {
   }
 };
 
-const handleFilter = () => {
-  console.log('Filter clicked');
-  // Implement filter logic
+const openFilterModal = () => {
+  showFilterModal.value = true;
+};
+
+const applyFilters = (filters) => {
+  activeFilters.value = filters;
+  showFilterModal.value = false;
+};
+
+const closeFormModal = () => {
+  showFormModal.value = false;
+  selectedHotel.value = {};
+};
+
+const handleFormSubmit = async ({ mode, data }) => {
+  loading.value = true;
+  try {
+    if (mode === 'add') {
+      await hotelsAPI.create(data);
+    } else {
+      await hotelsAPI.update(selectedHotel.value.id, data);
+    }
+    await fetchHotels();
+    closeFormModal();
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    alert('Failed to save hotel');
+  } finally {
+    loading.value = false;
+  }
 };
 
 // Lifecycle Hooks

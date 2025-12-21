@@ -5,11 +5,11 @@
 
     <!-- Trips Data Table -->
     <DataTable
-      title="Trips & Tours"
+      title="Trips"
       :columns="columns"
-      :data="trips"
+      :data="filteredTrips"
       :show-filter="true"
-      add-button-text="Create New Trip"
+      add-button-text="Add New Trip"
       :show-actions="{ edit: true, delete: true, view: true }"
       empty-message="No trips available"
       :per-page="8"
@@ -18,12 +18,28 @@
       @add="handleAdd"
       @edit="handleEdit"
       @delete="handleDelete"
-      @view="handleView"
       @toggle="handleToggle"
       @status-click="handleStatusClick"
       @status-change="handleStatusChange"
-      @filter="handleFilter"
-      v-model:data="trips"
+      @filter="openFilterModal"
+    />
+
+    <!-- Filter Modal -->
+    <FilterModal 
+      :is-open="showFilterModal"
+      v-bind="filterConfig"
+      @filter-change="applyFilters"
+      @close="showFilterModal = false"
+    />
+
+    <!-- Form Modal -->
+    <FormModal
+      :is-open="showFormModal"
+      :mode="formMode"
+      :config="formConfig"
+      :initial-data="selectedTrip"
+      @close="closeFormModal"
+      @submit="handleFormSubmit"
     />
   </div>
 </template>
@@ -32,11 +48,23 @@
 import { ref, computed, onMounted } from 'vue';
 import StatsCard from '@/components/Dashboard/StatsCard.vue';
 import DataTable from '@/components/Dashboard/DataTable.vue';
+import FilterModal from '@/components/Dashboard/FilterModal.vue';
+import FormModal from '@/components/Dashboard/FormModal.vue';
 import { tripsAPI } from '@/Services/dashboardApi';
+import { dashboardTripFilterConfig } from '@/Utils/dashboardFilterConfigs';
+import { tripFormConfig } from '@/Utils/dashboardFormConfigs';
 
 // Component State
 const loading = ref(false);
 const trips = ref([]);
+const showFilterModal = ref(false);
+const showFormModal = ref(false);
+const formMode = ref('add');
+const selectedTrip = ref({});
+const activeFilters = ref({});
+
+const filterConfig = dashboardTripFilterConfig;
+const formConfig = tripFormConfig;
 
 // Table Columns Configuration
 const columns = [
@@ -74,9 +102,23 @@ const columns = [
   },
   {
     label: 'Featured',
-    field: 'featured', // db.json might need check for 'featured' vs 'isFeatured'
+    field: 'featured',
     type: 'toggle',
     headerClass: 'w-1/12'
+  },
+  {
+    label: 'Availability',
+    field: 'availability',
+    type: 'status',
+    headerClass: 'w-1/8',
+    clickable: true
+  },
+  {
+    label: 'Status',
+    field: 'status',
+    type: 'status-dropdown',
+    options: ['Active', 'Inactive', 'Full'],
+    headerClass: 'w-1/8'
   },
   {
     label: 'Actions',
@@ -133,9 +175,9 @@ const fetchTrips = async () => {
       name: trip.title, // Map title to name for DataTable image column
       images: Array.isArray(trip.images) ? trip.images[0] : trip.trip.image || trip.image,
       nextDate: trip.availableDates ? trip.availableDates[0] : 'TBD',
-      // Ensure featured boolean exists
       featured: trip.featured || false,
-      status: 'Active' // Default status as it was missing in db.json preview
+      availability: trip.availability || 'Available',
+      status: trip.status || 'Active'
     }));
   } catch (error) {
     console.error('Error fetching trips:', error);
@@ -144,13 +186,47 @@ const fetchTrips = async () => {
   }
 };
 
+// Filtered trips
+const filteredTrips = computed(() => {
+  let result = trips.value;
+
+  if (activeFilters.value.maxPrice && activeFilters.value.maxPrice < filterConfig.priceRange.max) {
+    result = result.filter(t => t.price <= activeFilters.value.maxPrice);
+  }
+
+  if (activeFilters.value.destination) {
+    const searchDest = activeFilters.value.destination.toLowerCase();
+    result = result.filter(t => t.destination?.toLowerCase().includes(searchDest));
+  }
+
+  if (activeFilters.value.tripTypeSelected) {
+    result = result.filter(t => t.tripType === activeFilters.value.tripTypeSelected);
+  }
+
+  if (activeFilters.value.statusSelected) {
+    result = result.filter(t => t.status === activeFilters.value.statusSelected);
+  }
+
+  if (activeFilters.value.featuredSelected) {
+    const isFeatured = activeFilters.value.featuredSelected === 'true';
+    result = result.filter(t => t.featured === isFeatured);
+  }
+
+  return result;
+});
+
 // Actions
 const handleAdd = () => {
-  console.log('Add trip');
+  formMode.value = 'add';
+  selectedTrip.value = {};
+  showFormModal.value = true;
 };
 
 const handleEdit = (row) => {
-  console.log('Edit trip:', row);
+  formMode.value = 'edit';
+  const fullTrip = trips.value.find(t => t.id === row.id);
+  selectedTrip.value = { ...fullTrip };
+  showFormModal.value = true;
 };
 
 const handleDelete = async (row) => {
@@ -180,16 +256,65 @@ const handleToggle = async ({ row, field, newValue }) => {
   }
 };
 
-const handleStatusClick = (row) => {
-  console.log('Status clicked', row);
+const handleStatusClick = async ({ row, field, value }) => {
+  if (field === 'availability') {
+    const newAvailability = value === 'Available' ? 'Sold Out' : 'Available';
+    const rowIndex = trips.value.findIndex(t => t.id === row.id);
+    if (rowIndex !== -1) {
+      trips.value[rowIndex].availability = newAvailability;
+    }
+    try {
+      await tripsAPI.patch(row.id, { availability: newAvailability });
+    } catch (error) {
+      console.error('Error:', error);
+      if (rowIndex !== -1) {
+        trips.value[rowIndex].availability = value;
+      }
+    }
+  }
 };
 
-const handleStatusChange = (e) => {
-  console.log('Status changed', e);
+const handleStatusChange = async ({ row, field, newValue }) => {
+  try {
+    if (field === 'status') {
+      await tripsAPI.patch(row.id, { status: newValue });
+    }
+    await fetchTrips();
+  } catch (error) {
+    console.error('Error:', error);
+  }
 };
 
-const handleFilter = () => {
-  console.log('Filter trips');
+const openFilterModal = () => {
+  showFilterModal.value = true;
+};
+
+const applyFilters = (filters) => {
+  activeFilters.value = filters;
+  showFilterModal.value = false;
+};
+
+const closeFormModal = () => {
+  showFormModal.value = false;
+  selectedTrip.value = {};
+};
+
+const handleFormSubmit = async ({ mode, data }) => {
+  loading.value = true;
+  try {
+    if (mode === 'add') {
+      await tripsAPI.create(data);
+    } else {
+      await tripsAPI.update(selectedTrip.value.id, data);
+    }
+    await fetchTrips();
+    closeFormModal();
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    alert('Failed to save trip');
+  } finally {
+    loading.value = false;
+  }
 };
 
 onMounted(() => {
