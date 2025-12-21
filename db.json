@@ -7346,6 +7346,82 @@
       "paymentStatus": "pending",
       "bookingNumber": "BK1766226171667340",
       "bookingDate": "2025-12-20T10:22:51.667Z"
+    },
+    {
+      "id": "sample_booking_1",
+      "userId": "1",
+      "title": "Sofitel Legend Old Cataract",
+      "location": "Aswan, Egypt",
+      "date": "Oct 15 - Oct 20, 2025",
+      "time": "14:00",
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400",
+      "status": "Confirmed",
+      "type": "فندق",
+      "reference": "H-8842",
+      "price": 1200
+    },
+    {
+      "id": "sample_booking_2",
+      "userId": "1",
+      "title": "Private Tour: Valley of the Kings",
+      "location": "Luxor, Egypt",
+      "date": "Oct 22, 2025",
+      "time": "08:00 AM",
+      "image": "https://images.unsplash.com/photo-1553913861-c0fddf2619ee?w=400",
+      "status": "Confirmed",
+      "type": "رحلة",
+      "reference": "T-9921",
+      "price": 200
+    }
+  ],
+  "savedItems": [
+    {
+      "id": "saved_1",
+      "userId": "1",
+      "itemId": "1",
+      "type": "attraction",
+      "title": "Great Pyramids of Giza",
+      "image": "https://images.unsplash.com/photo-1572252009286-268acec5ca0a?w=800",
+      "location": "Giza",
+      "rating": 4.9
+    }
+  ],
+  "wallet": [
+    {
+      "id": "wallet_1",
+      "userId": "1",
+      "balance": 2500,
+      "currency": "EGP",
+      "points": 150,
+      "transactions": [
+        {
+          "id": 1,
+          "type": "deposit",
+          "amount": 1000,
+          "date": "2024-12-01",
+          "description": "Added funds"
+        }
+      ]
+    }
+  ],
+  "recentActivity": [
+    {
+      "id": "act_1",
+      "userId": "1",
+      "title": "Booked Sofitel Legend Old Cataract",
+      "type": "hotel",
+      "date": "2024-12-15",
+      "status": "completed",
+      "icon": "🏨"
+    },
+    {
+      "id": "act_2",
+      "userId": "1",
+      "title": "Cairo Airport Premium Transfer",
+      "type": "car",
+      "date": "2024-09-12",
+      "status": "completed",
+      "icon": "🚗"
     }
   ]
 }
