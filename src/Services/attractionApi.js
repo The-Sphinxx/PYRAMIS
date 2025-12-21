@@ -70,15 +70,15 @@ const attractionApi = {
   async getFilteredAttractions(filters) {
     try {
       const params = {};
-      
+
       if (filters.category && filters.category !== 'All') {
         params.category = filters.category;
       }
-      
+
       if (filters.city && filters.city !== 'All') {
         params.city = filters.city;
       }
-      
+
       if (filters.minRating) {
         params.rating_gte = filters.minRating;
       }

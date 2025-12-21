@@ -5884,124 +5884,1207 @@
           "valueForMoney": 4.6
         }
       },
-      "nearbyLocations": [
-        "Sharks Bay Beach - 0.5 km",
-        "Naama Bay - 7 km",
-        "Sharm El Sheikh Airport - 8 km"
-      ],
-      "availability": {
-        "availableRooms": 24,
-        "totalRooms": 136
-      },
-      "pricePerNight": 385,
-      "featured": true,
-      "status": "active"
+      "userReviews": [
+        {
+          "id": 1,
+          "userName": "Sophia Lee",
+          "userImage": "/images/users/user_f_19.jpg",
+          "rating": 4,
+          "date": "March 2025",
+          "comment": "Practical and easy to drive. Good for family use."
+        }
+      ]
     }
   ],
-  "cars": [],
-  "trips": [],
+  "trips": [
+    {
+      "id": "1",
+      "title": "Siwa Oasis Camping",
+      "city": "Siwa Oasis",
+      "description": "Explore the remote Siwa Oasis, salt lakes, and spend nights under the stars. Perfect for those seeking tranquility and a connection with nature.",
+      "price": 13700,
+      "rating": 4.8,
+      "reviews": 124,
+      "duration": "4 Days / 3 Nights",
+      "image": "/images/1.jpg",
+      "images": [
+        "/images/1.jpg",
+        "/images/2.jpg",
+        "/images/6.jpg",
+        "/images/3.png"
+      ],
+      "maxPeople": 20,
+      "availableDates": [
+        "10 Dec - 13 Dec 2024",
+        "20 Dec - 23 Dec 2024"
+      ],
+      "highlights": [
+        "Camping in the Great Sand Sea",
+        "Swim in the Salt Lakes",
+        "Visit Shali Fortress",
+        "Sunset at Fatnas Island",
+        "All meals included",
+        "4x4 Desert Safari"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival & Shali Fortress",
+          "activities": [
+            {
+              "time": "08:00 AM",
+              "title": "Departure & Arrival",
+              "desc": "Departure from Cairo. Arrive in Siwa, check into the eco-lodge, and visit the ancient Shali Fortress for sunset."
+            },
+            {
+              "time": "06:00 PM",
+              "title": "Sunset at Shali",
+              "desc": "Watch the sun set over the oasis from the top of the fortress."
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Salt Lakes & Cleopatra Spring",
+          "activities": [
+            {
+              "time": "09:00 AM",
+              "title": "Morning Tour",
+              "desc": "Visit the famous salt lakes for a float, followed by a refreshing dip in Cleopatra's Spring."
+            },
+            {
+              "time": "10:00 AM",
+              "title": "Salt Lakes Swimming",
+              "desc": "Float effortlessly in the crystal clear blue salt pools."
+            },
+            {
+              "time": "01:00 PM",
+              "title": "Cleopatra Spring",
+              "desc": "Relax at the historic natural spring."
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Great Sand Sea Safari",
+          "activities": [
+            {
+              "time": "02:00 PM",
+              "title": "Safari Start",
+              "desc": "Thrilling 4x4 jeep safari into the dunes, sandboarding, and camping under the stars."
+            },
+            {
+              "time": "04:00 PM",
+              "title": "Sandboarding",
+              "desc": "Glide down the massive sand dunes."
+            },
+            {
+              "time": "08:00 PM",
+              "title": "Bedouin Dinner",
+              "desc": "Traditional dinner cooked in the sand."
+            }
+          ]
+        },
+        {
+          "day": 4,
+          "title": "Return to Cairo",
+          "activities": [
+            {
+              "time": "08:00 AM",
+              "title": "Departure",
+              "desc": "Breakfast at camp and departure back to Cairo."
+            }
+          ]
+        }
+      ],
+      "hotel": {
+        "name": "Siwa Shali Resort",
+        "rating": 4.5,
+        "image": "/images/1.jpg",
+        "features": [
+          "Eco Lodge",
+          "Pool",
+          "Restaurant",
+          "Desert View"
+        ]
+      },
+      "reviewsList": [
+        {
+          "id": 1,
+          "user": "Sarah M.",
+          "rating": 5,
+          "date": "1 month ago",
+          "text": "Siwa is magical. The salt lakes are unlike anything I've ever seen."
+        }
+      ],
+      "amenities": {
+        "transport": true,
+        "accommodation": true,
+        "meals": 3
+      }
+    },
+    {
+      "id": "2",
+      "title": "Luxor & Aswan Nile Cruise",
+      "city": "Luxor & Aswan",
+      "description": "Experience ancient Egypt with visits to Valley of the Kings, Karnak Temple, and Abu Simbel. A journey through history on a luxury cruise.",
+      "price": 28500,
+      "rating": 4.9,
+      "reviews": 85,
+      "duration": "5 Days / 4 Nights",
+      "image": "/images/7.png",
+      "images": [
+        "/images/7.png",
+        "/images/5.jpg",
+        "/images/4.jpg",
+        "/images/1.jpg"
+      ],
+      "maxPeople": 50,
+      "availableDates": [
+        "15 Dec - 19 Dec 2024",
+        "25 Dec - 29 Dec 2024"
+      ],
+      "highlights": [
+        "5-Star Nile Cruise Accommodation",
+        "Valley of the Kings Tour",
+        "Karnak & Luxor Temples",
+        "Abu Simbel Excursion",
+        "Full Board Meals",
+        "Expert Egyptologist Guide"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Boarding in Luxor",
+          "activities": [
+            {
+              "time": "11:00 AM",
+              "title": "Boarding & Lunch",
+              "desc": "Check-in to your cruise ship. Lunch on board followed by a visit to Karnak and Luxor Temples."
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "title": "West Bank Tour",
+          "activities": [
+            {
+              "time": "08:00 AM",
+              "title": "West Bank Visits",
+              "desc": "Visit Valley of the Kings, Hatshepsut Temple, and Colossi of Memnon. Sail to Edfu."
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Edfu & Kom Ombo",
+          "activities": [
+            {
+              "time": "09:00 AM",
+              "title": "Edfu Temple",
+              "desc": "Visit Edfu Temple by horse carriage, then sail to Kom Ombo to visit the double temple."
+            }
+          ]
+        },
+        {
+          "day": 4,
+          "title": "Aswan Highlights",
+          "activities": [
+            {
+              "time": "09:00 AM",
+              "title": "Aswan Tour",
+              "desc": "Visit Philae Temple and the High Dam. Optional trip to Abu Simbel."
+            }
+          ]
+        },
+        {
+          "day": 5,
+          "title": "Disembarkation",
+          "activities": [
+            {
+              "time": "08:00 AM",
+              "title": "Checkout",
+              "desc": "Breakfast and checkout in Aswan."
+            }
+          ]
+        }
+      ],
+      "hotel": {
+        "name": "Royal Nile Cruise",
+        "rating": 5,
+        "image": "/images/7.png",
+        "features": [
+          "Pool",
+          "Sundeck",
+          "Restaurant",
+          "Bar",
+          "Shows"
+        ]
+      },
+      "reviewsList": [
+        {
+          "id": 1,
+          "user": "James B.",
+          "rating": 5,
+          "date": "2 weeks ago",
+          "text": "The best way to see Egypt. The cruise was luxurious and the sights were breathtaking."
+        }
+      ],
+      "amenities": {
+        "transport": true,
+        "accommodation": true,
+        "meals": 3
+      }
+    },
+    {
+      "id": "3",
+      "title": "Sharm El Sheikh ",
+      "city": "Sharm El Sheikh",
+      "description": "Escape to the perfect beach getaway in Sharm El Sheikh, one of Egypt's most stunning Red Sea destinations. This all-inclusive package combines relaxation on pristine beaches, world-class snorkeling and diving, and luxurious resort amenities.",
+      "price": 12600,
+      "rating": 4.8,
+      "reviews": 15,
+      "duration": "5 Days / 4 Nights",
+      "image": "/images/4.jpg",
+      "images": [
+        "/images/4.jpg",
+        "/images/3.png",
+        "/images/8.png",
+        "/images/5.jpg"
+      ],
+      "maxPeople": 40,
+      "availableDates": [
+        "1 Dec - 5 Dec 2024",
+        "12 Dec - 16 Dec 2024",
+        "22 Dec - 26 Dec 2024"
+      ],
+      "highlights": [
+        "5 nights accommodation in 5 stars resort",
+        "Unlimited soft drinks, mineral waters, and alcoholic beverages",
+        "Snorkeling equipment",
+        "Daily entertainment program",
+        "All meals (Breakfast, Lunch, Dinner)",
+        "Round trip airport transfers",
+        "Access to resort facilities (pools, gym, spa)",
+        "Free Wi-Fi throughout resort"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival & Beach Relaxation",
+          "activities": [
+            {
+              "time": "10:00 AM",
+              "title": "Arrival",
+              "desc": "Airport Pickup & Resort Check-in. Our representative will greet you at Sharm El Sheikh International Airport and transfer you to your luxury resort. Check-in and receive your welcome drink."
+            },
+            {
+              "time": "12:00 PM",
+              "title": "Welcome Lunch at Resort",
+              "desc": "Savor a delicious buffet lunch featuring international and local Egyptian cuisine at the resort's main restaurant."
+            },
+            {
+              "time": "02:00 PM",
+              "title": "Beach Time & Pool Relaxation",
+              "desc": "Spend the afternoon relaxing on the resort's private beach or by the pool. Take your first dip in the crystal-clear Red Sea waters."
+            },
+            {
+              "time": "07:00 PM",
+              "title": "Dinner & Evening Entertainment",
+              "desc": "Enjoy a gourmet dinner followed by live entertainment at the resort's theater. Shows include traditional folklore shows or international performances."
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Snorkeling Adventure & Beach Activities",
+          "activities": [
+            {
+              "time": "09:00 AM",
+              "title": "Breakfast & Preparation",
+              "desc": "Breakfast & Preparation. Start your day with a hearty breakfast buffet. Pick up your snorkeling equipment from the water center."
+            },
+            {
+              "time": "11:00 AM",
+              "title": "Guided Snorkeling Tour",
+              "desc": "Join our experienced guide for an unforgettable snorkeling experience at Ras Mohammed National Park or nearby coral reefs. Explore vibrant marine life."
+            },
+            {
+              "time": "01:00 PM",
+              "title": "Beachside Lunch",
+              "desc": "Enjoy lunch at the beach restaurant with stunning sea views. Fresh seafood and salads are our picks."
+            },
+            {
+              "time": "03:00 PM",
+              "title": "Free Time & Water Sports",
+              "desc": "Relax on the beach or try optional activities like diving, parasailing, or banana boat rides (additional cost)."
+            },
+            {
+              "time": "08:00 PM",
+              "title": "Themed Dinner Night",
+              "desc": "Experience a special themed dinner (Italian, Asian, or Egyptian Night depending on the day). Dance the night away at the resort bar."
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Leisure Morning & Departure",
+          "activities": [
+            {
+              "time": "09:00 AM",
+              "title": "Farewell Breakfast",
+              "desc": "Farewell Breakfast. Start your day with a final breakfast. Soak up remaining sun rays before check-out."
+            },
+            {
+              "time": "11:00 AM",
+              "title": "Final Beach Time",
+              "desc": "Savor the last moments on the beach."
+            },
+            {
+              "time": "12:00 PM",
+              "title": "Check-out & Airport Transfer",
+              "desc": "Check out from the resort. Our driver will transfer you to the airport for your flight home."
+            }
+          ]
+        }
+      ],
+      "hotel": {
+        "name": "Sharm Grand Plaza Resort",
+        "rating": 4.8,
+        "image": "/images/4.jpg",
+        "features": [
+          "5 Stars",
+          "Private Beach",
+          "3 Pools",
+          "Spa & Wellness",
+          "5 Restaurants",
+          "Kids Club"
+        ]
+      },
+      "reviewsList": [
+        {
+          "id": 1,
+          "user": "Ahmed Ali",
+          "rating": 5,
+          "date": "2 days ago",
+          "text": "Absolutely amazing experience! The resort was beautiful, the food was delicious, and the snorkeling was breathtaking. Highly recommend!"
+        },
+        {
+          "id": 2,
+          "user": "Monica Bellucci",
+          "rating": 5,
+          "date": "1 week ago",
+          "text": "A perfect vacation. Everything was organized perfectly, from the airport transfer to the daily activities. Will definitely come back."
+        },
+        {
+          "id": 3,
+          "user": "John Doe",
+          "rating": 4,
+          "date": "2 weeks ago",
+          "text": "Great trip overall. The hotel is fantastic. The only downside was the flight delay, but that's not the agency's fault."
+        }
+      ],
+      "amenities": {
+        "transport": true,
+        "accommodation": true,
+        "meals": 3
+      }
+    },
+    {
+      "id": "4",
+      "title": "Hurghada Beach & Safari",
+      "description": "Combine beach relaxation with thrilling quad biking and Bedouin culture experience.",
+      "price": 8400,
+      "rating": 4.7,
+      "reviews": 156,
+      "duration": "2 Days / 1 Night",
+      "image": "/images/3.png",
+      "images": [
+        "/images/3.png",
+        "/images/5.jpg",
+        "/images/8.png",
+        "/images/4.jpg"
+      ],
+      "maxPeople": 30,
+      "availableDates": [
+        "5 Jan - 6 Jan 2025",
+        "10 Jan - 11 Jan 2025"
+      ],
+      "highlights": [
+        "Quad Biking Safari",
+        "Bedouin Village Visit",
+        "Beach Day",
+        "Snorkeling Trip",
+        "BBQ Dinner"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Desert Adventure",
+          "time": "02:00 PM",
+          "description": "Afternoon quad bike safari into the desert. Visit a Bedouin village, drink tea, and enjoy a BBQ dinner.",
+          "activities": []
+        },
+        {
+          "day": 2,
+          "title": "Red Sea Relaxation",
+          "time": "10:00 AM",
+          "description": "Relax on the beach or go for a snorkeling trip before departure.",
+          "activities": []
+        }
+      ],
+      "hotel": {
+        "name": "Hurghada Marriott",
+        "rating": 4.6,
+        "image": "/images/3.png",
+        "features": [
+          "Beachfront",
+          "Pool",
+          "Bar",
+          "Watersports"
+        ]
+      },
+      "reviewsList": [
+        {
+          "id": 1,
+          "user": "Lisa K.",
+          "rating": 5,
+          "date": "1 month ago",
+          "text": "The quad biking was so much fun! A must do."
+        }
+      ],
+      "amenities": {
+        "transport": true,
+        "accommodation": true,
+        "meals": 3
+      }
+    },
+    {
+      "id": "5",
+      "title": "Dahab",
+      "description": "Perfect for adventure seekers - world-class diving spots and peaceful yoga retreats.",
+      "price": 9000,
+      "rating": 4.6,
+      "reviews": 98,
+      "duration": "4 Days / 3 Nights",
+      "image": "/images/8.png",
+      "images": [
+        "/images/8.png",
+        "/images/4.jpg",
+        "/images/2.jpg",
+        "/images/7.png"
+      ],
+      "maxPeople": 25,
+      "availableDates": [
+        "14 Feb - 17 Feb 2025"
+      ],
+      "highlights": [
+        "Blue Hole Diving",
+        "Mount Sinai Hike",
+        "Blue Lagoon"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival",
+          "time": "12:00 PM",
+          "description": "Arrival in Dahab.",
+          "activities": []
+        },
+        {
+          "day": 2,
+          "title": "Blue Hole",
+          "time": "09:00 AM",
+          "description": "Snorkeling at the Blue Hole.",
+          "activities": []
+        },
+        {
+          "day": 3,
+          "title": "Blue Lagoon",
+          "time": "10:00 AM",
+          "description": "Relaxing day at Blue Lagoon.",
+          "activities": []
+        },
+        {
+          "day": 4,
+          "title": "Departure",
+          "time": "11:00 AM",
+          "description": "Check out.",
+          "activities": []
+        }
+      ],
+      "hotel": {
+        "name": "Dahab Paradise",
+        "rating": 4.3,
+        "image": "/images/8.png",
+        "features": [
+          "Sea View",
+          "Pool",
+          "Chill Vibes"
+        ]
+      },
+      "reviewsList": [],
+      "amenities": {
+        "transport": true,
+        "accommodation": true,
+        "meals": 4
+      }
+    },
+    {
+      "id": "6",
+      "title": "Nuweibaa & Ras Shaitain",
+      "description": "A peaceful seaside retreat in eco-friendly huts with campfires lights.",
+      "price": 5900,
+      "rating": 4.2,
+      "reviews": 45,
+      "duration": "3 Days / 2 Nights",
+      "image": "/images/2.jpg",
+      "images": [
+        "/images/2.jpg",
+        "/images/8.png",
+        "/images/1.jpg"
+      ],
+      "maxPeople": 15,
+      "availableDates": [
+        "20 Mar - 22 Mar 2025"
+      ],
+      "highlights": [
+        "Campfire Nights",
+        "Stargazing",
+        "Hiking"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Arrival to Camp",
+          "time": "02:00 PM",
+          "description": "Check into your beach hut.",
+          "activities": []
+        },
+        {
+          "day": 2,
+          "title": "Hiking Colored Canyon",
+          "time": "08:00 AM",
+          "description": "Hike through the colorful rock formations.",
+          "activities": []
+        },
+        {
+          "day": 3,
+          "title": "Departure",
+          "time": "12:00 PM",
+          "description": "Head back home.",
+          "activities": []
+        }
+      ],
+      "hotel": {
+        "name": "Basata Camp",
+        "rating": 4.5,
+        "image": "/images/2.jpg",
+        "features": [
+          "Eco Friendly",
+          "Beach Access"
+        ]
+      },
+      "reviewsList": [],
+      "amenities": {
+        "transport": true,
+        "accommodation": true,
+        "meals": 2
+      }
+    },
+    {
+      "id": "7",
+      "title": "Fayoum",
+      "description": "A quick adventure: lakes, waterfalls, deserts, and sandboarding.",
+      "price": 900,
+      "rating": 4.3,
+      "reviews": 320,
+      "duration": "1 Day",
+      "image": "/images/6.jpg",
+      "images": [
+        "/images/6.jpg",
+        "/images/1.jpg"
+      ],
+      "maxPeople": 50,
+      "availableDates": [
+        "Every Friday",
+        "Every Saturday"
+      ],
+      "highlights": [
+        "Wadi El Rayan Waterfalls",
+        "Magic Lake",
+        "Sandboarding",
+        "Tunis Village"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Full Day Tour",
+          "time": "07:00 AM",
+          "description": "Drive to Fayoum, visit waterfalls, sandboard at Magic Lake, lunch at Tunis Village, return to Cairo.",
+          "activities": []
+        }
+      ],
+      "hotel": null,
+      "reviewsList": [],
+      "amenities": {
+        "transport": true,
+        "accommodation": false,
+        "meals": 1
+      }
+    },
+    {
+      "id": "8",
+      "title": "Alexandria",
+      "description": "A charming getaway to the Mediterranean bride: history and sea food.",
+      "price": 3800,
+      "rating": 4.5,
+      "reviews": 112,
+      "duration": "2 Days / 1 Night",
+      "image": "/images/5.jpg",
+      "images": [
+        "/images/5.jpg",
+        "/images/7.png"
+      ],
+      "maxPeople": 30,
+      "availableDates": [
+        "Daily"
+      ],
+      "highlights": [
+        "Citadel of Qaitbay",
+        "Library of Alexandria",
+        "Montaza Palace"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "City Tour",
+          "time": "09:00 AM",
+          "description": "Visit the Library and Citadel.",
+          "activities": []
+        },
+        {
+          "day": 2,
+          "title": "Montaza & Departure",
+          "time": "10:00 AM",
+          "description": "Walk in Montaza gardens.",
+          "activities": []
+        }
+      ],
+      "hotel": {
+        "name": "Steigenberger Cecil",
+        "rating": 4.7,
+        "image": "/images/5.jpg",
+        "features": [
+          "Historic",
+          "Sea View"
+        ]
+      },
+      "reviewsList": [],
+      "amenities": {
+        "transport": true,
+        "accommodation": true,
+        "meals": 4
+      }
+    },
+    {
+      "id": "9",
+      "title": "White Desert",
+      "description": "Unearthly landscapes with white chalk rock formations.",
+      "price": 4500,
+      "rating": 4.9,
+      "reviews": 56,
+      "duration": "2 Days / 1 Night",
+      "image": "/images/1.jpg",
+      "images": [
+        "/images/1.jpg",
+        "/images/6.jpg"
+      ],
+      "maxPeople": 12,
+      "availableDates": [
+        "15 Nov 2024",
+        "15 Dec 2024"
+      ],
+      "highlights": [
+        "Camping",
+        "Black Desert",
+        "Crystal Mountain"
+      ],
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Safari",
+          "time": "07:00 AM",
+          "description": "Drive to Bahariya, transfer to 4x4, camping in White Desert.",
+          "activities": []
+        },
+        {
+          "day": 2,
+          "title": "Return",
+          "time": "08:00 AM",
+          "description": "Breakfast and return to Cairo.",
+          "activities": []
+        }
+      ],
+      "hotel": {
+        "name": "Desert Camp",
+        "rating": 4.5,
+        "image": "/images/1.jpg",
+        "features": [
+          "Tents",
+          "Campfire"
+        ]
+      },
+      "reviewsList": [],
+      "amenities": {
+        "transport": true,
+        "accommodation": true,
+        "meals": 3
+      }
+    },
+    {
+      "id": "10",
+      "title": "Alexandria",
+      "description": "A charming getaway to the Mediterranean bride: history and sea food.",
+      "price": 3800,
+      "rating": 4.5,
+      "reviews": 112,
+      "duration": "2 Days / 1 Night",
+      "image": "/images/5.jpg",
+      "images": [
+        "/images/5.jpg",
+        "/images/7.png"
+      ],
+      "maxPeople": 30,
+      "availableDates": [
+        "Daily"
+      ],
+      "highlights": [],
+      "itinerary": [],
+      "hotel": null,
+      "reviewsList": [],
+      "amenities": {
+        "transport": true,
+        "accommodation": true,
+        "meals": 4
+      }
+    },
+    {
+      "id": "11",
+      "title": "Alexandria",
+      "description": "A charming getaway to the Mediterranean bride: history and sea food.",
+      "price": 3800,
+      "rating": 4.5,
+      "reviews": 112,
+      "duration": "2 Days / 1 Night",
+      "image": "/images/5.jpg",
+      "images": [
+        "/images/5.jpg",
+        "/images/7.png"
+      ],
+      "maxPeople": 30,
+      "availableDates": [
+        "Daily"
+      ],
+      "highlights": [],
+      "itinerary": [],
+      "hotel": null,
+      "reviewsList": [],
+      "amenities": {
+        "transport": true,
+        "accommodation": true,
+        "meals": 4
+      }
+    }
+  ],
   "reviews": [],
   "wishlist": [],
   "bookings": [
     {
-      "id": "db8a",
-      "userId": "google_1766087268401",
-      "type": "attraction",
-      "itemId": "5",
-      "itemName": "Marina Beach",
+      "id": "2e6a",
+      "userId": null,
+      "type": "trip",
+      "itemId": 3,
+      "itemName": "Sharm El Sheikh ",
       "itemData": {
-        "id": "5",
-        "name": "Marina Beach",
-        "city": "Alexandria",
-        "rating": 4.6,
-        "categories": [
-          "NATURE",
-          "FAMILY",
-          "BEACHES"
-        ],
+        "id": 3,
+        "title": "Sharm El Sheikh ",
+        "city": "Sharm El Sheikh",
+        "description": "Escape to the perfect beach getaway in Sharm El Sheikh, one of Egypt's most stunning Red Sea destinations. This all-inclusive package combines relaxation on pristine beaches, world-class snorkeling and diving, and luxurious resort amenities.",
+        "price": 12600,
+        "rating": 4.8,
+        "reviews": 15,
+        "duration": "5 Days / 4 Nights",
+        "image": "/images/4.jpg",
         "images": [
-          "/images/marina_beach/main.jpg",
-          "/images/marina_beach/view_2.jpg",
-          "/images/marina_beach/view_3.jpg",
-          "/images/marina_beach/view_4.jpg"
+          "/images/4.jpg",
+          "/images/3.png",
+          "/images/8.png",
+          "/images/5.jpg"
         ],
-        "latitude": 31.2185,
-        "longitude": 29.9079,
-        "description": "Popular Alexandria seaside area and beach promenade.",
-        "overview": "Marina Beach is one of the most famous public beaches in Alexandria, located near the Qaitbay Citadel. It offers clean sands and relatively clear Mediterranean waters, making it a favorite for local families and tourists seeking a convenient beach day. The area features a long promenade lined with cafes and facilities, though access to the private sections of the beach usually requires a paid entrance ticket.",
+        "maxPeople": 40,
+        "availableDates": [
+          "1 Dec - 5 Dec 2024",
+          "12 Dec - 16 Dec 2024",
+          "22 Dec - 26 Dec 2024"
+        ],
         "highlights": [
-          "Clean Mediterranean water",
-          "Long seaside promenade",
-          "Proximity to Qaitbay Citadel"
+          "5 nights accommodation in 5 stars resort",
+          "Unlimited soft drinks, mineral waters, and alcoholic beverages",
+          "Snorkeling equipment",
+          "Daily entertainment program",
+          "All meals (Breakfast, Lunch, Dinner)",
+          "Round trip airport transfers",
+          "Access to resort facilities (pools, gym, spa)",
+          "Free Wi-Fi throughout resort"
         ],
-        "amenities": [
-          "Cafes and Restaurants",
-          "Restrooms (Paid)",
-          "Beach Chairs/Umbrellas (Paid)",
-          "Changing Rooms (Paid)",
-          "Parking (Limited)"
-        ],
-        "paymentId": "pay_0005",
-        "price": "Free to enter (Paid beach access varies)",
-        "reviews": {
-          "overallRating": 4.6,
-          "totalReviews": 2105,
-          "ratingCriteria": {
-            "experience": 4.5,
-            "staff": 4.4,
-            "accessibility": 4.6,
-            "facilities": 4.3,
-            "valueForMoney": 4.7
-          }
-        },
-        "userReviews": [
+        "itinerary": [
           {
-            "id": 9,
-            "userName": "Rana Sherif",
-            "userImage": "/images/users/user_f_9.jpg",
-            "rating": 4.7,
-            "date": "July 2024",
-            "comment": "A clean and beautiful beach, perfect for a fun family day out by the sea."
+            "day": 1,
+            "title": "Arrival & Beach Relaxation",
+            "activities": [
+              {
+                "time": "10:00 AM",
+                "title": "Arrival",
+                "desc": "Airport Pickup & Resort Check-in. Our representative will greet you at Sharm El Sheikh International Airport and transfer you to your luxury resort. Check-in and receive your welcome drink."
+              },
+              {
+                "time": "12:00 PM",
+                "title": "Welcome Lunch at Resort",
+                "desc": "Savor a delicious buffet lunch featuring international and local Egyptian cuisine at the resort's main restaurant."
+              },
+              {
+                "time": "02:00 PM",
+                "title": "Beach Time & Pool Relaxation",
+                "desc": "Spend the afternoon relaxing on the resort's private beach or by the pool. Take your first dip in the crystal-clear Red Sea waters."
+              },
+              {
+                "time": "07:00 PM",
+                "title": "Dinner & Evening Entertainment",
+                "desc": "Enjoy a gourmet dinner followed by live entertainment at the resort's theater. Shows include traditional folklore shows or international performances."
+              }
+            ]
           },
           {
-            "id": 10,
-            "userName": "John O'Connell",
-            "userImage": "/images/users/user_m_10.jpg",
-            "rating": 4.5,
-            "date": "August 2024",
-            "comment": "Nice beach with clear water. Gets crowded in peak summer, but generally well-maintained."
+            "day": 2,
+            "title": "Snorkeling Adventure & Beach Activities",
+            "activities": [
+              {
+                "time": "09:00 AM",
+                "title": "Breakfast & Preparation",
+                "desc": "Breakfast & Preparation. Start your day with a hearty breakfast buffet. Pick up your snorkeling equipment from the water center."
+              },
+              {
+                "time": "11:00 AM",
+                "title": "Guided Snorkeling Tour",
+                "desc": "Join our experienced guide for an unforgettable snorkeling experience at Ras Mohammed National Park or nearby coral reefs. Explore vibrant marine life."
+              },
+              {
+                "time": "01:00 PM",
+                "title": "Beachside Lunch",
+                "desc": "Enjoy lunch at the beach restaurant with stunning sea views. Fresh seafood and salads are our picks."
+              },
+              {
+                "time": "03:00 PM",
+                "title": "Free Time & Water Sports",
+                "desc": "Relax on the beach or try optional activities like diving, parasailing, or banana boat rides (additional cost)."
+              },
+              {
+                "time": "08:00 PM",
+                "title": "Themed Dinner Night",
+                "desc": "Experience a special themed dinner (Italian, Asian, or Egyptian Night depending on the day). Dance the night away at the resort bar."
+              }
+            ]
+          },
+          {
+            "day": 3,
+            "title": "Leisure Morning & Departure",
+            "activities": [
+              {
+                "time": "09:00 AM",
+                "title": "Farewell Breakfast",
+                "desc": "Farewell Breakfast. Start your day with a final breakfast. Soak up remaining sun rays before check-out."
+              },
+              {
+                "time": "11:00 AM",
+                "title": "Final Beach Time",
+                "desc": "Savor the last moments on the beach."
+              },
+              {
+                "time": "12:00 PM",
+                "title": "Check-out & Airport Transfer",
+                "desc": "Check out from the resort. Our driver will transfer you to the airport for your flight home."
+              }
+            ]
           }
-        ]
+        ],
+        "hotel": {
+          "name": "Sharm Grand Plaza Resort",
+          "rating": 4.8,
+          "image": "/images/4.jpg",
+          "features": [
+            "5 Stars",
+            "Private Beach",
+            "3 Pools",
+            "Spa & Wellness",
+            "5 Restaurants",
+            "Kids Club"
+          ]
+        },
+        "reviewsList": [
+          {
+            "id": 1,
+            "user": "Ahmed Ali",
+            "rating": 5,
+            "date": "2 days ago",
+            "text": "Absolutely amazing experience! The resort was beautiful, the food was delicious, and the snorkeling was breathtaking. Highly recommend!"
+          },
+          {
+            "id": 2,
+            "user": "Monica Bellucci",
+            "rating": 5,
+            "date": "1 week ago",
+            "text": "A perfect vacation. Everything was organized perfectly, from the airport transfer to the daily activities. Will definitely come back."
+          },
+          {
+            "id": 3,
+            "user": "John Doe",
+            "rating": 4,
+            "date": "2 weeks ago",
+            "text": "Great trip overall. The hotel is fantastic. The only downside was the flight delay, but that's not the agency's fault."
+          }
+        ],
+        "amenities": {
+          "transport": true,
+          "accommodation": true,
+          "meals": 3
+        }
       },
       "bookingData": {
-        "date": "2025-12-25",
-        "guests": 2
+        "date": "22 Dec - 26 Dec 2024",
+        "guests": {
+          "adults": 3,
+          "children": 2
+        }
       },
       "pricing": {
-        "basePrice": 0,
-        "subtotal": 0,
-        "serviceFee": 0,
-        "taxes": 0,
-        "total": 0,
-        "duration": 1
+        "basePrice": 12600,
+        "subtotal": 50400,
+        "serviceFee": 2520,
+        "taxes": 7056,
+        "total": 59976,
+        "duration": 5
       },
       "status": "pending",
       "guestInfo": {
-        "firstName": "ss",
-        "lastName": "aaa",
-        "email": "ssaa.@gmail.com",
-        "phone": "01147296027",
+        "firstName": "ahmed",
+        "lastName": "roby",
+        "email": "ahmed@gmail.com",
+        "phone": "01096580123",
         "specialRequests": ""
       },
-      "bookingNumber": "BK1766093996036559",
-      "bookingDate": "2025-12-18T21:39:56.036Z",
-      "paymentStatus": "pending",
       "paymentInfo": {
         "method": "arrival",
         "cardLastFour": null,
         "cardType": null,
         "paidAt": null
-      }
+      },
+      "paymentStatus": "pending",
+      "bookingNumber": "BK1766081669982953",
+      "bookingDate": "2025-12-18T18:14:29.982Z"
+    },
+    {
+      "id": "3be8",
+      "userId": null,
+      "type": "trip",
+      "itemId": "3",
+      "itemName": "Sharm El Sheikh ",
+      "itemData": {
+        "id": "3",
+        "title": "Sharm El Sheikh ",
+        "city": "Sharm El Sheikh",
+        "description": "Escape to the perfect beach getaway in Sharm El Sheikh, one of Egypt's most stunning Red Sea destinations. This all-inclusive package combines relaxation on pristine beaches, world-class snorkeling and diving, and luxurious resort amenities.",
+        "price": 12600,
+        "rating": 4.8,
+        "reviews": 15,
+        "duration": "5 Days / 4 Nights",
+        "image": "/images/4.jpg",
+        "images": [
+          "/images/4.jpg",
+          "/images/3.png",
+          "/images/8.png",
+          "/images/5.jpg"
+        ],
+        "maxPeople": 40,
+        "availableDates": [
+          "1 Dec - 5 Dec 2024",
+          "12 Dec - 16 Dec 2024",
+          "22 Dec - 26 Dec 2024"
+        ],
+        "highlights": [
+          "5 nights accommodation in 5 stars resort",
+          "Unlimited soft drinks, mineral waters, and alcoholic beverages",
+          "Snorkeling equipment",
+          "Daily entertainment program",
+          "All meals (Breakfast, Lunch, Dinner)",
+          "Round trip airport transfers",
+          "Access to resort facilities (pools, gym, spa)",
+          "Free Wi-Fi throughout resort"
+        ],
+        "itinerary": [
+          {
+            "day": 1,
+            "title": "Arrival & Beach Relaxation",
+            "activities": [
+              {
+                "time": "10:00 AM",
+                "title": "Arrival",
+                "desc": "Airport Pickup & Resort Check-in. Our representative will greet you at Sharm El Sheikh International Airport and transfer you to your luxury resort. Check-in and receive your welcome drink."
+              },
+              {
+                "time": "12:00 PM",
+                "title": "Welcome Lunch at Resort",
+                "desc": "Savor a delicious buffet lunch featuring international and local Egyptian cuisine at the resort's main restaurant."
+              },
+              {
+                "time": "02:00 PM",
+                "title": "Beach Time & Pool Relaxation",
+                "desc": "Spend the afternoon relaxing on the resort's private beach or by the pool. Take your first dip in the crystal-clear Red Sea waters."
+              },
+              {
+                "time": "07:00 PM",
+                "title": "Dinner & Evening Entertainment",
+                "desc": "Enjoy a gourmet dinner followed by live entertainment at the resort's theater. Shows include traditional folklore shows or international performances."
+              }
+            ]
+          },
+          {
+            "day": 2,
+            "title": "Snorkeling Adventure & Beach Activities",
+            "activities": [
+              {
+                "time": "09:00 AM",
+                "title": "Breakfast & Preparation",
+                "desc": "Breakfast & Preparation. Start your day with a hearty breakfast buffet. Pick up your snorkeling equipment from the water center."
+              },
+              {
+                "time": "11:00 AM",
+                "title": "Guided Snorkeling Tour",
+                "desc": "Join our experienced guide for an unforgettable snorkeling experience at Ras Mohammed National Park or nearby coral reefs. Explore vibrant marine life."
+              },
+              {
+                "time": "01:00 PM",
+                "title": "Beachside Lunch",
+                "desc": "Enjoy lunch at the beach restaurant with stunning sea views. Fresh seafood and salads are our picks."
+              },
+              {
+                "time": "03:00 PM",
+                "title": "Free Time & Water Sports",
+                "desc": "Relax on the beach or try optional activities like diving, parasailing, or banana boat rides (additional cost)."
+              },
+              {
+                "time": "08:00 PM",
+                "title": "Themed Dinner Night",
+                "desc": "Experience a special themed dinner (Italian, Asian, or Egyptian Night depending on the day). Dance the night away at the resort bar."
+              }
+            ]
+          },
+          {
+            "day": 3,
+            "title": "Leisure Morning & Departure",
+            "activities": [
+              {
+                "time": "09:00 AM",
+                "title": "Farewell Breakfast",
+                "desc": "Farewell Breakfast. Start your day with a final breakfast. Soak up remaining sun rays before check-out."
+              },
+              {
+                "time": "11:00 AM",
+                "title": "Final Beach Time",
+                "desc": "Savor the last moments on the beach."
+              },
+              {
+                "time": "12:00 PM",
+                "title": "Check-out & Airport Transfer",
+                "desc": "Check out from the resort. Our driver will transfer you to the airport for your flight home."
+              }
+            ]
+          }
+        ],
+        "hotel": {
+          "name": "Sharm Grand Plaza Resort",
+          "rating": 4.8,
+          "image": "/images/4.jpg",
+          "features": [
+            "5 Stars",
+            "Private Beach",
+            "3 Pools",
+            "Spa & Wellness",
+            "5 Restaurants",
+            "Kids Club"
+          ]
+        },
+        "reviewsList": [
+          {
+            "id": 1,
+            "user": "Ahmed Ali",
+            "rating": 5,
+            "date": "2 days ago",
+            "text": "Absolutely amazing experience! The resort was beautiful, the food was delicious, and the snorkeling was breathtaking. Highly recommend!"
+          },
+          {
+            "id": 2,
+            "user": "Monica Bellucci",
+            "rating": 5,
+            "date": "1 week ago",
+            "text": "A perfect vacation. Everything was organized perfectly, from the airport transfer to the daily activities. Will definitely come back."
+          },
+          {
+            "id": 3,
+            "user": "John Doe",
+            "rating": 4,
+            "date": "2 weeks ago",
+            "text": "Great trip overall. The hotel is fantastic. The only downside was the flight delay, but that's not the agency's fault."
+          }
+        ],
+        "amenities": {
+          "transport": true,
+          "accommodation": true,
+          "meals": 3
+        }
+      },
+      "bookingData": {
+        "date": "1 Dec - 5 Dec 2024",
+        "guests": {
+          "adults": 3,
+          "children": 1
+        }
+      },
+      "pricing": {
+        "basePrice": 12600,
+        "subtotal": 44100,
+        "serviceFee": 2205,
+        "taxes": 6174,
+        "total": 52479,
+        "duration": 4
+      },
+      "status": "pending",
+      "guestInfo": {
+        "firstName": "ahmed",
+        "lastName": "roby",
+        "email": "ahmeeed@gmail.com",
+        "phone": "01096580123",
+        "specialRequests": ""
+      },
+      "paymentInfo": {
+        "method": "arrival",
+        "cardLastFour": null,
+        "cardType": null,
+        "paidAt": null
+      },
+      "paymentStatus": "pending",
+      "bookingNumber": "BK1766226171667340",
+      "bookingDate": "2025-12-20T10:22:51.667Z"
     }
   ]
 }
