@@ -22,15 +22,18 @@
         @click.self="closeModal"
       >
         <!-- Modal Container -->
-        <div class="modal-container bg-base-100 rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-hidden border-2 border-base-300">
+        <div class="modal-container bg-base-100 rounded-lg shadow-2xl max-w-lg w-full max-h-[90vh] overflow-hidden">
           <!-- Modal Header -->
-          <div class="modal-header bg-base-200 px-6 py-4 border-b-2 border-base-300 flex items-center justify-between">
-            <h2 class="text-2xl font-bold font-cairo text-primary">
+          <div class="modal-header px-6 py-5 flex items-center justify-between border-b border-base-300">
+            <h2 class="text-2xl font-bold font-cairo text-base-content">
               Filters
+              <span v-if="activeFiltersCount > 0" class="text-base font-normal text-base-content/60">
+                ( {{ activeFiltersCount }} selected )
+              </span>
             </h2>
             <button 
               @click="closeModal" 
-              class="btn btn-sm btn-ghost btn-circle"
+              class="btn btn-ghost btn-sm btn-square"
             >
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -39,73 +42,99 @@
           </div>
 
           <!-- Modal Body (Scrollable) -->
-          <div class="modal-body overflow-y-auto p-6" style="max-height: calc(90vh - 180px);">
+          <div class="modal-body overflow-y-auto px-6 py-6" style="max-height: calc(90vh - 180px);">
             <!-- Price Filter -->
-            <div v-if="showPriceFilter" class="filter-section">
-              <h3 class="filter-title text-lg font-bold font-cairo text-primary mb-4">
-                Filter By Price
+            <div v-if="showPriceFilter" class="filter-section mb-8">
+              <h3 class="filter-title text-base font-bold font-cairo text-base-content mb-4">
+                {{ priceLabel || 'Filter By Price' }}
               </h3>
-              <div class="price-slider w-full">
+              <div class="price-slider w-full mb-4">
                 <input
                   type="range"
                   :min="priceRange.min"
                   :max="priceRange.max"
                   v-model="tempFilters.maxPrice"
-                  class="range range-primary w-full mb-4"
+                  class="range range-primary w-full"
+                  style="height: 6px;"
                 />
-                <div class="price-inputs flex gap-3 w-full">
-                  <input
-                    type="number"
-                    :value="priceRange.min"
-                    readonly
-                    class="input input-bordered input-sm w-full text-center bg-base-200 font-bold"
-                  />
-                  <input
-                    type="number"
-                    v-model="tempFilters.maxPrice"
-                    :max="priceRange.max"
-                    class="input input-bordered input-sm w-full text-center font-bold"
-                  />
-                </div>
+              </div>
+              <div class="price-inputs flex gap-3 w-full">
+                <input
+                  type="text"
+                  :value="priceRange.min + '$'"
+                  readonly
+                  class="input input-bordered w-full text-center bg-base-100 font-medium text-base-content/70"
+                />
+                <input
+                  type="text"
+                  :value="tempFilters.maxPrice + '$'"
+                  readonly
+                  class="input input-bordered w-full text-center bg-base-100 font-medium text-base-content/70"
+                />
               </div>
             </div>
 
             <!-- Categories Filter -->
-            <div v-if="categoryOptions.length > 0" class="filter-section">
-              <h3 class="filter-title text-lg font-bold font-cairo text-primary mb-4">
-                Categories
+            <div v-if="categoryOptions.length > 0" class="filter-section mb-6">
+              <h3 class="filter-title text-base font-semibold font-cairo text-base-content mb-3">
+                {{ categoryLabel || 'Category' }}
               </h3>
-              <div class="checkbox-group flex flex-col gap-3">
-                <label
-                  v-for="category in categoryOptions"
+              <select 
+                v-model="tempFilters.categorySelected"
+                class="select select-bordered w-full font-cairo text-base-content/60"
+              >
+                <option value="">Select category</option>
+                <option 
+                  v-for="category in categoryOptions" 
                   :key="category.value"
-                  class="checkbox-label cursor-pointer flex items-center gap-3 hover:bg-base-200 p-2 rounded-lg transition-all"
+                  :value="category.value"
                 >
-                  <input
-                    type="checkbox"
-                    :value="category.value"
-                    v-model="tempFilters.categories"
-                    class="checkbox checkbox-primary checkbox-sm"
-                  />
-                  <span class="label-text font-cairo text-base-content font-medium">{{ category.label }}</span>
-                </label>
-              </div>
+                  {{ category.label }}
+                </option>
+              </select>
             </div>
 
-            <!-- Custom Filters -->
+            <!-- Custom Filters (as Select Dropdowns) -->
             <div
               v-for="customFilter in customFilters"
               :key="customFilter.key"
-              class="filter-section"
+              class="filter-section mb-6"
             >
-              <h3 class="filter-title text-lg font-bold font-cairo text-primary mb-4">
+              <h3 class="filter-title text-base font-semibold font-cairo text-base-content mb-3">
                 {{ customFilter.title }}
               </h3>
-              <div class="checkbox-group flex flex-col gap-3">
+              
+              <!-- For single selection filters like transmission -->
+              <select 
+                v-if="customFilter.type === 'single'"
+                v-model="tempFilters[customFilter.key + 'Selected']"
+                class="select select-bordered w-full font-cairo text-base-content/60"
+              >
+                <option value="">Select {{ customFilter.title.toLowerCase() }}</option>
+                <option 
+                  v-for="option in customFilter.options" 
+                  :key="option.value"
+                  :value="option.value"
+                >
+                  {{ option.label }}
+                </option>
+              </select>
+
+              <!-- For date/text inputs -->
+              <input
+                v-else-if="customFilter.inputType === 'date' || customFilter.inputType === 'text' || customFilter.inputType === 'number'"
+                :type="customFilter.inputType"
+                v-model="tempFilters[customFilter.key]"
+                :placeholder="customFilter.placeholder || 'Enter ' + customFilter.title.toLowerCase()"
+                class="input input-bordered w-full font-cairo text-base-content/60"
+              />
+
+              <!-- For multi-selection (checkboxes) - keep as is -->
+              <div v-else class="space-y-2">
                 <label
                   v-for="option in customFilter.options"
                   :key="option.value"
-                  class="checkbox-label cursor-pointer flex items-center gap-3 hover:bg-base-200 p-2 rounded-lg transition-all"
+                  class="flex items-center gap-3 p-2 hover:bg-base-200 rounded-md cursor-pointer transition-colors"
                 >
                   <input
                     type="checkbox"
@@ -120,18 +149,18 @@
           </div>
 
           <!-- Modal Footer -->
-          <div class="modal-footer bg-base-200 px-6 py-4 border-t-2 border-base-300 flex gap-3">
+          <div class="modal-footer px-6 py-4 border-t border-base-300 flex gap-3">
             <button 
               @click="clearFilters" 
               class="btn btn-outline btn-primary flex-1 font-cairo font-bold"
             >
-              Clear Filters
+              Reset All
             </button>
             <button 
               @click="applyFilters" 
               class="btn btn-primary flex-1 font-cairo font-bold"
             >
-              Apply Filters
+              Apply Filter
             </button>
           </div>
         </div>
@@ -150,11 +179,19 @@ const props = defineProps({
   },
   priceRange: {
     type: Object,
-    default: () => ({ min: 200, max: 1000 })
+    default: () => ({ min: 100, max: 1000 })
+  },
+  priceLabel: {
+    type: String,
+    default: 'Filter By Price'
   },
   categoryOptions: {
     type: Array,
     default: () => []
+  },
+  categoryLabel: {
+    type: String,
+    default: 'Category'
   },
   customFilters: {
     type: Array,
@@ -171,13 +208,17 @@ const emit = defineEmits(['filter-change']);
 const isOpen = ref(false);
 const tempFilters = ref({
   maxPrice: props.priceRange.max,
-  categories: [],
+  categorySelected: '',
   ...props.initialFilters
 });
 
-// Initialize custom filter arrays
+// Initialize custom filter fields
 props.customFilters.forEach(filter => {
-  if (!tempFilters.value[filter.key]) {
+  if (filter.type === 'single') {
+    tempFilters.value[filter.key + 'Selected'] = '';
+  } else if (filter.inputType) {
+    tempFilters.value[filter.key] = '';
+  } else {
     tempFilters.value[filter.key] = [];
   }
 });
@@ -186,14 +227,22 @@ props.customFilters.forEach(filter => {
 const activeFiltersCount = computed(() => {
   let count = 0;
   
-  // Check categories
-  if (tempFilters.value.categories?.length > 0) {
-    count += tempFilters.value.categories.length;
+  // Check category
+  if (tempFilters.value.categorySelected) {
+    count++;
   }
   
   // Check custom filters
   props.customFilters.forEach(filter => {
-    if (tempFilters.value[filter.key]?.length > 0) {
+    if (filter.type === 'single') {
+      if (tempFilters.value[filter.key + 'Selected']) {
+        count++;
+      }
+    } else if (filter.inputType) {
+      if (tempFilters.value[filter.key]) {
+        count++;
+      }
+    } else if (Array.isArray(tempFilters.value[filter.key])) {
       count += tempFilters.value[filter.key].length;
     }
   });
@@ -212,18 +261,37 @@ const closeModal = () => {
 };
 
 const applyFilters = () => {
-  emit('filter-change', { ...tempFilters.value });
+  const filtersToApply = { ...tempFilters.value };
+  
+  // Convert single selections to arrays for consistency
+  if (filtersToApply.categorySelected) {
+    filtersToApply.categories = [filtersToApply.categorySelected];
+  }
+  
+  props.customFilters.forEach(filter => {
+    if (filter.type === 'single' && filtersToApply[filter.key + 'Selected']) {
+      filtersToApply[filter.key] = [filtersToApply[filter.key + 'Selected']];
+    }
+  });
+  
+  emit('filter-change', filtersToApply);
   closeModal();
 };
 
 const clearFilters = () => {
   tempFilters.value = {
     maxPrice: props.priceRange.max,
-    categories: [],
+    categorySelected: '',
   };
   
   props.customFilters.forEach(filter => {
-    tempFilters.value[filter.key] = [];
+    if (filter.type === 'single') {
+      tempFilters.value[filter.key + 'Selected'] = '';
+    } else if (filter.inputType) {
+      tempFilters.value[filter.key] = '';
+    } else {
+      tempFilters.value[filter.key] = [];
+    }
   });
   
   emit('filter-change', { ...tempFilters.value });
@@ -240,7 +308,7 @@ watch(() => props.initialFilters, (newFilters) => {
 
 <style scoped>
 .modal-overlay {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
   animation: fadeIn 0.2s ease-out;
 }
@@ -261,7 +329,7 @@ watch(() => props.initialFilters, (newFilters) => {
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(20px) scale(0.95);
+    transform: translateY(20px) scale(0.98);
   }
   to {
     opacity: 1;
@@ -282,38 +350,73 @@ watch(() => props.initialFilters, (newFilters) => {
 
 .modal-enter-from .modal-container,
 .modal-leave-to .modal-container {
-  transform: translateY(20px) scale(0.95);
-}
-
-/* Filter sections */
-.filter-section {
-  margin-bottom: 2rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(200, 106, 65, 0.2);
-}
-
-.filter-section:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
-  padding-bottom: 0;
+  transform: translateY(20px) scale(0.98);
 }
 
 /* Scrollbar styling */
 .modal-body::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 .modal-body::-webkit-scrollbar-track {
-  background: var(--base-200);
-  border-radius: 4px;
+  background: transparent;
 }
 
 .modal-body::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 4px;
+  background: var(--bc, #2F2F2F);
+  opacity: 0.2;
+  border-radius: 3px;
 }
 
 .modal-body::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-focus);
+  opacity: 0.3;
+}
+
+/* Range Slider Custom Styling */
+.range {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.range::-webkit-slider-track {
+  background: linear-gradient(to right, var(--p) 0%, var(--p) 50%, #E5DBC7 50%, #E5DBC7 100%);
+  height: 6px;
+  border-radius: 3px;
+}
+
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--p);
+  cursor: pointer;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+}
+
+.range::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.range::-moz-range-track {
+  background: linear-gradient(to right, var(--p) 0%, var(--p) 50%, #E5DBC7 50%, #E5DBC7 100%);
+  height: 6px;
+  border-radius: 3px;
+}
+
+.range::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--p);
+  cursor: pointer;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 </style>

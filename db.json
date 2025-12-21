@@ -31,16 +31,20 @@
       "name": "Great Pyramids of Giza",
       "city": "Giza",
       "rating": 4.9,
+      "status": "Active",
+      "availability": "Available",
+      "isFeatured": true,
+      "capacity": "18 / 42 Ticket",
       "categories": [
         "TOP PICKS",
         "HISTORICAL",
         "CULTURE"
       ],
       "images": [
-        "/public/images/Attractions/pyramids-main.jpg",
-        "/public/images/Attractions/pyramids-view_2.jpg",
-        "/public/images/Attractions/pyramids-view_3.jpg",
-        "/public/images/Attractions/pyramids-view_4.jpg"
+        "/images/Attractions/pyramids-main.jpg",
+        "/images/Attractions/pyramids-view_2.jpg",
+        "/images/Attractions/pyramids-view_3.jpg",
+        "/images/Attractions/pyramids-view_4.jpg"
       ],
       "latitude": 29.9792,
       "longitude": 31.1342,
@@ -96,6 +100,10 @@
       "name": "Karnak Temple",
       "city": "Luxor",
       "rating": 4.8,
+      "status": "Active",
+      "availability": "Available",
+      "isFeatured": true,
+      "capacity": "25 / 50 Ticket",
       "categories": [
         "TOP PICKS",
         "HISTORICAL",
@@ -103,10 +111,10 @@
         "CULTURE"
       ],
       "images": [
-        "/public/images/Attractions/Karnak-Temple-main.png",
-        "/public/images/Attractions/karnak-view_2.jpg",
-        "/public/images/Attractions/karnak-view_3.jpg",
-        "/public/images/Attractions/karnak-view_4.jpg"
+        "/images/Attractions/Karnak-Temple-main.png",
+        "/images/Attractions/karnak-view_2.jpg",
+        "/images/Attractions/karnak-view_3.jpg",
+        "/images/Attractions/karnak-view_4.jpg"
       ],
       "latitude": 25.7197,
       "longitude": 32.6587,
@@ -162,16 +170,20 @@
       "name": "Salah El-Din Citadel",
       "city": "Cairo",
       "rating": 4.7,
+      "status": "Pending",
+      "availability": "Sold Out",
+      "isFeatured": false,
+      "capacity": "42 / 42 Ticket",
       "categories": [
         "HISTORICAL",
         "CULTURE",
         "TOP PICKS"
       ],
       "images": [
-        "/public/images/Attractions/Salah-El-Din-Citadel-main.png",
-        "/public/images/Attractions/Salah-El-Din-Citadel-view_2.jpg",
-        "/public/images/Attractions/Salah-El-Din-Citadel-view_3.jpg",
-        "/public/images/Attractions/Salah-El-Din-Citadel-view_4.jpg"
+        "/images/Attractions/Salah-El-Din-Citadel-main.png",
+        "/images/Attractions/Salah-El-Din-Citadel-view_2.jpg",
+        "/images/Attractions/Salah-El-Din-Citadel-view_3.jpg",
+        "/images/Attractions/Salah-El-Din-Citadel-view_4.jpg"
       ],
       "latitude": 30.0289,
       "longitude": 31.2625,
@@ -226,6 +238,10 @@
       "name": "Egyptian Museum",
       "city": "Cairo",
       "rating": 4.7,
+      "status": "Active",
+      "availability": "Available",
+      "isFeatured": true,
+      "capacity": "15 / 30 Ticket",
       "categories": [
         "MUSEUMS",
         "HISTORICAL",
@@ -233,10 +249,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/public/images/Attractions/Egyptian-Museum-main.png",
-        "/public/images/Attractions/Egyptian-Museum-view_2.jpg",
-        "/public/images/Attractions/Egyptian-Museum-view_3.jpg",
-        "/public/images/Attractions/Egyptian-Museum-view_4.jpg"
+        "/images/Attractions/Egyptian-Museum-main.png",
+        "/images/Attractions/Egyptian-Museum-view_2.jpg",
+        "/images/Attractions/Egyptian-Museum-view_3.jpg",
+        "/images/Attractions/Egyptian-Museum-view_4.jpg"
       ],
       "latitude": 30.0474,
       "longitude": 31.2365,
@@ -291,16 +307,20 @@
       "name": "Marina Beach",
       "city": "Alexandria",
       "rating": 4.6,
+      "status": "Disabled",
+      "availability": "Sold Out",
+      "isFeatured": false,
+      "capacity": "0 / 20 Ticket",
       "categories": [
         "NATURE",
         "FAMILY",
         "BEACHES"
       ],
       "images": [
-        "/public/images/Attractions/Marina-Beach-main.png",
-        "/public/images/Attractions/Marina-Beach-view_2.jpg",
-        "/public/images/Attractions/Marina-Beach-view_3.jpg",
-        "/public/images/Attractions/Marina-Beach-view_4.jpg"
+        "/images/Attractions/Marina-Beach-main.png",
+        "/images/Attractions/Marina-Beach-view_2.jpg",
+        "/images/Attractions/Marina-Beach-view_3.jpg",
+        "/images/Attractions/Marina-Beach-view_4.jpg"
       ],
       "latitude": 31.2185,
       "longitude": 29.9079,
@@ -355,16 +375,20 @@
       "name": "Valley of the Queens",
       "city": "Luxor",
       "rating": 4.7,
+      "status": "Active",
+      "availability": "Available",
+      "isFeatured": true,
+      "capacity": "10 / 25 Ticket",
       "categories": [
         "HISTORICAL",
         "CULTURE",
         "ANCIENT SITES"
       ],
       "images": [
-        "/public/images/Attractions/Valley-of-the-Queens-main.png",
-        "/public/images/Attractions/Valley-of-the-Queens-view_2.jpg",
-        "/public/images/Attractions/Valley-of-the-Queens-view_3.jpg",
-        "/public/images/Attractions/Valley-of-the-Queens-view_4.jpg"
+        "/images/Attractions/Valley-of-the-Queens-main.png",
+        "/images/Attractions/Valley-of-the-Queens-view_2.jpg",
+        "/images/Attractions/Valley-of-the-Queens-view_3.jpg",
+        "/images/Attractions/Valley-of-the-Queens-view_4.jpg"
       ],
       "latitude": 25.7262,
       "longitude": 32.5857,
@@ -426,10 +450,10 @@
         "CULTURE"
       ],
       "images": [
-        "/public/images/Attractions/AbuSimbel-Temples-main.png",
-        "/public/images/Attractions/AbuSimbel-Temples-view_2.png",
-        "/public/images/Attractions/AbuSimbel-Temples-view_3.png",
-        "/public/images/Attractions/AbuSimbel-Temples-view_4.png"
+        "/images/Attractions/AbuSimbel-Temples-main.png",
+        "/images/Attractions/AbuSimbel-Temples-view_2.png",
+        "/images/Attractions/AbuSimbel-Temples-view_3.png",
+        "/images/Attractions/AbuSimbel-Temples-view_4.png"
       ],
       "latitude": 22.3361,
       "longitude": 31.626,
@@ -490,10 +514,10 @@
         "SHOPPING"
       ],
       "images": [
-        "/public/images/Attractions/Khan-ElKhalili-Bazaar-main.png",
-        "/public/images/Attractions/Khan-ElKhalili-Bazaar-view_2.jpg",
-        "/public/images/Attractions/Khan-ElKhalili-Bazaar-view_3.jpg",
-        "/public/images/Attractions/Khan-ElKhalili-Bazaar-view_4.jpg"
+        "/images/Attractions/Khan-ElKhalili-Bazaar-main.png",
+        "/images/Attractions/Khan-ElKhalili-Bazaar-view_2.jpg",
+        "/images/Attractions/Khan-ElKhalili-Bazaar-view_3.jpg",
+        "/images/Attractions/Khan-ElKhalili-Bazaar-view_4.jpg"
       ],
       "latitude": 30.0475,
       "longitude": 31.2644,
@@ -540,7 +564,8 @@
           "date": "September 2024",
           "comment": "Chaotic but charming! A true sensory overload with amazing spices and handicrafts. Practice your bargaining skills!"
         }
-      ]
+      ],
+      "availability": "Available"
     },
     {
       "id": "9",
@@ -554,10 +579,10 @@
         "ANCIENT SITES"
       ],
       "images": [
-        "/public/images/Attractions/Valley-of-kings-main.png",
-        "/public/images/Attractions/Valley-of-kings-view_2.jpg",
-        "/public/images/Attractions/Valley-of-kings-view_3.jpg",
-        "/public/images/Attractions/Valley-of-kings-view_4.jpg"
+        "/images/Attractions/Valley-of-kings-main.png",
+        "/images/Attractions/Valley-of-kings-view_2.jpg",
+        "/images/Attractions/Valley-of-kings-view_3.jpg",
+        "/images/Attractions/Valley-of-kings-view_4.jpg"
       ],
       "latitude": 25.7408,
       "longitude": 32.601,
@@ -606,7 +631,8 @@
           "date": "November 2024",
           "comment": "The amount of history hidden here is indescribable! I greatly enjoyed the preserved colors."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
       "id": "10",
@@ -619,10 +645,10 @@
         "CULTURE"
       ],
       "images": [
-        "/public/images/Attractions/Mortuary-Temple-of-Hatshepsut-main.png",
-        "/public/images/Attractions/Mortuary-Temple-of-Hatshepsut-view_2.jpg",
-        "/public/images/Attractions/Mortuary-Temple-of-Hatshepsut-view_3.jpg",
-        "/public/images/Attractions/Mortuary-Temple-of-Hatshepsut-view_4.jpg"
+        "/images/Attractions/Mortuary-Temple-of-Hatshepsut-main.png",
+        "/images/Attractions/Mortuary-Temple-of-Hatshepsut-view_2.jpg",
+        "/images/Attractions/Mortuary-Temple-of-Hatshepsut-view_3.jpg",
+        "/images/Attractions/Mortuary-Temple-of-Hatshepsut-view_4.jpg"
       ],
       "latitude": 25.7381,
       "longitude": 32.6074,
@@ -684,10 +710,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/public/images/Attractions/Temple-of-Philae-main.png",
-        "/public/images/Attractions/Temple-of-Philae-view_2.png",
-        "/public/images/Attractions/Temple-of-Philae-view_3.png",
-        "/public/images/Attractions/Temple-of-Philae-view_4.png"
+        "/images/Attractions/Temple-of-Philae-main.png",
+        "/images/Attractions/Temple-of-Philae-view_2.png",
+        "/images/Attractions/Temple-of-Philae-view_3.png",
+        "/images/Attractions/Temple-of-Philae-view_4.png"
       ],
       "latitude": 24.0125,
       "longitude": 32.885,
@@ -734,7 +760,8 @@
           "date": "November 2024",
           "comment": "The setting is breathtaking, especially the transfer by boat. The Temple of Isis is beautifully preserved."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
       "id": "12",
@@ -747,10 +774,10 @@
         "CULTURE"
       ],
       "images": [
-        "/public/images/Attractions/Temple-of-KomOmbo-main.png",
-        "/public/images/Attractions/Temple-of-KomOmbo-view_2.png",
-        "/public/images/Attractions/Temple-of-KomOmbo-view_3.png",
-        "/public/images/Attractions/Temple-of-KomOmbo-view_4.png"
+        "/images/Attractions/Temple-of-KomOmbo-main.png",
+        "/images/Attractions/Temple-of-KomOmbo-view_2.png",
+        "/images/Attractions/Temple-of-KomOmbo-view_3.png",
+        "/images/Attractions/Temple-of-KomOmbo-view_4.png"
       ],
       "latitude": 24.4552,
       "longitude": 32.9555,
@@ -811,10 +838,10 @@
         "HISTORICAL"
       ],
       "images": [
-        "/public/images/Attractions/Nubian-Museum-main.png",
-        "/public/images/Attractions/Nubian-Museum-view_2.png",
-        "/public/images/Attractions/Nubian-Museum-view_3.png",
-        "/public/images/Attractions/Nubian-Museum-view_4.png"
+        "/images/Attractions/Nubian-Museum-main.png",
+        "/images/Attractions/Nubian-Museum-view_2.png",
+        "/images/Attractions/Nubian-Museum-view_3.png",
+        "/images/Attractions/Nubian-Museum-view_4.png"
       ],
       "latitude": 24.0863,
       "longitude": 32.8863,
@@ -863,7 +890,8 @@
           "date": "October 2024",
           "comment": "One of the best modern museums in Egypt. The artifacts are well displayed, and the story of Nubia is compelling."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
       "id": "14",
@@ -876,10 +904,10 @@
         "HISTORICAL"
       ],
       "images": [
-        "/public/images/Attractions/Museum-of-Islamic-Art-main .png",
-        "/public/images/Attractions/Museum-of-Islamic-Art-view_2.png",
-        "/public/images/Attractions/Museum-of-Islamic-Art-view_3.png",
-        "/public/images/Attractions/Museum-of-Islamic-Art-view_4.png"
+        "/images/Attractions/Museum-of-Islamic-Art-main .png",
+        "/images/Attractions/Museum-of-Islamic-Art-view_2.png",
+        "/images/Attractions/Museum-of-Islamic-Art-view_3.png",
+        "/images/Attractions/Museum-of-Islamic-Art-view_4.png"
       ],
       "latitude": 30.0425,
       "longitude": 31.2592,
@@ -927,7 +955,8 @@
           "date": "October 2024",
           "comment": "A true gem! The textiles, ceramics, and metalwork are incredibly detailed. Beautiful and peaceful atmosphere."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
       "id": "15",
@@ -941,10 +970,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/public/images/Attractions/National-Museum-of-Egyptian-Civilization-main.png",
-        "/public/images/Attractions/National-Museum-of-Egyptian-Civilization-view_2.png",
-        "/public/images/Attractions/National-Museum-of-Egyptian-Civilization-view_3.png",
-        "/public/images/Attractions/National-Museum-of-Egyptian-Civilization-view_4.png"
+        "/images/Attractions/National-Museum-of-Egyptian-Civilization-main.png",
+        "/images/Attractions/National-Museum-of-Egyptian-Civilization-view_2.png",
+        "/images/Attractions/National-Museum-of-Egyptian-Civilization-view_3.png",
+        "/images/Attractions/National-Museum-of-Egyptian-Civilization-view_4.png"
       ],
       "latitude": 30.0191,
       "longitude": 31.2372,
@@ -1007,10 +1036,10 @@
         "CULTURE"
       ],
       "images": [
-        "/public/images/Attractions/National-Museum-main.png",
-        "/public/images/Attractions/National-Museum-view_2.png",
-        "/public/images/Attractions/National-Museum-view_3.png",
-        "/public/images/Attractions/National-Museum-view_4.png"
+        "/images/Attractions/National-Museum-main.png",
+        "/images/Attractions/National-Museum-view_2.png",
+        "/images/Attractions/National-Museum-view_3.png",
+        "/images/Attractions/National-Museum-view_4.png"
       ],
       "latitude": 31.2001,
       "longitude": 29.9187,
@@ -1070,10 +1099,10 @@
         "HISTORICAL"
       ],
       "images": [
-        "/public/images/Attractions/Maspero-Museum-main.png",
-        "/public/images/Attractions/Maspero-Museum-view_2.png",
-        "/public/images/Attractions/Maspero-Museum-view_3.png",
-        "/public/images/Attractions/Maspero-Museum-view_4.png"
+        "/images/Attractions/Maspero-Museum-main.png",
+        "/images/Attractions/Maspero-Museum-view_2.png",
+        "/images/Attractions/Maspero-Museum-view_3.png",
+        "/images/Attractions/Maspero-Museum-view_4.png"
       ],
       "latitude": 30.0543,
       "longitude": 31.2429,
@@ -1121,7 +1150,8 @@
           "date": "October 2024",
           "comment": "Smaller collection but some unique pieces. Less busy than the main museums, which is a plus."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
       "id": "18",
@@ -1134,10 +1164,10 @@
         "DIVING"
       ],
       "images": [
-        "/public/images/Attractions/Ras-Mohammed-National-Park-main.png",
-        "/public/images/Attractions/Ras-Mohammed-National-Park-view_2.png",
-        "/public/images/Attractions/Ras-Mohammed-National-Park-view_3.png",
-        "/public/images/Attractions/Ras-Mohammed-National-Park-view_4.png"
+        "/images/Attractions/Ras-Mohammed-National-Park-main.png",
+        "/images/Attractions/Ras-Mohammed-National-Park-view_2.png",
+        "/images/Attractions/Ras-Mohammed-National-Park-view_3.png",
+        "/images/Attractions/Ras-Mohammed-National-Park-view_4.png"
       ],
       "latitude": 27.75,
       "longitude": 34.25,
@@ -1198,10 +1228,10 @@
         "BEACHES"
       ],
       "images": [
-        "/public/images/Attractions/Dahab-Beach-main.png",
-        "/public/images/Attractions/Dahab-Beach-view_2.png",
-        "/public/images/Attractions/Dahab-Beach-view_3.png",
-        "/public/images/Attractions/Dahab-Beach-view_4.png"
+        "/images/Attractions/Dahab-Beach-main.png",
+        "/images/Attractions/Dahab-Beach-view_2.png",
+        "/images/Attractions/Dahab-Beach-view_3.png",
+        "/images/Attractions/Dahab-Beach-view_4.png"
       ],
       "latitude": 28.5,
       "longitude": 34.5167,
@@ -1263,10 +1293,10 @@
         "BEACHES"
       ],
       "images": [
-        "/public/images/Attractions/Red-Sea-main.png",
-        "/public/images/Attractions/Red-Sea-view_2.png",
-        "/public/images/Attractions/Red-Sea-view_3.png",
-        "/public/images/Attractions/Red-Sea-view_4.png"
+        "/images/Attractions/Red-Sea-main.png",
+        "/images/Attractions/Red-Sea-view_2.png",
+        "/images/Attractions/Red-Sea-view_3.png",
+        "/images/Attractions/Red-Sea-view_4.png"
       ],
       "latitude": 27.257,
       "longitude": 33.8123,
@@ -1328,10 +1358,10 @@
         "ADVENTURE"
       ],
       "images": [
-        "/public/images/Attractions/Wadi-ElRayan-main.png",
-        "/public/images/Attractions/Wadi-ElRayan-view_2.png",
-        "/public/images/Attractions/Wadi-ElRayan-view_3.png",
-        "/public/images/Attractions/Wadi-ElRayan-view_4.png"
+        "/images/Attractions/Wadi-ElRayan-main.png",
+        "/images/Attractions/Wadi-ElRayan-view_2.png",
+        "/images/Attractions/Wadi-ElRayan-view_3.png",
+        "/images/Attractions/Wadi-ElRayan-view_4.png"
       ],
       "latitude": 29.1333,
       "longitude": 30.6333,
@@ -1379,7 +1409,8 @@
           "date": "October 2024",
           "comment": "A great escape from the city. The contrast between the lakes and the desert is striking. Don't miss the sand dunes!"
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
       "id": "22",
@@ -1392,10 +1423,10 @@
         "BEACHES"
       ],
       "images": [
-        "/public/images/Attractions/AinSokhna-Beach-main.png",
-        "/public/images/Attractions/AinSokhna-Beach-view_2.png",
-        "/public/images/Attractions/AinSokhna-Beach-view_3.png",
-        "/public/images/Attractions/AinSokhna-Beach-view_4.png"
+        "/images/Attractions/AinSokhna-Beach-main.png",
+        "/images/Attractions/AinSokhna-Beach-view_2.png",
+        "/images/Attractions/AinSokhna-Beach-view_3.png",
+        "/images/Attractions/AinSokhna-Beach-view_4.png"
       ],
       "latitude": 29.623,
       "longitude": 32.32,
@@ -1443,7 +1474,8 @@
           "date": "June 2024",
           "comment": "Great place for a short break. Clean beaches, but you must stay at a resort for the best experience."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
       "id": "23",
@@ -1456,10 +1488,10 @@
         "HISTORICAL"
       ],
       "images": [
-        "/public/images/Attractions/Siwa-Oasis-main.png",
-        "/public/images/Attractions/Siwa-Oasis-view_2.png",
-        "/public/images/Attractions/Siwa-Oasis-view_3.png",
-        "/public/images/Attractions/Siwa-Oasis-view_4.png"
+        "/images/Attractions/Siwa-Oasis-main.png",
+        "/images/Attractions/Siwa-Oasis-view_2.png",
+        "/images/Attractions/Siwa-Oasis-view_3.png",
+        "/images/Attractions/Siwa-Oasis-view_4.png"
       ],
       "latitude": 29.2045,
       "longitude": 25.5195,
@@ -1520,10 +1552,10 @@
         "ANCIENT SITES"
       ],
       "images": [
-        "/public/images/Attractions/Colossi-Memnon-main.png",
-        "/public/images/Attractions/Colossi-Memnon-view_2.png",
-        "/public/images/Attractions/Colossi-Memnon-view_3.png",
-        "/public/images/Attractions/Colossi-Memnon-view_4.png"
+        "/images/Attractions/Colossi-Memnon-main.png",
+        "/images/Attractions/Colossi-Memnon-view_2.png",
+        "/images/Attractions/Colossi-Memnon-view_3.png",
+        "/images/Attractions/Colossi-Memnon-view_4.png"
       ],
       "latitude": 25.7208,
       "longitude": 32.6095,
@@ -1569,7 +1601,8 @@
           "date": "September 2024",
           "comment": "A great, free photo stop on the way to the Valley of the Kings. Impressive scale and history."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
       "id": "25",
@@ -1582,10 +1615,10 @@
         "CULTURE"
       ],
       "images": [
-        "/public/images/Attractions/Temple-of-Edfu-main.png",
-        "/public/images/Attractions/Temple-of-Edfu-view_2.png",
-        "/public/images/Attractions/Temple-of-Edfu-view_3.png",
-        "/public/images/Attractions/Temple-of-Edfu-view_4.png"
+        "/images/Attractions/Temple-of-Edfu-main.png",
+        "/images/Attractions/Temple-of-Edfu-view_2.png",
+        "/images/Attractions/Temple-of-Edfu-view_3.png",
+        "/images/Attractions/Temple-of-Edfu-view_4.png"
       ],
       "latitude": 24.9818,
       "longitude": 32.8711,
@@ -1632,7 +1665,8 @@
           "date": "October 2024",
           "comment": "Incredible temple. The reliefs are so clear and detailed. Getting there by Kalesh from the boat was fun."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
       "id": "26",
@@ -1646,10 +1680,10 @@
         "CULTURE"
       ],
       "images": [
-        "/public/images/Attractions/Luxor-Temple-main.png",
-        "/public/images/Attractions/Luxor-Temple-view_2.png",
-        "/public/images/Attractions/Luxor-Temple-view_3.png",
-        "/public/images/Attractions/Luxor-Temple-view_4.png"
+        "/images/Attractions/Luxor-Temple-main.png",
+        "/images/Attractions/Luxor-Temple-view_2.png",
+        "/images/Attractions/Luxor-Temple-view_3.png",
+        "/images/Attractions/Luxor-Temple-view_4.png"
       ],
       "latitude": 25.6989,
       "longitude": 32.6394,
@@ -1697,7 +1731,8 @@
           "date": "October 2024",
           "comment": "Walking through history in the middle of a modern city is surreal. Go at sunset or after dark for the best photos."
         }
-      ]
+      ],
+      "isFeatured": false
     },
     {
       "id": "27",
@@ -1710,10 +1745,10 @@
         "CULTURE"
       ],
       "images": [
-        "/public/images/Attractions/Great-Sphinx-main.png",
-        "/public/images/Attractions/Great-Sphinx-view_2.png",
-        "/public/images/Attractions/Great-Sphinx-view_3.png",
-        "/public/images/Attractions/Great-Sphinx-view_4.png"
+        "/images/Attractions/Great-Sphinx-main.png",
+        "/images/Attractions/Great-Sphinx-view_2.png",
+        "/images/Attractions/Great-Sphinx-view_3.png",
+        "/images/Attractions/Great-Sphinx-view_4.png"
       ],
       "latitude": 29.9752,
       "longitude": 31.1376,
@@ -1760,7 +1795,8 @@
           "date": "November 2024",
           "comment": "Iconic photo opportunity. The scale is massive and it perfectly complements the pyramids."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
       "id": "28",
@@ -1772,10 +1808,10 @@
         "ANCIENT SITES"
       ],
       "images": [
-        "/public/images/Attractions/Dahshur-Pyramids-main.png",
-        "/public/images/Attractions/Dahshur-Pyramids-view_2.png",
-        "/public/images/Attractions/Dahshur-Pyramids-view_3.png",
-        "/public/images/Attractions/Dahshur-Pyramids-view_4.png"
+        "/images/Attractions/Dahshur-Pyramids-main.png",
+        "/images/Attractions/Dahshur-Pyramids-view_2.png",
+        "/images/Attractions/Dahshur-Pyramids-view_3.png",
+        "/images/Attractions/Dahshur-Pyramids-view_4.png"
       ],
       "latitude": 29.8185,
       "longitude": 31.2003,
@@ -1821,7 +1857,8 @@
           "date": "September 2024",
           "comment": "Great to be able to go inside the Red Pyramid without the Giza crowds. A bit of a drive, but worth it for history buffs."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
       "id": "29",
@@ -1834,10 +1871,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/public/images/Attractions/White-Desert-main.png",
-        "/public/images/Attractions/White-Desert-view_2.png",
-        "/public/images/Attractions/White-Desert-view_3.png",
-        "/public/images/Attractions/White-Desert-view_4.png"
+        "/images/Attractions/White-Desert-main.png",
+        "/images/Attractions/White-Desert-view_2.png",
+        "/images/Attractions/White-Desert-view_3.png",
+        "/images/Attractions/White-Desert-view_4.png"
       ],
       "latitude": 27.0333,
       "longitude": 27.9942,
@@ -1884,7 +1921,8 @@
           "date": "November 2024",
           "comment": "One of the most unique landscapes in the world. The overnight trip is a must. The quietness and the stars are phenomenal."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
       "id": "30",
@@ -1897,10 +1935,10 @@
         "MUSEUMS"
       ],
       "images": [
-        "/public/images/Attractions/Bibliotheca-Alexandrina-main.png",
-        "/public/images/Attractions/Bibliotheca-Alexandrina-view_2.png",
-        "/public/images/Attractions/Bibliotheca-Alexandrina-view_3.png",
-        "/public/images/Attractions/Bibliotheca-Alexandrina-view_4.png"
+        "/images/Attractions/Bibliotheca-Alexandrina-main.png",
+        "/images/Attractions/Bibliotheca-Alexandrina-view_2.png",
+        "/images/Attractions/Bibliotheca-Alexandrina-view_3.png",
+        "/images/Attractions/Bibliotheca-Alexandrina-view_4.png"
       ],
       "latitude": 31.2084,
       "longitude": 29.9079,
@@ -1950,7 +1988,8 @@
           "date": "September 2024",
           "comment": "A must-see in Alexandria. The sheer scale and modern design are impressive, a true revival of the ancient spirit."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
       "id": "31",
@@ -1963,10 +2002,10 @@
         "CULTURE"
       ],
       "images": [
-        "/public/images/Attractions/Saint-Catherine's-Monastery-main.png",
-        "/public/images/Attractions/Saint-Catherine's-Monastery-view_2.png",
-        "/public/images/Attractions/Saint-Catherine's-Monastery-view_3.png",
-        "/public/images/Attractions/Saint-Catherine's-Monastery-view_4.png"
+        "/images/Attractions/Saint-Catherine's-Monastery-main.png",
+        "/images/Attractions/Saint-Catherine's-Monastery-view_2.png",
+        "/images/Attractions/Saint-Catherine's-Monastery-view_3.png",
+        "/images/Attractions/Saint-Catherine's-Monastery-view_4.png"
       ],
       "latitude": 28.5574,
       "longitude": 33.9754,
@@ -2026,10 +2065,10 @@
         "HISTORICAL"
       ],
       "images": [
-        "/public/images/Attractions/AlMontazah-Palace-main.png",
-        "/public/images/Attractions/AlMontazah-Palace-view_2.png",
-        "/public/images/Attractions/AlMontazah-Palace-view_3.png",
-        "/public/images/Attractions/AlMontazah-Palace-view_4.png"
+        "/images/Attractions/AlMontazah-Palace-main.png",
+        "/images/Attractions/AlMontazah-Palace-view_2.png",
+        "/images/Attractions/AlMontazah-Palace-view_3.png",
+        "/images/Attractions/AlMontazah-Palace-view_4.png"
       ],
       "latitude": 31.2828,
       "longitude": 30.0075,
@@ -2077,7 +2116,8 @@
           "date": "June 2024",
           "comment": "Beautiful gardens for a leisurely walk. The palace is grand from the outside. Great for families and picnics."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
       "id": "33",
@@ -2090,10 +2130,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/public/images/Attractions/Qaitbay-Citadel-main.png",
-        "/public/images/Attractions/Qaitbay-Citadel-view_2.png",
-        "/public/images/Attractions/Qaitbay-Citadel-view_3.png",
-        "/public/images/Attractions/Qaitbay-Citadel-view_4.png"
+        "/images/Attractions/Qaitbay-Citadel-main.png",
+        "/images/Attractions/Qaitbay-Citadel-view_2.png",
+        "/images/Attractions/Qaitbay-Citadel-view_3.png",
+        "/images/Attractions/Qaitbay-Citadel-view_4.png"
       ],
       "latitude": 31.2141,
       "longitude": 29.8856,
@@ -2154,10 +2194,10 @@
         "CULTURE"
       ],
       "images": [
-        "/public/images/Attractions/Catacombs-of-Kom-ElShoqafa-main.png",
-        "/public/images/Attractions/Catacombs-of-Kom-ElShoqafa-view_2.png",
-        "/public/images/Attractions/Catacombs-of-Kom-ElShoqafa-view_3.png",
-        "/public/images/Attractions/Catacombs-of-Kom-ElShoqafa-view_4.png"
+        "/images/Attractions/Catacombs-of-Kom-ElShoqafa-main.png",
+        "/images/Attractions/Catacombs-of-Kom-ElShoqafa-view_2.png",
+        "/images/Attractions/Catacombs-of-Kom-ElShoqafa-view_3.png",
+        "/images/Attractions/Catacombs-of-Kom-ElShoqafa-view_4.png"
       ],
       "latitude": 31.1819,
       "longitude": 29.8973,
@@ -2217,10 +2257,10 @@
         "BEACHES"
       ],
       "images": [
-        "/public/images/Attractions/Ras-ElBarr-main.png",
-        "/public/images/Attractions/Ras-ElBarr-view_2.png",
-        "/public/images/Attractions/Ras-ElBarr-view_3.png",
-        "/public/images/Attractions/Ras-ElBarr-view_4.png"
+        "/images/Attractions/Ras-ElBarr-main.png",
+        "/images/Attractions/Ras-ElBarr-view_2.png",
+        "/images/Attractions/Ras-ElBarr-view_3.png",
+        "/images/Attractions/Ras-ElBarr-view_4.png"
       ],
       "latitude": 31.503,
       "longitude": 31.839,
@@ -2281,10 +2321,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/public/images/Attractions/Al-Azhar-Park-main.png",
-        "/public/images/Attractions/Al-Azhar-Park-view_2.png",
-        "/public/images/Attractions/Al-Azhar-Park-view_3.png",
-        "/public/images/Attractions/Al-Azhar-Park-view_4.png"
+        "/images/Attractions/Al-Azhar-Park-main.png",
+        "/images/Attractions/Al-Azhar-Park-view_2.png",
+        "/images/Attractions/Al-Azhar-Park-view_3.png",
+        "/images/Attractions/Al-Azhar-Park-view_4.png"
       ],
       "latitude": 30.0402,
       "longitude": 31.2687,
@@ -2345,10 +2385,10 @@
         "CULTURE"
       ],
       "images": [
-        "/public/images/Attractions/the-Hanging-Church-main.png",
-        "/public/images/Attractions/the-Hanging-Church-view_2.png",
-        "/public/images/Attractions/the-Hanging-Church-view_3.png",
-        "/public/images/Attractions/the-Hanging-Church-view_4.png"
+        "/images/Attractions/the-Hanging-Church-main.png",
+        "/images/Attractions/the-Hanging-Church-view_2.png",
+        "/images/Attractions/the-Hanging-Church-view_3.png",
+        "/images/Attractions/the-Hanging-Church-view_4.png"
       ],
       "latitude": 30.006,
       "longitude": 31.2335,
@@ -2408,10 +2448,10 @@
         "CULTURE"
       ],
       "images": [
-        "/public/images/Attractions/Mosque-of-IbnTulun-main.png",
-        "/public/images/Attractions/Mosque-of-IbnTulun-view_2.png",
-        "/public/images/Attractions/Mosque-of-IbnTulun-view_3.png",
-        "/public/images/Attractions/Mosque-of-IbnTulun-view_4.png"
+        "/images/Attractions/Mosque-of-IbnTulun-main.png",
+        "/images/Attractions/Mosque-of-IbnTulun-view_2.png",
+        "/images/Attractions/Mosque-of-IbnTulun-view_3.png",
+        "/images/Attractions/Mosque-of-IbnTulun-view_4.png"
       ],
       "latitude": 30.0234,
       "longitude": 31.2372,
@@ -2470,10 +2510,10 @@
         "ADVENTURE"
       ],
       "images": [
-        "/public/images/Attractions/Wadi-Degla-Protectorate-main.png",
-        "/public/images/Attractions/Wadi-Degla-Protectorate-view_2.png",
-        "/public/images/Attractions/Wadi-Degla-Protectorate-view_3.png",
-        "/public/images/Attractions/Wadi-Degla-Protectorate-view_4.png"
+        "/images/Attractions/Wadi-Degla-Protectorate-main.png",
+        "/images/Attractions/Wadi-Degla-Protectorate-view_2.png",
+        "/images/Attractions/Wadi-Degla-Protectorate-view_3.png",
+        "/images/Attractions/Wadi-Degla-Protectorate-view_4.png"
       ],
       "latitude": 29.95,
       "longitude": 31.35,
@@ -2533,10 +2573,10 @@
         "SHOPPING"
       ],
       "images": [
-        "/public/images/Attractions/traditional-from-Al-Fustat-main.png",
-        "/images/fustat_pottery/view_2.jpg",
-        "/images/fustat_pottery/view_3.jpg",
-        "/images/fustat_pottery/view_4.jpg"
+        "/images/Attractions/traditional-from-Al-Fustat-main.png",
+        "/images/Attractions/fustat_pottery/view_2.jpg",
+        "/images/Attractions/fustat_pottery/view_3.jpg",
+        "/images/Attractions/fustat_pottery/view_4.jpg"
       ],
       "latitude": 30.009,
       "longitude": 31.2335,

@@ -17,11 +17,16 @@ import Wishlist from '@/Views/UserAccount/Wishlist.vue'
 import Reservations from '@/Views/UserAccount/Reservations.vue'
 
 // Dashboard
+import DashboardLayout from '@/Layouts/DashboardLayout.vue'
+import Overview from '@/Views/Dashboard/Overview.vue'
+import Analytics from '@/Views/Dashboard/Analytics.vue'
+import Bookings from '@/Views/Dashboard/Bookings.vue'
+import CustomerSupport from '@/Views/Dashboard/CustomerSupport.vue'
 import UsersManage from '@/Views/Dashboard/UsersManage.vue'
 import TripsManage from '@/Views/Dashboard/TripsManage.vue'
 import HotelsManage from '@/Views/Dashboard/HotelsMange.vue'
 import CarsManage from '@/Views/Dashboard/CarsManage.vue'
-import PaymentManage from '@/Views/Dashboard/PaymentManage.vue'
+import AttractionsManage from '@/Views/Dashboard/AttractionsManage.vue'
 
 // AI
 import AiCollectData from '@/Views/Ai/AiCollectData.vue'
@@ -119,36 +124,58 @@ const routes = [
     meta: { requiresAuth: false },
   },
 
-  // Dashboard Routes (Protected)
+  // Dashboard Routes (Protected) - Using nested routing with DashboardLayout
   {
-    path: '/dashboard/users-manage',
-    name: 'UsersManage',
-    component: UsersManage,
+    path: '/dashboard',
+    component: DashboardLayout,
     meta: { requiresAuth: false },
-  },
-  {
-    path: '/dashboard/trips-manage',
-    name: 'TripsManage',
-    component: TripsManage,
-    meta: { requiresAuth: false },
-  },
-  {
-    path: '/dashboard/hotels-manage',
-    name: 'HotelsManage',
-    component: HotelsManage,
-    meta: { requiresAuth: false },
-  },
-  {
-    path: '/dashboard/cars-manage',
-    name: 'CarsManage',
-    component: CarsManage,
-    meta: { requiresAuth: false },
-  },
-  {
-    path: '/dashboard/payment-manage',
-    name: 'PaymentManage',
-    component: PaymentManage,
-    meta: { requiresAuth: false },
+    children: [
+      {
+        path: 'overview',
+        name: 'Overview',
+        component: Overview,
+      },
+      {
+        path: 'analytics',
+        name: 'Analytics',
+        component: Analytics,
+      },
+      {
+        path: 'bookings',
+        name: 'Bookings',
+        component: Bookings,
+      },
+      {
+        path: 'support',
+        name: 'CustomerSupport',
+        component: CustomerSupport,
+      },
+      {
+        path: 'users-manage',
+        name: 'UsersManage',
+        component: UsersManage,
+      },
+      {
+        path: 'trips-manage',
+        name: 'TripsManage',
+        component: TripsManage,
+      },
+      {
+        path: 'hotels-manage',
+        name: 'HotelsManage',
+        component: HotelsManage,
+      },
+      {
+        path: 'cars-manage',
+        name: 'CarsManage',
+        component: CarsManage,
+      },
+      {
+        path: 'attractions-manage',
+        name: 'AttractionsManage',
+        component: AttractionsManage,
+      },
+    ],
   },
 
   // AI Routes (Protected)
