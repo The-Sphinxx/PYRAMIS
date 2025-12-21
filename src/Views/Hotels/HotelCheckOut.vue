@@ -7,7 +7,7 @@ import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 import { useAuthStore } from '@/stores/authStore';
 import { useRoute, useRouter } from 'vue-router';
-import { useHotelStore } from '@/stores/hotelsStore';
+import { useHotelsStore } from '@/stores/hotelsStore';
 import StepIndicator from '@/components/Common/StepIndicator.vue';
 import GuestInfoForm from '@/components/Common/GuestInfoForm.vue';
 import PriceSummary from '@/components/Common/PriceSummary.vue';
@@ -15,7 +15,7 @@ import { calculateBookingCosts } from '@/Utils/bookingCalculator.js';
 
 const route = useRoute();
 const router = useRouter();
-const hotelStore = useHotelStore();
+const hotelStore = useHotelsStore();
 const authStore = useAuthStore();
 
 const hotel = ref(null);
@@ -68,7 +68,8 @@ const handleConfirm = async () => {
   submitting.value = true;
   try {
     const user = authStore.user;
-    const bookingUserId = user ? user.id : '1'; // Fallback
+    // Use logged-in user ID, or generate a unique guest ID to prevent data mixing
+    const bookingUserId = user ? user.id : `guest_${Date.now()}`;
 
     const newBooking = {
       userId: bookingUserId,

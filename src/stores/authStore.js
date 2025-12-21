@@ -34,12 +34,35 @@ export const useAuthStore = defineStore('auth', () => {
       }
 
       // Create new user
+      // Helper for default images
+      const defaultImages = [
+        '/images/users/user_m_1.jpg',
+        '/images/users/user_f_2.jpg',
+        '/images/users/user_m_3.jpg',
+        '/images/users/user_f_4.jpg'
+      ];
+      const randomImage = defaultImages[Math.floor(Math.random() * defaultImages.length)];
+
+      const nameParts = userData.fullName.trim().split(' ');
+      const firstName = nameParts[0];
+      const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
+
+      // Create new user with complete profile data
       const newUser = {
         id: Date.now().toString(),
         fullName: userData.fullName,
+        firstName: firstName,
+        lastName: lastName,
         email: userData.email,
-        password: userData.password, // في الواقع لازم يتعمل hash
-        createdAt: new Date().toISOString()
+        password: userData.password, 
+        phone: '',
+        dateOfBirth: null,
+        nationality: '',
+        gender: '',
+        profileImage: randomImage,
+        isVerified: false,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
       };
 
       const response = await fetch('http://localhost:3000/users', {
@@ -169,6 +192,43 @@ export const useAuthStore = defineStore('auth', () => {
     }
   };
 
+  // Update Profile
+  const updateProfile = async (updatedData) => {
+    try {
+      if (!user.value || !user.value.id) {
+        throw new Error('No user logged in');
+      }
+
+      const response = await fetch(`http://localhost:3000/users/${user.value.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedData),
+      });
+
+      if (response.ok) {
+        const updatedUser = await response.json();
+        
+        // Remove password before storing
+        const userWithoutPassword = { ...updatedUser };
+        delete userWithoutPassword.password;
+
+        user.value = userWithoutPassword;
+        
+        // Update localStorage
+        localStorage.setItem('user', JSON.stringify(userWithoutPassword));
+        
+        return { success: true };
+      } else {
+        return { success: false, error: 'Failed to update profile' };
+      }
+    } catch (error) {
+      console.error('Update profile error:', error);
+      return { success: false, error: error.message };
+    }
+  };
+
   // Logout
   const logout = () => {
     user.value = null;
@@ -185,6 +245,7 @@ export const useAuthStore = defineStore('auth', () => {
     register,
     login,
     loginWithGoogle,
+    updateProfile,
     logout
   };
 });
