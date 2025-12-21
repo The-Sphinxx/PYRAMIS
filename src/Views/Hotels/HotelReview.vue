@@ -84,14 +84,14 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useHotelStore } from '@/stores/hotelsStore';
+import { useHotelsStore } from '@/stores/hotelsStore';
 import StepIndicator from '@/components/Common/StepIndicator.vue';
 import PriceSummary from '@/components/Common/PriceSummary.vue';
 import { calculateBookingCosts } from '@/Utils/bookingCalculator.js';
 
 const route = useRoute();
 const router = useRouter();
-const hotelStore = useHotelStore();
+const hotelStore = useHotelsStore();
 
 const hotel = ref(null);
 const bookingData = ref({

@@ -26,7 +26,7 @@
             class="btn btn-outline btn-sm gap-2"
           >
             <i class="fas fa-user-edit"></i>
-            تعديل الملف الشخصي
+           Edit your profile
           </button>
         </div>
       </div>
