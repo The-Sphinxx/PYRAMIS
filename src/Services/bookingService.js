@@ -170,9 +170,9 @@ const bookingService = {
    */
   detectCardType(cardNumber) {
     if (!cardNumber) return null;
-    
+
     const number = cardNumber.replace(/\s/g, '');
-    
+
     // Visa
     if (/^4/.test(number)) return 'Visa';
     // Mastercard
@@ -181,7 +181,7 @@ const bookingService = {
     if (/^3[47]/.test(number)) return 'American Express';
     // Discover
     if (/^6(?:011|5)/.test(number)) return 'Discover';
-    
+
     return 'Unknown';
   },
 
@@ -197,9 +197,9 @@ const bookingService = {
           status: 'confirmed'
         }
       });
-      
+
       const existingBookings = response.data;
-      
+
       // Check if dates overlap with existing bookings
       // This is a simple implementation - you may need more complex logic
       const isAvailable = !existingBookings.some(booking => {
@@ -207,12 +207,12 @@ const bookingService = {
         const bookingEnd = new Date(booking.endDate);
         const requestStart = new Date(dates.startDate);
         const requestEnd = new Date(dates.endDate);
-        
+
         return (requestStart >= bookingStart && requestStart <= bookingEnd) ||
-               (requestEnd >= bookingStart && requestEnd <= bookingEnd) ||
-               (requestStart <= bookingStart && requestEnd >= bookingEnd);
+          (requestEnd >= bookingStart && requestEnd <= bookingEnd) ||
+          (requestStart <= bookingStart && requestEnd >= bookingEnd);
       });
-      
+
       return { isAvailable, existingBookings };
     } catch (error) {
       console.error('Error checking availability:', error);

@@ -127,7 +127,14 @@ const priceBreakdownLabel = computed(() => {
       return `${formatPrice(props.costs.basePrice)} × ${days} ${days === 1 ? 'day' : 'days'}`;
       
     case 'trip':
-      const travelers = props.bookingData.travelers || 1;
+      const tripGuests = props.bookingData.guests;
+      if (tripGuests && typeof tripGuests === 'object') {
+          const parts = [];
+          if (tripGuests.adults) parts.push(`${tripGuests.adults} Adults`);
+          if (tripGuests.children) parts.push(`${tripGuests.children} Children`);
+          return parts.join(', ');
+      }
+      const travelers = props.bookingData.travelers || props.bookingData.guests || 1;
       return `${formatPrice(props.costs.basePrice)} × ${travelers} ${travelers === 1 ? 'person' : 'persons'}`;
       
     default:

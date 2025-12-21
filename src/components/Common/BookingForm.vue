@@ -110,24 +110,61 @@
 
     <!-- Trip Booking Form -->
     <div v-else-if="type === 'trip'" class="space-y-4">
-      <DatePicker
-        v-model="localBookingData.date"
-        :min-date="today"
-        label="Select Date"
-        placeholder="mm/dd/yyyy"
-        @update:modelValue="updateField('date', $event)"
-      />
+       <!-- Dates -->
+       <div v-if="availableDates && availableDates.length">
+            <label class="label text-sm font-bold text-base-content/70 font-cairo pb-1">Select Date</label>
+            <div class="flex flex-col gap-2">
+                <div 
+                    v-for="(date, idx) in availableDates" 
+                    :key="idx"
+                    class="bg-base-200/50 rounded-lg p-3 flex justify-between items-center cursor-pointer border transition-all hover:border-primary/50"
+                    :class="localBookingData.date === date ? 'border-primary bg-primary/5 ring-1 ring-primary' : 'border-transparent'"
+                    @click="updateField('date', date)"
+                >
+                    <span class="font-bold text-sm">{{ date }}</span>
+                    <div class="w-4 h-4 rounded-full border border-base-content/20 flex items-center justify-center">
+                        <div v-if="localBookingData.date === date" class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-else>
+             <!-- Fallback if no specific dates provided -->
+              <DatePicker
+                v-model="localBookingData.date"
+                :min-date="today"
+                label="Select Date"
+                placeholder="mm/dd/yyyy"
+                @update:modelValue="updateField('date', $event)"
+              />
+        </div>
 
-      <GuestSelector
-        v-model="localBookingData.travelers"
-        label="Travelers"
-        icon="travelers"
-        singular-label="Traveler"
-        plural-label="Travelers"
-        :min="1"
-        :max="50"
-        @update:modelValue="updateField('travelers', $event)"
-      />
+        <!-- Guests (Adults/Children) -->
+        <div> 
+            <label class="label text-sm font-bold text-base-content/70 font-cairo pb-1">Guests</label>
+            <div class="bg-base-200/50 rounded-lg p-1 flex items-center justify-between border border-transparent hover:border-base-content/10">
+                    <div class="p-2">
+                        <span class="block text-xs font-bold text-base-content/80">Adults</span>
+                        <span class="text-xs text-base-content/40">Age 13+</span>
+                    </div>
+                    <div class="flex items-center gap-3 pr-2">
+                        <button class="btn btn-circle btn-xs btn-ghost bg-white shadow-sm" type="button" @click="updateTripGuests('adults', -1)" :disabled="localBookingData.guests.adults <= 1">-</button>
+                        <span class="font-bold w-4 text-center">{{ localBookingData.guests.adults }}</span>
+                        <button class="btn btn-circle btn-xs btn-ghost bg-white shadow-sm" type="button" @click="updateTripGuests('adults', 1)" :disabled="localBookingData.guests.adults >= (maxPeople || 10)">+</button>
+                    </div>
+            </div>
+                <div class="bg-base-200/50 rounded-lg p-1 flex items-center justify-between border border-transparent hover:border-base-content/10 mt-2">
+                    <div class="p-2">
+                        <span class="block text-xs font-bold text-base-content/80">Children</span>
+                        <span class="text-xs text-base-content/40">Age 2-12</span>
+                    </div>
+                    <div class="flex items-center gap-3 pr-2">
+                        <button class="btn btn-circle btn-xs btn-ghost bg-white shadow-sm" type="button" @click="updateTripGuests('children', -1)" :disabled="localBookingData.guests.children <= 0">-</button>
+                        <span class="font-bold w-4 text-center">{{ localBookingData.guests.children }}</span>
+                        <button class="btn btn-circle btn-xs btn-ghost bg-white shadow-sm" type="button" @click="updateTripGuests('children', 1)">+</button>
+                    </div>
+            </div>
+        </div>
     </div>
 
     <!-- Cost Breakdown -->
@@ -207,6 +244,14 @@ const props = defineProps({
   loading: {
     type: Boolean,
     default: false
+  },
+  availableDates: {
+    type: Array,
+    default: () => []
+  },
+  maxPeople: {
+    type: Number,
+    default: 10
   }
 });
 
@@ -254,7 +299,7 @@ function getDefaultData() {
     case 'car':
       return { pickupDate: null, returnDate: null, pickupTime: null, passengers: 2, days: 0 };
     case 'trip':
-      return { ...baseData, travelers: 2 };
+      return { ...baseData, guests: { adults: 2, children: 0 } };
     default:
       return baseData;
   }
@@ -291,6 +336,13 @@ const costBreakdownLabel = computed(() => {
     case 'car':
       return `${formattedBasePrice.value} × ${duration} ${duration === 1 ? 'day' : 'days'}`;
     case 'trip':
+      if (localBookingData.value.guests && typeof localBookingData.value.guests === 'object') {
+           const { adults, children } = localBookingData.value.guests;
+           const parts = [];
+           if (adults) parts.push(`${adults} Adults`);
+           if (children) parts.push(`${children} Children`);
+           return parts.join(', ');
+      }
       return `${formattedBasePrice.value} × ${count} ${count === 1 ? 'person' : 'persons'}`;
     default:
       return '';
@@ -312,6 +364,9 @@ function getCountValue() {
     case 'car':
       return 1;
     case 'trip':
+      if (localBookingData.value.guests && typeof localBookingData.value.guests === 'object') {
+          return (localBookingData.value.guests.adults || 0) + (localBookingData.value.guests.children || 0);
+      }
       return localBookingData.value.travelers || 1;
     default:
       return 1;
@@ -373,4 +428,26 @@ function handleBooking() {
 watch(() => props.basePrice, () => {
   validationErrors.value = [];
 });
+
+function updateTripGuests(type, change) {
+    if (!localBookingData.value.guests) {
+        localBookingData.value.guests = { adults: 2, children: 0 };
+    }
+    
+    // Initialize if missing
+    if (type === 'adults' && localBookingData.value.guests.adults === undefined) localBookingData.value.guests.adults = 2;
+    if (type === 'children' && localBookingData.value.guests.children === undefined) localBookingData.value.guests.children = 0;
+
+    if (type === 'adults') {
+        const newVal = localBookingData.value.guests.adults + change;
+        if (newVal >= 1 && newVal <= props.maxPeople) {
+            localBookingData.value.guests.adults = newVal;
+        }
+    } else if (type === 'children') {
+         const newVal = localBookingData.value.guests.children + change;
+         if (newVal >= 0) {
+             localBookingData.value.guests.children = newVal;
+         }
+    }
+}
 </script>

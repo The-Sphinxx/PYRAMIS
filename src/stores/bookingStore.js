@@ -1,7 +1,6 @@
-// stores/bookingStore.js
 import { defineStore } from 'pinia';
 import bookingService from '../Services/bookingService';
-import { calculateBookingCosts, validateBookingData } from '../Utils/bookingCalculator';
+import { calculateBookingCosts, validateBookingData, extractPrice } from '../Utils/bookingCalculator';
 
 export const useBookingStore = defineStore('booking', {
     state: () => ({
@@ -71,8 +70,8 @@ export const useBookingStore = defineStore('booking', {
             this.bookingInProgress = {
                 type,
                 itemId,
-                itemName: itemData.name,
-                basePrice: itemData.price,
+                itemName: itemData.name || itemData.title,
+                basePrice: extractPrice(itemData.price),
                 itemData,
                 bookingData: this.getDefaultBookingData(type)
             };
@@ -116,7 +115,7 @@ export const useBookingStore = defineStore('booking', {
                 case 'trip':
                     return {
                         ...baseData,
-                        travelers: 2
+                        guests: { adults: 2, children: 0 }
                     };
 
                 default:
@@ -149,7 +148,7 @@ export const useBookingStore = defineStore('booking', {
                     const days = Math.ceil(
                         (new Date(returnDate) - new Date(pickupDate)) / (1000 * 60 * 60 * 24)
                     );
-                this.bookingInProgress.bookingData.days = Math.max(0, days);
+                    this.bookingInProgress.bookingData.days = Math.max(0, days);
                 }
             }
             this.persistState();
@@ -225,17 +224,16 @@ export const useBookingStore = defineStore('booking', {
                     type: this.bookingInProgress.type,
                     itemId: this.bookingInProgress.itemId,
                     itemName: this.bookingInProgress.itemName,
-                    itemData: this.bookingInProgress.itemData, // Key fix: Preserve item details (coords, city, etc.)
+                    itemData: this.bookingInProgress.itemData,
                     bookingData: this.bookingInProgress.bookingData,
                     pricing: costs,
                     status: 'pending',
-                    // Pass structured guest info and other checkout data
                     guestInfo,
-                    paymentMethod: checkoutData.paymentMethod,
-                    cardNumber: checkoutData.cardNumber,
-                    cardName: checkoutData.cardName,
-                    expiryDate: checkoutData.expiryDate,
-                    cvc: checkoutData.cvc
+                    paymentInfo: {
+                        method: checkoutData.paymentMethod,
+                        cardLastFour: checkoutData.cardNumber ? checkoutData.cardNumber.replace(/\s/g, '').slice(-4) : null
+                    },
+                    paymentStatus: checkoutData.paymentMethod === 'card' ? 'paid' : 'pending' // Added for TripConfirmation logic
                 };
 
                 const result = await bookingService.createBooking(bookingPayload);
