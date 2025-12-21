@@ -24,7 +24,7 @@ import Bookings from '@/Views/Dashboard/Bookings.vue'
 import CustomerSupport from '@/Views/Dashboard/CustomerSupport.vue'
 import UsersManage from '@/Views/Dashboard/UsersManage.vue'
 import TripsManage from '@/Views/Dashboard/TripsManage.vue'
-import HotelsManage from '@/Views/Dashboard/HotelsMange.vue'
+import HotelsManage from '@/Views/Dashboard/HotelsManage.vue'
 import CarsManage from '@/Views/Dashboard/CarsManage.vue'
 import AttractionsManage from '@/Views/Dashboard/AttractionsManage.vue'
 
