@@ -5,8 +5,7 @@
 
     <!-- Hero Section -->
     <div class="relative w-full h-screen overflow-hidden">
-      <div class="absolute inset-0">
-        <img :src="heroSection.backgroundImage || defaultHero.backgroundImage" alt="Pyramid" class="w-full h-full object-cover"/>
+      <div class="absolute inset-0 bg-cover bg-center" :style="{ backgroundImage: `url(${heroSection.backgroundImage || defaultHero.backgroundImage})` }">
         <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50"></div>
       </div>
       
