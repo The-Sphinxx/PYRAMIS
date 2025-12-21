@@ -5883,17 +5883,7 @@
           "facilities": 4,
           "valueForMoney": 4.6
         }
-      },
-      "userReviews": [
-        {
-          "id": 1,
-          "userName": "Sophia Lee",
-          "userImage": "/images/users/user_f_19.jpg",
-          "rating": 4,
-          "date": "March 2025",
-          "comment": "Practical and easy to drive. Good for family use."
-        }
-      ]
+      }
     }
   ],
   "trips": [

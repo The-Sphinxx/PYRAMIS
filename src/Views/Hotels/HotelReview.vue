@@ -7,73 +7,46 @@
       <!-- Left Column: Hotel Info & Booking Details -->
       <div class="lg:col-span-2 space-y-8">
         <!-- Review Card -->
-        <div class="bg-base-100 rounded-2xl shadow-lg overflow-hidden border border-base-200">
+        <div class="bg-base-100 rounded-2xl shadow-sm border border-base-200 overflow-hidden">
           <!-- Hotel Image -->
-          <div class="h-64 w-full relative">
+          <div class="h-[300px] w-full relative">
             <img 
               :src="hotel.images?.[0] || '/images/placeholder-hotel.jpg'" 
               :alt="hotel.name" 
               class="w-full h-full object-cover"
             />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            <div class="absolute bottom-4 left-4 text-white">
-               <h2 class="text-3xl font-bold mb-1">{{ hotel.name }}</h2>
-               <div class="flex items-center gap-2 text-sm opacity-90">
-                 <i class="fas fa-map-marker-alt text-primary"></i>
-                 <span>{{ hotel.city }}, Egypt</span>
-               </div>
-            </div>
           </div>
 
           <!-- Content -->
-          <div class="p-8">
-            <p class="text-base-content/70 mb-8 leading-relaxed">
-              {{ hotel.overview ? hotel.overview.substring(0, 150) + '...' : 'Witness ancient wonders from the sky at sunrise' }}
+          <div class="p-6">
+            <p class="text-base-content/70 text-sm mb-4 leading-relaxed">
+              {{ hotel.overview || hotel.description }}
             </p>
 
+            <div class="flex items-center gap-2 text-sm text-base-content/80 mb-6">
+               <i class="fas fa-map-marker-alt text-[#C86A3F]"></i>
+               <span>{{ hotel.name }}, {{ hotel.city }}, Egypt</span>
+            </div>
+
+            <div class="divider"></div>
+
             <!-- Booking Details Section -->
-            <div class="pl-4 border-l-4 border-primary">
-              <h3 class="text-xl font-bold text-base-content mb-6">Booking Details</h3>
+            <div class="mt-6">
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-1 h-8 bg-[#C86A3F]"></div>
+                <h3 class="text-xl font-bold text-base-content">Booking Details</h3>
+              </div>
               
               <div class="space-y-4">
-                <!-- Check-in/Check-out -->
-                <div class="flex items-center gap-4 bg-base-200/50 p-4 rounded-xl">
-                  <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
-                    <i class="far fa-calendar-alt"></i>
+                <div v-for="(amenity, index) in displayAmenities" :key="index" class="bg-base-200/40 p-3 rounded-lg flex items-center gap-4">
+                  <div class="w-10 h-10 rounded bg-[#FBEFE9] flex items-center justify-center text-[#C86A3F]">
+                    <i :class="getAmenityIcon(amenity)"></i>
                   </div>
-                  <div>
-                    <div class="font-bold text-base-content">Dates</div>
-                    <div class="text-sm text-base-content/70">
-                      {{ formatDate(bookingData.checkIn) }} - {{ formatDate(bookingData.checkOut) }}
-                      <span class="ml-2 badge badge-ghost badge-sm">{{ numberOfNights }} Nights</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Rooms & Guests -->
-                <div class="flex items-center gap-4 bg-base-200/50 p-4 rounded-xl">
-                  <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
-                    <i class="fas fa-bed"></i>
-                  </div>
-                  <div>
-                    <div class="font-bold text-base-content">Accommodation</div>
-                    <div class="text-sm text-base-content/70">
-                      {{ bookingData.guests }} Guests, 1 Room
-                    </div>
-                  </div>
+                  <span class="text-sm font-medium text-base-content/70">{{ amenity }}</span>
                 </div>
                 
-                <!-- Room Type (Static for now) -->
-                <div class="flex items-center gap-4 bg-base-200/50 p-4 rounded-xl">
-                  <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
-                    <i class="fas fa-concierge-bell"></i>
-                  </div>
-                  <div>
-                    <div class="font-bold text-base-content">Room Type</div>
-                    <div class="text-sm text-base-content/70 font-medium text-success">
-                      Free Upgrade to Deluxe View
-                    </div>
-                  </div>
+                <div v-if="!displayAmenities.length" class="text-sm text-base-content/60 italic">
+                  No specific amenities listed.
                 </div>
               </div>
             </div>
@@ -83,7 +56,7 @@
         <!-- Continue Button -->
         <button 
           @click="handleContinue"
-          class="btn btn-primary w-full text-white text-lg font-bold py-4 h-auto shadow-lg hover:brightness-110"
+          class="btn bg-[#C86A3F] hover:bg-[#B05D35] text-white w-full text-lg font-bold py-4 h-auto shadow-md border-none rounded-lg"
         >
           Continue to Guest Information
         </button>
@@ -91,11 +64,12 @@
 
       <!-- Right Column: Price Summary -->
       <div class="lg:col-span-1">
-        <PriceSummary 
+        <PriceSummary
           :costs="costs"
-          :booking-type="'hotel'"
-          :booking-data="priceSummaryBookingData"
+          booking-type="hotel"
+          :booking-data="bookingDataForSummary"
           :base-price="hotel.pricePerNight"
+          :add-ons="500"
         />
       </div>
     </div>
@@ -113,6 +87,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { useHotelStore } from '@/stores/hotelsStore';
 import StepIndicator from '@/components/Common/StepIndicator.vue';
 import PriceSummary from '@/components/Common/PriceSummary.vue';
+import { calculateBookingCosts } from '@/Utils/bookingCalculator.js';
 
 const route = useRoute();
 const router = useRouter();
@@ -122,44 +97,56 @@ const hotel = ref(null);
 const bookingData = ref({
   checkIn: null,
   checkOut: null,
-  guests: 1
+  guests: 1,
+  rooms: 1
 });
 
 // Computed Properties
 const numberOfNights = computed(() => {
-  if (!bookingData.value.checkIn || !bookingData.value.checkOut) return 0;
+  if (!bookingData.value.checkIn || !bookingData.value.checkOut) return 7; // Default to 7
   const start = new Date(bookingData.value.checkIn);
   const end = new Date(bookingData.value.checkOut);
   const diffTime = Math.abs(end - start);
   return Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
 });
 
-const costs = computed(() => {
-  if (!hotel.value || numberOfNights.value === 0) return { subtotal: 0, serviceFee: 0, taxes: 0, total: 0 };
-  
-  const subtotal = hotel.value.pricePerNight * numberOfNights.value;
-  const serviceFee = 50; // Fixed fee for now
-  const taxes = subtotal * 0.14;
-  
-  return {
-    subtotal,
-    serviceFee,
-    taxes,
-    total: subtotal + serviceFee + taxes
-  };
-});
-
-const priceSummaryBookingData = computed(() => ({
-  nights: numberOfNights.value,
-  rooms: 1, // Default to 1 room
-  guests: bookingData.value.guests
+const bookingDataForSummary = computed(() => ({
+  ...bookingData.value,
+  nights: numberOfNights.value
 }));
 
+const costs = computed(() => {
+  if (!hotel.value) return { subtotal: 0, serviceFee: 0, taxes: 0, total: 0 };
+  
+  // Use shared calculator for consistency
+  // Note: calculateBookingCosts return object has: subtotal, serviceFee, taxes, total, duration
+  return calculateBookingCosts('hotel', hotel.value.pricePerNight, bookingDataForSummary.value);
+});
+
 // Methods
-const formatDate = (dateString) => {
-  if (!dateString) return '';
-  const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+const displayAmenities = computed(() => {
+  if (!hotel.value?.amenities) return [];
+  // Return top 3 amenities
+  return hotel.value.amenities.slice(0, 3);
+});
+
+const getAmenityIcon = (amenity) => {
+  const lower = amenity.toLowerCase();
+  if (lower.includes('pool')) return 'fas fa-swimming-pool';
+  if (lower.includes('spa') || lower.includes('wellness')) return 'fas fa-spa';
+  if (lower.includes('gym') || lower.includes('fitness')) return 'fas fa-dumbbell';
+  if (lower.includes('wifi') || lower.includes('wi-fi')) return 'fas fa-wifi';
+  if (lower.includes('park')) return 'fas fa-parking';
+  if (lower.includes('restaurant') || lower.includes('dining') || lower.includes('food')) return 'fas fa-utensils';
+  if (lower.includes('bar')) return 'fas fa-glass-martini';
+  if (lower.includes('beach')) return 'fas fa-umbrella-beach';
+  if (lower.includes('air') || lower.includes('ac')) return 'fas fa-snowflake';
+  if (lower.includes('transport') || lower.includes('shuttle')) return 'fas fa-shuttle-van';
+  return 'fas fa-check-circle';
+};
+
+const formatPrice = (price) => {
+  return `$${price}`;
 };
 
 const handleContinue = () => {
@@ -183,8 +170,13 @@ onMounted(async () => {
   }
   
   // Parse query params
-  if (route.query.checkIn) bookingData.value.checkIn = route.query.checkIn;
-  if (route.query.checkOut) bookingData.value.checkOut = route.query.checkOut;
-  if (route.query.guests) bookingData.value.guests = parseInt(route.query.guests);
+  if (route.query.checkIn) {
+    bookingData.value = {
+      checkIn: route.query.checkIn,
+      checkOut: route.query.checkOut,
+      guests: parseInt(route.query.guests) || 1,
+      rooms: parseInt(route.query.rooms) || 1
+    };
+  }
 });
 </script>

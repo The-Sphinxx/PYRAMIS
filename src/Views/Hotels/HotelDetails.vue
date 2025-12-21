@@ -155,72 +155,14 @@
 
         <!-- Right Column - Booking Form -->
         <div class="lg:col-span-1">
-          <div class="bg-base-100 rounded-2xl shadow-lg p-6 sticky top-24 border border-base-200">
-            <div class="flex items-baseline gap-1 mb-6">
-              <span class="text-3xl font-bold text-base-content">${{ hotel.pricePerNight }}</span>
-              <span class="text-sm text-neutral">/night</span>
-            </div>
-
-            <!-- Date Picker -->
-            <div class="mb-4">
-              <label class="flex items-center gap-2 text-sm font-semibold text-base-content mb-2">
-                <i class="far fa-calendar text-primary"></i> Select Date
-              </label>
-              <DatePicker 
-                v-model="bookingDates"
-                :min-date="new Date()"
-                range
-                placeholder="Check-in - Check-out"
-                class="w-full input input-bordered"
-              />
-            </div>
-
-            <!-- Guest Selector -->
-            <div class="mb-6">
-              <label class="flex items-center gap-2 text-sm font-semibold text-base-content mb-2">
-                <i class="fas fa-user-friends text-primary"></i> Guests
-              </label>
-              <GuestSelector 
-                v-model="guestCount"
-                :max-guests="10"
-                class="w-full"
-              />
-            </div>
-
-            <!-- Price Breakdown (Manual) -->
-            <div v-if="numberOfNights > 0" class="bg-base-200/50 rounded-lg p-4 mb-6 text-sm space-y-3">
-              <div class="flex justify-between">
-                <span class="text-base-content/70">Total {{ numberOfNights }} Nights</span>
-                <span class="font-semibold">{{ formatCurrency(hotel.pricePerNight * numberOfNights) }}</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-base-content/70">Service Fee</span>
-                <span class="font-semibold">{{formatCurrency(calculateServiceFee()) }}</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-base-content/70">Taxes</span>
-                <span class="font-semibold">{{ formatCurrency(calculateTaxes()) }}</span>
-              </div>
-              <div class="divider my-1"></div>
-              <div class="flex justify-between text-base font-bold">
-                <span>Total</span>
-                <span>{{ formatCurrency(calculateTotal()) }}</span>
-              </div>
-            </div>
-
-            <!-- Book Now Button -->
-            <button 
-              @click="handleBookNow"
-              class="btn btn-primary w-full font-cairo font-bold text-lg text-white hover:brightness-110 mb-3"
-              :disabled="!bookingDates || numberOfNights === 0"
-            >
-              Book Now
-            </button>
-
-            <div class="text-center flex items-center justify-center gap-2 text-success text-xs font-medium">
-              <i class="fas fa-check-circle"></i>
-              <span>Free cancellation before check-in</span>
-            </div>
+          <div class="sticky top-24">
+            <BookingForm 
+              v-if="hotel"
+              type="hotel"
+              :base-price="hotel.pricePerNight"
+              :loading="loading"
+              @submit="handleBookNow"
+            />
           </div>
         </div>
       </div>
@@ -252,16 +194,14 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useHotelStore } from '@/stores/hotelsStore';
 import Carousel from '@/components/Common/Carousel.vue';
-import Rating from '@/components/Common/Rating.vue';
-import DatePicker from '@/components/Common/DatePicker.vue';
-import GuestSelector from '@/components/Common/GuestSelector.vue';
 import ReviewsCarousel from '@/components/Common/ReviewsCarousel.vue';
 import Location from '@/components/Common/Location.vue';
 import HotelCard from '@/components/Hotels/HotelCard.vue';
+import BookingForm from '@/components/Common/BookingForm.vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -270,21 +210,7 @@ const hotelStore = useHotelStore();
 // State
 const loading = ref(true);
 const hotel = ref(null);
-const bookingDates = ref(null);
-const guestCount = ref(2);
 const recommendedHotels = ref([]);
-
-// Computed
-const numberOfNights = computed(() => {
-  if (!bookingDates.value || !Array.isArray(bookingDates.value) || bookingDates.value.length !== 2) {
-    return 0;
-  }
-  const start = new Date(bookingDates.value[0]);
-  const end = new Date(bookingDates.value[1]);
-  const diffTime = Math.abs(end - start);
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  return diffDays;
-});
 
 // Methods
 const getAmenityIcon = (amenity) => {
@@ -310,40 +236,30 @@ const formatKey = (key) => {
   return key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
 };
 
-const formatCurrency = (amount) => {
-  return `$${amount.toFixed(2)}`;
+const scrollToSection = (sectionId) => {
+  activeTab.value = sectionId;
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 };
 
-const calculateServiceFee = () => {
-  if (!hotel.value || numberOfNights.value === 0) return 0;
-  const subtotal = hotel.value.pricePerNight * numberOfNights.value;
-  return subtotal * 0.10; // 10% service fee
-};
+const handleBookNow = ({ bookingData, costs }) => {
+  if (!hotel.value) return;
+  
+  // Format dates for query params
+  const checkInDate = bookingData.checkIn ? new Date(bookingData.checkIn).toISOString() : null;
+  const checkOutDate = bookingData.checkOut ? new Date(bookingData.checkOut).toISOString() : null;
 
-const calculateTaxes = () => {
-  if (!hotel.value || numberOfNights.value === 0) return 0;
-  const subtotal = hotel.value.pricePerNight * numberOfNights.value;
-  const serviceFee = calculateServiceFee();
-  return (subtotal + serviceFee) * 0.14; // 14% VAT
-};
-
-const calculateTotal = () => {
-  if (!hotel.value || numberOfNights.value === 0) return 0;
-  const subtotal = hotel.value.pricePerNight * numberOfNights.value;
-  const serviceFee = calculateServiceFee();
-  const taxes = calculateTaxes();
-  return subtotal + serviceFee + taxes;
-};
-
-const handleBookNow = () => {
-  // Navigate to review page
   router.push({
     name: 'HotelReview',
     params: { id: hotel.value.id },
     query: {
-      checkIn: bookingDates.value[0], // Date object or string
-      checkOut: bookingDates.value[1],
-      guests: guestCount.value
+      checkIn: checkInDate,
+      checkOut: checkOutDate,
+      rooms: bookingData.rooms,
+      guests: bookingData.guests,
+      // Pass calculated costs slightly if needed across steps, but best to recalculate
     }
   });
 };
