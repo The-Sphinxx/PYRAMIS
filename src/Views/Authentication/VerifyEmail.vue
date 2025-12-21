@@ -69,6 +69,7 @@ import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/authStore';
 import { authApi } from '@/Services/api';
+import { getBackgrounds } from '@/Services/systemService';
 
 const route = useRoute();
 const router = useRouter();
@@ -81,12 +82,7 @@ const isResending = ref(false);
 const resendCooldown = ref(0);
 const errorMessage = ref('');
 
-const backgroundImages = ref([
-  '/images/backk.png',
-  '/images/pyramids.jpg',
-  '/images/museum.jpg',
-  '/images/camelriding.png',
-]);
+const backgroundImages = ref([]);
 
 const currentImageIndex = ref(0);
 let slideInterval = null;
@@ -147,7 +143,9 @@ const startSlideshow = () => {
   }, 5000);
 };
 
-onMounted(() => {
+onMounted(async () => {
+  const backgrounds = await getBackgrounds('VerifyEmail');
+  backgroundImages.value = backgrounds.map(b => b.url);
   startSlideshow();
 });
 

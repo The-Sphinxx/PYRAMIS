@@ -121,18 +121,14 @@
 
 <script setup>
 import { ref, reactive, onMounted, onUnmounted } from 'vue';
+import { getBackgrounds } from '@/Services/systemService';
 import { useRoute, useRouter } from 'vue-router';
 import { authApi } from '@/Services/api';
 
 const router = useRouter();
 const route = useRoute();
 
-const backgroundImages = ref([
-  '/images/backk.png',
-  '/images/pyramids.jpg',
-  '/images/museum.jpg',
-  '/images/camelriding.png',
-]);
+const backgroundImages = ref([]);
 
 const currentImageIndex = ref(0);
 let slideInterval = null;
@@ -194,7 +190,9 @@ const startSlideshow = () => {
   }, 5000);
 };
 
-onMounted(() => {
+onMounted(async () => {
+  const backgrounds = await getBackgrounds('ResetPassword');
+  backgroundImages.value = backgrounds.map(b => b.url);
   startSlideshow();
 });
 

@@ -222,12 +222,8 @@ const authStore = useAuthStore();
 const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || '769814768658-2sqboqvdrghp4qompmtfn76bdd05bfht.apps.googleusercontent.com';
 
 // Background Images
-const backgroundImages = ref([
-  '/images/backk.png',
-  '/images/pyramids.jpg',
-  '/images/museum.jpg',
-  '/images/camelriding.png',
-]);
+import { getBackgrounds } from '@/Services/systemService';
+const backgroundImages = ref([]);
 
 const currentImageIndex = ref(0);
 let slideInterval = null;
@@ -360,7 +356,9 @@ const startSlideshow = () => {
   }, 5000);
 };
 
-onMounted(() => {
+onMounted(async () => {
+  const backgrounds = await getBackgrounds('Signup');
+  backgroundImages.value = backgrounds.map(b => b.url);
   startSlideshow();
 });
 

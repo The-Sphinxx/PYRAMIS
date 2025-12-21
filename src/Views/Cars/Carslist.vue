@@ -3,7 +3,7 @@
     <!-- Hero Section with Search -->
     <div 
       class="relative bg-cover bg-center min-h-[585px]"
-      :style="{ backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${heroImage})` }"
+      :style="{ backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${heroBg || ''})` }"
     >
       <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 transform -translate-x-0 -translate-y-[75px]">
         <div class="max-w-4xl mb-4">
@@ -78,7 +78,8 @@ import Search from "@/components/Common/Search.vue";
 import LuxurySUVCardDynamic from "@/components/Cars/CarCard.vue";
 import Filter from "@/components/Common/Filter.vue";
 import { useRouter } from 'vue-router';
-import heroImage from "@/assets/images/CarHeroSection.jpg";
+import { getBackgrounds } from '@/Services/systemService';
+const heroBg = ref('');
 
 const store = useCarsStore();
 const router = useRouter();
@@ -93,8 +94,12 @@ const filters = ref({
 });
 
 onMounted(async () => {
-  await store.fetchCars();
+  const [_, backgrounds] = await Promise.all([
+    store.fetchCars(),
+    getBackgrounds('CarsListHero')
+  ]);
   filters.value.maxPrice = maxPrice.value;
+  heroBg.value = backgrounds[0]?.url || '';
 });
 
 const maxPrice = computed(() => {

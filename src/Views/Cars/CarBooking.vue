@@ -3,7 +3,7 @@
     <!-- Hero Section with Search -->
     <div 
       class="relative bg-cover bg-center min-h-[585px]"
-      :style="{ backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${heroImage})` }"
+      :style="{ backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${heroBg || ''})` }"
     >
 <!-- Positioned Content -->
 <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 transform -translate-x-0 -translate-y-[75px]">
@@ -87,14 +87,14 @@
 </template>
 
 <script setup>
-import { onMounted, computed } from "vue";
+import { ref, onMounted, computed } from 'vue';
 import { useRouter } from "vue-router";
 import { useCarsStore } from "@/stores/carsStore";
 
 import Search from "@/components/Common/Search.vue";
 import LuxurySUVCardDynamic from "@/components/Cars/CarCard.vue";
-
-import heroImage from "@/assets/images/CarHeroSection.jpg";
+import { getBackgrounds } from '@/Services/systemService';
+const heroBg = ref('');
 
 const store = useCarsStore();
 const router = useRouter();
@@ -102,7 +102,11 @@ const router = useRouter();
 const brands = ["Mercedes", "BMW", "Audi", "Tesla"];
 
 onMounted(async () => {
-  await store.fetchCars();
+  const [_, backgrounds] = await Promise.all([
+    store.fetchCars(),
+    getBackgrounds('CarBookingHero')
+  ]);
+  heroBg.value = backgrounds[0]?.url || '';
 });
 
 const cars = computed(() => store.cars);

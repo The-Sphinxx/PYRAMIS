@@ -21,5 +21,11 @@ public class SystemSettingConfiguration : IEntityTypeConfiguration<SystemSetting
         builder.Property(s => s.PublicId)
             .HasMaxLength(512)
             .IsRequired();
+
+        builder.Property(s => s.Group)
+            .HasMaxLength(128);
+
+        builder.Property(s => s.DisplayOrder)
+            .HasColumnType("int");
     }
 }

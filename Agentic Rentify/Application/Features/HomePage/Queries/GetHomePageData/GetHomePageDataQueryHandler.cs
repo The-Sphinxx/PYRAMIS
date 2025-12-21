@@ -44,7 +44,7 @@ public class GetHomePageDataQueryHandler(IUnitOfWork unitOfWork)
     {
         try
         {
-            var spec = new Agentic_Rentify.Application.Features.SystemSettings.Specifications.SystemSettingByPageSpecification(Agentic_Rentify.Core.Enums.SystemPage.Home);
+            var spec = new Agentic_Rentify.Application.Features.SystemSettings.Specifications.SystemSettingByPageSpecification(Agentic_Rentify.Core.Enums.SystemPage.HomeHero);
             var settings = await unitOfWork.Repository<SystemSetting>().ListAsync(spec);
             var setting = settings.FirstOrDefault();
             if (setting is not null && !string.IsNullOrWhiteSpace(setting.ImageUrl))

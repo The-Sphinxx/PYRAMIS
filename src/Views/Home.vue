@@ -378,8 +378,9 @@ const tabs = [
 const defaultHero = {
   title: 'Discover Egypt — Your Journey Starts Here',
   subtitle: 'Explore ancient wonders, luxury stays, and unforgettable experiences',
-  backgroundImage: 'https://images.unsplash.com/photo-1568322445389-f64ac2515020?q=80&w=2070'
+  backgroundImage: ''
 };
+  import { getBackgrounds } from '@/Services/systemService';
 
 const defaultMetadata = {
   siteName: 'PYRAMIS',
@@ -468,8 +469,15 @@ const applyHomeData = (payload) => {
 onMounted(async () => {
   isHomeLoading.value = true;
   try {
-    const data = await getHomePageData();
+    const [data, backgrounds] = await Promise.all([
+      getHomePageData(),
+      getBackgrounds('HomeHero')
+    ]);
+
     applyHomeData(data);
+    if (backgrounds && backgrounds.length > 0) {
+      heroSection.value.backgroundImage = backgrounds[0].url;
+    }
   } catch (error) {
     console.error('Failed to load home page data', error);
     applyHomeData({});
