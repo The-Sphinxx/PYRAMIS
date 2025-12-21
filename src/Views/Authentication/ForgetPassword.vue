@@ -289,11 +289,11 @@ const resendCooldown = ref(0);
 let cooldownInterval = null;
 
 const navigateToLogin = () => {
-  router.push('/authentication/login');
+  router.push('/auth/login');
 };
 
 const navigateToSignUp = () => {
-  router.push('/authentication/sign-up');
+  router.push('/auth/sign-up');
 };
 
 const startCooldown = () => {
@@ -322,17 +322,14 @@ const handleSendToken = async () => {
   
   isLoading.value = true;
   
-  const result = await authApi.forgotPassword(formData.email);
-  
-  isLoading.value = false;
-  
-  if (result.success) {
+  try {
+    await authApi.forgotPassword(formData.email);
+    isLoading.value = false;
     currentStep.value = 'token';
     startCooldown();
-    // في التطوير فقط - عرض الرمز
-    console.log('Reset Token:', result.resetToken);
-  } else {
-    errorMessage.value = result.message;
+  } catch (error) {
+    isLoading.value = false;
+    errorMessage.value = error.response?.data?.message || 'Unable to send reset code';
   }
 };
 
@@ -380,18 +377,17 @@ const handleResetPassword = async () => {
   
   isLoading.value = true;
   
-  const result = await authApi.resetPassword(
-    formData.email,
-    formData.resetToken,
-    formData.newPassword
-  );
-  
-  isLoading.value = false;
-  
-  if (result.success) {
+  try {
+    await authApi.resetPassword(
+      formData.email,
+      formData.resetToken,
+      formData.newPassword
+    );
+    isLoading.value = false;
     currentStep.value = 'success';
-  } else {
-    errorMessage.value = result.message;
+  } catch (error) {
+    isLoading.value = false;
+    errorMessage.value = error.response?.data?.message || 'Reset failed';
   }
 };
 

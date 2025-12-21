@@ -172,7 +172,7 @@
           <!-- Sign In Link -->
           <p class="text-start text-sm text-base-content mb-4">
             Already have an account?
-            <router-link to="/authentication/login" class="text-primary hover:text-primary-focus font-medium underline">
+            <router-link to="/auth/login" class="text-primary hover:text-primary-focus font-medium underline">
               Sign In
             </router-link>
           </p>
@@ -219,6 +219,7 @@ import { useAuthStore } from '@/stores/authStore';
 
 const router = useRouter();
 const authStore = useAuthStore();
+const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || '769814768658-2sqboqvdrghp4qompmtfn76bdd05bfht.apps.googleusercontent.com';
 
 // Background Images
 const backgroundImages = ref([
@@ -278,24 +279,76 @@ const handleSignUp = async () => {
   loading.value = false;
 
   if (result.success) {
-    router.push('/');
+    router.push({ path: '/auth/verify-email', query: { email: formData.value.email } });
   } else {
     error.value = result.error;
   }
+};
+
+const ensureGoogleSdk = () => {
+  if (window.google?.accounts?.id) return Promise.resolve();
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = 'https://accounts.google.com/gsi/client';
+    script.async = true;
+    script.defer = true;
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error('Failed to load Google SDK'));
+    document.head.appendChild(script);
+  });
+};
+
+const getGoogleIdToken = async () => {
+  await ensureGoogleSdk();
+
+  return new Promise((resolve, reject) => {
+    if (!window.google?.accounts?.id) {
+      reject(new Error('Google SDK not available'));
+      return;
+    }
+
+    let resolved = false;
+
+    window.google.accounts.id.initialize({
+      client_id: googleClientId,
+      callback: (response) => {
+        resolved = true;
+        if (response.credential) {
+          resolve(response.credential);
+        } else {
+          reject(new Error('No credential returned from Google'));
+        }
+      },
+    });
+
+    window.google.accounts.id.prompt((notification) => {
+      if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+        if (!resolved) {
+          reject(new Error('Google sign-in was closed or blocked'));
+        }
+      }
+    });
+  });
 };
 
 const handleGoogleSignUp = async () => {
   loading.value = true;
   error.value = null;
 
-  const result = await authStore.loginWithGoogle();
+  try {
+    const idToken = await getGoogleIdToken();
+    const result = await authStore.loginWithGoogle(idToken);
 
-  loading.value = false;
+    loading.value = false;
 
-  if (result.success) {
-    router.push('/');
-  } else {
-    error.value = result.error;
+    if (result.success) {
+      router.push({ path: '/auth/verify-email', query: { email: authStore.user?.email || formData.value.email } });
+    } else {
+      error.value = result.error;
+    }
+  } catch (err) {
+    loading.value = false;
+    error.value = err.message || 'Google sign-in failed';
   }
 };
 
