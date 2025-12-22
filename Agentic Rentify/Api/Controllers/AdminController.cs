@@ -6,6 +6,7 @@ using Agentic_Rentify.Core.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Agentic_Rentify.Api.Controllers;
 
@@ -56,6 +57,7 @@ public class AdminController(DataSyncService dataSyncService, IUnitOfWork unitOf
     /// <param name="file">Image file to upload.</param>
     /// <returns>Updated SystemSetting with new image URL and PublicId.</returns>
     [HttpPost("update-background")]
+    [AllowAnonymous]
     [ProducesResponseType(typeof(SystemSetting), StatusCodes.Status200OK)]
     public async Task<IActionResult> UpdateBackground([FromQuery] SystemPage page, IFormFile file)
     {
@@ -109,6 +111,7 @@ public class AdminController(DataSyncService dataSyncService, IUnitOfWork unitOf
     /// <param name="files">Images to upload.</param>
     /// <returns>List of created settings.</returns>
     [HttpPost("update-backgrounds")]
+    [AllowAnonymous]
     [ProducesResponseType(typeof(IEnumerable<SystemSetting>), StatusCodes.Status200OK)]
     public async Task<IActionResult> UpdateBackgrounds([FromQuery] SystemPage page, [FromQuery] string? group, [FromForm] List<IFormFile> files)
     {

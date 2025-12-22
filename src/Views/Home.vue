@@ -474,9 +474,13 @@ onMounted(async () => {
       getBackgrounds('HomeHero')
     ]);
 
+    console.log('Backgrounds response:', backgrounds);
     applyHomeData(data);
-    if (backgrounds && backgrounds.length > 0) {
+    if (backgrounds && backgrounds.length > 0 && backgrounds[0].url) {
+      console.log('Setting background to:', backgrounds[0].url);
       heroSection.value.backgroundImage = backgrounds[0].url;
+    } else {
+      console.warn('No backgrounds found or URL is empty');
     }
   } catch (error) {
     console.error('Failed to load home page data', error);
