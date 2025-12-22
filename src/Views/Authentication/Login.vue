@@ -16,7 +16,7 @@
     </div>
 
     <!-- Content -->
-    <div class="relative z-10 min-h-screen flex items-center p-4">
+    <div class="relative z-10 min-h-screen flex items-center p-4 ms-[64px]">
       <div class="bg-base-200/80 backdrop-blur-sm w-full max-w-md p-8 rounded-lg shadow-xl">
         <!-- Logo -->
         <div class="text-center mb-8">
