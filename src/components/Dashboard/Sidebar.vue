@@ -144,7 +144,7 @@ const logout = () => {
   // Clear auth data
   localStorage.removeItem('token');
   localStorage.removeItem('user');
-  router.push('/authentication/login');
+  router.push('/auth/login');
 };
 </script>
 
