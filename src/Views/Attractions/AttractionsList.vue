@@ -28,12 +28,10 @@
       <div class="bg-base-100 rounded-2xl shadow-lg p-8 mb-8">
         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
           <button
-          <div 
-            class="relative bg-cover bg-center min-h-[585px] flex items-center"
-            :style="{
-              backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${heroBg || ''})`
-            }"
-          >
+            v-for="category in categories" 
+            :key="category.id"
+            @click="selectCategory(category.id)"
+            :class="[
               'flex flex-col items-center gap-3 p-4 rounded-xl transition-all duration-300',
               selectedCategory === category.id 
                 ? 'bg-primary/10 border-2 border-primary' 
