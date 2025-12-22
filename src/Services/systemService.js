@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || '/api';
+const BASE = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5137').replace(/\/+$/, '');
+const API_BASE = `${BASE}/api`;
 
 export async function getBackgrounds(pageName) {
   try {
