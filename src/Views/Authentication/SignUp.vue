@@ -216,9 +216,11 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/authStore';
+import { useNotifyStore } from '@/stores/notifyStore';
 
 const router = useRouter();
 const authStore = useAuthStore();
+const notify = useNotifyStore();
 const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || '769814768658-2sqboqvdrghp4qompmtfn76bdd05bfht.apps.googleusercontent.com';
 
 // Background Images
@@ -275,9 +277,11 @@ const handleSignUp = async () => {
   loading.value = false;
 
   if (result.success) {
-    router.push({ path: '/auth/verify-email', query: { email: formData.value.email } });
+    notify.success('We emailed you a verification link. Please check your inbox.');
+    router.push('/auth/login');
   } else {
     error.value = result.error;
+    notify.error(result.error || 'Registration failed');
   }
 };
 

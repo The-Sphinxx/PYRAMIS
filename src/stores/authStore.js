@@ -54,58 +54,23 @@ export const useAuthStore = defineStore('auth', () => {
 
   const register = async (payload) => {
     try {
-      // Check if user already exists
-      const checkResponse = await fetch(`http://localhost:3000/users?email=${userData.email}`);
-      const existingUsers = await checkResponse.json();
+      const name = (payload.fullName || '').trim();
+      const parts = name.split(/\s+/);
+      const firstName = parts[0] || '';
+      const lastName = parts.length > 1 ? parts.slice(1).join(' ') : '';
 
-      if (existingUsers.length > 0) {
-        return {
-          success: false,
-          error: 'Email already exists'
-        };
-      }
-
-      // Create new user
-      // Helper for default images
-      const defaultImages = [
-        '/images/users/user_m_1.jpg',
-        '/images/users/user_f_2.jpg',
-        '/images/users/user_m_3.jpg',
-        '/images/users/user_f_4.jpg'
-      ];
-      const randomImage = defaultImages[Math.floor(Math.random() * defaultImages.length)];
-
-      const nameParts = userData.fullName.trim().split(' ');
-      const firstName = nameParts[0];
-      const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
-
-      // Create new user with complete profile data
-      const newUser = {
-        id: Date.now().toString(),
-        fullName: userData.fullName,
-        firstName: firstName,
-        lastName: lastName,
-        email: userData.email,
-        password: userData.password, 
-        phone: '',
-        dateOfBirth: null,
-        nationality: '',
-        gender: '',
-        profileImage: randomImage,
-        isVerified: false,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
+      const registerPayload = {
+        FirstName: firstName,
+        LastName: lastName,
+        Email: payload.email,
+        Password: payload.password,
+        Nationality: payload.nationality || '',
+        Gender: payload.gender || '',
+        DateOfBirth: payload.dateOfBirth || '2000-01-01T00:00:00.000Z',
+        ProfileImage: payload.profileImage || undefined,
       };
 
-      const response = await fetch('http://localhost:3000/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newUser),
-      });
-
-      setSession(authResponse, true);
+      await authApi.register(registerPayload);
       return { success: true };
     } catch (error) {
       const message = error.response?.data?.message || 'Registration failed';
