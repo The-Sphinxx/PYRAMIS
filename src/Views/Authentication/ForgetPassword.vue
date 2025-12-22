@@ -5,13 +5,12 @@
       <transition-group name="fade" mode="out-in">
         <div
           v-for="(image, index) in backgroundImages"
-          :key="image"
-          v-show="currentImageIndex === index"
-          class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+          :key="`${image}-${index}`"
+          v-if="index === currentImageIndex"
+          class="absolute inset-0 bg-cover bg-center"
           :style="{ backgroundImage: `url(${image})` }"
         ></div>
       </transition-group>
-      <!-- Overlay -->
       <div class="absolute inset-0 bg-black/20"></div>
     </div>
 
@@ -253,16 +252,13 @@
 import { ref, reactive, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { authApi } from '@/Services/api';
+import { getBackgrounds } from '@/Services/systemService';
 
 const router = useRouter();
 
 // Background Images
-const backgroundImages = ref([
-  '/images/backk.png',
-  '/images/pyramids.jpg',
-  '/images/museum.jpg',
-  '/images/camelriding.png',
-]);
+const backgroundImages = ref([]);
+
 
 const currentImageIndex = ref(0);
 let slideInterval = null;
@@ -289,11 +285,11 @@ const resendCooldown = ref(0);
 let cooldownInterval = null;
 
 const navigateToLogin = () => {
-  router.push('/authentication/login');
+  router.push('/auth/login');
 };
 
 const navigateToSignUp = () => {
-  router.push('/authentication/sign-up');
+  router.push('/auth/sign-up');
 };
 
 const startCooldown = () => {
@@ -322,17 +318,14 @@ const handleSendToken = async () => {
   
   isLoading.value = true;
   
-  const result = await authApi.forgotPassword(formData.email);
-  
-  isLoading.value = false;
-  
-  if (result.success) {
+  try {
+    await authApi.forgotPassword(formData.email);
+    isLoading.value = false;
     currentStep.value = 'token';
     startCooldown();
-    // في التطوير فقط - عرض الرمز
-    console.log('Reset Token:', result.resetToken);
-  } else {
-    errorMessage.value = result.message;
+  } catch (error) {
+    isLoading.value = false;
+    errorMessage.value = error.response?.data?.message || 'Unable to send reset code';
   }
 };
 
@@ -380,18 +373,17 @@ const handleResetPassword = async () => {
   
   isLoading.value = true;
   
-  const result = await authApi.resetPassword(
-    formData.email,
-    formData.resetToken,
-    formData.newPassword
-  );
-  
-  isLoading.value = false;
-  
-  if (result.success) {
+  try {
+    await authApi.resetPassword(
+      formData.email,
+      formData.resetToken,
+      formData.newPassword
+    );
+    isLoading.value = false;
     currentStep.value = 'success';
-  } else {
-    errorMessage.value = result.message;
+  } catch (error) {
+    isLoading.value = false;
+    errorMessage.value = error.response?.data?.message || 'Reset failed';
   }
 };
 
@@ -402,8 +394,15 @@ const startSlideshow = () => {
   }, 5000);
 };
 
-onMounted(() => {
-  startSlideshow();
+onMounted(async () => {
+  try {
+    const backgrounds = await getBackgrounds('ForgetPassword');
+    backgroundImages.value = backgrounds.map(b => b.url);
+  } catch (error) {
+    console.error('Failed to load backgrounds', error);
+  } finally {
+    startSlideshow();
+  }
 });
 
 onUnmounted(() => {

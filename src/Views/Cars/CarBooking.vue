@@ -3,7 +3,7 @@
     <!-- Hero Section with Search -->
     <div 
       class="relative bg-cover bg-center min-h-[585px]"
-      :style="{ backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${heroImage})` }"
+      :style="{ backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${heroBg || ''})` }"
     >
       <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 transform -translate-y-[75px]">
         <div class="max-w-4xl mb-4">

@@ -1,230 +1,107 @@
 import axios from 'axios';
 
-// إنشاء instance من axios
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5173';
+const authPrefix = '/api/Auth';
+
 export const api = axios.create({
-    baseURL: 'http://localhost:3000',
-    timeout: 10000,
-    headers: {
-        'Content-Type': 'application/json',
-    },
+  baseURL: apiBaseUrl,
+  timeout: 15000,
+  headers: { 'Content-Type': 'application/json' },
 });
 
-// Interceptor للـ requests - إضافة token
 api.interceptors.request.use(
-    (config) => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
-        }
-        return config;
-    },
-    (error) => {
-        return Promise.reject(error);
+  config => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
     }
+    return config;
+  },
+  error => Promise.reject(error)
 );
 
-// Interceptor للـ responses - معالجة الأخطاء
 api.interceptors.response.use(
-    (response) => {
-        return response;
-    },
-    (error) => {
-        if (error.response?.status === 401) {
-            // إزالة token منتهي الصلاحية
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
-            window.location.href = '/login';
-        }
+  response => response,
+  async error => {
+    const originalRequest = error.config || {};
+    const isUnauthorized = error.response?.status === 401;
+
+    if (isUnauthorized && !originalRequest._retry) {
+      originalRequest._retry = true;
+      const refreshToken = localStorage.getItem('refreshToken');
+      const token = localStorage.getItem('token');
+      if (!refreshToken || !token) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('user');
+        window.location.href = '/auth/login';
         return Promise.reject(error);
+      }
+
+      try {
+        const { data } = await axios.post(
+          `${apiBaseUrl}${authPrefix}/refresh-token`,
+          { token, refreshToken },
+          { headers: { 'Content-Type': 'application/json' } }
+        );
+
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('refreshToken', data.refreshToken);
+        api.defaults.headers.common.Authorization = `Bearer ${data.token}`;
+        originalRequest.headers.Authorization = `Bearer ${data.token}`;
+        return api(originalRequest);
+      } catch (refreshError) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('user');
+        window.location.href = '/auth/login';
+        return Promise.reject(refreshError);
+      }
     }
+
+    return Promise.reject(error);
+  }
 );
 
-// دوال مساعدة للـ Authentication
 export const authApi = {
-    // تسجيل دخول
-    login: async (email, password) => {
-        try {
-            // البحث عن المستخدم
-            const usersResponse = await api.get('/users', {
-                params: { email }
-            });
+  login: async (email, password) => {
+    const { data } = await api.post(`${authPrefix}/login`, { email, password });
+    return data;
+  },
 
-            const user = usersResponse.data[0];
+  register: async payload => {
+    const { data } = await api.post(`${authPrefix}/register`, payload);
+    return data;
+  },
 
-            if (!user) {
-                return {
-                    success: false,
-                    message: 'Email or Password is incorrect'
-                };
-            }
+  googleLogin: async idToken => {
+    const { data } = await api.post(`${authPrefix}/google-login`, { idToken });
+    return data;
+  },
 
-            // التحقق من كلمة المرور (في الإنتاج استخدم bcrypt)
-            if (user.password !== password) {
-                return {
-                    success: false,
-                    message: 'Email or Password is incorrect'
-                };
-            }
+  forgotPassword: async email => {
+    const { data } = await api.post(`${authPrefix}/forgot-password`, { email });
+    return data;
+  },
 
-            // إنشاء token بسيط (في الإنتاج استخدم JWT)
-            const token = btoa(`${user.id}:${Date.now()}`);
+  resetPassword: async (email, token, newPassword) => {
+    const { data } = await api.post(`${authPrefix}/reset-password`, {
+      email,
+      token,
+      newPassword,
+    });
+    return data;
+  },
 
-            // إرجاع بيانات المستخدم بدون كلمة المرور
-            const { password: _, ...userWithoutPassword } = user;
+  verifyEmail: async (email, code) => {
+    const { data } = await api.post(`${authPrefix}/verify-email`, { email, code });
+    return data;
+  },
 
-            return {
-                success: true,
-                token,
-                user: userWithoutPassword
-            };
-        } catch (error) {
-            return {
-                success: false,
-                message: 'Error occurred during login'
-            };
-        }
-    },
-
-    // إنشاء حساب جديد
-    signup: async (userData) => {
-        try {
-            // التحقق من وجود المستخدم
-            const existingUsers = await api.get('/users', {
-                params: { email: userData.email }
-            });
-
-            if (existingUsers.data.length > 0) {
-                return {
-                    success: false,
-                    message: 'Email is already registered'
-                };
-            }
-
-            // إنشاء المستخدم الجديد
-            const newUser = {
-                ...userData,
-                id: Date.now().toString(),
-                isVerified: false,
-                resetToken: null,
-                resetTokenExpiry: null,
-                createdAt: new Date().toISOString(),
-                updatedAt: new Date().toISOString()
-            };
-
-            const response = await api.post('/users', newUser);
-
-            // إنشاء token
-            const token = btoa(`${response.data.id}:${Date.now()}`);
-
-            // إرجاع بيانات المستخدم بدون كلمة المرور
-            const { password: _, ...userWithoutPassword } = response.data;
-
-            return {
-                success: true,
-                token,
-                user: userWithoutPassword
-            };
-        } catch (error) {
-            return {
-                success: false,
-                message: 'Error occurred during signup'
-            };
-        }
-    },
-
-    // نسيت كلمة المرور
-    forgotPassword: async (email) => {
-        try {
-            const usersResponse = await api.get('/users', {
-                params: { email }
-            });
-
-            const user = usersResponse.data[0];
-
-            if (!user) {
-                return {
-                    success: false,
-                    message: 'Email is not registered'
-                };
-            }
-
-            // إنشاء رمز التحقق
-            const resetToken = Math.floor(100000 + Math.random() * 900000).toString();
-            const resetTokenExpiry = new Date(Date.now() + 3600000).toISOString(); // ساعة واحدة
-
-            // تحديث المستخدم
-            await api.patch(`/users/${user.id}`, {
-                resetToken,
-                resetTokenExpiry,
-                updatedAt: new Date().toISOString()
-            });
-
-            // في الإنتاج، أرسل الرمز عبر البريد الإلكتروني
-            console.log('Reset Token:', resetToken);
-
-            return {
-                success: true,
-                message: 'Reset Token sent to your email',
-                resetToken // في الإنتاج لا ترجع الرمز
-            };
-        } catch (error) {
-            return {
-                success: false,
-                message: 'Error occurred during forgot password'
-            };
-        }
-    },
-
-    // إعادة تعيين كلمة المرور
-    resetPassword: async (email, resetToken, newPassword) => {
-        try {
-            const usersResponse = await api.get('/users', {
-                params: { email }
-            });
-
-            const user = usersResponse.data[0];
-
-            if (!user) {
-                return {
-                    success: false,
-                    message: 'Email is not registered'
-                };
-            }
-
-            // التحقق من الرمز وصلاحيته
-            if (user.resetToken !== resetToken) {
-                return {
-                    success: false,
-                    message: 'Reset Token is incorrect'
-                };
-            }
-
-            if (new Date(user.resetTokenExpiry) < new Date()) {
-                return {
-                    success: false,
-                    message: 'Reset Token has expired'
-                };
-            }
-
-            // تحديث كلمة المرور
-            await api.patch(`/users/${user.id}`, {
-                password: newPassword,
-                resetToken: null,
-                resetTokenExpiry: null,
-                updatedAt: new Date().toISOString()
-            });
-
-            return {
-                success: true,
-                message: 'Password reset successfully'
-            };
-        } catch (error) {
-            return {
-                success: false,
-                message: 'Error occurred during reset password'
-            };
-        }
-    }
+  resendOtp: async email => {
+    const { data } = await api.post(`${authPrefix}/resend-otp`, { email });
+    return data;
+  },
 };
 
 export default api;

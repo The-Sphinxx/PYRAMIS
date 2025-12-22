@@ -10,6 +10,8 @@ import ContactUs from '@/Views/ContactUs.vue'
 import Login from '@/Views/Authentication/Login.vue'
 import SignUp from '@/Views/Authentication/SignUp.vue'
 import ForgetPassword from '@/Views/Authentication/ForgetPassword.vue'
+import ResetPassword from '@/Views/Authentication/ResetPassword.vue'
+import VerifyEmail from '@/Views/Authentication/VerifyEmail.vue'
 
 // User Account
 import Profile from '@/Views/UserAccount/Profile.vue'
@@ -89,19 +91,30 @@ const routes = [
 
   // Authentication Routes
   {
-    path: '/authentication/login',
+    path: '/auth/login',
     name: 'Login',
     component: Login,
   },
   {
-    path: '/authentication/sign-up',
+    path: '/auth/sign-up',
     name: 'SignUp',
     component: SignUp,
   },
   {
-    path: '/authentication/forget-password',
+    path: '/auth/forget-password',
     name: 'ForgetPassword',
     component: ForgetPassword,
+  },
+  {
+    path: '/auth/reset-password',
+    name: 'ResetPassword',
+    component: ResetPassword,
+  },
+  {
+    path: '/auth/verify-email',
+    name: 'VerifyEmail',
+    component: VerifyEmail,
+    meta: { requiresAuth: true },
   },
 
   // User Account Routes (Protected)
@@ -109,26 +122,26 @@ const routes = [
     path: '/user-account/profile',
     name: 'Profile',
     component: Profile,
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
   },
   {
     path: '/user-account/wishlist',
     name: 'Wishlist',
     component: Wishlist,
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
   },
   {
     path: '/user-account/reservations',
     name: 'Reservations',
     component: Reservations,
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
   },
 
   // Dashboard Routes (Protected) - Using nested routing with DashboardLayout
   {
     path: '/dashboard',
     component: DashboardLayout,
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
     children: [
       {
         path: 'overview',
@@ -183,13 +196,13 @@ const routes = [
     path: '/ai/collect-data',
     name: 'AiCollectData',
     component: AiCollectData,
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
   },
   {
     path: '/ai/plan-results',
     name: 'AiPlanResults',
     component: AiPlanResults,
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
   },
 
   // Attractions Routes
@@ -207,19 +220,19 @@ const routes = [
     path: '/attractions/review/:id',
     name: 'AttractionReview',
     component: AttractionReview,
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
   },
   {
     path: '/attractions/checkout/:id',
     name: 'AttractionCheckOut',
     component: AttractionCheckOut,
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
   },
   {
     path: '/attractions/confirmation/:id',
     name: 'AttractionConfirmation',
     component: AttractionConfirmation,
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
   },
 
   // Cars Routes
@@ -237,25 +250,25 @@ const routes = [
   path: '/cars/booking',
   name: 'CarBooking',
   component: CarBooking,
-  meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
 },
 {
   path: '/cars/review/:id',
   name: 'CarReview',
   component: CarReview,
-  meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
 },
 {
   path: '/cars/checkout/:id',
   name: 'CarCheckOut',
   component: CarCheckOut,
-  meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
 },
 {
   path: '/cars/confirmation/:id',
   name: 'CarConfirmation',
   component: CarConfirmation,
-  meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
 },
 
 
@@ -279,13 +292,13 @@ const routes = [
     path: '/hotels/review/:id',
     name: 'HotelReview',
     component: HotelReview,
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
   },
   {
     path: '/hotels/checkout/:id',
     name: 'HotelCheckOut',
     component: HotelCheckOut,
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
   },
   {
     path: '/hotels/confirmation/:id',
@@ -309,19 +322,19 @@ const routes = [
     path: '/trips/review/:id',
     name: 'TripReview',
     component: TripReview,
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
   },
   {
     path: '/trips/checkout/:id',
     name: 'TripCheckOut',
     component: TripCheckOut,
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
   },
   {
     path: '/trips/confirmation/:id',
     name: 'TripConfirmation',
     component: TripConfirmation,
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
   },
 ]
 

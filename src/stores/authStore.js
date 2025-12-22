@@ -1,26 +1,58 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
+import { authApi, api } from '@/Services/api';
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref(null);
   const token = ref(null);
+  const refreshToken = ref(null);
 
-  // Check if user is logged in
-  const isAuthenticated = computed(() => !!user.value);
+  const isAuthenticated = computed(() => !!token.value);
 
-  // Initialize from localStorage
+  const setSession = (authResponse, rememberMe) => {
+    const shapedUser = {
+      id: authResponse.id,
+      email: authResponse.email,
+      firstName: authResponse.firstName,
+      lastName: authResponse.lastName,
+    };
+
+    user.value = shapedUser;
+    token.value = authResponse.token;
+    refreshToken.value = authResponse.refreshToken;
+
+    api.defaults.headers.common.Authorization = `Bearer ${authResponse.token}`;
+
+    // Persist tokens for refresh handling; rememberMe still controls UX choices elsewhere if needed
+    localStorage.setItem('user', JSON.stringify(shapedUser));
+    localStorage.setItem('token', authResponse.token);
+    localStorage.setItem('refreshToken', authResponse.refreshToken);
+  };
+
+  const clearSession = () => {
+    user.value = null;
+    token.value = null;
+    refreshToken.value = null;
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
+    delete api.defaults.headers.common.Authorization;
+  };
+
   const initAuth = () => {
     const savedUser = localStorage.getItem('user');
     const savedToken = localStorage.getItem('token');
-    
-    if (savedUser && savedToken) {
+    const savedRefresh = localStorage.getItem('refreshToken');
+
+    if (savedUser && savedToken && savedRefresh) {
       user.value = JSON.parse(savedUser);
       token.value = savedToken;
+      refreshToken.value = savedRefresh;
+      api.defaults.headers.common.Authorization = `Bearer ${savedToken}`;
     }
   };
 
-  // Register new user
-  const register = async (userData) => {
+  const register = async (payload) => {
     try {
       // Check if user already exists
       const checkResponse = await fetch(`http://localhost:3000/users?email=${userData.email}`);
@@ -73,122 +105,33 @@ export const useAuthStore = defineStore('auth', () => {
         body: JSON.stringify(newUser),
       });
 
-      if (response.ok) {
-        const createdUser = await response.json();
-        
-        // Remove password before storing
-        const userWithoutPassword = { ...createdUser };
-        delete userWithoutPassword.password;
-
-        user.value = userWithoutPassword;
-        token.value = `token_${createdUser.id}`;
-
-        // Save to localStorage
-        localStorage.setItem('user', JSON.stringify(userWithoutPassword));
-        localStorage.setItem('token', token.value);
-
-        return { success: true };
-      } else {
-        return {
-          success: false,
-          error: 'Registration failed'
-        };
-      }
-    } catch (error) {
-      console.error('Registration error:', error);
-      return {
-        success: false,
-        error: 'Network error. Please try again.'
-      };
-    }
-  };
-
-  // Login user
-  const login = async (credentials) => {
-    try {
-      const response = await fetch(
-        `http://localhost:3000/users?email=${credentials.email}&password=${credentials.password}`
-      );
-      const users = await response.json();
-
-      if (users.length > 0) {
-        const foundUser = users[0];
-        
-        // Remove password before storing
-        const userWithoutPassword = { ...foundUser };
-        delete userWithoutPassword.password;
-
-        user.value = userWithoutPassword;
-        token.value = `token_${foundUser.id}`;
-
-        // Save to localStorage if "Remember Me" is checked
-        if (credentials.rememberMe) {
-          localStorage.setItem('user', JSON.stringify(userWithoutPassword));
-          localStorage.setItem('token', token.value);
-        }
-
-        return { success: true };
-      } else {
-        return {
-          success: false,
-          error: 'Invalid email or password'
-        };
-      }
-    } catch (error) {
-      console.error('Login error:', error);
-      return {
-        success: false,
-        error: 'Network error. Please try again.'
-      };
-    }
-  };
-
-  // Google Sign In (Mock implementation)
-  const loginWithGoogle = async () => {
-    try {
-      // هنا المفروض تستخدمي Firebase أو Google OAuth
-      // دي mock implementation للتجربة
-      const mockGoogleUser = {
-        id: `google_${Date.now()}`,
-        fullName: 'Google User',
-        email: 'user@gmail.com',
-        provider: 'google',
-        createdAt: new Date().toISOString()
-      };
-
-      // Check if user exists
-      const checkResponse = await fetch(`http://localhost:3000/users?email=${mockGoogleUser.email}`);
-      const existingUsers = await checkResponse.json();
-
-      let finalUser;
-
-      if (existingUsers.length > 0) {
-        finalUser = existingUsers[0];
-      } else {
-        // Create new user
-        const response = await fetch('http://localhost:3000/users', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(mockGoogleUser),
-        });
-        finalUser = await response.json();
-      }
-
-      user.value = finalUser;
-      token.value = `token_${finalUser.id}`;
-
-      localStorage.setItem('user', JSON.stringify(finalUser));
-      localStorage.setItem('token', token.value);
-
+      setSession(authResponse, true);
       return { success: true };
     } catch (error) {
-      console.error('Google login error:', error);
-      return {
-        success: false,
-        error: 'Google sign in failed'
-      };
+      const message = error.response?.data?.message || 'Registration failed';
+      return { success: false, error: message };
+    }
+  };
+
+  const login = async (credentials) => {
+    try {
+      const authResponse = await authApi.login(credentials.email, credentials.password);
+      setSession(authResponse, credentials.rememberMe);
+      return { success: true };
+    } catch (error) {
+      const message = error.response?.data?.message || 'Invalid email or password';
+      return { success: false, error: message };
+    }
+  };
+
+  const loginWithGoogle = async (idToken) => {
+    try {
+      const authResponse = await authApi.googleLogin(idToken);
+      setSession(authResponse, true);
+      return { success: true };
+    } catch (error) {
+      const message = error.response?.data?.message || 'Google sign-in failed';
+      return { success: false, error: message };
     }
   };
 
@@ -231,15 +174,13 @@ export const useAuthStore = defineStore('auth', () => {
 
   // Logout
   const logout = () => {
-    user.value = null;
-    token.value = null;
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
+    clearSession();
   };
 
   return {
     user,
     token,
+    refreshToken,
     isAuthenticated,
     initAuth,
     register,

@@ -121,6 +121,8 @@ const handleImageError = (event) => {
 </script>
 
 <style scoped>
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -130,5 +132,4 @@ const handleImageError = (event) => {
 .active\:scale-95:active {
   transform: scale(0.95);
 }
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 </style>

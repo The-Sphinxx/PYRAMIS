@@ -24,9 +24,12 @@ public class GetHomePageDataQueryHandler(IUnitOfWork unitOfWork)
         var featuredHotels = hotels.Select(MapHotel).ToList();
         var featuredCars = cars.Select(MapCar).ToList();
 
+        // Resolve system background for Home page if configured
+        var heroBackground = await ResolveHomeBackgroundAsync(unitOfWork, featuredTrips);
+
         return new HomePageDataDto
         {
-            HeroSection = BuildHeroSection(featuredTrips),
+            HeroSection = BuildHeroSection(featuredTrips, heroBackground),
             Metadata = BuildMetadata(),
             FeaturedTrips = featuredTrips,
             PopularAttractions = popularAttractions,
@@ -37,9 +40,29 @@ public class GetHomePageDataQueryHandler(IUnitOfWork unitOfWork)
         };
     }
 
-    private static HeroSectionDto BuildHeroSection(IReadOnlyCollection<HomeTripCardDto> trips)
+    private static async Task<string> ResolveHomeBackgroundAsync(IUnitOfWork unitOfWork, IReadOnlyCollection<HomeTripCardDto> trips)
     {
-        var firstImage = trips.FirstOrDefault()?.Image;
+        try
+        {
+            var spec = new Agentic_Rentify.Application.Features.SystemSettings.Specifications.SystemSettingByPageSpecification(Agentic_Rentify.Core.Enums.SystemPage.HomeHero);
+            var settings = await unitOfWork.Repository<SystemSetting>().ListAsync(spec);
+            var setting = settings.FirstOrDefault();
+            if (setting is not null && !string.IsNullOrWhiteSpace(setting.ImageUrl))
+            {
+                return setting.ImageUrl;
+            }
+        }
+        catch
+        {
+            // ignore and fallback
+        }
+
+        return trips.FirstOrDefault()?.Image ?? string.Empty;
+    }
+
+    private static HeroSectionDto BuildHeroSection(IReadOnlyCollection<HomeTripCardDto> trips, string? overrideBackground)
+    {
+        var firstImage = string.IsNullOrWhiteSpace(overrideBackground) ? trips.FirstOrDefault()?.Image : overrideBackground;
 
         return new HeroSectionDto
         {

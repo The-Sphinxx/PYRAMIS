@@ -157,6 +157,22 @@ public class ImageCleanupService(
                     }
                 }
             }
+
+            // Include system background images (Home/Login/Signup) from SystemSettings
+            var settings = await _unitOfWork.Repository<SystemSetting>().ListAllAsync();
+            foreach (var setting in settings)
+            {
+                if (!string.IsNullOrEmpty(setting.PublicId))
+                {
+                    usedPublicIds.Add(setting.PublicId);
+                }
+                else if (!string.IsNullOrEmpty(setting.ImageUrl))
+                {
+                    var publicId = ExtractPublicIdFromUrl(setting.ImageUrl);
+                    if (!string.IsNullOrEmpty(publicId))
+                        usedPublicIds.Add(publicId);
+                }
+            }
         }
         catch (Exception ex)
         {
