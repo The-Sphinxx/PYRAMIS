@@ -135,7 +135,7 @@ const handlePlaceOrder = async () => {
   error.value = null;
 
   try {
-    const userId = authStore.user?.id || null;
+    const userId = authStore.user?.id || `guest_${Date.now()}`;
 
     // Submit booking through store, passing user ID and guest data
     const result = await bookingStore.submitBooking(userId, guestData.value);
@@ -150,7 +150,6 @@ const handlePlaceOrder = async () => {
   } catch (err) {
     error.value = err.message || 'Failed to place order';
     console.error('Order error:', err);
-    // alert(`❌ Failed to place order: ${error.value}`); // Basic alert
   } finally {
     submitting.value = false;
   }

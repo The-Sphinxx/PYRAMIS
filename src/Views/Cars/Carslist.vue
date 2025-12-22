@@ -5,7 +5,9 @@
       class="relative bg-cover bg-center min-h-[585px]"
       :style="{ backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${heroBg || ''})` }"
     >
-      <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 transform -translate-x-0 -translate-y-[75px]">
+      <!-- Positioned Content -->
+      <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 transform -translate-y-[75px]">
+        <!-- Hero Text -->
         <div class="max-w-4xl mb-4">
           <h1 class="font-cairo text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
             Find Your
@@ -23,129 +25,123 @@
           </p>
         </div>
 
+        <!-- Search Bar -->
         <div class="w-full max-w-6xl">
-          <Search
-            type="cars"
-            @search="handleSearch"
-          />
+          <Search type="cars" @search="handleSearch" />
         </div>
       </div>
     </div>
 
     <!-- Page Title -->
-    <div class="my-6 text-center">
-      <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-base-content">
+    <div class="page-container my-6 text-center">
+      <h1 class="font-cairo text-2xl sm:text-3xl md:text-4xl font-bold text-base-content">
         Featured Vehicles
       </h1>
-      <p class="text-sm sm:text-base text-base-content/70 mt-1">
+      <p class="font-cairo text-sm sm:text-base text-gray-500 mt-1">
         Explore our handpicked selection of premium cars
       </p>
     </div>
 
-    <!-- Main Content: Filters Button + Cars Grid -->
-    <div class="flex flex-col lg:flex-row gap-6 mt-4">
-      <!-- Filter -->
-      <div class="w-full lg:w-64 flex-shrink-0">
-        <Filter
-          :show-price-filter="true"
-          :price-range="{ min: 0, max: maxPrice }"
-          :category-options="dynamicCategories"
-          :custom-filters="dynamicCustomFilters"
-          :initial-filters="filters"
-          @filter-change="handleFilterChange"
-        />
-      </div>
+   <!-- Cars Grid -->
+<div class="page-container">
+  <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <LuxurySUVCardDynamic
+      v-for="car in cars"
+      :key="car.id"
+      :car="car"
+      @view="handleViewCar"
+    />
+  </div>
 
-      <!-- Cars Grid -->
-      <main class="flex-1">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <LuxurySUVCardDynamic 
-            v-for="car in filteredCars" 
-            :key="car.id" 
-            :car="car"
-            @view="handleViewCar"
-          />
-        </div>
-      </main>
+<!-- View All Button -->
+<div class="mt-8 max-w-xs mx-auto">
+  <button class="btn btn-primary w-full py-2 text-sm" @click="goToCarBooking">
+    View All
+  </button>
+</div>
+
+</div>
+
+
+    <!-- Car Categories -->
+    <div class="page-container my-12 text-center">
+      <h1 class="font-cairo text-2xl sm:text-3xl md:text-4xl font-bold text-base-content">
+        Car Categories
+      </h1>
+      <p class="font-cairo text-sm sm:text-base text-gray-500 mt-1">
+        Browse cars by category
+      </p>
+
+      <div class="flex justify-center gap-6 flex-wrap mt-4">
+        <button
+          v-for="category in categories"
+          :key="category.value"
+          @click="goToCategory(category.value)"
+          class="btn btn-outline btn-secondary font-semibold py-5 px-8 transition hover:scale-105"
+        >
+          {{ category.label }}
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
-import { useCarsStore } from "@/stores/carsStore.js";
+import { onMounted, computed } from "vue";
+import { useRouter } from "vue-router";
+import { useCarsStore } from "@/stores/carsStore";
+
 import Search from "@/components/Common/Search.vue";
 import LuxurySUVCardDynamic from "@/components/Cars/CarCard.vue";
-import Filter from "@/components/Common/Filter.vue";
-import { useRouter } from 'vue-router';
-import { getBackgrounds } from '@/Services/systemService';
-const heroBg = ref('');
+
+import heroImage from "@/assets/images/CarHeroSection.jpg";
 
 const store = useCarsStore();
 const router = useRouter();
 
-const filters = ref({
-  maxPrice: 0,
-  categories: [],
-  type: [],
-  brand: [],
-  seats: [],
-  transmission: []
-});
+
+const categories = [
+  { label: "Chevrolet", value: "Chevrolet" },
+  { label: "Toyota", value: "Toyota" },
+  { label: "Kia", value: "Kia" },
+  { label: "Mazda", value: "Mazda" }
+];
 
 onMounted(async () => {
-  const [_, backgrounds] = await Promise.all([
-    store.fetchCars(),
-    getBackgrounds('CarsListHero')
-  ]);
-  filters.value.maxPrice = maxPrice.value;
-  heroBg.value = backgrounds[0]?.url || '';
+  await store.fetchCars();
+  
 });
 
-const maxPrice = computed(() => {
-  if (!store.cars.length) return 300;
-  return Math.max(...store.cars.map(c => c.price || 0));
-});
-
-const dynamicCategories = computed(() => {
-  return Array.from(new Set(store.cars.map(c => c.category))).map(c => ({ label: c, value: c }));
-});
-
-const dynamicCustomFilters = computed(() => {
-  const brands = Array.from(new Set(store.cars.map(c => c.name.split(" ")[0]))).map(b => ({ label: b, value: b }));
-  const transmissions = Array.from(new Set(store.cars.map(c => c.transmission))).map(t => ({ label: t, value: t }));
-  const seatsOptions = Array.from(new Set(store.cars.map(c => c.seats))).map(s => ({ label: `${s} Seats`, value: s }));
-  return [
-    { key: 'brand', title: 'Brand', options: brands },
-    { key: 'seats', title: 'Seats', options: seatsOptions },
-    { key: 'transmission', title: 'Transmission', options: transmissions },
-    { key: 'type', title: 'Car Type', options: dynamicCategories.value }
-  ];
-});
-
-const filteredCars = computed(() => {
-  return store.cars.filter(car => {
-    const priceMatch = car.price <= filters.value.maxPrice;
-    const typeMatch = filters.value.type.length ? filters.value.type.includes(car.category) : true;
-    const brandMatch = filters.value.brand.length ? filters.value.brand.some(b => car.name.includes(b)) : true;
-    const seatsMatch = filters.value.seats.length ? filters.value.seats.includes(car.seats) : true;
-    const transmissionMatch = filters.value.transmission.length ? filters.value.transmission.includes(car.transmission) : true;
-    const categoryMatch = filters.value.categories.length ? filters.value.categories.includes(car.category) : true;
-
-    return priceMatch && typeMatch && brandMatch && seatsMatch && transmissionMatch && categoryMatch;
-  });
-});
-
-function handleFilterChange(newFilters) {
-  filters.value = { ...filters.value, ...newFilters };
-}
+const cars = computed(() => store.cars);
 
 function handleViewCar(car) {
-  router.push({ name: 'CarDetails', params: { id: car.id } });
+  router.push({ name: "CarDetails", params: { id: car.id } });
 }
 
-function handleSearch(query) {
-  console.log("Search query:", query);
+function goToCarBooking() {
+  router.push({ name: "CarBooking" });
+}
+
+function goToCategory(category) {
+  router.push({
+    name: "CarBooking",
+    query: { category }
+  });
+}
+
+function handleSearch(payload) {
+  console.log("Cars search:", payload);
 }
 
 </script>
+
+<style scoped>
+.font-cairo {
+  font-family: "Cairo", sans-serif;
+}
+.page-container {
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+</style>

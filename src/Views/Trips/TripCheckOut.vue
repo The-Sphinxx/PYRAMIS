@@ -137,7 +137,7 @@ const handlePlaceOrder = async () => {
   error.value = null;
 
   try {
-    const userId = authStore.user?.id || null;
+    const userId = authStore.user?.id || `guest_${Date.now()}`;
 
     // Submit booking through store, passing user ID and guest data
     const result = await bookingStore.submitBooking(userId, guestData.value);

@@ -26,7 +26,7 @@ import Bookings from '@/Views/Dashboard/Bookings.vue'
 import CustomerSupport from '@/Views/Dashboard/CustomerSupport.vue'
 import UsersManage from '@/Views/Dashboard/UsersManage.vue'
 import TripsManage from '@/Views/Dashboard/TripsManage.vue'
-import HotelsManage from '@/Views/Dashboard/HotelsMange.vue'
+import HotelsManage from '@/Views/Dashboard/HotelsManage.vue'
 import CarsManage from '@/Views/Dashboard/CarsManage.vue'
 import AttractionsManage from '@/Views/Dashboard/AttractionsManage.vue'
 
@@ -52,6 +52,7 @@ import CarBooking from '@/Views/Cars/CarBooking.vue'
 
 // Hotels
 import HotelsList from '@/Views/Hotels/HotelsList.vue'
+import HotelFilter from '@/Views/Hotels/hotelfilter.vue'
 import HotelDetails from '@/Views/Hotels/HotelDetails.vue'
 import HotelReview from '@/Views/Hotels/HotelReview.vue'
 import HotelCheckOut from '@/Views/Hotels/HotelCheckOut.vue'
@@ -276,6 +277,11 @@ const routes = [
     path: '/hotels/list',
     name: 'HotelsList',
     component: HotelsList,
+  },
+  {
+    path: '/hotels/filter',
+    name: 'HotelFilter',
+    component: HotelFilter,
   },
   {
     path: '/hotels/details/:id',

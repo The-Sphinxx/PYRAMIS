@@ -125,12 +125,7 @@
                 :auto-play-interval="4000"
               />
 
-              <button 
-                class="btn btn-primary w-full mt-6"
-                @click="handleBooking"
-              >
-                Book Now
-              </button>
+          
             </div>
           </div>
 

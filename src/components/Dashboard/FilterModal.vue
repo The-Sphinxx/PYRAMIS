@@ -1,18 +1,4 @@
 <template>
-  <!-- Filter Button -->
-  <button 
-    @click="openModal" 
-    class="btn btn-primary gap-2 font-cairo font-bold"
-  >
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-      <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clip-rule="evenodd" />
-    </svg>
-    Filters
-    <span v-if="activeFiltersCount > 0" class="badge badge-secondary">
-      {{ activeFiltersCount }}
-    </span>
-  </button>
-
   <!-- Modal Overlay & Content -->
   <Teleport to="body">
     <Transition name="modal">
@@ -173,6 +159,10 @@
 import { ref, computed, watch, defineProps, defineEmits } from 'vue';
 
 const props = defineProps({
+  isOpen: {
+    type: Boolean,
+    required: true
+  },
   showPriceFilter: {
     type: Boolean,
     default: true
@@ -203,9 +193,8 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['filter-change']);
+const emit = defineEmits(['filter-change', 'close']);
 
-const isOpen = ref(false);
 const tempFilters = ref({
   maxPrice: props.priceRange.max,
   categorySelected: '',
@@ -250,13 +239,8 @@ const activeFiltersCount = computed(() => {
   return count;
 });
 
-const openModal = () => {
-  isOpen.value = true;
-  document.body.style.overflow = 'hidden';
-};
-
 const closeModal = () => {
-  isOpen.value = false;
+  emit('close');
   document.body.style.overflow = '';
 };
 
@@ -304,6 +288,15 @@ watch(() => props.initialFilters, (newFilters) => {
     ...newFilters
   };
 }, { deep: true });
+
+// Handle body overflow when modal opens/closes
+watch(() => props.isOpen, (newVal) => {
+  if (newVal) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
+});
 </script>
 
 <style scoped>

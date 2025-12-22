@@ -72,6 +72,20 @@ export const bookingsAPI = {
   updatePaymentStatus: (id, paymentStatus) => api.patch(`/bookings/${id}`, { paymentStatus }),
 };
 
+// ==================== Users API ====================
+export const usersAPI = {
+  getAll: () => api.get('/users'),
+  getOne: (id) => api.get(`/users/${id}`),
+  create: (data) => api.post('/users', data),
+  update: (id, data) => api.put(`/users/${id}`, data),
+  patch: (id, data) => api.patch(`/users/${id}`, data),
+  delete: (id) => api.delete(`/users/${id}`),
+
+  // Specific updates
+  updateStatus: (id, status) => api.patch(`/users/${id}`, { status }),
+  // Add other specific user updates here if needed (e.g., role, verification)
+};
+
 // ==================== Generic API Helper ====================
 export const apiService = {
   get: (resource, params) => api.get(`/${resource}`, { params }),

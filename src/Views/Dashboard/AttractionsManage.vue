@@ -7,7 +7,7 @@
     <DataTable
       title="Attractions"
       :columns="columns"
-      :data="attractions"
+      :data="filteredAttractions"
       :show-filter="true"
       add-button-text="Add New Attraction"
       :show-actions="{ edit: true, delete: true, view: true }"
@@ -22,8 +22,25 @@
       @toggle="handleToggle"
       @status-click="handleStatusClick"
       @status-change="handleStatusChange"
-      @filter="handleFilter"
-      v-model:data="attractions"
+      @filter="openFilterModal"
+    />
+
+    <!-- Filter Modal -->
+    <FilterModal 
+      :is-open="showFilterModal"
+      v-bind="filterConfig"
+      @filter-change="applyFilters"
+      @close="showFilterModal = false"
+    />
+
+    <!-- Form Modal -->
+    <FormModal
+      :is-open="showFormModal"
+      :mode="formMode"
+      :config="formConfig"
+      :initial-data="selectedAttraction"
+      @close="closeFormModal"
+      @submit="handleFormSubmit"
     />
   </div>
 </template>
@@ -32,11 +49,24 @@
 import { ref, onMounted, computed } from 'vue';
 import DataTable from '@/components/Dashboard/DataTable.vue';
 import StatsCard from '@/components/Dashboard/StatsCard.vue';
+import FilterModal from '@/components/Dashboard/FilterModal.vue';
+import FormModal from '@/components/Dashboard/FormModal.vue';
 import { attractionsAPI } from '@/Services/dashboardApi';
+import { dashboardAttractionFilterConfig } from '@/Utils/dashboardFilterConfigs';
+import { attractionFormConfig } from '@/Utils/dashboardFormConfigs';
 
 // State
 const attractions = ref([]);
 const loading = ref(false);
+const showFilterModal = ref(false);
+const showFormModal = ref(false);
+const formMode = ref('add');
+const selectedAttraction = ref({});
+const activeFilters = ref({});
+
+// Configs
+const filterConfig = dashboardAttractionFilterConfig;
+const formConfig = attractionFormConfig;
 
 // Table columns configuration
 const columns = [
@@ -121,6 +151,54 @@ const stats = computed(() => {
   ];
 });
 
+// Filtered attractions based on active filters
+const filteredAttractions = computed(() => {
+  let result = attractions.value;
+
+  // Apply price filter
+  if (activeFilters.value.maxPrice && activeFilters.value.maxPrice < filterConfig.priceRange.max) {
+    result = result.filter(a => {
+      const price = typeof a.price === 'string' ? parseInt(a.price) || 0 : a.price;
+      return price <= activeFilters.value.maxPrice;
+    });
+  }
+
+  // Apply category filter
+  if (activeFilters.value.categorySelected) {
+    result = result.filter(a => a.categories?.includes(activeFilters.value.categorySelected));
+  }
+
+  // Apply city filter
+  if (activeFilters.value.city) {
+    const searchCity = activeFilters.value.city.toLowerCase();
+    result = result.filter(a => a.city?.toLowerCase().includes(searchCity));
+  }
+
+  // Apply status filter
+  if (activeFilters.value.statusSelected) {
+    result = result.filter(a => a.status === activeFilters.value.statusSelected);
+  }
+
+  // Apply availability filter
+  if (activeFilters.value.availabilitySelected) {
+    result = result.filter(a => a.availability === activeFilters.value.availabilitySelected);
+  }
+
+  // Apply featured filter
+  if (activeFilters.value.featuredSelected) {
+    const isFeatured = activeFilters.value.featuredSelected === 'true';
+    result = result.filter(a => a.isFeatured === isFeatured);
+  }
+
+  // Apply rating filter
+  if (activeFilters.value.ratingSelected) {
+    const minRating = parseFloat(activeFilters.value.ratingSelected);
+    result = result.filter(a => a.rating >= minRating);
+  }
+
+return result;
+});
+
 // Fetch attractions from API
 const fetchAttractions = async () => {
   loading.value = true;
@@ -151,13 +229,16 @@ const fetchAttractions = async () => {
 
 // Event handlers
 const handleAdd = () => {
-  console.log('Add new attraction');
-  // TODO: Open modal or navigate to add page
+  formMode.value = 'add';
+  selectedAttraction.value = {};
+  showFormModal.value = true;
 };
 
 const handleEdit = (row) => {
-  console.log('Edit attraction:', row);
-  // TODO: Open edit modal or navigate to edit page
+  formMode.value = 'edit';
+  const fullAttraction = attractions.value.find(a => a.id === row.id);
+  selectedAttraction.value = { ...fullAttraction };
+  showFormModal.value = true;
 };
 
 const handleDelete = async (row) => {
@@ -230,9 +311,36 @@ const handleStatusChange = async ({ row, field, newValue }) => {
   }
 };
 
-const handleFilter = () => {
-  console.log('Open filter modal');
-  // TODO: Implement filter functionality
+const openFilterModal = () => {
+  showFilterModal.value = true;
+};
+
+const applyFilters = (filters) => {
+  activeFilters.value = filters;
+  showFilterModal.value = false;
+};
+
+const closeFormModal = () => {
+  showFormModal.value = false;
+  selectedAttraction.value = {};
+};
+
+const handleFormSubmit = async ({ mode, data }) => {
+  loading.value = true;
+  try {
+    if (mode === 'add') {
+      await attractionsAPI.create(data);
+    } else {
+      await attractionsAPI.update(selectedAttraction.value.id, data);
+    }
+    await fetchAttractions();
+    closeFormModal();
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    alert('Failed to save attraction');
+  } finally {
+    loading.value = false;
+  }
 };
 
 // Lifecycle
