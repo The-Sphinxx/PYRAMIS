@@ -101,7 +101,7 @@
                   class="flex items-center gap-3 p-4 bg-base-200 rounded-lg"
                 >
                   <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <i class="fas fa-concierge-bell text-primary"></i>
+                    <i :class="[getAmenityIcon(amenity), 'text-primary']"></i>
                   </div>
                   <span class="text-base-content/80">{{ amenity }}</span>
                 </div>
@@ -234,6 +234,68 @@ const similarAttractions = computed(() => {
 });
 
 // Methods
+const getAmenityIcon = (amenity) => {
+  if (!amenity) return 'fas fa-check-circle';
+  const name = amenity.toLowerCase().trim();
+  
+  const iconMap = {
+    'wifi': 'fas fa-wifi',
+    'internet': 'fas fa-wifi',
+    'parking': 'fas fa-parking',
+    'car': 'fas fa-car',
+    'restaurant': 'fas fa-utensils',
+    'food': 'fas fa-utensils',
+    'dining': 'fas fa-utensils',
+    'cafe': 'fas fa-coffee',
+    'coffee': 'fas fa-coffee',
+    'toilet': 'fas fa-restroom',
+    'wc': 'fas fa-restroom',
+    'restroom': 'fas fa-restroom',
+    'bathroom': 'fas fa-restroom',
+    'accessibility': 'fas fa-wheelchair',
+    'wheelchair': 'fas fa-wheelchair',
+    'accessible': 'fas fa-wheelchair',
+    'guide': 'fas fa-user-tie',
+    'tour': 'fas fa-flag',
+    'shop': 'fas fa-store',
+    'store': 'fas fa-store',
+    'gift': 'fas fa-gift',
+    'souvenir': 'fas fa-gift',
+    'ticket': 'fas fa-ticket-alt',
+    'entry': 'fas fa-ticket-alt',
+    'audio': 'fas fa-headphones',
+    'headphone': 'fas fa-headphones',
+    'locker': 'fas fa-lock',
+    'storage': 'fas fa-box',
+    'medical': 'fas fa-briefcase-medical',
+    'first aid': 'fas fa-briefcase-medical',
+    'kid': 'fas fa-child',
+    'child': 'fas fa-child',
+    'family': 'fas fa-users',
+    'transport': 'fas fa-bus',
+    'bus': 'fas fa-bus',
+    'shuttle': 'fas fa-shuttle-van',
+    'transfer': 'fas fa-car-side',
+    'camera': 'fas fa-camera',
+    'photo': 'fas fa-camera',
+    'photography': 'fas fa-camera',
+    'prayer': 'fas fa-mosque',
+    'mosque': 'fas fa-mosque',
+    'museum': 'fas fa-landmark',
+    'history': 'fas fa-landmark',
+    'security': 'fas fa-shield-alt',
+    'information': 'fas fa-info-circle',
+    'map': 'fas fa-map'
+  };
+
+  // Check for partial matches
+  for (const [key, icon] of Object.entries(iconMap)) {
+    if (name.includes(key)) return icon;
+  }
+  
+  return 'fas fa-check-circle'; // Default icon
+};
+
 const fetchAttraction = async () => {
   loading.value = true;
   error.value = null;
