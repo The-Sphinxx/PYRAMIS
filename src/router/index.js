@@ -372,6 +372,7 @@ router.beforeEach((to, from, next) => {
 
   // Use auth store to check authentication status
   const authStore = useAuthStore()
+  authStore.initAuth()
 
   if (requiresAuth && !authStore.isAuthenticated) {
     // Redirect to login page if not authenticated
@@ -380,7 +381,7 @@ router.beforeEach((to, from, next) => {
       query: { redirect: to.fullPath }, // Save the intended destination
     })
   } else if (requiresAdmin) {
-    const role = authStore.user?.role || JSON.parse(localStorage.getItem('user') || '{}')?.role || ''
+    const role = authStore.user?.role || ''
     if (role !== 'Admin') {
       next({ path: '/' })
     } else {

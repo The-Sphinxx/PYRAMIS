@@ -2,6 +2,7 @@ using System.Net;
 using System.Text.Json;
 using FluentValidation;
 using Stripe;
+using Agentic_Rentify.Core.Exceptions;
 
 namespace Agentic_Rentify.Api.Middleware;
 

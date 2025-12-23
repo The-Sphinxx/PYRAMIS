@@ -2,6 +2,14 @@
   <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 group overflow-hidden rounded-glass-radius border border-base-200">
     <!-- Image Section -->
     <figure class="relative h-48 overflow-hidden">
+      <button
+        class="btn btn-circle btn-sm absolute right-3 top-3 z-10 bg-base-100/80"
+        :class="{ 'text-error': isWishlisted }"
+        @click.stop="toggleWishlist"
+        title="Save to wishlist"
+      >
+        <i :class="isWishlisted ? 'fas fa-heart' : 'far fa-heart'"></i>
+      </button>
       <router-link :to="`/trips/details/${trip.id}`" class="w-full h-full block">
         <img 
           :src="trip.image" 
@@ -96,12 +104,50 @@
 </template>
 
 <script setup>
-defineProps({
+import { ref } from 'vue';
+import { useAuthStore } from '@/stores/authStore';
+import wishlistApi from '@/Services/wishlistApi';
+
+const props = defineProps({
   trip: {
     type: Object,
     required: true
   }
 });
+
+const authStore = useAuthStore();
+const isWishlisted = ref(!!props.trip.isWishlisted);
+const isSaving = ref(false);
+
+const toggleWishlist = async () => {
+  if (isSaving.value) return;
+  if (!authStore.user?.id) {
+    // Future: redirect to login or show toast
+    return;
+  }
+
+  isSaving.value = true;
+  try {
+    const payload = {
+      itemId: props.trip.id,
+      itemType: 'Trip',
+      title: props.trip.title,
+      imageUrl: props.trip.image,
+      location: props.trip.city || props.trip.location || '',
+      rating: props.trip.rating || null
+    };
+
+    if (isWishlisted.value) {
+      await wishlistApi.remove('Trip', props.trip.id);
+      isWishlisted.value = false;
+    } else {
+      await wishlistApi.add(payload);
+      isWishlisted.value = true;
+    }
+  } finally {
+    isSaving.value = false;
+  }
+};
 </script>
 
 <style scoped>

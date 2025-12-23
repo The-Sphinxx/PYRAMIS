@@ -56,7 +56,7 @@
 
     <!-- Messages Area -->
     <div class="flex-1 overflow-y-auto p-6 space-y-4 bg-base-200/30" ref="messagesContainer">
-      <div v-for="msg in currentTicket.messages" :key="msg.id" class="chat" :class="isMessageFromMe(msg) ? 'chat-end' : 'chat-start'">
+      <div v-for="msg in displayedMessages" :key="msg.id" class="chat" :class="isMessageFromMe(msg) ? 'chat-end' : 'chat-start'">
         <!-- Avatar logic: if message is NOT from me, show avatar -->
         <div class="chat-image avatar placeholder" v-if="!isMessageFromMe(msg)">
           <div class="w-10 rounded-full bg-neutral text-neutral-content" :class="{'bg-primary': !msg.isSupport && !isUserView, 'bg-neutral': msg.isSupport && isUserView}">
@@ -105,7 +105,7 @@
 </template>
 
 <script setup>
-import { ref, watch, nextTick, onMounted, onUnmounted } from 'vue';
+import { ref, watch, nextTick, onMounted, onUnmounted, computed } from 'vue';
 import { useSupportStore } from '@/stores/supportStore';
 import { useChat, chatService } from '@/Services/chatService';
 import { storeToRefs } from 'pinia';
@@ -127,10 +127,16 @@ const props = defineProps({
 
 const store = useSupportStore();
 const { currentTicket } = storeToRefs(store);
-const { connect, disconnect } = useChat();
+const { connect, disconnect, messages, conversations } = useChat();
 const newMessage = ref('');
 const sending = ref(false);
 const messagesContainer = ref(null);
+
+const displayedMessages = computed(() => {
+  const convId = currentTicket.value?.id;
+  if (!convId) return [];
+  return (messages.current || []).filter((m) => m.conversationId === convId);
+});
 
 const isMessageFromMe = (msg) => {
   if (props.isUserView) {
@@ -146,12 +152,30 @@ const scrollToBottom = () => {
     }
 };
 
-watch(() => currentTicket.value?.messages?.length, () => {
-    nextTick(scrollToBottom);
+watch(() => displayedMessages.value.length, () => {
+  nextTick(scrollToBottom);
 });
 
-watch(() => currentTicket.value, () => {
-    nextTick(scrollToBottom);
+watch(() => currentTicket.value?.id, async (id) => {
+  if (!id) return;
+  // Join conversation group and fetch history from API
+  try {
+    await chatService.joinConversation(id);
+  } catch (e) {
+    console.error('Failed to join conversation', e);
+  }
+  try {
+    await chatService.fetchHistory(id);
+    if (store.currentTicket && store.currentTicket.id === id) {
+      store.currentTicket = {
+        ...store.currentTicket,
+        messages: [...messages.current]
+      };
+    }
+  } catch (e) {
+    console.error('Failed to load history', e);
+  }
+  nextTick(scrollToBottom);
 });
 
 const sendMessage = async () => {
@@ -159,16 +183,19 @@ const sendMessage = async () => {
     
     sending.value = true;
     try {
-        // Use chatService to send message via API (REST fallback for REST communication)
-        const result = await chatService.sendMessage(
-            currentTicket.value.id,
-            newMessage.value,
-            currentTicket.value.subject
+        // Persist message; server will broadcast via SignalR.
+        await chatService.sendMessage(
+          currentTicket.value.id,
+          newMessage.value,
+          currentTicket.value.subject
         );
 
-        // Also try to broadcast via SignalR if connected
-        if (chatService.connection?.state === 'Connected') {
-            await chatService.sendMessageRealtime(currentTicket.value.id, newMessage.value);
+        // Sync current ticket messages with latest store
+        if (store.currentTicket && store.currentTicket.id === currentTicket.value.id) {
+          store.currentTicket = {
+            ...store.currentTicket,
+            messages: [...messages.current]
+          };
         }
 
         newMessage.value = '';

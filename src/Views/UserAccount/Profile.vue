@@ -79,8 +79,15 @@
       <div v-if="activeTab === 'saved'" class="space-y-8">
          <h2 class="text-2xl font-bold text-base-content mb-6">Saved Items</h2>
          <div v-if="savedItems.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div v-for="item in savedItems" :key="item.id" class="card bg-base-100 shadow-xl image-full h-64">
-              <figure><img :src="item.image" :alt="item.title" class="w-full h-full object-cover" /></figure>
+            <div v-for="item in savedItems" :key="item.id" class="card bg-base-100 shadow-xl image-full h-64 relative">
+              <button
+                class="btn btn-square btn-sm absolute right-3 top-3 bg-base-100/80"
+                @click="handleRemoveWishlist(item)"
+                title="Remove from wishlist"
+              >
+                <i class="fas fa-heart-broken text-error"></i>
+              </button>
+              <figure><img :src="item.imageUrl || item.image" :alt="item.title" class="w-full h-full object-cover" /></figure>
               <div class="card-body">
                 <h2 class="card-title text-white">{{ item.title }}</h2>
                 <div class="flex items-center gap-1 text-white/90 text-sm">
@@ -125,7 +132,7 @@
     <!-- Edit Profile Modal -->
     <EditProfileModal
       :is-open="isEditModalOpen"
-      :user="authStore.user"
+      :user="user"
       @close="isEditModalOpen = false"
       @save="handleSaveProfile"
     />
@@ -134,7 +141,6 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import axios from 'axios';
 import ProfileHeader from '@/components/profile/ProfileHeader.vue';
 import BookingCard from '@/components/profile/BookingCard.vue';
 import ActivityItem from '@/components/profile/ActivityItem.vue';
@@ -142,6 +148,8 @@ import EditProfileModal from '@/components/profile/EditProfileModal.vue';
 import TicketList from '@/components/Support/TicketList.vue';
 import TicketChat from '@/components/Support/TicketChat.vue';
 
+import api from '@/Services/api';
+import wishlistApi from '@/Services/wishlistApi';
 import { useAuthStore } from '@/stores/authStore';
 
 const authStore = useAuthStore();
@@ -218,65 +226,48 @@ const handleViewActivity = (id) => {
   console.log('View activity', id);
 };
 
+const handleRemoveWishlist = async (item) => {
+  try {
+    const typeValue = item.itemType ?? item.itemtype ?? item.type ?? 'Trip';
+    const type = typeof typeValue === 'number'
+      ? ['Trip', 'Hotel', 'Car', 'Attraction'][typeValue] || 'Trip'
+      : typeValue;
+
+    await wishlistApi.remove(type, item.itemId ?? item.id);
+    savedItems.value = savedItems.value.filter((w) => w.itemId !== (item.itemId ?? item.id) || w.itemType !== item.itemType);
+  } catch (error) {
+    console.error('Failed to remove wishlist item', error);
+  }
+};
+
 onMounted(async () => {
-  // Ensure auth is initialized (try to load from local storage if fresh reload)
   if (!authStore.user) {
     authStore.initAuth();
   }
 
-  const currentUser = authStore.user;
-  const userId = currentUser ? currentUser.id : '1'; // Fallback to 1 if not logged in
-
   try {
-    // 1. Fetch User Info (Dynamic)
-    // If we have currentUser, we can use that, or fetch fresh from API
-    if (currentUser) {
-         user.value = {
-            name: currentUser.fullName || (currentUser.firstName + ' ' + currentUser.lastName),
-            email: currentUser.email,
-            avatar: currentUser.profileImage || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150',
-            membershipType: currentUser.membershipType || 'Standard Member'
-        };
-    } else {
-        // Fallback fetch for user 1
-        const userRes = await axios.get(`http://localhost:3000/users/${userId}`);
-        if (userRes.data) {
-            const u = userRes.data;
-             user.value = {
-                name: (u.firstName + ' ' + u.lastName) || u.fullName,
-                email: u.email,
-                avatar: u.profileImage || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150',
-                membershipType: u.membershipType || 'Standard Member'
-            };
-        }
-    }
+    const { data } = await api.get('/Profile');
 
-    // 2. Fetch Bookings (Strictly for this user)
-    // Only fetch if we have a valid userId
-         // 2. Fetch Bookings (Strictly for this user)
-    // Only fetch if we have a valid userId
-    if (userId && userId !== '1') {
-         // Query API
-         const bookingsRes = await axios.get(`http://localhost:3000/bookings?userId=${userId}`);
-         // DOUBLE CHECK: Client-side filter to guarantee isolation
-         bookings.value = bookingsRes.data.filter(b => b.userId == userId);
+    user.value = {
+      id: data.id,
+      name: data.fullName || `${data.firstName} ${data.lastName}`.trim() || 'Guest User',
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      avatar: data.profileImage || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150',
+      profileImage: data.profileImage,
+      phone: data.phone,
+      nationality: data.nationality,
+      gender: data.gender,
+      dateOfBirth: data.dateOfBirth,
+      membershipType: data.membershipType || 'Standard Member'
+    };
 
-          // 3. Fetch Saved Items
-         const savedRes = await axios.get(`http://localhost:3000/savedItems?userId=${userId}`);
-         savedItems.value = savedRes.data.filter(i => i.userId == userId);
-
-          // 5. Fetch Recent Activity
-         const activityRes = await axios.get(`http://localhost:3000/recentActivity?userId=${userId}`);
-         recentActivity.value = activityRes.data.filter(a => a.userId == userId);
-    } else {
-        // Clear data if no valid user logged in to prevent leakage
-        bookings.value = [];
-        savedItems.value = [];
-        recentActivity.value = [];
-    }
-
+    bookings.value = data.bookings || [];
+    savedItems.value = data.wishlist || [];
+    recentActivity.value = []; // Not yet provided by backend
   } catch (error) {
-    console.error("Failed to load profile data:", error);
+    console.error('Failed to load profile data:', error);
   }
 });
 </script>

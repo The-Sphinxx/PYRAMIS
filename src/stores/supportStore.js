@@ -1,8 +1,28 @@
-
 import { defineStore } from 'pinia';
-import axios from 'axios';
+import apiService from '@/Services/apiService';
 
-const API_URL = 'http://localhost:3000/tickets';
+const mapConversation = (conversation) => ({
+  id: conversation.id,
+  subject: conversation.subject,
+  status: conversation.status || 'Open',
+  priority: conversation.priority || 'Medium',
+  userName: conversation.clientName || 'Client',
+  userEmail: conversation.clientEmail,
+  userId: conversation.clientId,
+  createdAt: conversation.createdAt || conversation.lastMessageAt || new Date().toISOString(),
+  updatedAt: conversation.lastMessageAt || conversation.updatedAt || new Date().toISOString(),
+  messages: conversation.messages || []
+});
+
+const mapMessage = (message) => ({
+  id: message.id,
+  conversationId: message.conversationId || message.conversationID || null,
+  senderId: message.senderId,
+  senderName: message.senderName,
+  senderRole: message.senderRole,
+  content: message.content,
+  timestamp: message.sentAt || new Date().toISOString(),
+});
 
 export const useSupportStore = defineStore('support', {
   state: () => ({
@@ -15,35 +35,28 @@ export const useSupportStore = defineStore('support', {
   getters: {
     getTicketById: (state) => (id) => state.tickets.find((t) => t.id === id),
     
-    // Filter tickets based on search query and filters
     filteredTickets: (state) => (searchQuery, filters) => {
       let result = [...state.tickets];
 
-      // 1. Text Search (ID, Subject, UserName, UserEmail)
       if (searchQuery) {
         const query = searchQuery.toLowerCase();
         result = result.filter(ticket => 
-          ticket.id.toLowerCase().includes(query) ||
+          String(ticket.id).toLowerCase().includes(query) ||
           ticket.subject.toLowerCase().includes(query) ||
           (ticket.userName && ticket.userName.toLowerCase().includes(query)) ||
           (ticket.userEmail && ticket.userEmail.toLowerCase().includes(query))
         );
       }
 
-      // 2. Status Filter
       if (filters.status && filters.status !== 'All') {
         result = result.filter(ticket => ticket.status === filters.status);
       }
 
-      // 3. Priority Filter
       if (filters.priority && filters.priority !== 'All') {
         result = result.filter(ticket => ticket.priority === filters.priority);
       }
 
-      // 4. Date Filter (CreatedAt)
       if (filters.date) {
-        // Assuming filters.date is "YYYY-MM-DD" or similar
-        // Or if it's a date range. For simple implementation, let's match the date part.
         const filterDateString = new Date(filters.date).toDateString();
         result = result.filter(ticket => {
           const ticketDate = new Date(ticket.createdAt).toDateString();
@@ -51,9 +64,7 @@ export const useSupportStore = defineStore('support', {
         });
       }
 
-      // Sort by newest Date
       result.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
-
       return result;
     },
 
@@ -66,8 +77,12 @@ export const useSupportStore = defineStore('support', {
     async fetchTickets() {
       this.loading = true;
       try {
-        const response = await axios.get(API_URL);
-        this.tickets = response.data;
+        const response = await apiService.get('/chat/conversations');
+        this.tickets = (response.data || []).map(mapConversation);
+
+        if (this.currentTicket) {
+          this.currentTicket = this.tickets.find((t) => t.id === this.currentTicket.id) || null;
+        }
       } catch (err) {
         this.error = err.message;
         console.error('Error fetching tickets:', err);
@@ -79,9 +94,19 @@ export const useSupportStore = defineStore('support', {
     async fetchTicketById(id) {
       this.loading = true;
       try {
-        const response = await axios.get(`${API_URL}/${id}`);
-        this.currentTicket = response.data;
-        return response.data;
+        const cached = this.tickets.find((t) => t.id === id);
+        if (cached) {
+          this.currentTicket = cached;
+          return cached;
+        }
+
+        const response = await apiService.get('/chat/conversations');
+        const conversations = (response.data || []).map(mapConversation);
+        this.tickets = conversations;
+
+        const found = conversations.find((t) => t.id === id) || null;
+        this.currentTicket = found;
+        return found;
       } catch (err) {
         this.error = err.message;
         console.error('Error fetching ticket:', err);
@@ -93,19 +118,30 @@ export const useSupportStore = defineStore('support', {
     async createTicket(ticketData) {
       this.loading = true;
       try {
-        const newTicket = {
-          ...ticketData,
-          id: `TK-${Date.now().toString().slice(-4)}`, // Simple ID generation
-          status: 'Open',
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-          messages: ticketData.messages || []
-        };
-        const response = await axios.post(API_URL, newTicket);
-        this.tickets.push(response.data);
-        return response.data;
+        // Use apiService which has auth interceptor configured
+        const response = await apiService.post(
+          '/chat/tickets',
+          {
+            subject: ticketData.subject,
+            priority: ticketData.priority,
+            initialMessage: ticketData.initialMessage
+          }
+        );
+
+        const conversationData = response.data.data || response.data;
+        const newConversation = mapConversation({
+          ...conversationData,
+          createdAt: conversationData.createdAt || new Date().toISOString(),
+          updatedAt: conversationData.updatedAt || conversationData.lastMessageAt || new Date().toISOString(),
+          clientName: conversationData.clientName || 'You'
+        });
+
+        this.tickets.unshift(newConversation);
+        this.currentTicket = newConversation;
+        return newConversation;
       } catch (err) {
-        this.error = err.message;
+        this.error = err.response?.data?.message || err.message;
+        console.error('Error creating ticket:', err);
         throw err;
       } finally {
         this.loading = false;
@@ -114,35 +150,31 @@ export const useSupportStore = defineStore('support', {
 
     async sendMessage(ticketId, message) {
       try {
-        // First get the ticket to ensure we have latest messages
-        const ticket = this.tickets.find(t => t.id === ticketId);
+        const ticket = this.tickets.find((t) => t.id === ticketId);
         if (!ticket) throw new Error('Ticket not found');
 
-        const newMessage = {
-          id: Date.now(),
-          ...message,
-          timestamp: new Date().toISOString()
+        const response = await apiService.post('/chat/messages', {
+          conversationId: ticketId,
+          content: message.content,
+          subject: message.subject || ticket.subject || null,
+        });
+
+        const savedMessage = mapMessage(response.data || {});
+        const updatedTicket = {
+          ...ticket,
+          messages: [...(ticket.messages || []), savedMessage],
+          updatedAt: savedMessage.timestamp,
         };
 
-        const updatedMessages = [...ticket.messages, newMessage];
-        const updatedTicket = { 
-          ...ticket, 
-          messages: updatedMessages,
-          updatedAt: new Date().toISOString()
-        };
-
-        const response = await axios.put(`${API_URL}/${ticketId}`, updatedTicket);
-        
-        // Update local state
-        const index = this.tickets.findIndex(t => t.id === ticketId);
+        const index = this.tickets.findIndex((t) => t.id === ticketId);
         if (index !== -1) {
-          this.tickets[index] = response.data;
+          this.tickets[index] = updatedTicket;
         }
         if (this.currentTicket && this.currentTicket.id === ticketId) {
-          this.currentTicket = response.data;
+          this.currentTicket = updatedTicket;
         }
 
-        return response.data;
+        return savedMessage;
       } catch (err) {
         console.error('Error sending message:', err);
         throw err;
@@ -151,23 +183,21 @@ export const useSupportStore = defineStore('support', {
 
     async updateTicketStatus(ticketId, status) {
       try {
-        const ticket = this.tickets.find(t => t.id === ticketId);
+        const ticket = this.tickets.find((t) => t.id === ticketId);
         if (!ticket) throw new Error('Ticket not found');
 
-        const updatedTicket = { 
-          ...ticket, 
+        const updatedTicket = {
+          ...ticket,
           status,
           updatedAt: new Date().toISOString()
         };
 
-        const response = await axios.put(`${API_URL}/${ticketId}`, updatedTicket);
-        
-        const index = this.tickets.findIndex(t => t.id === ticketId);
+        const index = this.tickets.findIndex((t) => t.id === ticketId);
         if (index !== -1) {
-          this.tickets[index] = response.data;
+          this.tickets[index] = updatedTicket;
         }
         if (this.currentTicket && this.currentTicket.id === ticketId) {
-          this.currentTicket = response.data;
+          this.currentTicket = updatedTicket;
         }
       } catch (err) {
         console.error('Error updating status:', err);
@@ -177,18 +207,17 @@ export const useSupportStore = defineStore('support', {
 
     async assignTicket(ticketId, adminId) {
       try {
-        const ticket = this.tickets.find(t => t.id === ticketId);
+        const ticket = this.tickets.find((t) => t.id === ticketId);
         if (!ticket) throw new Error('Ticket not found');
 
-        const updatedTicket = { ...ticket, assignedTo: adminId };
-        const response = await axios.put(`${API_URL}/${ticketId}`, updatedTicket);
+        const updatedTicket = { ...ticket, assignedTo: adminId, updatedAt: new Date().toISOString() };
 
-        const index = this.tickets.findIndex(t => t.id === ticketId);
+        const index = this.tickets.findIndex((t) => t.id === ticketId);
         if (index !== -1) {
-          this.tickets[index] = response.data;
+          this.tickets[index] = updatedTicket;
         }
         if (this.currentTicket && this.currentTicket.id === ticketId) {
-          this.currentTicket = response.data;
+          this.currentTicket = updatedTicket;
         }
       } catch (err) {
         console.error('Error assigning ticket:', err);

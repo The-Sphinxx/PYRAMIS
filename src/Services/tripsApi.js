@@ -1,14 +1,11 @@
 // Services/tripsApi.js
-import axios from 'axios';
-
-// Base URL - adjust according to your json-server configuration
-const API_BASE_URL = 'http://localhost:3000';
+import api from './api';
 
 const tripsApi = {
     // Get all trips
     async getAllTrips() {
         try {
-            const response = await axios.get(`${API_BASE_URL}/trips`);
+            const response = await api.get('/Trips');
             return response.data;
         } catch (error) {
             console.error('Error fetching trips:', error);
@@ -19,7 +16,7 @@ const tripsApi = {
     // Get trip by ID
     async getTripById(id) {
         try {
-            const response = await axios.get(`${API_BASE_URL}/trips/${id}`);
+            const response = await api.get(`/Trips/${id}`);
             return response.data;
         } catch (error) {
             console.error(`Error fetching trip ${id}:`, error);
@@ -30,7 +27,7 @@ const tripsApi = {
     // Get trips by category
     async getTripsByCategory(category) {
         try {
-            const response = await axios.get(`${API_BASE_URL}/trips`, {
+            const response = await api.get('/Trips', {
                 params: { category }
             });
             return response.data;
@@ -43,7 +40,7 @@ const tripsApi = {
     // Get trips by city/destination
     async getTripsByCity(city) {
         try {
-            const response = await axios.get(`${API_BASE_URL}/trips`, {
+            const response = await api.get('/Trips', {
                 params: { city }
             });
             return response.data;
@@ -56,7 +53,7 @@ const tripsApi = {
     // Search trips
     async searchTrips(query) {
         try {
-            const response = await axios.get(`${API_BASE_URL}/trips`, {
+            const response = await api.get('/Trips', {
                 params: { q: query }
             });
             return response.data;
@@ -87,7 +84,7 @@ const tripsApi = {
                 params.price_lte = filters.maxPrice; // Assuming simple number, might need custom filtering if string
             }
 
-            const response = await axios.get(`${API_BASE_URL}/trips`, { params });
+            const response = await api.get('/Trips', { params });
             return response.data;
         } catch (error) {
             console.error('Error fetching filtered trips:', error);
@@ -98,12 +95,8 @@ const tripsApi = {
     // Get top rated trips
     async getTopRatedTrips(limit = 8) {
         try {
-            const response = await axios.get(`${API_BASE_URL}/trips`, {
-                params: {
-                    _sort: 'rating',
-                    _order: 'desc',
-                    _limit: limit
-                }
+            const response = await api.get('/Trips/top-rated', {
+                params: { limit }
             });
             return response.data;
         } catch (error) {
@@ -115,12 +108,10 @@ const tripsApi = {
     // Book trip (POST to bookings endpoint)
     async bookTrip(tripId, bookingData) {
         try {
-            const response = await axios.post(`${API_BASE_URL}/bookings`, {
-                tripId, // or itemId generically
+            const response = await api.post('/Bookings', {
+                tripId,
                 type: 'trip',
                 ...bookingData,
-                bookingDate: new Date().toISOString(),
-                status: 'pending'
             });
             return response.data;
         } catch (error) {

@@ -1,6 +1,7 @@
 using Agentic_Rentify.Application.Features.Chat.DTOs;
 using Agentic_Rentify.Application.Interfaces;
 using Agentic_Rentify.Core.Enums;
+using Agentic_Rentify.Core.Exceptions;
 using MediatR;
 using ChatMessageEntity = Agentic_Rentify.Core.Entities.ChatMessage;
 using ChatConversationEntity = Agentic_Rentify.Core.Entities.ChatConversation;

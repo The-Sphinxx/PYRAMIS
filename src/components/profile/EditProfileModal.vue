@@ -101,17 +101,22 @@
           </div>
         </div>
 
-        <!-- Avatar URL (Optional enhancement: proper upload) -->
+        <!-- Profile Image Upload -->
         <div class="form-control">
-           <label class="label">
-             <span class="label-text">Profile Image URL (Optional)</span>
-           </label>
-           <input 
-             v-model="formData.profileImage" 
-             type="text" 
-             class="input input-bordered w-full"
-             placeholder="https://..."
-           />
+          <label class="label">
+            <span class="label-text">Profile Photo</span>
+          </label>
+          <input 
+            ref="fileInput"
+            type="file" 
+            accept="image/*"
+            @change="handleImageSelect"
+            class="file-input file-input-bordered w-full" 
+          />
+          <div v-if="imagePreview" class="mt-3">
+            <img :src="imagePreview" alt="Preview" class="w-24 h-24 rounded-lg object-cover" />
+          </div>
+          <p v-if="uploadError" class="text-error text-sm mt-2">{{ uploadError }}</p>
         </div>
 
         <div class="modal-action mt-6">
@@ -181,6 +186,7 @@
 <script setup>
 import { ref, reactive, watch } from 'vue';
 import { useAuthStore } from '@/stores/authStore';
+import uploadApi from '@/Services/uploadApi';
 
 const props = defineProps({
   isOpen: Boolean,
@@ -195,6 +201,10 @@ const loading = ref(false);
 const activeMode = ref('details');
 const authStore = useAuthStore();
 const passwordError = ref('');
+const uploadError = ref('');
+const fileInput = ref(null);
+const selectedFile = ref(null);
+const imagePreview = ref('');
 
 const formData = reactive({
   firstName: '',
@@ -218,35 +228,100 @@ watch(() => props.isOpen, (newVal) => {
     // Reset mode and forms
     activeMode.value = 'details';
     passwordError.value = '';
+    uploadError.value = '';
+    selectedFile.value = null;
+    imagePreview.value = '';
     passwordData.currentPassword = '';
     passwordData.newPassword = '';
     passwordData.confirmPassword = '';
     
-    formData.firstName = props.user.firstName || props.user.name.split(' ')[0] || '';
-    formData.lastName = props.user.lastName || props.user.name.split(' ').slice(1).join(' ') || '';
+    const safeName = (props.user.name || props.user.fullName || '').trim();
+    const nameParts = safeName ? safeName.split(/\s+/) : [];
+
+    formData.firstName = props.user.firstName || nameParts[0] || '';
+    formData.lastName = props.user.lastName || nameParts.slice(1).join(' ') || '';
     formData.phone = props.user.phone || '';
     formData.nationality = props.user.nationality || '';
-    formData.dateOfBirth = props.user.dateOfBirth || '';
+    
+    // Format dateOfBirth for HTML date input (YYYY-MM-DD)
+    if (props.user.dateOfBirth) {
+      const date = new Date(props.user.dateOfBirth);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      formData.dateOfBirth = `${year}-${month}-${day}`;
+    } else {
+      formData.dateOfBirth = '';
+    }
+    
     formData.gender = props.user.gender || '';
     formData.profileImage = props.user.avatar || props.user.profileImage || '';
+    imagePreview.value = formData.profileImage;
   }
 });
 
+const handleImageSelect = (event) => {
+  const file = event.target.files?.[0];
+  if (!file) return;
+
+  selectedFile.value = file;
+  uploadError.value = '';
+  
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    imagePreview.value = e.target?.result || '';
+  };
+  reader.readAsDataURL(file);
+};
+
+const uploadImage = async () => {
+  if (!selectedFile.value) return null;
+
+  try {
+    const result = await uploadApi.uploadPhoto(selectedFile.value);
+    if (!result || !result.url) {
+      throw new Error('No URL in upload response');
+    }
+    return result.url;
+  } catch (error) {
+    uploadError.value = error.response?.data?.error || error.message || 'Failed to upload image';
+    throw error;
+  }
+};
+
 const handleSubmit = async () => {
   loading.value = true;
+  uploadError.value = '';
+  
   try {
+    let profileImageUrl = formData.profileImage;
+
+    // If a new file is selected, upload it first
+    if (selectedFile.value) {
+      profileImageUrl = await uploadImage();
+    }
+
+    // Build the update payload with only non-empty fields
     const updatedData = {
-      firstName: formData.firstName,
-      lastName: formData.lastName,
+      firstName: formData.firstName || '',
+      lastName: formData.lastName || '',
       fullName: `${formData.firstName} ${formData.lastName}`.trim(),
-      phone: formData.phone,
-      nationality: formData.nationality,
-      dateOfBirth: formData.dateOfBirth,
-      gender: formData.gender,
-      profileImage: formData.profileImage
+      phone: formData.phone || '',
+      nationality: formData.nationality || '',
+      gender: formData.gender || '',
+      profileImage: profileImageUrl || ''
     };
+
+    // Only add dateOfBirth if it's set
+    if (formData.dateOfBirth) {
+      const date = new Date(formData.dateOfBirth);
+      updatedData.dateOfBirth = date.toISOString();
+    }
     
     emit('save', updatedData);
+  } catch (error) {
+    console.error('Save error:', error);
+    // uploadError is already set by uploadImage if needed
   } finally {
     loading.value = false;
   }
