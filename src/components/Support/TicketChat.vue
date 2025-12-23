@@ -68,7 +68,7 @@
           {{ msg.senderName }}
           <time class="ml-1">{{ formatTime(msg.timestamp) }}</time>
         </div>
-        <div class="chat-bubble" :class="isMessageFromMe(msg) ? 'chat-bubble-primary' : 'chat-bubble-base-100 bg-white text-base-content'">
+        <div class="chat-bubble" :class="isMessageFromMe(msg) ? 'chat-bubble-primary' : 'bg-base-200 text-base-content border border-base-300'">
           {{ msg.content }}
         </div>
       </div>
