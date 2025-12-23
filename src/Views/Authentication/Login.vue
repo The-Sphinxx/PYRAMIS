@@ -7,7 +7,7 @@
           v-for="(image, index) in backgroundImages"
           :key="image"
           v-show="currentImageIndex === index"
-          class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+          class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000"
           :style="{ backgroundImage: `url(${image})` }"
         ></div>
       </transition-group>
@@ -16,7 +16,7 @@
     </div>
 
     <!-- Content -->
-    <div class="relative z-10 min-h-screen flex items-center p-4">
+    <div class="relative z-10 min-h-screen flex items-center p-4 ms-[64px]">
       <div class="bg-base-200/80 backdrop-blur-sm w-full max-w-md p-8 rounded-lg shadow-xl">
         <!-- Logo -->
         <div class="text-center mb-8">

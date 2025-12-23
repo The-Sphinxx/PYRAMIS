@@ -15,7 +15,7 @@
     </div>
 
     <!-- Content -->
-    <div class="relative z-10 min-h-screen flex items-center p-4">
+    <div class="relative z-10 min-h-screen flex items-center p-4 justify-center">
       <div class="bg-base-200/80 backdrop-blur-sm w-full max-w-md p-8 rounded-lg shadow-xl">
         <!-- Logo -->
         <div class="text-center mb-8">
@@ -252,9 +252,11 @@
 import { ref, reactive, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { authApi } from '@/Services/api';
+import { useNotifyStore } from '@/stores/notifyStore';
 import { getBackgrounds } from '@/Services/systemService';
 
 const router = useRouter();
+const notify = useNotifyStore();
 
 // Background Images
 const backgroundImages = ref([]);
@@ -323,9 +325,11 @@ const handleSendToken = async () => {
     isLoading.value = false;
     currentStep.value = 'token';
     startCooldown();
+    notify.info('We sent a 6-digit code to your email. It expires in 10 minutes.');
   } catch (error) {
     isLoading.value = false;
     errorMessage.value = error.response?.data?.message || 'Unable to send reset code';
+    notify.error(errorMessage.value);
   }
 };
 
@@ -381,9 +385,11 @@ const handleResetPassword = async () => {
     );
     isLoading.value = false;
     currentStep.value = 'success';
+    notify.success('Password reset successfully. You can now sign in.');
   } catch (error) {
     isLoading.value = false;
     errorMessage.value = error.response?.data?.message || 'Reset failed';
+    notify.error(errorMessage.value);
   }
 };
 

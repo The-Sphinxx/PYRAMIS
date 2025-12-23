@@ -13,7 +13,7 @@
       <div class="absolute inset-0 bg-black/20"></div>
     </div>
 
-    <div class="relative z-10 min-h-screen flex items-center p-4">
+    <div class="relative z-10 min-h-screen flex items-center p-4 justify-center">
       <div class="bg-base-200/80 backdrop-blur-sm w-full max-w-md p-8 rounded-lg shadow-xl">
         <div class="text-center mb-8">
           <h1 class="text-4xl font-bold text-primary font-cairo">PYRAMIS</h1>

@@ -32,12 +32,11 @@ public class GlobalExceptionHandlerMiddleware
 
     private async Task HandleExceptionAsync(HttpContext context, Exception ex)
     {
-        _logger.LogError(ex, "An unexpected error occurred.");
-
         context.Response.ContentType = "application/json";
 
         if (ex is ValidationException validationException)
         {
+            _logger.LogWarning(ex, "Validation failed");
             context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
             var validationErrors = validationException.Errors
                 .GroupBy(e => e.PropertyName)
@@ -49,11 +48,36 @@ public class GlobalExceptionHandlerMiddleware
                 message = "Validation failed",
                 errors = validationErrors
             };
-            
             await context.Response.WriteAsync(JsonSerializer.Serialize(response));
+            return;
         }
-        else if (ex is StripeException stripeException)
+        if (ex is UnauthorizedException unauthorized)
         {
+            _logger.LogInformation("Unauthorized: {Message}", unauthorized.Message);
+            context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+            var response = new
+            {
+                statusCode = context.Response.StatusCode,
+                message = unauthorized.Message
+            };
+            await context.Response.WriteAsync(JsonSerializer.Serialize(response));
+            return;
+        }
+        if (ex is NotFoundException notFound)
+        {
+            _logger.LogInformation("Not Found: {Message}", notFound.Message);
+            context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+            var response = new
+            {
+                statusCode = context.Response.StatusCode,
+                message = notFound.Message
+            };
+            await context.Response.WriteAsync(JsonSerializer.Serialize(response));
+            return;
+        }
+        if (ex is StripeException stripeException)
+        {
+            _logger.LogWarning(ex, "Stripe error");
             context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
             var response = new
             {
@@ -63,18 +87,18 @@ public class GlobalExceptionHandlerMiddleware
             };
 
             await context.Response.WriteAsync(JsonSerializer.Serialize(response));
+            return;
         }
-        else
-        {
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            var response = new
-            {
-                statusCode = context.Response.StatusCode,
-                message = ex.Message,
-                stackTrace = _env.IsDevelopment() ? ex.StackTrace : null
-            };
 
-            await context.Response.WriteAsync(JsonSerializer.Serialize(response));
-        }
+        _logger.LogError(ex, "An unexpected error occurred.");
+        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+        var generic = new
+        {
+            statusCode = context.Response.StatusCode,
+            message = "An unexpected error occurred.",
+            detail = _env.IsDevelopment() ? ex.Message : null,
+            stackTrace = _env.IsDevelopment() ? ex.StackTrace : null
+        };
+        await context.Response.WriteAsync(JsonSerializer.Serialize(generic));
     }
 }

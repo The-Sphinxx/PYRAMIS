@@ -17,4 +17,12 @@ public class ApplicationUser : IdentityUser
 
     public string? EmailVerificationCode { get; set; }
     public DateTime? EmailVerificationCodeExpiresAt { get; set; }
+
+    // Link-based email verification token (preferred)
+    public string? EmailVerificationToken { get; set; }
+    public DateTime? EmailVerificationTokenExpiresAt { get; set; }
+
+    // Numeric OTP for password reset flow
+    public string? PasswordResetOtp { get; set; }
+    public DateTime? PasswordResetOtpExpiresAt { get; set; }
 }

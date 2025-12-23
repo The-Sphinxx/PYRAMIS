@@ -98,6 +98,11 @@ export const authApi = {
     return data;
   },
 
+  verifyEmailByLink: async (email, token) => {
+    const { data } = await api.get(`${authPrefix}/verify-email`, { params: { email, token } });
+    return data;
+  },
+
   resendOtp: async email => {
     const { data } = await api.post(`${authPrefix}/resend-otp`, { email });
     return data;

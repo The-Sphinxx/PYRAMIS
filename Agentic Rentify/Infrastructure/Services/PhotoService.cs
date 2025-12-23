@@ -50,11 +50,11 @@ public class PhotoService(IConfiguration configuration) : IPhotoService
         var uploadParams = new ImageUploadParams
         {
             File = new FileDescription(file.FileName, stream),
-            Transformation = new Transformation()
-                .Height(500)
-                .Width(500)
-                .Crop("fill")
-                .Gravity("face")
+            // Preserve original image without any resizing/cropping.
+            // Keep original format and dimensions as-is.
+            UseFilename = true,
+            UniqueFilename = true,
+            Overwrite = false
         };
 
         var uploadResult = await _cloudinary.UploadAsync(uploadParams);
