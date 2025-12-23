@@ -12,7 +12,7 @@
       <div class="flex justify-between items-center">
         <h2 class="font-bold text-lg">{{ isUserView ? 'My Tickets' : 'All Tickets' }}</h2>
         <div class="flex items-center gap-2">
-          <!-- Create Ticket Button (Client Only) - Sidebar -->
+          <!-- Create Ticket Button (Client Only) - Sidebar admin view -->
           <button 
             v-if="isClient && !isUserView"
             @click="handleCreateTicket"
@@ -25,8 +25,10 @@
             </svg>
           </button>
 
-          <!-- Filter Button -->
-          <div class="dropdown dropdown-end">
+         
+
+          <!-- Filter Button (Admins only) -->
+          <div v-if="isAdmin" class="dropdown dropdown-end">
             <div tabindex="0" role="button" class="btn btn-ghost btn-sm gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z" />
@@ -65,6 +67,18 @@
               </div>
             </div>
           </div>
+
+           <!-- Create Ticket Button (Client user view when tickets already exist) -->
+          <button
+            v-if="isClient && isUserView && hasTickets"
+            @click="handleCreateTicket"
+            class="btn btn-primary btn-sm gap-2"
+            :disabled="isCreatingTicket"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+          </button>
         </div>
       </div>
     </div>
@@ -149,8 +163,8 @@
             />
           </div>
 
-          <!-- Priority Select -->
-          <div class="form-control">
+          <!-- Priority Select (hidden for client view; admin assigns priority) -->
+          <div v-if="!isUserView" class="form-control">
             <label class="label"><span class="label-text">Priority</span></label>
             <select v-model="newTicket.priority" class="select select-bordered">
               <option value="Low">Low</option>
@@ -229,6 +243,7 @@ const filters = ref({
   priority: 'All',
   date: ''
 });
+const hasTickets = computed(() => (store.tickets?.length || 0) > 0);
 
 // Create Ticket modal state
 const showCreateModal = ref(false);
