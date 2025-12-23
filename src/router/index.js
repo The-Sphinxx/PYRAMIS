@@ -10,6 +10,8 @@ import ContactUs from '@/Views/ContactUs.vue'
 import Login from '@/Views/Authentication/Login.vue'
 import SignUp from '@/Views/Authentication/SignUp.vue'
 import ForgetPassword from '@/Views/Authentication/ForgetPassword.vue'
+import ResetPassword from '@/Views/Authentication/ResetPassword.vue'
+import VerifyEmail from '@/Views/Authentication/VerifyEmail.vue'
 
 // User Account
 import Profile from '@/Views/UserAccount/Profile.vue'
@@ -18,15 +20,19 @@ import Reservations from '@/Views/UserAccount/Reservations.vue'
 
 // Dashboard
 import DashboardLayout from '@/Layouts/DashboardLayout.vue'
+import MainLayout from '@/Layouts/MainLayout.vue'
 import Overview from '@/Views/Dashboard/Overview.vue'
 import Analytics from '@/Views/Dashboard/Analytics.vue'
 import Bookings from '@/Views/Dashboard/Bookings.vue'
 import CustomerSupport from '@/Views/Dashboard/CustomerSupport.vue'
 import UsersManage from '@/Views/Dashboard/UsersManage.vue'
 import TripsManage from '@/Views/Dashboard/TripsManage.vue'
-import HotelsManage from '@/Views/Dashboard/HotelsMange.vue'
+import HotelsManage from '@/Views/Dashboard/HotelsManage.vue'
 import CarsManage from '@/Views/Dashboard/CarsManage.vue'
+
 import AttractionsManage from '@/Views/Dashboard/AttractionsManage.vue'
+import AdminsManage from '@/Views/Dashboard/AdminsManage.vue'
+import AdminSettings from '@/Views/Dashboard/AdminSettings.vue'
 
 // AI
 import AiCollectData from '@/Views/Ai/AiCollectData.vue'
@@ -64,7 +70,7 @@ import TripCheckOut from '@/Views/Trips/TripCheckOut.vue'
 import TripConfirmation from '@/Views/Trips/TripConfirmation.vue'
 
 const routes = [
-  // Home Routes
+  // Home Routes (No Layout)
   {
     path: '/',
     name: 'Home',
@@ -75,53 +81,205 @@ const routes = [
     redirect: '/',
   },
 
-  // Public Pages
+  // Authentication Routes (No Layout)
   {
-    path: '/about',
-    name: 'About',
-    component: About,
-  },
-  {
-    path: '/contact-us',
-    name: 'ContactUs',
-    component: ContactUs,
-  },
-
-  // Authentication Routes
-  {
-    path: '/authentication/login',
+    path: '/auth/login',
     name: 'Login',
     component: Login,
   },
   {
-    path: '/authentication/sign-up',
+    path: '/auth/sign-up',
     name: 'SignUp',
     component: SignUp,
   },
   {
-    path: '/authentication/forget-password',
+    path: '/auth/forget-password',
     name: 'ForgetPassword',
     component: ForgetPassword,
   },
 
-  // User Account Routes (Protected)
+  // Main Layout Routes (Navbar & Footer included)
   {
-    path: '/user-account/profile',
-    name: 'Profile',
-    component: Profile,
-    meta: { requiresAuth: false },
-  },
-  {
-    path: '/user-account/wishlist',
-    name: 'Wishlist',
-    component: Wishlist,
-    meta: { requiresAuth: false },
-  },
-  {
-    path: '/user-account/reservations',
-    name: 'Reservations',
-    component: Reservations,
-    meta: { requiresAuth: false },
+    path: '/',
+    component: MainLayout,
+    children: [
+      // Public Pages
+      {
+        path: 'about',
+        name: 'About',
+        component: About,
+      },
+      {
+        path: 'contact-us',
+        name: 'ContactUs',
+        component: ContactUs,
+      },
+
+      // User Account Routes (Protected)
+      {
+        path: 'user-account/profile',
+        name: 'Profile',
+        component: Profile,
+        meta: { requiresAuth: false },
+      },
+      {
+        path: 'user-account/wishlist',
+        name: 'Wishlist',
+        component: Wishlist,
+        meta: { requiresAuth: false },
+      },
+      {
+        path: 'user-account/reservations',
+        name: 'Reservations',
+        component: Reservations,
+        meta: { requiresAuth: false },
+      },
+
+      // AI Routes (Protected)
+      {
+        path: 'ai/collect-data',
+        name: 'AiCollectData',
+        component: AiCollectData,
+        meta: { requiresAuth: false },
+      },
+      {
+        path: 'ai/plan-results',
+        name: 'AiPlanResults',
+        component: AiPlanResults,
+        meta: { requiresAuth: false },
+      },
+
+      // Attractions Routes
+      {
+        path: 'attractions/list',
+        name: 'AttractionsList',
+        component: AttractionsList,
+      },
+      {
+        path: 'attractions/details/:id',
+        name: 'AttractionDetails',
+        component: AttractionDetails,
+      },
+      {
+        path: 'attractions/review/:id',
+        name: 'AttractionReview',
+        component: AttractionReview,
+        meta: { requiresAuth: false },
+      },
+      {
+        path: 'attractions/checkout/:id',
+        name: 'AttractionCheckOut',
+        component: AttractionCheckOut,
+        meta: { requiresAuth: false },
+      },
+      {
+        path: 'attractions/confirmation/:id',
+        name: 'AttractionConfirmation',
+        component: AttractionConfirmation,
+        meta: { requiresAuth: false },
+      },
+
+      // Cars Routes
+      {
+        path: 'cars/list',
+        name: 'CarsList',
+        component: CarsList,
+      },
+      {
+        path: 'cars/details/:id',
+        name: 'CarDetails',
+        component: CarDetails,
+      },
+      {
+        path: 'cars/booking',
+        name: 'CarBooking',
+        component: CarBooking,
+        meta: { requiresAuth: false },
+      },
+      {
+        path: 'cars/review/:id',
+        name: 'CarReview',
+        component: CarReview,
+        meta: { requiresAuth: false },
+      },
+      {
+        path: 'cars/checkout/:id',
+        name: 'CarCheckOut',
+        component: CarCheckOut,
+        meta: { requiresAuth: false },
+      },
+      {
+        path: 'cars/confirmation/:id',
+        name: 'CarConfirmation',
+        component: CarConfirmation,
+        meta: { requiresAuth: false },
+      },
+
+      // Hotels Routes
+      {
+        path: 'hotels/list',
+        name: 'HotelsList',
+        component: HotelsList,
+      },
+      {
+        path: 'hotels/filter',
+        name: 'HotelFilter',
+        component: HotelFilter,
+      },
+      {
+        path: 'hotels/details/:id',
+        name: 'HotelDetails',
+        component: HotelDetails,
+      },
+      {
+        path: 'hotels/review/:id',
+        name: 'HotelReview',
+        component: HotelReview,
+        meta: { requiresAuth: false },
+      },
+      {
+        path: 'hotels/checkout/:id',
+        name: 'HotelCheckOut',
+        component: HotelCheckOut,
+        meta: { requiresAuth: false },
+      },
+      {
+        path: 'hotels/confirmation/:id',
+        name: 'HotelConfirmation',
+        component: HotelConfirmation,
+        meta: { requiresAuth: true },
+      },
+
+      // Trips Routes
+      {
+        path: 'trips/list',
+        name: 'TripsList',
+        component: TripsList,
+      },
+      {
+        path: 'trips/details/:id',
+        name: 'TripDetails',
+        component: TripDetails,
+      },
+      {
+        path: 'trips/review/:id',
+        name: 'TripReview',
+        component: TripReview,
+        meta: { requiresAuth: false },
+      },
+      {
+        path: 'trips/checkout/:id',
+        name: 'TripCheckOut',
+        component: TripCheckOut,
+        meta: { requiresAuth: false },
+      },
+      {
+        path: 'trips/confirmation/:id',
+        name: 'TripConfirmation',
+        component: TripConfirmation,
+        meta: { requiresAuth: false },
+      },
+    ]
   },
 
   // Dashboard Routes (Protected) - Using nested routing with DashboardLayout
@@ -175,153 +333,23 @@ const routes = [
         name: 'AttractionsManage',
         component: AttractionsManage,
       },
+      {
+        path: 'admins-manage',
+        name: 'AdminsManage',
+        component: AdminsManage,
+      },
+      {
+        path: 'settings',
+        name: 'AdminSettings',
+        component: AdminSettings,
+      },
+      {
+        path: 'details/:type/:id',
+        name: 'DashboardDetails',
+        component: () => import('@/Views/Dashboard/DashboardDetails.vue'),
+        props: true
+      },
     ],
-  },
-
-  // AI Routes (Protected)
-  {
-    path: '/ai/collect-data',
-    name: 'AiCollectData',
-    component: AiCollectData,
-    meta: { requiresAuth: false },
-  },
-  {
-    path: '/ai/plan-results',
-    name: 'AiPlanResults',
-    component: AiPlanResults,
-    meta: { requiresAuth: false },
-  },
-
-  // Attractions Routes
-  {
-    path: '/attractions/list',
-    name: 'AttractionsList',
-    component: AttractionsList,
-  },
-  {
-    path: '/attractions/details/:id',
-    name: 'AttractionDetails',
-    component: AttractionDetails,
-  },
-  {
-    path: '/attractions/review/:id',
-    name: 'AttractionReview',
-    component: AttractionReview,
-    meta: { requiresAuth: false },
-  },
-  {
-    path: '/attractions/checkout/:id',
-    name: 'AttractionCheckOut',
-    component: AttractionCheckOut,
-    meta: { requiresAuth: false },
-  },
-  {
-    path: '/attractions/confirmation/:id',
-    name: 'AttractionConfirmation',
-    component: AttractionConfirmation,
-    meta: { requiresAuth: false },
-  },
-
-  // Cars Routes
-{
-  path: '/cars/list',
-  name: 'CarsList',
-  component: CarsList,
-},
-{
-  path: '/cars/details/:id',
-  name: 'CarDetails',
-  component: CarDetails,
-},
-{
-  path: '/cars/booking',
-  name: 'CarBooking',
-  component: CarBooking,
-  meta: { requiresAuth: false },
-},
-{
-  path: '/cars/review/:id',
-  name: 'CarReview',
-  component: CarReview,
-  meta: { requiresAuth: false },
-},
-{
-  path: '/cars/checkout/:id',
-  name: 'CarCheckOut',
-  component: CarCheckOut,
-  meta: { requiresAuth: false },
-},
-{
-  path: '/cars/confirmation/:id',
-  name: 'CarConfirmation',
-  component: CarConfirmation,
-  meta: { requiresAuth: false },
-},
-
-
-  // Hotels Routes
-  {
-    path: '/hotels/list',
-    name: 'HotelsList',
-    component: HotelsList,
-  },
-  {
-    path: '/hotels/filter',
-    name: 'HotelFilter',
-    component: HotelFilter,
-  },
-  {
-    path: '/hotels/details/:id',
-    name: 'HotelDetails',
-    component: HotelDetails,
-  },
-  {
-    path: '/hotels/review/:id',
-    name: 'HotelReview',
-    component: HotelReview,
-    meta: { requiresAuth: false },
-  },
-  {
-    path: '/hotels/checkout/:id',
-    name: 'HotelCheckOut',
-    component: HotelCheckOut,
-    meta: { requiresAuth: false },
-  },
-  {
-    path: '/hotels/confirmation/:id',
-    name: 'HotelConfirmation',
-    component: HotelConfirmation,
-    meta: { requiresAuth: true },
-  },
-
-  // Trips Routes
-  {
-    path: '/trips/list',
-    name: 'TripsList',
-    component: TripsList,
-  },
-  {
-    path: '/trips/details/:id',
-    name: 'TripDetails',
-    component: TripDetails,
-  },
-  {
-    path: '/trips/review/:id',
-    name: 'TripReview',
-    component: TripReview,
-    meta: { requiresAuth: false },
-  },
-  {
-    path: '/trips/checkout/:id',
-    name: 'TripCheckOut',
-    component: TripCheckOut,
-    meta: { requiresAuth: false },
-  },
-  {
-    path: '/trips/confirmation/:id',
-    name: 'TripConfirmation',
-    component: TripConfirmation,
-    meta: { requiresAuth: false },
   },
 ]
 

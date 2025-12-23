@@ -28,7 +28,7 @@
       <div class="bg-base-100 rounded-2xl shadow-lg p-8 mb-8">
         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
           <button
-            v-for="category in categories"
+            v-for="category in categories" 
             :key="category.id"
             @click="selectCategory(category.id)"
             :class="[

@@ -83,14 +83,14 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { useHotelStore } from '@/stores/hotelsStore';
+import { useHotelsStore } from '@/stores/hotelsStore';
 import HotelCard from '@/components/Hotels/HotelCard.vue';
 import Search from '@/components/Common/Search.vue';
 import Filter from '@/components/Common/Filter.vue';
 import Pagination from '@/components/Common/Pagination.vue';
 
 const router = useRouter();
-const hotelStore = useHotelStore();
+const hotelStore = useHotelsStore();
 
 // State
 const currentPage = ref(1);

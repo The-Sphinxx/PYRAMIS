@@ -1,12 +1,9 @@
 <template>
   <div>
-    <!-- Navbar Component -->
     <Navbar />
 
-    <!-- Hero Section -->
     <div class="relative w-full h-screen overflow-hidden">
-      <div class="absolute inset-0">
-        <img :src="heroSection.backgroundImage || defaultHero.backgroundImage" alt="Pyramid" class="w-full h-full object-cover"/>
+      <div class="absolute inset-0 bg-cover bg-center" :style="{ backgroundImage: `url(${heroSection.backgroundImage || defaultHero.backgroundImage})` }">
         <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50"></div>
       </div>
       
@@ -25,7 +22,6 @@
           </div>
 
           <div class="bg-base-100 rounded-lg p-4">
-            <!-- Attractions Tab -->
             <div v-if="activeTab === 'attractions'" class="flex flex-col md:flex-row gap-4">
               <div class="flex-1">
                 <label class="block text-sm text-base-content/70 mb-2 font-cairo">City</label>
@@ -46,7 +42,6 @@
               </button>
             </div>
 
-            <!-- Hotels Tab -->
             <div v-if="activeTab === 'hotels'" class="flex flex-col md:flex-row gap-4">
               <div class="flex-1">
                 <label class="block text-sm text-base-content/70 mb-2 font-cairo">Destination</label>
@@ -65,7 +60,6 @@
               </button>
             </div>
 
-            <!-- Trips Tab -->
             <div v-if="activeTab === 'trips'" class="flex flex-col md:flex-row gap-4">
               <div class="flex-1">
                 <label class="block text-sm text-base-content/70 mb-2 font-cairo">Pick-up Location</label>
@@ -84,7 +78,6 @@
               </button>
             </div>
 
-            <!-- Car Rental Tab -->
             <div v-if="activeTab === 'car-rental'" class="flex flex-col md:flex-row gap-4">
               <div class="flex-1">
                 <label class="block text-sm text-base-content/70 mb-2 font-cairo">Pick-up Location</label>
@@ -107,7 +100,6 @@
       </div>
     </div>
 
-    <!-- Attractions Section -->
     <section class="bg-base-200 py-16">
       <div class="page-container">
         <div class="text-center mb-12">
@@ -140,12 +132,11 @@
           </div>
         </div>
         <div class="text-center">
-          <button class="btn btn-primary btn-lg font-cairo font-semibold px-12">View All</button>
+          <button class="btn btn-primary font-cairo font-semibold w-64 h-12 min-h-0 text-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all">View All</button>
         </div>
       </div>
     </section>
 
-    <!-- Hotels Section -->
     <section class="bg-base-100 py-16">
       <div class="page-container">
         <div class="text-center mb-12">
@@ -186,12 +177,11 @@
           </div>
         </div>
         <div class="text-center">
-          <button class="btn btn-primary btn-lg font-cairo font-semibold px-12">View All</button>
+          <button class="btn btn-primary font-cairo font-semibold w-64 h-12 min-h-0 text-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all">View All</button>
         </div>
       </div>
     </section>
 
-    <!-- Trips Section -->
     <section class="bg-base-200 py-16">
       <div class="page-container">
         <div class="text-center mb-12">
@@ -226,12 +216,11 @@
           </div>
         </div>
         <div class="text-center">
-          <button class="btn btn-primary btn-lg font-cairo font-semibold px-12">View All</button>
+          <button class="btn btn-primary font-cairo font-semibold w-64 h-12 min-h-0 text-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all">View All</button>
         </div>
       </div>
     </section>
 
-    <!-- Cars Section -->
     <section class="bg-base-100 py-16">
       <div class="page-container">
         <div class="text-center mb-12">
@@ -267,12 +256,11 @@
           </div>
         </div>
         <div class="text-center">
-          <button class="btn btn-primary btn-lg font-cairo font-semibold px-12">View All</button>
+          <button class="btn btn-primary font-cairo font-semibold w-64 h-12 min-h-0 text-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all">View All</button>
         </div>
       </div>
     </section>
 
-    <!-- AI Planner Section -->
     <section class="bg-gradient-to-br from-accent/20 via-base-200 to-accent/30 py-20">
       <div class="page-container">
         <div class="flex flex-col items-center justify-center text-center">
@@ -294,7 +282,6 @@
       </div>
     </section>
 
-    <!-- Testimonials Section -->
     <section class="bg-base-100 py-16">
       <div class="page-container">
         <div class="text-center mb-12">
@@ -319,7 +306,6 @@
       </div>
     </section>
 
-    <!-- Why Choose Us Section -->
     <section class="bg-base-200 py-16">
       <div class="page-container">
         <div class="text-center mb-12">
@@ -338,7 +324,6 @@
       </div>
     </section>
 
-    <!-- Newsletter Section -->
     <section class="bg-base-100 py-16">
       <div class="page-container">
         <div class="text-center max-w-3xl mx-auto">
@@ -355,7 +340,6 @@
       </div>
     </section>
 
-    <!-- Footer Component -->
     <Footer />
   </div>
 </template>
@@ -379,8 +363,9 @@ const tabs = [
 const defaultHero = {
   title: 'Discover Egypt — Your Journey Starts Here',
   subtitle: 'Explore ancient wonders, luxury stays, and unforgettable experiences',
-  backgroundImage: 'https://images.unsplash.com/photo-1568322445389-f64ac2515020?q=80&w=2070'
+  backgroundImage: ''
 };
+  import { getBackgrounds } from '@/Services/systemService';
 
 const defaultMetadata = {
   siteName: 'PYRAMIS',
@@ -469,8 +454,19 @@ const applyHomeData = (payload) => {
 onMounted(async () => {
   isHomeLoading.value = true;
   try {
-    const data = await getHomePageData();
+    const [data, backgrounds] = await Promise.all([
+      getHomePageData(),
+      getBackgrounds('HomeHero')
+    ]);
+
+    console.log('Backgrounds response:', backgrounds);
     applyHomeData(data);
+    if (backgrounds && backgrounds.length > 0 && backgrounds[0].url) {
+      console.log('Setting background to:', backgrounds[0].url);
+      heroSection.value.backgroundImage = backgrounds[0].url;
+    } else {
+      console.warn('No backgrounds found or URL is empty');
+    }
   } catch (error) {
     console.error('Failed to load home page data', error);
     applyHomeData({});

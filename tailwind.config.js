@@ -149,30 +149,35 @@ export default {
       },
       {
         nileheritageDark: {
-          "primary": "#C86A41",
-          "primary-focus": "#A55733",
+          // اللون الأساسي (النحاسي) يبقى كما هو لتمييز الهوية
+          "primary": "#C86A41", 
+          "primary-focus": "#E07A4D",
           "primary-content": "#ffffff",
-          "secondary": "#1E4F56",
-          "secondary-focus": "#184046",
-          "secondary-content": "#ffffff",
-          "accent": "#D5B77A",
-          "accent-focus": "#C3A56C",
-          "accent-content": "#1E1A12",
-          "neutral": "#2F2F30",
-          "neutral-content": "#EDEDED",
-          "base-100": "#1A1A1A",
-          "base-200": "#222222",
-          "base-300": "#2A2A2A",
-          "base-content": "#EDEDED",
-          "info": "#3ABFF8",
-          "success": "#36B37E",
-          "warning": "#F2A540",
-          "error": "#E45858",
+          
+          // الكحلي الداكن جداً للخلفية الأساسية
+          "base-100": "#0F172A", // Deep Navy
+          "base-200": "#1E293B", // Lighter Navy for cards
+          "base-300": "#334155", // For borders/hovers
+          "base-content": "#F1F5F9", // Off-white text
+          
+          // لون ثانوي يتماشى مع الكحلي (درجة Teal عميقة)
+          "secondary": "#38BDF8", // Sky blue لمسة إشراق
+          "secondary-focus": "#0EA5E9",
+          "secondary-content": "#0F172A",
+          
+          // الألوان الأخرى
+          "accent": "#FDE047", // Yellow gold للتباين
+          "neutral": "#1E293B",
+          "neutral-content": "#94A3B8",
+          
+          "info": "#0CA5E9",
+          "success": "#2DD4BF",
+          "warning": "#F59E0B",
+          "error": "#FB7185",
 
-          // DaisyUI Border Radius Override
-          "--rounded-box": "8px",      // للـ cards
-          "--rounded-btn": "6px",      // للـ buttons
-          "--rounded-badge": "6px",    // للـ badges
+          "--rounded-box": "8px",
+          "--rounded-btn": "6px",
+          "--rounded-badge": "6px",
         },
       },
     ],

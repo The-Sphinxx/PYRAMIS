@@ -36,8 +36,10 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
+import axios from 'axios';
+import { useAuthStore } from '@/stores/authStore';
 import { useRoute, useRouter } from 'vue-router';
-import { useHotelStore } from '@/stores/hotelsStore';
+import { useHotelsStore } from '@/stores/hotelsStore';
 import StepIndicator from '@/components/Common/StepIndicator.vue';
 import GuestInfoForm from '@/components/Common/GuestInfoForm.vue';
 import PriceSummary from '@/components/Common/PriceSummary.vue';
@@ -45,7 +47,8 @@ import { calculateBookingCosts } from '@/Utils/bookingCalculator.js';
 
 const route = useRoute();
 const router = useRouter();
-const hotelStore = useHotelStore();
+const hotelStore = useHotelsStore();
+const authStore = useAuthStore();
 
 const hotel = ref(null);
 const submitting = ref(false);
@@ -95,15 +98,37 @@ const costs = computed(() => {
 
 const handleConfirm = async () => {
   submitting.value = true;
-  // Mock API call
-  await new Promise(resolve => setTimeout(resolve, 1500));
-  submitting.value = false;
+  try {
+    const user = authStore.user;
+    // Use logged-in user ID, or generate a unique guest ID to prevent data mixing
+    const bookingUserId = user ? user.id : `guest_${Date.now()}`;
 
-  router.push({
-    name: 'HotelConfirmation',
-    params: { id: hotel.value.id },
-    query: { ...route.query }
-  });
+    const newBooking = {
+      userId: bookingUserId,
+      title: hotel.value.name,
+      location: hotel.value.city || 'Egypt',
+      date: `${bookingDataForSummary.value.checkIn} - ${bookingDataForSummary.value.checkOut}`,
+      image: hotel.value.images ? hotel.value.images[0] : hotel.value.image,
+      status: 'Confirmed',
+      type: 'Hotel', // or 'فندق'
+      reference: 'H-' + Math.floor(Math.random() * 10000),
+      price: costs.value.total,
+      bookingData: bookingDataForSummary.value
+    };
+
+    await axios.post('http://localhost:3000/bookings', newBooking);
+
+    router.push({
+      name: 'HotelConfirmation',
+      params: { id: hotel.value.id },
+      query: { ...route.query }
+    });
+  } catch (error) {
+    console.error("Booking failed:", error);
+    alert("Failed to confirm booking. Please try again.");
+  } finally {
+    submitting.value = false;
+  }
 };
 
 onMounted(async () => {

@@ -196,7 +196,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useHotelStore } from '@/stores/hotelsStore';
+import { useHotelsStore } from '@/stores/hotelsStore';
 import Carousel from '@/components/Common/Carousel.vue';
 import ReviewsCarousel from '@/components/Common/ReviewsCarousel.vue';
 import Location from '@/components/Common/Location.vue';
@@ -205,7 +205,7 @@ import BookingForm from '@/components/Common/BookingForm.vue';
 
 const route = useRoute();
 const router = useRouter();
-const hotelStore = useHotelStore();
+const hotelStore = useHotelsStore();
 
 // State
 const loading = ref(true);

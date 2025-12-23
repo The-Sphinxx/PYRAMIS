@@ -127,13 +127,13 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useHotelStore } from '@/stores/hotelsStore';
+import { useHotelsStore } from '@/stores/hotelsStore';
 import StepIndicator from '@/components/Common/StepIndicator.vue';
 import Location from '@/components/Common/Location.vue';
 
 const route = useRoute();
 const router = useRouter();
-const hotelStore = useHotelStore();
+const hotelStore = useHotelsStore();
 
 const hotel = ref(null);
 

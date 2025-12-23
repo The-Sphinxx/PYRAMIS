@@ -1,17 +1,18 @@
 <template>
-  <div class="flex min-h-screen bg-base-200">
+  <div class="flex h-screen bg-base-200 p-4 gap-4 overflow-hidden">
     <!-- Sidebar -->
     <Sidebar />
     
     <!-- Main Content Area -->
-    <main class="flex-1 overflow-y-auto">
+    <main class="flex-1 overflow-y-auto overflow-x-hidden rounded-2xl shadow-sm relative min-w-0 max-w-full">
     
 
       <!-- Page Content -->
-      <div class="px-4 md:px-6 lg:px-8 py-2 md:py-4">
+      <div class="px-2 md:px-6 lg:px-2 py-2 md:py-2 w-full max-w-full overflow-x-hidden">
         <router-view />
       </div>
     </main>
+    <ToastContainer />
   </div>
 </template>
 
@@ -19,6 +20,7 @@
 import { computed, ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import Sidebar from '@/components/Dashboard/Sidebar.vue';
+import ToastContainer from '@/components/Common/ToastContainer.vue';
 
 const route = useRoute();
 const isDark = ref(false);
@@ -89,5 +91,10 @@ onMounted(() => {
 /* Ensure proper scrolling */
 main {
   max-height: 100vh;
+}
+
+/* Prevent horizontal overflow */
+:deep(body) {
+  overflow-x: hidden;
 }
 </style>

@@ -1,190 +1,196 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
+import { authApi, api } from '@/Services/api';
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref(null);
   const token = ref(null);
+  const refreshToken = ref(null);
 
-  // Check if user is logged in
-  const isAuthenticated = computed(() => !!user.value);
+  const isAuthenticated = computed(() => !!token.value);
 
-  // Initialize from localStorage
+  const setSession = (authResponse, rememberMe) => {
+    const shapedUser = {
+      id: authResponse.id,
+      email: authResponse.email,
+      firstName: authResponse.firstName,
+      lastName: authResponse.lastName,
+    };
+
+    user.value = shapedUser;
+    token.value = authResponse.token;
+    refreshToken.value = authResponse.refreshToken;
+
+    api.defaults.headers.common.Authorization = `Bearer ${authResponse.token}`;
+
+    // Persist tokens for refresh handling; rememberMe still controls UX choices elsewhere if needed
+    localStorage.setItem('user', JSON.stringify(shapedUser));
+    localStorage.setItem('token', authResponse.token);
+    localStorage.setItem('refreshToken', authResponse.refreshToken);
+  };
+
+  const clearSession = () => {
+    user.value = null;
+    token.value = null;
+    refreshToken.value = null;
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
+    delete api.defaults.headers.common.Authorization;
+  };
+
   const initAuth = () => {
     const savedUser = localStorage.getItem('user');
     const savedToken = localStorage.getItem('token');
-    
-    if (savedUser && savedToken) {
+    const savedRefresh = localStorage.getItem('refreshToken');
+
+    if (savedUser && savedToken && savedRefresh) {
       user.value = JSON.parse(savedUser);
       token.value = savedToken;
+      refreshToken.value = savedRefresh;
+      api.defaults.headers.common.Authorization = `Bearer ${savedToken}`;
     }
   };
 
-  // Register new user
-  const register = async (userData) => {
+  const register = async (payload) => {
     try {
-      // Check if user already exists
-      const checkResponse = await fetch(`http://localhost:3000/users?email=${userData.email}`);
-      const existingUsers = await checkResponse.json();
+      const name = (payload.fullName || '').trim();
+      const parts = name.split(/\s+/);
+      const firstName = parts[0] || '';
+      const lastName = parts.length > 1 ? parts.slice(1).join(' ') : '';
 
-      if (existingUsers.length > 0) {
-        return {
-          success: false,
-          error: 'Email already exists'
-        };
-      }
-
-      // Create new user
-      const newUser = {
-        id: Date.now().toString(),
-        fullName: userData.fullName,
-        email: userData.email,
-        password: userData.password, // في الواقع لازم يتعمل hash
-        createdAt: new Date().toISOString()
+      const registerPayload = {
+        FirstName: firstName,
+        LastName: lastName,
+        Email: payload.email,
+        Password: payload.password,
+        Nationality: payload.nationality || '',
+        Gender: payload.gender || '',
+        DateOfBirth: payload.dateOfBirth || '2000-01-01T00:00:00.000Z',
+        ProfileImage: payload.profileImage || undefined,
       };
 
-      const response = await fetch('http://localhost:3000/users', {
-        method: 'POST',
+      await authApi.register(registerPayload);
+      return { success: true };
+    } catch (error) {
+      const message = error.response?.data?.message || 'Registration failed';
+      return { success: false, error: message };
+    }
+  };
+
+  const login = async (credentials) => {
+    try {
+      const authResponse = await authApi.login(credentials.email, credentials.password);
+      setSession(authResponse, credentials.rememberMe);
+      return { success: true };
+    } catch (error) {
+      const message = error.response?.data?.message || 'Invalid email or password';
+      return { success: false, error: message };
+    }
+  };
+
+  const loginWithGoogle = async (idToken) => {
+    try {
+      const authResponse = await authApi.googleLogin(idToken);
+      setSession(authResponse, true);
+      return { success: true };
+    } catch (error) {
+      const message = error.response?.data?.message || 'Google sign-in failed';
+      return { success: false, error: message };
+    }
+  };
+
+  // Update Profile
+  const updateProfile = async (updatedData) => {
+    try {
+      if (!user.value || !user.value.id) {
+        throw new Error('No user logged in');
+      }
+
+      const response = await fetch(`http://localhost:3000/users/${user.value.id}`, {
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(newUser),
+        body: JSON.stringify(updatedData),
       });
 
       if (response.ok) {
-        const createdUser = await response.json();
+        const updatedUser = await response.json();
         
         // Remove password before storing
-        const userWithoutPassword = { ...createdUser };
+        const userWithoutPassword = { ...updatedUser };
         delete userWithoutPassword.password;
 
         user.value = userWithoutPassword;
-        token.value = `token_${createdUser.id}`;
-
-        // Save to localStorage
+        
+        // Update localStorage
         localStorage.setItem('user', JSON.stringify(userWithoutPassword));
-        localStorage.setItem('token', token.value);
-
-        return { success: true };
-      } else {
-        return {
-          success: false,
-          error: 'Registration failed'
-        };
-      }
-    } catch (error) {
-      console.error('Registration error:', error);
-      return {
-        success: false,
-        error: 'Network error. Please try again.'
-      };
-    }
-  };
-
-  // Login user
-  const login = async (credentials) => {
-    try {
-      const response = await fetch(
-        `http://localhost:3000/users?email=${credentials.email}&password=${credentials.password}`
-      );
-      const users = await response.json();
-
-      if (users.length > 0) {
-        const foundUser = users[0];
         
-        // Remove password before storing
-        const userWithoutPassword = { ...foundUser };
-        delete userWithoutPassword.password;
-
-        user.value = userWithoutPassword;
-        token.value = `token_${foundUser.id}`;
-
-        // Save to localStorage if "Remember Me" is checked
-        if (credentials.rememberMe) {
-          localStorage.setItem('user', JSON.stringify(userWithoutPassword));
-          localStorage.setItem('token', token.value);
-        }
-
         return { success: true };
       } else {
-        return {
-          success: false,
-          error: 'Invalid email or password'
-        };
+        return { success: false, error: 'Failed to update profile' };
       }
     } catch (error) {
-      console.error('Login error:', error);
-      return {
-        success: false,
-        error: 'Network error. Please try again.'
-      };
+      console.error('Update profile error:', error);
+      return { success: false, error: error.message };
     }
   };
 
-  // Google Sign In (Mock implementation)
-  const loginWithGoogle = async () => {
+  // Change Password
+  const changePassword = async (currentPassword, newPassword) => {
     try {
-      // هنا المفروض تستخدمي Firebase أو Google OAuth
-      // دي mock implementation للتجربة
-      const mockGoogleUser = {
-        id: `google_${Date.now()}`,
-        fullName: 'Google User',
-        email: 'user@gmail.com',
-        provider: 'google',
-        createdAt: new Date().toISOString()
-      };
-
-      // Check if user exists
-      const checkResponse = await fetch(`http://localhost:3000/users?email=${mockGoogleUser.email}`);
-      const existingUsers = await checkResponse.json();
-
-      let finalUser;
-
-      if (existingUsers.length > 0) {
-        finalUser = existingUsers[0];
-      } else {
-        // Create new user
-        const response = await fetch('http://localhost:3000/users', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(mockGoogleUser),
-        });
-        finalUser = await response.json();
+      if (!user.value || !user.value.id) {
+        throw new Error('No user logged in');
       }
 
-      user.value = finalUser;
-      token.value = `token_${finalUser.id}`;
+      // 1. Verify old password
+      // Since we don't store the password in the state, we check against the server
+      const verifyResponse = await fetch(
+        `http://localhost:3000/users?id=${user.value.id}&password=${currentPassword}`
+      );
+      const verifiedUsers = await verifyResponse.json();
 
-      localStorage.setItem('user', JSON.stringify(finalUser));
-      localStorage.setItem('token', token.value);
+      if (verifiedUsers.length === 0) {
+        return { success: false, error: 'Incorrect current password' };
+      }
 
-      return { success: true };
+      // 2. Update to new password
+      const updateResponse = await fetch(`http://localhost:3000/users/${user.value.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password: newPassword }),
+      });
+
+      if (updateResponse.ok) {
+        return { success: true };
+      } else {
+        return { success: false, error: 'Failed to update password' };
+      }
     } catch (error) {
-      console.error('Google login error:', error);
-      return {
-        success: false,
-        error: 'Google sign in failed'
-      };
+      console.error('Change password error:', error);
+      return { success: false, error: error.message };
     }
   };
 
   // Logout
   const logout = () => {
-    user.value = null;
-    token.value = null;
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
+    clearSession();
   };
 
   return {
     user,
     token,
+    refreshToken,
     isAuthenticated,
     initAuth,
     register,
     login,
     loginWithGoogle,
+    updateProfile,
+    changePassword,
     logout
   };
 });

@@ -1,5 +1,12 @@
 using Agentic_Rentify.Infragentic.Services;
+using Agentic_Rentify.Application.Interfaces;
+using Agentic_Rentify.Application.Features.Photos.Commands.DeletePhoto;
+using Agentic_Rentify.Core.Entities;
+using Agentic_Rentify.Core.Enums;
+using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Agentic_Rentify.Api.Controllers;
 
@@ -14,8 +21,11 @@ namespace Agentic_Rentify.Api.Controllers;
 [Route("api/admin")]
 [Produces("application/json")]
 [ApiExplorerSettings(GroupName = "Admin")]
-public class AdminController(DataSyncService dataSyncService) : ControllerBase
+public class AdminController(DataSyncService dataSyncService, IUnitOfWork unitOfWork, IPhotoService photoService, IMediator mediator) : ControllerBase
 {
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly IPhotoService _photoService = photoService;
+    private readonly IMediator _mediator = mediator;
     /// <summary>
     /// Manually trigger vector database synchronization for all entities.
     /// </summary>
@@ -38,5 +48,97 @@ public class AdminController(DataSyncService dataSyncService) : ControllerBase
     {
         await dataSyncService.SyncAsync("rentify_memory");
         return Ok(new { status = "ok", message = "Vector database synchronization completed" });
+    }
+
+    /// <summary>
+    /// Upload or update the background image for a specific system page.
+    /// </summary>
+    /// <param name="page">Target page: Home, Login, or Signup.</param>
+    /// <param name="file">Image file to upload.</param>
+    /// <returns>Updated SystemSetting with new image URL and PublicId.</returns>
+    [HttpPost("update-background")]
+    [AllowAnonymous]
+    [ProducesResponseType(typeof(SystemSetting), StatusCodes.Status200OK)]
+    public async Task<IActionResult> UpdateBackground([FromQuery] SystemPage page, IFormFile file)
+    {
+        if (file is null || file.Length == 0)
+        {
+            return BadRequest(new { error = "File cannot be null or empty." });
+        }
+
+        // Get existing setting
+        var spec = new Agentic_Rentify.Application.Features.SystemSettings.Specifications.SystemSettingByPageSpecification(page);
+        var existing = (await _unitOfWork.Repository<SystemSetting>().ListAsync(spec)).FirstOrDefault();
+        var oldPublicId = existing?.PublicId ?? string.Empty;
+
+        // Upload new image
+        var upload = await _photoService.AddPhotoAsync(file);
+
+        if (existing is null)
+        {
+            existing = new SystemSetting
+            {
+                PageName = page,
+                ImageUrl = upload.Url,
+                PublicId = upload.PublicId
+            };
+            await _unitOfWork.Repository<SystemSetting>().AddAsync(existing);
+        }
+        else
+        {
+            existing.ImageUrl = upload.Url;
+            existing.PublicId = upload.PublicId;
+            existing.UpdatedAt = DateTime.UtcNow;
+            await _unitOfWork.Repository<SystemSetting>().UpdateAsync(existing);
+        }
+
+        await _unitOfWork.CompleteAsync();
+
+        // Delete old image via CQRS if applicable
+        if (!string.IsNullOrWhiteSpace(oldPublicId) && oldPublicId != upload.PublicId)
+        {
+            await _mediator.Send(new DeletePhotoCommand { PublicId = oldPublicId });
+        }
+
+        return Ok(existing);
+    }
+
+    /// <summary>
+    /// Upload multiple background images for a page (supports carousels).
+    /// </summary>
+    /// <param name="page">Target page.</param>
+    /// <param name="group">Optional grouping key (e.g., "default").</param>
+    /// <param name="files">Images to upload.</param>
+    /// <returns>List of created settings.</returns>
+    [HttpPost("update-backgrounds")]
+    [AllowAnonymous]
+    [ProducesResponseType(typeof(IEnumerable<SystemSetting>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> UpdateBackgrounds([FromQuery] SystemPage page, [FromQuery] string? group, [FromForm] List<IFormFile> files)
+    {
+        if (files is null || files.Count == 0)
+        {
+            return BadRequest(new { error = "No files provided." });
+        }
+
+        var created = new List<SystemSetting>();
+        int order = 1;
+
+        foreach (var file in files)
+        {
+            var upload = await _photoService.AddPhotoAsync(file);
+            var setting = new SystemSetting
+            {
+                PageName = page,
+                ImageUrl = upload.Url,
+                PublicId = upload.PublicId,
+                Group = group,
+                DisplayOrder = order++,
+            };
+            await _unitOfWork.Repository<SystemSetting>().AddAsync(setting);
+            created.Add(setting);
+        }
+
+        await _unitOfWork.CompleteAsync();
+        return Ok(created.Select(s => new { s.Id, s.ImageUrl, s.PublicId, s.Group, s.DisplayOrder }));
     }
 }

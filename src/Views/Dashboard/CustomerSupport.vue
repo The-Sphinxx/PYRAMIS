@@ -1,11 +1,18 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-base-200 p-4">
-    <div class="text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-base-content mb-4">Customer Support</h1>
-      <p class="text-base-content/60">Customer support page coming soon...</p>
+  <div class="h-[calc(100vh-64px)] flex flex-col lg:flex-row bg-base-200 overflow-hidden rounded-2xl shadow-sm">
+    <!-- Sidebar: Ticket List -->
+    <div class="w-full lg:w-80 xl:w-96 flex-none bg-base-100 border-b lg:border-b-0 lg:border-r border-base-300 overflow-y-auto max-h-[40vh] lg:max-h-full">
+      <TicketList />
+    </div>
+
+    <!-- Main Content: Chat -->
+    <div class="flex-1 bg-base-100 min-w-0 overflow-hidden">
+      <TicketChat />
     </div>
   </div>
 </template>
 
 <script setup>
+import TicketList from '@/components/Support/TicketList.vue';
+import TicketChat from '@/components/Support/TicketChat.vue';
 </script>

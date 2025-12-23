@@ -1,42 +1,61 @@
 import axios from 'axios';
 
-// Create axios instance with default config
-const apiClient = axios.create({
-    baseURL: '/', // Using relative path since valid db.json is in public folder or served via proxy
-    headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-    }
-});
+// Base URL - adjust according to your json-server configuration
+const API_BASE_URL = 'http://localhost:3000';
 
-export default {
+const hotelsApi = {
     // Get all hotels
-    async getHotels() {
+    async getAllHotels() {
         try {
-            const response = await apiClient.get('db.json');
-            return response.data.hotels;
+            const response = await axios.get(`${API_BASE_URL}/hotels`);
+            return response.data;
         } catch (error) {
-            console.error('API Error: Failed to fetch hotels', error);
-            throw error;
+            console.error('Error fetching hotels:', error);
+            throw new Error('Failed to fetch hotels');
         }
+    },
+
+    // Alias for getHotels (used by dev branch store)
+    async getHotels() {
+        return this.getAllHotels();
     },
 
     // Get hotel by ID
     async getHotelById(id) {
         try {
-            const hotels = await this.getHotels();
-            const hotel = hotels.find(h => h.id === id || h.id === String(id));
-            if (!hotel) throw new Error(`Hotel with ID ${id} not found`);
-            return hotel;
+            const response = await axios.get(`${API_BASE_URL}/hotels/${id}`);
+            return response.data;
         } catch (error) {
-            console.error(`API Error: Failed to fetch hotel ${id}`, error);
-            throw error;
+            console.error(`Error fetching hotel ${id}:`, error);
+            throw new Error('Failed to fetch hotel details');
+        }
+    },
+
+    // Get hotels by city
+    async getHotelsByCity(city) {
+        try {
+            const response = await axios.get(`${API_BASE_URL}/hotels`, {
+                params: { city }
+            });
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching hotels by city:', error);
+            throw new Error('Failed to fetch hotels by city');
         }
     },
 
     // Search hotels
     async searchHotels(query) {
         try {
+            // First try API search if supported
+            /* 
+            const response = await axios.get(`${API_BASE_URL}/hotels`, {
+                params: { q: query }
+            });
+            return response.data; 
+            */
+            
+            // Fallback to client-side filtering to match robust dev logic
             const hotels = await this.getHotels();
             if (!query) return hotels;
 
@@ -47,43 +66,85 @@ export default {
                 (hotel.highlights && hotel.highlights.some(h => h.toLowerCase().includes(lowerQuery)))
             );
         } catch (error) {
-            console.error('API Error: Failed to search hotels', error);
-            throw error;
+            console.error('Error searching hotels:', error);
+            throw new Error('Failed to search hotels');
         }
     },
 
-    // Filter hotels
-    async filterHotels(filters) {
+    // Get filtered hotels (Combines dev logic with API fetch)
+    async getFilteredHotels(filters) {
         try {
-            let results = await this.getHotels();
+            // Fetch all and filter client side for complex logic, or build params
+             let results = await this.getHotels();
 
-            // City filter
-            if (filters.city && filters.city !== 'All' && filters.city !== 'All Cities') {
-                results = results.filter(h => h.city === filters.city);
-            }
+             if (filters) { // Apply client side filtering from dev branch
+                // City filter
+                if (filters.city && filters.city !== 'All' && filters.city !== 'All Cities') {
+                    results = results.filter(h => h.city === filters.city);
+                }
 
-            // Category filter
-            if (filters.category && filters.category !== 'all') {
-                results = results.filter(h => h.category === filters.category);
-            }
+                // Category filter
+                if (filters.category && filters.category !== 'all') {
+                    results = results.filter(h => h.category === filters.category);
+                }
 
-            // Price filter
-            if (filters.priceRange) {
-                results = results.filter(h =>
-                    h.pricePerNight >= filters.priceRange.min &&
-                    h.pricePerNight <= filters.priceRange.max
-                );
-            }
+                // Price filter
+                if (filters.priceRange) {
+                    results = results.filter(h =>
+                        h.pricePerNight >= filters.priceRange.min &&
+                        h.pricePerNight <= filters.priceRange.max
+                    );
+                }
 
-            // Rating filter
-            if (filters.rating) {
-                results = results.filter(h => h.rating >= filters.rating);
-            }
-
+                 // Rating filter
+                if (filters.rating) {
+                    results = results.filter(h => h.rating >= filters.rating);
+                }
+             }
             return results;
         } catch (error) {
-            console.error('API Error: Failed to filter hotels', error);
-            throw error;
+            console.error('Error fetching filtered hotels:', error);
+            throw new Error('Failed to fetch filtered hotels');
+        }
+    },
+
+    // Alias for filterHotels
+    async filterHotels(filters) {
+        return this.getFilteredHotels(filters);
+    },
+
+    // Get top rated hotels
+    async getTopRatedHotels(limit = 8) {
+        try {
+            const response = await axios.get(`${API_BASE_URL}/hotels`, {
+                params: {
+                    _sort: 'rating',
+                    _order: 'desc',
+                    _limit: limit
+                }
+            });
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching top rated hotels:', error);
+            throw new Error('Failed to fetch top rated hotels');
+        }
+    },
+
+    // Book hotel (POST to bookings endpoint)
+    async bookHotel(bookingData) {
+        try {
+            const response = await axios.post(`${API_BASE_URL}/bookings`, {
+                type: 'hotel',
+                ...bookingData,
+                bookingDate: new Date().toISOString(),
+                status: 'pending'
+            });
+            return response.data;
+        } catch (error) {
+            console.error('Error booking hotel:', error);
+            throw new Error('Failed to book hotel');
         }
     }
 };
+
+export default hotelsApi;

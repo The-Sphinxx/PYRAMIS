@@ -1,83 +1,105 @@
 // Services/dashboardApi.js
-import { api } from './api'; // Import من الـ api.js الأساسي بتاعك
+import axios from 'axios';
+
+// Create a dedicated axios instance for json-server (db.json)
+// This avoids conflicts with the main api.js which might point to an external Auth backend
+export const jsonServer = axios.create({
+  baseURL: 'http://localhost:3000',
+  timeout: 10000,
+  headers: { 'Content-Type': 'application/json' }
+});
 
 // ==================== Attractions API ====================
 export const attractionsAPI = {
-  getAll: () => api.get('/attractions'),
-  getOne: (id) => api.get(`/attractions/${id}`),
-  create: (data) => api.post('/attractions', data),
-  update: (id, data) => api.put(`/attractions/${id}`, data),
-  patch: (id, data) => api.patch(`/attractions/${id}`, data),
-  delete: (id) => api.delete(`/attractions/${id}`),
+  getAll: () => jsonServer.get('/attractions'),
+  getOne: (id) => jsonServer.get(`/attractions/${id}`),
+  create: (data) => jsonServer.post('/attractions', data),
+  update: (id, data) => jsonServer.put(`/attractions/${id}`, data),
+  patch: (id, data) => jsonServer.patch(`/attractions/${id}`, data),
+  delete: (id) => jsonServer.delete(`/attractions/${id}`),
   
   // Specific updates
-  updateStatus: (id, status) => api.patch(`/attractions/${id}`, { status }),
-  updateAvailability: (id, availability) => api.patch(`/attractions/${id}`, { availability }),
-  toggleFeatured: (id, isFeatured) => api.patch(`/attractions/${id}`, { isFeatured }),
+  updateStatus: (id, status) => jsonServer.patch(`/attractions/${id}`, { status }),
+  updateAvailability: (id, availability) => jsonServer.patch(`/attractions/${id}`, { availability }),
+  toggleFeatured: (id, isFeatured) => jsonServer.patch(`/attractions/${id}`, { isFeatured }),
 };
 
 // ==================== Hotels API ====================
 export const hotelsAPI = {
-  getAll: () => api.get('/hotels'),
-  getOne: (id) => api.get(`/hotels/${id}`),
-  create: (data) => api.post('/hotels', data),
-  update: (id, data) => api.put(`/hotels/${id}`, data),
-  patch: (id, data) => api.patch(`/hotels/${id}`, data),
-  delete: (id) => api.delete(`/hotels/${id}`),
+  getAll: () => jsonServer.get('/hotels'),
+  getOne: (id) => jsonServer.get(`/hotels/${id}`),
+  create: (data) => jsonServer.post('/hotels', data),
+  update: (id, data) => jsonServer.put(`/hotels/${id}`, data),
+  patch: (id, data) => jsonServer.patch(`/hotels/${id}`, data),
+  delete: (id) => jsonServer.delete(`/hotels/${id}`),
   
   // Specific updates
-  updateStatus: (id, status) => api.patch(`/hotels/${id}`, { status }),
-  toggleFeatured: (id, isFeatured) => api.patch(`/hotels/${id}`, { isFeatured }),
+  updateStatus: (id, status) => jsonServer.patch(`/hotels/${id}`, { status }),
+  toggleFeatured: (id, isFeatured) => jsonServer.patch(`/hotels/${id}`, { isFeatured }),
 };
 
 // ==================== Cars API ====================
 export const carsAPI = {
-  getAll: () => api.get('/cars'),
-  getOne: (id) => api.get(`/cars/${id}`),
-  create: (data) => api.post('/cars', data),
-  update: (id, data) => api.put(`/cars/${id}`, data),
-  patch: (id, data) => api.patch(`/cars/${id}`, data),
-  delete: (id) => api.delete(`/cars/${id}`),
+  getAll: () => jsonServer.get('/cars'),
+  getOne: (id) => jsonServer.get(`/cars/${id}`),
+  create: (data) => jsonServer.post('/cars', data),
+  update: (id, data) => jsonServer.put(`/cars/${id}`, data),
+  patch: (id, data) => jsonServer.patch(`/cars/${id}`, data),
+  delete: (id) => jsonServer.delete(`/cars/${id}`),
   
   // Specific updates
-  updateStatus: (id, status) => api.patch(`/cars/${id}`, { status }),
-  toggleFeatured: (id, isFeatured) => api.patch(`/cars/${id}`, { isFeatured }),
+  updateStatus: (id, status) => jsonServer.patch(`/cars/${id}`, { status }),
+  toggleFeatured: (id, isFeatured) => jsonServer.patch(`/cars/${id}`, { isFeatured }),
 };
 
 // ==================== Trips API ====================
 export const tripsAPI = {
-  getAll: () => api.get('/trips'),
-  getOne: (id) => api.get(`/trips/${id}`),
-  create: (data) => api.post('/trips', data),
-  update: (id, data) => api.put(`/trips/${id}`, data),
-  patch: (id, data) => api.patch(`/trips/${id}`, data),
-  delete: (id) => api.delete(`/trips/${id}`),
+  getAll: () => jsonServer.get('/trips'),
+  getOne: (id) => jsonServer.get(`/trips/${id}`),
+  create: (data) => jsonServer.post('/trips', data),
+  update: (id, data) => jsonServer.put(`/trips/${id}`, data),
+  patch: (id, data) => jsonServer.patch(`/trips/${id}`, data),
+  delete: (id) => jsonServer.delete(`/trips/${id}`),
   
   // Specific updates
-  updateStatus: (id, status) => api.patch(`/trips/${id}`, { status }),
-  toggleFeatured: (id, isFeatured) => api.patch(`/trips/${id}`, { isFeatured }),
+  updateStatus: (id, status) => jsonServer.patch(`/trips/${id}`, { status }),
+  toggleFeatured: (id, isFeatured) => jsonServer.patch(`/trips/${id}`, { isFeatured }),
 };
 
 // ==================== Bookings API ====================
 export const bookingsAPI = {
-  getAll: () => api.get('/bookings'),
-  getOne: (id) => api.get(`/bookings/${id}`),
-  create: (data) => api.post('/bookings', data),
-  update: (id, data) => api.put(`/bookings/${id}`, data),
-  patch: (id, data) => api.patch(`/bookings/${id}`, data),
-  delete: (id) => api.delete(`/bookings/${id}`),
+  getAll: () => jsonServer.get('/bookings'),
+  getOne: (id) => jsonServer.get(`/bookings/${id}`),
+  create: (data) => jsonServer.post('/bookings', data),
+  update: (id, data) => jsonServer.put(`/bookings/${id}`, data),
+  patch: (id, data) => jsonServer.patch(`/bookings/${id}`, data),
+  delete: (id) => jsonServer.delete(`/bookings/${id}`),
   
   // Specific updates
-  updateStatus: (id, status) => api.patch(`/bookings/${id}`, { status }),
-  updatePaymentStatus: (id, paymentStatus) => api.patch(`/bookings/${id}`, { paymentStatus }),
+  updateStatus: (id, status) => jsonServer.patch(`/bookings/${id}`, { status }),
+  updatePaymentStatus: (id, paymentStatus) => jsonServer.patch(`/bookings/${id}`, { paymentStatus }),
+};
+
+// ==================== Users API ====================
+export const usersAPI = {
+  getAll: () => jsonServer.get('/users'),
+  getOne: (id) => jsonServer.get(`/users/${id}`),
+  create: (data) => jsonServer.post('/users', data),
+  update: (id, data) => jsonServer.put(`/users/${id}`, data),
+  patch: (id, data) => jsonServer.patch(`/users/${id}`, data),
+  delete: (id) => jsonServer.delete(`/users/${id}`),
+
+  // Specific updates
+  updateStatus: (id, status) => jsonServer.patch(`/users/${id}`, { status }),
+  // Add other specific user updates here if needed (e.g., role, verification)
 };
 
 // ==================== Generic API Helper ====================
 export const apiService = {
-  get: (resource, params) => api.get(`/${resource}`, { params }),
-  getOne: (resource, id) => api.get(`/${resource}/${id}`),
-  create: (resource, data) => api.post(`/${resource}`, data),
-  update: (resource, id, data) => api.put(`/${resource}/${id}`, data),
-  patch: (resource, id, data) => api.patch(`/${resource}/${id}`, data),
-  delete: (resource, id) => api.delete(`/${resource}/${id}`),
+  get: (resource, params) => jsonServer.get(`/${resource}`, { params }),
+  getOne: (resource, id) => jsonServer.get(`/${resource}/${id}`),
+  create: (resource, data) => jsonServer.post(`/${resource}`, data),
+  update: (resource, id, data) => jsonServer.put(`/${resource}/${id}`, data),
+  patch: (resource, id, data) => jsonServer.patch(`/${resource}/${id}`, data),
+  delete: (resource, id) => jsonServer.delete(`/${resource}/${id}`),
 };

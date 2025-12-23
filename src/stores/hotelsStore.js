@@ -1,29 +1,31 @@
 import { defineStore } from 'pinia';
 import hotelsApi from '@/Services/hotelsApi';
 
-export const useHotelStore = defineStore('hotels', {
+export const useHotelsStore = defineStore('hotels', {
     state: () => ({
         hotels: [],
+        selectedHotel: null,
         loading: false,
         error: null,
         filters: {
             searchQuery: '',
-            city: '',
+            city: 'All',
             category: 'all',
             priceRange: { min: 0, max: 10000 },
-            rating: 0
+            rating: 0,
+            minRating: 0, // Keeping for backward compatibility if needed, though 'rating' covers it
+            amenities: []
         }
     }),
 
     getters: {
-        // Get unique cities from all hotels
+        getHotelById: (state) => (id) => state.hotels.find(h => h.id == id),
+
         uniqueCities: (state) => {
-            const cities = state.hotels.map(hotel => hotel.city);
-            return [...new Set(cities)].sort();
+            const cities = state.hotels.map(hotel => hotel.city).filter(Boolean);
+            return ['All', ...new Set(cities)].sort();
         },
 
-        // Get filtered hotels based on current filters logic is now handled in store getters for reactivity
-        // mimicking the previous logic to ensure UI stays consistent
         filteredHotels: (state) => {
             let result = [...state.hotels];
 
@@ -31,8 +33,8 @@ export const useHotelStore = defineStore('hotels', {
             if (state.filters.searchQuery) {
                 const query = state.filters.searchQuery.toLowerCase();
                 result = result.filter(hotel =>
-                    hotel.name.toLowerCase().includes(query) ||
-                    hotel.city.toLowerCase().includes(query) ||
+                    (hotel.name || '').toLowerCase().includes(query) ||
+                    (hotel.city || '').toLowerCase().includes(query) ||
                     (hotel.highlights && hotel.highlights.some(h => h.toLowerCase().includes(query)))
                 );
             }
@@ -58,39 +60,45 @@ export const useHotelStore = defineStore('hotels', {
                 );
             }
 
-            // Filter by minimum rating
-            if (state.filters.rating > 0) {
-                result = result.filter(hotel => hotel.rating >= state.filters.rating);
+            // Filter by rating (using max of rating or minRating for compatibility)
+            const targetRating = Math.max(state.filters.rating, state.filters.minRating);
+            if (targetRating > 0) {
+                result = result.filter(hotel => (hotel.rating || 0) >= targetRating);
+            }
+
+            // Filter by amenities
+            if (state.filters.amenities.length > 0) {
+                result = result.filter(h => 
+                   h.amenities && state.filters.amenities.every(a => h.amenities.includes(a))
+                );
             }
 
             return result;
         },
 
-        // Get hotels by category
         hotelsByCategory: (state) => (category) => {
             if (category === 'all') return state.hotels;
             return state.hotels.filter(hotel => hotel.category === category);
         },
 
-        // Get hotels by city
         hotelsByCity: (state) => (city) => {
             return state.hotels.filter(hotel => hotel.city === city);
         }
     },
 
     actions: {
-        // Fetch all hotels using API service
         async fetchHotels() {
             this.loading = true;
             this.error = null;
 
             try {
-                const data = await hotelsApi.getHotels();
+                // Using method name from dev/HEAD reconciliation (we will fix api next)
+                const data = await hotelsApi.getHotels(); 
 
                 // Transform hotels data to include required fields
                 this.hotels = data.map(hotel => ({
                     ...hotel,
-                    imageUrl: hotel.images && hotel.images.length > 0 ? hotel.images[0] : '/images/placeholder-hotel.jpg',
+                    imageUrl: hotel.images && hotel.images.length > 0 ? hotel.images[0] : (hotel.image || '/images/placeholder-hotel.jpg'),
                     totalReviews: hotel.reviews?.totalReviews || 0,
                     // Assign category based on hotel characteristics if not present
                     category: hotel.category || this.inferCategory(hotel)
@@ -104,7 +112,28 @@ export const useHotelStore = defineStore('hotels', {
             }
         },
 
-        // Infer category from hotel data
+        async fetchHotelById(id) {
+            this.loading = true;
+            this.error = null;
+            try {
+                // Try to find in existing state first
+                if (!this.hotels.length) await this.fetchHotels();
+                
+                let hotel = this.hotels.find(h => h.id == id);
+                if (!hotel) {
+                    hotel = await hotelsApi.getHotelById(id);
+                }
+                this.selectedHotel = hotel;
+                return hotel;
+            } catch (err) {
+                this.error = err.message || 'Failed to fetch hotel';
+                throw err;
+            } finally {
+                this.loading = false;
+            }
+        },
+
+        // Helper: Infer category from hotel data
         inferCategory(hotel) {
             if (hotel.rating >= 4.8) return 'LUXURY';
             if (hotel.rating >= 4.5) return 'FIVE_STAR';
@@ -118,32 +147,37 @@ export const useHotelStore = defineStore('hotels', {
             return 'LUXURY';
         },
 
-        // Set individual filter
-        setFilter(filterName, value) {
-            if (this.filters.hasOwnProperty(filterName)) {
-                this.filters[filterName] = value;
+        setFilter(filterType, value) {
+            if (this.filters.hasOwnProperty(filterType)) {
+                this.filters[filterType] = value;
             }
         },
 
-        // Set multiple filters at once
+        // Compatibility alias for setFilters from dev
         setFilters(filters) {
             this.filters = { ...this.filters, ...filters };
         },
 
-        // Reset all filters to default
+        toggleAmenity(amenity) {
+            const index = this.filters.amenities.indexOf(amenity);
+            if (index > -1) this.filters.amenities.splice(index, 1);
+            else this.filters.amenities.push(amenity);
+        },
+
         resetFilters() {
             this.filters = {
                 searchQuery: '',
-                city: '',
+                city: 'All',
                 category: 'all',
                 priceRange: { min: 0, max: 10000 },
-                rating: 0
+                rating: 0,
+                minRating: 0,
+                amenities: []
             };
         },
 
-        // Get hotel by ID
-        getHotelById(id) {
-            return this.hotels.find(hotel => hotel.id === id || hotel.id === String(id));
+        clearSelectedHotel() {
+            this.selectedHotel = null;
         }
     }
 });

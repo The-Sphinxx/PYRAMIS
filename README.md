@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 # PYRAMIS
 
 This template should help get you started developing with Vue 3 in Vite.
@@ -38,11 +36,3 @@ npm run dev
 ```sh
 npm run build
 ```
-
-# Vue-project
-
-=======
-
-# Booking-Graduation-project
-
-> > > > > > > c638a49f9f32f1630cbc43c81e5eb5bc1c0d6f84
