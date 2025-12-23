@@ -24,43 +24,6 @@
 
     <!-- Categories Tabs -->
     <div class="page-container py-8">
-      <div class="bg-base-100 rounded-2xl shadow-lg p-8 mb-8">
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
-          <button
-            v-for="category in categories"
-            :key="category.id"
-            @click="selectCategory(category.id)"
-            :class="[
-              'flex flex-col items-center gap-3 p-4 rounded-xl transition-all duration-300',
-              selectedCategory === category.id 
-                ? 'bg-primary/10 border-2 border-primary' 
-                : 'bg-base-200 hover:bg-base-300 border-2 border-transparent'
-            ]"
-          >
-            <div 
-              :class="[
-                'w-16 h-16 rounded-xl flex items-center justify-center text-3xl transition-all duration-300',
-                selectedCategory === category.id 
-                  ? 'bg-primary text-primary-content' 
-                  : 'bg-base-100 text-neutral'
-              ]"
-            >
-              <i :class="category.icon"></i>
-            </div>
-            <span 
-              :class="[
-                'text-sm font-semibold text-center leading-tight',
-                selectedCategory === category.id 
-                  ? 'text-primary' 
-                  : 'text-base-content'
-              ]"
-            >
-              {{ category.name }}
-            </span>
-          </button>
-        </div>
-      </div>
-
       <!-- Section Title -->
       <div class="text-center mb-8">
         <h2 class="text-4xl font-bold text-base-content font-cairo mb-2">
