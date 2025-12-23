@@ -223,6 +223,22 @@ public class AuthController : ControllerBase
         await _mediator.Send(command);
         return Ok(new { Message = "Email verified successfully" });
     }
+    
+    /// <summary>
+    /// Verifies email using a token sent in a link (GET).
+    /// </summary>
+    /// <param name="email">User email.</param>
+    /// <param name="token">Verification token from email link.</param>
+    /// <returns>Success result.</returns>
+    [HttpGet("verify-email")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> VerifyEmailByLink([FromQuery] string email, [FromQuery] string token)
+    {
+        var ok = await _mediator.Send(new VerifyEmailByTokenQuery(email, token));
+        return ok ? Ok(new { message = "Email verified." }) : BadRequest(new { error = "Verification failed." });
+    }
 
     /// <summary>
     /// Resends the Email Verification OTP.
