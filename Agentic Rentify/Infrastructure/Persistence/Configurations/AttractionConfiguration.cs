@@ -22,12 +22,10 @@ public class AttractionConfiguration : IEntityTypeConfiguration<Attraction>
             rs.OwnsOne(r => r.Criteria);
         });
 
-        // حقول الـ List<string> البسيطة
-        // EF Core 8+ handles List<string> as JSON primitive collections automatically.
-        // We do not need to force HasColumnType("nvarchar(max)") - EF does this.
-        // We just need to ensure the DB knows it's standard.
-        // But to be safe and explicit, let's leave them or remove the configurations if defaults work.
-        // actually HasColumnType is fine, but removing OwnsMany for Categories is key.
+        builder.OwnsMany(a => a.UserReviews, ur => { ur.ToJson(); });
 
+        // حقول الـ List<string> البسيطة
+        builder.Property(a => a.Categories).HasColumnType("nvarchar(max)");
+        builder.Property(a => a.Highlights).HasColumnType("nvarchar(max)");
     }
 }

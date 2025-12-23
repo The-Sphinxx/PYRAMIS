@@ -94,6 +94,7 @@ public static class InfrastructureExtensions
         
         // Seeder
         services.AddScoped<DbInitializer>();
+        services.AddScoped<DataSeeder>();
 
         // Repositories & UnitOfWork
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));

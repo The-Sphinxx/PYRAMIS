@@ -17,6 +17,10 @@ public class TripProfile : Profile
             .ReverseMap()
             .ForMember(dest => dest.Desc, opt => opt.MapFrom(src => src.Description));
         CreateMap<TripHotelInfo, TripHotelInfoDTO>().ReverseMap();
+        CreateMap<TripReviewSummary, TripReviewSummaryDTO>();
+        CreateMap<RatingCriteria, RatingCriteriaDTO>();
+        CreateMap<UserReview, UserReviewDTO>();
+        CreateMap<TripAmenitiesInfo, TripAmenitiesInfoDTO>();
 
         CreateMap<CreateTripDTO, Trip>();
         CreateMap<UpdateTripDTO, Trip>();

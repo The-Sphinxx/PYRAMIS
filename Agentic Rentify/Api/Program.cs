@@ -3,6 +3,7 @@ using Scalar.AspNetCore;
 using Hangfire;
 using Hangfire.Common;
 using Agentic_Rentify.Infragentic;
+using Agentic_Rentify.Infrastructure.Services;
 
 // 1. إعداد الـ Logger المبدئي
 Log.Logger = new LoggerConfiguration()
@@ -155,6 +156,12 @@ Comprehensive REST API for an AI-powered travel booking platform with intelligen
         var dbInitializer = seedScope.ServiceProvider.GetRequiredService<DbInitializer>();
         dbInitializer.SeedAsync().GetAwaiter().GetResult();
         Log.Information("Database seeding executed successfully.");
+        
+        // Seed data from db.json
+        var dataSeeder = seedScope.ServiceProvider.GetRequiredService<DataSeeder>();
+        var jsonPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "db.json");
+        dataSeeder.SeedDataFromJsonAsync(jsonPath).GetAwaiter().GetResult();
+        Log.Information("Data import from db.json completed successfully.");
     }
     catch (Exception seedEx)
     {

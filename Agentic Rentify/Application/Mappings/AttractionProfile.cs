@@ -16,5 +16,6 @@ public class AttractionProfile : Profile
         CreateMap<AttractionReviewSummary, ReviewSummaryDTO>();
         CreateMap<RatingCriteria, RatingCriteriaDTO>();
         CreateMap<UserReview, UserReviewDTO>();
+        CreateMap<AttractionImage, string>().ConstructUsing(src => src.Url);
     }
 }

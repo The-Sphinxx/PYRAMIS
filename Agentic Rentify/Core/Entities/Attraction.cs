@@ -15,6 +15,11 @@ public class Attraction : BaseEntity
     public string Overview { get; set; } = string.Empty;
     public decimal Price { get; set; } 
     public string Currency { get; set; } = "$";
+    public string PaymentId { get; set; } = string.Empty;
+    public string Status { get; set; } = "Active"; // Active, Pending, Disabled
+    public string Availability { get; set; } = "Available"; // Available, Sold Out
+    public bool IsFeatured { get; set; } = false;
+    public string Capacity { get; set; } = string.Empty; // e.g., "18 / 42 Ticket"
 
     // Coordinates
     public double Latitude { get; set; }
