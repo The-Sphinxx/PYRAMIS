@@ -1,5 +1,6 @@
 using Agentic_Rentify.Application.Features.Chat.DTOs;
 using Agentic_Rentify.Application.Interfaces;
+using Agentic_Rentify.Core.Exceptions;
 using MediatR;
 
 namespace Agentic_Rentify.Application.Features.Chat.Queries.GetChatHistory;

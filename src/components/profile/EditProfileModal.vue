@@ -222,8 +222,11 @@ watch(() => props.isOpen, (newVal) => {
     passwordData.newPassword = '';
     passwordData.confirmPassword = '';
     
-    formData.firstName = props.user.firstName || props.user.name.split(' ')[0] || '';
-    formData.lastName = props.user.lastName || props.user.name.split(' ').slice(1).join(' ') || '';
+    const safeName = (props.user.name || props.user.fullName || '').trim();
+    const nameParts = safeName ? safeName.split(/\s+/) : [];
+
+    formData.firstName = props.user.firstName || nameParts[0] || '';
+    formData.lastName = props.user.lastName || nameParts.slice(1).join(' ') || '';
     formData.phone = props.user.phone || '';
     formData.nationality = props.user.nationality || '';
     formData.dateOfBirth = props.user.dateOfBirth || '';

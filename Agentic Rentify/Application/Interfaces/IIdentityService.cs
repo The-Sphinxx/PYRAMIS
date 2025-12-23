@@ -1,3 +1,4 @@
+using Agentic_Rentify.Core.Entities;
 
 public interface IIdentityService
 {
@@ -8,6 +9,7 @@ public interface IIdentityService
     Task ResendOtpAsync(string email);
     Task<AuthResponseDto> LoginWithGoogleAsync(string idToken);
     Task<AuthResponseDto> RefreshTokenAsync(string token, string refreshToken);
+    Task<ApplicationUser?> GetByIdAsync(string userId);
     
     Task ForgotPasswordAsync(string email);
     Task ResetPasswordAsync(string email, string tokenOrOtp, string newPassword);

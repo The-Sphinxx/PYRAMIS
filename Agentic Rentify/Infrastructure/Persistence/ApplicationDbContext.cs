@@ -19,6 +19,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<SystemSetting> SystemSettings { get; set; }
     public DbSet<ChatConversation> ChatConversations { get; set; }
     public DbSet<ChatMessage> ChatMessages { get; set; }
+    public DbSet<WishlistItem> WishlistItems { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

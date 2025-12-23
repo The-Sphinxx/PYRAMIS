@@ -1,6 +1,7 @@
 using Agentic_Rentify.Application.Interfaces;
 using Agentic_Rentify.Core.Entities;
 using Agentic_Rentify.Core.Enums;
+using Agentic_Rentify.Core.Exceptions;
 using MediatR;
 
 namespace Agentic_Rentify.Application.Features.Bookings.Commands.ConfirmBooking;

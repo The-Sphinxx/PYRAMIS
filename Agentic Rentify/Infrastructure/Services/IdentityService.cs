@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using Hangfire;
 using System;
 using System;
+using Agentic_Rentify.Core.Exceptions;
 
 public class IdentityService : IIdentityService
 {
@@ -245,6 +246,11 @@ public class IdentityService : IIdentityService
         return await GenerateAuthResponseAsync(user);
     }
 
+    public async Task<ApplicationUser?> GetByIdAsync(string userId)
+    {
+        return await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
+    }
+
     public async Task ForgotPasswordAsync(string email)
     {
         var user = await _userManager.FindByEmailAsync(email);
@@ -328,6 +334,10 @@ public class IdentityService : IIdentityService
             new Claim(ClaimTypes.Name, user.UserName!),
             new Claim(ClaimTypes.NameIdentifier, user.Id),
             new Claim(ClaimTypes.Email, user.Email!),
+            new Claim(ClaimTypes.GivenName, user.FirstName ?? string.Empty),
+            new Claim(ClaimTypes.Surname, user.LastName ?? string.Empty),
+            new Claim("fullName", $"{user.FirstName} {user.LastName}".Trim()),
+            new Claim("profileImage", user.ProfileImage ?? string.Empty),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
         };
 
