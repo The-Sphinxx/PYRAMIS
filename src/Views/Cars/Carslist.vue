@@ -42,77 +42,63 @@
       </p>
     </div>
 
-   <!-- Cars Grid -->
-<div class="page-container">
-  <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-    <LuxurySUVCardDynamic
-      v-for="car in cars"
-      :key="car.id"
-      :car="car"
-      @view="handleViewCar"
-    />
-  </div>
+    <!-- Cars Grid -->
+    <div class="page-container">
+      <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <LuxurySUVCardDynamic
+          v-for="car in paginatedCars"
+          :key="car.id"
+          :car="car"
+          @view="handleViewCar"
+        />
+      </div>
 
-<!-- View All Button -->
-<div class="mt-8 max-w-xs mx-auto">
-  <button class="btn btn-primary w-full py-2 text-sm" @click="goToCarBooking">
-    View All
-  </button>
-</div>
-
-</div>
-
-
-    <!-- Car Categories -->
-    <div class="page-container my-12 text-center">
-      <h1 class="font-cairo text-2xl sm:text-3xl md:text-4xl font-bold text-base-content">
-        Car Categories
-      </h1>
-      <p class="font-cairo text-sm sm:text-base text-gray-500 mt-1">
-        Browse cars by category
-      </p>
-
-      <div class="flex justify-center gap-6 flex-wrap mt-4">
-        <button
-          v-for="category in categories"
-          :key="category.value"
-          @click="goToCategory(category.value)"
-          class="btn btn-outline btn-secondary font-semibold py-5 px-8 transition hover:scale-105"
-        >
-          {{ category.label }}
-        </button>
+      <!-- Pagination Component -->
+      <div class="mt-8 flex justify-center">
+        <Pagination
+          :current-page="currentPage"
+          :total="cars.length"
+          :per-page="itemsPerPage"
+          :show-info="true"
+          :show-per-page-selector="true"
+          :per-page-options="[10, 20, 30]"
+          @update:current-page="handlePageChange"
+          @update:per-page="val => { itemsPerPage.value = val; currentPage.value = 1 }"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { onMounted, computed } from "vue";
+import { onMounted, computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useCarsStore } from "@/stores/carsStore";
 
 import Search from "@/components/Common/Search.vue";
 import LuxurySUVCardDynamic from "@/components/Cars/CarCard.vue";
+import Pagination from "@/components/Common/Pagination.vue";
 
 import heroImage from "@/assets/images/CarHeroSection.jpg";
 
 const store = useCarsStore();
 const router = useRouter();
 
-
-const categories = [
-  { label: "Chevrolet", value: "Chevrolet" },
-  { label: "Toyota", value: "Toyota" },
-  { label: "Kia", value: "Kia" },
-  { label: "Mazda", value: "Mazda" }
-];
+const currentPage = ref(1);
+const itemsPerPage = ref(12);
 
 onMounted(async () => {
   await store.fetchCars();
-  
+
 });
 
 const cars = computed(() => store.cars);
+
+const paginatedCars = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage.value;
+  const end = start + itemsPerPage.value;
+  return cars.value.slice(start, end);
+});
 
 function handleViewCar(car) {
   router.push({ name: "CarDetails", params: { id: car.id } });
@@ -130,9 +116,17 @@ function goToCategory(category) {
 }
 
 function handleSearch(payload) {
-  console.log("Cars search:", payload);
+  const queryParams = {};
+  if (payload.query) {
+    queryParams.query = payload.query; 
+  }
+  router.push({ name: "CarBooking", query: queryParams });
 }
 
+function handlePageChange(page) {
+  currentPage.value = page;
+  window.scrollTo({ top: 400, behavior: 'smooth' });
+}
 </script>
 
 <style scoped>
