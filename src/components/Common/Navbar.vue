@@ -33,7 +33,10 @@
             <router-link :to="{ name: 'SignUp' }" class="btn btn-primary btn-sm font-cairo">Sign Up</router-link>
           </template>
           <template v-else>
-            <router-link :to="{ name: 'Profile' }" class="btn btn-ghost btn-sm font-cairo border border-base-300">
+            <router-link v-if="authStore.user?.role === 'Admin'" :to="{ path: '/dashboard/overview' }" class="btn btn-ghost btn-sm font-cairo border border-base-300">
+              <i class="fas fa-gauge mr-2"></i>Dashboard
+            </router-link>
+            <router-link v-else :to="{ name: 'Profile' }" class="btn btn-ghost btn-sm font-cairo border border-base-300">
               <i class="fas fa-user mr-2"></i>Profile
             </router-link>
             <button @click="handleLogout" class="btn btn-primary btn-sm font-cairo">Logout</button>
@@ -63,7 +66,8 @@
               <router-link :to="{ name: 'SignUp' }" class="btn btn-primary btn-sm font-cairo flex-1" @click="closeMobile">Sign Up</router-link>
             </template>
             <template v-else>
-              <router-link :to="{ name: 'Profile' }" class="btn btn-ghost btn-sm font-cairo flex-1" @click="closeMobile">Profile</router-link>
+              <router-link v-if="authStore.user?.role === 'Admin'" :to="{ path: '/dashboard/overview' }" class="btn btn-ghost btn-sm font-cairo flex-1" @click="closeMobile">Dashboard</router-link>
+              <router-link v-else :to="{ name: 'Profile' }" class="btn btn-ghost btn-sm font-cairo flex-1" @click="closeMobile">Profile</router-link>
               <button class="btn btn-primary btn-sm font-cairo flex-1" @click="() => { handleLogout(); closeMobile(); }">Logout</button>
             </template>
           </div>

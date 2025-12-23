@@ -70,6 +70,11 @@ import TripCheckOut from '@/Views/Trips/TripCheckOut.vue'
 import TripConfirmation from '@/Views/Trips/TripConfirmation.vue'
 
 const routes = [
+  // Admin alias route for dashboard
+  {
+    path: '/admin/dashboard',
+    redirect: '/dashboard/overview'
+  },
   // Home Routes (No Layout)
   {
     path: '/',
@@ -286,7 +291,7 @@ const routes = [
   {
     path: '/dashboard',
     component: DashboardLayout,
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true, requiresAdmin: true },
     children: [
       {
         path: 'overview',
@@ -363,6 +368,7 @@ import { useAuthStore } from '@/stores/authStore'
 // Navigation guard for protected routes
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  const requiresAdmin = to.matched.some(record => record.meta.requiresAdmin)
 
   // Use auth store to check authentication status
   const authStore = useAuthStore()
@@ -373,6 +379,13 @@ router.beforeEach((to, from, next) => {
       name: 'Login',
       query: { redirect: to.fullPath }, // Save the intended destination
     })
+  } else if (requiresAdmin) {
+    const role = authStore.user?.role || JSON.parse(localStorage.getItem('user') || '{}')?.role || ''
+    if (role !== 'Admin') {
+      next({ path: '/' })
+    } else {
+      next()
+    }
   } else {
     next()
   }

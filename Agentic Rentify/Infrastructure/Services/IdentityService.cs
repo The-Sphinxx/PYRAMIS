@@ -59,6 +59,11 @@ public class IdentityService : IIdentityService
         if (!result.Succeeded)
             throw new BadRequestException("User creation failed! Errors: " + string.Join(", ", result.Errors.Select(e => e.Description)));
 
+        // Assign Client role on standard registration
+        var roleAssign = await _userManager.AddToRoleAsync(user, "Client");
+        if (!roleAssign.Succeeded)
+            throw new BadRequestException("Role assignment failed: " + string.Join(", ", roleAssign.Errors.Select(e => e.Description)));
+
         // Generate email verification token (link-based)
         var emailToken = Convert.ToBase64String(Guid.NewGuid().ToByteArray())
             .Replace("+", string.Empty)
@@ -213,6 +218,11 @@ public class IdentityService : IIdentityService
             };
             var result = await _userManager.CreateAsync(user); 
              if (!result.Succeeded) throw new BadRequestException("Google User creation failed: " + string.Join(", ", result.Errors.Select(e => e.Description)));
+
+            // Ensure Client role for new Google users
+            var roleAssign = await _userManager.AddToRoleAsync(user, "Client");
+            if (!roleAssign.Succeeded)
+                throw new BadRequestException("Role assignment failed: " + string.Join(", ", roleAssign.Errors.Select(e => e.Description)));
         }
         
         return await GenerateAuthResponseAsync(user);
@@ -348,10 +358,41 @@ public class IdentityService : IIdentityService
             Email = user.Email!,
             FirstName = user.FirstName,
             LastName = user.LastName,
+            Role = userRoles.FirstOrDefault() ?? string.Empty,
             Token = new JwtSecurityTokenHandler().WriteToken(token),
             RefreshToken = refreshToken,
             RefreshTokenExpiration = user.RefreshTokenExpiryTime
         };
+    }
+
+    // Create an admin user (used by admin-only endpoint)
+    public async Task<(string Id, string Email)> CreateAdminAsync(string email, string password, string firstName, string lastName)
+    {
+        var existing = await _userManager.FindByEmailAsync(email);
+        if (existing != null)
+            throw new BadRequestException("User already exists!");
+
+        var user = new ApplicationUser
+        {
+            Email = email,
+            UserName = email,
+            SecurityStamp = Guid.NewGuid().ToString(),
+            FirstName = firstName,
+            LastName = lastName,
+            IsVerified = true,
+            EmailConfirmed = true,
+            CreatedAt = DateTime.UtcNow
+        };
+
+        var create = await _userManager.CreateAsync(user, password);
+        if (!create.Succeeded)
+            throw new BadRequestException("Admin creation failed: " + string.Join(", ", create.Errors.Select(e => e.Description)));
+
+        var role = await _userManager.AddToRoleAsync(user, "Admin");
+        if (!role.Succeeded)
+            throw new BadRequestException("Assigning Admin role failed: " + string.Join(", ", role.Errors.Select(e => e.Description)));
+
+        return (user.Id, user.Email!);
     }
 
     private static string GenerateRefreshToken()

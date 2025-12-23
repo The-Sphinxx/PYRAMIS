@@ -15,6 +15,7 @@ export const useAuthStore = defineStore('auth', () => {
       email: authResponse.email,
       firstName: authResponse.firstName,
       lastName: authResponse.lastName,
+      role: authResponse.role || '',
     };
 
     user.value = shapedUser;

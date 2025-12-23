@@ -14,4 +14,7 @@ public interface IIdentityService
     Task ChangePasswordAsync(string email, string currentPassword, string newPassword);
     
     Task<bool> ValidateTokenAsync(string token);
+
+    // Admin management
+    Task<(string Id, string Email)> CreateAdminAsync(string email, string password, string firstName, string lastName);
 }

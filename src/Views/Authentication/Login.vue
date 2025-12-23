@@ -218,8 +218,13 @@ const handleSignIn = async () => {
   loading.value = false;
 
   if (result.success) {
-    const redirectPath = route.query.redirect || '/';
-    router.push(redirectPath);
+    const role = authStore.user?.role || '';
+    if (role === 'Admin') {
+      router.push('/dashboard/overview');
+    } else {
+      const redirectPath = route.query.redirect || '/';
+      router.push(redirectPath);
+    }
   } else {
     error.value = result.error;
   }
@@ -282,8 +287,13 @@ const handleGoogleSignIn = async () => {
     loading.value = false;
 
     if (result.success) {
-      const redirectPath = route.query.redirect || '/';
-      router.push(redirectPath);
+      const role = authStore.user?.role || '';
+      if (role === 'Admin') {
+        router.push('/dashboard/overview');
+      } else {
+        const redirectPath = route.query.redirect || '/';
+        router.push(redirectPath);
+      }
     } else {
       error.value = result.error;
     }
