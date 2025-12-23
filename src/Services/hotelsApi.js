@@ -1,13 +1,10 @@
-import axios from 'axios';
-
-// Base URL - adjust according to your json-server configuration
-const API_BASE_URL = 'http://localhost:3000';
+import api from './api';
 
 const hotelsApi = {
     // Get all hotels
     async getAllHotels() {
         try {
-            const response = await axios.get(`${API_BASE_URL}/hotels`);
+            const response = await api.get('/Hotels');
             return response.data;
         } catch (error) {
             console.error('Error fetching hotels:', error);
@@ -23,7 +20,7 @@ const hotelsApi = {
     // Get hotel by ID
     async getHotelById(id) {
         try {
-            const response = await axios.get(`${API_BASE_URL}/hotels/${id}`);
+            const response = await api.get(`/Hotels/${id}`);
             return response.data;
         } catch (error) {
             console.error(`Error fetching hotel ${id}:`, error);
@@ -34,7 +31,7 @@ const hotelsApi = {
     // Get hotels by city
     async getHotelsByCity(city) {
         try {
-            const response = await axios.get(`${API_BASE_URL}/hotels`, {
+            const response = await api.get('/Hotels', {
                 params: { city }
             });
             return response.data;
@@ -116,12 +113,8 @@ const hotelsApi = {
     // Get top rated hotels
     async getTopRatedHotels(limit = 8) {
         try {
-            const response = await axios.get(`${API_BASE_URL}/hotels`, {
-                params: {
-                    _sort: 'rating',
-                    _order: 'desc',
-                    _limit: limit
-                }
+            const response = await api.get('/Hotels/top-rated', {
+                params: { limit }
             });
             return response.data;
         } catch (error) {
@@ -133,11 +126,9 @@ const hotelsApi = {
     // Book hotel (POST to bookings endpoint)
     async bookHotel(bookingData) {
         try {
-            const response = await axios.post(`${API_BASE_URL}/bookings`, {
+            const response = await api.post('/Bookings', {
                 type: 'hotel',
                 ...bookingData,
-                bookingDate: new Date().toISOString(),
-                status: 'pending'
             });
             return response.data;
         } catch (error) {

@@ -2,6 +2,52 @@ import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 import { authApi, api } from '@/Services/api';
 
+const decodeToken = (token) => {
+  try {
+    const payload = token.split('.')[1];
+    const decoded = JSON.parse(atob(payload.replace(/-/g, '+').replace(/_/g, '/')));
+    return decoded;
+  } catch (e) {
+    return null;
+  }
+};
+
+const buildUserFromToken = (token) => {
+  const decoded = decodeToken(token);
+  if (!decoded) return null;
+
+  const claim = (keys) => {
+    for (const k of keys) {
+      if (decoded[k]) return decoded[k];
+    }
+    return '';
+  };
+
+  return {
+    id: claim([
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier',
+      'nameid',
+      'sub'
+    ]) || null,
+    email: claim([
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress',
+      'email'
+    ]) || null,
+    firstName: claim([
+      'given_name',
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname'
+    ]),
+    lastName: claim([
+      'family_name',
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname'
+    ]),
+    role: claim([
+      'http://schemas.microsoft.com/ws/2008/06/identity/claims/role',
+      'role'
+    ])
+  };
+};
+
 export const useAuthStore = defineStore('auth', () => {
   const user = ref(null);
   const token = ref(null);
@@ -10,13 +56,15 @@ export const useAuthStore = defineStore('auth', () => {
   const isAuthenticated = computed(() => !!token.value);
 
   const setSession = (authResponse, rememberMe) => {
-    const shapedUser = {
-      id: authResponse.id,
-      email: authResponse.email,
-      firstName: authResponse.firstName,
-      lastName: authResponse.lastName,
-      role: authResponse.role || '',
-    };
+    const shapedUser = authResponse?.role
+      ? {
+          id: authResponse.id,
+          email: authResponse.email,
+          firstName: authResponse.firstName,
+          lastName: authResponse.lastName,
+          role: authResponse.role || '',
+        }
+      : buildUserFromToken(authResponse.token);
 
     user.value = shapedUser;
     token.value = authResponse.token;
@@ -25,7 +73,6 @@ export const useAuthStore = defineStore('auth', () => {
     api.defaults.headers.common.Authorization = `Bearer ${authResponse.token}`;
 
     // Persist tokens for refresh handling; rememberMe still controls UX choices elsewhere if needed
-    localStorage.setItem('user', JSON.stringify(shapedUser));
     localStorage.setItem('token', authResponse.token);
     localStorage.setItem('refreshToken', authResponse.refreshToken);
   };
@@ -34,19 +81,26 @@ export const useAuthStore = defineStore('auth', () => {
     user.value = null;
     token.value = null;
     refreshToken.value = null;
-    localStorage.removeItem('user');
     localStorage.removeItem('token');
     localStorage.removeItem('refreshToken');
     delete api.defaults.headers.common.Authorization;
   };
 
   const initAuth = () => {
-    const savedUser = localStorage.getItem('user');
     const savedToken = localStorage.getItem('token');
     const savedRefresh = localStorage.getItem('refreshToken');
 
-    if (savedUser && savedToken && savedRefresh) {
-      user.value = JSON.parse(savedUser);
+    if (savedToken && savedRefresh) {
+      const decoded = decodeToken(savedToken);
+      const nowSeconds = Math.floor(Date.now() / 1000);
+      const isExpired = decoded?.exp && decoded.exp < nowSeconds;
+
+      if (isExpired) {
+        clearSession();
+        return;
+      }
+
+      user.value = buildUserFromToken(savedToken);
       token.value = savedToken;
       refreshToken.value = savedRefresh;
       api.defaults.headers.common.Authorization = `Bearer ${savedToken}`;

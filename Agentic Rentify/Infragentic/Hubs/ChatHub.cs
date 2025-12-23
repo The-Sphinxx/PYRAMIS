@@ -99,6 +99,33 @@ public class ChatHub : Hub
     }
 
     /// <summary>
+    /// Notify all admins of a new ticket created by a client (called from CreateTicket endpoint)
+    /// </summary>
+    public async Task NotifyNewTicket(object ticketData)
+    {
+        var userId = Context.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var role = Context.User?.FindFirst(ClaimTypes.Role)?.Value;
+
+        // Only clients should call this (or allow via authorization check)
+        if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(role))
+        {
+            await Clients.Caller.SendAsync("Error", "Unauthorized: Missing user identity");
+            return;
+        }
+
+        if (!role.Equals("Client", StringComparison.OrdinalIgnoreCase))
+        {
+            await Clients.Caller.SendAsync("Error", "Only clients can create tickets");
+            return;
+        }
+
+        // Broadcast to all admins
+        await Clients.Group("Admins").SendAsync("NewTicketCreated", ticketData);
+
+        await LogActivity(userId, "CreatedTicket", $"Ticket: {ticketData}");
+    }
+
+    /// <summary>
     /// Join a conversation group (for targeted messaging)
     /// </summary>
     public async Task JoinConversation(int conversationId)
@@ -162,3 +189,4 @@ public class ChatHub : Hub
         }
     }
 }
+

@@ -57,6 +57,13 @@ class ChatService {
         });
       });
 
+      this.connection.on('NewTicketCreated', (ticketData) => {
+        console.log('New ticket created by client:', ticketData);
+        // Emit event that can be listened to by components
+        // This will trigger a refresh of conversations for admins
+        window.dispatchEvent(new CustomEvent('newTicketCreated', { detail: ticketData }));
+      });
+
       this.connection.on('UserTyping', (data) => {
         this.typing.userId = data.userId;
         this.typing.userName = data.userName;
@@ -232,6 +239,25 @@ class ChatService {
    */
   clearMessages() {
     this.messages.current = [];
+  }
+
+  /**
+   * Notify admins of a new ticket via SignalR
+   * Called after ticket creation on the client side
+   */
+  async notifyAdminsOfNewTicket(ticketData) {
+    if (!this.connection || this.connection.state !== 'Connected') {
+      console.warn('Chat not connected, skipping admin notification');
+      return;
+    }
+
+    try {
+      await this.connection.invoke('NotifyNewTicket', ticketData);
+      console.log('Admin notification sent for new ticket');
+    } catch (error) {
+      console.error('Failed to notify admins of new ticket:', error);
+      // Non-critical error, don't throw
+    }
   }
 }
 

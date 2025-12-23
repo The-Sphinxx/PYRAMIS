@@ -232,9 +232,7 @@ import { ref, onMounted, computed, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useBookingStore } from '@/stores/bookingStore';
 
-// Importing directly from db.json. 
-// Note: In a real app, this should probably be an API call, but for this setup we import the file.
-import dbData from '../../../db.json';
+import tripsApi from '@/Services/tripsApi';
 import BookingForm from '@/components/Common/BookingForm.vue';
 import TripCard from '@/components/Trips/TripCard.vue';
 import Carousel from '@/components/Common/Carousel.vue';
@@ -245,15 +243,28 @@ const router = useRouter();
 const bookingStore = useBookingStore();
 const trip = ref(null);
 
-// Access the nested Structure: dbData.trips is [[...], ...]
-// We assume index 0 contains the trips list as seen in db.json analysis
-const allTrips = computed(() => {
-    return Array.isArray(dbData.trips) ? dbData.trips : [];
-});
+const allTrips = ref([]);
 
-const loadTrip = () => {
+const loadTrip = async () => {
     const id = route.params.id;
-    trip.value = allTrips.value.find(t => t.id == id);
+
+    if (!allTrips.value.length) {
+        try {
+            const result = await tripsApi.getAllTrips();
+            allTrips.value = Array.isArray(result) ? result : [];
+        } catch (error) {
+            console.error('Failed to load trips', error);
+            allTrips.value = [];
+        }
+    }
+
+    try {
+        const apiTrip = await tripsApi.getTripById(id);
+        trip.value = apiTrip || allTrips.value.find(t => t.id == id);
+    } catch (error) {
+        console.error('Failed to load trip by id', error);
+        trip.value = allTrips.value.find(t => t.id == id) || null;
+    }
     
     if (trip.value) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -280,10 +291,8 @@ const reviewsAdapted = computed(() => {
 
 const relatedTrips = computed(() => {
     if (!trip.value || !allTrips.value.length) return [];
-    // Get 4 random trips that are not the current one
     return allTrips.value
         .filter(t => t.id !== trip.value.id)
-        .sort(() => 0.5 - Math.random())
         .slice(0, 4);
 });
 

@@ -78,10 +78,10 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
+import tripsApi from '@/Services/tripsApi';
 import Search from '@/components/Common/Search.vue';
 import TripCard from '@/components/Trips/TripCard.vue';
 import Pagination from '@/components/Common/Pagination.vue';
-import tripsData from '../../../db.json'; // Directly importing implementation plan data
 
 // State
 const trips = ref([]);
@@ -90,11 +90,12 @@ const itemsPerPage = 8;
 const searchParams = ref({});
 
 // Load Data
-onMounted(() => {
-  // Access the trips array directly from db.json
-  if (tripsData.trips) {
-    trips.value = tripsData.trips;
-  } else {
+onMounted(async () => {
+  try {
+    const result = await tripsApi.getAllTrips();
+    trips.value = Array.isArray(result) ? result : [];
+  } catch (error) {
+    console.error('Failed to load trips from API', error);
     trips.value = [];
   }
 });

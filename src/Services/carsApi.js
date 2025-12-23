@@ -1,10 +1,8 @@
-import axios from "axios";
-
-const API_URL = "http://localhost:3000/cars";
+import api from './api';
 
 export const getAllCars = async () => {
   try {
-    const response = await axios.get(API_URL);
+    const response = await api.get('/Cars');
     return response.data;
   } catch (error) {
     console.error("Error fetching cars:", error);
