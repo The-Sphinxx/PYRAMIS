@@ -187,7 +187,7 @@ const isActive = (path) => {
 
 const logout = () => {
   authStore.logout();
-  router.push('/authentication/login');
+  router.push('/auth/login');
 };
 </script>
 

@@ -18,7 +18,7 @@
     <div class="p-5">
       <!-- Title and Price -->
       <div class="flex items-start justify-between mb-3 gap-2">
-        <h3 class="text-xl font-bold text-base-content font-cairo flex-1 leading-tight">
+        <h3 class="text-xl font-bold text-base-content font-cairo flex-1 leading-tight line-clamp-2 min-h-[3.25rem]">
           {{ title }}
         </h3>
         <span class="text-primary font-bold text-lg flex-shrink-0">
@@ -119,4 +119,12 @@ const handleViewDetails = () => {
 <style scoped>
 /* Import Font Awesome if not globally imported */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
 </style>

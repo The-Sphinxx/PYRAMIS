@@ -1,4 +1,5 @@
 import axios from 'axios';
+import router from '@/router';
 
 const base = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5137').replace(/\/+$/, '');
 const apiBaseUrl = `${base}/api`;
@@ -35,7 +36,7 @@ api.interceptors.response.use(
         localStorage.removeItem('token');
         localStorage.removeItem('refreshToken');
         localStorage.removeItem('user');
-        window.location.href = '/auth/login';
+        router.push({ name: 'Login' });
         return Promise.reject(error);
       }
 
@@ -55,7 +56,7 @@ api.interceptors.response.use(
         localStorage.removeItem('token');
         localStorage.removeItem('refreshToken');
         localStorage.removeItem('user');
-        window.location.href = '/auth/login';
+        router.push({ name: 'Login' });
         return Promise.reject(refreshError);
       }
     }

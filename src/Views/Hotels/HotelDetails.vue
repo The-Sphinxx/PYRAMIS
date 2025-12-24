@@ -6,7 +6,7 @@
     </div>
 
     <!-- Hotel Details Content -->
-    <div v-else-if="hotel" class="page-container py-8">
+    <div v-else-if="hotel" class="page-container py-4">
       <!-- Breadcrumbs -->
       <div class="text-sm breadcrumbs mb-4 text-base-content/70">
         <ul>
@@ -96,49 +96,18 @@
             </ul>
           </div>
 
-          <!-- Guest Ratings -->
-          <div v-if="hotel.reviews" class="bg-base-100 rounded-xl border border-base-200 p-6">
-            <div class="border-l-4 border-primary pl-4 mb-6">
-              <h2 class="text-2xl font-bold text-primary font-cairo">Guest Ratings</h2>
-            </div>
-            
-            <div class="flex flex-col md:flex-row items-center gap-8 md:gap-16">
-              <!-- Score Circle -->
-              <div class="text-center min-w-[120px]">
-                <div class="text-6xl font-bold text-[#D4852B] mb-1">{{ hotel.reviews.overallRating }}</div>
-                <div class="text-sm font-bold text-base-content uppercase tracking-wider mb-1">Excellent</div>
-                <div class="text-xs text-neutral">Based on {{ hotel.reviews.totalReviews }} reviews</div>
-              </div>
-              
-              <!-- Progress Bars -->
-              <div class="flex-1 w-full space-y-4">
-                <div v-for="(value, key) in hotel.reviews.ratingCriteria" :key="key" class="grid grid-cols-[120px_1fr_40px] items-center gap-4">
-                  <span class="text-sm font-medium text-base-content capitalize">{{ formatKey(key) }}</span>
-                  <div class="h-2 bg-base-200 rounded-full overflow-hidden">
-                    <div 
-                      class="h-full bg-primary rounded-full"
-                      :style="{ width: `${(value / 5) * 100}%` }"
-                    ></div>
-                  </div>
-                  <span class="text-sm font-bold text-base-content">{{ value }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Rating 
+            v-if="hotel.reviews" 
+            :reviews="hotel.reviews" 
+          />
 
           <!-- Guest Reviews -->
           <div v-if="hotel.userReviews && hotel.userReviews.length > 0">
-            <div class="border-l-4 border-primary pl-4 mb-4">
-              <h2 class="text-2xl font-bold text-primary font-cairo">Guest Reviews</h2>
-            </div>
             <ReviewsCarousel :reviews="hotel.userReviews" />
           </div>
 
           <!-- Location -->
           <div>
-            <div class="border-l-4 border-primary pl-4 mb-4">
-              <h2 class="text-2xl font-bold text-primary font-cairo">Location</h2>
-            </div>
             <div class="rounded-xl overflow-hidden shadow-sm border border-base-200">
               <Location 
                 :name="hotel.name"
@@ -202,6 +171,7 @@ import ReviewsCarousel from '@/components/Common/ReviewsCarousel.vue';
 import Location from '@/components/Common/Location.vue';
 import HotelCard from '@/components/Hotels/HotelCard.vue';
 import BookingForm from '@/components/Common/BookingForm.vue';
+import Rating from '@/components/Common/Rating.vue';
 
 const route = useRoute();
 const router = useRouter();

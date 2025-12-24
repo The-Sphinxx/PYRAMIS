@@ -2,13 +2,13 @@
   <div>
     <Navbar />
 
-    <div class="relative w-full h-screen overflow-hidden">
+    <div class="relative w-full h-[100dvh] overflow-hidden">
       <div class="absolute inset-0 bg-cover bg-center" :style="{ backgroundImage: `url(${heroSection.backgroundImage || defaultHero.backgroundImage})` }">
         <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50"></div>
       </div>
       
-      <div class="relative z-10 flex flex-col items-center justify-center h-full page-container text-center">
-        <h1 class="font-cairo text-5xl md:text-7xl font-bold text-white mb-4 animate-fade-in" v-html="heroDisplayTitle"></h1>
+      <div class="relative z-10 flex flex-col items-center justify-start pt-32 lg:justify-center lg:pt-20 h-full page-container text-center">
+        <h1 class="font-cairo text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 animate-fade-in" v-html="heroDisplayTitle"></h1>
         <p class="font-cairo text-xl md:text-2xl text-white/90 mb-12 animate-fade-in-delay">
           {{ heroSection.subtitle || defaultHero.subtitle }}
         </p>
@@ -22,7 +22,7 @@
           </div>
 
           <div class="bg-base-100 rounded-lg p-4">
-            <div v-if="activeTab === 'attractions'" class="flex flex-col md:flex-row gap-4">
+            <div v-if="activeTab === 'attractions'" class="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-row gap-4">
               <div class="flex-1">
                 <label class="block text-sm text-base-content/70 mb-2 font-cairo">City</label>
                 <select class="select select-bordered w-full">
@@ -42,7 +42,7 @@
               </button>
             </div>
 
-            <div v-if="activeTab === 'hotels'" class="flex flex-col md:flex-row gap-4">
+            <div v-if="activeTab === 'hotels'" class="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-row gap-4">
               <div class="flex-1">
                 <label class="block text-sm text-base-content/70 mb-2 font-cairo">Destination</label>
                 <input type="text" placeholder="City or hotel name" class="input input-bordered w-full"/>
@@ -60,7 +60,7 @@
               </button>
             </div>
 
-            <div v-if="activeTab === 'trips'" class="flex flex-col md:flex-row gap-4">
+            <div v-if="activeTab === 'trips'" class="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-row gap-4">
               <div class="flex-1">
                 <label class="block text-sm text-base-content/70 mb-2 font-cairo">Pick-up Location</label>
                 <input type="text" placeholder="City or station" class="input input-bordered w-full"/>
@@ -78,7 +78,7 @@
               </button>
             </div>
 
-            <div v-if="activeTab === 'car-rental'" class="flex flex-col md:flex-row gap-4">
+            <div v-if="activeTab === 'car-rental'" class="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-row gap-4">
               <div class="flex-1">
                 <label class="block text-sm text-base-content/70 mb-2 font-cairo">Pick-up Location</label>
                 <input type="text" placeholder="City or station" class="input input-bordered w-full"/>
@@ -106,7 +106,7 @@
           <h2 class="font-cairo text-4xl md:text-5xl font-bold text-base-content mb-4">Explore Egypt's Wonders</h2>
           <p class="font-cairo text-lg text-base-content/70 max-w-3xl mx-auto">Discover ancient treasures and timeless beauty across Egypt's most iconic attractions</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-10">
           <AttractionCard
             v-for="item in attractions.slice(0, 4)"
             :key="item.id"
@@ -131,7 +131,7 @@
           <h2 class="font-cairo text-4xl md:text-5xl font-bold text-base-content mb-4">Luxury Hotels & Resorts</h2>
           <p class="font-cairo text-lg text-base-content/70 max-w-3xl mx-auto">Experience Egyptian hospitality at its finest in our handpicked selection of premium hotels</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-10">
           <HotelCard
             v-for="item in hotels.slice(0, 4)"
             :key="item.id"
@@ -159,7 +159,7 @@
           <h2 class="font-cairo text-4xl md:text-5xl font-bold text-base-content mb-4">Featured Trips & Tours</h2>
           <p class="font-cairo text-lg text-base-content/70 max-w-3xl mx-auto">All-inclusive packages designed for unforgettable Egyptian adventures</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-10">
           <TripCard
             v-for="item in trips.slice(0, 4)"
             :key="item.id"
@@ -193,7 +193,7 @@
           <h2 class="font-cairo text-4xl md:text-5xl font-bold text-base-content mb-4">Rent Your Perfect Ride</h2>
           <p class="font-cairo text-lg text-base-content/70 max-w-3xl mx-auto">Explore Egypt at your own pace with our diverse fleet of quality vehicles</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-10">
           <CarCard
             v-for="item in cars.slice(0, 4)"
             :key="item.id"
@@ -269,7 +269,7 @@
           </h2>
           <div class="w-24 h-1 bg-primary mx-auto"></div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           <div v-for="item in whyChooseUs" :key="item.id" class="flex flex-col items-center text-center">
             <i :class="[item.icon, 'text-6xl text-primary mb-4']"></i>
             <h3 class="font-cairo text-xl font-bold text-base-content mb-2">{{item.title}}</h3>

@@ -94,23 +94,28 @@ export default {
       addComponents({
         '.page-container': {
           width: '100%',
-          paddingLeft: theme('spacing.page-x'),
-          paddingRight: theme('spacing.page-x'),
-          '@media (max-width: 1280px)': {
-            paddingLeft: theme('spacing.page-x-lg'),
-            paddingRight: theme('spacing.page-x-lg'),
-          },
-          '@media (max-width: 1024px)': {
-            paddingLeft: theme('spacing.page-x-md'),
-            paddingRight: theme('spacing.page-x-md'),
-          },
-          '@media (max-width: 768px)': {
-            paddingLeft: theme('spacing.page-x-sm'),
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          maxWidth: '1400px', // Prevent 4K stretching
+          paddingLeft: theme('spacing.page-x-xs'), // Mobile default (16px)
+          paddingRight: theme('spacing.page-x-xs'),
+
+          // Mobile-first breakpoints (min-width)
+          '@media (min-width: 640px)': { // sm
+            paddingLeft: theme('spacing.page-x-sm'), // 24px
             paddingRight: theme('spacing.page-x-sm'),
           },
-          '@media (max-width: 640px)': {
-            paddingLeft: theme('spacing.page-x-xs'),
-            paddingRight: theme('spacing.page-x-xs'),
+          '@media (min-width: 768px)': { // md
+            paddingLeft: theme('spacing.page-x-md'), // 60px
+            paddingRight: theme('spacing.page-x-md'),
+          },
+          '@media (min-width: 1024px)': { // lg
+            paddingLeft: theme('spacing.page-x-lg'), // 80px
+            paddingRight: theme('spacing.page-x-lg'),
+          },
+          '@media (min-width: 1280px)': { // xl
+            paddingLeft: theme('spacing.page-x'), // 120px
+            paddingRight: theme('spacing.page-x'),
           },
         },
       });
@@ -150,26 +155,26 @@ export default {
       {
         nileheritageDark: {
           // اللون الأساسي (النحاسي) يبقى كما هو لتمييز الهوية
-          "primary": "#C86A41", 
+          "primary": "#C86A41",
           "primary-focus": "#E07A4D",
           "primary-content": "#ffffff",
-          
+
           // الكحلي الداكن جداً للخلفية الأساسية
           "base-100": "#0F172A", // Deep Navy
           "base-200": "#1E293B", // Lighter Navy for cards
           "base-300": "#334155", // For borders/hovers
           "base-content": "#F1F5F9", // Off-white text
-          
+
           // لون ثانوي يتماشى مع الكحلي (درجة Teal عميقة)
           "secondary": "#38BDF8", // Sky blue لمسة إشراق
           "secondary-focus": "#0EA5E9",
           "secondary-content": "#0F172A",
-          
+
           // الألوان الأخرى
           "accent": "#FDE047", // Yellow gold للتباين
           "neutral": "#1E293B",
           "neutral-content": "#94A3B8",
-          
+
           "info": "#0CA5E9",
           "success": "#2DD4BF",
           "warning": "#F59E0B",

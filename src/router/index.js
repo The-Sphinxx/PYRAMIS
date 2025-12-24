@@ -2,74 +2,73 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 // Import all view components
-import Home from '@/Views/Home.vue'
-import About from '@/Views/About.vue'
-import ContactUs from '@/Views/ContactUs.vue'
+// Import all view components - converted to lazy loading
+// Public Pages
+const Home = () => import('@/Views/Home.vue')
+const About = () => import('@/Views/About.vue')
+const ContactUs = () => import('@/Views/ContactUs.vue')
 
 // Authentication
-import Login from '@/Views/Authentication/Login.vue'
-import SignUp from '@/Views/Authentication/SignUp.vue'
-import ForgetPassword from '@/Views/Authentication/ForgetPassword.vue'
-import ResetPassword from '@/Views/Authentication/ResetPassword.vue'
-import VerifyEmail from '@/Views/Authentication/VerifyEmail.vue'
+const Login = () => import('@/Views/Authentication/Login.vue')
+const SignUp = () => import('@/Views/Authentication/SignUp.vue')
+const ForgetPassword = () => import('@/Views/Authentication/ForgetPassword.vue')
+const ResetPassword = () => import('@/Views/Authentication/ResetPassword.vue')
+const VerifyEmail = () => import('@/Views/Authentication/VerifyEmail.vue')
 
 // User Account
-import Profile from '@/Views/UserAccount/Profile.vue'
-import Wishlist from '@/Views/UserAccount/Wishlist.vue'
-import Reservations from '@/Views/UserAccount/Reservations.vue'
+const Profile = () => import('@/Views/UserAccount/Profile.vue')
+const Wishlist = () => import('@/Views/UserAccount/Wishlist.vue')
+const Reservations = () => import('@/Views/UserAccount/Reservations.vue')
 
 // Dashboard
-import DashboardLayout from '@/Layouts/DashboardLayout.vue'
-import MainLayout from '@/Layouts/MainLayout.vue'
-import Overview from '@/Views/Dashboard/Overview.vue'
-import Analytics from '@/Views/Dashboard/Analytics.vue'
-import Bookings from '@/Views/Dashboard/Bookings.vue'
-import CustomerSupport from '@/Views/Dashboard/CustomerSupport.vue'
-import UsersManage from '@/Views/Dashboard/UsersManage.vue'
-import TripsManage from '@/Views/Dashboard/TripsManage.vue'
-import HotelsManage from '@/Views/Dashboard/HotelsManage.vue'
-import CarsManage from '@/Views/Dashboard/CarsManage.vue'
+const DashboardLayout = () => import('@/Layouts/DashboardLayout.vue')
+const MainLayout = () => import('@/Layouts/MainLayout.vue')
+const Overview = () => import('@/Views/Dashboard/Overview.vue')
+const Analytics = () => import('@/Views/Dashboard/Analytics.vue')
+const Bookings = () => import('@/Views/Dashboard/Bookings.vue')
+const CustomerSupport = () => import('@/Views/Dashboard/CustomerSupport.vue')
+const UsersManage = () => import('@/Views/Dashboard/UsersManage.vue')
+const TripsManage = () => import('@/Views/Dashboard/TripsManage.vue')
+const HotelsManage = () => import('@/Views/Dashboard/HotelsManage.vue')
+const CarsManage = () => import('@/Views/Dashboard/CarsManage.vue')
 
-import AttractionsManage from '@/Views/Dashboard/AttractionsManage.vue'
-import AdminsManage from '@/Views/Dashboard/AdminsManage.vue'
-import AdminSettings from '@/Views/Dashboard/AdminSettings.vue'
+const AttractionsManage = () => import('@/Views/Dashboard/AttractionsManage.vue')
+const AdminsManage = () => import('@/Views/Dashboard/AdminsManage.vue')
+const AdminSettings = () => import('@/Views/Dashboard/AdminSettings.vue')
 
 // AI
-import AiCollectData from '@/Views/Ai/AiCollectData.vue'
-import AiPlanResults from '@/Views/Ai/AiPlanResults.vue'
-import AiPlanner from '@/Views/Ai/AiPlanner.vue'
-import AiPlannerResult from '@/Views/Ai/AiPlannerResult.vue'
+const AiCollectData = () => import('@/Views/Ai/AiCollectData.vue')
+const AiPlanResults = () => import('@/Views/Ai/AiPlanResults.vue')
 
 // Attractions
-import AttractionsList from '@/Views/Attractions/AttractionsList.vue'
-import AttractionDetails from '@/Views/Attractions/AttractionDetails.vue'
-import AttractionReview from '@/Views/Attractions/AttractionReview.vue'
-import AttractionCheckOut from '@/Views/Attractions/AttractionCheckOut.vue'
-import AttractionConfirmation from '@/Views/Attractions/AttractionConfirmation.vue'
+const AttractionsList = () => import('@/Views/Attractions/AttractionsList.vue')
+const AttractionDetails = () => import('@/Views/Attractions/AttractionDetails.vue')
+const AttractionReview = () => import('@/Views/Attractions/AttractionReview.vue')
+const AttractionCheckOut = () => import('@/Views/Attractions/AttractionCheckOut.vue')
+const AttractionConfirmation = () => import('@/Views/Attractions/AttractionConfirmation.vue')
 
 // Cars
-import CarsList from '@/Views/Cars/Carslist.vue'
-import CarDetails from '@/Views/Cars/CarDetails.vue'
-import CarReview from '@/Views/Cars/CarReview.vue'
-import CarCheckOut from '@/Views/Cars/CarCheckOut.vue'
-import CarConfirmation from '@/Views/Cars/CarConfirmation.vue'
-import CarBooking from '@/Views/Cars/CarBooking.vue'
-
+const CarsList = () => import('@/Views/Cars/Carslist.vue')
+const CarDetails = () => import('@/Views/Cars/CarDetails.vue')
+const CarReview = () => import('@/Views/Cars/CarReview.vue')
+const CarCheckOut = () => import('@/Views/Cars/CarCheckOut.vue')
+const CarConfirmation = () => import('@/Views/Cars/CarConfirmation.vue')
+const CarBooking = () => import('@/Views/Cars/CarBooking.vue')
 
 // Hotels
-import HotelsList from '@/Views/Hotels/HotelsList.vue'
-import HotelFilter from '@/Views/Hotels/hotelfilter.vue'
-import HotelDetails from '@/Views/Hotels/HotelDetails.vue'
-import HotelReview from '@/Views/Hotels/HotelReview.vue'
-import HotelCheckOut from '@/Views/Hotels/HotelCheckOut.vue'
-import HotelConfirmation from '@/Views/Hotels/HotelConfirmation.vue'
+const HotelsList = () => import('@/Views/Hotels/HotelsList.vue')
+const HotelFilter = () => import('@/Views/Hotels/hotelfilter.vue')
+const HotelDetails = () => import('@/Views/Hotels/HotelDetails.vue')
+const HotelReview = () => import('@/Views/Hotels/HotelReview.vue')
+const HotelCheckOut = () => import('@/Views/Hotels/HotelCheckOut.vue')
+const HotelConfirmation = () => import('@/Views/Hotels/HotelConfirmation.vue')
 
 // Trips
-import TripsList from '@/Views/Trips/TripsList.vue'
-import TripDetails from '@/Views/Trips/TripDetails.vue'
-import TripReview from '@/Views/Trips/TripReview.vue'
-import TripCheckOut from '@/Views/Trips/TripCheckOut.vue'
-import TripConfirmation from '@/Views/Trips/TripConfirmation.vue'
+const TripsList = () => import('@/Views/Trips/TripsList.vue')
+const TripDetails = () => import('@/Views/Trips/TripDetails.vue')
+const TripReview = () => import('@/Views/Trips/TripReview.vue')
+const TripCheckOut = () => import('@/Views/Trips/TripCheckOut.vue')
+const TripConfirmation = () => import('@/Views/Trips/TripConfirmation.vue')
 
 const routes = [
   // Admin alias route for dashboard

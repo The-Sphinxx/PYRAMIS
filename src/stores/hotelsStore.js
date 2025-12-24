@@ -116,7 +116,16 @@ export const useHotelsStore = defineStore('hotels', {
                     address: hotel.address,
                     phone: hotel.phone,
                     email: hotel.email,
-                    reviews: hotel.reviews || { totalReviews: 0, averageRating: 0 },
+                    reviews: hotel.reviews ? {
+                        ...hotel.reviews,
+                        overallRating: typeof hotel.reviews.overallRating === 'number' ? hotel.reviews.overallRating : (hotel.reviews.averageRating || hotel.rating || 0),
+                        totalReviews: hotel.reviews.totalReviews || 0,
+                        ratingCriteria: hotel.reviews.ratingCriteria || {}
+                    } : { 
+                        overallRating: hotel.rating || 0, 
+                        totalReviews: 0, 
+                        ratingCriteria: {}
+                    },
                     totalReviews: hotel.reviews?.totalReviews || 0,
                     // Include original data for flexibility
                     ...hotel
