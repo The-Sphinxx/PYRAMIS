@@ -81,38 +81,20 @@
           <div v-if="tripData?.lodging_recommendations?.length" class="glass backdrop-blur-glass bg-base-200/50 rounded-lg p-6 border border-base-300/50">
             <h2 class="text-2xl font-bold text-base-content mb-4 font-cairo">🏨 Recommended Hotels</h2>
             <div class="space-y-4">
-              <div
-                v-for="hotel in tripData.lodging_recommendations"
-                :key="hotel.hotel_id"
-                class="border border-base-300 rounded-lg p-4 hover:border-primary/50 transition-all hover:shadow-lg"
-              >
-                <div class="flex items-start justify-between">
-                  <div class="flex-1">
-                    <h3 class="text-lg font-semibold text-base-content">{{ hotel.name }}</h3>
-                    <p class="text-sm text-base-content/60">{{ hotel.city }}</p>
-                    <div class="flex items-center mt-2">
-                      <span class="text-warning">★</span>
-                      <span class="ml-1 text-sm font-medium">{{ hotel.rating }}</span>
-                    </div>
-                    <div class="mt-2 flex flex-wrap gap-2">
-                      <span
-                        v-for="amenity in hotel.amenities?.slice(0, 3)"
-                        :key="amenity"
-                        class="text-xs bg-primary/20 text-primary px-2 py-1 rounded"
-                      >
-                        {{ amenity }}
-                      </span>
-                    </div>
-                  </div>
-                  <div class="ml-4 text-right">
-                    <p class="text-sm text-base-content/60">Per Night</p>
-                    <p class="text-xl font-bold text-primary">${{ hotel.price_per_night }}</p>
-                    <p class="text-sm text-base-content/60 mt-1">
-                      {{ hotel.total_nights }} nights = ${{ hotel.total_cost }}
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <!-- Direct v-bind to HotelCard component -->
+              <HotelCard
+                v-for="hotelData in tripData.lodging_recommendations"
+                :key="hotelData.hotel_id"
+                :hotel="{
+                  name: hotelData.name,
+                  image: hotelData.images?.[0] || '/images/hotels/default.jpg',
+                  price: hotelData.price_per_night,
+                  location: hotelData.city,
+                  rating: hotelData.rating,
+                  reviews: hotelData.total_nights?.toString() || '0',
+                  amenities: hotelData.amenities || []
+                }"
+              />
             </div>
           </div>
 
@@ -216,6 +198,7 @@ import { ref, onMounted, nextTick } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import HotelCard from '@/components/Hotels/HotelCard.vue';
 
 const route = useRoute();
 const router = useRouter();
