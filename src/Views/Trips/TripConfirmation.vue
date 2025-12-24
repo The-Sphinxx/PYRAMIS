@@ -331,8 +331,10 @@ const paymentStatusLabel = computed(() => {
       return 'Paid';
     case 'processing':
       return 'Processing';
+    case 'pending':
+      return 'Pending';
     case 'requires_payment_method':
-      return 'Payment failed';
+      return 'Pending';
     case 'requires_action':
       return 'Action needed';
     default:
@@ -346,6 +348,8 @@ const paymentStatusClass = computed(() => {
       return 'badge-success';
     case 'processing':
       return 'badge-warning';
+    case 'pending':
+      return 'badge-info';
     case 'requires_payment_method':
       return 'badge-error';
     default:
@@ -357,7 +361,14 @@ const verifyPaymentStatus = async () => {
   const clientSecret = route.query.payment_intent_client_secret || sessionStorage.getItem('stripe_client_secret');
   const publishableKey = sessionStorage.getItem('stripe_publishable_key') || import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 
-  if (!clientSecret || !publishableKey) return;
+  if (!clientSecret || !publishableKey) {
+    // Check if this is Pay on Arrival
+    if (booking.value?.paymentInfo?.method === 'arrival' || booking.value?.paymentStatus === 'pending') {
+      paymentStatus.value = 'pending';
+      paymentStatusNote.value = 'Payment will be collected upon arrival';
+    }
+    return;
+  }
 
   try {
     const stripe = await loadStripe(publishableKey);
@@ -378,10 +389,7 @@ const verifyPaymentStatus = async () => {
 onMounted(async () => {
    const id = route.params.id;
    
-   // 1. Verify Stripe payment first
-   await verifyPaymentStatus();
-   
-   // 2. Fetch Booking with Fallback (use in-progress for now since mock API is down)
+   // 1. Fetch Booking with Fallback FIRST (needed for payment verification)
    booking.value = bookingStore.bookingInProgress;
 
    if (!booking.value) {
@@ -389,6 +397,9 @@ onMounted(async () => {
       // Fallback if needed
       return;
    }
+   
+   // 2. Verify Stripe payment (now that booking data is loaded)
+   await verifyPaymentStatus();
 
    // 3. Fetch Fresh Trip Details (For Location/Images/etc)
    if (booking.value.itemId) {

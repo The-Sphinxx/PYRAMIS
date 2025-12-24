@@ -154,8 +154,10 @@ const paymentStatusLabel = computed(() => {
       return 'Paid';
     case 'processing':
       return 'Processing';
+    case 'pending':
+      return 'Pending';
     case 'requires_payment_method':
-      return 'Payment failed';
+      return 'pending';
     case 'requires_action':
       return 'Action needed';
     default:
@@ -169,6 +171,8 @@ const paymentStatusClass = computed(() => {
       return 'badge-success';
     case 'processing':
       return 'badge-warning';
+    case 'pending':
+      return 'badge-info';
     case 'requires_payment_method':
       return 'badge-error';
     default:
@@ -180,8 +184,11 @@ const verifyPaymentStatus = async () => {
   try {
     const clientSecret = route.query.payment_intent_client_secret || sessionStorage.getItem('stripe_client_secret');
     if (!clientSecret) {
-      paymentStatus.value = 'unknown';
-      paymentStatusNote.value = 'Payment verification unavailable';
+      // Check if this is Pay on Arrival
+      if (booking.value?.paymentInfo?.method === 'arrival' || booking.value?.paymentStatus === 'pending') {
+        paymentStatus.value = 'pending';
+        paymentStatusNote.value = 'Payment will be collected upon arrival';
+      }
       return;
     }
 
@@ -237,15 +244,15 @@ const recommendations = ref([
 ]);
 
 onMounted(async () => {
-  // 1. Verify payment status
-  await verifyPaymentStatus();
-
-  // 2. Get booking from store (avoid mock API)
+  // 1. Get booking from store FIRST (needed for payment verification)
   booking.value = bookingStore.bookingInProgress;
   if (!booking.value) {
     console.warn("No booking data found for confirmation");
     return;
   }
+
+  // 2. Verify payment status (now that booking data is loaded)
+  await verifyPaymentStatus();
 
   // 3. Fetch cars if not already loaded
   if (!carsStore.cars.length) await carsStore.fetchCars();

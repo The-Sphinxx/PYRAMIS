@@ -155,8 +155,10 @@ const paymentStatusLabel = computed(() => {
       return 'Paid';
     case 'processing':
       return 'Processing';
+    case 'pending':
+      return 'Pending';
     case 'requires_payment_method':
-      return 'Payment failed';
+      return 'Pending';
     case 'requires_action':
       return 'Action needed';
     default:
@@ -170,6 +172,8 @@ const paymentStatusClass = computed(() => {
       return 'badge-success';
     case 'processing':
       return 'badge-warning';
+    case 'pending':
+      return 'badge-info';
     case 'requires_payment_method':
       return 'badge-error';
     default:
@@ -192,7 +196,15 @@ const verifyPaymentStatus = async () => {
   const clientSecret = route.query.payment_intent_client_secret || sessionStorage.getItem('stripe_client_secret');
   const publishableKey = sessionStorage.getItem('stripe_publishable_key') || import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 
-  if (!clientSecret || !publishableKey) return;
+  if (!clientSecret || !publishableKey) {
+    // Check if this is Pay on Arrival
+    const bookingInProgress = JSON.parse(localStorage.getItem('bookingInProgress'));
+    if (bookingInProgress?.paymentInfo?.method === 'arrival' || bookingInProgress?.paymentStatus === 'pending') {
+      paymentStatus.value = 'pending';
+      paymentStatusNote.value = 'Payment will be collected upon arrival';
+    }
+    return;
+  }
 
   try {
     const stripe = await loadStripe(publishableKey);
@@ -269,6 +281,10 @@ onMounted(async () => {
         hotel.value = hotelStore.getHotelById(hotelId);
     }
 
+  // Get booking from store FIRST (needed for payment verification)
+  booking.value = bookingStore.bookingInProgress;
+
+  // Verify payment status (now that booking data is loaded)
   await verifyPaymentStatus();
 });
 </script>
