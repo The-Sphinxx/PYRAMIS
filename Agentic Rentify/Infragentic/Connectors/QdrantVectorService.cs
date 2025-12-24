@@ -40,6 +40,13 @@ namespace Agentic_Rentify.Infragentic.Services
 
         public async Task SaveTextVector(string collectionName, string entityId, string type, string text, string? name = null, decimal? price = null, string? city = null)
         {
+            // Incremental safeguard: skip embedding/upsert if the point already exists
+            if (await PointExistsAsync(collectionName, entityId))
+            {
+                // Point already present; no need to regenerate embedding or upsert
+                return;
+            }
+
             var vector = await GetEmbeddingAsync(text);
 
             var point = new PointStruct
@@ -121,6 +128,27 @@ namespace Agentic_Rentify.Infragentic.Services
                 // In case of network issues or temporary failures, return a zero vector of reasonable length
                 // This avoids failing the entire command; subsequent upserts can overwrite once connectivity resumes.
                 return new float[256];
+            }
+        }
+
+        // Checks if a point with the given ID already exists in the collection to avoid re-embedding
+        private async Task<bool> PointExistsAsync(string collectionName, string entityId)
+        {
+            try
+            {
+                // Prefer Qdrant REST API for a lightweight existence check
+                var endpoint = _aiSettings.QdrantEndpoint?.TrimEnd('/') ?? "http://localhost:6334";
+                using var http = new HttpClient();
+                var url = $"{endpoint}/collections/{collectionName}/points/{entityId}";
+                var resp = await http.GetAsync(url);
+
+                // Qdrant returns 200 when point exists, 404 when not found
+                return resp.IsSuccessStatusCode;
+            }
+            catch
+            {
+                // If we cannot verify existence (network error, server down), fall back to embedding/upsert
+                return false;
             }
         }
     }
