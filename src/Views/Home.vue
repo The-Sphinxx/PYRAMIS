@@ -13,87 +13,64 @@
           {{ heroSection.subtitle || defaultHero.subtitle }}
         </p>
 
-        <div class="w-full max-w-5xl bg-base-100 rounded-lg shadow-2xl p-6 animate-slide-up">
-          <div class="flex justify-center gap-4 mb-6 flex-wrap">
-            <button v-for="tab in tabs" :key="tab.id" @click="activeTab = tab.id" 
-              :class="['btn font-cairo font-semibold transition-all', activeTab === tab.id ? 'btn-primary' : 'btn-ghost hover:bg-base-200']">
-              <i :class="[tab.icon, 'mr-2']"></i>{{ tab.name }}
+        <div class="w-full max-w-6xl bg-base-100 rounded-2xl shadow-2xl p-4 md:p-6 animate-slide-up ">
+          <!-- Tab Headers -->
+          <div role="tablist" class="tabs bg-base-200 p-0 mb-4 md:mb-6 gap-0 flex-wrap md:flex-nowrap border-b border-base-300 pb-4 rounded-t-lg">
+            <button
+              role="tab"
+              v-for="tab in tabs"
+              :key="tab.id"
+              @click="activeTab = tab.id"
+              :class="[
+                'tab font-cairo font-semibold text-sm md:text-base transition-all duration-300 flex-1 md:flex-initial border-b-2 rounded-none pb-3 pt-3',
+                activeTab === tab.id 
+                  ? ' text-primary bg-primary/10' 
+                  : 'border-transparent text-base-content/60 hover:text-base-content hover:border-base-300'
+              ]"
+            >
+              <i :class="[tab.icon, 'mr-1 md:mr-2']"></i>
+              <span class="hidden sm:inline">{{ tab.name }}</span>
+              <span class="sm:hidden">{{ tab.name.split(' ')[0] }}</span>
             </button>
           </div>
 
-          <div class="bg-base-100 rounded-lg p-4">
-            <div v-if="activeTab === 'attractions'" class="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-row gap-4">
-              <div class="flex-1">
-                <label class="block text-sm text-base-content/70 mb-2 font-cairo">City</label>
-                <select class="select select-bordered w-full">
-                  <option>All Cities</option>
-                  <option>Cairo</option>
-                  <option>Luxor</option>
-                  <option>Aswan</option>
-                  <option>Alexandria</option>
-                </select>
-              </div>
-              <div class="flex-1">
-                <label class="block text-sm text-base-content/70 mb-2 font-cairo">Search</label>
-                <input type="text" placeholder="Pyramids, Museums..." class="input input-bordered w-full"/>
-              </div>
-              <button class="btn btn-primary self-end font-cairo font-semibold">
-                <i class="fas fa-search mr-2"></i>Search
-              </button>
+          <!-- Tab Content -->
+          <div>
+            <!-- Attractions -->
+            <div v-show="activeTab === 'attractions'">
+              <Search 
+                type="attractions"
+                :show-ai-planner="true"
+                :cities="egyptianCities"
+                @search="handleAttractionSearch"
+                @ai-planner="handleAiPlanner"
+              />
             </div>
 
-            <div v-if="activeTab === 'hotels'" class="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-row gap-4">
-              <div class="flex-1">
-                <label class="block text-sm text-base-content/70 mb-2 font-cairo">Destination</label>
-                <input type="text" placeholder="City or hotel name" class="input input-bordered w-full"/>
-              </div>
-              <div class="flex-1">
-                <label class="block text-sm text-base-content/70 mb-2 font-cairo">Check-in</label>
-                <input type="date" class="input input-bordered w-full"/>
-              </div>
-              <div class="flex-1">
-                <label class="block text-sm text-base-content/70 mb-2 font-cairo">Check-out</label>
-                <input type="date" class="input input-bordered w-full"/>
-              </div>
-              <button class="btn btn-primary self-end font-cairo font-semibold">
-                <i class="fas fa-search mr-2"></i>Search
-              </button>
+            <!-- Hotels -->
+            <div v-show="activeTab === 'hotels'">
+              <Search
+                type="hotels"
+                @search="handleHotelSearch"
+              />
             </div>
 
-            <div v-if="activeTab === 'trips'" class="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-row gap-4">
-              <div class="flex-1">
-                <label class="block text-sm text-base-content/70 mb-2 font-cairo">Pick-up Location</label>
-                <input type="text" placeholder="City or station" class="input input-bordered w-full"/>
-              </div>
-              <div class="flex-1">
-                <label class="block text-sm text-base-content/70 mb-2 font-cairo">Pick-up Date</label>
-                <input type="date" class="input input-bordered w-full"/>
-              </div>
-              <div class="flex-1">
-                <label class="block text-sm text-base-content/70 mb-2 font-cairo">Drop-off Date</label>
-                <input type="date" class="input input-bordered w-full"/>
-              </div>
-              <button class="btn btn-primary self-end font-cairo font-semibold">
-                <i class="fas fa-search mr-2"></i>Search
-              </button>
+            <!-- Trips -->
+            <div v-show="activeTab === 'trips'">
+              <Search
+                type="trips"
+                :show-ai-planner="true"
+                @search="handleTripSearch"
+                @ai-planner="handleAiPlanner"
+              />
             </div>
 
-            <div v-if="activeTab === 'car-rental'" class="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-row gap-4">
-              <div class="flex-1">
-                <label class="block text-sm text-base-content/70 mb-2 font-cairo">Pick-up Location</label>
-                <input type="text" placeholder="City or station" class="input input-bordered w-full"/>
-              </div>
-              <div class="flex-1">
-                <label class="block text-sm text-base-content/70 mb-2 font-cairo">Pick-up Date</label>
-                <input type="date" class="input input-bordered w-full"/>
-              </div>
-              <div class="flex-1">
-                <label class="block text-sm text-base-content/70 mb-2 font-cairo">Time</label>
-                <input type="time" value="10:00" class="input input-bordered w-full"/>
-              </div>
-              <button class="btn btn-primary self-end font-cairo font-semibold">
-                <i class="fas fa-search mr-2"></i>Search
-              </button>
+            <!-- Car Rental -->
+            <div v-show="activeTab === 'car-rental'">
+              <Search
+                type="cars"
+                @search="handleCarSearch"
+              />
             </div>
           </div>
         </div>
@@ -229,7 +206,7 @@
           <p class="font-cairo text-xl text-base-content/80 max-w-3xl mx-auto mb-10">
             Tell our smart assistant what you want, and it builds a full personalized itinerary.
           </p>
-          <button class="btn btn-lg bg-base-100 hover:bg-base-200 border-accent/30 text-base-content font-cairo font-semibold px-8 shadow-lg">
+          <button @click="handleAiPlanner" class="btn btn-lg bg-base-100 hover:bg-base-200 border-accent/30 text-base-content font-cairo font-semibold px-8 shadow-lg">
             <i class="fas fa-magic mr-2 text-primary"></i>
             Start <span class="text-primary">AI Planning</span>
           </button>
@@ -301,14 +278,18 @@
 
 <script setup>
 import { computed, onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { getHomePageData } from '@/Services/homeService';
+import { getBackgrounds } from '@/Services/systemService';
 import Navbar from '@/components/Common/Navbar.vue';
 import Footer from '@/components/Common/Footer.vue';
+import Search from '@/components/Common/Search.vue';
 import AttractionCard from '@/components/Attractions/AttractionCard.vue';
 import HotelCard from '@/components/Hotels/HotelCard.vue';
 import TripCard from '@/components/Trips/TripCard.vue';
 import CarCard from '@/components/Cars/CarCard.vue';
 
+const router = useRouter();
 const activeTab = ref('attractions');
 const isHomeLoading = ref(false);
 
@@ -319,12 +300,31 @@ const tabs = [
   { id: 'car-rental', name: 'Car Rental', icon: 'fas fa-car' }
 ];
 
+// Egyptian cities
+const egyptianCities = ref([
+  'All Cities',
+  'Cairo',
+  'Giza',
+  'Alexandria',
+  'Luxor',
+  'Aswan',
+  'Sharm El Sheikh',
+  'Dahab',
+  'Hurghada',
+  'Faiyum',
+  'Ain Sokhna',
+  'El Gouna',
+  'Marsa Alam',
+  'Port Said',
+  'Suez',
+  'Ismailia'
+]);
+
 const defaultHero = {
   title: 'Discover Egypt — Your Journey Starts Here',
   subtitle: 'Explore ancient wonders, luxury stays, and unforgettable experiences',
   backgroundImage: ''
 };
-  import { getBackgrounds } from '@/Services/systemService';
 
 const defaultMetadata = {
   siteName: 'PYRAMIS',
@@ -410,6 +410,63 @@ const applyHomeData = (payload) => {
   whyChooseUs.value = payload?.whyChooseUs?.length ? payload.whyChooseUs : defaultWhyChooseUs;
 };
 
+// Search handlers
+const handleAttractionSearch = (searchData) => {
+  console.log('Attraction Search:', searchData);
+  router.push({
+    name: 'Attractions',
+    query: {
+      city: searchData.city,
+      query: searchData.query
+    }
+  });
+};
+
+const handleHotelSearch = (searchData) => {
+  console.log('Hotel Search:', searchData);
+  router.push({
+    name: 'Hotels',
+    query: {
+      destination: searchData.destination,
+      checkIn: searchData.checkIn,
+      checkOut: searchData.checkOut,
+      guests: searchData.guests,
+      rooms: searchData.rooms
+    }
+  });
+};
+
+const handleTripSearch = (searchData) => {
+  console.log('Trip Search:', searchData);
+  router.push({
+    name: 'Trips',
+    query: {
+      from: searchData.pickupLocation,
+      pickupDate: searchData.pickupDate,
+      dropoffDate: searchData.dropoffDate
+    }
+  });
+};
+
+const handleCarSearch = (searchData) => {
+  console.log('Car Search:', searchData);
+  router.push({
+    name: 'Cars',
+    query: {
+      location: searchData.pickupLocation,
+      pickupDate: searchData.pickupDate,
+      pickupTime: searchData.pickupTime,
+      dropoffDate: searchData.dropoffDate,
+      dropoffTime: searchData.dropoffTime
+    }
+  });
+};
+
+const handleAiPlanner = () => {
+  console.log('Opening AI Trip Planner...');
+  alert('AI Trip Planner - Coming Soon! 🤖✨');
+};
+
 onMounted(async () => {
   isHomeLoading.value = true;
   try {
@@ -448,6 +505,16 @@ const parseReviews = (reviewsStr) => {
 
 .font-cairo { font-family: 'Cairo', sans-serif; }
 
+/* Tab styling */
+.tabs-boxed {
+  border-radius: 1rem;
+}
+
+.tab {
+  border-radius: 0.75rem;
+  padding: 0.75rem 1.5rem;
+}
+
 @keyframes fade-in {
   from { opacity: 0; transform: translateY(-20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -461,4 +528,11 @@ const parseReviews = (reviewsStr) => {
 .animate-fade-in { animation: fade-in 1s ease-out; }
 .animate-fade-in-delay { animation: fade-in 1s ease-out 0.3s both; }
 .animate-slide-up { animation: slide-up 1s ease-out 0.6s both; }
+
+/* Smooth transitions */
+* {
+  transition-property: color, background-color, border-color, transform, box-shadow;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+}
 </style>

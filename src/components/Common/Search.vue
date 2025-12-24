@@ -3,7 +3,7 @@
     <!-- Hotels Search Bar -->
     <div v-if="type === 'hotels'" class="flex flex-wrap items-end gap-4 p-4 bg-base-100 rounded-glass-radius shadow-lg">
       <div class="flex-1 min-w-[200px]">
-        <label class="text-sm text-base-content/70 mb-1 block font-cairo">{{ labels.destination }}</label>
+        <label class="text-sm text-base-content/70 mb-1 block font-cairo text-start">{{ labels.destination }}</label>
         <div class="relative">
           <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary z-10">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -39,7 +39,7 @@
       </div>
 
       <div class="flex-1 min-w-[120px]">
-        <label class="text-sm text-base-content/70 mb-1 block font-cairo">{{ labels.guests }}</label>
+        <label class="text-sm text-base-content/70 mb-1 block font-cairo text-start">{{ labels.guests }}</label>
         <div class="relative">
           <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary z-10">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -56,7 +56,7 @@
       </div>
 
       <div class="flex-1 min-w-[120px]">
-        <label class="text-sm text-base-content/70 mb-1 block font-cairo">{{ labels.rooms }}</label>
+        <label class="text-sm text-base-content/70 mb-1 block font-cairo text-start">{{ labels.rooms }}</label>
         <div class="relative">
           <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary z-10">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -116,7 +116,7 @@
     <!-- Trips Search Bar (بدون Time) -->
     <div v-else-if="type === 'trips'" class="flex flex-wrap items-end gap-4 p-4 bg-base-100 rounded-glass-radius shadow-lg">
       <div class="flex-1 min-w-[200px]">
-        <label class="text-sm text-base-content/70 mb-1 block font-cairo">{{ labels.pickupLocation }}</label>
+        <label class="text-sm text-base-content/70 mb-1 block font-cairo text-start">{{ labels.pickupLocation }}</label>
         <div class="relative">
           <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary z-10">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -169,7 +169,7 @@
     <!-- Car Rental Search Bar (مع Time) -->
     <div v-else-if="type === 'cars'" class="flex flex-wrap items-end gap-4 p-4 bg-base-100 rounded-glass-radius shadow-lg">
       <div class="flex-1 min-w-[200px]">
-        <label class="text-sm text-base-content/70 mb-1 block font-cairo">{{ labels.pickupLocation }}</label>
+        <label class="text-sm text-base-content/70 mb-1 block font-cairo text-start">{{ labels.pickupLocation }}</label>
         <div class="relative">
           <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary z-10">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

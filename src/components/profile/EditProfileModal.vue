@@ -79,14 +79,13 @@
 
         <div class="grid grid-cols-2 gap-4">
           <div class="form-control">
-            <label class="label">
-              <span class="label-text">Date of Birth</span>
-            </label>
-            <input 
-              v-model="formData.dateOfBirth" 
-              type="date" 
-              class="input input-bordered w-full" 
-            />
+             <DatePicker
+                v-model="formData.dateOfBirth"
+                label="Date of Birth"
+                placeholder="Select date of birth"
+                format="YYYY-MM-DD"
+                displayFormat="DD/MM/YYYY"
+              />
           </div>
           <div class="form-control">
             <label class="label">
@@ -96,7 +95,6 @@
               <option value="">Select Gender</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
-              <option value="other">Other</option>
             </select>
           </div>
         </div>
@@ -187,6 +185,7 @@
 import { ref, reactive, watch } from 'vue';
 import { useAuthStore } from '@/stores/authStore';
 import uploadApi from '@/Services/uploadApi';
+import DatePicker from '@/components/Common/DatePicker.vue';
 
 const props = defineProps({
   isOpen: Boolean,
