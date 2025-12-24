@@ -13,6 +13,9 @@
         </div>
         <h1 class="text-3xl font-bold text-gray-800 mb-2">Booking Confirmed !</h1>
         <p class="text-gray-500">Your reservation has been successfully processed</p>
+        <div v-if="paymentStatus" class="mt-4">
+          <span class="badge" :class="paymentStatusClass">Payment {{ paymentStatusLabel }}</span>
+        </div>
       </div>
 
       <!-- Main Confirmation Card -->
@@ -130,6 +133,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
+import { loadStripe } from '@stripe/stripe-js';
 import { useBookingStore } from '@/stores/bookingStore';
 import { useAttractionStore } from '@/stores/attractionStore';
 import StepIndicator from '@/components/Common/StepIndicator.vue';
@@ -142,6 +146,8 @@ const attractionStore = useAttractionStore();
 
 const booking = ref(null);
 const attractionDetails = ref(null);
+const paymentStatus = ref('processing');
+const paymentStatusNote = ref('');
 
 const bookingType = computed(() => booking.value?.type || 'attraction');
 
@@ -165,6 +171,45 @@ const formattedDate = computed(() => {
 const locationData = computed(() => {
     return attractionDetails.value || booking.value?.itemData || {};
 });
+
+const paymentStatusLabel = computed(() => {
+  if (paymentStatus.value === 'succeeded') return 'Succeeded';
+  if (paymentStatus.value === 'processing') return 'Processing';
+  return 'Failed';
+});
+
+const paymentStatusClass = computed(() => {
+  if (paymentStatus.value === 'succeeded') return 'badge-success';
+  if (paymentStatus.value === 'processing') return 'badge-warning';
+  return 'badge-error';
+});
+
+const verifyPaymentStatus = async () => {
+  try {
+    const clientSecret = route.query.payment_intent_client_secret || sessionStorage.getItem('attraction_payment_client_secret');
+    if (!clientSecret) {
+      paymentStatus.value = 'unknown';
+      paymentStatusNote.value = 'Payment verification unavailable';
+      return;
+    }
+
+    const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || 'pk_test_51QauWoP5jgpKEGjvRGUxEJbvLh2lnWZe1j6GmKvqfCKAcWFAv9YJxHg8YYCXmzIINl7IpVyTxBv0FdC6UkdN5Hpa00DFWIBkJx');
+    const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
+
+    paymentStatus.value = paymentIntent.status;
+    if (paymentIntent.status === 'succeeded') {
+      paymentStatusNote.value = 'Your payment has been successfully processed';
+    } else if (paymentIntent.status === 'processing') {
+      paymentStatusNote.value = 'Your payment is being processed';
+    } else {
+      paymentStatusNote.value = 'There was an issue with your payment';
+    }
+  } catch (error) {
+    console.error('Error verifying payment status:', error);
+    paymentStatus.value = 'unknown';
+    paymentStatusNote.value = 'Could not verify payment status';
+  }
+};
 
 // Mock Data for Recommendations
 const recommendations = ref([
@@ -201,27 +246,17 @@ const recommendations = ref([
 ]);
 
 onMounted(async () => {
-   const id = route.params.id;
-   
-   // 1. Fetch Booking
-   if (id) {
-      if (bookingStore.currentBooking && bookingStore.currentBooking.id === id) {
-         booking.value = bookingStore.currentBooking;
-      } else {
-         const found = bookingStore.bookings.find(b => b.id === id);
-         booking.value = found || bookingStore.bookingInProgress;
-      }
-   } else {
-      booking.value = bookingStore.bookingInProgress;
-   }
+   // 1. Verify payment status
+   await verifyPaymentStatus();
 
+   // 2. Get booking from store (avoid mock API)
+   booking.value = bookingStore.bookingInProgress;
    if (!booking.value) {
       console.warn("No booking data found for confirmation");
-      // router.push('/'); 
       return;
    }
 
-   // 2. Fetch Fresh Attraction Details (For Location)
+   // 3. Fetch fresh attraction details for location data
    if (booking.value.itemId) {
        try {
            const attr = await attractionStore.fetchAttractionById(booking.value.itemId);

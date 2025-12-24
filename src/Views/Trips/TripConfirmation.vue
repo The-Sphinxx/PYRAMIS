@@ -13,6 +13,10 @@
         </div>
         <h1 class="text-3xl font-bold text-gray-800 mb-2">Booking Confirmed !</h1>
         <p class="text-gray-500">Your reservation has been successfully processed</p>
+        <div v-if="paymentStatus" class="flex justify-center mt-4">
+          <span class="badge text-sm px-4 py-3" :class="paymentStatusClass">Payment {{ paymentStatusLabel }}</span>
+        </div>
+        <p v-if="paymentStatusNote" class="text-error text-sm mt-2">{{ paymentStatusNote }}</p>
       </div>
 
       <!-- Main Confirmation Card -->
@@ -247,6 +251,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
+import { loadStripe } from '@stripe/stripe-js';
 import { useBookingStore } from '@/stores/bookingStore';
 import { useTripsStore } from '@/stores/tripsStore';
 import StepIndicator from '@/components/Common/StepIndicator.vue';
@@ -259,6 +264,8 @@ const tripsStore = useTripsStore();
 
 const booking = ref(null);
 const tripDetails = ref(null);
+const paymentStatus = ref('');
+const paymentStatusNote = ref('');
 
 const bookingType = computed(() => booking.value?.type || 'trip');
 
@@ -318,34 +325,72 @@ const formatPrice = (price) => {
     return price ? `${price}$` : '0$';
 };
 
+const paymentStatusLabel = computed(() => {
+  switch (paymentStatus.value) {
+    case 'succeeded':
+      return 'Paid';
+    case 'processing':
+      return 'Processing';
+    case 'requires_payment_method':
+      return 'Payment failed';
+    case 'requires_action':
+      return 'Action needed';
+    default:
+      return paymentStatus.value || 'Pending';
+  }
+});
+
+const paymentStatusClass = computed(() => {
+  switch (paymentStatus.value) {
+    case 'succeeded':
+      return 'badge-success';
+    case 'processing':
+      return 'badge-warning';
+    case 'requires_payment_method':
+      return 'badge-error';
+    default:
+      return 'badge-neutral';
+  }
+});
+
+const verifyPaymentStatus = async () => {
+  const clientSecret = route.query.payment_intent_client_secret || sessionStorage.getItem('stripe_client_secret');
+  const publishableKey = sessionStorage.getItem('stripe_publishable_key') || import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
+
+  if (!clientSecret || !publishableKey) return;
+
+  try {
+    const stripe = await loadStripe(publishableKey);
+    const { paymentIntent, error } = await stripe.retrievePaymentIntent(clientSecret);
+
+    if (paymentIntent) {
+      paymentStatus.value = paymentIntent.status;
+      paymentStatusNote.value = paymentIntent.last_payment_error?.message || '';
+    } else if (error) {
+      paymentStatus.value = 'requires_payment_method';
+      paymentStatusNote.value = error.message || '';
+    }
+  } catch (err) {
+    console.error('Failed to verify payment intent', err);
+  }
+};
+
 onMounted(async () => {
    const id = route.params.id;
    
-   // 1. Fetch Booking with Fallback
-   if (id) {
-      // Try store first
-      let found = bookingStore.currentBooking?.id === id ? bookingStore.currentBooking : bookingStore.bookings.find(b => b.id === id);
-      
-      // If not in store, fetch from API
-      if (!found) {
-         try {
-            found = await bookingStore.fetchBookingById(id);
-         } catch (err) {
-            console.error("Failed to fetch booking by ID:", err);
-         }
-      }
-      
-      booking.value = found || bookingStore.bookingInProgress;
-   } else {
-      booking.value = bookingStore.bookingInProgress;
-   }
+   // 1. Verify Stripe payment first
+   await verifyPaymentStatus();
+   
+   // 2. Fetch Booking with Fallback (use in-progress for now since mock API is down)
+   booking.value = bookingStore.bookingInProgress;
 
    if (!booking.value) {
       console.warn("No booking data found for confirmation");
+      // Fallback if needed
       return;
    }
 
-   // 2. Fetch Fresh Trip Details (For Location/Images/etc)
+   // 3. Fetch Fresh Trip Details (For Location/Images/etc)
    if (booking.value.itemId) {
        try {
            const trip = await tripsStore.fetchTripById(booking.value.itemId);
@@ -355,7 +400,7 @@ onMounted(async () => {
        }
    }
 
-   // 3. Fetch Recommendations (Trips)
+   // 4. Fetch Recommendations (Trips)
    try {
        await tripsStore.fetchTrips();
        // Get top 3 trips (excluding current)
