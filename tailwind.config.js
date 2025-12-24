@@ -56,22 +56,23 @@ export default {
   plugins: [
     daisyui,
     function ({ addUtilities, addComponents }) {
-      addUtilities({
-        '.glass': {
-          'backdrop-filter': 'blur(20px)',
-          '-webkit-backdrop-filter': 'blur(20px)',
-          'background-color': 'rgba(255, 255, 255, 0.1)',
-          'border': '1px solid rgba(255, 255, 255, 0.3)',
-          'border-radius': '8px',
-          'box-shadow': '0 4px 30px rgba(0, 0, 0, 0.1)',
-        },
-        // Page Container Utility
-        '.page-container': {
-          'width': '100%',
-          'padding-left': '120px',
-          'padding-right': '120px',
-        },
-      });
+      // داخل قسم addUtilities في الـ plugins
+addUtilities({
+  '.glass-morphism': {
+    'background': 'rgba(255, 255, 255, 0.05)', // خلفية بيضاء شفافة جداً
+    'backdrop-filter': 'blur(12px) saturate(180%)', // التغبيش مع زيادة تشبع الألوان خلفه
+    '-webkit-backdrop-filter': 'blur(12px) saturate(180%)',
+    'border': '1px solid rgba(255, 255, 255, 0.125)', // حدود رفيعة تحاكي انعكاس الضوء
+    'border-radius': '12px', // الصورة توضح حواف ناعمة (أكثر من 8px)
+    'box-shadow': '0 8px 32px 0 rgba(0, 0, 0, 0.05)', // ظل خفيف جداً غير مشتت
+  },
+  '.glass-morphism-dark': {
+    'background': 'rgba(15, 23, 42, 0.3)', // خلفية داكنة للـ Dark Mode
+    'backdrop-filter': 'blur(12px) saturate(160%)',
+    '-webkit-backdrop-filter': 'blur(12px) saturate(160%)',
+    'border': '1px solid rgba(255, 255, 255, 0.08)',
+  }
+});
 
       // Override DaisyUI button and input border radius
       addComponents({
@@ -145,7 +146,6 @@ export default {
           "success": "#36B37E",
           "warning": "#F2A540",
           "error": "#E45858",
-
           // DaisyUI Border Radius Override
           "--rounded-box": "8px",      // للـ cards
           "--rounded-btn": "6px",      // للـ buttons

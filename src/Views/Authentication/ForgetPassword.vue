@@ -54,7 +54,7 @@
                 type="email" 
                 v-model="formData.email"
                 placeholder="Enter your email"
-                class="input input-bordered w-full bg-white/90 focus:bg-white"
+                class="input input-bordered w-full bg-white/90 focus:bg-white text-gray-900"
                 :class="{ 'input-error': errors.email }"
               />
               <span v-if="errors.email" class="text-error text-xs mt-1">{{ errors.email }}</span>
@@ -94,7 +94,7 @@
                 type="text" 
                 v-model="formData.resetToken"
                 placeholder="000000"
-                class="input input-bordered w-full bg-white/90 focus:bg-white text-center text-2xl tracking-widest font-semibold"
+                class="input input-bordered w-full bg-white/90 focus:bg-white text-center text-2xl tracking-widest font-semibold text-gray-900"
                 :class="{ 'input-error': errors.resetToken }"
                 maxlength="6"
               />
@@ -180,7 +180,7 @@
                 :type="showPassword ? 'text' : 'password'" 
                 v-model="formData.newPassword"
                 placeholder="At least 8 characters" 
-                class="input input-bordered w-full bg-white/90 focus:bg-white"
+                class="input input-bordered w-full bg-white/90 focus:bg-white text-gray-900"
                 :class="{ 'input-error': errors.newPassword }"
               />
               <span v-if="errors.newPassword" class="text-error text-xs mt-1">{{ errors.newPassword }}</span>
@@ -193,7 +193,7 @@
                 :type="showPassword ? 'text' : 'password'" 
                 v-model="formData.confirmPassword"
                 placeholder="At least 8 characters" 
-                class="input input-bordered w-full bg-white/90 focus:bg-white"
+                class="input input-bordered w-full bg-white/90 focus:bg-white text-gray-900"
                 :class="{ 'input-error': errors.confirmPassword }"
               />
               <span v-if="errors.confirmPassword" class="text-error text-xs mt-1">{{ errors.confirmPassword }}</span>

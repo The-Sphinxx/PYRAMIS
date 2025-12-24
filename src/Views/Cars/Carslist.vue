@@ -10,14 +10,8 @@
         <!-- Hero Text -->
         <div class="max-w-4xl mb-4">
           <h1 class="font-cairo text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-            Find Your
-            <span
-              class="relative inline-block
-              bg-[linear-gradient(to_bottom,white_56%,transparent_85%)]
-              bg-clip-text text-transparent"
-            >
-              Perfect Ride
-            </span>
+            Find Your Perfect Ride
+            
           </h1>
           <p class="font-cairo text-sm sm:text-base md:text-lg text-gray-200 mt-2 leading-relaxed">
             Discover premium vehicles for every journey.

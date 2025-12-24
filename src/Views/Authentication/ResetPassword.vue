@@ -29,7 +29,7 @@
               v-model="formData.email"
               type="email"
               placeholder="you@example.com"
-              class="input input-bordered w-full bg-white/90 focus:bg-white"
+              class="input input-bordered w-full bg-white/90 focus:bg-white text-gray-900"
               :disabled="Boolean(route.query.email)"
             />
             <span v-if="errors.email" class="text-error text-xs mt-1">{{ errors.email }}</span>
@@ -41,7 +41,7 @@
               v-model="formData.token"
               type="text"
               placeholder="Paste the 6-digit code"
-              class="input input-bordered w-full bg-white/90 focus:bg-white"
+              class="input input-bordered w-full bg-white/90 focus:bg-white text-gray-900"
               maxlength="64"
             />
             <span v-if="errors.token" class="text-error text-xs mt-1">{{ errors.token }}</span>
@@ -82,7 +82,7 @@
               :type="showPassword ? 'text' : 'password'"
               v-model="formData.newPassword"
               placeholder="At least 8 characters"
-              class="input input-bordered w-full bg-white/90 focus:bg-white"
+              class="input input-bordered w-full bg-white/90 focus:bg-white text-gray-900"
             />
             <span v-if="errors.newPassword" class="text-error text-xs mt-1">{{ errors.newPassword }}</span>
           </div>
@@ -93,7 +93,7 @@
               :type="showPassword ? 'text' : 'password'"
               v-model="formData.confirmPassword"
               placeholder="Repeat your password"
-              class="input input-bordered w-full bg-white/90 focus:bg-white"
+              class="input input-bordered w-full bg-white/90 focus:bg-white text-gray-900"
             />
             <span v-if="errors.confirmPassword" class="text-error text-xs mt-1">{{ errors.confirmPassword }}</span>
           </div>

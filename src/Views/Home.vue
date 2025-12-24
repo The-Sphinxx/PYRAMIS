@@ -193,84 +193,123 @@
       </div>
     </section>
 
-    <section class="bg-gradient-to-br from-accent/20 via-base-200 to-accent/30 py-20">
-      <div class="page-container">
-        <div class="flex flex-col items-center justify-center text-center">
-          <div class="badge badge-lg bg-base-100 border-accent/30 mb-6 px-4 py-3">
-            <i class="fas fa-sparkles text-primary mr-2"></i>
-            <span class="font-cairo text-base-content">Powered by AI</span>
-          </div>
-          <h2 class="font-cairo text-4xl md:text-6xl font-bold text-base-content mb-6">
-            Plan Your <span class="text-primary">Trip with AI</span>
-          </h2>
-          <p class="font-cairo text-xl text-base-content/80 max-w-3xl mx-auto mb-10">
-            Tell our smart assistant what you want, and it builds a full personalized itinerary.
-          </p>
-          <button @click="handleAiPlanner" class="btn btn-lg bg-base-100 hover:bg-base-200 border-accent/30 text-base-content font-cairo font-semibold px-8 shadow-lg">
-            <i class="fas fa-magic mr-2 text-primary"></i>
-            Start <span class="text-primary">AI Planning</span>
-          </button>
-        </div>
+    <section class="relative min-h-[600px] flex items-center justify-center overflow-hidden py-20">
+  <div class="absolute inset-0 z-0">
+    <img 
+      src="/public/ai.png" 
+      alt="Background" 
+      class="w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-[#D8C4B6]/60 mix-blend-multiply"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#E8D5C4]/40 to-[#D8C4B6]/70"></div>
+  </div>
+
+  <div class="page-container relative z-10">
+    <div class="flex flex-col items-center justify-center text-center">
+      
+      <div class="inline-flex items-center gap-2 px-6 py-2 mb-8 rounded-full border border-white/40 bg-white/20 backdrop-blur-xl shadow-sm">
+        <i class="fas fa-sparkles text-[#C86A41]"></i>
+        <span class="font-cairo text-sm font-medium text-[#5D4037]">Powered by AI</span>
       </div>
-    </section>
+
+      <h2 class="font-cairo text-4xl md:text-6xl font-bold text-[#4A372F] mb-6 tracking-tight">
+        Plan  <span class="bg-gradient-to-r from-[#C86A41] to-[#A5533A] bg-clip-text text-transparent">Your Trip with AI</span>
+      </h2>
+
+      <p class="font-cairo text-xl text-[#5D4037]/90 max-w-2xl mx-auto mb-12 leading-relaxed">
+        Tell our smart assistant what you want, and it builds a full personalized itinerary.
+      </p>
+
+      <button 
+        @click="handleAiPlanner" 
+        class="group relative flex items-center gap-3 px-10 py-4 rounded-2xl border border-white/50 bg-white/20 backdrop-blur-md transition-all duration-300 hover:bg-white/30 hover:scale-105 active:scale-95 shadow-xl"
+      >
+        <i class="fas fa-magic text-[#C86A41] text-xl"></i>
+        <span class="font-cairo text-xl font-bold text-[#4A372F]">
+          Start <span class="bg-gradient-to-r from-[#C86A41] to-[#A5533A] bg-clip-text text-transparent">Ai Planning</span>
+        </span>
+      </button>
+      
+    </div>
+  </div>
+</section>
 
     <section class="bg-base-100 py-16">
-      <div class="page-container">
-        <div class="text-center mb-12">
-          <h2 class="font-cairo text-4xl md:text-5xl font-bold text-base-content mb-2">
-            What <span class="text-primary">Travelers Say</span>
-          </h2>
-          <div class="w-24 h-1 bg-primary mx-auto"></div>
+  <div class="page-container">
+    <div class="text-center mb-16">
+      <h2 class="font-cairo text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+        <span class="text-neutral dark:text-gray-300">What </span>
+        <span class="bg-gradient-to-r from-[#C86A41] to-[#A5533A] bg-clip-text text-transparent">
+          Travelers Say
+        </span>
+      </h2>
+      <div class="relative flex justify-center items-center">
+        <div class="w-48 h-[1px] bg-gradient-to-r from-transparent via-[#C86A41] to-transparent opacity-60"></div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div v-for="item in testimonials" :key="item.id" 
+           class="card bg-base-100 shadow-glass-shadow border border-base-300 p-8 hover:border-primary/30 transition-all duration-300">
+        
+        <i class="fas fa-quote-left text-3xl text-primary/20 mb-4"></i>
+        
+        <div class="flex gap-1 mb-4">
+          <i v-for="i in 5" :key="i" class="fas fa-star text-[#D5B77A] text-xs"></i>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div v-for="item in testimonials" :key="item.id" class="card bg-base-100 shadow-lg border border-base-300 p-6">
-            <i class="fas fa-quote-left text-4xl text-primary mb-4"></i>
-            <div class="flex gap-1 mb-4">
-              <i v-for="i in 5" :key="i" class="fas fa-star text-primary"></i>
-            </div>
-            <p class="font-cairo text-base-content/80 mb-6">{{item.text}}</p>
-            <div class="mt-auto">
-              <h4 class="font-cairo font-bold text-base-content">{{item.name}}</h4>
-              <p class="font-cairo text-sm text-primary">{{item.country}}</p>
-            </div>
+        
+        <p class="font-cairo text-base-content/80 mb-6 italic leading-relaxed">
+          "{{item.text}}"
+        </p>
+        
+        <div class="mt-auto pt-4 border-t border-base-300/50 flex items-center gap-4">
+          <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center font-bold text-primary">
+            {{ item.name.charAt(0) }}
+          </div>
+          <div>
+            <h4 class="font-cairo font-bold text-base-content leading-none">{{item.name}}</h4>
+            <p class="font-cairo text-xs text-primary mt-1">{{item.country}}</p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
+
+   
 
     <section class="bg-base-200 py-16">
-      <div class="page-container">
-        <div class="text-center mb-12">
-          <h2 class="font-cairo text-4xl md:text-5xl font-bold text-base-content mb-2">
-            Why Travelers <span class="text-primary">Choose Us</span>
-          </h2>
-          <div class="w-24 h-1 bg-primary mx-auto"></div>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          <div v-for="item in whyChooseUs" :key="item.id" class="flex flex-col items-center text-center">
-            <i :class="[item.icon, 'text-6xl text-primary mb-4']"></i>
-            <h3 class="font-cairo text-xl font-bold text-base-content mb-2">{{item.title}}</h3>
-            <p class="font-cairo text-base-content/70">{{item.description}}</p>
-          </div>
-        </div>
+  <div class="page-container">
+    <div class="text-center mb-16">
+      <h2 class="font-cairo text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+        <span class="text-neutral">Why  </span>
+        <span class="bg-gradient-to-r  from-[#C86A41] to-[#A5533A] bg-clip-text text-transparent">
+          Travelers Choose Us
+        </span>
+      </h2>
+      <div class="relative flex justify-center items-center">
+        <div class="w-56 h-[1.5px] bg-gradient-to-r from-transparent via-primary/60 to-transparent"></div>
       </div>
-    </section>
+    </div>
 
-    <section class="bg-base-100 py-16">
-      <div class="page-container">
-        <div class="text-center max-w-3xl mx-auto">
-          <h2 class="font-cairo text-3xl md:text-4xl font-bold text-base-content mb-4">Get Exclusive Travel Deals</h2>
-          <p class="font-cairo text-base-content/70 mb-8">Subscribe to receive curated travel ideas, exclusive Egypt-only experiences, special offers, and early access to new destinations and attractions.</p>
-          <div class="flex flex-col md:flex-row gap-4 max-w-2xl mx-auto">
-            <div class="relative flex-1">
-              <i class="fas fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-base-content/50"></i>
-              <input type="email" placeholder="Enter your email to explore Egypt better" class="input input-bordered w-full pl-12"/>
-            </div>
-            <button class="btn btn-primary font-cairo font-semibold px-8">Subscribe</button>
-          </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12">
+      <div v-for="item in whyChooseUs" :key="item.id" 
+           class="flex flex-col items-center text-center group transition-all duration-300">
+        <div class="mb-6 transform group-hover:scale-110 transition-transform duration-300">
+          <i :class="[item.icon, 'text-6xl text-primary opacity-90']"></i>
         </div>
+        
+        <h3 class="font-cairo text-xl font-bold text-base-content mb-3 group-hover:text-primary transition-colors">
+          {{item.title}}
+        </h3>
+        
+        <p class="font-cairo text-base-content/70 leading-relaxed px-4">
+          {{item.description}}
+        </p>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
     <Footer />
   </div>

@@ -34,7 +34,7 @@
               v-model="formData.fullName"
               type="text"
               placeholder="Enter your full name"
-              class="input input-bordered w-full bg-white/90 focus:bg-white"
+              class="input input-bordered w-full bg-white/90 focus:bg-white text-gray-900"
               required
             />
           </div>
@@ -48,7 +48,7 @@
               v-model="formData.email"
               type="email"
               placeholder="Enter your email"
-              class="input input-bordered w-full bg-white/90 focus:bg-white"
+              class="input input-bordered w-full bg-white/90 focus:bg-white text-gray-900"
               required
             />
           </div>
@@ -98,7 +98,7 @@
               v-model="formData.password"
               :type="showPassword ? 'text' : 'password'"
               placeholder="Enter your password"
-              class="input input-bordered w-full bg-white/90 focus:bg-white"
+              class="input input-bordered w-full bg-white/90 focus:bg-white text-gray-900"
               required
               minlength="6"
             />
@@ -149,7 +149,7 @@
               v-model="formData.confirmPassword"
               :type="showConfirmPassword ? 'text' : 'password'"
               placeholder="Confirm your password"
-              class="input input-bordered w-full bg-white/90 focus:bg-white"
+              class="input input-bordered w-full bg-white/90 focus:bg-white text-gray-900"
               required
             />
           </div>

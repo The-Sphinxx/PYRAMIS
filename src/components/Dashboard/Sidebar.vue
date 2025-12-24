@@ -68,6 +68,14 @@
           <p class="font-semibold text-sm">{{ user?.fullName || 'Guest' }}</p>
           <span class="badge badge-success badge-sm rounded-md">{{ user?.role === 'admin' ? 'Admin' : 'User' }}</span>
         </div>
+
+        <button 
+          @click="toggleTheme" 
+          class="btn btn-circle btn-sm btn-ghost transition-colors theme-toggle-btn"
+        >
+          <i v-if="isDark" class="fas fa-sun text-lg spin-slow text-primary"></i>
+          <i v-else class="fas fa-moon text-lg text-primary"></i> 
+        </button>
       </div>
       
       <button 
@@ -86,11 +94,13 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/authStore';
+import { useTheme } from '@/composables/useTheme';
 import { computed, onMounted, ref, watch } from 'vue';
 
 const route = useRoute();
 const router = useRouter();
 const authStore = useAuthStore();
+const { isDark, toggleTheme } = useTheme();
 const searchQuery = ref('');
 
 onMounted(() => {
@@ -224,6 +234,10 @@ const logout = () => {
     display: none;
   }
 
+  .theme-toggle-btn {
+    display: none;
+  }
+
   .nav-item {
     justify-content: center;
     padding: 0.75rem;
@@ -249,4 +263,13 @@ const logout = () => {
     text-align: center;
   }
 }
+
+.spin-slow {
+  animation: spin 8s linear infinite;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 </style>

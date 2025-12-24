@@ -34,7 +34,7 @@
               v-model="formData.email"
               type="email"
               placeholder="Enter your email address"
-              class="input input-bordered w-full bg-white/90 focus:bg-white"
+              class="input input-bordered w-full bg-white/90 focus:bg-white text-gray-900"
               required
             />
           </div>
@@ -84,7 +84,7 @@
               v-model="formData.password"
               :type="showPassword ? 'text' : 'password'"
               placeholder="Enter your password"
-              class="input input-bordered w-full bg-white/90 focus:bg-white"
+              class="input input-bordered w-full bg-white/90 focus:bg-white text-gray-900"
               required
             />
           </div>
