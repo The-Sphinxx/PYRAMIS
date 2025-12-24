@@ -134,7 +134,7 @@
                           <div>
                              <p class="text-sm font-bold capitalize">{{ booking?.paymentInfo?.method }} Payment</p>
                              <p v-if="booking?.paymentInfo?.cardLastFour" class="text-xs text-gray-500">Ending in **** {{ booking?.paymentInfo?.cardLastFour }}</p>
-                             <p v-else class="text-xs text-gray-500">Pay upon arrival</p>
+                             <p v-else class="text-xs text-gray-500">Paid</p>
                           </div>
                        </div>
                        <div class="badge badge-success badge-sm text-white gap-1 py-3 px-3">

@@ -141,7 +141,7 @@ const car = computed(() => carsStore.getCarById(booking.value?.itemId));
 const bookingImage = computed(() => car.value?.images?.[0] || '/images/placeholder.jpg');
 
 const formattedDate = computed(() => {
-  const date = booking.value?.bookingData?.startDate;
+  const date = booking.value?.bookingData?.pickupDate;
   if (!date) return 'N/A';
   return new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 });
@@ -149,20 +149,36 @@ const formattedDate = computed(() => {
 const bookingType = computed(() => 'car');
 
 const paymentStatusLabel = computed(() => {
-  if (paymentStatus.value === 'succeeded') return 'Succeeded';
-  if (paymentStatus.value === 'processing') return 'Processing';
-  return 'Failed';
+  switch (paymentStatus.value) {
+    case 'succeeded':
+      return 'Paid';
+    case 'processing':
+      return 'Processing';
+    case 'requires_payment_method':
+      return 'Payment failed';
+    case 'requires_action':
+      return 'Action needed';
+    default:
+      return paymentStatus.value || 'Pending';
+  }
 });
 
 const paymentStatusClass = computed(() => {
-  if (paymentStatus.value === 'succeeded') return 'badge-success';
-  if (paymentStatus.value === 'processing') return 'badge-warning';
-  return 'badge-error';
+  switch (paymentStatus.value) {
+    case 'succeeded':
+      return 'badge-success';
+    case 'processing':
+      return 'badge-warning';
+    case 'requires_payment_method':
+      return 'badge-error';
+    default:
+      return 'badge-neutral';
+  }
 });
 
 const verifyPaymentStatus = async () => {
   try {
-    const clientSecret = route.query.payment_intent_client_secret || sessionStorage.getItem('car_payment_client_secret');
+    const clientSecret = route.query.payment_intent_client_secret || sessionStorage.getItem('stripe_client_secret');
     if (!clientSecret) {
       paymentStatus.value = 'unknown';
       paymentStatusNote.value = 'Payment verification unavailable';

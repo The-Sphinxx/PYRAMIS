@@ -48,6 +48,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { loadStripe } from '@stripe/stripe-js';
 import { useAuthStore } from '@/stores/authStore';
+import { useBookingStore } from '@/stores/bookingStore';
 import { useRoute, useRouter } from 'vue-router';
 import { useHotelsStore } from '@/stores/hotelsStore';
 import StepIndicator from '@/components/Common/StepIndicator.vue';
@@ -60,6 +61,7 @@ const route = useRoute();
 const router = useRouter();
 const hotelStore = useHotelsStore();
 const authStore = useAuthStore();
+const bookingStore = useBookingStore();
 
 const hotel = ref(null);
 const submitting = ref(false);
@@ -205,8 +207,23 @@ const handleConfirm = async () => {
 
     const status = result.paymentIntent?.status;
     if (status === 'succeeded') {
-      paymentMessage.value = 'Payment succeeded! Redirecting...';
-      router.push({
+      paymentMessage.value = 'Payment succeeded! Redirecting...';      
+      // Enrich booking with guest info and pricing for confirmation page
+      bookingStore.enrichBookingWithDetails(
+        {
+          firstName: guest.value.firstName,
+          lastName: guest.value.lastName,
+          email: guest.value.email,
+          phone: guest.value.phone,
+          specialRequests: guest.value.specialRequests
+        },
+        {
+          method: 'card',
+          cardLastFour: null,
+          status: 'paid'
+        }
+      );
+            router.push({
         name: 'HotelConfirmation',
         params: { id: route.params.id },
         query: {

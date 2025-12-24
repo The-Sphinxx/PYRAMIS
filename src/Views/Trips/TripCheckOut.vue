@@ -219,6 +219,23 @@ const handlePlaceOrder = async () => {
     const status = result.paymentIntent?.status;
     if (status === 'succeeded') {
       paymentMessage.value = 'Payment succeeded! Redirecting...';
+      
+      // Enrich booking with guest info and pricing for confirmation page
+      bookingStore.enrichBookingWithDetails(
+        {
+          firstName: guestData.value.firstName,
+          lastName: guestData.value.lastName,
+          email: guestData.value.email,
+          phone: guestData.value.phone,
+          specialRequests: guestData.value.specialRequests
+        },
+        {
+          method: 'card',
+          cardLastFour: null,
+          status: 'paid'
+        }
+      );
+      
       router.push({
         name: 'TripConfirmation',
         params: { id: entityId.value },
