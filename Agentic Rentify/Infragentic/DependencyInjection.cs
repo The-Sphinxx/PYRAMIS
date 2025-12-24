@@ -55,10 +55,12 @@ public static class InfragenticExtensions
             var discoveryPlugin = new DiscoveryPlugin(serviceScopeFactory);
             var bookingPlugin = new BookingPlugin(serviceScopeFactory);
             var travelDatabasePlugin = new TravelDatabasePlugin(serviceScopeFactory);
+            var dataFetchPlugin = new DataFetchPlugin(serviceScopeFactory); // NEW: Stage 1 Orchestrator Plugin
 
             kernelBuilder.Plugins.AddFromObject(discoveryPlugin, "Discovery");
             kernelBuilder.Plugins.AddFromObject(bookingPlugin, "Booking");
             kernelBuilder.Plugins.AddFromObject(travelDatabasePlugin, "TravelDatabase");
+            kernelBuilder.Plugins.AddFromObject(dataFetchPlugin, "DataFetch"); // NEW: For Two-Stage Trip Planner
 
             return kernelBuilder.Build();
         });
@@ -82,7 +84,9 @@ public static class InfragenticExtensions
 
         // Register AI Services
         services.AddScoped<IChatAiService, ChatAiService>();
-        services.AddScoped<IAiTripPlannerService, AiTripPlannerService>();
+        
+        // Two-Stage Trip Planner (Stage 1: Grok Orchestrator, Stage 2: GPT-OSS Formatter)
+        services.AddScoped<IAiTripPlannerService, TwoStageTripPlannerService>();
 
         return services;
     }
