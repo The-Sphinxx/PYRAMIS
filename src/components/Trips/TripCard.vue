@@ -8,7 +8,7 @@
         @click.stop="toggleWishlist"
         title="Save to wishlist"
       >
-        <i :class="isWishlisted ? 'fas fa-heart' : 'far fa-heart'"></i>
+        <i :class="isWishlisted ? 'fas fa-bookmark' : 'far fa-bookmark'"></i>
       </button>
       <router-link :to="`/trips/details/${trip.id}`" class="w-full h-full block">
         <img 
@@ -24,7 +24,7 @@
     <div class="card-body p-4">
       <!-- Title -->
       <router-link :to="`/trips/details/${trip.id}`">
-        <h2 class="card-title text-lg font-bold font-cairo text-base-content mb-1 hover:text-primary transition-colors">
+        <h2 class="card-title text-lg font-bold font-cairo text-base-content mb-1 hover:text-primary transition-colors line-clamp-2 min-h-[3.25rem] leading-tight">
           {{ trip.title }}
         </h2>
       </router-link>
@@ -91,12 +91,12 @@
       </div>
 
       <!-- Buttons -->
-      <div class="flex flex-col gap-2 mt-auto">
-        <router-link :to="`/trips/details/${trip.id}`" class="btn btn-outline btn-primary btn-sm w-full font-cairo h-10 hover:!text-white">
+      <div class="mt-auto">
+        <router-link 
+          :to="`/trips/details/${trip.id}`" 
+          class="block text-center w-full px-4 py-2.5 bg-primary text-primary-content border-none rounded-lg text-sm font-semibold cursor-pointer transition-all duration-300 hover:bg-primary-focus hover:shadow-lg active:scale-95"
+        >
           View Details
-        </router-link>
-        <router-link :to="`/trips/details/${trip.id}`" class="btn btn-primary btn-sm w-full font-cairo h-10 text-white shadow-lg shadow-primary/30">
-          Book Now
         </router-link>
       </div>
     </div>
@@ -156,5 +156,13 @@ const toggleWishlist = async () => {
 }
 .rounded-glass-radius {
     border-radius: 12px; /* Or whatever variable is being used globally */
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
 }
 </style>

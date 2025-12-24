@@ -69,17 +69,6 @@
                   <p class="font-bold text-lg">{{ formattedDate }}</p>
                 </div>
              </div>
-             
-             <!-- Static "Transport" placeholder as seen in design, or omit if not applicable -->
-              <div class="flex items-center gap-4 border-l-4 border-primary pl-4 bg-base-200/50 p-4 rounded-r-lg">
-                <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary text-xl">
-                  <i class="fas fa-bus"></i>
-                </div>
-                <div>
-                  <p class="text-sm text-base-content/60">Transport</p>
-                  <p class="font-bold text-lg">Standard Transfer</p>
-                </div>
-             </div>
           </div>
 
           <!-- Proceed Button -->
