@@ -10,7 +10,6 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Stripe;
-using Stripe.Checkout;
 
 namespace Agentic_Rentify.Api.Controllers;
 
@@ -19,7 +18,7 @@ namespace Agentic_Rentify.Api.Controllers;
 /// </summary>
 /// <remarks>
 /// Handles the complete booking lifecycle from creation to payment confirmation.
-/// Integrates with Stripe Checkout for secure payment processing.
+/// Integrates with Stripe Payment Intents + Elements for secure payment processing.
 /// </remarks>
 [ApiController]
 [Route("api/[controller]")]
@@ -59,10 +58,10 @@ public class BookingsController(IMediator mediator, IOptions<StripeSettings> str
     }
 
     /// <summary>
-    /// Creates a new booking and initiates a Stripe checkout session.
+    /// Creates a new booking and initializes a Stripe PaymentIntent (for Payment Element).
     /// </summary>
     /// <param name="command">The booking command containing user, entity, type, dates, and total price.</param>
-    /// <returns>A JSON response with the Stripe checkout session URL.</returns>
+    /// <returns>A JSON response with the Stripe client secret for Payment Element.</returns>
     /// <remarks>
     /// **Request Body:**
     /// ```json
@@ -79,24 +78,30 @@ public class BookingsController(IMediator mediator, IOptions<StripeSettings> str
     /// **Booking Types:** `Trip`, `Hotel`, `Car`, `Attraction`
     /// 
     /// The booking is initially created with status "Pending" and IsPaid=false.
-    /// The returned sessionUrl should be used to redirect the user to Stripe Checkout.
+    /// The returned clientSecret is used to render Stripe Payment Element on the frontend.
     /// 
     /// **Payment Flow:**
     /// 1. Frontend calls this endpoint
-    /// 2. Redirect user to returned `sessionUrl`
-    /// 3. User completes payment on Stripe
+    /// 2. Frontend mounts Stripe Payment Element with the provided clientSecret
+    /// 3. User completes payment on your hosted page (Elements renders secure iframes)
     /// 4. Stripe webhooks trigger booking confirmation
     /// 5. Use GET /api/Bookings/{id} to verify payment status
     /// </remarks>
-    /// <response code="200">Returns the checkout session URL for Stripe payment.</response>
+    /// <response code="200">Returns the PaymentIntent client secret for Stripe Elements.</response>
     /// <response code="400">Validation failed or Stripe API error.</response>
     [HttpPost]
     [ProducesResponseType(typeof(CreateBookingResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create([FromBody] CreateBookingCommand command)
     {
-        var sessionUrl = await mediator.Send(command);
-        return Ok(new CreateBookingResponse { SessionUrl = sessionUrl });
+        var result = await mediator.Send(command);
+        return Ok(new CreateBookingResponse
+        {
+            BookingId = result.BookingId,
+            ClientSecret = result.ClientSecret,
+            PaymentIntentId = result.PaymentIntentId,
+            PublishableKey = result.PublishableKey
+        });
     }
 
     /// <summary>
@@ -158,14 +163,14 @@ public class BookingsController(IMediator mediator, IOptions<StripeSettings> str
     /// Verifies webhook signature and updates booking status to Confirmed with IsPaid=true.
     /// 
     /// **Webhook Configuration:**
-    /// - Event Type: `checkout.session.completed`
+    /// - Event Type: `payment_intent.succeeded`
     /// - Signature Verification: Required using WebhookSecret
     /// - Endpoint URL: https://yourapi.com/api/bookings/webhook
     /// 
     /// **Flow:**
     /// 1. Stripe sends POST request to this endpoint
     /// 2. Validates signature using Stripe-Signature header
-    /// 3. Extracts session ID from event payload
+    /// 3. Extracts payment_intent ID from event payload
     /// 4. Confirms booking payment status
     /// </remarks>
     /// <response code="200">Webhook received and processed successfully.</response>
@@ -189,9 +194,9 @@ public class BookingsController(IMediator mediator, IOptions<StripeSettings> str
             return BadRequest(new { message = "Invalid webhook signature" });
         }
 
-        if (stripeEvent.Type == "checkout.session.completed" && stripeEvent.Data.Object is Session session)
+        if (stripeEvent.Type == EventTypes.PaymentIntentSucceeded && stripeEvent.Data.Object is PaymentIntent intent)
         {
-            await mediator.Send(new ConfirmBookingCommand(session.Id));
+            await mediator.Send(new ConfirmBookingCommand(intent.Id));
         }
 
         return Ok(new { received = true });
@@ -199,10 +204,19 @@ public class BookingsController(IMediator mediator, IOptions<StripeSettings> str
 }
 
 /// <summary>
-/// Response from create booking with Stripe checkout URL
+/// Response from create booking with Stripe PaymentIntent client secret
 /// </summary>
 public class CreateBookingResponse
 {
-    /// <summary>Stripe Checkout session URL - redirect user here to complete payment</summary>
-    public string SessionUrl { get; set; } = string.Empty;
+    /// <summary>Database identifier for the booking</summary>
+    public int BookingId { get; set; }
+
+    /// <summary>Stripe client secret used to render Payment Element</summary>
+    public string ClientSecret { get; set; } = string.Empty;
+
+    /// <summary>Stripe PaymentIntent ID (stored server-side)</summary>
+    public string PaymentIntentId { get; set; } = string.Empty;
+
+    /// <summary>Publishable key to initialize Stripe.js on the client</summary>
+    public string PublishableKey { get; set; } = string.Empty;
 }

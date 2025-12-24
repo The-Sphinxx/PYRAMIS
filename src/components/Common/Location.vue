@@ -115,9 +115,9 @@ import { useRouter } from 'vue-router';
 
 // Import all stores
 import { useAttractionStore } from '@/stores/attractionStore';
-//import { usehotelsStore } from '@/stores/hotelsStore';
-//import { useTripStore } from '@/stores/tripsStore';
-//import useCarStore from '@/stores/carsStore';
+import { useHotelsStore } from '@/stores/hotelsStore';
+import { useTripsStore } from '@/stores/tripsStore';
+import { useCarsStore } from '@/stores/carsStore';
 
 // ==================== SVG ICONS ====================
 const PyramidIcon = {
@@ -210,9 +210,9 @@ const props = defineProps({
 // ==================== STATE & STORES ====================
 const router = useRouter();
 const attractionStore = useAttractionStore();
-//const hotelStore = useHotelStore();
-//const tripStore = useTripStore();
-//const carStore = useCarStore();
+const hotelStore = useHotelsStore();
+const tripStore = useTripsStore();
+const carStore = useCarsStore();
 
 const mapLoaded = ref(false);
 const nearbyLandmarks = ref([]);

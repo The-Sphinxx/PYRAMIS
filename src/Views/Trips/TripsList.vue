@@ -92,7 +92,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useTripsStore } from '@/stores/tripsStore';
 import Search from '@/components/Common/Search.vue';
 import TripCard from '@/components/Trips/TripCard.vue';
@@ -162,7 +162,12 @@ const handlePageChange = (page) => {
 const resetSearch = () => {
     searchParams.value = {};
     currentPage.value = 1;
-}
+};
+
+onUnmounted(() => {
+  searchParams.value = {};
+  tripsStore.resetFilters();
+});
 
 </script>
 

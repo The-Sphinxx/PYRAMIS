@@ -28,8 +28,18 @@
             ref="guestFormRef"
             v-model="guestData"
             :submitting="submitting"
+            :use-stripe-elements="true"
             @submit="handlePlaceOrder"
-          />
+          >
+            <template #payment-element>
+              <div class="space-y-3">
+                <div id="attraction-payment-element" class="rounded-xl border border-base-300 bg-base-200/60 p-4"></div>
+                <p class="text-xs text-base-content/60">Secured by Stripe. Your card details never hit our servers.</p>
+                <p v-if="paymentError" class="text-sm text-error">{{ paymentError }}</p>
+                <p v-if="paymentMessage" class="text-sm text-success">{{ paymentMessage }}</p>
+              </div>
+            </template>
+          </GuestInfoForm>
         </div>
 
         <!-- Right Side - Price Summary (Sticky CSS) -->
@@ -61,13 +71,15 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import { loadStripe } from '@stripe/stripe-js';
 import { useRouter } from 'vue-router';
 import { useBookingStore } from '@/stores/bookingStore';
 import { useAuthStore } from '@/stores/authStore';
 import StepIndicator from '@/components/Common/StepIndicator.vue';
 import PriceSummary from '@/components/Common/PriceSummary.vue';
 import GuestInfoForm from '@/components/Common/GuestInfoForm.vue';
+import attractionApi from '@/Services/attractionApi';
 
 const router = useRouter();
 const bookingStore = useBookingStore();
@@ -90,52 +102,174 @@ const guestData = ref({
 const loading = ref(false);
 const submitting = ref(false);
 const error = ref(null);
+const paymentError = ref('');
+const paymentMessage = ref('');
+const clientSecret = ref('');
+const bookingId = ref(null);
+const paymentIntentId = ref(null);
+const stripeInstance = ref(null);
+const elements = ref(null);
+const paymentElement = ref(null);
+const currentPublishableKey = ref('');
 
 // Get booking type from store
 const bookingType = computed(() => {
   return bookingStore.bookingInProgress?.type || 'attraction';
 });
 
-onMounted(() => {
-  // Check if there's a booking in progress
-  if (!bookingStore.bookingInProgress) {
-    error.value = 'No booking in progress';
-    setTimeout(() => {
-      router.push({ name: 'Home' });
-    }, 2000);
-  }
-  
-  // Pre-fill user data if logged in
-  if (authStore.user) {
-    guestData.value.firstName = authStore.user.firstName || '';
-    guestData.value.lastName = authStore.user.lastName || '';
-    guestData.value.email = authStore.user.email || '';
-    guestData.value.phone = authStore.user.phone || '';
-  }
-});
+const totalCost = computed(() => bookingStore.bookingCosts?.total ?? bookingStore.bookingInProgress?.basePrice ?? 0);
+const entityId = computed(() => bookingStore.bookingInProgress?.itemId ?? 0);
+const bookingData = computed(() => bookingStore.bookingInProgress?.bookingData ?? {});
 
+const appearance = {
+  theme: 'stripe',
+  variables: {
+    colorPrimary: '#C86A3F',
+    colorBackground: '#ffffff'
+  }
+};
+
+const ensureStripe = async (publishableKey) => {
+  if (!publishableKey) throw new Error('Stripe publishable key is missing');
+  if (!stripeInstance.value || currentPublishableKey.value !== publishableKey) {
+    stripeInstance.value = await loadStripe(publishableKey);
+    currentPublishableKey.value = publishableKey;
+  }
+  return stripeInstance.value;
+};
+
+const mountPaymentElement = async (intentPayload) => {
+  const publishableKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || intentPayload.publishableKey;
+  const stripe = await ensureStripe(publishableKey);
+
+  clientSecret.value = intentPayload.clientSecret;
+  bookingId.value = intentPayload.bookingId;
+  paymentIntentId.value = intentPayload.paymentIntentId;
+
+  sessionStorage.setItem('stripe_publishable_key', publishableKey);
+  sessionStorage.setItem('stripe_client_secret', intentPayload.clientSecret);
+  sessionStorage.setItem('stripe_payment_intent_id', intentPayload.paymentIntentId);
+  sessionStorage.setItem('stripe_booking_id', String(intentPayload.bookingId));
+
+  if (paymentElement.value) {
+    paymentElement.value.unmount();
+  }
+
+  elements.value = stripe.elements({ clientSecret: intentPayload.clientSecret, appearance });
+  paymentElement.value = elements.value.create('payment');
+  paymentElement.value.mount('#attraction-payment-element');
+};
+
+const initializePaymentIntent = async () => {
+  if (!bookingStore.bookingInProgress) throw new Error('No booking in progress');
+
+  const user = authStore.user;
+  const bookingUserId = user ? user.id : `guest_${Date.now()}`;
+  const totalAmount = Number(totalCost.value);
+  const startDate = bookingData.value.date ? new Date(bookingData.value.date).toISOString() : new Date().toISOString();
+
+  const intentPayload = await attractionApi.createBookingIntent({
+    userId: bookingUserId,
+    entityId: Number(entityId.value),
+    bookingType: 'Attraction',
+    startDate,
+    endDate: null,
+    totalPrice: totalAmount
+  });
+
+  await mountPaymentElement(intentPayload);
+};
 
 const handlePlaceOrder = async () => {
   submitting.value = true;
-  error.value = null;
+  paymentError.value = '';
+  paymentMessage.value = '';
 
   try {
-    const userId = authStore.user?.id || `guest_${Date.now()}`;
+    // Check if user selected "Pay on Arrival"
+    if (guestData.value.paymentMethod === 'arrival') {
+      // Skip Stripe payment, go directly to confirmation
+      bookingStore.enrichBookingWithDetails(
+        {
+          firstName: guestData.value.firstName,
+          lastName: guestData.value.lastName,
+          email: guestData.value.email,
+          phone: guestData.value.phone,
+          specialRequests: guestData.value.specialRequests
+        },
+        {
+          method: 'arrival',
+          cardLastFour: null,
+          status: 'pending'
+        }
+      );
+      
+      router.push({
+        name: 'AttractionConfirmation',
+        params: { id: entityId.value }
+      });
+      return;
+    }
 
-    // Submit booking through store, passing user ID and guest data
-    const result = await bookingStore.submitBooking(userId, guestData.value);
-    
-    console.log('Booking created:', result);
+    // Card payment flow
+    if (!clientSecret.value) {
+      await initializePaymentIntent();
+    }
 
-    // Navigate to confirmation page
-    router.push({ 
-      name: 'AttractionConfirmation', 
-      params: { id: result.id } 
+    if (!stripeInstance.value || !elements.value) {
+      throw new Error('Payment form is not ready. Please retry.');
+    }
+
+    const returnUrl = `${window.location.origin}/attractions/confirmation/${entityId.value}?bookingId=${bookingId.value ?? ''}`;
+
+    const result = await stripeInstance.value.confirmPayment({
+      elements: elements.value,
+      confirmParams: {
+        return_url: returnUrl
+      },
+      redirect: 'if_required'
     });
+
+    if (result.error) {
+      paymentError.value = result.error.message || 'Payment could not be processed.';
+      return;
+    }
+
+    const status = result.paymentIntent?.status;
+    if (status === 'succeeded') {
+      paymentMessage.value = 'Payment succeeded! Redirecting...';
+      
+      // Enrich booking with guest info and pricing for confirmation page
+      bookingStore.enrichBookingWithDetails(
+        {
+          firstName: guestData.value.firstName,
+          lastName: guestData.value.lastName,
+          email: guestData.value.email,
+          phone: guestData.value.phone,
+          specialRequests: guestData.value.specialRequests
+        },
+        {
+          method: 'card',
+          cardLastFour: null,
+          status: 'paid'
+        }
+      );
+      
+      router.push({
+        name: 'AttractionConfirmation',
+        params: { id: entityId.value },
+        query: {
+          bookingId: bookingId.value ?? undefined,
+          payment_intent: paymentIntentId.value ?? undefined
+        }
+      });
+    } else if (status === 'processing') {
+      paymentMessage.value = 'Payment is processing. We will email you once confirmed.';
+    }
   } catch (err) {
     error.value = err.message || 'Failed to place order';
+    paymentError.value = error.value;
     console.error('Order error:', err);
-    // alert(`❌ Failed to place order: ${error.value}`); // Basic alert
   } finally {
     submitting.value = false;
   }
@@ -144,6 +278,28 @@ const handlePlaceOrder = async () => {
 const goBack = () => {
   router.back();
 };
+
+onMounted(() => {
+  if (!bookingStore.bookingInProgress) {
+    error.value = 'No booking in progress';
+    setTimeout(() => {
+      router.push({ name: 'Home' });
+    }, 2000);
+    return;
+  }
+  
+  if (authStore.user) {
+    guestData.value.firstName = authStore.user.firstName || '';
+    guestData.value.lastName = authStore.user.lastName || '';
+    guestData.value.email = authStore.user.email || '';
+    guestData.value.phone = authStore.user.phone || '';
+  }
+
+  initializePaymentIntent().catch((err) => {
+    console.error('Failed to initialize payment intent:', err);
+    paymentError.value = err.message || 'Unable to start payment. Please try again later.';
+  });
+});
 
 
 </script>

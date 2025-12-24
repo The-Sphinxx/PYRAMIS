@@ -105,15 +105,17 @@ export const searchCars = async (query) => {
  * @param {Object} bookingData - Booking information
  * @returns {Promise<Object>} Booking confirmation
  */
-export const bookCar = async (bookingData) => {
+export const createCarBookingIntent = async (bookingData) => {
   try {
-    const response = await api.post('/Bookings', {
-      type: 'car',
-      ...bookingData,
-    });
+    const response = await api.post('/Bookings', bookingData);
     return response.data;
   } catch (error) {
-    console.error('Error booking car:', error);
+    console.error('Error creating car booking intent:', error);
     throw error;
   }
+};
+
+// Backwards-compatible alias
+export const bookCar = async (bookingData) => {
+  return createCarBookingIntent(bookingData);
 };

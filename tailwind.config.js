@@ -97,11 +97,11 @@ addUtilities({
           width: '100%',
           marginLeft: 'auto',
           marginRight: 'auto',
-          maxWidth: '1400px', // Prevent 4K stretching
-          paddingLeft: theme('spacing.page-x-xs'), // Mobile default (16px)
+          maxWidth: '1400px', 
+          paddingLeft: theme('spacing.page-x-xs'), 
           paddingRight: theme('spacing.page-x-xs'),
 
-          // Mobile-first breakpoints (min-width)
+          
           '@media (min-width: 640px)': { // sm
             paddingLeft: theme('spacing.page-x-sm'), // 24px
             paddingRight: theme('spacing.page-x-sm'),
@@ -146,32 +146,30 @@ addUtilities({
           "success": "#36B37E",
           "warning": "#F2A540",
           "error": "#E45858",
-          // DaisyUI Border Radius Override
-          "--rounded-box": "8px",      // للـ cards
-          "--rounded-btn": "6px",      // للـ buttons
-          "--rounded-badge": "6px",    // للـ badges
+          
+          "--rounded-box": "8px",      
+          "--rounded-btn": "6px",      
+          "--rounded-badge": "6px",    
         },
       },
       {
         nileheritageDark: {
-          // اللون الأساسي (النحاسي) يبقى كما هو لتمييز الهوية
           "primary": "#C86A41",
           "primary-focus": "#E07A4D",
           "primary-content": "#ffffff",
 
-          // الكحلي الداكن جداً للخلفية الأساسية
-          "base-100": "#0F172A", // Deep Navy
-          "base-200": "#1E293B", // Lighter Navy for cards
-          "base-300": "#334155", // For borders/hovers
-          "base-content": "#F1F5F9", // Off-white text
+          "base-100": "#0F172A", 
+          "base-200": "#1E293B", 
+          "base-300": "#334155", 
+          "base-content": "#F1F5F9", 
 
-          // لون ثانوي يتماشى مع الكحلي (درجة Teal عميقة)
-          "secondary": "#38BDF8", // Sky blue لمسة إشراق
+          
+          "secondary": "#38BDF8", 
           "secondary-focus": "#0EA5E9",
           "secondary-content": "#0F172A",
 
-          // الألوان الأخرى
-          "accent": "#FDE047", // Yellow gold للتباين
+          
+          "accent": "#FDE047", 
           "neutral": "#1E293B",
           "neutral-content": "#94A3B8",
 

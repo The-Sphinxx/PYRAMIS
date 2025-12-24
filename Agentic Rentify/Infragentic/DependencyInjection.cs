@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 using Qdrant.Client;
+using Microsoft.Extensions.Options;
 
 namespace Agentic_Rentify.Infragentic;
 
@@ -15,78 +16,44 @@ public static class InfragenticExtensions
 {
     public static IServiceCollection AddInfragenticServices(this IServiceCollection services, IConfiguration configuration)
     {
-        // Bind AI settings
-        services.Configure<AiSettings>(configuration.GetSection("AI"));
+        services.Configure<AiSettings>(configuration.GetSection("AI")); // [cite: 4]
         var aiSettings = configuration.GetSection("AI").Get<AiSettings>()!;
 
-        // Register custom HttpClient for OpenRouter with required headers
         services.AddHttpClient("OpenRouter", client =>
         {
-            client.BaseAddress = new Uri(aiSettings.OpenAIEndpoint);
-            client.DefaultRequestHeaders.Add("HTTP-Referer", "https://agentic-rentify.com");
-            client.DefaultRequestHeaders.Add("X-Title", "Agentic Rentify AI");
+            client.BaseAddress = new Uri(aiSettings.OpenAIEndpoint); // [cite: 5]
+            client.Timeout = TimeSpan.FromMinutes(3); // لحل مشكلة ResponseEnded
         });
 
-        // Register Semantic Kernel with OpenRouter configuration
         services.AddSingleton<Kernel>(sp =>
         {
-            var httpClientFactory = sp.GetRequiredService<IHttpClientFactory>();
-            var openRouterClient = httpClientFactory.CreateClient("OpenRouter");
-            var mediator = sp.GetRequiredService<MediatR.IMediator>();
-            var serviceScopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
+            var httpClient = sp.GetRequiredService<IHttpClientFactory>().CreateClient("OpenRouter");
+            var builder = Kernel.CreateBuilder();
 
-            var kernelBuilder = Kernel.CreateBuilder();
+            // تسجيل الأدمغة بـ IDs فريدة [cite: 6, 7, 8, 9]
+            builder.AddOpenAIChatCompletion(aiSettings.ChatModel, aiSettings.OpenAIKey, httpClient: httpClient, serviceId: "SmartBrain");
+            builder.AddOpenAIChatCompletion(aiSettings.PlannerModel, aiSettings.OpenAIKey, httpClient: httpClient, serviceId: "FastBrain");
+            builder.AddOpenAIChatCompletion(aiSettings.DefaultModel, aiSettings.OpenAIKey, httpClient: httpClient, serviceId: "DefaultBrain");
 
-            // Add OpenAI Chat Completion pointing to OpenRouter
-            kernelBuilder.AddOpenAIChatCompletion(
-                modelId: aiSettings.ChatModel,
-                apiKey: aiSettings.OpenAIKey,
-                httpClient: openRouterClient
-            );
+            // فلتر المراقبة والتسجيل في DB [cite: 10, 474]
+            builder.Services.AddSingleton<IFunctionInvocationFilter>(new AgentInvocationFilter(sp.GetRequiredService<IServiceScopeFactory>()));
 
-            // Embeddings are accessed via OpenRouter HTTP client directly in QdrantVectorService
+            // تسجيل الـ Plugins [cite: 11, 12, 13]
+            builder.Plugins.AddFromObject(sp.GetRequiredService<SqlQueryPlugin>(), "SqlQuery");
+            builder.Plugins.AddFromObject(new DiscoveryPlugin(sp.GetRequiredService<IServiceScopeFactory>()), "Discovery");
+            builder.Plugins.AddFromObject(new TravelDatabasePlugin(sp.GetRequiredService<IServiceScopeFactory>()), "TravelDatabase");
+            builder.Plugins.AddFromObject(new BookingPlugin(sp.GetRequiredService<IServiceScopeFactory>()), "Booking");
 
-            // Register agent invocation filter for observability
-            kernelBuilder.Services.AddSingleton<IFunctionInvocationFilter>(
-                new AgentInvocationFilter(serviceScopeFactory)
-            );
-
-            // Create plugin instances with resolved dependencies and add them
-            var discoveryPlugin = new DiscoveryPlugin(serviceScopeFactory);
-            var bookingPlugin = new BookingPlugin(serviceScopeFactory);
-            var travelDatabasePlugin = new TravelDatabasePlugin(serviceScopeFactory);
-            var dataFetchPlugin = new DataFetchPlugin(serviceScopeFactory); // NEW: Stage 1 Orchestrator Plugin
-
-            kernelBuilder.Plugins.AddFromObject(discoveryPlugin, "Discovery");
-            kernelBuilder.Plugins.AddFromObject(bookingPlugin, "Booking");
-            kernelBuilder.Plugins.AddFromObject(travelDatabasePlugin, "TravelDatabase");
-            kernelBuilder.Plugins.AddFromObject(dataFetchPlugin, "DataFetch"); // NEW: For Two-Stage Trip Planner
-
-            return kernelBuilder.Build();
+            return builder.Build();
         });
 
-        // Register Qdrant Native Client
-        services.AddSingleton<QdrantClient>(sp =>
-        {
-            return new QdrantClient(
-                host: aiSettings.QdrantHost,
-                port: aiSettings.QdrantPort,
-                https: false
-            );
-        });
-
-        // Register Vector DB service
+        // تسجيل الخدمات الأساسية [cite: 14, 15]
+        services.AddSingleton<QdrantClient>(sp => new QdrantClient(aiSettings.QdrantHost, aiSettings.QdrantPort, https: false));
         services.AddScoped<IVectorDbService, QdrantVectorService>();
-        services.AddScoped<DataSyncService>();
-
-        // Register Three-Brain AI Strategy
+        services.AddSingleton<SqlQueryPlugin>();
         services.AddScoped<IAIBrainService, AIBrainService>();
-
-        // Register AI Services
         services.AddScoped<IChatAiService, ChatAiService>();
-        
-        // Two-Stage Trip Planner (Stage 1: Grok Orchestrator, Stage 2: GPT-OSS Formatter)
-        services.AddScoped<IAiTripPlannerService, TwoStageTripPlannerService>();
+        services.AddScoped<IAiTripPlannerService, SmartAiTripPlannerService>(); // المخطط الوحيد المعتمد [cite: 16]
 
         return services;
     }

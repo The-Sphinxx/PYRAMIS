@@ -331,9 +331,9 @@ watch(() => props.modelValue, (newVal) => {
 }, { immediate: true });
 
 onMounted(() => {
-  document.addEventListener('click', handleClickOutside);
-  window.addEventListener('resize', handleResize);
-  window.addEventListener('scroll', handleScroll, true);
+  document.addEventListener('click', handleClickOutside, { passive: true });
+  window.addEventListener('resize', handleResize, { passive: true });
+  window.addEventListener('scroll', handleScroll, { capture: true, passive: true });
 });
 
 onBeforeUnmount(() => {

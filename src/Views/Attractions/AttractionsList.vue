@@ -132,7 +132,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAttractionStore } from '@/stores/attractionStore';
 import AttractionCard from '@/components/Attractions/AttractionCard.vue';
@@ -309,6 +309,11 @@ onMounted(async () => {
   } finally {
     loading.value = false;
   }
+});
+
+onUnmounted(() => {
+  attractionStore.resetFilters();
+  selectedCategory.value = 'all';
 });
 </script>
 

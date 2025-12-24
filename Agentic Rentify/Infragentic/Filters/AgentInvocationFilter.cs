@@ -14,46 +14,32 @@ public class AgentInvocationFilter(IServiceScopeFactory serviceScopeFactory) : I
     public async Task OnFunctionInvocationAsync(FunctionInvocationContext context, Func<FunctionInvocationContext, Task> next)
     {
         var stopwatch = Stopwatch.StartNew();
-        var userId = context.Arguments != null && context.Arguments.TryGetValue("UserId", out var userIdObj)
-            ? userIdObj?.ToString()
-            : null;
+        
+        // جلب أسماء واضحة للـ DB
+        var pluginName = context.Function.Metadata.PluginName ?? "TripSystem";
+        var functionName = context.Function.Name;
 
-        try
-        {
+        try {
             await next(context);
             stopwatch.Stop();
 
-            // Capture result with safe serialization
             var resultJson = SerializeResult(context.Result);
+            var argsJson = SerializeArguments(context.Arguments);
 
-            // Log execution (fire and forget)
             _ = Task.Run(() => LogExecutionAsync(
-                userId: userId,
-                pluginName: context.Function.PluginName,
-                functionName: context.Function.Name,
-                argumentsJson: context.Arguments != null ? SerializeArguments(context.Arguments) : "{}",
+                userId: null,
+                pluginName: pluginName,
+                functionName: functionName,
+                argumentsJson: argsJson,
                 resultJson: resultJson,
                 isError: false,
                 errorMessage: null,
                 executionDurationMs: stopwatch.ElapsedMilliseconds
             ));
         }
-        catch (Exception ex)
-        {
+        catch (Exception ex) {
             stopwatch.Stop();
-
-            // Log error
-            _ = Task.Run(() => LogExecutionAsync(
-                userId: userId,
-                pluginName: context.Function.PluginName,
-                functionName: context.Function.Name,
-                argumentsJson: context.Arguments != null ? SerializeArguments(context.Arguments) : "{}",
-                resultJson: string.Empty,
-                isError: true,
-                errorMessage: ex.Message,
-                executionDurationMs: stopwatch.ElapsedMilliseconds
-            ));
-
+            _ = Task.Run(() => LogExecutionAsync(null, pluginName, functionName, "{}", string.Empty, true, ex.Message, stopwatch.ElapsedMilliseconds));
             throw;
         }
     }

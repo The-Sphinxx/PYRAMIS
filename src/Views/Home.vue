@@ -97,7 +97,7 @@
           />
         </div>
         <div class="text-center">
-          <button class="btn btn-primary font-cairo font-semibold w-64 h-12 min-h-0 text-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all">View All</button>
+          <router-link to="/attractions/list" class="btn btn-primary font-cairo font-semibold w-64 h-12 min-h-0 text-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all flex items-center justify-center mx-auto">View All</router-link>
         </div>
       </div>
     </section>
@@ -125,7 +125,7 @@
           />
         </div>
         <div class="text-center">
-          <button class="btn btn-primary font-cairo font-semibold w-64 h-12 min-h-0 text-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all">View All</button>
+          <router-link to="/hotels/list" class="btn btn-primary font-cairo font-semibold w-64 h-12 min-h-0 text-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all flex items-center justify-center mx-auto">View All</router-link>
         </div>
       </div>
     </section>
@@ -159,7 +159,7 @@
           />
         </div>
         <div class="text-center">
-          <button class="btn btn-primary font-cairo font-semibold w-64 h-12 min-h-0 text-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all">View All</button>
+          <router-link to="/trips/list" class="btn btn-primary font-cairo font-semibold w-64 h-12 min-h-0 text-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all flex items-center justify-center mx-auto">View All</router-link>
         </div>
       </div>
     </section>
@@ -188,7 +188,7 @@
           />
         </div>
         <div class="text-center">
-          <button class="btn btn-primary font-cairo font-semibold w-64 h-12 min-h-0 text-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all">View All</button>
+          <router-link to="/cars/list" class="btn btn-primary font-cairo font-semibold w-64 h-12 min-h-0 text-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all flex items-center justify-center mx-auto">View All</router-link>
         </div>
       </div>
     </section>
@@ -196,7 +196,7 @@
     <section class="relative min-h-[600px] flex items-center justify-center overflow-hidden py-20">
   <div class="absolute inset-0 z-0">
     <img 
-      src="/public/ai.png" 
+      src="/public/images/AI.png" 
       alt="Background" 
       class="w-full h-full object-cover"
     />
@@ -453,7 +453,7 @@ const applyHomeData = (payload) => {
 const handleAttractionSearch = (searchData) => {
   console.log('Attraction Search:', searchData);
   router.push({
-    name: 'Attractions',
+    name: 'AttractionsList',
     query: {
       city: searchData.city,
       query: searchData.query
@@ -464,7 +464,7 @@ const handleAttractionSearch = (searchData) => {
 const handleHotelSearch = (searchData) => {
   console.log('Hotel Search:', searchData);
   router.push({
-    name: 'Hotels',
+    name: 'HotelsList',
     query: {
       destination: searchData.destination,
       checkIn: searchData.checkIn,
@@ -478,7 +478,7 @@ const handleHotelSearch = (searchData) => {
 const handleTripSearch = (searchData) => {
   console.log('Trip Search:', searchData);
   router.push({
-    name: 'Trips',
+    name: 'TripsList',
     query: {
       from: searchData.pickupLocation,
       pickupDate: searchData.pickupDate,
@@ -490,7 +490,7 @@ const handleTripSearch = (searchData) => {
 const handleCarSearch = (searchData) => {
   console.log('Car Search:', searchData);
   router.push({
-    name: 'Cars',
+    name: 'CarsList',
     query: {
       location: searchData.pickupLocation,
       pickupDate: searchData.pickupDate,

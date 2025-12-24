@@ -95,9 +95,9 @@
       </div>
 
       <!-- Book Now Button -->
-      <button class="w-full px-4 py-2.5 bg-primary text-primary-content border-none rounded-lg text-sm font-semibold cursor-pointer transition-all duration-300 hover:bg-primary-focus hover:shadow-lg active:scale-95" @click="handleBooking">
+      <router-link class="block text-center w-full px-4 py-2.5 bg-primary text-primary-content border-none rounded-lg text-sm font-semibold cursor-pointer transition-all duration-300 hover:bg-primary-focus hover:shadow-lg active:scale-95" :to="`/hotels/details/${hotel.id}`">
         View Details
-      </button>
+      </router-link>
     </div>
   </div>
 </template>

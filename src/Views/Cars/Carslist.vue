@@ -90,7 +90,7 @@
 </template>
 
 <script setup>
-import { onMounted, computed, ref } from "vue";
+import { onMounted, onUnmounted, computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useCarsStore } from "@/stores/carsStore";
 
@@ -152,6 +152,10 @@ function handlePageChange(page) {
 function resetFilters() {
   currentPage.value = 1;
 }
+
+onUnmounted(() => {
+  currentPage.value = 1;
+});
 </script>
 
 <style scoped>

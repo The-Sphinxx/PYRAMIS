@@ -121,21 +121,23 @@ const hotelsApi = {
     },
 
     /**
-     * Book a hotel
-     * @param {Object} bookingData - Booking information
-     * @returns {Promise<Object>} Booking confirmation
+     * Create a booking and Stripe PaymentIntent for hotels (Payment Element flow)
+     * @param {Object} bookingData - { userId, entityId, bookingType, startDate, endDate, totalPrice }
+     * @returns {Promise<Object>} { bookingId, clientSecret, paymentIntentId, publishableKey }
      */
-    async bookHotel(bookingData) {
+    async createBookingIntent(bookingData) {
         try {
-            const response = await api.post('/Bookings', {
-                type: 'hotel',
-                ...bookingData,
-            });
+            const response = await api.post('/Bookings', bookingData);
             return response.data;
         } catch (error) {
-            console.error('Error booking hotel:', error);
+            console.error('Error creating hotel booking intent:', error);
             throw error;
         }
+    },
+
+    // Backwards-compatible alias
+    async bookHotel(bookingData) {
+        return this.createBookingIntent(bookingData);
     }
 };
 

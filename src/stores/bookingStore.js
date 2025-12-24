@@ -349,6 +349,50 @@ export const useBookingStore = defineStore('booking', {
                 this.loading = false;
             }
         },
+
+        /**
+         * Enrich booking in progress with guest info and pricing for confirmation page
+         */
+        enrichBookingWithDetails(guestInfo, paymentInfo) {
+            if (!this.bookingInProgress) return;
+
+            const costs = this.bookingCosts;
+
+            // Add booking ID
+            if (!this.bookingInProgress.id) {
+                this.bookingInProgress.id = `booking_${Date.now()}`;
+            }
+
+            // Add guest information
+            this.bookingInProgress.guestInfo = {
+                firstName: guestInfo.firstName || '',
+                lastName: guestInfo.lastName || '',
+                email: guestInfo.email || '',
+                phone: guestInfo.phone || '',
+                specialRequests: guestInfo.specialRequests || ''
+            };
+
+            // Add pricing breakdown
+            this.bookingInProgress.pricing = {
+                basePrice: costs?.basePrice || this.bookingInProgress.basePrice || 0,
+                subtotal: costs?.subtotal || 0,
+                serviceFee: costs?.serviceFee || 0,
+                taxes: costs?.taxes || 0,
+                total: costs?.total || 0
+            };
+
+            // Add payment information
+            this.bookingInProgress.paymentInfo = {
+                method: paymentInfo.method || 'card',
+                cardLastFour: paymentInfo.cardLastFour || null
+            };
+
+            // Set payment status
+            this.bookingInProgress.paymentStatus = paymentInfo.status || 'paid';
+
+            this.persistState();
+        },
+
         /**
          * Persist state to localStorage
          */

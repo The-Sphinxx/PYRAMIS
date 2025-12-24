@@ -137,7 +137,9 @@
 
         <!-- Card Payment Details (Only show if card is selected) -->
         <div v-if="localData.paymentMethod === 'card'" class="space-y-6 animate-fade-in-down">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <slot v-if="useStripeElements" name="payment-element" />
+
+          <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Card Number -->
             <div class="form-control">
               <label class="label pl-0">
@@ -231,8 +233,9 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import { useFormValidation } from '@/composables/useFormValidation';
+import { useAuthStore } from '@/stores/authStore';
 import {
   validateRequired,
   validateEmail,
@@ -261,12 +264,45 @@ const props = defineProps({
   submitting: {
     type: Boolean,
     default: false
+  },
+  useStripeElements: {
+    type: Boolean,
+    default: false
   }
 });
 
 const emit = defineEmits(['update:modelValue', 'validate', 'submit']);
+const authStore = useAuthStore();
 
 const localData = ref({ ...props.modelValue });
+
+// Pre-fill guest information on mount
+onMounted(() => {
+  // Try to get saved guest info from localStorage
+  const savedGuestInfo = localStorage.getItem('guestInfo');
+  
+  if (savedGuestInfo) {
+    try {
+      const parsed = JSON.parse(savedGuestInfo);
+      localData.value.firstName = parsed.firstName || localData.value.firstName;
+      localData.value.lastName = parsed.lastName || localData.value.lastName;
+      localData.value.email = parsed.email || localData.value.email;
+      localData.value.phone = parsed.phone || localData.value.phone;
+    } catch (e) {
+      console.error('Failed to parse saved guest info', e);
+    }
+  }
+  
+  // If user is logged in, use their information (overrides localStorage)
+  if (authStore.isAuthenticated && authStore.user) {
+    localData.value.firstName = authStore.user.firstName || localData.value.firstName;
+    localData.value.lastName = authStore.user.lastName || localData.value.lastName;
+    localData.value.email = authStore.user.email || localData.value.email;
+  }
+  
+  // Emit the pre-filled data
+  emit('update:modelValue', { ...localData.value });
+});
 
 const { 
   errors, 
@@ -290,6 +326,15 @@ const validateExpiryDateString = (value) => {
 // Watch for changes and emit
 watch(localData, (newVal) => {
   emit('update:modelValue', { ...newVal });
+  
+  // Save guest info to localStorage (excluding payment details)
+  const guestInfoToSave = {
+    firstName: newVal.firstName,
+    lastName: newVal.lastName,
+    email: newVal.email,
+    phone: newVal.phone
+  };
+  localStorage.setItem('guestInfo', JSON.stringify(guestInfoToSave));
 }, { deep: true });
 
 // Format card number (add spaces)
@@ -319,7 +364,7 @@ const validate = () => {
     phone: { value: localData.value.phone, validator: validatePhone },
   };
 
-  if (localData.value.paymentMethod === 'card') {
+  if (localData.value.paymentMethod === 'card' && !props.useStripeElements) {
     fieldsToValidate.cardNumber = { value: localData.value.cardNumber, validator: validateCreditCard };
     fieldsToValidate.cardName = { value: localData.value.cardName, validator: (v) => validateRequired(v, 'Name on card') };
     fieldsToValidate.expiryDate = { value: localData.value.expiryDate, validator: validateExpiryDateString };

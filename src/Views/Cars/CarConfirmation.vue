@@ -14,6 +14,9 @@
         </div>
         <h1 class="text-3xl font-bold text-gray-800 mb-2">Booking Confirmed !</h1>
         <p class="text-gray-500">Your car reservation has been successfully processed</p>
+        <div v-if="paymentStatus" class="mt-4">
+          <span class="badge" :class="paymentStatusClass">Payment {{ paymentStatusLabel }}</span>
+        </div>
       </div>
 
       <!-- Main Card -->
@@ -119,6 +122,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
+import { loadStripe } from '@stripe/stripe-js';
 import { useBookingStore } from '@/stores/bookingStore';
 import { useCarsStore } from '@/stores/carsStore';
 import StepIndicator from '@/components/Common/StepIndicator.vue';
@@ -129,18 +133,82 @@ const bookingStore = useBookingStore();
 const carsStore = useCarsStore();
 
 const booking = ref(null);
+const paymentStatus = ref('processing');
+const paymentStatusNote = ref('');
 
 const car = computed(() => carsStore.getCarById(booking.value?.itemId));
 
 const bookingImage = computed(() => car.value?.images?.[0] || '/images/placeholder.jpg');
 
 const formattedDate = computed(() => {
-  const date = booking.value?.bookingData?.startDate;
+  const date = booking.value?.bookingData?.pickupDate;
   if (!date) return 'N/A';
   return new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 });
 
 const bookingType = computed(() => 'car');
+
+const paymentStatusLabel = computed(() => {
+  switch (paymentStatus.value) {
+    case 'succeeded':
+      return 'Paid';
+    case 'processing':
+      return 'Processing';
+    case 'pending':
+      return 'Pending';
+    case 'requires_payment_method':
+      return 'pending';
+    case 'requires_action':
+      return 'Action needed';
+    default:
+      return paymentStatus.value || 'Pending';
+  }
+});
+
+const paymentStatusClass = computed(() => {
+  switch (paymentStatus.value) {
+    case 'succeeded':
+      return 'badge-success';
+    case 'processing':
+      return 'badge-warning';
+    case 'pending':
+      return 'badge-info';
+    case 'requires_payment_method':
+      return 'badge-error';
+    default:
+      return 'badge-neutral';
+  }
+});
+
+const verifyPaymentStatus = async () => {
+  try {
+    const clientSecret = route.query.payment_intent_client_secret || sessionStorage.getItem('stripe_client_secret');
+    if (!clientSecret) {
+      // Check if this is Pay on Arrival
+      if (booking.value?.paymentInfo?.method === 'arrival' || booking.value?.paymentStatus === 'pending') {
+        paymentStatus.value = 'pending';
+        paymentStatusNote.value = 'Payment will be collected upon arrival';
+      }
+      return;
+    }
+
+    const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || 'pk_test_51QauWoP5jgpKEGjvRGUxEJbvLh2lnWZe1j6GmKvqfCKAcWFAv9YJxHg8YYCXmzIINl7IpVyTxBv0FdC6UkdN5Hpa00DFWIBkJx');
+    const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
+
+    paymentStatus.value = paymentIntent.status;
+    if (paymentIntent.status === 'succeeded') {
+      paymentStatusNote.value = 'Your payment has been successfully processed';
+    } else if (paymentIntent.status === 'processing') {
+      paymentStatusNote.value = 'Your payment is being processed';
+    } else {
+      paymentStatusNote.value = 'There was an issue with your payment';
+    }
+  } catch (error) {
+    console.error('Error verifying payment status:', error);
+    paymentStatus.value = 'unknown';
+    paymentStatusNote.value = 'Could not verify payment status';
+  }
+};
 
 const recommendations = ref([
   {
@@ -176,8 +244,17 @@ const recommendations = ref([
 ]);
 
 onMounted(async () => {
-  booking.value = bookingStore.currentBooking || bookingStore.bookings.find(b => b.id === route.params.id);
-  if (!booking.value) return;
+  // 1. Get booking from store FIRST (needed for payment verification)
+  booking.value = bookingStore.bookingInProgress;
+  if (!booking.value) {
+    console.warn("No booking data found for confirmation");
+    return;
+  }
+
+  // 2. Verify payment status (now that booking data is loaded)
+  await verifyPaymentStatus();
+
+  // 3. Fetch cars if not already loaded
   if (!carsStore.cars.length) await carsStore.fetchCars();
 });
 

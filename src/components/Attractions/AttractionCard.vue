@@ -27,27 +27,24 @@
       </div>
 
       <!-- Location -->
-      <div class="flex items-center gap-2 mb-3 text-neutral">
+      <div class="flex items-center gap-1.5 mb-2 text-base-content/70 text-[13px]">
         <i class="fas fa-map-marker-alt text-primary text-sm"></i>
-        <span class="text-sm">{{ location }}</span>
+        <span>{{ location }}</span>
       </div>
 
       <!-- Rating -->
-      <div class="flex items-center gap-2 mb-4">
+      <div class="flex items-center gap-1.5 mb-3">
         <i class="fas fa-star text-primary text-sm"></i>
-        <span class="font-bold text-base-content">{{ rating }}</span>
-        <span class="text-sm text-neutral">
-          ({{ formattedReviews }} {{ reviewsText }})
-        </span>
+        <span class="text-[13px] font-semibold text-base-content">{{ rating }} ({{ formattedReviews }} {{ reviewsText }})</span>
       </div>
 
       <!-- Button -->
-      <button
-        @click="handleViewDetails"
-        class="w-full bg-primary hover:bg-primary-focus text-primary-content font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:shadow-lg active:scale-95"
+      <router-link
+        :to="`/attractions/details/${id}`"
+        class="block text-center w-full bg-primary hover:bg-primary-focus text-primary-content font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:shadow-lg active:scale-95"
       >
         {{ buttonText }}
-      </button>
+      </router-link>
     </div>
   </div>
 </template>

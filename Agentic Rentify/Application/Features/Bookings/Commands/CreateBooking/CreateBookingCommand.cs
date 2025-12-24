@@ -2,7 +2,7 @@ using MediatR;
 
 namespace Agentic_Rentify.Application.Features.Bookings.Commands.CreateBooking;
 
-public class CreateBookingCommand : IRequest<string>
+public class CreateBookingCommand : IRequest<CreateBookingResult>
 {
     public string UserId { get; set; } = string.Empty;
     public int EntityId { get; set; }

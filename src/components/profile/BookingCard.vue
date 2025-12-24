@@ -9,8 +9,8 @@
           class="w-full h-full object-cover"
         />
         <div class="absolute top-3 right-3 badge badge-lg bg-white/90 backdrop-blur-sm gap-2">
-          <i :class="booking.type === 'فندق' ? 'fas fa-hotel' : 'fas fa-map-marked-alt'" class="text-primary"></i>
-          <span class="font-semibold">{{ booking.type }}</span>
+          <i :class="booking.type?.toLowerCase() === 'hotel' ? 'fas fa-hotel' : 'fas fa-map-marked-alt'" class="text-primary"></i>
+          <span class="font-semibold capitalize">{{ booking.type }}</span>
         </div>
       </div>
 
@@ -33,7 +33,7 @@
               </span>
             </div>
             <span class="text-xs text-base-content/50 bg-base-200 px-3 py-1 rounded-md">
-              رقم المرجع: {{ booking.reference }}
+              Reference: {{ booking.reference }}
             </span>
           </div>
         </div>
@@ -43,13 +43,6 @@
             <i class="fas fa-check-circle"></i>
             {{ booking.status }}
           </span>
-          <button 
-            @click="$emit('view-details', booking.id)"
-            class="btn btn-ghost btn-sm text-primary gap-2 font-semibold"
-          >
-            عرض التفاصيل
-            <i class="fas fa-arrow-left"></i>
-          </button>
         </div>
       </div>
     </div>

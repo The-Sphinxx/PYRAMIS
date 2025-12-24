@@ -83,9 +83,11 @@
       </div>
 
       <!-- Button -->
-      <button 
-        @click="$emit('view', car)"
+      <router-link 
+        :to="`/cars/details/${car.id}`"
         class="
+          block
+          text-center
           w-full
           bg-primary
           md:hover:bg-primary-focus
@@ -102,7 +104,7 @@
         "
       >
         View Details
-      </button>
+      </router-link>
     </div>
   </div>
 </template>
