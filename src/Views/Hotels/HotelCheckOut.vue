@@ -182,6 +182,32 @@ const handleConfirm = async () => {
   paymentMessage.value = '';
 
   try {
+    // Check if user selected "Pay on Arrival"
+    if (guest.value.paymentMethod === 'arrival') {
+      // Skip Stripe payment, go directly to confirmation
+      bookingStore.enrichBookingWithDetails(
+        {
+          firstName: guest.value.firstName,
+          lastName: guest.value.lastName,
+          email: guest.value.email,
+          phone: guest.value.phone,
+          specialRequests: guest.value.specialRequests
+        },
+        {
+          method: 'arrival',
+          cardLastFour: null,
+          status: 'pending'
+        }
+      );
+      
+      router.push({
+        name: 'HotelConfirmation',
+        params: { id: route.params.id }
+      });
+      return;
+    }
+
+    // Card payment flow
     if (!clientSecret.value) {
       await initializePaymentIntent();
     }

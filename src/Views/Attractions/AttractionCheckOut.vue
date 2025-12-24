@@ -186,6 +186,32 @@ const handlePlaceOrder = async () => {
   paymentMessage.value = '';
 
   try {
+    // Check if user selected "Pay on Arrival"
+    if (guestData.value.paymentMethod === 'arrival') {
+      // Skip Stripe payment, go directly to confirmation
+      bookingStore.enrichBookingWithDetails(
+        {
+          firstName: guestData.value.firstName,
+          lastName: guestData.value.lastName,
+          email: guestData.value.email,
+          phone: guestData.value.phone,
+          specialRequests: guestData.value.specialRequests
+        },
+        {
+          method: 'arrival',
+          cardLastFour: null,
+          status: 'pending'
+        }
+      );
+      
+      router.push({
+        name: 'AttractionConfirmation',
+        params: { id: entityId.value }
+      });
+      return;
+    }
+
+    // Card payment flow
     if (!clientSecret.value) {
       await initializePaymentIntent();
     }
