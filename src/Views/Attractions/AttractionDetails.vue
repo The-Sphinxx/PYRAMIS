@@ -14,7 +14,7 @@
     </div>
 
     <div v-else-if="attraction" class="bg-base-200 pb-16 !overflow-visible">
-      <div class="page-container py-4">
+      <div class="page-container py-4  ">
         <div class="flex items-center gap-2 text-sm text-base-content/70">
           <router-link to="/" class="hover:text-primary">Home</router-link>
           <i class="fas fa-chevron-right text-xs"></i>

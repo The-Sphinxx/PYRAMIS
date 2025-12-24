@@ -12,7 +12,7 @@
         </div>
 
         <!-- Hero Content -->
-        <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 text-center text-white px-4">
+        <div class="absolute inset-0 flex flex-col items-center justify-start pt-32 lg:justify-center lg:pt-20 text-center text-white px-4">
           <h1 class="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg font-cairo">Discover Egypt</h1>
           <p class="text-lg md:text-xl max-w-2xl mx-auto mb-20 drop-shadow-md font-cairo text-white/90">
             From ancient pyramids to pristine beaches, find your perfect Egyptian adventure.

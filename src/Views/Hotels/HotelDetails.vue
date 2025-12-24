@@ -6,7 +6,7 @@
     </div>
 
     <!-- Hotel Details Content -->
-    <div v-else-if="hotel" class="page-container py-8">
+    <div v-else-if="hotel" class="page-container py-4">
       <!-- Breadcrumbs -->
       <div class="text-sm breadcrumbs mb-4 text-base-content/70">
         <ul>

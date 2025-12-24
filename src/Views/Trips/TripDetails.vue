@@ -1,5 +1,5 @@
 <template>
-  <div v-if="trip" class="min-h-screen bg-base-100 pb-12 pt-4">
+  <div v-if="trip" class="min-h-screen bg-base-100 py-4">
     <div class="container mx-auto px-4 lg:px-[120px]">
       <!-- Breadcrumbs -->
       <div class="text-sm breadcrumbs mb-4 font-cairo text-base-content/70">

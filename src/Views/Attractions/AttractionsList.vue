@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-base-200">
     <!-- Hero Section with Search -->
     <div 
-      class="relative bg-cover bg-center min-h-[585px] flex items-center"
+      class="relative bg-cover bg-center min-h-[585px] flex items-start pt-32 lg:items-center lg:pt-20"
       style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/hero-attractions.jpg')"
     >
       <div class="page-container py-16">

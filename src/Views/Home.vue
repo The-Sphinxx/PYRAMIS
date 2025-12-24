@@ -7,7 +7,7 @@
         <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50"></div>
       </div>
       
-      <div class="relative z-10 flex flex-col items-center justify-center h-full page-container text-center">
+      <div class="relative z-10 flex flex-col items-center justify-start pt-32 lg:justify-center lg:pt-20 h-full page-container text-center">
         <h1 class="font-cairo text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 animate-fade-in" v-html="heroDisplayTitle"></h1>
         <p class="font-cairo text-xl md:text-2xl text-white/90 mb-12 animate-fade-in-delay">
           {{ heroSection.subtitle || defaultHero.subtitle }}
