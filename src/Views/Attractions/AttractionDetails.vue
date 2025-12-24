@@ -440,8 +440,8 @@ const handleResize = () => {
 // Lifecycle
 onMounted(() => {
   fetchAttraction();
-  window.addEventListener('scroll', handleScroll);
-  window.addEventListener('resize', handleResize);
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('resize', handleResize, { passive: true });
 });
 
 onUnmounted(() => {

@@ -223,7 +223,7 @@ const handleResize = () => {
 
 // Lifecycle hooks
 onMounted(() => {
-  window.addEventListener('resize', handleResize);
+  window.addEventListener('resize', handleResize, { passive: true });
   startAutoPlay();
 });
 

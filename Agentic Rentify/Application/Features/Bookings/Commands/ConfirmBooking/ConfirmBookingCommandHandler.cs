@@ -12,12 +12,12 @@ public class ConfirmBookingCommandHandler(IUnitOfWork unitOfWork)
     public async Task<Unit> Handle(ConfirmBookingCommand request, CancellationToken cancellationToken)
     {
         var matches = await unitOfWork.Repository<Booking>()
-            .GetAsync(b => b.StripeSessionId == request.SessionId);
+            .GetAsync(b => b.StripeSessionId == request.PaymentIntentId);
 
         var booking = matches.FirstOrDefault();
         if (booking == null)
         {
-            throw new NotFoundException($"Booking with session {request.SessionId} not found.");
+            throw new NotFoundException($"Booking with payment intent {request.PaymentIntentId} not found.");
         }
 
         if (booking.IsPaid && booking.Status == BookingStatus.Confirmed)

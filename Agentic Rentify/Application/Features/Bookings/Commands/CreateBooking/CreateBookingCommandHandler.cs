@@ -6,9 +6,9 @@ using MediatR;
 namespace Agentic_Rentify.Application.Features.Bookings.Commands.CreateBooking;
 
 public class CreateBookingCommandHandler(IUnitOfWork unitOfWork, IPaymentService paymentService)
-    : IRequestHandler<CreateBookingCommand, string>
+    : IRequestHandler<CreateBookingCommand, CreateBookingResult>
 {
-    public async Task<string> Handle(CreateBookingCommand request, CancellationToken cancellationToken)
+    public async Task<CreateBookingResult> Handle(CreateBookingCommand request, CancellationToken cancellationToken)
     {
         var booking = new Booking
         {
@@ -25,11 +25,17 @@ public class CreateBookingCommandHandler(IUnitOfWork unitOfWork, IPaymentService
         await unitOfWork.Repository<Booking>().AddAsync(booking);
         await unitOfWork.CompleteAsync();
 
-        var sessionUrl = await paymentService.CreateCheckoutSessionAsync(booking);
+        var paymentIntent = await paymentService.CreatePaymentIntentAsync(booking);
 
         await unitOfWork.Repository<Booking>().UpdateAsync(booking);
         await unitOfWork.CompleteAsync();
 
-        return sessionUrl;
+        return new CreateBookingResult
+        {
+            BookingId = booking.Id,
+            ClientSecret = paymentIntent.ClientSecret,
+            PaymentIntentId = paymentIntent.PaymentIntentId,
+            PublishableKey = paymentIntent.PublishableKey
+        };
     }
 }

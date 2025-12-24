@@ -11,6 +11,10 @@
         </div>
         <h1 class="text-4xl font-bold text-base-content mb-3">Booking Confirmed !</h1>
         <p class="text-base-content/70 text-lg">Your reservation has been successfully processed</p>
+        <div v-if="paymentStatus" class="flex justify-center mt-4">
+          <span class="badge text-sm px-4 py-3" :class="paymentStatusClass">Payment {{ paymentStatusLabel }}</span>
+        </div>
+        <p v-if="paymentStatusNote" class="text-error text-sm mt-2">{{ paymentStatusNote }}</p>
       </div>
 
       <!-- Confirmation Card -->
@@ -127,6 +131,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { loadStripe } from '@stripe/stripe-js';
 import { useHotelsStore } from '@/stores/hotelsStore';
 import StepIndicator from '@/components/Common/StepIndicator.vue';
 import Location from '@/components/Common/Location.vue';
@@ -136,10 +141,44 @@ const router = useRouter();
 const hotelStore = useHotelsStore();
 
 const hotel = ref(null);
+const paymentStatus = ref('');
+const paymentStatusNote = ref('');
 
 const displayAmenities = computed(() => {
   if (!hotel.value?.amenities) return [];
   return hotel.value.amenities.slice(0, 3);
+});
+
+const paymentStatusLabel = computed(() => {
+  switch (paymentStatus.value) {
+    case 'succeeded':
+      return 'Paid';
+    case 'processing':
+      return 'Processing';
+    case 'pending':
+      return 'Pending';
+    case 'requires_payment_method':
+      return 'Pending';
+    case 'requires_action':
+      return 'Action needed';
+    default:
+      return paymentStatus.value || 'Pending';
+  }
+});
+
+const paymentStatusClass = computed(() => {
+  switch (paymentStatus.value) {
+    case 'succeeded':
+      return 'badge-success';
+    case 'processing':
+      return 'badge-warning';
+    case 'pending':
+      return 'badge-info';
+    case 'requires_payment_method':
+      return 'badge-error';
+    default:
+      return 'badge-neutral';
+  }
 });
 
 const getAmenityIcon = (amenity) => {
@@ -151,6 +190,36 @@ const getAmenityIcon = (amenity) => {
   if (lower.includes('park')) return 'fas fa-parking';
   if (lower.includes('transport') || lower.includes('shuttle')) return 'fas fa-shuttle-van';
   return 'fas fa-check-circle'; // Default
+};
+
+const verifyPaymentStatus = async () => {
+  const clientSecret = route.query.payment_intent_client_secret || sessionStorage.getItem('stripe_client_secret');
+  const publishableKey = sessionStorage.getItem('stripe_publishable_key') || import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
+
+  if (!clientSecret || !publishableKey) {
+    // Check if this is Pay on Arrival
+    const bookingInProgress = JSON.parse(localStorage.getItem('bookingInProgress'));
+    if (bookingInProgress?.paymentInfo?.method === 'arrival' || bookingInProgress?.paymentStatus === 'pending') {
+      paymentStatus.value = 'pending';
+      paymentStatusNote.value = 'Payment will be collected upon arrival';
+    }
+    return;
+  }
+
+  try {
+    const stripe = await loadStripe(publishableKey);
+    const { paymentIntent, error } = await stripe.retrievePaymentIntent(clientSecret);
+
+    if (paymentIntent) {
+      paymentStatus.value = paymentIntent.status;
+      paymentStatusNote.value = paymentIntent.last_payment_error?.message || '';
+    } else if (error) {
+      paymentStatus.value = 'requires_payment_method';
+      paymentStatusNote.value = error.message || '';
+    }
+  } catch (err) {
+    console.error('Failed to verify payment intent', err);
+  }
 };
 
 // Mock Data for "Enhance Your Stay" - using generic images as placeholders
@@ -211,5 +280,11 @@ onMounted(async () => {
         }
         hotel.value = hotelStore.getHotelById(hotelId);
     }
+
+  // Get booking from store FIRST (needed for payment verification)
+  booking.value = bookingStore.bookingInProgress;
+
+  // Verify payment status (now that booking data is loaded)
+  await verifyPaymentStatus();
 });
 </script>

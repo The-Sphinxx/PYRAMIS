@@ -120,22 +120,26 @@ const tripsApi = {
     },
 
     /**
-     * Book a trip
-     * @param {Object} bookingData - Booking information
-     * @returns {Promise<Object>} Booking confirmation
+     * Create booking + PaymentIntent for trips (Payment Element flow)
+     * @param {Object} bookingData - { userId, entityId, bookingType, startDate, endDate, totalPrice }
+     * @returns {Promise<Object>} { bookingId, clientSecret, paymentIntentId, publishableKey }
      */
-    async bookTrip(tripId, bookingData) {
+    async createBookingIntent(bookingData) {
         try {
-            const response = await api.post('/Bookings', {
-                tripId,
-                type: 'trip',
-                ...bookingData,
-            });
+            const response = await api.post('/Bookings', bookingData);
             return response.data;
         } catch (error) {
-            console.error('Error booking trip:', error);
+            console.error('Error creating trip booking intent:', error);
             throw error;
         }
+    },
+
+    // Backwards-compatible alias
+    async bookTrip(tripId, bookingData) {
+        return this.createBookingIntent({
+            tripId,
+            ...bookingData
+        });
     }
 };
 

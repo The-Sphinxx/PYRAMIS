@@ -1,10 +1,10 @@
 using Agentic_Rentify.Application.Interfaces;
+using Agentic_Rentify.Application.Models.Payments;
 using Agentic_Rentify.Core.Entities;
 using Agentic_Rentify.Infrastructure.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Stripe;
-using Stripe.Checkout;
 
 namespace Agentic_Rentify.Infrastructure.Services;
 
@@ -20,46 +20,34 @@ public class StripePaymentService : IPaymentService
         StripeConfiguration.ApiKey = _settings.SecretKey;
     }
 
-    public async Task<string> CreateCheckoutSessionAsync(Booking booking)
+    public async Task<PaymentIntentResult> CreatePaymentIntentAsync(Booking booking)
     {
-        var sessionOptions = new SessionCreateOptions
+        var intentOptions = new PaymentIntentCreateOptions
         {
-            PaymentMethodTypes = new List<string> { "card" },
-            Mode = "payment",
-            SuccessUrl = $"{_clientAppUrl}/payment-success?sessionId={{CHECKOUT_SESSION_ID}}",
-            CancelUrl = $"{_clientAppUrl}/payment-cancelled",
+            Amount = (long)Math.Round(booking.TotalPrice * 100M, 0, MidpointRounding.AwayFromZero),
+            Currency = "usd",
+            AutomaticPaymentMethods = new PaymentIntentAutomaticPaymentMethodsOptions
+            {
+                Enabled = true
+            },
             Metadata = new Dictionary<string, string>
             {
                 { "bookingId", booking.Id.ToString() },
                 { "userId", booking.UserId },
-                { "bookingType", booking.BookingType }
-            },
-            LineItems = new List<SessionLineItemOptions>
-            {
-                new()
-                {
-                    Quantity = 1,
-                    PriceData = new SessionLineItemPriceDataOptions
-                    {
-                        Currency = "usd",
-                        UnitAmountDecimal = booking.TotalPrice * 100,
-                        ProductData = new SessionLineItemPriceDataProductDataOptions
-                        {
-                            Name = $"{booking.BookingType} Booking #{booking.Id}",
-                            Metadata = new Dictionary<string, string>
-                            {
-                                { "entityId", booking.EntityId.ToString() }
-                            }
-                        }
-                    }
-                }
+                { "bookingType", booking.BookingType },
+                { "entityId", booking.EntityId.ToString() }
             }
         };
 
-        var sessionService = new SessionService();
-        var session = await sessionService.CreateAsync(sessionOptions);
+        var intentService = new PaymentIntentService();
+        var intent = await intentService.CreateAsync(intentOptions);
 
-        booking.StripeSessionId = session.Id;
-        return session.Url ?? string.Empty;
+        booking.StripeSessionId = intent.Id; // Stores PaymentIntent id for webhook lookup
+
+        return new PaymentIntentResult(
+            intent.ClientSecret,
+            intent.Id,
+            _settings.PublishableKey
+        );
     }
 }

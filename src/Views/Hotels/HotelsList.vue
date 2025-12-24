@@ -77,7 +77,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useHotelsStore } from '@/stores/hotelsStore';
 import HotelCard from '@/components/Hotels/HotelCard.vue';
@@ -307,6 +307,11 @@ onMounted(async () => {
   } finally {
     loading.value = false;
   }
+});
+
+onUnmounted(() => {
+  hotelStore.resetFilters();
+  selectedCategory.value = 'all';
 });
 </script>
 

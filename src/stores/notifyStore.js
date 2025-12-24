@@ -2,14 +2,16 @@ import { defineStore } from 'pinia'
 
 export const useNotifyStore = defineStore('notify', {
   state: () => ({
-    toasts: []
+    toasts: [],
+    timeoutIds: []
   }),
   actions: {
     show(message, type = 'info', timeout = 3500) {
       const id = Date.now() + Math.random()
       this.toasts.push({ id, message, type })
       if (timeout > 0) {
-        setTimeout(() => this.remove(id), timeout)
+        const timeoutId = setTimeout(() => this.remove(id), timeout)
+        this.timeoutIds.push(timeoutId)
       }
       return id
     },
