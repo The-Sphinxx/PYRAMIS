@@ -154,18 +154,6 @@ const routes = [
         component: AiPlanResults,
         meta: { requiresAuth: false },
       },
-      {
-        path: 'ai/planner',
-        name: 'AiPlanner',
-        component: AiPlanner,
-        meta: { requiresAuth: false },
-      },
-      {
-        path: 'ai/planner-result',
-        name: 'PlannerResult',
-        component: AiPlannerResult,
-        meta: { requiresAuth: false },
-      },
 
       // Attractions Routes
       {

@@ -158,7 +158,7 @@ const links = [
   { name: 'HotelsList', label: 'Hotels' },
   { name: 'TripsList', label: 'Trips' },
   { name: 'CarsList', label: 'Car Rental' },
-  { name: 'AiPlanner', label: 'Ai Trip Planner' },
+  { name: 'AiCollectData', label: 'Ai Trip Planner' },
 ];
 
 const handleScroll = () => {

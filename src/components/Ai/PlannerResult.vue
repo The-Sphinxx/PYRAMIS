@@ -226,7 +226,7 @@ const markers = [];
 const polyline = ref(null);
 
 const goBack = () => {
-  router.push({ name: 'AiPlanner' });
+  router.push({ name: 'AiCollectData' });
 };
 
 const initializeMap = () => {
@@ -307,7 +307,7 @@ onMounted(async () => {
     if (localStorage.getItem('tripPlanData')) {
       tripData.value = JSON.parse(localStorage.getItem('tripPlanData'));
     } else {
-      router.push({ name: 'AiPlanner' });
+      router.push({ name: 'AiCollectData' });
       return;
     }
 
@@ -316,7 +316,7 @@ onMounted(async () => {
     addMarkers();
   } catch (error) {
     console.error('Error:', error);
-    router.push({ name: 'AiPlanner' });
+    router.push({ name: 'AiCollectData' });
   }
 });
 </script>
