@@ -62,7 +62,7 @@ public class DbInitializer(
             // Ensure Admin is in role
             if (!await userManager.IsInRoleAsync(adminUser, "Admin"))
             {
-                var addRoleResult = await userManager.AddToRoleAsync(adminUser, "Super Admin");
+                var addRoleResult = await userManager.AddToRoleAsync(adminUser, "SuperAdmin");
                 if (!addRoleResult.Succeeded)
                 {
                     var errors = string.Join(", ", addRoleResult.Errors.Select(e => e.Description));

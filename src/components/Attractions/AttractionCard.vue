@@ -4,6 +4,14 @@
   >
     <!-- Image Container -->
     <div class="relative h-64 overflow-hidden">
+      <button
+        class="btn btn-circle btn-sm absolute right-3 top-3 z-10 bg-base-100/80"
+        :class="{ 'text-error': isWishlisted }"
+        @click.stop="toggleWishlist"
+        title="Save to wishlist"
+      >
+        <i :class="isWishlisted ? 'fas fa-bookmark' : 'far fa-bookmark'"></i>
+      </button>
       <img 
         :src="image" 
         :alt="title"
@@ -50,7 +58,9 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
+import { useAuthStore } from '@/stores/authStore';
+import wishlistApi from '@/Services/wishlistApi';
 
 // Props
 const props = defineProps({
@@ -89,11 +99,49 @@ const props = defineProps({
   reviewsText: {
     type: String,
     default: 'reviews'
+  },
+  isWishlistedProp: {
+    type: Boolean,
+    default: false
   }
 });
 
 // Emits
 const emit = defineEmits(['viewDetails']);
+
+const authStore = useAuthStore();
+const isWishlisted = ref(!!props.isWishlistedProp);
+const isSaving = ref(false);
+
+const toggleWishlist = async () => {
+  if (isSaving.value) return;
+  if (!authStore.user?.id) {
+    // Future: redirect to login or show toast
+    return;
+  }
+
+  isSaving.value = true;
+  try {
+    const payload = {
+      itemId: props.id,
+      itemType: 'Attraction',
+      title: props.title,
+      imageUrl: props.image,
+      location: props.location,
+      rating: props.rating || null
+    };
+
+    if (isWishlisted.value) {
+      await wishlistApi.remove('Attraction', props.id);
+      isWishlisted.value = false;
+    } else {
+      await wishlistApi.add(payload);
+      isWishlisted.value = true;
+    }
+  } finally {
+    isSaving.value = false;
+  }
+};
 
 // Computed
 const formattedReviews = computed(() => {

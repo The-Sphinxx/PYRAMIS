@@ -104,7 +104,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { useAuthStore } from '@/stores/authStore';
 import wishlistApi from '@/Services/wishlistApi';
 
@@ -113,13 +113,6 @@ const props = defineProps({
     type: Object,
     required: true
   }
-});
-
-const componentId = Math.random().toString(36).substr(2, 9);
-
-onMounted(() => {
-  console.log('🎴 TripCard MOUNTED - ComponentID:', componentId, 'TripID:', props.trip.id, 'Title:', props.trip.title);
-  console.trace('Mount stack trace');
 });
 
 const authStore = useAuthStore();

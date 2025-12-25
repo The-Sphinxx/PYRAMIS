@@ -81,8 +81,8 @@
          <div v-if="savedItems.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div v-for="item in savedItems" :key="item.id" class="card bg-base-100 shadow-xl image-full h-64 relative">
               <button
-                class="btn btn-square btn-sm absolute right-3 top-3 bg-base-100/80"
-                @click="handleRemoveWishlist(item)"
+                class="btn btn-square btn-sm absolute right-3 top-3 bg-base-100/80 z-50 hover:bg-error hover:text-white"
+                @click.stop="handleRemoveWishlist(item)"
                 title="Remove from wishlist"
               >
                 <i class="fas fa-heart-broken text-error"></i>
@@ -97,7 +97,7 @@
                    <i class="fas fa-star"></i> {{ item.rating }}
                 </div>
                 <div class="card-actions justify-end mt-auto">
-                  <button class="btn btn-primary btn-sm">View Details</button>
+                  <button class="btn btn-primary btn-sm" @click="handleViewDetails(item)">View Details</button>
                 </div>
               </div>
             </div>
@@ -141,6 +141,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import ProfileHeader from '@/components/profile/ProfileHeader.vue';
 import BookingCard from '@/components/profile/BookingCard.vue';
 import ActivityItem from '@/components/profile/ActivityItem.vue';
@@ -153,6 +154,7 @@ import wishlistApi from '@/Services/wishlistApi';
 import { useAuthStore } from '@/stores/authStore';
 
 const authStore = useAuthStore();
+const router = useRouter();
 const activeTab = ref('overview');
 
 const user = ref({
@@ -227,17 +229,51 @@ const handleViewActivity = (id) => {
 };
 
 const handleRemoveWishlist = async (item) => {
+  // Immediately remove from UI for better UX
+  const itemIdToRemove = item.itemId ?? item.id;
+  const itemTypeToRemove = item.itemType;
+  
+  console.log('Removing item:', { itemIdToRemove, itemTypeToRemove, item });
+  
+  // Remove from local array immediately
+  savedItems.value = savedItems.value.filter(
+    (w) => !((w.itemId ?? w.id) === itemIdToRemove && w.itemType === itemTypeToRemove)
+  );
+  
+  console.log('Remaining items:', savedItems.value.length);
+  
   try {
     const typeValue = item.itemType ?? item.itemtype ?? item.type ?? 'Trip';
     const type = typeof typeValue === 'number'
       ? ['Trip', 'Hotel', 'Car', 'Attraction'][typeValue] || 'Trip'
       : typeValue;
 
-    await wishlistApi.remove(type, item.itemId ?? item.id);
-    savedItems.value = savedItems.value.filter((w) => w.itemId !== (item.itemId ?? item.id) || w.itemType !== item.itemType);
+    console.log('Calling API remove with:', { type, itemIdToRemove });
+    await wishlistApi.remove(type, itemIdToRemove);
+    console.log('Successfully removed from backend');
   } catch (error) {
     console.error('Failed to remove wishlist item', error);
+    // Re-add item if API call fails
+    savedItems.value.push(item);
   }
+};
+
+const handleViewDetails = (item) => {
+  const itemIdValue = item.itemId ?? item.id;
+  const typeValue = item.itemType ?? item.itemtype ?? item.type ?? 0;
+  
+  // Convert numeric type to string if needed
+  const typeMap = ['trips', 'hotels', 'cars', 'attractions'];
+  let routePath = '';
+  
+  if (typeof typeValue === 'number') {
+    routePath = `/${typeMap[typeValue]}/details/${itemIdValue}`;
+  } else {
+    const typeStr = typeValue.toLowerCase();
+    routePath = `/${typeStr}s/details/${itemIdValue}`;
+  }
+  
+  router.push(routePath);
 };
 
 onMounted(async () => {
