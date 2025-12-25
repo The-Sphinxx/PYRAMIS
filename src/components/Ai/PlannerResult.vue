@@ -2,26 +2,26 @@
   <div class="min-h-screen bg-base-100">
     <!-- Skeleton Loading State -->
     <div v-if="isLoading" class="page-container py-8">
-      <div class="glass-morphism p-8 mb-6 animate-pulse">
-        <div class="h-8 bg-gray-300 rounded w-3/4 mx-auto mb-4"></div>
-        <div class="h-4 bg-gray-300 rounded w-1/2 mx-auto"></div>
+      <div class="bg-base-100 backdrop-blur-sm p-8 mb-6 animate-pulse border border-base-300 rounded-xl shadow-xl">
+        <div class="h-8 bg-base-200 rounded w-3/4 mx-auto mb-4"></div>
+        <div class="h-4 bg-base-200 rounded w-1/2 mx-auto"></div>
       </div>
       
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div class="lg:col-span-2 space-y-6">
-          <div class="glass-morphism p-6 animate-pulse">
-            <div class="h-6 bg-gray-300 rounded w-1/3 mb-4"></div>
+          <div class="bg-base-100 backdrop-blur-sm p-6 animate-pulse border border-base-300 rounded-xl shadow-xl">
+            <div class="h-6 bg-base-200 rounded w-1/3 mb-4"></div>
             <div class="space-y-3">
-              <div class="h-20 bg-gray-200 rounded"></div>
-              <div class="h-20 bg-gray-200 rounded"></div>
+              <div class="h-20 bg-base-200 rounded"></div>
+              <div class="h-20 bg-base-200 rounded"></div>
             </div>
           </div>
         </div>
         <div class="lg:col-span-1">
-          <div class="glass-morphism p-4 animate-pulse">
+          <div class="bg-base-100 backdrop-blur-sm p-4 animate-pulse border border-base-300 rounded-xl shadow-xl">
             <div class="space-y-3">
-              <div class="h-16 bg-gray-200 rounded"></div>
-              <div class="h-16 bg-gray-200 rounded"></div>
+              <div class="h-16 bg-base-200 rounded"></div>
+              <div class="h-16 bg-base-200 rounded"></div>
             </div>
           </div>
         </div>
@@ -31,19 +31,19 @@
     <!-- Main Content -->
     <div v-else class="page-container py-8">
       <!-- Hero Section -->
-      <div class="glass-morphism p-8 mb-6 text-center">
-        <h1 class="text-3xl font-bold text-primary mb-2 font-cairo">{{ tripData.title }}</h1>
-        <p class="text-base-content opacity-80 font-cairo">{{ tripData.summary }}</p>
+      <div class="bg-base-100 backdrop-blur-sm p-8 mb-6 text-center shadow-xl border border-base-300 rounded-xl my-8">
+        <h1 class="text-4xl font-bold text-primary mb-3 font-cairo">{{ tripData.title }}</h1>
+        <p class="text-base-content opacity-80 text-lg font-cairo">{{ tripData.summary }}</p>
       </div>
 
       <!-- Main Grid -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Left Column -->
-        <div class="lg:col-span-2 space-y-6">
+        <div class="lg:col-span-2 space-y-6 mb-8">
           
           <!-- Day Tabs & Content -->
-          <div class="glass-morphism overflow-hidden">
-            <div class="flex border-b border-base-300 overflow-x-auto">
+          <div class="bg-base-100 backdrop-blur-sm overflow-hidden shadow-xl border border-base-300 rounded-xl">
+            <div class="flex border-b border-base-300 overflow-x-auto bg-base-100">
               <button
                 v-for="dayData in tripData.itinerary"
                 :key="dayData.day"
@@ -62,7 +62,7 @@
             <!-- Day Content -->
             <div v-for="dayData in tripData.itinerary" :key="dayData.day">
               <div v-if="dayData.day === selectedDay" class="p-6">
-                <h3 class="text-xl font-bold mb-4 font-cairo">{{ formatDate(dayData.date) }}</h3>
+                <h3 class="text-2xl font-bold mb-4 text-primary font-cairo">{{ formatDate(dayData.date) }}</h3>
                 
                 <div class="space-y-6">
                   <div v-for="(activity, idx) in dayData.activities" :key="idx" class="border-l-4 border-primary pl-4 pb-4">
@@ -87,20 +87,20 @@
                 </div>
 
                 <!-- Meals -->
-                <div class="mt-6 bg-base-200 p-4 rounded-lg">
-                  <h4 class="font-bold text-base-content mb-3 font-cairo">🍽️ Meals for Day {{ dayData.day }}</h4>
+                <div class="mt-6 bg-base-200 border border-base-300 p-4 rounded-lg shadow-sm">
+                  <h4 class="font-bold text-primary mb-3 font-cairo">🍽️ Meals for Day {{ dayData.day }}</h4>
                   <div class="space-y-2 text-sm">
-                    <p class="font-cairo"><strong>Breakfast:</strong> {{ dayData.meals.breakfast }}</p>
-                    <p class="font-cairo"><strong>Lunch:</strong> {{ dayData.meals.lunch }}</p>
-                    <p class="font-cairo"><strong>Dinner:</strong> {{ dayData.meals.dinner }}</p>
+                    <p class="font-cairo text-base-content"><strong class="text-primary">Breakfast:</strong> {{ dayData.meals.breakfast }}</p>
+                    <p class="font-cairo text-base-content"><strong class="text-primary">Lunch:</strong> {{ dayData.meals.lunch }}</p>
+                    <p class="font-cairo text-base-content"><strong class="text-primary">Dinner:</strong> {{ dayData.meals.dinner }}</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <!-- Map Section -->
-          <div class="glass-morphism p-4">
-            <h3 class="text-lg font-bold text-base-content mb-3 pb-2 border-b-2 border-primary font-cairo">
+          <div class="bg-base-100 backdrop-blur-sm p-4 shadow-xl border border-base-300 rounded-xl">
+            <h3 class="text-lg font-bold text-primary mb-3 pb-2 border-b-2 border-primary font-cairo">
               🗺️ Trip Map
             </h3>
             <div class="mt-4 rounded-lg overflow-hidden shadow-lg">
@@ -109,16 +109,16 @@
           </div>
 
           <!-- Historical Background -->
-          <div class="glass-morphism p-6">
-            <h2 class="text-xl font-bold text-base-content mb-4 pb-2 border-b-4 border-primary font-cairo">
+          <div class="bg-base-100 backdrop-blur-sm p-6 shadow-xl border border-base-300 rounded-xl">
+            <h2 class="text-2xl font-bold text-primary mb-4 pb-3 border-b-4 border-primary inline-block font-cairo">
               📜 Historical Background
             </h2>
             <p class="text-base-content opacity-90 leading-relaxed mt-4 font-cairo">{{ tripData.historicalBackground }}</p>
           </div>
 
           <!-- Lodging -->
-          <div class="glass-morphism p-6">
-            <h2 class="text-xl font-bold text-base-content mb-4 pb-2 border-b-4 border-primary flex items-center gap-2 font-cairo">
+          <div class="bg-base-100 backdrop-blur-sm p-6 shadow-xl border border-base-300 rounded-xl">
+            <h2 class="text-2xl font-bold text-primary mb-4 pb-3 border-b-4 border-primary flex items-center gap-2 font-cairo">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
                 <polyline points="9 22 9 12 15 12 15 22"/>
@@ -135,8 +135,8 @@
           </div>
 
           <!-- Car Rental -->
-          <div v-if="tripData.carRecommendations && tripData.carRecommendations.length > 0" class="glass-morphism p-6">
-            <h2 class="text-xl font-bold text-base-content mb-4 pb-2 border-b-4 border-primary flex items-center gap-2 font-cairo">
+          <div v-if="tripData.carRecommendations && tripData.carRecommendations.length > 0" class="bg-base-100 backdrop-blur-sm p-6 shadow-xl border border-base-300 rounded-xl">
+            <h2 class="text-2xl font-bold text-primary mb-4 pb-3 border-b-4 border-primary flex items-center gap-2 font-cairo">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/>
                 <circle cx="7" cy="17" r="2"/>
@@ -159,9 +159,9 @@
         <div class="lg:col-span-1 space-y-6">
           
           <!-- Overview Cards -->
-          <div class="glass-morphism p-4">
+          <div class="bg-base-100 backdrop-blur-sm p-4 shadow-xl border border-base-300 rounded-xl">
             <div class="space-y-3">
-              <div class="bg-base-200 p-3 rounded-lg flex items-center gap-2">
+              <div class="bg-base-200 border border-base-300 p-3 rounded-lg flex items-center gap-2">
                 <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
                   <line x1="16" y1="2" x2="16" y2="6"/>
@@ -174,7 +174,7 @@
                 </div>
               </div>
               
-              <div class="bg-base-200 p-3 rounded-lg flex items-center gap-2">
+              <div class="bg-base-200 border border-base-300 p-3 rounded-lg flex items-center gap-2">
                 <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                   <circle cx="9" cy="7" r="4"/>
@@ -187,7 +187,7 @@
                 </div>
               </div>
               
-              <div class="bg-base-200 p-3 rounded-lg flex items-center gap-2">
+              <div class="bg-base-200 border border-base-300 p-3 rounded-lg flex items-center gap-2">
                 <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <line x1="12" y1="1" x2="12" y2="23"/>
                   <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
@@ -198,7 +198,7 @@
                 </div>
               </div>
               
-              <div class="bg-base-200 p-3 rounded-lg flex items-center gap-2">
+              <div class="bg-base-200 border border-base-300 p-3 rounded-lg flex items-center gap-2">
                 <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <circle cx="12" cy="12" r="10"/>
                   <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
@@ -214,8 +214,8 @@
           
 
           <!-- Attractions -->
-          <div class="glass-morphism p-4">
-            <h3 class="text-lg font-bold text-base-content mb-3 pb-2 border-b-4 border-primary inline-block font-cairo">
+          <div class="bg-base-100 backdrop-blur-sm p-4 shadow-xl border border-base-300 rounded-xl">
+            <h3 class="text-lg font-bold text-primary mb-3 pb-2 border-b-4 border-primary inline-block font-cairo">
               🏛️ Key Attractions
             </h3>
             <div class="space-y-3 mt-4">
@@ -228,8 +228,8 @@
           </div>
 
           <!-- Cost Breakdown -->
-          <div class="glass-morphism p-4">
-            <h3 class="text-lg font-bold text-base-content mb-3 pb-2 border-b-4 border-primary inline-block font-cairo">
+          <div class="bg-base-100 backdrop-blur-sm p-4 shadow-xl border border-base-300 rounded-xl">
+            <h3 class="text-lg font-bold text-primary mb-3 pb-2 border-b-4 border-primary inline-block font-cairo">
               💰 Cost Breakdown
             </h3>
             <div class="space-y-2 text-sm mt-4">
@@ -245,7 +245,7 @@
                 <span>🎫 Activities</span>
                 <span class="font-bold">${{ tripData.estimatedCosts.breakdown.activities }}</span>
               </div>
-              <div class="divider my-2"></div>
+              <div class="divider my-2 border-base-300"></div>
               <div class="flex justify-between text-base-content font-bold text-base font-cairo">
                 <span>Total</span>
                 <span class="text-primary">${{ tripData.estimatedCosts.grandTotal }}</span>
@@ -257,8 +257,8 @@
           </div>
 
           <!-- Travel Tips -->
-          <div class="glass-morphism p-4">
-            <h3 class="text-lg font-bold text-base-content mb-3 pb-2 border-b-4 border-primary inline-block font-cairo">
+          <div class="bg-base-100 backdrop-blur-sm p-4 shadow-xl border border-base-300 rounded-xl">
+            <h3 class="text-lg font-bold text-primary mb-3 pb-2 border-b-4 border-primary inline-block font-cairo">
               💡 Travel Tips
             </h3>
             <ul class="space-y-2 mt-4">
