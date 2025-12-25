@@ -2,6 +2,7 @@ using Agentic_Rentify.Application.Features.Bookings.Commands.ConfirmBooking;
 using Agentic_Rentify.Application.Features.Bookings.Commands.UpdateBooking;
 using Agentic_Rentify.Application.Features.Bookings.Commands.DeleteBooking;
 using Agentic_Rentify.Application.Features.Bookings.Commands.CancelBooking;
+using Agentic_Rentify.Application.Features.Bookings.Commands.PatchBooking;
 using Agentic_Rentify.Application.Features.Bookings.Queries.GetActiveBookings;
 using Agentic_Rentify.Application.Features.Bookings.Queries.GetBookingById;
 using Agentic_Rentify.Application.Features.Bookings.Commands.CreateBooking;
@@ -112,6 +113,33 @@ public class BookingsController(IMediator mediator, IOptions<StripeSettings> str
     public async Task<IActionResult> Update(int id, [FromBody] UpdateBookingCommand command)
     {
         if (id != command.Id) return BadRequest(new { message = "ID mismatch" });
+        var resultId = await mediator.Send(command);
+        return Ok(new { id = resultId });
+    }
+
+    /// <summary>
+    /// Partially update a booking (PATCH).
+    /// </summary>
+    /// <param name="id">Booking ID</param>
+    /// <param name="command">Fields to update (only provided fields will be updated)</param>
+    /// <remarks>
+    /// Supports partial updates of booking properties:
+    /// - Status (e.g., "Confirmed", "Pending", "Cancelled")
+    /// - PaymentStatus (e.g., "Paid", "Unpaid", "Pending", "Refunded")
+    /// - StartDate
+    /// - EndDate
+    /// - TotalPrice
+    /// 
+    /// Only include the fields you want to update in the request body.
+    /// </remarks>
+    /// <response code="200">Booking updated successfully</response>
+    /// <response code="404">Booking not found</response>
+    [HttpPatch("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Patch(int id, [FromBody] PatchBookingCommand command)
+    {
+        command.Id = id;
         var resultId = await mediator.Send(command);
         return Ok(new { id = resultId });
     }

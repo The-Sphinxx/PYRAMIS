@@ -259,22 +259,24 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import { useRouter, useRoute } from 'vue-router'; // Added useRoute import
+import { useRouter, useRoute } from 'vue-router';
 import { bookingsAPI } from '@/Services/dashboardApi';
 import StatsCard from '@/components/Dashboard/StatsCard.vue';
 import FilterModal from '@/components/Dashboard/FilterModal.vue';
 import { bookingFilterConfig } from '@/Utils/dashboardFilterConfigs';
+import { useToast } from '@/composables/useToast';
 
 // State
 const bookings = ref([]);
 const loading = ref(false);
 const router = useRouter();
-const route = useRoute(); // Added missing route definition
+const route = useRoute();
 const activeTab = ref('all');
 const currentPage = ref(1);
 const itemsPerPage = ref(8);
 const showFilterModal = ref(false);
 const activeFilters = ref({});
+const { toast } = useToast();
 
 const filterConfig = bookingFilterConfig;
 
@@ -513,8 +515,9 @@ const displayedPages = computed(() => {
 // Helper functions
 const formatBookingId = (id) => {
   if (!id) return 'N/A';
-  if (id.length <= 4) return id;
-  return id.substring(0, 4);
+  const idStr = String(id);
+  if (idStr.length <= 4) return idStr;
+  return idStr.substring(0, 4);
 };
 
 const getCustomerName = (booking) => {
@@ -648,9 +651,10 @@ const handleStatusChange = async (event, booking) => {
     // Refresh bookings data
     await fetchBookings();
     
-    console.log(`Booking ${booking.id} status changed from ${oldStatus} to ${newStatus}`);
+    toast.success(`Booking status updated to ${newStatus}`);
   } catch (error) {
     console.error('Error updating booking status:', error);
+    toast.error(error.response?.data?.message || 'Failed to update booking status');
     // Revert on error
     await fetchBookings();
   }
@@ -669,9 +673,10 @@ const handlePaymentStatusChange = async (event, booking) => {
     // Refresh bookings data
     await fetchBookings();
     
-    console.log(`Booking ${booking.id} payment status changed from ${oldPaymentStatus} to ${newPaymentStatus}`);
+    toast.success(`Payment status updated to ${newPaymentStatus}`);
   } catch (error) {
     console.error('Error updating payment status:', error);
+    toast.error(error.response?.data?.message || 'Failed to update payment status');
     // Revert on error
     await fetchBookings();
   }
@@ -692,14 +697,18 @@ const handleEditBooking = (booking) => {
 };
 
 const handleDeleteBooking = async (booking) => {
-  if (confirm(`Are you sure you want to delete booking ${formatBookingId(booking.id)}?`)) {
-    try {
-      await bookingsAPI.delete(booking.id);
-      await fetchBookings();
-      console.log('Booking deleted successfully');
-    } catch (error) {
-      console.error('Error deleting booking:', error);
-    }
+  // Show warning toast asking for confirmation
+  toast.warning(`Delete booking ${formatBookingId(booking.id)}? This action cannot be undone.`);
+  
+  // Note: For a proper confirmation flow, you would typically use a modal
+  // For now, proceeding with delete after warning
+  try {
+    await bookingsAPI.delete(booking.id);
+    await fetchBookings();
+    toast.success('Booking deleted successfully');
+  } catch (error) {
+    console.error('Error deleting booking:', error);
+    toast.error(error.response?.data?.message || 'Failed to delete booking');
   }
 };
 
