@@ -140,30 +140,33 @@
            />
         </div>
 
-        <div class="form-control">
-           <label class="label">
-             <span class="label-text">New Password</span>
-           </label>
-           <input 
-             v-model="passwordData.newPassword" 
-             type="password" 
-             class="input input-bordered w-full" 
-             required
-             minlength="6"
-           />
-        </div>
-
-        <div class="form-control">
-           <label class="label">
-             <span class="label-text">Confirm New Password</span>
-           </label>
-           <input 
-             v-model="passwordData.confirmPassword" 
-             type="password" 
-             class="input input-bordered w-full" 
-             required
-             minlength="6"
-           />
+         <div class="form-control">
+            <label class="label">
+              <span class="label-text">New Password</span>
+            </label>
+            <input 
+              v-model="passwordData.newPassword" 
+              type="password" 
+              class="input input-bordered w-full" 
+              required
+              minlength="8"
+            />
+            <label class="label">
+              <span class="label-text-alt text-base-content/60">Min 8 characters, with uppercase, number, and special character.</span>
+            </label>
+         </div>
+ 
+         <div class="form-control">
+            <label class="label">
+              <span class="label-text">Confirm New Password</span>
+            </label>
+            <input 
+              v-model="passwordData.confirmPassword" 
+              type="password" 
+              class="input input-bordered w-full" 
+              required
+              minlength="8"
+            />
            <label class="label" v-if="passwordError">
              <span class="label-text-alt text-error">{{ passwordError }}</span>
            </label>

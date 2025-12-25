@@ -36,6 +36,8 @@
       :title="editingAdmin ? 'Edit Admin' : 'Add New Admin'"
       :config="adminFormConfig"
       :initialData="editingAdmin"
+      :errors="formErrors"
+      :loading="isSubmitting"
       @close="closeModal"
       @submit="handleSubmit"
     />
@@ -71,6 +73,8 @@ const admins = ref([]);
 const loading = ref(false);
 const isModalOpen = ref(false);
 const editingAdmin = ref(null);
+const isSubmitting = ref(false);
+const formErrors = ref({});
 
 const columns = [
   { label: 'Name', field: 'fullName', type: 'text', headerClass: 'w-1/4' },
@@ -80,7 +84,7 @@ const columns = [
   { label: 'Actions', field: 'actions', type: 'actions', headerClass: 'w-1/6' }
 ];
 
-const adminFormConfig = {
+const adminFormConfig = ref({
   title: 'Admin',
   fields: [
     { key: 'firstName', label: 'First Name', type: 'text', required: true, placeholder: 'Enter first name' },
@@ -95,11 +99,11 @@ const adminFormConfig = {
       required: true,
       options: [
         { label: 'Admin', value: 'Admin' },
-        { label: 'Super Admin', value: 'SuperAdmin' }
+        { label: 'SuperAdmin', value: 'SuperAdmin' }
       ]
     }
   ]
-};
+});
 
 const fetchAdmins = async () => {
   loading.value = true;
@@ -120,48 +124,68 @@ const fetchAdmins = async () => {
 
 const openAddModal = () => {
   editingAdmin.value = null;
+  formErrors.value = {};
   
-  // Ensure password field is required/visible for creating
-  const pwdField = adminFormConfig.fields.find(f => f.key === 'password');
-  if(pwdField) pwdField.type = 'password';
+  // Set password required for new admin
+  const pwdField = adminFormConfig.value.fields.find(f => f.key === 'password');
+  if (pwdField) pwdField.required = true;
 
   isModalOpen.value = true;
 };
 
 const openEditModal = (admin) => {
-  editingAdmin.value = { ...admin };
+  // Normalize data for form (casing fix)
+  editingAdmin.value = {
+    ...admin,
+    firstName: admin.firstName || admin.FirstName,
+    lastName: admin.lastName || admin.LastName,
+    email: admin.email || admin.Email,
+    phone: admin.phone || admin.Phone || admin.phoneNumber,
+    role: admin.role || admin.Role
+  };
   
-  // Maybe hide/disable password for edit? Or keep it to allow reset.
-  // For simplicity, let's allow editing everything.
+  formErrors.value = {};
   
+  // Password not required for editing
+  const pwdField = adminFormConfig.value.fields.find(f => f.key === 'password');
+  if (pwdField) pwdField.required = false;
+
   isModalOpen.value = true;
 };
 
 const closeModal = () => {
   isModalOpen.value = false;
   editingAdmin.value = null;
+  formErrors.value = {};
 };
 
 const handleSubmit = async ({ data: formData }) => {
+  isSubmitting.value = true;
+  formErrors.value = {};
+
   try {
     // Construct payload
     const payload = {
       ...formData,
       fullName: `${formData.firstName} ${formData.lastName}`,
-      role: formData.role || 'Admin', // Use selected role or default to 'Admin'
+      role: formData.role || 'Admin',
       profileImage: editingAdmin.value?.profileImage || '/images/users/user_m_1.jpg',
-      status: editingAdmin.value?.status || 'Active',
-      updatedAt: new Date().toISOString()
+      status: editingAdmin.value?.status || 'Active'
     };
 
     if (editingAdmin.value) {
-        // Update
-        if (!formData.password) delete payload.password; // Don't overwrite blank pass
-       await usersAPI.patch(editingAdmin.value.id, payload);
-       toast.success('Admin updated successfully');
+        // Update - handle ID casing (Id vs id)
+        const updateId = editingAdmin.value.id || editingAdmin.value.Id;
+        
+        // Remove password if empty in edit mode
+        if (!formData.password) {
+          delete payload.password;
+        }
+        
+        await usersAPI.patch(updateId, payload);
+        toast.success('Admin updated successfully');
     } else {
         // Create
-        payload.createdAt = new Date().toISOString();
         payload.isVerified = true; 
         await usersAPI.create(payload);
         toast.success('Admin created successfully');
@@ -170,7 +194,26 @@ const handleSubmit = async ({ data: formData }) => {
     fetchAdmins();
   } catch (error) {
     console.error('Error saving admin:', error);
-    toast.error('Failed to save admin');
+    
+    // Handle validation errors from API
+    if (error.response?.status === 400 && error.response.data.errors) {
+      const apiErrors = error.response.data.errors;
+      const mappedErrors = {};
+      
+      // Map API property names to form field keys
+      Object.keys(apiErrors).forEach(key => {
+        const formKey = key.charAt(0).toLowerCase() + key.slice(1);
+        mappedErrors[formKey] = Array.isArray(apiErrors[key]) ? apiErrors[key][0] : apiErrors[key];
+      });
+      
+      formErrors.value = mappedErrors;
+      toast.error('Please fix the validation errors');
+    } else {
+      const message = error.response?.data?.message || 'Failed to save admin';
+      toast.error(message);
+    }
+  } finally {
+    isSubmitting.value = false;
   }
 };
 

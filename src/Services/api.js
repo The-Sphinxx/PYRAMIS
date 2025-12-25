@@ -109,6 +109,11 @@ export const authApi = {
     const { data } = await api.post(`${authPrefix}/resend-otp`, { email });
     return data;
   },
+
+  changePassword: async (payload) => {
+    const { data } = await api.post(`${authPrefix}/change-password`, payload);
+    return data;
+  }
 };
 
 export default api;

@@ -139,14 +139,36 @@ export const useAuthStore = defineStore('auth', () => {
       // Refresh user data from profile endpoint to get updated info
       const profileResponse = await api.get('/Profile');
 
-      // Update local user state with new data
-      user.value = buildUserFromToken(token.value);
+      // Update local user state with new data from profile response
+      if (profileResponse.data) {
+        user.value = {
+          ...user.value,
+          ...profileResponse.data
+        };
+      }
 
       return { success: true, data: profileResponse.data };
     } catch (error) {
       console.error('Update profile error:', error);
       const message = error.response?.data?.message || error.message || 'Failed to update profile';
       return { success: false, error: message };
+    }
+  };
+
+  // Fetch latest profile data
+  const fetchProfile = async () => {
+    try {
+      const response = await api.get('/Profile');
+      if (response.data) {
+        user.value = {
+          ...user.value,
+          ...response.data
+        };
+      }
+      return { success: true, data: response.data };
+    } catch (error) {
+      console.error('Fetch profile error:', error);
+      return { success: false, error: error.message };
     }
   };
 
@@ -188,6 +210,7 @@ export const useAuthStore = defineStore('auth', () => {
     loginWithGoogle,
     updateProfile,
     changePassword,
+    fetchProfile,
     logout
   };
 });

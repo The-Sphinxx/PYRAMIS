@@ -310,6 +310,12 @@ public class IdentityService : IIdentityService
         var user = await _userManager.FindByEmailAsync(email);
         if (user == null) throw new NotFoundException("User not found");
         
+        // If the user doesn't have a password hash, it means they logged in with Google/External
+        if (string.IsNullOrEmpty(user.PasswordHash))
+        {
+            throw new BadRequestException("This account does not have a local password. Please use your external login provider.");
+        }
+        
         var result = await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
          if (!result.Succeeded) throw new BadRequestException("Change password failed: " + string.Join(" ", result.Errors.Select(e => e.Description)));
     }

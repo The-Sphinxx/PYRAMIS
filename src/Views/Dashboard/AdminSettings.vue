@@ -50,6 +50,18 @@
                 <label class="label"><span class="label-text font-medium">Phone Number</span></label>
                 <input v-model="profileForm.phone" type="tel" class="input input-bordered w-full" />
               </div>
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text font-medium">Nationality</span></label>
+                <input v-model="profileForm.nationality" type="text" class="input input-bordered w-full" placeholder="e.g. Egyptian" />
+              </div>
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text font-medium">Gender</span></label>
+                <select v-model="profileForm.gender" class="select select-bordered w-full">
+                  <option value="">Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
             </div>
          </div>
       </div>
@@ -123,7 +135,9 @@ const profileForm = ref({
   firstName: '',
   lastName: '',
   email: '',
-  phone: ''
+  phone: '',
+  nationality: '',
+  gender: ''
 });
 
 const passwordForm = ref({
@@ -137,16 +151,24 @@ const formatDate = (date) => {
 }
 
 // Initialize form with current user data
-onMounted(() => {
+onMounted(async () => {
   if (!isValidRole.value) {
     toast.error('Access restricted to Administrators');
     return;
   }
+  
+  // Fetch freshest data from backend
+  loadingProfile.value = true;
+  await authStore.fetchProfile();
+  loadingProfile.value = false;
+
   if (authStore.user) {
     profileForm.value.firstName = authStore.user.firstName || '';
     profileForm.value.lastName = authStore.user.lastName || '';
     profileForm.value.email = authStore.user.email || '';
-    profileForm.value.phone = authStore.user.phone || '';
+    profileForm.value.phone = authStore.user.phoneNumber || authStore.user.phone || '';
+    profileForm.value.nationality = authStore.user.nationality || '';
+    profileForm.value.gender = (authStore.user.gender || '').toLowerCase();
   }
 });
 
@@ -157,8 +179,10 @@ const handleUpdateProfile = async () => {
       firstName: profileForm.value.firstName,
       lastName: profileForm.value.lastName,
       fullName: `${profileForm.value.firstName} ${profileForm.value.lastName}`,
-      email: profileForm.value.email, // Kept for API compatibility, though readonly in UI mainly
-      phone: profileForm.value.phone
+      email: profileForm.value.email,
+      phone: profileForm.value.phone,
+      nationality: profileForm.value.nationality,
+      gender: profileForm.value.gender
     };
     
     const result = await authStore.updateProfile(updatedData);

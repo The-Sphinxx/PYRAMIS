@@ -52,6 +52,18 @@ public class GlobalExceptionHandlerMiddleware
             await context.Response.WriteAsync(JsonSerializer.Serialize(response));
             return;
         }
+        if (ex is BadRequestException badRequest)
+        {
+            _logger.LogInformation("Bad Request: {Message}", badRequest.Message);
+            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            var response = new
+            {
+                statusCode = context.Response.StatusCode,
+                message = badRequest.Message
+            };
+            await context.Response.WriteAsync(JsonSerializer.Serialize(response));
+            return;
+        }
         if (ex is UnauthorizedException unauthorized)
         {
             _logger.LogInformation("Unauthorized: {Message}", unauthorized.Message);

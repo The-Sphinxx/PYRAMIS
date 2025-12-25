@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Agentic_Rentify.Api.Controllers;
 
@@ -188,6 +189,11 @@ public class AuthController : ControllerBase
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordCommand command)
     {
+        if (string.IsNullOrWhiteSpace(command.Email))
+        {
+            command.Email = User.FindFirstValue(ClaimTypes.Email) ?? User.Identity?.Name ?? string.Empty;
+        }
+        
         await _mediator.Send(command);
         return Ok(new { message = "Password changed successfully." });
     }
