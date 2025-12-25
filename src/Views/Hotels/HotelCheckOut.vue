@@ -51,6 +51,7 @@ import { useAuthStore } from '@/stores/authStore';
 import { useBookingStore } from '@/stores/bookingStore';
 import { useRoute, useRouter } from 'vue-router';
 import { useHotelsStore } from '@/stores/hotelsStore';
+import { useToast } from '@/composables/useToast';
 import StepIndicator from '@/components/Common/StepIndicator.vue';
 import GuestInfoForm from '@/components/Common/GuestInfoForm.vue';
 import PriceSummary from '@/components/Common/PriceSummary.vue';
@@ -62,6 +63,7 @@ const router = useRouter();
 const hotelStore = useHotelsStore();
 const authStore = useAuthStore();
 const bookingStore = useBookingStore();
+const { toast } = useToast();
 
 const hotel = ref(null);
 const submitting = ref(false);
@@ -228,12 +230,14 @@ const handleConfirm = async () => {
 
     if (result.error) {
       paymentError.value = result.error.message || 'Payment could not be processed.';
+      toast.error(result.error.message || 'Payment could not be processed.');
       return;
     }
 
     const status = result.paymentIntent?.status;
     if (status === 'succeeded') {
-      paymentMessage.value = 'Payment succeeded! Redirecting...';      
+      paymentMessage.value = 'Payment succeeded! Redirecting...';
+      toast.success('Payment successful! Redirecting to confirmation...');      
       // Enrich booking with guest info and pricing for confirmation page
       bookingStore.enrichBookingWithDetails(
         {
@@ -259,10 +263,12 @@ const handleConfirm = async () => {
       });
     } else if (status === 'processing') {
       paymentMessage.value = 'Payment is processing. We will email you once confirmed.';
+      toast.info('Payment is processing. We will email you once confirmed.');
     }
   } catch (error) {
     console.error('Booking failed:', error);
     paymentError.value = error.message || 'Failed to confirm booking. Please try again.';
+    toast.error(error.message || 'Failed to confirm booking. Please try again.');
   } finally {
     submitting.value = false;
   }
@@ -283,6 +289,7 @@ onMounted(async () => {
     } catch (error) {
       console.error('Failed to initialize payment intent:', error);
       paymentError.value = error.message || 'Unable to start payment. Please try again later.';
+      toast.error(error.message || 'Unable to start payment. Please try again later.');
     }
   }
 });
