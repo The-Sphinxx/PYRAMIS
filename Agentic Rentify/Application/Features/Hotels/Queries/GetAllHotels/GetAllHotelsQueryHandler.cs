@@ -87,10 +87,48 @@ public class GetAllHotelsQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
             filter = Expression.Lambda<Func<Hotel, bool>>(combinedExpression, parameter);
         }
 
-        var (items, totalCount) = await unitOfWork.Repository<Hotel>()
-            .GetPagedAppAsync(request.PageNumber, request.PageSize, filter);
+        // Use projection to select only what is needed for the list
 
-        var dtos = mapper.Map<IReadOnlyList<HotelResponseDTO>>(items);
+        // Calculate total count first (without paging)
+        var countSpec = new Agentic_Rentify.Application.Specifications.GenericSpecification<Hotel>(filter);
+        var totalCount = await unitOfWork.Repository<Hotel>().CountAsync(countSpec);
+
+        // Use projection to select only what is needed for the list
+        var dtos = await unitOfWork.Repository<Hotel>().ListAsync(
+            new Agentic_Rentify.Application.Specifications.GenericSpecification<Hotel>(
+                filter, 
+                orderBy: h => h.Id, 
+                skip: (request.PageNumber - 1) * request.PageSize, 
+                take: request.PageSize, 
+                isPagingEnabled: true
+            ), 
+            h => new HotelResponseDTO
+            {
+                Id = h.Id,
+                Name = h.Name,
+                City = h.City,
+                Rating = h.Rating,
+                ReviewsCount = h.ReviewsCount,
+                BasePrice = h.BasePrice + "$", // Assuming currency symbol logic is handled or static
+                RawBasePrice = h.BasePrice,
+                PricePerNight = h.PricePerNight + "$",
+                RawPricePerNight = h.PricePerNight,
+                // Do not fetch description for list if not needed, or truncate it
+                Description = h.Description.Length > 100 ? h.Description.Substring(0, 100) + "..." : h.Description,
+                Status = h.Status,
+                Featured = h.Featured,
+                IsFeatured = h.IsFeatured,
+                // Only take the first image
+                Images = h.Images.Take(1).ToList(),
+                Amenities = h.Amenities.Take(3).ToList(), // Take top 3 for preview
+                ReviewSummary = new HotelReviewSummaryDTO
+                {
+                    TotalReviews = h.ReviewSummary != null ? h.ReviewSummary.TotalReviews : 0,
+                    OverallRating = h.ReviewSummary != null ? h.ReviewSummary.OverallRating : 0
+                },
+                Latitude = h.Latitude,
+                Longitude = h.Longitude
+            });
 
         return new PagedResponse<HotelResponseDTO>(dtos, request.PageNumber, request.PageSize, totalCount);
     }

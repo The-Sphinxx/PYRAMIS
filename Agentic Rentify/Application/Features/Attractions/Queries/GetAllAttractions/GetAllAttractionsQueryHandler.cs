@@ -23,12 +23,32 @@ public class GetAllAttractionsQueryHandler : IRequestHandler<GetAllAttractionsQu
     public async Task<PagedResponse<AttractionResponseDTO>> Handle(GetAllAttractionsQuery request, CancellationToken cancellationToken)
     {
         var spec = new AttractionWithFiltersSpecification(request, applyPaging: true);
-        var items = await _unitOfWork.Repository<Attraction>().ListAsync(spec);
+        
+        // Use projection to select only what is needed for the list
+        var dtos = await _unitOfWork.Repository<Attraction>().ListAsync(spec, a => new AttractionResponseDTO
+        {
+            Id = a.Id,
+            Name = a.Name,
+            City = a.City,
+            Rating = a.Rating,
+            Price = a.Price + " " + a.Currency,
+            RawPrice = a.Price,
+            // Only take the first image to save bandwidth/db load
+            Images = a.Images.Select(i => i.Url).Take(1).ToList(),
+            Categories = a.Categories,
+            Reviews = new ReviewSummaryDTO 
+            { 
+               TotalReviews = a.ReviewSummary != null ? a.ReviewSummary.TotalReviews : 0,
+               OverallRating = a.ReviewSummary != null ? a.ReviewSummary.OverallRating : 0
+            },
+            // Do not fetch heavy UserReviews or Description for the list
+            Description = a.Description.Length > 100 ? a.Description.Substring(0, 100) + "..." : a.Description,
+            Availability = a.Availability,
+            IsFeatured = a.IsFeatured
+        });
 
         var countSpec = new AttractionWithFiltersSpecification(request, applyPaging: false);
         var totalCount = await _unitOfWork.Repository<Attraction>().CountAsync(countSpec);
-
-        var dtos = _mapper.Map<IReadOnlyList<AttractionResponseDTO>>(items);
 
         var pageNumber = Math.Max(1, request.PageNumber);
         var pageSize = Math.Max(1, request.PageSize);

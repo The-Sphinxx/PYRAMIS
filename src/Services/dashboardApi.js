@@ -3,7 +3,7 @@ import { api } from './api.js';
 
 // ==================== Attractions API ====================
 export const attractionsAPI = {
-  getAll: () => api.get('/attractions', { params: { pageSize: 10000 } }),
+  getAll: (params = {}) => api.get('/attractions', { params: { pageSize: 10, ...params } }),
   getOne: (id) => api.get(`/attractions/${id}`),
   create: (data) => api.post('/attractions', data),
   update: (id, data) => api.put(`/attractions/${id}`, data),
@@ -46,7 +46,7 @@ export const carsAPI = {
 
 // ==================== Trips API ====================
 export const tripsAPI = {
-  getAll: () => api.get('/trips', { params: { pageSize: 10000 } }),
+  getAll: (params = {}) => api.get('/trips', { params: { pageSize: 10, ...params } }),
   getOne: (id) => api.get(`/trips/${id}`),
   create: (data) => api.post('/trips', data),
   update: (id, data) => api.put(`/trips/${id}`, data),

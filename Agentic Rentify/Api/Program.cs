@@ -127,12 +127,11 @@ Comprehensive REST API for an AI-powered travel booking platform with intelligen
     // CORS Configuration
     builder.Services.AddCors(options =>
     {
-        options.AddPolicy("AllowAll", policy => 
+        options.AddPolicy("AllowAll", policy =>
         {
-            policy.WithOrigins("http://localhost:5173", "http://localhost:3000")
+            policy.AllowAnyOrigin()
                   .AllowAnyMethod()
-                  .AllowAnyHeader()
-                  .AllowCredentials();
+                  .AllowAnyHeader();
         });
     });
 

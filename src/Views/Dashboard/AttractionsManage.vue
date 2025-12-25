@@ -7,13 +7,15 @@
     <DataTable
       title="Attractions"
       :columns="columns"
-      :data="filteredAttractions"
+      :data="attractions"
       :show-filter="true"
       add-button-text="Add New Attraction"
       :show-actions="{ edit: true, delete: true, view: true }"
       empty-message="No attractions available"
       :per-page="compactMode ? 5 : 8"
       :show-pagination="!compactMode"
+      :server-side="true"
+      :total-items="totalItems"
       resource="attractions"
       :loading="loading"
       @add="handleAdd"
@@ -24,6 +26,7 @@
       @status-click="handleStatusClick"
       @status-change="handleStatusChange"
       @filter="openFilterModal"
+      @page-change="handlePageChange"
     />
 
     <!-- Filter Modal -->
@@ -81,6 +84,9 @@ const props = defineProps({
 
 // State
 const attractions = ref([]);
+const totalItems = ref(0);
+const currentPage = ref(1);
+const itemsPerPage = ref(props.compactMode ? 5 : 8);
 const router = useRouter();
 const route = useRoute(); // Added missing route definition
 import { useToast } from '@/composables/useToast.js';
@@ -183,73 +189,43 @@ const stats = computed(() => {
 });
 
 // Filtered attractions based on active filters
-const filteredAttractions = computed(() => {
-  let result = attractions.value;
+// Server-side: just return the current page data
+const filteredAttractions = computed(() => attractions.value);
 
-  // Global Search
-  if (route.query.q) {
-    const search = route.query.q.toLowerCase();
-    result = result.filter(a => 
-      a.name?.toLowerCase().includes(search) || 
-      a.city?.toLowerCase().includes(search) ||
-      a.location?.toLowerCase().includes(search) ||
-      a.status?.toLowerCase().includes(search) || // Status match
-      (search === 'featured' && a.isFeatured) // "featured" keyword match
-    );
-  }
-
-  // Apply price filter
-  if (activeFilters.value.maxPrice && activeFilters.value.maxPrice < filterConfig.priceRange.max) {
-    result = result.filter(a => {
-      const price = typeof a.price === 'string' ? parseInt(a.price) || 0 : a.price;
-      return price <= activeFilters.value.maxPrice;
-    });
-  }
-
-  // Apply category filter
-  if (activeFilters.value.categorySelected) {
-    result = result.filter(a => a.categories?.includes(activeFilters.value.categorySelected));
-  }
-
-  // Apply city filter
-  if (activeFilters.value.city) {
-    const searchCity = activeFilters.value.city.toLowerCase();
-    result = result.filter(a => a.city?.toLowerCase().includes(searchCity));
-  }
-
-  // Apply status filter
-  if (activeFilters.value.status) {
-    result = result.filter(a => a.status === activeFilters.value.status);
-  }
-
-  // Apply availability filter
-  if (activeFilters.value.availability) {
-    result = result.filter(a => a.availability === activeFilters.value.availability);
-  }
-
-  // Apply featured filter
-  if (activeFilters.value.featured) {
-    const isFeatured = activeFilters.value.featured === 'true';
-    result = result.filter(a => a.isFeatured === isFeatured);
-  }
-
-  // Apply rating filter
-  if (activeFilters.value.rating) {
-    const minRating = parseFloat(activeFilters.value.rating);
-    result = result.filter(a => a.rating >= minRating);
-  }
-
-return result;
+// Watch for search query changes
+import { watch } from 'vue';
+watch(() => route.query.q, () => {
+  currentPage.value = 1;
+  fetchAttractions();
 });
 
 // Fetch attractions from API
 const fetchAttractions = async () => {
   loading.value = true;
   try {
-    const response = await attractionsAPI.getAll();
+    const params = {
+      pageNumber: currentPage.value,
+      pageSize: itemsPerPage.value,
+      searchTerm: route.query.q || undefined,
+      // Map filters
+      city: activeFilters.value.city,
+      category: activeFilters.value.categorySelected,
+      minRating: activeFilters.value.rating,
+      // Add other filters if supported by backend, otherwise they are ignored for now
+      // Note: Backend might not support all these filters in GetAll yet
+    };
+
+    const response = await attractionsAPI.getAll(params);
     
+    // Check if response conforms to paginated structure
+    const data = response.data.data || response.data; // Helper for different response structures
+    const items = Array.isArray(data) ? data : (data.items || []); 
+    
+    // Update total items for pagination
+    totalItems.value = response.data.totalCount || response.data.totalRecords || items.length; // Fallback
+
     // Transform data to match table requirements
-    attractions.value = response.data.data.map(attraction => ({
+    attractions.value = items.map(attraction => ({
       ...attraction,
       location: `${attraction.city}, Egypt`,
       // Map images to string URLs for DataTable
@@ -264,9 +240,16 @@ const fetchAttractions = async () => {
     }));
   } catch (error) {
     console.error('Error fetching attractions:', error);
+    toast.error('Failed to load attractions');
   } finally {
     loading.value = false;
   }
+};
+
+const handlePageChange = ({ page, perPage }) => {
+  currentPage.value = page;
+  itemsPerPage.value = perPage;
+  fetchAttractions();
 };
 
 // Event handlers
@@ -394,6 +377,8 @@ const openFilterModal = () => {
 const applyFilters = (filters) => {
   activeFilters.value = filters;
   showFilterModal.value = false;
+  currentPage.value = 1; // Reset to first page on filter change
+  fetchAttractions();
 };
 
 const closeFormModal = () => {

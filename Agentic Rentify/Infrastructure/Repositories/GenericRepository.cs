@@ -37,6 +37,12 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
         return await query.ToListAsync();
     }
 
+    public async Task<IReadOnlyList<TResult>> ListAsync<TResult>(ISpecification<T> spec, Expression<Func<T, TResult>> selector)
+    {
+        var query = ApplySpecification(spec);
+        return await query.Select(selector).ToListAsync();
+    }
+
     public async Task<IReadOnlyList<T>> GetPagedResponseAsync(int page, int size)
     {
         return await _context.Set<T>()

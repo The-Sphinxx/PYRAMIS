@@ -7,13 +7,15 @@
     <DataTable
       title="Trips"
       :columns="columns"
-      :data="filteredTrips"
+      :data="trips"
       :show-filter="true"
       add-button-text="Add New Trip"
       :show-actions="{ edit: true, delete: true, view: true }"
       empty-message="No trips available"
       :per-page="compactMode ? 5 : 8"
       :show-pagination="!compactMode"
+      :server-side="true"
+      :total-items="totalItems"
       resource="trips"
       :loading="loading"
       @add="handleAdd"
@@ -23,6 +25,7 @@
       @status-change="handleStatusChange"
       @view="handleView"
       @filter="openFilterModal"
+      @page-change="handlePageChange"
     />
 
     <!-- Filter Modal -->
@@ -83,6 +86,9 @@ const loading = ref(false);
 const router = useRouter();
 const route = useRoute(); // Added missing route definition
 const trips = ref([]);
+const totalItems = ref(0);
+const currentPage = ref(1);
+const itemsPerPage = ref(props.compactMode ? 5 : 8);
 const showFilterModal = ref(false);
 const showFormModal = ref(false);
 const showDeleteModal = ref(false);
@@ -190,9 +196,23 @@ const stats = computed(() => {
 const fetchTrips = async () => {
   loading.value = true;
   try {
-    const response = await tripsAPI.getAll();
+    const params = {
+      pageNumber: currentPage.value,
+      pageSize: itemsPerPage.value,
+      searchTerm: route.query.q || undefined,
+      maxPrice: activeFilters.value.maxPrice,
+      city: activeFilters.value.destination,
+      // Pass other filters if supported
+    };
+
+    const response = await tripsAPI.getAll(params);
+    
+    const data = response.data.data || response.data;
+    const items = Array.isArray(data) ? data : (data.items || []);
+    totalItems.value = response.data.totalCount || response.data.totalRecords || items.length;
+
     // Transform API data
-    trips.value = response.data.data.map(trip => ({
+    trips.value = items.map(trip => ({
       ...trip,
       name: trip.title, // Map title to name for DataTable image column
       images: Array.isArray(trip.images) ? trip.images[0] : trip.trip.image || trip.image,
@@ -204,52 +224,26 @@ const fetchTrips = async () => {
     }));
   } catch (error) {
     console.error('Error fetching trips:', error);
+    toast.error('Failed to load trips');
   } finally {
     loading.value = false;
   }
 };
 
-// Filtered trips
-const filteredTrips = computed(() => {
-  let result = trips.value;
+const handlePageChange = ({ page, perPage }) => {
+  currentPage.value = page;
+  itemsPerPage.value = perPage;
+  fetchTrips();
+};
 
-  // Global Search
-  if (route.query.q) {
-    const search = route.query.q.toLowerCase();
-    result = result.filter(t => 
-      (t.title?.toLowerCase().includes(search)) || 
-      (t.city?.toLowerCase().includes(search)) ||
-      (t.destination?.toLowerCase().includes(search)) ||
-      (t.tripType?.toLowerCase().includes(search)) ||
-      (t.status?.toLowerCase().includes(search)) || // Status text match
-      (search.includes('featured') && t.featured) || // "featured" keyword
-      (t.price?.toString().includes(search)) // Price match
-    );
-  }
+// Filtered trips (Server-side: return current page)
+const filteredTrips = computed(() => trips.value);
 
-  if (activeFilters.value.maxPrice && activeFilters.value.maxPrice < filterConfig.priceRange.max) {
-    result = result.filter(t => t.price <= activeFilters.value.maxPrice);
-  }
-
-  if (activeFilters.value.destination) {
-    const searchCity = activeFilters.value.destination.toLowerCase();
-    result = result.filter(t => t.city?.toLowerCase().includes(searchCity));
-  }
-
-  if (activeFilters.value.tripType) {
-    result = result.filter(t => t.tripType === activeFilters.value.tripType);
-  }
-
-  if (activeFilters.value.status) {
-    result = result.filter(t => t.status === activeFilters.value.status);
-  }
-
-  if (activeFilters.value.featured) {
-    const isFeatured = activeFilters.value.featured === 'true';
-    result = result.filter(t => (t.featured === isFeatured || t.isFeatured === isFeatured));
-  }
-
-  return result;
+// Watch for search query
+import { watch } from 'vue';
+watch(() => route.query.q, () => {
+  currentPage.value = 1;
+  fetchTrips();
 });
 
 // Actions
@@ -366,6 +360,8 @@ const openFilterModal = () => {
 const applyFilters = (filters) => {
   activeFilters.value = filters;
   showFilterModal.value = false;
+  currentPage.value = 1;
+  fetchTrips();
 };
 
 const closeFormModal = () => {

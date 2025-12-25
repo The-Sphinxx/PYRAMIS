@@ -275,7 +275,7 @@ const handleSignIn = async () => {
   if (result.success) {
     toast.success('Login successful! Welcome back.');
     const role = authStore.user?.role || '';
-    if (role === 'Admin') {
+    if (role === 'Admin' || role === 'SuperAdmin') {
       router.push('/dashboard/overview');
     } else {
       const redirectPath = route.query.redirect || '/';
@@ -345,7 +345,7 @@ const handleGoogleSignIn = async () => {
 
     if (result.success) {
       const role = authStore.user?.role || '';
-      if (role === 'Admin') {
+      if (role === 'Admin' || role === 'SuperAdmin') {
         router.push('/dashboard/overview');
       } else {
         const redirectPath = route.query.redirect || '/';

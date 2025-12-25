@@ -14,15 +14,58 @@ public class GetHomePageDataQueryHandler(IUnitOfWork unitOfWork)
 {
     public async Task<HomePageDataDto> Handle(GetHomePageDataQuery request, CancellationToken cancellationToken)
     {
-        var trips = await unitOfWork.Repository<Trip>().ListAsync(new TopTripsSpecification(6));
-        var attractions = await unitOfWork.Repository<Attraction>().ListAsync(new TopAttractionsSpecification(4));
-        var hotels = await unitOfWork.Repository<Hotel>().ListAsync(new TopHotelsSpecification(4));
-        var cars = await unitOfWork.Repository<Car>().ListAsync(new TopCarsSpecification(4));
+        var featuredTrips = await unitOfWork.Repository<Trip>().ListAsync(
+            new TopTripsSpecification(6), 
+            t => new HomeTripCardDto
+            {
+                Id = t.Id,
+                Name = t.Title,
+                Price = t.Price,
+                Description = t.Description,
+                Location = t.City,
+                Duration = t.Duration,
+                Rating = t.Rating,
+                Reviews = t.TotalReviews.ToString("N0", CultureInfo.InvariantCulture),
+                Image = t.MainImage != null ? t.MainImage : (t.Images.Count > 0 ? t.Images[0] : "")
+            });
 
-        var featuredTrips = trips.Select(MapTrip).ToList();
-        var popularAttractions = attractions.Select(MapAttraction).ToList();
-        var featuredHotels = hotels.Select(MapHotel).ToList();
-        var featuredCars = cars.Select(MapCar).ToList();
+        var popularAttractions = await unitOfWork.Repository<Attraction>().ListAsync(
+            new TopAttractionsSpecification(4),
+            a => new HomeAttractionCardDto
+            {
+                Id = a.Id,
+                Name = a.Name,
+                Price = a.Price,
+                Location = a.City,
+                Rating = a.Rating,
+                Reviews = (a.ReviewSummary != null ? a.ReviewSummary.TotalReviews : 0).ToString("N0", CultureInfo.InvariantCulture),
+                Featured = a.Rating >= 4.5,
+                Image = a.Images.Any() ? a.Images.FirstOrDefault().Url : ""
+            });
+
+        var featuredHotels = await unitOfWork.Repository<Hotel>().ListAsync(
+            new TopHotelsSpecification(4),
+            h => new HomeHotelCardDto
+            {
+                Id = h.Id,
+                Name = h.Name,
+                Price = h.BasePrice,
+                Location = h.City,
+                Rating = h.Rating,
+                Reviews = h.ReviewsCount.ToString("N0", CultureInfo.InvariantCulture),
+                Image = h.Images.Count > 0 ? h.Images[0] : ""
+            });
+
+        var featuredCars = await unitOfWork.Repository<Car>().ListAsync(
+            new TopCarsSpecification(4),
+            c => new HomeCarCardDto
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Price = c.Price,
+                Description = c.Description ?? "",
+                Image = c.Images.Count > 0 ? c.Images[0] : ""
+            });
 
         // Resolve system background for Home page if configured
         var heroBackground = await ResolveHomeBackgroundAsync(unitOfWork, featuredTrips);
@@ -31,10 +74,10 @@ public class GetHomePageDataQueryHandler(IUnitOfWork unitOfWork)
         {
             HeroSection = BuildHeroSection(featuredTrips, heroBackground),
             Metadata = BuildMetadata(),
-            FeaturedTrips = featuredTrips,
-            PopularAttractions = popularAttractions,
-            FeaturedHotels = featuredHotels,
-            FeaturedCars = featuredCars,
+            FeaturedTrips = featuredTrips.ToList(),
+            PopularAttractions = popularAttractions.ToList(),
+            FeaturedHotels = featuredHotels.ToList(),
+            FeaturedCars = featuredCars.ToList(),
             Testimonials = BuildTestimonials(),
             WhyChooseUs = BuildWhyChooseUs()
         };

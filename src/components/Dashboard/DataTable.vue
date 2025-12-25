@@ -218,7 +218,7 @@
         <Pagination
           v-model:currentPage="currentPage"
           v-model:perPage="itemsPerPage"
-          :total="data.length"
+          :total="serverSide ? totalItems : data.length"
           @page-change="handlePageChange"
         />
       </div>
@@ -284,6 +284,14 @@ const props = defineProps({
   showPagination: {
     type: Boolean,
     default: true
+  },
+  serverSide: {
+    type: Boolean,
+    default: false
+  },
+  totalItems: {
+    type: Number,
+    default: 0
   }
 });
 
@@ -297,13 +305,15 @@ const emit = defineEmits([
   'status-change',
   'update:data',
   'refresh',
-  'status-click'
+  'status-click',
+  'page-change'
 ]);
 
 const currentPage = ref(1);
 const itemsPerPage = ref(props.perPage);
 
 const paginatedData = computed(() => {
+  if (props.serverSide) return props.data;
   const start = (currentPage.value - 1) * itemsPerPage.value;
   const end = start + itemsPerPage.value;
   return props.data.slice(start, end);
@@ -312,6 +322,10 @@ const paginatedData = computed(() => {
 const handlePageChange = ({ page, perPage }) => {
   currentPage.value = page;
   itemsPerPage.value = perPage;
+  
+  if (props.serverSide) {
+    emit('page-change', { page, perPage });
+  }
 };
 
 // Handle status/dropdown changes

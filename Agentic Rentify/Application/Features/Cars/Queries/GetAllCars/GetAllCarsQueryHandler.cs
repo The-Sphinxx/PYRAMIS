@@ -24,10 +24,46 @@ public class GetAllCarsQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
                 (c.Model != null && c.Model.Contains(term));
         }
 
-        var (items, totalCount) = await unitOfWork.Repository<Car>()
-            .GetPagedAppAsync(request.PageNumber, request.PageSize, filter);
+        // Calculate total count first (without paging)
+        var countSpec = new Agentic_Rentify.Application.Specifications.GenericSpecification<Car>(filter);
+        var totalCount = await unitOfWork.Repository<Car>().CountAsync(countSpec);
 
-        var dtos = mapper.Map<IReadOnlyList<CarResponseDTO>>(items);
+        // Use projection to select only what is needed for the list
+        var dtos = await unitOfWork.Repository<Car>().ListAsync(
+            new Agentic_Rentify.Application.Specifications.GenericSpecification<Car>(
+                filter, 
+                orderBy: c => c.Id, 
+                skip: (request.PageNumber - 1) * request.PageSize, 
+                take: request.PageSize, 
+                isPagingEnabled: true
+            ), 
+            c => new CarResponseDTO
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Brand = c.Brand,
+                Model = c.Model,
+                Year = c.Year,
+                City = c.City,
+                Description = c.Description.Length > 100 ? c.Description.Substring(0, 100) + "..." : c.Description,
+                Type = c.Type,
+                Seats = c.Seats,
+                Transmission = c.Transmission,
+                FuelType = c.FuelType,
+                Price = c.Price + "$",
+                RawPrice = c.Price,
+                TotalFleet = c.TotalFleet,
+                AvailableNow = c.AvailableNow,
+                Status = c.Status,
+                Featured = c.Featured,
+                IsFeatured = c.IsFeatured,
+                Images = c.Images.Take(1).ToList(),
+                ReviewSummary = new CarReviewSummaryDTO
+                {
+                    TotalReviews = c.ReviewSummary != null ? c.ReviewSummary.TotalReviews : 0,
+                    OverallRating = c.ReviewSummary != null ? c.ReviewSummary.OverallRating : 0
+                }
+            });
 
         return new PagedResponse<CarResponseDTO>(dtos, request.PageNumber, request.PageSize, totalCount);
     }

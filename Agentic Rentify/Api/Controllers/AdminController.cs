@@ -24,7 +24,7 @@ namespace Agentic_Rentify.Api.Controllers;
 [Route("api/admin")]
 [Produces("application/json")]
 [ApiExplorerSettings(GroupName = "Admin")]
-public class AdminController(DataSyncService dataSyncService, IUnitOfWork unitOfWork, IPhotoService photoService, IMediator mediator, UserManager<ApplicationUser> userManager) : ControllerBase
+public class AdminController(IUnitOfWork unitOfWork, IPhotoService photoService, IMediator mediator, UserManager<ApplicationUser> userManager) : ControllerBase
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
     private readonly IPhotoService _photoService = photoService;
@@ -46,13 +46,13 @@ public class AdminController(DataSyncService dataSyncService, IUnitOfWork unitOf
     /// The sync will embed all entity descriptions and update the search index.
     /// </remarks>
     /// <response code="200">Synchronization completed successfully</response>
-    [HttpGet("vector-sync")]
-    [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
-    public async Task<IActionResult> VectorSync()
-    {
-        await dataSyncService.SyncAsync("rentify_memory");
-        return Ok(new { status = "ok", message = "Vector database synchronization completed" });
-    }
+    // [HttpGet("vector-sync")]
+    // [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
+    // public async Task<IActionResult> VectorSync()
+    // {
+    //     await dataSyncService.SyncAsync("rentify_memory");
+    //     return Ok(new { status = "ok", message = "Vector database synchronization completed" });
+    // }
 
 
     /// <summary>

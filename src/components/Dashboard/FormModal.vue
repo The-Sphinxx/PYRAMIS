@@ -182,7 +182,7 @@
               type="button"
               @click="handleCancel" 
               class="btn btn-outline flex-1 font-cairo font-bold"
-              :disabled="loading"
+              :disabled="isLoading"
             >
               Cancel
             </button>
@@ -190,9 +190,9 @@
               type="button"
               @click="handleSubmit" 
               class="btn btn-primary flex-1 font-cairo font-bold"
-              :disabled="loading"
+              :disabled="isLoading"
             >
-              <span v-if="loading" class="loading loading-spinner loading-sm"></span>
+              <span v-if="isLoading" class="loading loading-spinner loading-sm"></span>
               <span v-else>{{ mode === 'add' ? 'Add' : 'Update' }} {{ config.title }}</span>
             </button>
           </div>
@@ -226,13 +226,23 @@ const props = defineProps({
   initialData: {
     type: Object,
     default: () => ({})
+  },
+  loading: {
+    type: Boolean,
+    default: false
+  },
+  errors: {
+    type: Object,
+    default: () => ({})
   }
 });
 
 const emit = defineEmits(['close', 'submit']);
 
 const formData = ref({});
-const loading = ref(false);
+const localSubmitting = ref(false);
+
+const isLoading = computed(() => props.loading || localSubmitting.value);
 
 // Filter fields based on mode (some fields might be add-only)
 const visibleFields = computed(() => {
@@ -290,7 +300,7 @@ const handleImageUpload = (event, key) => {
 
 // Handle form submission
 const handleSubmit = async () => {
-  loading.value = true;
+  localSubmitting.value = true;
   try {
     // Create a clean copy of form data
     const dataToSubmit = { ...formData.value };
@@ -303,13 +313,13 @@ const handleSubmit = async () => {
   } catch (error) {
     console.error('Form submission error:', error);
   } finally {
-    loading.value = false;
+    localSubmitting.value = false;
   }
 };
 
 // Handle cancel
 const handleCancel = () => {
-  if (!loading.value) {
+  if (!isLoading.value) {
     emit('close');
   }
 };

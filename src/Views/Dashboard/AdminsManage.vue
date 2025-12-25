@@ -17,6 +17,7 @@
 
     <!-- Data Table -->
     <DataTable
+      title="Admins"
       :columns="columns"
       :data="admins"
       :loading="loading"
@@ -33,7 +34,6 @@
     <FormModal
       :isOpen="isModalOpen"
       :mode="editingAdmin ? 'edit' : 'add'"
-      :title="editingAdmin ? 'Edit Admin' : 'Add New Admin'"
       :config="adminFormConfig"
       :initialData="editingAdmin"
       :errors="formErrors"

@@ -390,7 +390,7 @@ router.beforeEach((to, from, next) => {
     })
   } else if (requiresAdmin) {
     const role = authStore.user?.role || ''
-    if (role !== 'Admin') {
+    if (role !== 'Admin' && role !== 'SuperAdmin') {
       next({ path: '/' })
     } else {
       next()
