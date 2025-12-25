@@ -1,9 +1,10 @@
 import { defineStore } from "pinia";
-import { getAllCars } from "@/Services/carsApi"; 
+import { getAllCars, getCarById } from "@/Services/carsApi"; 
 
 export const useCarsStore = defineStore("carsStore", {
   state: () => ({
-    cars: [],        
+    cars: [],
+    selectedCar: null,        
     loading: false,  
     error: null      
   }),
@@ -19,35 +20,82 @@ export const useCarsStore = defineStore("carsStore", {
         const carsArray = Array.isArray(response) ? response : (response.items || response.data || []);
 
         // Transform cars data - map PascalCase API response to camelCase
-        this.cars = carsArray.map(car => ({
-          id: car.id,
-          name: car.name,
-          description: car.description,
-          category: car.category,
-          brand: car.brand,
-          model: car.model,
-          year: car.year,
-          transmission: car.transmission,
-          fuelType: car.fuelType,
-          seating: car.seating,
-          pricePerDay: car.pricePerDay,
-          images: car.images || [],
-          image: car.images?.[0],
-          imageUrl: car.images?.[0] || '/images/placeholder-car.jpg',
-          features: car.features || [],
-          rating: car.rating || 0,
-          reviews: car.reviews || { totalReviews: 0 },
-          totalReviews: car.reviews?.totalReviews || 0,
-          available: car.available !== false,
-          // Include original data for flexibility
-          ...car
-        }));
+        this.cars = carsArray.map(car => this.transformCar(car));
       } catch (err) {
         console.error("Error fetching cars:", err);
         this.error = err.message || "Failed to fetch cars";
       } finally {
         this.loading = false;
       }
+    },
+
+    async fetchCarById(id) {
+      this.loading = true;
+      this.error = null;
+      try {
+        // Try to find in existing state first
+        let car = this.cars.find(c => c.id == id);
+        
+        if (!car) {
+          // Fetch from API if not in state
+          const response = await getCarById(id);
+          car = this.transformCar(response);
+        }
+        
+        this.selectedCar = car;
+        return car;
+      } catch (err) {
+        console.error("Error fetching car by ID:", err);
+        this.error = err.message || 'Failed to fetch car';
+        throw err;
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    transformCar(car) {
+      return {
+        id: car.id,
+        name: car.name,
+        description: car.description,
+        overview: car.overview,
+        category: car.category,
+        brand: car.brand,
+        model: car.model,
+        year: car.year,
+        transmission: car.transmission,
+        fuelType: car.fuelType,
+        seats: car.seats || car.seating,
+        seating: car.seating || car.seats,
+        price: car.price || car.pricePerDay,
+        pricePerDay: car.pricePerDay || car.price,
+        images: car.images || [],
+        image: car.images?.[0],
+        imageUrl: car.images?.[0] || '/images/placeholder-car.jpg',
+        features: car.features || [],
+        amenities: car.amenities || [],
+        rating: car.rating || 0,
+        reviewSummary: car.reviewSummary || car.reviews || { 
+          overallRating: car.rating || 0, 
+          totalReviews: 0,
+          ratingCriteria: {}
+        },
+        reviews: car.reviews || car.reviewSummary || { 
+          overallRating: car.rating || 0, 
+          totalReviews: 0 
+        },
+        userReviews: car.userReviews || [],
+        totalReviews: car.reviews?.totalReviews || car.reviewSummary?.totalReviews || 0,
+        available: car.available !== false,
+        status: car.status,
+        city: car.city,
+        // Include original data for flexibility
+        ...car
+      };
+    },
+
+    clearSelectedCar() {
+      this.selectedCar = null;
     }
   },
 
