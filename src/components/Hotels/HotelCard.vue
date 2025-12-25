@@ -120,6 +120,15 @@ export default {
       })
     }
   },
+  data() {
+    return {
+      componentId: Math.random().toString(36).substr(2, 9)
+    };
+  },
+  mounted() {
+    console.log('🎴 HotelCard MOUNTED - ComponentID:', this.componentId, 'HotelID:', this.hotel?.id, 'Name:', this.hotel?.name);
+    console.trace('HotelCard mount stack trace');
+  },
   methods: {
     handleBooking() {
       this.$emit('book', this.hotel);

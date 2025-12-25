@@ -7,6 +7,12 @@ export const useTripsStore = defineStore('trips', {
         selectedTrip: null,
         loading: false,
         error: null,
+        pagination: {
+            pageIndex: 0,
+            pageSize: 12,
+            totalCount: 0,
+            totalPages: 0
+        },
         filters: {
             categories: [],
             city: 'All',
@@ -63,14 +69,16 @@ export const useTripsStore = defineStore('trips', {
     },
 
     actions: {
-        async fetchTrips() {
+        async fetchTrips(params = {}) {
             this.loading = true;
             this.error = null;
+            this.trips = []; // Clear before fetch
             try {
-                const data = await tripsApi.getAllTrips();
+                const data = await tripsApi.getAllTrips(params);
                 
                 // Handle both paginated response and direct array
-                const tripsArray = Array.isArray(data) ? data : (data.items || data.data || []);
+                // API returns camelCase: data, pageNumber, pageSize, totalRecords, totalPages
+                const tripsArray = Array.isArray(data) ? data : (data.data || data.Data || data.items || []);
 
                 // Transform trips data - map PascalCase API response to camelCase
                 this.trips = tripsArray.map(trip => ({
@@ -95,6 +103,16 @@ export const useTripsStore = defineStore('trips', {
                     // Include original data for flexibility
                     ...trip
                 }));
+                
+                // Update pagination metadata
+                this.pagination = {
+                    pageIndex: (data.pageNumber ? data.pageNumber - 1 : 0),
+                    pageSize: data.pageSize ?? params.pageSize ?? 12,
+                    totalCount: data.totalRecords ?? tripsArray.length,
+                    totalPages: data.totalPages ?? 1
+                };
+                
+                return this.pagination;
             } catch (err) {
                 this.error = err.message || 'Failed to fetch trips';
                 console.error('Error fetching trips:', err);

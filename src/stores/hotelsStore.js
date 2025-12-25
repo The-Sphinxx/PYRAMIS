@@ -7,6 +7,12 @@ export const useHotelsStore = defineStore('hotels', {
         selectedHotel: null,
         loading: false,
         error: null,
+        pagination: {
+            pageIndex: 0,
+            pageSize: 12,
+            totalCount: 0,
+            totalPages: 0
+        },
         filters: {
             searchQuery: '',
             city: 'All',
@@ -87,16 +93,18 @@ export const useHotelsStore = defineStore('hotels', {
     },
 
     actions: {
-        async fetchHotels() {
+        async fetchHotels(params = {}) {
             this.loading = true;
             this.error = null;
+            this.hotels = []; // Clear before fetch
 
             try {
-                const data = await hotelsApi.getHotels(); 
+                const data = await hotelsApi.getHotels(params);
 
                 // Transform hotels data to include required fields
                 // Handle both paginated response and direct array
-                const hotelsArray = Array.isArray(data) ? data : (data.items || data.data || []);
+                // API returns camelCase: data, pageNumber, pageSize, totalRecords, totalPages
+                const hotelsArray = Array.isArray(data) ? data : (data.data || data.Data || data.items || []);
 
                 this.hotels = hotelsArray.map(hotel => ({
                     // Map PascalCase API response to camelCase for Vue components
@@ -130,6 +138,16 @@ export const useHotelsStore = defineStore('hotels', {
                     // Include original data for flexibility
                     ...hotel
                 }));
+                
+                // Update pagination metadata - API uses camelCase
+                this.pagination = {
+                    pageIndex: (data.pageNumber ? data.pageNumber - 1 : 0),
+                    pageSize: data.pageSize ?? params.pageSize ?? 12,
+                    totalCount: data.totalRecords ?? hotelsArray.length,
+                    totalPages: data.totalPages ?? 1
+                };
+                
+                return this.pagination;
             } catch (error) {
                 console.error('Error fetching hotels:', error);
                 this.error = error.message || 'Failed to fetch hotels';

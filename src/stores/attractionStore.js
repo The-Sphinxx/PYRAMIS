@@ -9,6 +9,12 @@ export const useAttractionStore = defineStore('attraction', {
     filteredAttractions: [],
     loading: false,
     error: null,
+    pagination: {
+      pageIndex: 0,
+      pageSize: 12,
+      totalCount: 0,
+      totalPages: 0
+    },
     categories: ['TOP PICKS', 'HISTORICAL', 'MUSEUMS', 'NATURE', 'FAMILY', 'RELIGIOUS', 'CULTURE'],
     cities: [],
     filters: {
@@ -108,14 +114,16 @@ export const useAttractionStore = defineStore('attraction', {
 
   actions: {
     // Fetch all attractions
-    async fetchAttractions() {
+    async fetchAttractions(params = {}) {
       this.loading = true;
       this.error = null;
+      this.attractions = []; // Clear before fetch
       try {
-        const data = await attractionApi.getAllAttractions();
+        const data = await attractionApi.getAllAttractions(params);
         
         // Handle both paginated response and direct array
-        const attractionsArray = Array.isArray(data) ? data : (data.items || data.data || []);
+        // API returns camelCase: data, pageNumber, pageSize, totalRecords, totalPages
+        const attractionsArray = Array.isArray(data) ? data : (data.data || data.Data || data.items || []);
 
         // Transform attractions data - map PascalCase API response to camelCase
         this.attractions = attractionsArray.map(attr => ({
@@ -140,8 +148,17 @@ export const useAttractionStore = defineStore('attraction', {
           ...attr
         }));
         
-        this.filteredAttractions = this.attractions;
+        // Update pagination metadata - API uses camelCase
+        this.pagination = {
+          pageIndex: (data.pageNumber ? data.pageNumber - 1 : 0),
+          pageSize: data.pageSize ?? params.pageSize ?? 12,
+          totalCount: data.totalRecords ?? attractionsArray.length,
+          totalPages: data.totalPages ?? 1
+        };
+        
         this.cities = this.uniqueCities;
+        
+        return this.pagination;
       } catch (error) {
         this.error = error.message || 'Failed to fetch attractions';
         console.error('Error fetching attractions:', error);

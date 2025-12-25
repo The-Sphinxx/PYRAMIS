@@ -6,24 +6,43 @@ export const useCarsStore = defineStore("carsStore", {
     cars: [],
     selectedCar: null,        
     loading: false,  
-    error: null      
+    error: null,
+    pagination: {
+      pageIndex: 0,
+      pageSize: 12,
+      totalCount: 0,
+      totalPages: 0
+    }
   }),
 
   actions: {
-    async fetchCars() {
+    async fetchCars(params = {}) {
       this.loading = true;
       this.error = null;
+      this.cars = []; // Clear before fetch
       try {
-        const response = await getAllCars();
+        const response = await getAllCars(params);
         
         // Handle both paginated response and direct array
-        const carsArray = Array.isArray(response) ? response : (response.items || response.data || []);
+        // API returns camelCase: data, pageNumber, pageSize, totalRecords, totalPages
+        const carsArray = Array.isArray(response) ? response : (response.data || response.Data || response.items || []);
 
         // Transform cars data - map PascalCase API response to camelCase
         this.cars = carsArray.map(car => this.transformCar(car));
+        
+        // Update pagination metadata - API uses camelCase
+        this.pagination = {
+          pageIndex: (response.pageNumber ? response.pageNumber - 1 : 0),
+          pageSize: response.pageSize ?? params.pageSize ?? 12,
+          totalCount: response.totalRecords ?? carsArray.length,
+          totalPages: response.totalPages ?? 1
+        };
+        
+        return this.pagination;
       } catch (err) {
         console.error("Error fetching cars:", err);
         this.error = err.message || "Failed to fetch cars";
+        throw err;
       } finally {
         this.loading = false;
       }
