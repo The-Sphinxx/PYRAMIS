@@ -54,10 +54,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/Attractions/pyramids-main.jpg",
-        "/images/Attractions/pyramids-view_2.jpg",
-        "/images/Attractions/pyramids-view_3.jpg",
-        "/images/Attractions/pyramids-view_4.jpg"
+        "/images/pyramids-main.jpg",
+        "/images/pyramids-view_2.jpg",
+        "/images/pyramids-view_3.jpg",
+        "/images/pyramids-view_4.jpg"
       ],
       "latitude": 29.9792,
       "longitude": 31.1342,
@@ -124,15 +124,15 @@
         "CULTURE"
       ],
       "images": [
-        "/images/Attractions/Karnak-Temple-main.png",
-        "/images/Attractions/karnak-view_2.jpg",
-        "/images/Attractions/karnak-view_3.jpg",
-        "/images/Attractions/karnak-view_4.jpg"
+        "/images/Karnak-Temple-main.png",
+        "/images/karnak-view_2.jpg",
+        "/images/karnak-view_3.jpg",
+        "/images/karnak-view_4.jpg"
       ],
       "latitude": 25.7197,
       "longitude": 32.6587,
       "description": "Large complex of ancient temples and monuments dedicated to Amun-Ra.",
-      "overview": "Karnak is the largest religious building ever constructed. It was the main place of worship of the Theban Triad (Amun, Mut, and Khonsu) and a powerful symbol of Egyptian influence. Highlights include the massive Hypostyle Hall with 134 towering columns, the Sacred Lake, and the Avenue of Sphinxes. A night-time Sound and Light show is often available, offering a dramatic view of the monumental structures.",
+      "overview": "Karnak is the largest religious building ever constructed. It was the main place of worship of the Theban Triad (Amun, Mut, and Khonsu) and a powerful symbol of Egyptian influence. Highlights include the massive Hypostyle Hall with 134 towering columns, the Sacred Lake, and the Avenue of Sphinxes. A night-time Sound and Light show is often Available, offering a dramatic view of the monumental structures.",
       "highlights": [
         "The Great Hypostyle Hall",
         "The Sacred Lake",
@@ -193,10 +193,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/Attractions/Salah-El-Din-Citadel-main.png",
-        "/images/Attractions/Salah-El-Din-Citadel-view_2.jpg",
-        "/images/Attractions/Salah-El-Din-Citadel-view_3.jpg",
-        "/images/Attractions/Salah-El-Din-Citadel-view_4.jpg"
+        "/images/Salah-El-Din-Citadel-main.png",
+        "/images/Salah-El-Din-Citadel-view_2.jpg",
+        "/images/Salah-El-Din-Citadel-view_3.jpg",
+        "/images/Salah-El-Din-Citadel-view_4.jpg"
       ],
       "latitude": 30.0289,
       "longitude": 31.2625,
@@ -208,7 +208,7 @@
         "Al-Nasser Mohammad Mosque"
       ],
       "amenities": [
-        "Mosques (Restrooms available)",
+        "Mosques (Restrooms Available)",
         "Museums (Police & Military)",
         "Panoramic Viewpoints",
         "Gift Shops/Vendors",
@@ -262,10 +262,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/Attractions/Egyptian-Museum-main.png",
-        "/images/Attractions/Egyptian-Museum-view_2.jpg",
-        "/images/Attractions/Egyptian-Museum-view_3.jpg",
-        "/images/Attractions/Egyptian-Museum-view_4.jpg"
+        "/images/Egyptian-Museum-main.png",
+        "/images/Egyptian-Museum-view_2.jpg",
+        "/images/Egyptian-Museum-view_3.jpg",
+        "/images/Egyptian-Museum-view_4.jpg"
       ],
       "latitude": 30.0474,
       "longitude": 31.2365,
@@ -330,10 +330,10 @@
         "BEACHES"
       ],
       "images": [
-        "/images/Attractions/Marina-Beach-main.png",
-        "/images/Attractions/Marina-Beach-view_2.jpg",
-        "/images/Attractions/Marina-Beach-view_3.jpg",
-        "/images/Attractions/Marina-Beach-view_4.jpg"
+        "/images/Marina-Beach-main.png",
+        "/images/Marina-Beach-view_2.jpg",
+        "/images/Marina-Beach-view_3.jpg",
+        "/images/Marina-Beach-view_4.jpg"
       ],
       "latitude": 31.2185,
       "longitude": 29.9079,
@@ -398,10 +398,10 @@
         "ANCIENT SITES"
       ],
       "images": [
-        "/images/Attractions/Valley-of-the-Queens-main.png",
-        "/images/Attractions/Valley-of-the-Queens-view_2.jpg",
-        "/images/Attractions/Valley-of-the-Queens-view_3.jpg",
-        "/images/Attractions/Valley-of-the-Queens-view_4.jpg"
+        "/images/Valley-of-the-Queens-main.png",
+        "/images/Valley-of-the-Queens-view_2.jpg",
+        "/images/Valley-of-the-Queens-view_3.jpg",
+        "/images/Valley-of-the-Queens-view_4.jpg"
       ],
       "latitude": 25.7262,
       "longitude": 32.5857,
@@ -463,10 +463,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/Attractions/AbuSimbel-Temples-main.png",
-        "/images/Attractions/AbuSimbel-Temples-view_2.png",
-        "/images/Attractions/AbuSimbel-Temples-view_3.png",
-        "/images/Attractions/AbuSimbel-Temples-view_4.png"
+        "/images/AbuSimbel-Temples-main.png",
+        "/images/AbuSimbel-Temples-view_2.png",
+        "/images/AbuSimbel-Temples-view_3.png",
+        "/images/AbuSimbel-Temples-view_4.png"
       ],
       "latitude": 22.3361,
       "longitude": 31.626,
@@ -527,10 +527,10 @@
         "SHOPPING"
       ],
       "images": [
-        "/images/Attractions/Khan-ElKhalili-Bazaar-main.png",
-        "/images/Attractions/Khan-ElKhalili-Bazaar-view_2.jpg",
-        "/images/Attractions/Khan-ElKhalili-Bazaar-view_3.jpg",
-        "/images/Attractions/Khan-ElKhalili-Bazaar-view_4.jpg"
+        "/images/Khan-ElKhalili-Bazaar-main.png",
+        "/images/Khan-ElKhalili-Bazaar-view_2.jpg",
+        "/images/Khan-ElKhalili-Bazaar-view_3.jpg",
+        "/images/Khan-ElKhalili-Bazaar-view_4.jpg"
       ],
       "latitude": 30.0475,
       "longitude": 31.2644,
@@ -592,10 +592,10 @@
         "ANCIENT SITES"
       ],
       "images": [
-        "/images/Attractions/Valley-of-kings-main.png",
-        "/images/Attractions/Valley-of-kings-view_2.jpg",
-        "/images/Attractions/Valley-of-kings-view_3.jpg",
-        "/images/Attractions/Valley-of-kings-view_4.jpg"
+        "/images/Valley-of-kings-main.png",
+        "/images/Valley-of-kings-view_2.jpg",
+        "/images/Valley-of-kings-view_3.jpg",
+        "/images/Valley-of-kings-view_4.jpg"
       ],
       "latitude": 25.7408,
       "longitude": 32.601,
@@ -658,10 +658,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/Attractions/Mortuary-Temple-of-Hatshepsut-main.png",
-        "/images/Attractions/Mortuary-Temple-of-Hatshepsut-view_2.jpg",
-        "/images/Attractions/Mortuary-Temple-of-Hatshepsut-view_3.jpg",
-        "/images/Attractions/Mortuary-Temple-of-Hatshepsut-view_4.jpg"
+        "/images/Mortuary-Temple-of-Hatshepsut-main.png",
+        "/images/Mortuary-Temple-of-Hatshepsut-view_2.jpg",
+        "/images/Mortuary-Temple-of-Hatshepsut-view_3.jpg",
+        "/images/Mortuary-Temple-of-Hatshepsut-view_4.jpg"
       ],
       "latitude": 25.7381,
       "longitude": 32.6074,
@@ -723,10 +723,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/Attractions/Temple-of-Philae-main.png",
-        "/images/Attractions/Temple-of-Philae-view_2.png",
-        "/images/Attractions/Temple-of-Philae-view_3.png",
-        "/images/Attractions/Temple-of-Philae-view_4.png"
+        "/images/Temple-of-Philae-main.png",
+        "/images/Temple-of-Philae-view_2.png",
+        "/images/Temple-of-Philae-view_3.png",
+        "/images/Temple-of-Philae-view_4.png"
       ],
       "latitude": 24.0125,
       "longitude": 32.885,
@@ -787,10 +787,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/Attractions/Temple-of-KomOmbo-main.png",
-        "/images/Attractions/Temple-of-KomOmbo-view_2.png",
-        "/images/Attractions/Temple-of-KomOmbo-view_3.png",
-        "/images/Attractions/Temple-of-KomOmbo-view_4.png"
+        "/images/Temple-of-KomOmbo-main.png",
+        "/images/Temple-of-KomOmbo-view_2.png",
+        "/images/Temple-of-KomOmbo-view_3.png",
+        "/images/Temple-of-KomOmbo-view_4.png"
       ],
       "latitude": 24.4552,
       "longitude": 32.9555,
@@ -851,10 +851,10 @@
         "HISTORICAL"
       ],
       "images": [
-        "/images/Attractions/Nubian-Museum-main.png",
-        "/images/Attractions/Nubian-Museum-view_2.png",
-        "/images/Attractions/Nubian-Museum-view_3.png",
-        "/images/Attractions/Nubian-Museum-view_4.png"
+        "/images/Nubian-Museum-main.png",
+        "/images/Nubian-Museum-view_2.png",
+        "/images/Nubian-Museum-view_3.png",
+        "/images/Nubian-Museum-view_4.png"
       ],
       "latitude": 24.0863,
       "longitude": 32.8863,
@@ -917,10 +917,10 @@
         "HISTORICAL"
       ],
       "images": [
-        "/images/Attractions/Museum-of-Islamic-Art-main .png",
-        "/images/Attractions/Museum-of-Islamic-Art-view_2.png",
-        "/images/Attractions/Museum-of-Islamic-Art-view_3.png",
-        "/images/Attractions/Museum-of-Islamic-Art-view_4.png"
+        "/images/Museum-of-Islamic-Art-main .png",
+        "/images/Museum-of-Islamic-Art-view_2.png",
+        "/images/Museum-of-Islamic-Art-view_3.png",
+        "/images/Museum-of-Islamic-Art-view_4.png"
       ],
       "latitude": 30.0425,
       "longitude": 31.2592,
@@ -983,10 +983,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/Attractions/National-Museum-of-Egyptian-Civilization-main.png",
-        "/images/Attractions/National-Museum-of-Egyptian-Civilization-view_2.png",
-        "/images/Attractions/National-Museum-of-Egyptian-Civilization-view_3.png",
-        "/images/Attractions/National-Museum-of-Egyptian-Civilization-view_4.png"
+        "/images/National-Museum-of-Egyptian-Civilization-main.png",
+        "/images/National-Museum-of-Egyptian-Civilization-view_2.png",
+        "/images/National-Museum-of-Egyptian-Civilization-view_3.png",
+        "/images/National-Museum-of-Egyptian-Civilization-view_4.png"
       ],
       "latitude": 30.0191,
       "longitude": 31.2372,
@@ -1049,10 +1049,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/Attractions/National-Museum-main.png",
-        "/images/Attractions/National-Museum-view_2.png",
-        "/images/Attractions/National-Museum-view_3.png",
-        "/images/Attractions/National-Museum-view_4.png"
+        "/images/National-Museum-main.png",
+        "/images/National-Museum-view_2.png",
+        "/images/National-Museum-view_3.png",
+        "/images/National-Museum-view_4.png"
       ],
       "latitude": 31.2001,
       "longitude": 29.9187,
@@ -1112,10 +1112,10 @@
         "HISTORICAL"
       ],
       "images": [
-        "/images/Attractions/Maspero-Museum-main.png",
-        "/images/Attractions/Maspero-Museum-view_2.png",
-        "/images/Attractions/Maspero-Museum-view_3.png",
-        "/images/Attractions/Maspero-Museum-view_4.png"
+        "/images/Maspero-Museum-main.png",
+        "/images/Maspero-Museum-view_2.png",
+        "/images/Maspero-Museum-view_3.png",
+        "/images/Maspero-Museum-view_4.png"
       ],
       "latitude": 30.0543,
       "longitude": 31.2429,
@@ -1177,10 +1177,10 @@
         "DIVING"
       ],
       "images": [
-        "/images/Attractions/Ras-Mohammed-National-Park-main.png",
-        "/images/Attractions/Ras-Mohammed-National-Park-view_2.png",
-        "/images/Attractions/Ras-Mohammed-National-Park-view_3.png",
-        "/images/Attractions/Ras-Mohammed-National-Park-view_4.png"
+        "/images/Ras-Mohammed-National-Park-main.png",
+        "/images/Ras-Mohammed-National-Park-view_2.png",
+        "/images/Ras-Mohammed-National-Park-view_3.png",
+        "/images/Ras-Mohammed-National-Park-view_4.png"
       ],
       "latitude": 27.75,
       "longitude": 34.25,
@@ -1241,10 +1241,10 @@
         "BEACHES"
       ],
       "images": [
-        "/images/Attractions/Dahab-Beach-main.png",
-        "/images/Attractions/Dahab-Beach-view_2.png",
-        "/images/Attractions/Dahab-Beach-view_3.png",
-        "/images/Attractions/Dahab-Beach-view_4.png"
+        "/images/Dahab-Beach-main.png",
+        "/images/Dahab-Beach-view_2.png",
+        "/images/Dahab-Beach-view_3.png",
+        "/images/Dahab-Beach-view_4.png"
       ],
       "latitude": 28.5,
       "longitude": 34.5167,
@@ -1306,10 +1306,10 @@
         "BEACHES"
       ],
       "images": [
-        "/images/Attractions/Red-Sea-main.png",
-        "/images/Attractions/Red-Sea-view_2.png",
-        "/images/Attractions/Red-Sea-view_3.png",
-        "/images/Attractions/Red-Sea-view_4.png"
+        "/images/Red-Sea-main.png",
+        "/images/Red-Sea-view_2.png",
+        "/images/Red-Sea-view_3.png",
+        "/images/Red-Sea-view_4.png"
       ],
       "latitude": 27.257,
       "longitude": 33.8123,
@@ -1371,10 +1371,10 @@
         "ADVENTURE"
       ],
       "images": [
-        "/images/Attractions/Wadi-ElRayan-main.png",
-        "/images/Attractions/Wadi-ElRayan-view_2.png",
-        "/images/Attractions/Wadi-ElRayan-view_3.png",
-        "/images/Attractions/Wadi-ElRayan-view_4.png"
+        "/images/Wadi-ElRayan-main.png",
+        "/images/Wadi-ElRayan-view_2.png",
+        "/images/Wadi-ElRayan-view_3.png",
+        "/images/Wadi-ElRayan-view_4.png"
       ],
       "latitude": 29.1333,
       "longitude": 30.6333,
@@ -1436,10 +1436,10 @@
         "BEACHES"
       ],
       "images": [
-        "/images/Attractions/AinSokhna-Beach-main.png",
-        "/images/Attractions/AinSokhna-Beach-view_2.png",
-        "/images/Attractions/AinSokhna-Beach-view_3.png",
-        "/images/Attractions/AinSokhna-Beach-view_4.png"
+        "/images/AinSokhna-Beach-main.png",
+        "/images/AinSokhna-Beach-view_2.png",
+        "/images/AinSokhna-Beach-view_3.png",
+        "/images/AinSokhna-Beach-view_4.png"
       ],
       "latitude": 29.623,
       "longitude": 32.32,
@@ -1501,10 +1501,10 @@
         "HISTORICAL"
       ],
       "images": [
-        "/images/Attractions/Siwa-Oasis-main.png",
-        "/images/Attractions/Siwa-Oasis-view_2.png",
-        "/images/Attractions/Siwa-Oasis-view_3.png",
-        "/images/Attractions/Siwa-Oasis-view_4.png"
+        "/images/Siwa-Oasis-main.png",
+        "/images/Siwa-Oasis-view_2.png",
+        "/images/Siwa-Oasis-view_3.png",
+        "/images/Siwa-Oasis-view_4.png"
       ],
       "latitude": 29.2045,
       "longitude": 25.5195,
@@ -1565,10 +1565,10 @@
         "ANCIENT SITES"
       ],
       "images": [
-        "/images/Attractions/Colossi-Memnon-main.png",
-        "/images/Attractions/Colossi-Memnon-view_2.png",
-        "/images/Attractions/Colossi-Memnon-view_3.png",
-        "/images/Attractions/Colossi-Memnon-view_4.png"
+        "/images/Colossi-Memnon-main.png",
+        "/images/Colossi-Memnon-view_2.png",
+        "/images/Colossi-Memnon-view_3.png",
+        "/images/Colossi-Memnon-view_4.png"
       ],
       "latitude": 25.7208,
       "longitude": 32.6095,
@@ -1628,10 +1628,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/Attractions/Temple-of-Edfu-main.png",
-        "/images/Attractions/Temple-of-Edfu-view_2.png",
-        "/images/Attractions/Temple-of-Edfu-view_3.png",
-        "/images/Attractions/Temple-of-Edfu-view_4.png"
+        "/images/Temple-of-Edfu-main.png",
+        "/images/Temple-of-Edfu-view_2.png",
+        "/images/Temple-of-Edfu-view_3.png",
+        "/images/Temple-of-Edfu-view_4.png"
       ],
       "latitude": 24.9818,
       "longitude": 32.8711,
@@ -1646,7 +1646,7 @@
         "Visitor Facilities",
         "Restrooms",
         "Parking",
-        "Horse-drawn carriages (Kalesh) available from the Nile port"
+        "Horse-drawn carriages (Kalesh) Available from the Nile port"
       ],
       "paymentId": "pay_0025",
       "price": "21$",
@@ -1693,10 +1693,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/Attractions/Luxor-Temple-main.png",
-        "/images/Attractions/Luxor-Temple-view_2.png",
-        "/images/Attractions/Luxor-Temple-view_3.png",
-        "/images/Attractions/Luxor-Temple-view_4.png"
+        "/images/Luxor-Temple-main.png",
+        "/images/Luxor-Temple-view_2.png",
+        "/images/Luxor-Temple-view_3.png",
+        "/images/Luxor-Temple-view_4.png"
       ],
       "latitude": 25.6989,
       "longitude": 32.6394,
@@ -1758,10 +1758,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/Attractions/Great-Sphinx-main.png",
-        "/images/Attractions/Great-Sphinx-view_2.png",
-        "/images/Attractions/Great-Sphinx-view_3.png",
-        "/images/Attractions/Great-Sphinx-view_4.png"
+        "/images/Great-Sphinx-main.png",
+        "/images/Great-Sphinx-view_2.png",
+        "/images/Great-Sphinx-view_3.png",
+        "/images/Great-Sphinx-view_4.png"
       ],
       "latitude": 29.9752,
       "longitude": 31.1376,
@@ -1821,10 +1821,10 @@
         "ANCIENT SITES"
       ],
       "images": [
-        "/images/Attractions/Dahshur-Pyramids-main.png",
-        "/images/Attractions/Dahshur-Pyramids-view_2.png",
-        "/images/Attractions/Dahshur-Pyramids-view_3.png",
-        "/images/Attractions/Dahshur-Pyramids-view_4.png"
+        "/images/Dahshur-Pyramids-main.png",
+        "/images/Dahshur-Pyramids-view_2.png",
+        "/images/Dahshur-Pyramids-view_3.png",
+        "/images/Dahshur-Pyramids-view_4.png"
       ],
       "latitude": 29.8185,
       "longitude": 31.2003,
@@ -1884,10 +1884,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/Attractions/White-Desert-main.png",
-        "/images/Attractions/White-Desert-view_2.png",
-        "/images/Attractions/White-Desert-view_3.png",
-        "/images/Attractions/White-Desert-view_4.png"
+        "/images/White-Desert-main.png",
+        "/images/White-Desert-view_2.png",
+        "/images/White-Desert-view_3.png",
+        "/images/White-Desert-view_4.png"
       ],
       "latitude": 27.0333,
       "longitude": 27.9942,
@@ -1948,10 +1948,10 @@
         "MUSEUMS"
       ],
       "images": [
-        "/images/Attractions/Bibliotheca-Alexandrina-main.png",
-        "/images/Attractions/Bibliotheca-Alexandrina-view_2.png",
-        "/images/Attractions/Bibliotheca-Alexandrina-view_3.png",
-        "/images/Attractions/Bibliotheca-Alexandrina-view_4.png"
+        "/images/Bibliotheca-Alexandrina-main.png",
+        "/images/Bibliotheca-Alexandrina-view_2.png",
+        "/images/Bibliotheca-Alexandrina-view_3.png",
+        "/images/Bibliotheca-Alexandrina-view_4.png"
       ],
       "latitude": 31.2084,
       "longitude": 29.9079,
@@ -2015,10 +2015,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/Attractions/Saint-Catherine's-Monastery-main.png",
-        "/images/Attractions/Saint-Catherine's-Monastery-view_2.png",
-        "/images/Attractions/Saint-Catherine's-Monastery-view_3.png",
-        "/images/Attractions/Saint-Catherine's-Monastery-view_4.png"
+        "/images/Saint-Catherine's-Monastery-main.png",
+        "/images/Saint-Catherine's-Monastery-view_2.png",
+        "/images/Saint-Catherine's-Monastery-view_3.png",
+        "/images/Saint-Catherine's-Monastery-view_4.png"
       ],
       "latitude": 28.5574,
       "longitude": 33.9754,
@@ -2078,10 +2078,10 @@
         "HISTORICAL"
       ],
       "images": [
-        "/images/Attractions/AlMontazah-Palace-main.png",
-        "/images/Attractions/AlMontazah-Palace-view_2.png",
-        "/images/Attractions/AlMontazah-Palace-view_3.png",
-        "/images/Attractions/AlMontazah-Palace-view_4.png"
+        "/images/AlMontazah-Palace-main.png",
+        "/images/AlMontazah-Palace-view_2.png",
+        "/images/AlMontazah-Palace-view_3.png",
+        "/images/AlMontazah-Palace-view_4.png"
       ],
       "latitude": 31.2828,
       "longitude": 30.0075,
@@ -2143,10 +2143,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/Attractions/Qaitbay-Citadel-main.png",
-        "/images/Attractions/Qaitbay-Citadel-view_2.png",
-        "/images/Attractions/Qaitbay-Citadel-view_3.png",
-        "/images/Attractions/Qaitbay-Citadel-view_4.png"
+        "/images/Qaitbay-Citadel-main.png",
+        "/images/Qaitbay-Citadel-view_2.png",
+        "/images/Qaitbay-Citadel-view_3.png",
+        "/images/Qaitbay-Citadel-view_4.png"
       ],
       "latitude": 31.2141,
       "longitude": 29.8856,
@@ -2207,10 +2207,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/Attractions/Catacombs-of-Kom-ElShoqafa-main.png",
-        "/images/Attractions/Catacombs-of-Kom-ElShoqafa-view_2.png",
-        "/images/Attractions/Catacombs-of-Kom-ElShoqafa-view_3.png",
-        "/images/Attractions/Catacombs-of-Kom-ElShoqafa-view_4.png"
+        "/images/Catacombs-of-Kom-ElShoqafa-main.png",
+        "/images/Catacombs-of-Kom-ElShoqafa-view_2.png",
+        "/images/Catacombs-of-Kom-ElShoqafa-view_3.png",
+        "/images/Catacombs-of-Kom-ElShoqafa-view_4.png"
       ],
       "latitude": 31.1819,
       "longitude": 29.8973,
@@ -2270,10 +2270,10 @@
         "BEACHES"
       ],
       "images": [
-        "/images/Attractions/Ras-ElBarr-main.png",
-        "/images/Attractions/Ras-ElBarr-view_2.png",
-        "/images/Attractions/Ras-ElBarr-view_3.png",
-        "/images/Attractions/Ras-ElBarr-view_4.png"
+        "/images/Ras-ElBarr-main.png",
+        "/images/Ras-ElBarr-view_2.png",
+        "/images/Ras-ElBarr-view_3.png",
+        "/images/Ras-ElBarr-view_4.png"
       ],
       "latitude": 31.503,
       "longitude": 31.839,
@@ -2334,10 +2334,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/Attractions/Al-Azhar-Park-main.png",
-        "/images/Attractions/Al-Azhar-Park-view_2.png",
-        "/images/Attractions/Al-Azhar-Park-view_3.png",
-        "/images/Attractions/Al-Azhar-Park-view_4.png"
+        "/images/Al-Azhar-Park-main.png",
+        "/images/Al-Azhar-Park-view_2.png",
+        "/images/Al-Azhar-Park-view_3.png",
+        "/images/Al-Azhar-Park-view_4.png"
       ],
       "latitude": 30.0402,
       "longitude": 31.2687,
@@ -2398,10 +2398,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/Attractions/the-Hanging-Church-main.png",
-        "/images/Attractions/the-Hanging-Church-view_2.png",
-        "/images/Attractions/the-Hanging-Church-view_3.png",
-        "/images/Attractions/the-Hanging-Church-view_4.png"
+        "/images/the-Hanging-Church-main.png",
+        "/images/the-Hanging-Church-view_2.png",
+        "/images/the-Hanging-Church-view_3.png",
+        "/images/the-Hanging-Church-view_4.png"
       ],
       "latitude": 30.006,
       "longitude": 31.2335,
@@ -2461,10 +2461,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/Attractions/Mosque-of-IbnTulun-main.png",
-        "/images/Attractions/Mosque-of-IbnTulun-view_2.png",
-        "/images/Attractions/Mosque-of-IbnTulun-view_3.png",
-        "/images/Attractions/Mosque-of-IbnTulun-view_4.png"
+        "/images/Mosque-of-IbnTulun-main.png",
+        "/images/Mosque-of-IbnTulun-view_2.png",
+        "/images/Mosque-of-IbnTulun-view_3.png",
+        "/images/Mosque-of-IbnTulun-view_4.png"
       ],
       "latitude": 30.0234,
       "longitude": 31.2372,
@@ -2523,10 +2523,10 @@
         "ADVENTURE"
       ],
       "images": [
-        "/images/Attractions/Wadi-Degla-Protectorate-main.png",
-        "/images/Attractions/Wadi-Degla-Protectorate-view_2.png",
-        "/images/Attractions/Wadi-Degla-Protectorate-view_3.png",
-        "/images/Attractions/Wadi-Degla-Protectorate-view_4.png"
+        "/images/Wadi-Degla-Protectorate-main.png",
+        "/images/Wadi-Degla-Protectorate-view_2.png",
+        "/images/Wadi-Degla-Protectorate-view_3.png",
+        "/images/Wadi-Degla-Protectorate-view_4.png"
       ],
       "latitude": 29.95,
       "longitude": 31.35,
@@ -2586,10 +2586,10 @@
         "SHOPPING"
       ],
       "images": [
-        "/images/Attractions/traditional-from-Al-Fustat-main.png",
-        "/images/Attractions/fustat_pottery/view_2.jpg",
-        "/images/Attractions/fustat_pottery/view_3.jpg",
-        "/images/Attractions/fustat_pottery/view_4.jpg"
+        "/images/traditional-from-Al-Fustat-main.png",
+        "/images/fustat_pottery/view_2.jpg",
+        "/images/fustat_pottery/view_3.jpg",
+        "/images/fustat_pottery/view_4.jpg"
       ],
       "latitude": 30.009,
       "longitude": 31.2335,
@@ -2649,7 +2649,7 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/cave_church/main.jpg",
+        "/images/Cave-Church-main.png",
         "/images/cave_church/view_2.jpg",
         "/images/cave_church/view_3.jpg",
         "/images/cave_church/view_4.jpg"
@@ -2712,10 +2712,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/wadi_hitan/main.jpg",
-        "/images/wadi_hitan/view_2.jpg",
-        "/images/wadi_hitan/view_3.jpg",
-        "/images/wadi_hitan/view_4.jpg"
+        "/images/Wadi-Al-Hitan-main.png",
+        "/images/Wadi-Al-Hitan-view_2.png",
+        "/images/Wadi-Al-Hitan-view_3.png",
+        "/images/Wadi-Al-Hitan-view_4.png"
       ],
       "latitude": 29.35,
       "longitude": 30.2,
@@ -2776,10 +2776,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/djoser_pyramid/main.jpg",
-        "/images/djoser_pyramid/view_2.jpg",
-        "/images/djoser_pyramid/view_3.jpg",
-        "/images/djoser_pyramid/view_4.jpg"
+        "/images/Djoser-Step-saqqara-main.png",
+        "/images/Djoser-Step-saqqara-view_2.png",
+        "/images/Djoser-Step-saqqara-view_3.png",
+        "/images/Djoser-Step-saqqara-view_4.png"
       ],
       "latitude": 29.8718,
       "longitude": 31.2166,
@@ -2840,10 +2840,10 @@
         "DIVING"
       ],
       "images": [
-        "/images/sharm_el_sheikh_beach/main.jpg",
-        "/images/sharm_el_sheikh_beach/view_2.jpg",
-        "/images/sharm_el_sheikh_beach/view_3.jpg",
-        "/images/sharm_el_sheikh_beach/view_4.jpg"
+        "/images/Sharm El Sheikh Beaches-main.png",
+        "/images/Sharm El Sheikh Beaches-view_2.png",
+        "/images/Sharm El Sheikh Beaches-view_3.png",
+        "/images/Sharm El Sheikh Beaches-view_4.png"
       ],
       "latitude": 27.9158,
       "longitude": 34.3312,
@@ -2904,10 +2904,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/seti_temple/main.jpg",
-        "/images/seti_temple/view_2.jpg",
-        "/images/seti_temple/view_3.jpg",
-        "/images/seti_temple/view_4.jpg"
+        "/images/Temple-of-Seti-main.png",
+        "/images/Temple-of-Seti-view_2.png",
+        "/images/Temple-of-Seti-view_3.png",
+        "/images/Temple-of-Seti-view_4.png"
       ],
       "latitude": 26.1833,
       "longitude": 31.9167,
@@ -2967,10 +2967,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/black_desert/main.jpg",
-        "/images/black_desert/view_2.jpg",
-        "/images/black_desert/view_3.jpg",
-        "/images/black_desert/view_4.jpg"
+        "/images/White-Black-Deserts-main.png",
+        "/images/White-Black-Deserts-view_2.png",
+        "/images/White-Black-Deserts-view_3.png",
+        "/images/White-Black-Deserts-view_4.png"
       ],
       "latitude": 28.35,
       "longitude": 28.85,
@@ -3032,10 +3032,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/blue_hole/main.jpg",
-        "/images/blue_hole/view_2.jpg",
-        "/images/blue_hole/view_3.jpg",
-        "/images/blue_hole/view_4.jpg"
+        "/images/Dahab-Blue-Hole-main.png",
+        "/images/Dahab-Blue-Hole-view_2.png",
+        "/images/Dahab-Blue-Hole-view_3.png",
+        "/images/Dahab-Blue-Hole-view_4.png"
       ],
       "latitude": 28.5833,
       "longitude": 34.5333,
@@ -3095,10 +3095,10 @@
         "SHOPPING"
       ],
       "images": [
-        "/images/hurghada_marina/main.jpg",
-        "/images/hurghada_marina/view_2.jpg",
-        "/images/hurghada_marina/view_3.jpg",
-        "/images/hurghada_marina/view_4.jpg"
+        "/images/Hurghada-Marina-main.png",
+        "/images/Hurghada-Marina-view_2.png",
+        "/images/Hurghada-Marina-view_3.png",
+        "/images/Hurghada-Marina-view_4.png"
       ],
       "latitude": 27.2464,
       "longitude": 33.8444,
@@ -3158,10 +3158,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/mahmoud_said_museum/main.jpg",
-        "/images/mahmoud_said_museum/view_2.jpg",
-        "/images/mahmoud_said_museum/view_3.jpg",
-        "/images/mahmoud_said_museum/view_4.jpg"
+        "/images/mahmoud-said-museum-main.png",
+        "/images/mahmoud-said-museum-view_2.png",
+        "/images/mahmoud-said-museum-view_3.png",
+        "/images/mahmoud-said-museum-view_4.png"
       ],
       "latitude": 31.2175,
       "longitude": 29.9079,
@@ -3221,10 +3221,10 @@
         "ADVENTURE"
       ],
       "images": [
-        "/images/wadi_el_gemal/main.jpg",
-        "/images/wadi_el_gemal/view_2.jpg",
-        "/images/wadi_el_gemal/view_3.jpg",
-        "/images/wadi_el_gemal/view_4.jpg"
+        "/images/Wadi-elgemal-park-main.png",
+        "/images/Wadi-elgemal-park-view_2.png",
+        "/images/Wadi-elgemal-park-view_3.png",
+        "/images/Wadi-elgemal-park-view_4.png"
       ],
       "latitude": 24.5833,
       "longitude": 34.8167,
@@ -3284,10 +3284,10 @@
         "ENGINEERING"
       ],
       "images": [
-        "/images/aswan_high_dam/main.jpg",
-        "/images/aswan_high_dam/view_2.jpg",
-        "/images/aswan_high_dam/view_3.jpg",
-        "/images/aswan_high_dam/view_4.jpg"
+        "/images/Aswan-High-Dam-main.png",
+        "/images/Aswan-High-Dam-view_2.png",
+        "/images/Aswan-High-Dam-view_3.png",
+        "/images/Aswan-High-Dam-view_4.png"
       ],
       "latitude": 23.9619,
       "longitude": 32.8711,
@@ -3347,10 +3347,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/unfinished_obelisk/main.jpg",
-        "/images/unfinished_obelisk/view_2.jpg",
-        "/images/unfinished_obelisk/view_3.jpg",
-        "/images/unfinished_obelisk/view_4.jpg"
+        "/images/the-Unfinished-Obelisk-main.png",
+        "/images/the-Unfinished-Obelisk-view_2.png",
+        "/images/the-Unfinished-Obelisk-view_3.png",
+        "/images/the-Unfinished-Obelisk-view_4.png"
       ],
       "latitude": 24.0792,
       "longitude": 32.8806,
@@ -3410,10 +3410,10 @@
         "NATURE"
       ],
       "images": [
-        "/images/mons_claudianus/main.jpg",
-        "/images/mons_claudianus/view_2.jpg",
-        "/images/mons_claudianus/view_3.jpg",
-        "/images/mons_claudianus/view_4.jpg"
+        "/images/Gabal-AlDukhan-main.png",
+        "/images/Gabal-AlDukhan-view_2.png",
+        "/images/Gabal-AlDukhan-view_3.png",
+        "/images/Gabal-AlDukhan-view_4.png"
       ],
       "latitude": 26.784,
       "longitude": 33.364,
@@ -3472,10 +3472,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/gebel_silsila/main.jpg",
-        "/images/gebel_silsila/view_2.jpg",
-        "/images/gebel_silsila/view_3.jpg",
-        "/images/gebel_silsila/view_4.jpg"
+        "/images/Gebel-Silsila-main.png",
+        "/images/Gebel-Silsila-view_2.png",
+        "/images/Gebel-Silsila-view_3.png",
+        "/images/Gebel-Silsila-view_4.png"
       ],
       "latitude": 24.646,
       "longitude": 32.933,
@@ -3534,10 +3534,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/dendera_temple/main.jpg",
-        "/images/dendera_temple/view_2.jpg",
-        "/images/dendera_temple/view_3.jpg",
-        "/images/dendera_temple/view_4.jpg"
+        "/images/Dendera-Temple-main.png",
+        "/images/Dendera-Temple-view_2.png",
+        "/images/Dendera-Temple-view_3.png",
+        "/images/Dendera-Temple-view_4.png"
       ],
       "latitude": 26.1428,
       "longitude": 32.6714,
@@ -3597,10 +3597,10 @@
         "HISTORICAL"
       ],
       "images": [
-        "/images/bawiti/main.jpg",
-        "/images/bawiti/view_2.jpg",
-        "/images/bawiti/view_3.jpg",
-        "/images/bawiti/view_4.jpg"
+        "/images/Bawiti-Bahariya-Oasis-main.png",
+        "/images/Bawiti-Bahariya-Oasis-view_2.png",
+        "/images/Bawiti-Bahariya-Oasis-view_3.png",
+        "/images/Bawiti-Bahariya-Oasis-view_4.png"
       ],
       "latitude": 28.35,
       "longitude": 28.85,
@@ -3662,10 +3662,10 @@
         "BEACHES"
       ],
       "images": [
-        "/images/marsa_matrouh/main.jpg",
-        "/images/marsa_matrouh/view_2.jpg",
-        "/images/marsa_matrouh/view_3.jpg",
-        "/images/marsa_matrouh/view_4.jpg"
+        "/images/MarsaMatrouh-Beach-main.png",
+        "/images/MarsaMatrouh-Beach-view_2.png",
+        "/images/MarsaMatrouh-Beach-view_3.png",
+        "/images/MarsaMatrouh-Beach-view_4.png"
       ],
       "latitude": 31.357,
       "longitude": 27.2285,
@@ -3726,10 +3726,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/abydos/main.jpg",
-        "/images/abydos/view_2.jpg",
-        "/images/abydos/view_3.jpg",
-        "/images/abydos/view_4.jpg"
+        "/images/the-Abydos-Temple-main.png",
+        "/images/the-Abydos-Temple-view_2.png",
+        "/images/the-Abydos-Temple-view_3.png",
+        "/images/the-Abydos-Temple-view_4.png"
       ],
       "latitude": 26.1833,
       "longitude": 31.9167,
@@ -3789,11 +3789,11 @@
         "MODERN SITES"
       ],
       "images": [
-        "/images/baron_palace/main.jpg",
-        "/images/baron_palace/view_2.jpg",
-        "/images/baron_palace/view_3.jpg",
-        "/images/baron_palace/view_4.jpg"
-      ],
+        "/images/Baron-Empain-Church-main.png",
+        "/images/Baron-Empain-Church-view_2.png",
+        "/images/Baron-Empain-Church-view_3.png",
+        "/images/Baron-Empain-Church-view_4.png"
+      ],  
       "latitude": 30.0898,
       "longitude": 31.334,
       "description": "A magnificent, unusual Hindu-Khmer style palace in Heliopolis, recently restored.",
@@ -3854,10 +3854,10 @@
         "MODERN SITES"
       ],
       "images": [
-        "/images/el_gouna_beach/main.jpg",
-        "/images/el_gouna_beach/view_2.jpg",
-        "/images/el_gouna_beach/view_3.jpg",
-        "/images/el_gouna_beach/view_4.jpg"
+        "/images/ElGouna-Beaches-main.png",
+        "/images/ElGouna-Beaches-view_2.png",
+        "/images/ElGouna-Beaches-view_3.png",
+        "/images/ElGouna-Beaches-view_4.png"
       ],
       "latitude": 27.3828,
       "longitude": 33.6625,
@@ -3919,10 +3919,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/qaid_ibrahim/main.jpg",
-        "/images/qaid_ibrahim/minaret.jpg",
-        "/images/qaid_ibrahim/interior.jpg",
-        "/images/qaid_ibrahim/square.jpg"
+        "/images/Al-Qa'id-Ibrahim-Mosque-main.png",
+        "/images/Al-Qa'id-Ibrahim-Mosque-view_2.png",
+        "/images/Al-Qa'id-Ibrahim-Mosque-view_3.png",
+        "/images/Al-Qa'id-Ibrahim-Mosque-view_4.png"
       ],
       "latitude": 31.2058,
       "longitude": 29.9161,
@@ -3982,10 +3982,10 @@
         "FAMILY"
       ],
       "images": [
-        "/images/ain_al_sira/main.jpg",
-        "/images/ain_al_sira/view_2.jpg",
-        "/images/ain_al_sira/view_3.jpg",
-        "/images/ain_al_sira/view_4.jpg"
+        "/images/Ain-Al-Sira-Lake-main.png",
+        "/images/Ain-Al-Sira-Lake-view_2.png",
+        "/images/Ain-Al-Sira-Lake-view_3.png",
+        "/images/Ain-Al-Sira-Lake-view_4.png"
       ],
       "latitude": 30.013,
       "longitude": 31.2335,
@@ -4047,10 +4047,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/gem/main.jpg",
-        "/images/gem/view_2.jpg",
-        "/images/gem/view_3.jpg",
-        "/images/gem/view_4.jpg"
+        "/images/The-Great-Museum-main.png",
+        "/images/The-Great-Museum-view_2.png",
+        "/images/The-Great-Museum-view_3.png",
+        "/images/The-Great-Museum-view_4.png"
       ],
       "latitude": 30.0191,
       "longitude": 31.2372,
@@ -4112,10 +4112,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/abdeen_palace/main.jpg",
-        "/images/abdeen_palace/view_2.jpg",
-        "/images/abdeen_palace/view_3.jpg",
-        "/images/abdeen_palace/view_4.jpg"
+        "/images/Abdeen-Palace-Museum-main.png",
+        "/images/Abdeen-Palace-Museum-view_2.png",
+        "/images/Abdeen-Palace-Museum-view_3.png",
+        "/images/Abdeen-Palace-Museum-view_4.png"
       ],
       "latitude": 30.0435,
       "longitude": 31.2405,
@@ -4174,10 +4174,10 @@
         "ANCIENT SITES"
       ],
       "images": [
-        "/images/tanis/main.jpg",
-        "/images/tanis/view_2.jpg",
-        "/images/tanis/view_3.jpg",
-        "/images/tanis/view_4.jpg"
+        "/images/Tanis(San-al-Hagar)-main.png",
+        "/images/Tanis(San-al-Hagar)-view_2.png",
+        "/images/Tanis(San-al-Hagar)-view_3.png",
+        "/images/Tanis(San-al-Hagar)-view_4.png"
       ],
       "latitude": 30.957,
       "longitude": 31.874,
@@ -4235,10 +4235,10 @@
         "ADVENTURE"
       ],
       "images": [
-        "/images/wadi_degla_sharm/main.jpg",
-        "/images/wadi_degla_sharm/view_2.jpg",
-        "/images/wadi_degla_sharm/view_3.jpg",
-        "/images/wadi_degla_sharm/view_4.jpg"
+        "/images/Wadi-Degla-National-Park-main.png",
+        "/images/Wadi-Degla-National-Park-view_2.png",
+        "/images/Wadi-Degla-National-Park-view_3.png",
+        "/images/Wadi-Degla-National-Park-view_4.png"
       ],
       "latitude": 28.05,
       "longitude": 34.05,
@@ -4297,10 +4297,10 @@
         "FAMILY"
       ],
       "images": [
-        "/images/al_bahr_al_aazam/main.jpg",
-        "/images/al_bahr_al_aazam/view_2.jpg",
-        "/images/al_bahr_al_aazam/view_3.jpg",
-        "/images/al_bahr_al_aazam/view_4.jpg"
+        "/images/Al-Bahr-Al-A'zam-main.png",
+        "/images/Al-Bahr-Al-A'zam-view_2.png",
+        "/images/Al-Bahr-Al-A'zam-view_3.png",
+        "/images/Al-Bahr-Al-A'zam-view_4.png"
       ],
       "latitude": 30.007,
       "longitude": 31.228,
@@ -4360,10 +4360,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/manial_palace/main.jpg",
-        "/images/manial_palace/view_2.jpg",
-        "/images/manial_palace/view_3.jpg",
-        "/images/manial_palace/view_4.jpg"
+        "/images/Manial-Palace-main.png",
+        "/images/Manial-Palace-view_2.png",
+        "/images/Manial-Palace-view_3.png",
+        "/images/Manial-Palace-view_4.png"
       ],
       "latitude": 30.0163,
       "longitude": 31.2212,
@@ -4423,10 +4423,10 @@
         "BEACHES"
       ],
       "images": [
-        "/images/barada_beach/main.jpg",
-        "/images/barada_beach/view_2.jpg",
-        "/images/barada_beach/view_3.jpg",
-        "/images/barada_beach/view_4.jpg"
+        "/images/Barada-main.png",
+        "/images/Barada-view_2.png",
+        "/images/Barada-view_3.png",
+        "/images/Barada-view_4.png"
       ],
       "latitude": 31.2185,
       "longitude": 29.9079,
@@ -4485,10 +4485,10 @@
         "BEACHES"
       ],
       "images": [
-        "/images/aboukir/main.jpg",
-        "/images/aboukir/view_2.jpg",
-        "/images/aboukir/view_3.jpg",
-        "/images/aboukir/view_4.jpg"
+        "/images/Aboukir-main.png",
+        "/images/Aboukir-view_2.png",
+        "/images/Aboukir-view_3.png",
+        "/images/Aboukir-view_4.png"
       ],
       "latitude": 31.325,
       "longitude": 30.065,
@@ -4548,10 +4548,10 @@
         "ADVENTURE"
       ],
       "images": [
-        "/images/dahab_canyon/main.jpg",
-        "/images/dahab_canyon/view_2.jpg",
-        "/images/dahab_canyon/view_3.jpg",
-        "/images/dahab_canyon/view_4.jpg"
+        "/images/Dahab-Canyons-main.png",
+        "/images/Dahab-Canyons-view_2.png",
+        "/images/Dahab-Canyons-view_3.png",
+        "/images/Dahab-Canyons-view_4.png"
       ],
       "latitude": 28.52,
       "longitude": 34.54,
@@ -4611,10 +4611,10 @@
         "ADVENTURE"
       ],
       "images": [
-        "/images/ras_abu_galum/main.jpg",
-        "/images/ras_abu_galum/view_2.jpg",
-        "/images/ras_abu_galum/view_3.jpg",
-        "/images/ras_abu_galum/view_4.jpg"
+        "/images/Ras-AbuGalum-main.png",
+        "/images/Ras-AbuGalum-view_2.png",
+        "/images/Ras-AbuGalum-view_3.png",
+        "/images/Ras-AbuGalum-view_4.png"
       ],
       "latitude": 28.6167,
       "longitude": 34.5333,
@@ -4673,10 +4673,10 @@
         "HISTORICAL"
       ],
       "images": [
-        "/images/st_anthony_monastery/main.jpg",
-        "/images/st_anthony_monastery/view_2.jpg",
-        "/images/st_anthony_monastery/view_3.jpg",
-        "/images/st_anthony_monastery/view_4.jpg"
+        "/images/the-Monastery-of-Saint-Anthony-main.png",
+        "/images/the-Monastery-of-Saint-Anthony-view_2.png",
+        "/images/the-Monastery-of-Saint-Anthony-view_3.png",
+        "/images/the-Monastery-of-Saint-Anthony-view_4.png"
       ],
       "latitude": 29.8667,
       "longitude": 32.8917,
@@ -4737,10 +4737,10 @@
         "ANCIENT SITES"
       ],
       "images": [
-        "/images/deir_el_medina/main.jpg",
-        "/images/deir_el_medina/view_2.jpg",
-        "/images/deir_el_medina/view_3.jpg",
-        "/images/deir_el_medina/view_4.jpg"
+        "/images/Deir-el-Medina-main.png",
+        "/images/Deir-el-Medina-view_2.png",
+        "/images/Deir-el-Medina-view_3.png",
+        "/images/Deir-el-Medina-view_4.png"
       ],
       "latitude": 25.7262,
       "longitude": 32.5857,
@@ -4800,10 +4800,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/baron_church/main.jpg",
-        "/images/baron_church/view_2.jpg",
-        "/images/baron_church/view_3.jpg",
-        "/images/baron_church/view_4.jpg"
+        "/images/Baron-Empain-Church-main.png",
+        "/images/Baron-Empain-Church-view_2.png",
+        "/images/Baron-Empain-Church-view_3.png",
+        "/images/Baron-Empain-Church-view_4.png"
       ],
       "latitude": 30.0901,
       "longitude": 31.335,
@@ -4862,10 +4862,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/tiran_island/main.jpg",
-        "/images/tiran_island/view_2.jpg",
-        "/images/tiran_island/view_3.jpg",
-        "/images/tiran_island/view_4.jpg"
+        "/images/Tiran-Island-main.png",
+        "/images/Tiran-Island-view_2.png",
+        "/images/Tiran-Island-view_3.png",
+        "/images/Tiran-Island-view_4.png"
       ],
       "latitude": 28.05,
       "longitude": 34.5083,
@@ -4923,10 +4923,9 @@
         "ADVENTURE"
       ],
       "images": [
-        "/images/wadi_degla_hurghada/main.jpg",
-        "/images/wadi_degla_hurghada/view_2.jpg",
-        "/images/wadi_degla_hurghada/view_3.jpg",
-        "/images/wadi_degla_hurghada/view_4.jpg"
+        "/images/Wadi-Degla-Protectorate-main.png",
+        "/images/Wadi-Degla-Protectorate-view_2.png",
+        "/images/Wadi-Degla-Protectorate-view_3.png"
       ],
       "latitude": 27.2,
       "longitude": 33.7,
@@ -4985,10 +4984,10 @@
         "HISTORICAL"
       ],
       "images": [
-        "/images/st_paul_monastery/main.jpg",
-        "/images/st_paul_monastery/view_2.jpg",
-        "/images/st_paul_monastery/view_3.jpg",
-        "/images/st_paul_monastery/view_4.jpg"
+        "/images/Saint-Paul-Monastery-main.png",
+        "/images/Saint-Paul-Monastery-view_2.png",
+        "/images/Saint-Paul-Monastery-view_3.png",
+        "/images/Saint-Paul-Monastery-view_4.png"
       ],
       "latitude": 29.0417,
       "longitude": 32.7417,
@@ -5047,10 +5046,10 @@
       "rating": 4.8,
       "overview": "Marriott Mena House is a historic luxury hotel located at the foot of the Great Pyramids of Giza. Built in 1869 as a royal hunting lodge, it offers unparalleled views of the ancient wonders, lush gardens, and world-class amenities. The hotel combines historic charm with modern luxury, featuring elegant rooms, multiple restaurants, a spa, and an outdoor pool.",
       "images": [
-        "/public/images/Hotels/marriott-mena-house-main.jpg",
-        "/public/images/Hotels/marriott-mena-house-view_2.jpg",
-        "/public/images/Hotels/marriott-mena-house-view_3.jpg",
-        "/public/images/Hotels/marriott-mena-house-view_4.jpg"
+        "/images/MarriottMenaHouse–Giza1.png",
+        "/images/MarriottMenaHouse–Giza2.png",
+        "/images/MarriottMenaHouse–Giza3.png",
+        "/images/MarriottMenaHouse–Giza4.png"
       ],
       "latitude": 29.9792,
       "longitude": 31.1312,
@@ -5116,10 +5115,10 @@
         "Egyptian Museum - 12 km"
       ],
       "availability": {
-        "availableRooms": 28,
+        "AvailableRooms": 28,
         "totalRooms": 120
       },
-      "pricePerNight": 185,
+      "pricePerNight": "185 $",
       "featured": true,
       "status": "Active",
       "isFeatured": true
@@ -5130,10 +5129,10 @@
       "city": "Cairo",
       "rating": 4.9,
       "images": [
-        "/public/images/Hotels/four-seasons-nile-main.jpg",
-        "/public/images/Hotels/four-seasons-nile-view_2.jpg",
-        "/public/images/Hotels/four-seasons-nile-view_3.jpg",
-        "/public/images/Hotels/four-seasons-nile-view_4.jpg"
+        "/images/FourSeasonsHotelCairoatNilePlaza–Cairo1.png",
+        "/images/FourSeasonsHotelCairoatNilePlaza–Cairo2.png",
+        "/images/FourSeasonsHotelCairoatNilePlaza–Cairo3.png",
+        "/images/FourSeasonsHotelCairoatNilePlaza–Cairo4.png"
       ],
       "latitude": 30.0444,
       "longitude": 31.2357,
@@ -5200,10 +5199,10 @@
         "Tahrir Square - 1 km"
       ],
       "availability": {
-        "availableRooms": 42,
+        "AvailableRooms": 42,
         "totalRooms": 365
       },
-      "pricePerNight": 295,
+      "pricePerNight": "295 $",
       "featured": true,
       "status": "Active"
     },
@@ -5213,10 +5212,10 @@
       "city": "Aswan",
       "rating": 4.8,
       "images": [
-        "/public/images/Hotels/old-cataract-main.jpg",
-        "/public/images/Hotels/old-cataract-view_2.jpg",
-        "/public/images/Hotels/old-cataract-view_3.jpg",
-        "/public/images/Hotels/old-cataract-view_4.jpg"
+        "/images/SofitelLegendOld CataractAswan–Aswan1.png",
+        "/images/SofitelLegendOld CataractAswan–Aswan2.png",
+        "/images/SofitelLegendOld CataractAswan–Aswan3.png",
+        "/images/SofitelLegendOld CataractAswan–Aswan4.png"
       ],
       "latitude": 24.0875,
       "longitude": 32.8842,
@@ -5282,10 +5281,10 @@
         "Nubian Museum - 2 km"
       ],
       "availability": {
-        "availableRooms": 18,
+        "AvailableRooms": 18,
         "totalRooms": 138
       },
-      "pricePerNight": 245,
+      "pricePerNight": "245 $",
       "featured": true,
       "status": "Active"
     },
@@ -5295,10 +5294,10 @@
       "city": "Cairo",
       "rating": 4.5,
       "images": [
-        "/public/images/Hotels/steigenberger-tahrir-main.jpg",
-        "/public/images/Hotels/steigenberger-tahrir-view_2.jpg",
-        "/public/images/Hotels/steigenberger-tahrir-view_3.jpg",
-        "/public/images/Hotels/steigenberger-tahrir-view_4.jpg"
+        "/images/Steigenberger HotelElTahrir–Cairo1.png",
+        "/images/Steigenberger HotelElTahrir–Cairo2.png",
+        "/images/Steigenberger HotelElTahrir–Cairo3.png",
+        "/images/Steigenberger HotelElTahrir–Cairo4.png"
       ],
       "latitude": 30.0478,
       "longitude": 31.2342,
@@ -5364,10 +5363,10 @@
         "Khan El Khalili - 2.5 km"
       ],
       "availability": {
-        "availableRooms": 35,
+        "AvailableRooms": 35,
         "totalRooms": 295
       },
-      "pricePerNight": 95,
+      "pricePerNight": "95 $",
       "featured": false,
       "status": "Pending"
     },
@@ -5377,10 +5376,10 @@
       "city": "Luxor",
       "rating": 4.6,
       "images": [
-        "/public/images/Hotels/hilton-luxor-main.jpg",
-        "/public/images/Hotels/hilton-luxor-view_2.jpg",
-        "/public/images/Hotels/hilton-luxor-view_3.jpg",
-        "/public/images/Hotels/hilton-luxor-view_4.jpg"
+        "/images/HiltonLuxorResort&Spa–Luxor1.png",
+        "/images/HiltonLuxorResort&Spa–Luxor2.png",
+        "/images/HiltonLuxorResort&Spa–Luxor3.png",
+        "/images/HiltonLuxorResort&Spa–Luxor4.png"
       ],
       "latitude": 25.6984,
       "longitude": 32.6353,
@@ -5446,10 +5445,10 @@
         "Valley of the Kings - 6 km"
       ],
       "availability": {
-        "availableRooms": 52,
+        "AvailableRooms": 52,
         "totalRooms": 236
       },
-      "pricePerNight": 125,
+      "pricePerNight": "125 $",
       "featured": true,
       "status": "Inactive"
     },
@@ -5459,10 +5458,10 @@
       "city": "Sharm El Sheikh",
       "rating": 4.7,
       "images": [
-        "/public/images/Hotels/rixos-sharm-main.jpg",
-        "/public/images/Hotels/rixos-sharm-view_2.jpg",
-        "/public/images/Hotels/rixos-sharm-view_3.jpg",
-        "/public/images/Hotels/rixos-sharm-view_4.jpg"
+        "/images/RixosSharmElSheikh–SharmEl Sheikh1.png",
+        "/images/RixosSharmElSheikh–SharmEl Sheikh2.png",
+        "/images/RixosSharmElSheikh–SharmEl Sheikh3.png",
+        "/images/RixosSharmElSheikh–SharmEl Sheikh4.png"
       ],
       "latitude": 27.9158,
       "longitude": 34.3298,
@@ -5529,10 +5528,10 @@
         "Sharm El Sheikh Airport - 12 km"
       ],
       "availability": {
-        "availableRooms": 78,
+        "AvailableRooms": 78,
         "totalRooms": 420
       },
-      "pricePerNight": 165,
+      "pricePerNight": "165 $",
       "featured": true,
       "status": "Active"
     },
@@ -5542,10 +5541,10 @@
       "city": "Cairo",
       "rating": 4.7,
       "images": [
-        "/public/images/Hotels/fairmont-nile-city-main.jpg",
-        "/public/images/Hotels/fairmont-nile-city-view_2.jpg",
-        "/public/images/Hotels/fairmont-nile-city-view_3.jpg",
-        "/public/images/Hotels/fairmont-nile-city-view_4.jpg"
+        "/images/FairmontNileCity–Cairo1.png",
+        "/images/FairmontNileCity–Cairo2.png",
+        "/images/FairmontNileCity–Cairo3.png",
+        "/images/FairmontNileCity–Cairo4.png"
       ],
       "latitude": 30.0556,
       "longitude": 31.2239,
@@ -5612,10 +5611,10 @@
         "Zamalek Island - 1 km"
       ],
       "availability": {
-        "availableRooms": 45,
+        "AvailableRooms": 45,
         "totalRooms": 540
       },
-      "pricePerNight": 215,
+      "pricePerNight": "215 $",
       "featured": true,
       "status": "Active"
     },
@@ -5625,10 +5624,10 @@
       "city": "Cairo",
       "rating": 4.6,
       "images": [
-        "/public/images/Hotels/intercontinental-citystars-main.jpg",
-        "/public/images/Hotels/intercontinental-citystars-view_2.jpg",
-        "/public/images/Hotels/intercontinental-citystars-view_3.jpg",
-        "/public/images/Hotels/intercontinental-citystars-view_4.jpg"
+        "/images/InterContinentalCitystarsCairo–Cairo1.png",
+        "/images/InterContinentalCitystarsCairo–Cairo2.png",
+        "/images/InterContinentalCitystarsCairo–Cairo3.png",
+        "/images/InterContinentalCitystarsCairo–Cairo4.png"
       ],
       "latitude": 30.0733,
       "longitude": 31.3441,
@@ -5694,10 +5693,10 @@
         "Heliopolis - 2 km"
       ],
       "availability": {
-        "availableRooms": 68,
+        "AvailableRooms": 68,
         "totalRooms": 370
       },
-      "pricePerNight": 135,
+      "pricePerNight": "135 $",
       "featured": false,
       "status": "Active"
     },
@@ -5707,10 +5706,10 @@
       "city": "Cairo",
       "rating": 4.8,
       "images": [
-        "/public/images/Hotels/kempinski-nile-main.jpg",
-        "/public/images/Hotels/kempinski-nile-view_2.jpg",
-        "/public/images/Hotels/kempinski-nile-view_3.jpg",
-        "/public/images/Hotels/kempinski-nile-view_4.jpg"
+        "/images/KempinskiNile Hotel Cairo–Cairo1.png",
+        "/images/KempinskiNile Hotel Cairo–Cairo2.png",
+        "/images/KempinskiNile Hotel Cairo–Cairo3.png",
+        "/images/KempinskiNile Hotel Cairo–Cairo4.png"
       ],
       "latitude": 30.0311,
       "longitude": 31.2258,
@@ -5777,10 +5776,10 @@
         "Garden City - 0.5 km"
       ],
       "availability": {
-        "availableRooms": 32,
+        "AvailableRooms": 32,
         "totalRooms": 191
       },
-      "pricePerNight": 285,
+      "pricePerNight": "285 $",
       "featured": true,
       "status": "Active"
     },
@@ -5790,10 +5789,10 @@
       "city": "Hurghada",
       "rating": 4.5,
       "images": [
-        "/public/images/Hotels/movenpick-hurghada-main.jpg",
-        "/public/images/Hotels/movenpick-hurghada-view_2.jpg",
-        "/public/images/Hotels/movenpick-hurghada-view_3.jpg",
-        "/public/images/Hotels/movenpick-hurghada-view_4.jpg"
+        "/images/MovenpickResortHurghada–Hurghada1.png",
+        "/images/MovenpickResortHurghada–Hurghada2.png",
+        "/images/MovenpickResortHurghada–Hurghada3.png",
+        "/images/MovenpickResortHurghada–Hurghada4.png"
       ],
       "latitude": 27.1783,
       "longitude": 33.7681,
@@ -5860,10 +5859,10 @@
         "Hurghada Airport - 15 km"
       ],
       "availability": {
-        "availableRooms": 95,
+        "AvailableRooms": 95,
         "totalRooms": 435
       },
-      "pricePerNight": 115,
+      "pricePerNight": "115 $",
       "featured": false,
       "status": "Maintenance"
     },
@@ -5873,10 +5872,10 @@
       "city": "Sharm El Sheikh",
       "rating": 4.9,
       "images": [
-        "/public/images/Hotels/four-seasons-sharm-main.jpg",
-        "/public/images/Hotels/four-seasons-sharm-view_2.jpg",
-        "/public/images/Hotels/four-seasons-sharm-view_3.jpg",
-        "/public/images/Hotels/four-seasons-sharm-view_4.jpg"
+        "/images/FourSeasons ResortSharmEl Sheikh–SharmElSheikh1.png",
+        "/images/FourSeasons ResortSharmEl Sheikh–SharmElSheikh2.png",
+        "/images/FourSeasons ResortSharmEl Sheikh–SharmElSheikh3.png",
+        "/images/FourSeasons ResortSharmEl Sheikh–SharmElSheikh4.png"
       ],
       "latitude": 27.8944,
       "longitude": 34.3389,
@@ -5949,13 +5948,13 @@
       "model": "Corolla",
       "year": 2023,
       "city": "Cairo",
-      "price": 100,
-      "basePrice": 100,
+      "price": "100 $",
+      "basePrice": "100 $",
       "type": "sedan",
       "transmission": "automatic",
       "seats": 4,
       "total_fleet": 20,
-      "available_now": 5,
+      "Available_now": 5,
       "fuelType": "hybrid",
       "nextAvailability": "2025-12-23",
       "description": "Reliable compact sedan suitable for 4 passengers.",
@@ -5963,7 +5962,7 @@
       "features": ["GPS", "A/C", "Bluetooth"],
       "highlights": ["Reliable", "Fuel efficient", "Comfortable"],
       "amenities": ["Air Conditioning", "GPS Navigation", "Bluetooth Connectivity", "USB Ports"],
-      "images": ["/images-car/placeholder.jpg", "/images-car/placeholder_2.jpg"],
+      "images": ["/images/ToyotaCorolla.avif", "/images/ToyotaCorolla2.jpg","/images/ToyotaCorolla3.jpg","/images/ToyotaCorolla4.jpg"],
       "status": "Available",
       "featured": true,
       "isFeatured": true,
@@ -5980,13 +5979,13 @@
       "model": "Rush",
       "year": 2023,
       "city": "Alexandria",
-      "price": 160,
-      "basePrice": 160,
+      "price": "160 $",
+      "basePrice": "160 $",
       "type": "luxury",
       "transmission": "automatic",
       "seats": 6,
       "total_fleet": 20,
-      "available_now": 5,
+      "Available_now": 5,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-18",
       "description": "Compact SUV ideal for 5-6 passengers with flexibility for city and trips.",
@@ -5994,7 +5993,7 @@
       "features": ["GPS", "A/C", "Bluetooth", "Sunroof"],
       "highlights": ["Flexible seating", "Sunroof", "Modern infotainment"],
       "amenities": ["Air Conditioning", "GPS Navigation", "Bluetooth Connectivity", "Sunroof", "Cruise Control", "USB Ports"],
-      "images": ["/images-car/ToyotaRush.jpg", "/images-car/placeholder_2.jpg"],
+      "images": ["/images/ToyotaRush.jpg", "/images/placeholder_2.jpg"],
       "status": "Available",
       "featured": true,
       "isFeatured": true,
@@ -6011,13 +6010,13 @@
       "model": "Xpander",
       "year": 2023,
       "city": "Luxor",
-      "price": 155,
-      "basePrice": 155,
+      "price": "155 $",
+      "basePrice": "155 $",
       "type": "MPV",
       "transmission": "automatic",
       "seats": 6,
       "total_fleet": 20,
-      "available_now": 1,
+      "Available_now": 1,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-26",
       "description": "Modern MPV for 5-6 passengers with comfortable interior.",
@@ -6025,7 +6024,7 @@
       "features": ["GPS", "A/C", "Bluetooth", "Entertainment System"],
       "highlights": ["Modern interior", "Entertainment system", "Spacious seating"],
       "amenities": ["Air Conditioning", "GPS Navigation", "Bluetooth Connectivity", "Entertainment System", "USB Ports"],
-      "images": ["/images-car/MitsubishiXpander.jpg", "/images-car/MitsubishiXpander2.jpeg"],
+      "images": ["/images/MitsubishiXpander.jpg", "/images/MitsubishiXpander2.jpeg"],
       "status": "Maintenance",
       "featured": true,
       "isFeatured": true,
@@ -6042,13 +6041,13 @@
       "model": "Land Cruiser",
       "year": 2023,
       "city": "Aswan",
-      "price": 150,
-      "basePrice": 150,
+      "price": "150 $",
+      "basePrice": "150 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 5,
+      "Available_now": 5,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-18",
       "description": "Great for families exploring Cairo, Giza, and Alexandria.",
@@ -6056,7 +6055,7 @@
       "features": ["GPS", "A/C", "Bluetooth", "Backup Camera"],
       "highlights": ["Full-size SUV", "Spacious interior", "Advanced safety"],
       "amenities": ["Air Conditioning", "GPS Navigation", "Bluetooth Connectivity", "Backup Camera", "Cruise Control"],
-      "images": ["/images-car/ToyotaLandCruiser.avif", "/images-car/ToyotaLandCruiser2.png"],
+      "images": ["/images/ToyotaLandCruiser.avif", "/images/ToyotaLandCruiser2.png"],
       "status": "Rented",
       "featured": true,
       "isFeatured": true,
@@ -6073,13 +6072,13 @@
       "model": "Pilot",
       "year": 2023,
       "city": "Sharm El Sheikh",
-      "price": 170,
-      "basePrice": 170,
+      "price": "170 $",
+      "basePrice": "170 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 3,
+      "Available_now": 3,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-22",
       "description": "Perfect for family trips across major Egyptian cities.",
@@ -6087,7 +6086,7 @@
       "features": ["GPS", "A/C", "Cruise Control", "USB Ports"],
       "highlights": ["Spacious seating", "Comfortable ride", "Family-friendly"],
       "amenities": ["Air Conditioning", "GPS Navigation", "Cruise Control", "USB Ports", "Bluetooth Connectivity"],
-      "images": ["/images-car/HondaPilot.webp", "/images-car/HondaPilot2.avif"],
+      "images": ["/images/HondaPilot.webp", "/images/HondaPilot2.avif"],
       "status": "Available",
       "featured": true,
       "isFeatured": true,
@@ -6104,13 +6103,13 @@
       "model": "Explorer",
       "year": 2023,
       "city": "Hurghada",
-      "price": 180,
-      "basePrice": 180,
+      "price": "180 $",
+      "basePrice": "180 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 2,
+      "Available_now": 2,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-28",
       "description": "Spacious and comfortable SUV for family adventures.",
@@ -6118,7 +6117,7 @@
       "features": ["GPS", "A/C", "Leather Seats", "Sunroof"],
       "highlights": ["Spacious interior", "Leather seats", "Sunroof"],
       "amenities": ["Air Conditioning", "GPS Navigation", "Leather Seats", "Sunroof", "Bluetooth Connectivity"],
-      "images": ["/images-car/FordExplorer.jpg", "/images-car/FordExplorer2.png"],
+      "images": ["/images/FordExplorer.jpg", "/images/FordExplorer2.png"],
       "status": "Available",
       "featured": true,
       "isFeatured": true,
@@ -6135,13 +6134,13 @@
       "model": "Tahoe",
       "year": 2023,
       "city": "Dahab",
-      "price": 185,
-      "basePrice": 185,
+      "price": "185 $",
+      "basePrice": "185 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 0,
+      "Available_now": 0,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-29",
       "description": "Full-size SUV perfect for family adventures.",
@@ -6149,7 +6148,7 @@
       "features": ["GPS", "A/C", "4WD", "Premium Sound"],
       "highlights": ["Full-size SUV", "4WD for off-road", "Premium sound"],
       "amenities": ["Air Conditioning", "GPS Navigation", "4WD", "Premium Sound", "Bluetooth Connectivity"],
-      "images": ["/images-car/ChevroletTahoe.avif", "/images-car/ChevroletTahoe2.jpg"],
+      "images": ["/images/ChevroletTahoe.avif", "/images/ChevroletTahoe2.jpg"],
       "status": "Rented",
       "featured": true,
       "isFeatured": true,
@@ -6166,13 +6165,13 @@
       "model": "Suburban",
       "year": 2023,
       "city": "Siwa",
-      "price": 250,
-      "basePrice": 250,
+      "price": "250 $",
+      "basePrice": "250 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 5,
+      "Available_now": 5,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-26",
       "description": "Iconic large SUV for family adventures across Egypt.",
@@ -6180,8 +6179,8 @@
       "features": ["GPS", "A/C", "Entertainment System", "Power Liftgate"],
       "highlights": ["Iconic SUV", "Spacious interior", "Luxury comfort"],
       "amenities": ["Air Conditioning", "GPS Navigation", "Entertainment System", "Power Liftgate", "Bluetooth Connectivity"],
-      "images": ["/images-car/ChevroletSuburban.avif", "/images-car/ChevroletSuburban2.avif"],
-      "status": "available",
+      "images": ["/images/ChevroletSuburban.avif", "/images/ChevroletSuburban2.avif"],
+      "status": "Available",
       "featured": true,
       "isFeatured": true,
       "reviews": {
@@ -6197,13 +6196,13 @@
       "model": "Yukon",
       "year": 2023,
       "city": "Marsa Alam",
-      "price": 110,
-      "basePrice": 110,
+      "price": "110 $",
+      "basePrice": "110 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 7,
+      "Available_now": 7,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-20",
       "description": "Large SUV with comfort and advanced tech.",
@@ -6211,8 +6210,8 @@
       "features": ["GPS", "A/C", "Adaptive Cruise", "Lane Assist"],
       "highlights": ["Advanced tech", "Comfortable seating", "Reliable performance"],
       "amenities": ["Air Conditioning", "GPS Navigation", "Adaptive Cruise Control", "Lane Assist", "Bluetooth Connectivity"],
-      "images": ["/images-car/GMCYukon.avif", "/images-car/GMCYukon2.webp"],
-      "status": "available",
+      "images": ["/images/GMCYukon.avif", "/images/GMCYukon2.webp"],
+      "status": "Available",
       "featured": true,
       "isFeatured": true,
       "reviews": {
@@ -6228,13 +6227,13 @@
       "model": "Palisade",
       "year": 2023,
       "city": "Port Said",
-      "price": 135,
-      "basePrice": 135,
+      "price": "135 $",
+      "basePrice": "135 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 1,
+      "Available_now": 1,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-26",
       "description": "Comfortable family SUV with advanced features.",
@@ -6242,7 +6241,7 @@
       "features": ["GPS", "A/C", "Wireless Charging", "Smart Trunk"],
       "highlights": ["Luxury SUV", "Advanced features", "Comfortable ride"],
       "amenities": ["Air Conditioning", "GPS Navigation", "Wireless Charging", "Smart Trunk", "Bluetooth Connectivity"],
-      "images": ["/images-car/HyundaiPalisade.webp", "/images-car/HyundaiPalisade2.avif"],
+      "images": ["/images/HyundaiPalisade.webp", "/images/HyundaiPalisade2.avif"],
       "status": "pending",
       "featured": true,
       "isFeatured": true,
@@ -6259,13 +6258,13 @@
       "model": "Telluride",
       "year": 2023,
       "city": "Nuweiba",
-      "price": 145,
-      "basePrice": 145,
+      "price": "145 $",
+      "basePrice": "145 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 5,
+      "Available_now": 5,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-27",
       "description": "Family-friendly SUV with modern amenities.",
@@ -6273,8 +6272,8 @@
       "features": ["GPS", "A/C", "Heated Seats", "Panoramic Roof"],
       "highlights": ["Modern family SUV", "Panoramic roof", "Heated seats"],
       "amenities": ["Air Conditioning", "GPS Navigation", "Heated Seats", "Panoramic Roof", "Bluetooth Connectivity"],
-      "images": ["/images-car/KiaTelluride.avif", "/images-car/KiaTelluride2.avif"],
-      "status": "available",
+      "images": ["/images/KiaTelluride.avif", "/images/KiaTelluride2.avif"],
+      "status": "Available",
       "featured": true,
       "isFeatured": true,
       "reviews": {
@@ -6290,13 +6289,13 @@
       "model": "CX-9",
       "year": 2023,
       "city": "Faiyum",
-      "price": 270,
-      "basePrice": 270,
+      "price": "270 $",
+      "basePrice": "270 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 5,
+      "Available_now": 5,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-20",
       "description": "Elegant and spacious SUV for family trips.",
@@ -6304,8 +6303,8 @@
       "features": ["GPS", "A/C", "Head-Up Display", "Bose Audio"],
       "highlights": ["Elegant design", "Premium audio", "Smooth ride"],
       "amenities": ["Air Conditioning", "GPS Navigation", "Head-Up Display", "Bose Audio", "Bluetooth Connectivity"],
-      "images": ["/images-car/MazdaCX-9.png", "/images-car/MazdaCX-92.jpg"],
-      "status": "available",
+      "images": ["/images/MazdaCX-9.png", "/images/MazdaCX-92.jpg"],
+      "status": "Available",
       "featured": true,
       "isFeatured": true,
       "reviews": {
@@ -6321,13 +6320,13 @@
       "model": "Patrol",
       "year": 2023,
       "city": "Ain Sokhna",
-      "price": 260,
-      "basePrice": 260,
+      "price": "260 $",
+      "basePrice": "260 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 3,
+      "Available_now": 3,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-25",
       "description": "Reliable SUV with comfort and space for the whole family.",
@@ -6335,8 +6334,8 @@
       "features": ["GPS", "A/C", "Off-Road Mode", "Tow Package"],
       "highlights": ["Reliable SUV", "Off-road capability", "Spacious interior"],
       "amenities": ["Air Conditioning", "GPS Navigation", "Off-Road Mode", "Tow Package", "Bluetooth Connectivity"],
-      "images": ["/images-car/NissanPatrol.jpg", "/images-car/NissanPatrol2.jpg"],
-      "status": "available",
+      "images": ["/images/NissanPatrol.jpg", "/images/NissanPatrol2.jpg"],
+      "status": "Available",
       "featured": true,
       "isFeatured": true,
       "reviews": {
@@ -6352,13 +6351,13 @@
       "model": "Ascent",
       "year": 2023,
       "city": "Cairo",
-      "price": 300,
-      "basePrice": 300,
+      "price": "300 $",
+      "basePrice": "300 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 4,
+      "Available_now": 4,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-18",
       "description": "Family SUV with safety and comfort in mind.",
@@ -6366,8 +6365,8 @@
       "features": ["GPS", "A/C", "EyeSight Safety", "All-Wheel Drive"],
       "highlights": ["All-wheel drive", "EyeSight safety", "Spacious interior"],
       "amenities": ["Air Conditioning", "GPS Navigation", "EyeSight Safety", "All-Wheel Drive", "Bluetooth Connectivity"],
-      "images": ["/images-car/SubaruAscent.webp", "/images-car/SubaruAscent2.avif"],
-      "status": "available",
+      "images": ["/images/SubaruAscent.webp", "/images/SubaruAscent2.avif"],
+      "status": "Available",
       "featured": true,
       "isFeatured": true,
       "reviews": {
@@ -6383,13 +6382,13 @@
       "model": "Atlas",
       "year": 2024,
       "city": "Giza",
-      "price": 275,
-      "basePrice": 275,
+      "price": "275 $",
+      "basePrice": "275 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 5,
+      "Available_now": 5,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-26",
       "description": "Spacious SUV perfect for family road trips.",
@@ -6397,8 +6396,8 @@
       "features": ["GPS", "A/C", "Digital Cockpit", "Ambient Lighting"],
       "highlights": ["Digital cockpit", "Spacious interior", "Ambient lighting"],
       "amenities": ["Air Conditioning", "GPS Navigation", "Digital Cockpit", "Ambient Lighting", "Bluetooth Connectivity"],
-      "images": ["/images-car/VolkswagenAtlas.webp", "/images-car/VolkswagenAtlas2.jpg"],
-      "status": "available",
+      "images": ["/images/VolkswagenAtlas.webp", "/images/VolkswagenAtlas2.jpg"],
+      "status": "Available",
       "featured": true,
       "isFeatured": true,
       "reviews": {
@@ -6414,13 +6413,13 @@
       "model": "RAV4",
       "year": 2023,
       "city": "Alexandria",
-      "price": 120,
-      "basePrice": 120,
+      "price": "120 $",
+      "basePrice": "120 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 4,
       "total_fleet": 20,
-      "available_now": 3,
+      "Available_now": 3,
       "fuelType": "Hybrid",
       "nextAvailability": "2025-12-26",
       "description": "Compact SUV ideal for city and weekend trips.",
@@ -6428,8 +6427,8 @@
       "features": ["GPS", "A/C", "Bluetooth", "Rear Camera"],
       "highlights": ["Compact and efficient", "Easy city driving", "Comfortable interior"],
       "amenities": ["Air Conditioning", "GPS Navigation", "Bluetooth Connectivity", "Rear Camera", "Cruise Control"],
-      "images": ["/images-car/ToyotaRAV4.avif", "/images-car/ToyotaRAV42.jpg"],
-      "status": "available",
+      "images": ["/images/ToyotaRAV4.avif", "/images/ToyotaRAV42.jpg"],
+      "status": "Available",
       "featured": true,
       "isFeatured": true,
       "reviews": {
@@ -6445,13 +6444,13 @@
       "model": "CR-V",
       "year": 2023,
       "city": "Luxor",
-      "price": 130,
-      "basePrice": 130,
+      "price": "130 $",
+      "basePrice": "130 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 4,
       "total_fleet": 20,
-      "available_now": 5,
+      "Available_now": 5,
       "fuelType": "Hybrid",
       "nextAvailability": "2025-12-16",
       "description": "Reliable SUV with excellent fuel efficiency for families.",
@@ -6459,8 +6458,8 @@
       "features": ["GPS", "A/C", "Sunroof", "Lane Assist"],
       "highlights": ["Fuel-efficient", "Sunroof", "Lane assist tech"],
       "amenities": ["Air Conditioning", "GPS Navigation", "Sunroof", "Lane Assist", "Bluetooth Connectivity"],
-      "images": ["/images-car/HondaCR‑V.webp", "/images-car/HondaCR‑V2.jpg"],
-      "status": "available",
+      "images": ["/images/HondaCR‑V.webp", "/images/HondaCR‑V2.jpg"],
+      "status": "Available",
       "featured": true,
       "isFeatured": true,
       "reviews": {
@@ -6476,13 +6475,13 @@
       "model": "CX-5",
       "year": 2024,
       "city": "Aswan",
-      "price": 140,
-      "basePrice": 140,
+      "price": "140 $",
+      "basePrice": "140 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 4,
       "total_fleet": 20,
-      "available_now": 6,
+      "Available_now": 6,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-26",
       "description": "Stylish and comfortable SUV for smaller families.",
@@ -6490,8 +6489,8 @@
       "features": ["GPS", "A/C", "Heated Seats", "Premium Audio"],
       "highlights": ["Stylish design", "Heated seats", "Premium audio system", "Compact and comfortable"],
       "amenities": ["Air Conditioning", "GPS Navigation", "Heated Seats", "Premium Audio", "Bluetooth Connectivity", "USB Ports"],
-      "images": ["/images-car/MazdaCX‑5.webp", "/images-car/MazdaCX‑52.jpg", "/images-car/MazdaCX‑53.avif", "/images-car/MazdaCX‑54.webp"],
-      "status": "available",
+      "images": ["/images/MazdaCX‑5.webp", "/images/MazdaCX‑52.jpg", "/images/MazdaCX‑53.avif", "/images/MazdaCX‑54.webp"],
+      "status": "Available",
       "featured": true,
       "isFeatured": true,
       "reviews": {
@@ -6510,13 +6509,13 @@
       "model": "Avanza",
       "year": 2022,
       "city": "Sharm El Sheikh",
-      "price": 140,
-      "basePrice": 140,
+      "price": "140 $",
+      "basePrice": "140 $",
       "type": "Van",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 2,
+      "Available_now": 2,
       "fuelType": "Diesel",
       "nextAvailability": "2025-12-28",
       "description": "Compact MPV ideal for 5–7 passengers, perfect for city rides and family trips.",
@@ -6524,7 +6523,7 @@
       "features": ["GPS", "A/C", "Bluetooth", "Rear Camera"],
       "highlights": ["Compact MPV", "Flexible seating", "Family-friendly", "Fuel-efficient"],
       "amenities": ["Air Conditioning", "GPS Navigation", "Bluetooth Connectivity", "Rear Camera", "Cruise Control", "USB Ports"],
-      "images": ["/images-car/ToyotaAvanza.avif", "/images-car/ToyotaAvanza2.avif", "/images-car/ToyotaAvanza3.avif", "/images-car/ToyotaAvanza4.png"],
+      "images": ["/images/ToyotaAvanza.avif", "/images/ToyotaAvanza2.avif", "/images/ToyotaAvanza3.avif", "/images/ToyotaAvanza4.png"],
       "status": "pending",
       "featured": true,
       "isFeatured": true,
@@ -6547,21 +6546,21 @@
       "tripType": "Desert Safari",
       "featured": true,
       "status": "Ongoing",
-      "availableSpots": 8,
+      "AvailableSpots": 8,
       "description": "Explore the remote Siwa Oasis, salt lakes, and spend nights under the stars. Perfect for those seeking tranquility and a connection with nature.",
-      "price": 13700,
+      "price": "500 $",
       "rating": 4.8,
       "reviews": 124,
       "duration": "4 Days / 3 Nights",
-      "image": "/images/1.jpg",
+      "image": "/images/Siwa-Oasis-main.png",
       "images": [
-        "/images/1.jpg",
+        "/images/Siwa-Oasis-main.png",
         "/images/2.jpg",
         "/images/6.jpg",
         "/images/3.png"
       ],
       "maxPeople": 20,
-      "availableDates": [
+      "AvailableDates": [
         "10 Dec - 13 Dec 2024",
         "20 Dec - 23 Dec 2024"
       ],
@@ -6647,7 +6646,7 @@
       "hotel": {
         "name": "Siwa Shali Resort",
         "rating": 4.5,
-        "image": "/images/1.jpg",
+        "image": "/images/HiltonLuxorResort&Spa–Luxor1.png",
         "features": [
           "Eco Lodge",
           "Pool",
@@ -6655,7 +6654,7 @@
           "Desert View"
         ]
       },
-      "reviewsList": [
+      "userReviews": [
         {
           "id": 1,
           "user": "Sarah M.",
@@ -6677,9 +6676,9 @@
       "city": "Luxor & Aswan",
       "destination": "Luxor & Aswan",
       "tripType": "Nile Cruise",
-      "availableSpots": 12,
+      "AvailableSpots": 12,
       "description": "Experience ancient Egypt with visits to Valley of the Kings, Karnak Temple, and Abu Simbel. A journey through history on a luxury cruise.",
-      "price": 28500,
+      "price": "285 $",
       "rating": 4.9,
       "reviews": 85,
       "duration": "5 Days / 4 Nights",
@@ -6688,10 +6687,10 @@
         "/images/7.png",
         "/images/5.jpg",
         "/images/4.jpg",
-        "/images/1.jpg"
+        "/images/Aswan-High-Dam-main.png"
       ],
       "maxPeople": 50,
-      "availableDates": [
+      "AvailableDates": [
         "15 Dec - 19 Dec 2024",
         "25 Dec - 29 Dec 2024"
       ],
@@ -6763,7 +6762,7 @@
       "hotel": {
         "name": "Royal Nile Cruise",
         "rating": 5,
-        "image": "/images/7.png",
+        "image": "/images/SofitelLegendOldCataractAswan–Aswan1.png",
         "features": [
           "Pool",
           "Sundeck",
@@ -6772,7 +6771,7 @@
           "Shows"
         ]
       },
-      "reviewsList": [
+      "userReviews": [
         {
           "id": 1,
           "user": "James B.",
@@ -6793,7 +6792,7 @@
       "title": "Sharm El Sheikh ",
       "city": "Sharm El Sheikh",
       "description": "Escape to the perfect beach getaway in Sharm El Sheikh, one of Egypt's most stunning Red Sea destinations. This all-inclusive package combines relaxation on pristine beaches, world-class snorkeling and diving, and luxurious resort amenities.",
-      "price": 12600,
+      "price": "126 $",
       "rating": 4.8,
       "reviews": 15,
       "duration": "5 Days / 4 Nights",
@@ -6805,7 +6804,7 @@
         "/images/5.jpg"
       ],
       "maxPeople": 40,
-      "availableDates": [
+      "AvailableDates": [
         "1 Dec - 5 Dec 2024",
         "12 Dec - 16 Dec 2024",
         "22 Dec - 26 Dec 2024"
@@ -6903,7 +6902,7 @@
       "hotel": {
         "name": "Sharm Grand Plaza Resort",
         "rating": 4.8,
-        "image": "/images/4.jpg",
+        "image": "/public/images/RixosSharmElSheikh–SharmEl Sheikh1.png",
         "features": [
           "5 Stars",
           "Private Beach",
@@ -6913,7 +6912,7 @@
           "Kids Club"
         ]
       },
-      "reviewsList": [
+      "userReviews": [
         {
           "id": 1,
           "user": "Ahmed Ali",
@@ -6946,7 +6945,7 @@
       "id": "4",
       "title": "Hurghada Beach & Safari",
       "description": "Combine beach relaxation with thrilling quad biking and Bedouin culture experience.",
-      "price": 8400,
+      "price": "840 $",
       "rating": 4.7,
       "reviews": 156,
       "duration": "2 Days / 1 Night",
@@ -6958,7 +6957,7 @@
         "/images/4.jpg"
       ],
       "maxPeople": 30,
-      "availableDates": [
+      "AvailableDates": [
         "5 Jan - 6 Jan 2025",
         "10 Jan - 11 Jan 2025"
       ],
@@ -6988,7 +6987,7 @@
       "hotel": {
         "name": "Hurghada Marriott",
         "rating": 4.6,
-        "image": "/images/3.png",
+        "image": "/images/MarriottMenaHouse–Giza1.png",
         "features": [
           "Beachfront",
           "Pool",
@@ -6996,7 +6995,7 @@
           "Watersports"
         ]
       },
-      "reviewsList": [
+      "userReviews": [
         {
           "id": 1,
           "user": "Lisa K.",
@@ -7015,7 +7014,7 @@
       "id": "5",
       "title": "Dahab",
       "description": "Perfect for adventure seekers - world-class diving spots and peaceful yoga retreats.",
-      "price": 9000,
+      "price": "900 $",
       "rating": 4.6,
       "reviews": 98,
       "duration": "4 Days / 3 Nights",
@@ -7027,7 +7026,7 @@
         "/images/7.png"
       ],
       "maxPeople": 25,
-      "availableDates": [
+      "AvailableDates": [
         "14 Feb - 17 Feb 2025"
       ],
       "highlights": [
@@ -7068,14 +7067,14 @@
       "hotel": {
         "name": "Dahab Paradise",
         "rating": 4.3,
-        "image": "/images/8.png",
+        "image": "/public/images/Steigenberger HotelElTahrir–Cairo1.png",
         "features": [
           "Sea View",
           "Pool",
           "Chill Vibes"
         ]
       },
-      "reviewsList": [],
+      "userReviews": [],
       "amenities": {
         "transport": true,
         "accommodation": true,
@@ -7086,7 +7085,7 @@
       "id": "6",
       "title": "Nuweibaa & Ras Shaitain",
       "description": "A peaceful seaside retreat in eco-friendly huts with campfires lights.",
-      "price": 5900,
+      "price": "590 $",
       "rating": 4.2,
       "reviews": 45,
       "duration": "3 Days / 2 Nights",
@@ -7094,10 +7093,10 @@
       "images": [
         "/images/2.jpg",
         "/images/8.png",
-        "/images/1.jpg"
+        "/images/Wadi-Degla-main.png"
       ],
       "maxPeople": 15,
-      "availableDates": [
+      "AvailableDates": [
         "20 Mar - 22 Mar 2025"
       ],
       "highlights": [
@@ -7131,13 +7130,13 @@
       "hotel": {
         "name": "Basata Camp",
         "rating": 4.5,
-        "image": "/images/2.jpg",
+        "image": "/images/HiltonLuxorResort&Spa–Luxor2.png",
         "features": [
           "Eco Friendly",
           "Beach Access"
         ]
       },
-      "reviewsList": [],
+      "userReviews": [],
       "amenities": {
         "transport": true,
         "accommodation": true,
@@ -7148,17 +7147,17 @@
       "id": "7",
       "title": "Fayoum",
       "description": "A quick adventure: lakes, waterfalls, deserts, and sandboarding.",
-      "price": 900,
+      "price": "900 $",
       "rating": 4.3,
       "reviews": 320,
       "duration": "1 Day",
       "image": "/images/6.jpg",
       "images": [
         "/images/6.jpg",
-        "/images/1.jpg"
+        "/images/Wadi-ElRayan-main.png"
       ],
       "maxPeople": 50,
-      "availableDates": [
+      "AvailableDates": [
         "Every Friday",
         "Every Saturday"
       ],
@@ -7178,7 +7177,7 @@
         }
       ],
       "hotel": null,
-      "reviewsList": [],
+      "userReviews": [],
       "amenities": {
         "transport": true,
         "accommodation": false,
@@ -7189,7 +7188,7 @@
       "id": "8",
       "title": "Alexandria",
       "description": "A charming getaway to the Mediterranean bride: history and sea food.",
-      "price": 3800,
+      "price": "380 $",
       "rating": 4.5,
       "reviews": 112,
       "duration": "2 Days / 1 Night",
@@ -7199,7 +7198,7 @@
         "/images/7.png"
       ],
       "maxPeople": 30,
-      "availableDates": [
+      "AvailableDates": [
         "Daily"
       ],
       "highlights": [
@@ -7226,13 +7225,13 @@
       "hotel": {
         "name": "Steigenberger Cecil",
         "rating": 4.7,
-        "image": "/images/5.jpg",
+        "image": "/images/HiltonLuxorResort&Spa–Luxor4.png",
         "features": [
           "Historic",
           "Sea View"
         ]
       },
-      "reviewsList": [],
+      "userReviews": [],
       "amenities": {
         "transport": true,
         "accommodation": true,
@@ -7243,17 +7242,18 @@
       "id": "9",
       "title": "White Desert",
       "description": "Unearthly landscapes with white chalk rock formations.",
-      "price": 4500,
+      "price": "450 $",
       "rating": 4.9,
       "reviews": 56,
       "duration": "2 Days / 1 Night",
-      "image": "/images/1.jpg",
+      "image": "/images/White-Black-Deserts-main.png",
       "images": [
-        "/images/1.jpg",
-        "/images/6.jpg"
+        "/images/White-Black-Deserts-main.png",
+        "/images/White-Black-Deserts-view_2.png",
+        "/images/White-Black-Deserts-view_3.png"
       ],
       "maxPeople": 12,
-      "availableDates": [
+      "AvailableDates": [
         "15 Nov 2024",
         "15 Dec 2024"
       ],
@@ -7281,13 +7281,13 @@
       "hotel": {
         "name": "Desert Camp",
         "rating": 4.5,
-        "image": "/images/1.jpg",
+        "image": "/images/KempinskiNile Hotel Cairo–Cairo1.png",
         "features": [
           "Tents",
           "Campfire"
         ]
       },
-      "reviewsList": [],
+      "userReviews": [],
       "amenities": {
         "transport": true,
         "accommodation": true,
@@ -7298,7 +7298,7 @@
       "id": "10",
       "title": "Alexandria",
       "description": "A charming getaway to the Mediterranean bride: history and sea food.",
-      "price": 3800,
+      "price": "380 $",
       "rating": 4.5,
       "reviews": 112,
       "duration": "2 Days / 1 Night",
@@ -7308,13 +7308,13 @@
         "/images/7.png"
       ],
       "maxPeople": 30,
-      "availableDates": [
+      "AvailableDates": [
         "Daily"
       ],
       "highlights": [],
       "itinerary": [],
       "hotel": null,
-      "reviewsList": [],
+      "userReviews": [],
       "amenities": {
         "transport": true,
         "accommodation": true,
@@ -7325,7 +7325,7 @@
       "id": "11",
       "title": "Alexandria",
       "description": "A charming getaway to the Mediterranean bride: history and sea food.",
-      "price": 3800,
+      "price": "380 $",
       "rating": 4.5,
       "reviews": 112,
       "duration": "2 Days / 1 Night",
@@ -7335,13 +7335,13 @@
         "/images/7.png"
       ],
       "maxPeople": 30,
-      "availableDates": [
+      "AvailableDates": [
         "Daily"
       ],
       "highlights": [],
       "itinerary": [],
       "hotel": null,
-      "reviewsList": [],
+      "userReviews": [],
       "amenities": {
         "transport": true,
         "accommodation": true,
@@ -7373,7 +7373,7 @@
           "/images/5.jpg"
         ],
         "maxPeople": 40,
-        "availableDates": [
+        "AvailableDates": [
           "1 Dec - 5 Dec 2024",
           "12 Dec - 16 Dec 2024",
           "22 Dec - 26 Dec 2024"
@@ -7566,7 +7566,7 @@
           "/images/5.jpg"
         ],
         "maxPeople": 40,
-        "availableDates": [
+        "AvailableDates": [
           "1 Dec - 5 Dec 2024",
           "12 Dec - 16 Dec 2024",
           "22 Dec - 26 Dec 2024"
@@ -7776,10 +7776,10 @@
         "seats": 6,
         "transmission": "Auto",
         "total_fleet": 20,
-        "available_now": 6,
+        "Available_now": 6,
         "booked_today": 4,
         "in_maintenance": 11,
-        "status": "available",
+        "status": "Available",
         "nextAvailability": "2025-12-19",
         "featured": true,
         "features": [
