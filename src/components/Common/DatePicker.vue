@@ -68,12 +68,12 @@
             v-for="(day, idx) in calendarDays"
             :key="idx"
             @click="selectDate(day)"
-            :disabled="!day.isCurrentMonth"
+            :disabled="!day.isCurrentMonth || day.isPast"
             class="btn btn-sm font-cairo"
             :class="{
               'btn-primary': day.isSelected,
-              'btn-ghost': day.isCurrentMonth && !day.isSelected,
-              'bg-transparent text-base-content/40 hover:bg-transparent border-transparent': !day.isCurrentMonth,
+              'btn-ghost': day.isCurrentMonth && !day.isSelected && !day.isPast,
+              'bg-transparent text-base-content/40 hover:bg-transparent border-transparent': !day.isCurrentMonth || day.isPast,
               'ring-2 ring-accent': day.isToday && !day.isSelected
             }"
           >
@@ -166,6 +166,7 @@ const calendarDays = computed(() => {
   const lastDay = firstDay.endOf('month');
   const startDate = firstDay.startOf('week');
   const endDate = lastDay.endOf('week');
+  const today = dayjs().startOf('day');
   
   const days = [];
   let current = startDate;
@@ -176,7 +177,8 @@ const calendarDays = computed(() => {
       date: current.toDate(),
       isCurrentMonth: current.month() === currentMonth.value,
       isToday: current.isSame(dayjs(), 'day'),
-      isSelected: selectedDate.value && current.isSame(dayjs(selectedDate.value), 'day')
+      isSelected: selectedDate.value && current.isSame(dayjs(selectedDate.value), 'day'),
+      isPast: current.isBefore(today, 'day')
     });
     current = current.add(1, 'day');
   }
@@ -231,7 +233,7 @@ const closePicker = () => {
 };
 
 const selectDate = (day) => {
-  if (!day.isCurrentMonth) return;
+  if (!day.isCurrentMonth || day.isPast) return;
   
   selectedDate.value = day.date;
   emit('update:modelValue', dayjs(day.date).format(props.format));
