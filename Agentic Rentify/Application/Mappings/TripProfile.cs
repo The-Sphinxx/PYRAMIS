@@ -9,7 +9,8 @@ public class TripProfile : Profile
     public TripProfile()
     {
         CreateMap<Trip, TripResponseDTO>()
-            .ForMember(dest => dest.Price, opt => opt.MapFrom(src => $"{src.Price} $"));
+            .ForMember(dest => dest.Price, opt => opt.MapFrom(src => $"{src.Price} $"))
+            .ForMember(dest => dest.RawPrice, opt => opt.MapFrom(src => src.Price));
 
         CreateMap<ItineraryDay, ItineraryDayDTO>().ReverseMap();
         CreateMap<Activity, ActivityDTO>()
@@ -20,8 +21,7 @@ public class TripProfile : Profile
         CreateMap<TripReviewSummary, TripReviewSummaryDTO>();
         CreateMap<RatingCriteria, RatingCriteriaDTO>();
         CreateMap<UserReview, UserReviewDTO>();
-        CreateMap<TripAmenitiesInfo, TripAmenitiesInfoDTO>();
-
+        CreateMap<TripAmenitiesInfo, TripAmenitiesInfoDTO>().ReverseMap();
         CreateMap<CreateTripDTO, Trip>();
         CreateMap<UpdateTripDTO, Trip>();
     }

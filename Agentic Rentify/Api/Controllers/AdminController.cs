@@ -3,6 +3,7 @@ using Agentic_Rentify.Application.Interfaces;
 using Agentic_Rentify.Application.Features.Photos.Commands.DeletePhoto;
 using Agentic_Rentify.Core.Entities;
 using Agentic_Rentify.Core.Enums;
+using Agentic_Rentify.Application.Features.Admin.Commands.CreateUser;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -147,7 +148,7 @@ public class AdminController(DataSyncService dataSyncService, IUnitOfWork unitOf
     }
 
     [HttpGet("users")]
-    [ProducesResponseType(typeof(IEnumerable<ApplicationUser>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetUsers(int pageNumber = 1, int pageSize = 10000)
     {
         var users = _userManager.Users
@@ -155,13 +156,232 @@ public class AdminController(DataSyncService dataSyncService, IUnitOfWork unitOf
             .Take(pageSize)
             .ToList();
 
+        var usersWithRoles = new List<object>();
+        foreach (var user in users)
+        {
+            var roles = await _userManager.GetRolesAsync(user);
+            usersWithRoles.Add(new
+            {
+                user.Id,
+                user.UserName,
+                user.Email,
+                user.FirstName,
+                user.LastName,
+                FullName = $"{user.FirstName} {user.LastName}",
+                Phone = user.PhoneNumber,
+                user.Nationality,
+                user.ProfileImage,
+                user.IsVerified,
+                Status = user.LockoutEnd > DateTimeOffset.UtcNow ? "Suspended" : (user.IsVerified ? "Verified" : "Active"),
+                Role = roles.FirstOrDefault() ?? "Client",
+                user.CreatedAt
+            });
+        }
+
         return Ok(new {
             pageNumber,
             pageSize,
             totalRecords = _userManager.Users.Count(),
             totalPages = (int)Math.Ceiling(_userManager.Users.Count() / (double)pageSize),
-            data = users
+            data = usersWithRoles
         });
     }
 
+    /// <summary>
+    /// Get a single user by ID.
+    /// </summary>
+    /// <param name="id">User ID (GUID)</param>
+    /// <returns>User details</returns>
+    [HttpGet("users/{id}")]
+    [ProducesResponseType(typeof(ApplicationUser), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetUser(string id)
+    {
+        var user = await _userManager.FindByIdAsync(id);
+        if (user == null)
+        {
+            return NotFound(new { error = $"User with ID {id} not found." });
+        }
+
+        return Ok(user);
+    }
+
+    /// <summary>
+    /// Create a new user.
+    /// </summary>
+    /// <param name="request">User creation data</param>
+    /// <returns>Created user ID</returns>
+    [HttpPost("users")]
+    [ProducesResponseType(typeof(string), StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> CreateUser([FromBody] CreateUserRequest request)
+    {
+        var command = new CreateUserCommand
+        {
+            Email = request.Email,
+            Password = request.Password,
+            FirstName = request.FirstName,
+            LastName = request.LastName,
+            Phone = request.Phone,
+            Nationality = request.Nationality,
+            ProfileImage = request.ProfileImage,
+            Role = request.Role
+        };
+
+        var userId = await _mediator.Send(command);
+        return CreatedAtAction(nameof(GetUser), new { id = userId }, userId);
+    }
+
+    /// <summary>
+    /// Update user details (full update).
+    /// </summary>
+    /// <param name="id">User ID</param>
+    /// <param name="request">Updated user data</param>
+    /// <returns>Success response</returns>
+    [HttpPut("users/{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> UpdateUser(string id, [FromBody] UpdateUserRequest request)
+    {
+        var user = await _userManager.FindByIdAsync(id);
+        if (user == null)
+        {
+            return NotFound(new { error = $"User with ID {id} not found." });
+        }
+
+        // Update properties
+        user.FirstName = request.FirstName ?? user.FirstName;
+        user.LastName = request.LastName ?? user.LastName;
+        user.Email = request.Email ?? user.Email;
+        user.UserName = request.Email ?? user.UserName;
+        user.PhoneNumber = request.Phone ?? user.PhoneNumber;
+        user.Nationality = request.Nationality ?? user.Nationality;
+        user.ProfileImage = request.ProfileImage ?? user.ProfileImage;
+
+        var result = await _userManager.UpdateAsync(user);
+        
+        if (!result.Succeeded)
+        {
+            return BadRequest(new { errors = result.Errors.Select(e => e.Description) });
+        }
+
+        return Ok(new { message = "User updated successfully.", user });
+    }
+
+    /// <summary>
+    /// Partially update user (PATCH).
+    /// </summary>
+    /// <param name="id">User ID</param>
+    /// <param name="request">Partial update data</param>
+    /// <returns>Success response</returns>
+    [HttpPatch("users/{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> PatchUser(string id, [FromBody] PatchUserRequest request)
+    {
+        var user = await _userManager.FindByIdAsync(id);
+        if (user == null)
+        {
+            return NotFound(new { error = $"User with ID {id} not found." });
+        }
+
+        // Update only provided fields
+        if (request.FirstName != null) user.FirstName = request.FirstName;
+        if (request.LastName != null) user.LastName = request.LastName;
+        if (request.Email != null)
+        {
+            user.Email = request.Email;
+            user.UserName = request.Email;
+        }
+        if (request.Phone != null) user.PhoneNumber = request.Phone;
+        if (request.Nationality != null) user.Nationality = request.Nationality;
+        if (request.ProfileImage != null) user.ProfileImage = request.ProfileImage;
+        if (request.Status != null) 
+        {
+            if (request.Status == "Suspended")
+            {
+                user.LockoutEnabled = true;
+                user.LockoutEnd = DateTimeOffset.MaxValue;
+                user.IsVerified = false; // Optional: mark as unverified if suspended
+            }
+            else
+            {
+                // Clear lockout if status is not Suspended
+                user.LockoutEnd = null;
+                user.IsVerified = request.Status == "Verified";
+            }
+        }
+
+        var result = await _userManager.UpdateAsync(user);
+        
+        if (!result.Succeeded)
+        {
+            return BadRequest(new { errors = result.Errors.Select(e => e.Description) });
+        }
+
+        return Ok(new { message = "User updated successfully.", user });
+    }
+
+    /// <summary>
+    /// Delete a user.
+    /// </summary>
+    /// <param name="id">User ID</param>
+    /// <returns>Success response</returns>
+    [HttpDelete("users/{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> DeleteUser(string id)
+    {
+        var user = await _userManager.FindByIdAsync(id);
+        if (user == null)
+        {
+            return NotFound(new { error = $"User with ID {id} not found." });
+        }
+
+        var result = await _userManager.DeleteAsync(user);
+        
+        if (!result.Succeeded)
+        {
+            return BadRequest(new { errors = result.Errors.Select(e => e.Description) });
+        }
+
+        return Ok(new { message = "User deleted successfully." });
+    }
+
+}
+
+// ==================== DTOs ====================
+public record CreateUserRequest
+{
+    public string Email { get; init; } = string.Empty;
+    public string? Password { get; init; }
+    public string? FirstName { get; init; }
+    public string? LastName { get; init; }
+    public string? Phone { get; init; }
+    public string? Nationality { get; init; }
+    public string? ProfileImage { get; init; }
+    public string? Role { get; init; }
+}
+
+public record UpdateUserRequest
+{
+    public string? Email { get; init; }
+    public string? FirstName { get; init; }
+    public string? LastName { get; init; }
+    public string? Phone { get; init; }
+    public string? Nationality { get; init; }
+    public string? ProfileImage { get; init; }
+}
+
+public record PatchUserRequest
+{
+    public string? Email { get; init; }
+    public string? FirstName { get; init; }
+    public string? LastName { get; init; }
+    public string? Phone { get; init; }
+    public string? Nationality { get; init; }
+    public string? ProfileImage { get; init; }
+    public string? Status { get; init; }
 }

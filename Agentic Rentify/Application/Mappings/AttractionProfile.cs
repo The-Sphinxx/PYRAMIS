@@ -10,6 +10,7 @@ public class AttractionProfile : Profile
     {
         CreateMap<Attraction, AttractionResponseDTO>()
             .ForMember(dest => dest.Price, opt => opt.MapFrom(src => $"{src.Price} {src.Currency}"))
+            .ForMember(dest => dest.RawPrice, opt => opt.MapFrom(src => src.Price))
             .ForMember(dest => dest.Reviews, opt => opt.MapFrom(src => src.ReviewSummary))
             .ForMember(dest => dest.UserReviews, opt => opt.MapFrom(src => src.UserReviews));
 

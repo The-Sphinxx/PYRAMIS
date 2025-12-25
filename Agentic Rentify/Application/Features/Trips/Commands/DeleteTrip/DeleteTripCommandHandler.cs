@@ -10,12 +10,32 @@ public class DeleteTripCommandHandler(IUnitOfWork unitOfWork, IMediator mediator
 {
     public async Task<int> Handle(DeleteTripCommand request, CancellationToken cancellationToken)
     {
-        var trip = await unitOfWork.Repository<Trip>().GetByIdAsync(request.Id);
+        var spec = new Specifications.TripByIdWithRelationsSpecification(request.Id);
+        var trips = await unitOfWork.Repository<Trip>().ListAsync(spec);
+        var trip = trips.FirstOrDefault();
+
         if (trip == null)
         {
             throw new Exception($"Trip with ID {request.Id} not found.");
         }
 
+        // Manually clear related entities to enforce cascade delete behavior
+        // logic: Remove them from collection -> EF Core marks as deleted if configured as Composition
+        if (trip.UserReviews != null)
+        {
+            trip.UserReviews.Clear();
+        }
+
+        if (trip.Itinerary != null)
+        {
+            trip.Itinerary.Clear();
+        }
+
+        // We update first to let EF Core delete the orphans
+        await unitOfWork.Repository<Trip>().UpdateAsync(trip);
+        await unitOfWork.CompleteAsync();
+
+        // Now delete the trip itself
         await unitOfWork.Repository<Trip>().DeleteAsync(trip);
         await unitOfWork.CompleteAsync();
 
@@ -24,3 +44,4 @@ public class DeleteTripCommandHandler(IUnitOfWork unitOfWork, IMediator mediator
         return trip.Id;
     }
 }
+

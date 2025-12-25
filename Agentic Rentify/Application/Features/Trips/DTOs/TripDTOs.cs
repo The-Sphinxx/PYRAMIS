@@ -12,6 +12,7 @@ public class TripResponseDTO
     public string TripType { get; set; } = string.Empty;
     public DateTime? StartDate { get; set; }
     public string Price { get; set; } = string.Empty; // Formatted with currency
+    public decimal RawPrice { get; set; }
     public double Rating { get; set; }
     public int TotalReviews { get; set; }
     public int Reviews { get; set; }
@@ -112,4 +113,14 @@ public class CreateTripDTO
 public class UpdateTripDTO : CreateTripDTO
 {
     public int Id { get; set; }
+    public string Status { get; set; } = "Ongoing";
+    public bool Featured { get; set; } = false;
+    public bool IsFeatured { get; set; } = false;
+}
+
+public class PatchTripDTO
+{
+    public string? Status { get; set; }
+    public bool? Featured { get; set; }
+    public bool? IsFeatured { get; set; }
 }

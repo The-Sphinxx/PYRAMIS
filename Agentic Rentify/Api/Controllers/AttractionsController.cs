@@ -1,4 +1,5 @@
 using Agentic_Rentify.Application.Features.Attractions.Commands.CreateAttraction;
+using Agentic_Rentify.Application.Features.Attractions.Commands.PatchAttraction;
 using Agentic_Rentify.Application.Features.Attractions.Queries.GetAllAttractions;
 using Agentic_Rentify.Application.Wrappers;
 using MediatR;
@@ -118,6 +119,27 @@ public class AttractionsController : ControllerBase
     {
         var command = new Agentic_Rentify.Application.Features.Attractions.Commands.DeleteAttraction.DeleteAttractionCommand(id);
         var result = await _mediator.Send(command);
+        return Ok(result);
+    }
+
+    /// <summary>
+    /// Partially update attraction details (e.g., status, availability, featured status).
+    /// </summary>
+    /// <param name="id">Attraction ID</param>
+    /// <param name="command">Patch data</param>
+    /// <returns>Updated attraction ID</returns>
+    [HttpPatch("{id}")]
+    [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Patch(int id, [FromBody] PatchAttractionCommand command)
+    {
+        var patchCommand = new PatchAttractionCommand(id)
+        {
+            Status = command.Status,
+            Availability = command.Availability,
+            IsFeatured = command.IsFeatured
+        };
+        var result = await _mediator.Send(patchCommand);
         return Ok(result);
     }
 }

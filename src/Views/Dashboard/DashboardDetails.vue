@@ -188,6 +188,7 @@
 import { ref, computed, onMounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import FormModal from '@/components/Dashboard/FormModal.vue';
+import { useToast } from '@/composables/useToast.js';
 import { 
   hotelsAPI, 
   carsAPI, 
@@ -209,6 +210,7 @@ import dayjs from 'dayjs';
 
 const route = useRoute();
 const router = useRouter();
+const { toast } = useToast();
 
 const id = route.params.id;
 const resourceType = route.params.type; // hotels, cars, trips, etc.
@@ -305,7 +307,39 @@ const fetchData = async () => {
 
   try {
     const response = await api.getOne(id);
-    data.value = response.data;
+    const rawData = response.data;
+    
+    // Standardize price fields across all types
+    const priceKeyMap = {
+      hotels: ['rawPricePerNight', 'pricePerNight', 'rawBasePrice', 'basePrice'],
+      cars: ['rawPrice', 'price'],
+      trips: ['rawPrice', 'price'],
+      attractions: ['rawPrice', 'price']
+    };
+
+    const keys = priceKeyMap[resourceType] || [];
+    let normalizedPrice = 0;
+    for (const key of keys) {
+      const val = rawData[key];
+      if (val !== undefined && val !== null) {
+        if (typeof val === 'number') {
+          normalizedPrice = val;
+          break;
+        } else if (typeof val === 'string') {
+          const stripped = Number(val.replace(/[^0-9.]/g, ''));
+          if (!isNaN(stripped)) {
+            normalizedPrice = stripped;
+            break;
+          }
+        }
+      }
+    }
+
+    data.value = {
+      ...rawData,
+      price: normalizedPrice || rawData.price, // Final fallback
+      images: Array.isArray(rawData.images) ? rawData.images : (rawData.images ? [rawData.images] : (rawData.profileImage ? [rawData.profileImage] : []))
+    };
   } catch (err) {
     console.error('Fetch error:', err);
     error.value = 'Failed to load details';
@@ -323,23 +357,242 @@ const handleEdit = () => {
   }
 
   // Data Normalization: Convert amenities object to array for Trips
-  if (route.params.resource === 'trips' && selectedItem.value.amenities && !Array.isArray(selectedItem.value.amenities) && typeof selectedItem.value.amenities === 'object') {
+  if (resourceType === 'trips' && selectedItem.value.amenities && !Array.isArray(selectedItem.value.amenities) && typeof selectedItem.value.amenities === 'object') {
      selectedItem.value.amenities = Object.keys(selectedItem.value.amenities).filter(k => selectedItem.value.amenities[k]);
+  }
+  
+  // Data Normalization: Map user data fields for form
+  if (resourceType === 'users') {
+    // Map phoneNumber to phone for form compatibility
+    if (selectedItem.value.phoneNumber) {
+      selectedItem.value.phone = selectedItem.value.phoneNumber;
+    }
+    // Map profileImage to image for form compatibility
+    if (selectedItem.value.profileImage) {
+      selectedItem.value.image = selectedItem.value.profileImage;
+    }
+    // Ensure name field exists (combine firstName + lastName if needed)
+    if (!selectedItem.value.name && (selectedItem.value.firstName || selectedItem.value.lastName)) {
+      selectedItem.value.name = `${selectedItem.value.firstName || ''} ${selectedItem.value.lastName || ''}`.trim();
+    }
   }
   
   showFormModal.value = true;
 };
 
-const handleUpdate = async (updatedData) => {
+const handleUpdate = async ({ mode, data: formData }) => {
   modalloading.value = true;
+  
+  // Merge with initial data to ensure all fields are present
+  const finalData = { ...selectedItem.value, ...formData };
+  
+  // Validate required fields based on resource type
+  if (resourceType === 'hotels') {
+    if (!finalData.name?.trim()) {
+      toast.error('Hotel name is required');
+      modalloading.value = false;
+      return;
+    }
+    if (!finalData.city?.trim()) {
+      toast.error('City is required');
+      modalloading.value = false;
+      return;
+    }
+    if (!finalData.pricePerNight && !finalData.price) {
+      toast.error('Price is required');
+      modalloading.value = false;
+      return;
+    }
+    if (!finalData.overview?.trim() && !finalData.description?.trim()) {
+      toast.error('Description is required');
+      modalloading.value = false;
+      return;
+    }
+  } else if (resourceType === 'users') {
+    if (!finalData.name?.trim() && !finalData.firstName?.trim()) {
+      toast.error('User name is required');
+      modalloading.value = false;
+      return;
+    }
+    if (!finalData.email?.trim()) {
+      toast.error('Email is required');
+      modalloading.value = false;
+      return;
+    }
+  } else if (resourceType === 'trips') {
+    if (!finalData.title?.trim()) {
+      toast.error('Trip title is required');
+      modalloading.value = false;
+      return;
+    }
+    if (!finalData.destination?.trim() && !finalData.city?.trim()) {
+      toast.error('Destination is required');
+      modalloading.value = false;
+      return;
+    }
+    if (!finalData.price || finalData.price <= 0) {
+      toast.error('Valid price is required');
+      modalloading.value = false;
+      return;
+    }
+  } else if (resourceType === 'cars') {
+    if (!finalData.name?.trim() && !finalData.brand?.trim()) {
+      toast.error('Brand/Name is required');
+      modalloading.value = false;
+      return;
+    }
+    if (!finalData.price || finalData.price <= 0) {
+      toast.error('Valid price is required');
+      modalloading.value = false;
+      return;
+    }
+    if (!finalData.city?.trim() && !finalData.location?.trim()) {
+      toast.error('Location is required');
+      modalloading.value = false;
+      return;
+    }
+  } else if (resourceType === 'attractions') {
+    if (!finalData.name?.trim()) {
+      toast.error('Attraction name is required');
+      modalloading.value = false;
+      return;
+    }
+    if (!finalData.price || finalData.price <= 0) {
+      toast.error('Valid price is required');
+      modalloading.value = false;
+      return;
+    }
+    if (!finalData.location?.trim() && !finalData.city?.trim()) {
+      toast.error('Location is required');
+      modalloading.value = false;
+      return;
+    }
+  }
+  
+  // Transform form data to match backend expectations
+  let transformedData = { ...finalData };
+  if (resourceType === 'hotels') {
+    transformedData = {
+      ...finalData,
+      name: finalData.name?.trim(),
+      city: finalData.city?.trim(),
+      basePrice: Number(finalData.price || finalData.pricePerNight),
+      pricePerNight: Number(finalData.pricePerNight || finalData.price),
+      description: (finalData.description || finalData.overview)?.trim(),
+      images: Array.isArray(finalData.images) ? finalData.images.filter(img => typeof img === 'string') : [],
+      facilities: Array.isArray(finalData.amenities) ? finalData.amenities.filter(f => typeof f === 'string') : [],
+      Id: Number(id)
+    };
+  } else if (resourceType === 'users') {
+    transformedData = {
+      firstName: finalData.firstName?.trim() || finalData.name?.trim() || '',
+      lastName: finalData.lastName?.trim() || '',
+      email: finalData.email?.trim(),
+      phone: (finalData.phone || finalData.phoneNumber)?.trim() || '',
+      nationality: finalData.nationality?.trim() || '',
+      profileImage: finalData.image || finalData.profileImage || '',
+      Id: id // Use the global id (string)
+    };
+  } else if (resourceType === 'trips') {
+    const rawAmenities = finalData.amenities || [];
+    let transportValue = false;
+    let accommodationValue = false;
+    let mealsValue = 0;
+
+    if (Array.isArray(rawAmenities)) {
+      transportValue = rawAmenities.some(a => typeof a === 'string' && a.toLowerCase().includes('transport'));
+      accommodationValue = rawAmenities.some(a => typeof a === 'string' && a.toLowerCase().includes('hotel'));
+      mealsValue = rawAmenities.some(a => typeof a === 'string' && a.toLowerCase().includes('meal')) ? 1 : 0;
+    } else if (rawAmenities && typeof rawAmenities === 'object') {
+      transportValue = !!(rawAmenities.transport || rawAmenities.Transport);
+      accommodationValue = !!(rawAmenities.accommodation || rawAmenities.Accommodation);
+      mealsValue = Number(rawAmenities.meals || rawAmenities.Meals || 0);
+    }
+
+    transformedData = {
+      Id: Number(id),
+      Title: finalData.title?.trim() || "",
+      Description: finalData.description?.trim() || finalData.title?.trim() || "",
+      City: (finalData.city || finalData.destination)?.trim() || "",
+      Destination: (finalData.destination || finalData.city)?.trim() || "",
+      TripType: finalData.tripType || "Beach Getaway",
+      Price: Number(finalData.price || 0),
+      Duration: String(finalData.duration || "1 Day / 1 Night"),
+      MaxPeople: Number(finalData.maxPeople || 10),
+      AvailableSpots: Number(finalData.availableSpots || finalData.maxPeople || 10),
+      MainImage: (finalData.images && finalData.images.length > 0) ? finalData.images[0] : "placeholder.jpg",
+      Images: Array.isArray(finalData.images) ? finalData.images.filter(img => typeof img === 'string') : [],
+      AvailableDates: Array.isArray(finalData.availableDates) ? finalData.availableDates : [],
+      Highlights: Array.isArray(finalData.highlights) ? finalData.highlights : [],
+      Status: finalData.status || "Ongoing",
+      IsFeatured: !!(finalData.isFeatured || finalData.featured),
+      Featured: !!(finalData.featured || finalData.isFeatured),
+
+      Amenities: {
+        Transport: transportValue,
+        Accommodation: accommodationValue,
+        Meals: mealsValue
+      },
+
+      HotelInfo: finalData['hotel.name'] || finalData.hotelInfo?.name ? {
+        Name: finalData['hotel.name'] || finalData.hotelInfo?.name,
+        Rating: Number(finalData['hotel.rating'] || finalData.hotelInfo?.rating || 4.5),
+        Image: "hotel-placeholder.jpg",
+        Features: []
+      } : null,
+
+      Itinerary: (finalData.itinerary || []).map(day => ({
+        Day: Number(day.day || 1),
+        Title: day.title || "Day Title",
+        Description: day.description || day.title || "Day Description",
+        Activities: (day.activities || []).map(act => ({
+          Time: act.time || "09:00 AM",
+          Title: act.title || "Activity Title",
+          Description: act.description || act.desc || "Activity Description"
+        }))
+      }))
+    };
+  } else if (resourceType === 'attractions') {
+    transformedData = {
+      ...finalData,
+      name: finalData.name?.trim(),
+      city: (finalData.city || finalData.location)?.trim(),
+      location: (finalData.location || finalData.city)?.trim(),
+      price: Number(finalData.price),
+      capacity: finalData.capacity?.toString(),
+      images: Array.isArray(finalData.images) ? finalData.images.filter(img => typeof img === 'string') : [],
+      Id: Number(id)
+    };
+  } else if (resourceType === 'cars') {
+    transformedData = {
+      ...finalData,
+      name: finalData.name?.trim() || `${finalData.brand} ${finalData.model}`,
+      brand: finalData.brand?.trim(),
+      model: finalData.model?.trim(),
+      city: (finalData.city || finalData.location)?.trim(),
+      price: Number(finalData.price),
+      seats: Number(finalData.seats || 4),
+      totalFleet: Number(finalData.totalFleet || 1),
+      availableNow: Number(finalData.availableNow || 0),
+      images: Array.isArray(finalData.images) ? finalData.images.filter(img => typeof img === 'string') : [],
+      Id: Number(id)
+    };
+  }
+  
   try {
     const api = apiMap[resourceType];
-    const res = await api.update(id, updatedData);
-    data.value = res.data; // Update local data
+    const updateId = resourceType === 'users' ? transformedData.Id : Number(transformedData.Id); 
+    await api.update(updateId, transformedData);
+    
+    toast.success(`${config.value?.title || 'Item'} updated successfully`);
     showFormModal.value = false;
+    await fetchData(); // Re-fetch to sync UI with server state
   } catch (err) {
     console.error('Update failed:', err);
-    alert('Failed to update. Please try again.');
+    const errorMessage = err.response?.data?.errors 
+      ? Object.values(err.response.data.errors).flat().join(', ')
+      : err.response?.data?.message || err.message;
+    toast.error(`Failed to update ${config?.title?.toLowerCase() || 'item'}: ${errorMessage}`);
   } finally {
     modalloading.value = false;
   }

@@ -18,16 +18,16 @@ export const attractionsAPI = {
 
 // ==================== Hotels API ====================
 export const hotelsAPI = {
-  getAll: () => api.get('/hotels', { params: { pageSize: 10000 } }),
+  getAll: (params = {}) => api.get('/hotels', { params: { pageSize: 10000, ...params } }),
   getOne: (id) => api.get(`/hotels/${id}`),
   create: (data) => api.post('/hotels', data),
   update: (id, data) => api.put(`/hotels/${id}`, data),
   patch: (id, data) => api.patch(`/hotels/${id}`, data),
   delete: (id) => api.delete(`/hotels/${id}`),
-  
+
   // Specific updates
   updateStatus: (id, status) => api.patch(`/hotels/${id}`, { status }),
-  toggleFeatured: (id, isFeatured) => api.patch(`/hotels/${id}`, { isFeatured }),
+  toggleFeatured: (id, isFeatured) => api.patch(`/hotels/${id}`, { featured: isFeatured }),
 };
 
 // ==================== Cars API ====================
@@ -38,7 +38,7 @@ export const carsAPI = {
   update: (id, data) => api.put(`/cars/${id}`, data),
   patch: (id, data) => api.patch(`/cars/${id}`, data),
   delete: (id) => api.delete(`/cars/${id}`),
-  
+
   // Specific updates
   updateStatus: (id, status) => api.patch(`/cars/${id}`, { status }),
   toggleFeatured: (id, isFeatured) => api.patch(`/cars/${id}`, { isFeatured }),
@@ -52,7 +52,7 @@ export const tripsAPI = {
   update: (id, data) => api.put(`/trips/${id}`, data),
   patch: (id, data) => api.patch(`/trips/${id}`, data),
   delete: (id) => api.delete(`/trips/${id}`),
-  
+
   // Specific updates
   updateStatus: (id, status) => api.patch(`/trips/${id}`, { status }),
   toggleFeatured: (id, isFeatured) => api.patch(`/trips/${id}`, { isFeatured }),
@@ -66,7 +66,7 @@ export const bookingsAPI = {
   update: (id, data) => api.put(`/bookings/${id}`, data),
   patch: (id, data) => api.patch(`/bookings/${id}`, data),
   delete: (id) => api.delete(`/bookings/${id}`),
-  
+
   // Specific updates
   updateStatus: (id, status) => api.patch(`/bookings/${id}`, { status }),
   updatePaymentStatus: (id, paymentStatus) => api.patch(`/bookings/${id}`, { paymentStatus }),
