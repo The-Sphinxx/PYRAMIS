@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 import { authApi, api } from '@/Services/api';
+import { decodeJwt, buildUserFromToken } from '@/Utils/auth';
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref(null);
@@ -10,12 +11,15 @@ export const useAuthStore = defineStore('auth', () => {
   const isAuthenticated = computed(() => !!token.value);
 
   const setSession = (authResponse, rememberMe) => {
-    const shapedUser = {
-      id: authResponse.id,
-      email: authResponse.email,
-      firstName: authResponse.firstName,
-      lastName: authResponse.lastName,
-    };
+    const shapedUser = authResponse?.role
+      ? {
+        id: authResponse.id,
+        email: authResponse.email,
+        firstName: authResponse.firstName,
+        lastName: authResponse.lastName,
+        role: authResponse.role || '',
+      }
+      : buildUserFromToken(authResponse.token);
 
     user.value = shapedUser;
     token.value = authResponse.token;
@@ -24,7 +28,6 @@ export const useAuthStore = defineStore('auth', () => {
     api.defaults.headers.common.Authorization = `Bearer ${authResponse.token}`;
 
     // Persist tokens for refresh handling; rememberMe still controls UX choices elsewhere if needed
-    localStorage.setItem('user', JSON.stringify(shapedUser));
     localStorage.setItem('token', authResponse.token);
     localStorage.setItem('refreshToken', authResponse.refreshToken);
   };
@@ -33,19 +36,26 @@ export const useAuthStore = defineStore('auth', () => {
     user.value = null;
     token.value = null;
     refreshToken.value = null;
-    localStorage.removeItem('user');
     localStorage.removeItem('token');
     localStorage.removeItem('refreshToken');
     delete api.defaults.headers.common.Authorization;
   };
 
   const initAuth = () => {
-    const savedUser = localStorage.getItem('user');
     const savedToken = localStorage.getItem('token');
     const savedRefresh = localStorage.getItem('refreshToken');
 
-    if (savedUser && savedToken && savedRefresh) {
-      user.value = JSON.parse(savedUser);
+    if (savedToken && savedRefresh) {
+      const decoded = decodeJwt(savedToken);
+      const nowSeconds = Math.floor(Date.now() / 1000);
+      const isExpired = decoded?.exp && decoded.exp < nowSeconds;
+
+      if (isExpired) {
+        clearSession();
+        return;
+      }
+
+      user.value = buildUserFromToken(savedToken);
       token.value = savedToken;
       refreshToken.value = savedRefresh;
       api.defaults.headers.common.Authorization = `Bearer ${savedToken}`;
@@ -107,71 +117,58 @@ export const useAuthStore = defineStore('auth', () => {
         throw new Error('No user logged in');
       }
 
-      const response = await fetch(`http://localhost:3000/users/${user.value.id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedData),
-      });
+      // Use the backend API to update profile
+      const payload = {
+        firstName: updatedData.firstName || '',
+        lastName: updatedData.lastName || '',
+        phone: updatedData.phone || '',
+        nationality: updatedData.nationality || '',
+        gender: updatedData.gender || '',
+        profileImage: updatedData.profileImage || ''
+      };
 
-      if (response.ok) {
-        const updatedUser = await response.json();
-        
-        // Remove password before storing
-        const userWithoutPassword = { ...updatedUser };
-        delete userWithoutPassword.password;
-
-        user.value = userWithoutPassword;
-        
-        // Update localStorage
-        localStorage.setItem('user', JSON.stringify(userWithoutPassword));
-        
-        return { success: true };
-      } else {
-        return { success: false, error: 'Failed to update profile' };
+      // Only include dateOfBirth if it's provided
+      if (updatedData.dateOfBirth) {
+        payload.dateOfBirth = updatedData.dateOfBirth;
       }
+
+      console.log('Sending profile update:', payload);
+
+      await api.put('/Profile', payload);
+
+      // Refresh user data from profile endpoint to get updated info
+      const profileResponse = await api.get('/Profile');
+
+      // Update local user state with new data
+      user.value = buildUserFromToken(token.value);
+
+      return { success: true, data: profileResponse.data };
     } catch (error) {
       console.error('Update profile error:', error);
-      return { success: false, error: error.message };
+      const message = error.response?.data?.message || error.message || 'Failed to update profile';
+      return { success: false, error: message };
     }
   };
 
   // Change Password
   const changePassword = async (currentPassword, newPassword) => {
     try {
-      if (!user.value || !user.value.id) {
+      if (!user.value || !user.value.email) {
         throw new Error('No user logged in');
       }
 
-      // 1. Verify old password
-      // Since we don't store the password in the state, we check against the server
-      const verifyResponse = await fetch(
-        `http://localhost:3000/users?id=${user.value.id}&password=${currentPassword}`
-      );
-      const verifiedUsers = await verifyResponse.json();
-
-      if (verifiedUsers.length === 0) {
-        return { success: false, error: 'Incorrect current password' };
-      }
-
-      // 2. Update to new password
-      const updateResponse = await fetch(`http://localhost:3000/users/${user.value.id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ password: newPassword }),
+      // Use the backend /api/Auth/change-password endpoint
+      await api.post('/Auth/change-password', {
+        email: user.value.email,
+        currentPassword: currentPassword,
+        newPassword: newPassword
       });
 
-      if (updateResponse.ok) {
-        return { success: true };
-      } else {
-        return { success: false, error: 'Failed to update password' };
-      }
+      return { success: true };
     } catch (error) {
       console.error('Change password error:', error);
-      return { success: false, error: error.message };
+      const message = error.response?.data?.message || error.message || 'Failed to change password';
+      return { success: false, error: message };
     }
   };
 

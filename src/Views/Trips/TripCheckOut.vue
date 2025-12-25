@@ -32,25 +32,17 @@
           />
         </div>
 
-        <!-- Right Side - Price Summary (Sticky JS) -->
-        <div ref="bookingColumn" class="lg:col-span-1 h-full min-h-[500px] relative hidden lg:block">
-           <!-- Placeholder -->
-           <div ref="bookingWrapper" :style="{ minHeight: isSticky ? '1px' : 'auto' }"></div>
-           
-           <div 
-            ref="stickyForm"
-            :style="stickyStyle"
-            :class="{ 'fixed top-24 z-50': isSticky }"
-            class="transition-all duration-300"
-          >
-            <PriceSummary
-                :costs="bookingStore.bookingCosts"
-                :booking-type="bookingType"
-                :booking-data="bookingStore.bookingInProgress.bookingData"
-                :base-price="bookingStore.bookingInProgress.basePrice"
-                :add-ons="0"
-            />
-          </div>
+        <!-- Right Side - Price Summary (CSS Sticky) -->
+        <div class="lg:col-span-1 h-full min-h-[500px] relative hidden lg:block">
+           <div class="sticky top-24 z-40 transition-all duration-300">
+             <PriceSummary
+                 :costs="bookingStore.bookingCosts"
+                 :booking-type="bookingType"
+                 :booking-data="bookingStore.bookingInProgress.bookingData"
+                 :base-price="bookingStore.bookingInProgress.basePrice"
+                 :add-ons="0"
+             />
+           </div>
         </div>
 
         <!-- Mobile Price Summary -->
@@ -122,14 +114,10 @@ onMounted(() => {
     guestData.value.email = authStore.user.email || '';
     guestData.value.phone = authStore.user.phone || '';
   }
-
-  window.addEventListener('scroll', handleScroll);
-  window.addEventListener('resize', handleResize);
 });
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
-  window.removeEventListener('resize', handleResize);
+  // No cleanup needed
 });
 
 const handlePlaceOrder = async () => {
@@ -160,57 +148,5 @@ const handlePlaceOrder = async () => {
 
 const goBack = () => {
   router.back();
-};
-
-// -- Sticky Logic --
-const bookingWrapper = ref(null);
-const stickyForm = ref(null);
-const isSticky = ref(false);
-const stickyStyle = ref({});
-const bookingColumn = ref(null);
-const contentColumn = ref(null);
-
-const handleScroll = () => {
-  if (!bookingWrapper.value || !bookingColumn.value || !contentColumn.value) return;
-
-  const rect = bookingWrapper.value.getBoundingClientRect();
-  const contentRect = contentColumn.value.getBoundingClientRect();
-  const formHeight = stickyForm.value.offsetHeight;
-  
-  const offsetTop = 100;
-
-  // Bottom Boundary Logic
-  if (contentRect.bottom <= offsetTop + formHeight) {
-    isSticky.value = false;
-    stickyStyle.value = {
-      position: 'absolute',
-      bottom: '0',
-      left: '0',
-      width: '100%',
-      zIndex: 40
-    };
-  } else if (rect.top <= offsetTop) {
-     // Sticky Logic
-    isSticky.value = true;
-    stickyStyle.value = {
-      position: 'fixed',
-      top: `${offsetTop}px`,
-      width: `${bookingWrapper.value.getBoundingClientRect().width}px`,
-      left: `${bookingWrapper.value.getBoundingClientRect().left}px`,
-      zIndex: 50
-    };
-  } else {
-    // Normal Logic
-    isSticky.value = false;
-    stickyStyle.value = {};
-  }
-};
-
-const handleResize = () => {
-  if (isSticky.value && bookingWrapper.value) {
-    const rect = bookingWrapper.value.getBoundingClientRect();
-    stickyStyle.value.width = `${rect.width}px`;
-    stickyStyle.value.left = `${rect.left}px`;
-  }
 };
 </script>

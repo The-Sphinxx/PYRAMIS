@@ -113,7 +113,11 @@ defineProps({
 });
 defineEmits(['view']);
 
-const getImage = (images) => images[0] || '/images-car/placeholder.jpg';
+const getImage = (images) => {
+  if (!images) return '/images-car/placeholder.jpg';
+  if (Array.isArray(images)) return images[0] || '/images-car/placeholder.jpg';
+  return images; // Ensure string case is handled if data is not fixed yet
+};
 
 const handleImageError = (event) => {
   event.target.src = '/images-car/placeholder.jpg';

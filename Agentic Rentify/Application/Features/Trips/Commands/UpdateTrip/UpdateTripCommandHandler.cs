@@ -12,13 +12,26 @@ public class UpdateTripCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, IM
 {
     public async Task<int> Handle(UpdateTripCommand request, CancellationToken cancellationToken)
     {
-        var trip = await unitOfWork.Repository<Trip>().GetByIdAsync(request.Id);
+        // Use specification to load all related data for update (replacing collections)
+        var spec = new Specifications.TripByIdWithRelationsSpecification(request.Id);
+        var trips = await unitOfWork.Repository<Trip>().ListAsync(spec);
+        var trip = trips.FirstOrDefault();
+
         if (trip == null)
         {
             throw new Exception($"Trip with ID {request.Id} not found.");
         }
 
+        // Clear existing collections to allow full replacement from DTO
+        // This avoids duplication if the DTO sends items without IDs or creates new entities
+        if (trip.Itinerary != null)
+        {
+            trip.Itinerary.Clear();
+        }
+
+        // Apply updates
         mapper.Map(request, trip);
+
         await unitOfWork.Repository<Trip>().UpdateAsync(trip);
         await unitOfWork.CompleteAsync();
 

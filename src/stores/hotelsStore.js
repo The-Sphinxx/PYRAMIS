@@ -92,20 +92,47 @@ export const useHotelsStore = defineStore('hotels', {
             this.error = null;
 
             try {
-                // Using method name from dev/HEAD reconciliation (we will fix api next)
                 const data = await hotelsApi.getHotels(); 
 
                 // Transform hotels data to include required fields
-                this.hotels = data.map(hotel => ({
-                    ...hotel,
-                    imageUrl: hotel.images && hotel.images.length > 0 ? hotel.images[0] : (hotel.image || '/images/placeholder-hotel.jpg'),
+                // Handle both paginated response and direct array
+                const hotelsArray = Array.isArray(data) ? data : (data.items || data.data || []);
+
+                this.hotels = hotelsArray.map(hotel => ({
+                    // Map PascalCase API response to camelCase for Vue components
+                    id: hotel.id,
+                    name: hotel.name,
+                    description: hotel.description,
+                    city: hotel.city,
+                    country: hotel.country,
+                    category: hotel.category || this.inferCategory(hotel),
+                    rating: hotel.rating || 0,
+                    pricePerNight: hotel.pricePerNight,
+                    images: hotel.images || [],
+                    image: hotel.images?.[0],
+                    imageUrl: hotel.images?.[0] || '/images/placeholder-hotel.jpg',
+                    amenities: hotel.amenities || [],
+                    highlights: hotel.highlights || [],
+                    address: hotel.address,
+                    phone: hotel.phone,
+                    email: hotel.email,
+                    reviews: hotel.reviews ? {
+                        ...hotel.reviews,
+                        overallRating: typeof hotel.reviews.overallRating === 'number' ? hotel.reviews.overallRating : (hotel.reviews.averageRating || hotel.rating || 0),
+                        totalReviews: hotel.reviews.totalReviews || 0,
+                        ratingCriteria: hotel.reviews.ratingCriteria || {}
+                    } : { 
+                        overallRating: hotel.rating || 0, 
+                        totalReviews: 0, 
+                        ratingCriteria: {}
+                    },
                     totalReviews: hotel.reviews?.totalReviews || 0,
-                    // Assign category based on hotel characteristics if not present
-                    category: hotel.category || this.inferCategory(hotel)
+                    // Include original data for flexibility
+                    ...hotel
                 }));
             } catch (error) {
                 console.error('Error fetching hotels:', error);
-                this.error = error.message;
+                this.error = error.message || 'Failed to fetch hotels';
                 this.hotels = [];
             } finally {
                 this.loading = false;

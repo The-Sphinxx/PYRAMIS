@@ -166,6 +166,12 @@
                   :max-size="field.maxSize"
                   :required="field.required"
                 />
+
+                <!-- Itinerary Builder -->
+                <ItineraryBuilder
+                  v-else-if="field.type === 'itinerary-builder'"
+                  v-model="formData[field.key]"
+                />
               </div>
             </div>
           </form>
@@ -200,6 +206,7 @@
 import { ref, computed, watch } from 'vue';
 import DatePicker from '@/components/Common/DatePicker.vue';
 import ImageUploader from '@/components/Dashboard/ImageUploader.vue';
+import ItineraryBuilder from '@/components/Dashboard/ItineraryBuilder.vue';
 
 const props = defineProps({
   isOpen: {
@@ -237,12 +244,20 @@ const visibleFields = computed(() => {
   });
 });
 
+// Helper to getting nested values
+const getNestedValue = (obj, path) => {
+  return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+};
+
 // Initialize form data
 const initializeForm = () => {
   const data = {};
   props.config.fields.forEach(field => {
-    if (props.mode === 'edit' && props.initialData[field.key] !== undefined) {
-      data[field.key] = props.initialData[field.key];
+    // Check if we have initial data for this field (handling nested keys)
+    const initialValue = getNestedValue(props.initialData, field.key);
+    
+    if (props.mode === 'edit' && initialValue !== undefined) {
+      data[field.key] = initialValue;
     } else {
       // Initialize with default values
       if (field.type === 'multi-select') {
@@ -251,7 +266,7 @@ const initializeForm = () => {
         data[field.key] = false;
       } else if (field.type === 'number' || field.type === 'rating') {
         data[field.key] = 0;
-      } else if (field.type === 'image-upload') {
+      } else if (field.type === 'image-upload' || field.type === 'itinerary-builder') {
         data[field.key] = [];
       } else {
         data[field.key] = '';

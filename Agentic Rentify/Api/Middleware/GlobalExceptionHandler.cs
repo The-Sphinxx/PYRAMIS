@@ -1,6 +1,7 @@
 using System.Net;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
+using Agentic_Rentify.Core.Exceptions;
 
 public class GlobalExceptionHandler : IMiddleware
 {

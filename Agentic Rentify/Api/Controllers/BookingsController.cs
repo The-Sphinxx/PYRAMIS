@@ -116,6 +116,7 @@ public class BookingsController(IMediator mediator, IOptions<StripeSettings> str
         return Ok(new { id = resultId });
     }
 
+
     /// <summary>
     /// Cancel a booking. If already paid, marks as Cancelled (refund not implemented).
     /// </summary>

@@ -4,11 +4,11 @@
     <Sidebar />
     
     <!-- Main Content Area -->
-    <main class="flex-1 overflow-y-auto rounded-2xl shadow-sm relative">
+    <main class="flex-1 overflow-y-auto overflow-x-hidden rounded-2xl shadow-sm relative min-w-0 max-w-full">
     
 
       <!-- Page Content -->
-      <div class="px-2 md:px-6 lg:px-2 py-2 md:py-2">
+      <div class="px-2 md:px-6 lg:px-2 py-2 md:py-2 w-full max-w-full overflow-x-hidden">
         <router-view />
       </div>
     </main>
@@ -91,5 +91,10 @@ onMounted(() => {
 /* Ensure proper scrolling */
 main {
   max-height: 100vh;
+}
+
+/* Prevent horizontal overflow */
+:deep(body) {
+  overflow-x: hidden;
 }
 </style>

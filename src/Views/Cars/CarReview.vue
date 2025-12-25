@@ -125,15 +125,9 @@
         </div>
 
         <!-- Right Side - Sticky Summary -->
-        <div ref="bookingColumn" class="lg:col-span-1 hidden lg:block relative">
-          <div ref="bookingWrapper"></div>
-
-          <div
-            ref="stickyForm"
-            :style="stickyStyle"
-            :class="{ 'fixed top-24 z-50': isSticky }"
-            class="transition-all duration-300"
-          >
+        <!-- Right Side - Sticky Summary (CSS) -->
+        <div class="lg:col-span-1 hidden lg:block relative h-full">
+          <div class="sticky top-24 z-40 transition-all duration-300">
             <PriceSummary
               :costs="bookingStore.bookingCosts"
               :booking-type="bookingType"
@@ -187,14 +181,10 @@ onMounted(() => {
     error.value = 'No booking in progress'
     setTimeout(() => router.push({ name: 'Home' }), 2000)
   }
-
-  window.addEventListener('scroll', handleScroll)
-  window.addEventListener('resize', handleResize)
 })
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-  window.removeEventListener('resize', handleResize)
+  // No cleanup needed
 })
 
 const handleProceed = () => {
@@ -206,48 +196,5 @@ const handleProceed = () => {
 
 const goBack = () => router.back()
 
-/* Sticky Logic */
-const bookingWrapper = ref(null)
-const stickyForm = ref(null)
-const bookingColumn = ref(null)
-const contentColumn = ref(null)
 
-const isSticky = ref(false)
-const stickyStyle = ref({})
-
-const handleScroll = () => {
-  if (!bookingWrapper.value || !stickyForm.value || !contentColumn.value) return
-
-  const contentRect = contentColumn.value.getBoundingClientRect()
-  const formHeight = stickyForm.value.offsetHeight
-  const offsetTop = 100
-
-  if (contentRect.bottom <= offsetTop + formHeight) {
-    isSticky.value = false
-    stickyStyle.value = {
-      position: 'absolute',
-      bottom: '0',
-      width: '100%'
-    }
-  } else if (bookingWrapper.value.getBoundingClientRect().top <= offsetTop) {
-    const rect = bookingWrapper.value.getBoundingClientRect()
-    isSticky.value = true
-    stickyStyle.value = {
-      position: 'fixed',
-      top: `${offsetTop}px`,
-      left: `${rect.left}px`,
-      width: `${rect.width}px`
-    }
-  } else {
-    isSticky.value = false
-    stickyStyle.value = {}
-  }
-}
-
-const handleResize = () => {
-  if (!isSticky.value || !bookingWrapper.value) return
-  const rect = bookingWrapper.value.getBoundingClientRect()
-  stickyStyle.value.width = `${rect.width}px`
-  stickyStyle.value.left = `${rect.left}px`
-}
 </script>

@@ -259,7 +259,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router'; // Added useRoute import
 import { bookingsAPI } from '@/Services/dashboardApi';
 import StatsCard from '@/components/Dashboard/StatsCard.vue';
 import FilterModal from '@/components/Dashboard/FilterModal.vue';
@@ -269,6 +269,7 @@ import { bookingFilterConfig } from '@/Utils/dashboardFilterConfigs';
 const bookings = ref([]);
 const loading = ref(false);
 const router = useRouter();
+const route = useRoute(); // Added missing route definition
 const activeTab = ref('all');
 const currentPage = ref(1);
 const itemsPerPage = ref(8);
@@ -303,6 +304,19 @@ const fetchBookings = async () => {
 // Filtered bookings based on active tab and filters
 const filteredBookings = computed(() => {
   let result = bookings.value;
+
+  // Global Search from Sidebar
+  if (route.query.q) {
+    const search = route.query.q.toLowerCase();
+    result = result.filter(b => 
+      (b.id || '').toString().toLowerCase().includes(search) ||
+      getCustomerName(b).toLowerCase().includes(search) ||
+      (b.guestInfo?.email || '').toLowerCase().includes(search) ||
+      (b.type || '').toLowerCase().includes(search) ||
+      (b.status || '').toLowerCase().includes(search) || // Status text match
+      (b.paymentStatus || '').toLowerCase().includes(search) // Payment Status text match
+    );
+  }
 
   // Apply tab filter
   if (activeTab.value !== 'all') {

@@ -218,15 +218,7 @@ export const hotelFormConfig = {
       required: true
     },
     {
-      key: 'address',
-      label: 'Address',
-      type: 'textarea',
-      placeholder: 'Enter full address',
-      required: true,
-      rows: 2
-    },
-    {
-      key: 'description',
+      key: 'overview',
       label: 'Description',
       type: 'textarea',
       placeholder: 'Enter description',
@@ -252,20 +244,7 @@ export const hotelFormConfig = {
       required: true
     },
     {
-      key: 'stars',
-      label: 'Star Rating',
-      type: 'select',
-      options: [
-        { label: '5 Stars', value: 5 },
-        { label: '4 Stars', value: 4 },
-        { label: '3 Stars', value: 3 },
-        { label: '2 Stars', value: 2 },
-        { label: '1 Star', value: 1 }
-      ],
-      required: true
-    },
-    {
-      key: 'totalRooms',
+      key: 'availability.totalRooms',
       label: 'Total Rooms',
       type: 'number',
       placeholder: 'Enter total rooms',
@@ -273,7 +252,7 @@ export const hotelFormConfig = {
       required: true
     },
     {
-      key: 'availableRooms',
+      key: 'availability.availableRooms',
       label: 'Available Rooms',
       type: 'number',
       placeholder: 'Enter available rooms',
@@ -321,6 +300,27 @@ export const hotelFormConfig = {
       required: true,
       accept: 'image/jpeg,image/png,image/webp',
       maxSize: 2 * 1024 * 1024 // 2MB per image
+    },
+    {
+      key: 'highlights',
+      label: 'Highlights',
+      type: 'tags',
+      placeholder: 'Add highlight',
+      required: false
+    },
+    {
+      key: 'roomAmenities',
+      label: 'Room Amenities',
+      type: 'tags',
+      placeholder: 'Add amenity',
+      required: false
+    },
+    {
+      key: 'nearbyLocations',
+      label: 'Nearby Locations',
+      type: 'tags',
+      placeholder: 'Add location',
+      required: false
     }
   ]
 };
@@ -341,14 +341,14 @@ export const carFormConfig = {
       label: 'Brand',
       type: 'text',
       placeholder: 'e.g., BMW',
-      required: true
+      required: false
     },
     {
       key: 'model',
       label: 'Model',
       type: 'text',
       placeholder: 'e.g., X5',
-      required: true
+      required: false
     },
     {
       key: 'year',
@@ -357,7 +357,7 @@ export const carFormConfig = {
       placeholder: 'e.g., 2023',
       min: 1990,
       max: new Date().getFullYear() + 1,
-      required: true
+      required: false
     },
     {
       key: 'city',
@@ -407,7 +407,7 @@ export const carFormConfig = {
       required: true
     },
     {
-      key: 'total_fleet',
+      key: 'totalFleet',
       label: 'Total Fleet',
       type: 'number',
       placeholder: 'Total number of this car',
@@ -415,7 +415,7 @@ export const carFormConfig = {
       required: true
     },
     {
-      key: 'available_now',
+      key: 'availableNow',
       label: 'Available Now',
       type: 'number',
       placeholder: 'Currently available',
@@ -432,6 +432,12 @@ export const carFormConfig = {
         { label: 'Electric', value: 'electric' },
         { label: 'Hybrid', value: 'hybrid' }
       ],
+      required: false
+    },
+    {
+      key: 'nextAvailability',
+      label: 'Next Availability',
+      type: 'date',
       required: false
     },
     {
@@ -552,28 +558,16 @@ export const tripFormConfig = {
       ],
       required: true
     },
-    {
-      key: 'maxGroupSize',
-      label: 'Max Group Size',
-      type: 'number',
-      placeholder: 'Maximum participants',
-      min: 1,
-      required: true
-    },
+
     {
       key: 'availableSpots',
       label: 'Available Spots',
       type: 'number',
       placeholder: 'Currently available spots',
       min: 0,
-      required: true
+      required: false
     },
-    {
-      key: 'description',
-      label: 'Description',
-      type: 'textarea',
-      required: true
-    },
+
     {
       key: 'highlights',
       label: 'Highlights',
@@ -583,8 +577,27 @@ export const tripFormConfig = {
     },
     {
       key: 'itinerary',
-      label: 'Itinerary (JSON)',
-      type: 'textarea', // Simplified for now, complex object editing is hard
+      label: 'Itinerary',
+      type: 'itinerary-builder',
+      required: false
+    },
+    {
+      key: 'hotel.name',
+      label: 'Hotel Name',
+      type: 'text',
+      required: false
+    },
+    {
+      key: 'hotel.rating',
+      label: 'Hotel Rating',
+      type: 'number',
+      step: 0.1,
+      required: false
+    },
+    {
+      key: 'amenities',
+      label: 'Amenities',
+      type: 'tags', // Assumes data is array of strings or handled
       required: false
     },
     {
@@ -611,15 +624,10 @@ export const tripFormConfig = {
       required: true
     },
     {
-      key: 'startDate',
-      label: 'Start Date',
-      type: 'date',
-      required: false
-    },
-    {
-      key: 'endDate',
-      label: 'End Date',
-      type: 'date',
+      key: 'availableDates',
+      label: 'Available Dates',
+      type: 'tags',
+      placeholder: 'Add date range',
       required: false
     },
     {

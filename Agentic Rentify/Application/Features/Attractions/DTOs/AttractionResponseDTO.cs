@@ -15,6 +15,12 @@ public class AttractionResponseDTO
     public List<string> Highlights { get; set; } = new();
     public List<string> Amenities { get; set; } = new();
     public string Price { get; set; } = string.Empty; // Returning as string "120 $" to match JSON
+    public decimal RawPrice { get; set; }
+    public string PaymentId { get; set; } = string.Empty;
+    public string Status { get; set; } = "Active";
+    public string Availability { get; set; } = "Available";
+    public bool IsFeatured { get; set; } = false;
+    public string Capacity { get; set; } = string.Empty;
     public ReviewSummaryDTO Reviews { get; set; } = new();
     public List<UserReviewDTO> UserReviews { get; set; } = new();
 }
@@ -43,4 +49,11 @@ public class UserReviewDTO
     public double Rating { get; set; }
     public string Date { get; set; } = string.Empty;
     public string Comment { get; set; } = string.Empty;
+}
+
+public class PatchAttractionDTO
+{
+    public string? Status { get; set; }
+    public string? Availability { get; set; }
+    public bool? IsFeatured { get; set; }
 }

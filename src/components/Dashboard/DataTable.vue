@@ -1,15 +1,15 @@
 <template>
-  <div class="w-full font-cairo bg-base-100 p-4 rounded-lg shadow-sm">
+  <div class="w-full font-cairo bg-base-100 p-2 md:p-4 rounded-lg shadow-sm">
     <!-- Table Header (Title + Actions) -->
-    <div class="flex items-center justify-between mb-6">
-      <h1 class="text-3xl font-bold text-base-content">{{ title }}</h1>
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4 md:mb-6">
+      <h1 class="text-2xl md:text-3xl font-bold text-base-content">{{ title }}</h1>
       
-      <div class="flex items-center gap-3 p-2">
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 w-full md:w-auto">
         <!-- Filter Button -->
         <button
           v-if="showFilter"
           @click="$emit('filter')"
-          class="btn btn-outline btn-primary gap-2"
+          class="btn btn-outline btn-primary gap-2 w-full sm:w-auto"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
@@ -22,7 +22,7 @@
         <button
           v-if="addButtonText"
           @click="$emit('add')"
-          class="btn btn-primary gap-2"
+          class="btn btn-primary gap-2 w-full sm:w-auto"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -214,7 +214,7 @@
       </div>
 
       <!-- Pagination -->
-      <div v-if="data.length > 0" class="p-4 border-t border-base-300">
+      <div v-if="data.length > 0 && showPagination" class="p-4 border-t border-base-300">
         <Pagination
           v-model:currentPage="currentPage"
           v-model:perPage="itemsPerPage"
@@ -280,6 +280,10 @@ const props = defineProps({
   loading: {
     type: Boolean,
     default: false
+  },
+  showPagination: {
+    type: Boolean,
+    default: true
   }
 });
 

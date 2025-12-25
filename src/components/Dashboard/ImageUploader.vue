@@ -26,9 +26,7 @@
           <p class="text-base-content font-semibold">
             Drag & drop images here or click to browse
           </p>
-          <p class="text-sm text-base-content/60 mt-1">
-            Maximum {{ maxImages }} images, {{ formatFileSize(maxSize) }} per image
-          </p>
+         
         </div>
       </div>
     </div>

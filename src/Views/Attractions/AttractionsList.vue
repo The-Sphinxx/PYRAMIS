@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-base-200">
     <!-- Hero Section with Search -->
     <div 
-      class="relative bg-cover bg-center min-h-[585px] flex items-center"
+      class="relative bg-cover bg-center min-h-[585px] flex items-start pt-32 lg:items-center lg:pt-20"
       style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/hero-attractions.jpg')"
     >
       <div class="page-container py-16">
@@ -89,7 +89,7 @@
             :price="attraction.price"
             :location="attraction.city"
             :rating="attraction.rating"
-            :reviews="getRandomReviews()"
+            :reviews="attraction.totalReviews || 0"
             button-text="View Details"
             reviews-text="reviews"
             :show-price="true"
@@ -119,6 +119,14 @@
           Reset Filters
         </button>
       </div>
+    </div>
+
+    <!-- Error State -->
+    <div v-if="attractionStore.error" class="page-container alert alert-error my-6">
+      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l-2-2m0 0l-2-2m2 2l2-2m-2 2l-2 2m9-11a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <span>{{ attractionStore.error }}</span>
     </div>
   </div>
 </template>
@@ -209,41 +217,7 @@ const currentCategoryDescription = computed(() => {
 });
 
 const filteredAttractions = computed(() => {
-  let result = attractionStore.attractions;
-
-  // Filter by category
-  if (selectedCategory.value !== 'all') {
-    result = result.filter(attraction => {
-      if (!attraction.categories) return false;
-      
-      // Special handling for RELIGIOUS category to match all religious types
-      if (selectedCategory.value === 'RELIGIOUS') {
-        return attraction.categories.some(cat => 
-          cat.includes('RELIGIOUS')
-        );
-      }
-      
-      // Normal category matching
-      return attraction.categories.includes(selectedCategory.value);
-    });
-  }
-
-  // Filter by store filters (search query from SearchBar)
-  if (attractionStore.filters.searchQuery) {
-    const query = attractionStore.filters.searchQuery.toLowerCase();
-    result = result.filter(attraction =>
-      attraction.name.toLowerCase().includes(query) ||
-      attraction.city.toLowerCase().includes(query) ||
-      attraction.description.toLowerCase().includes(query)
-    );
-  }
-
-  // Filter by city from store
-  if (attractionStore.filters.city && attractionStore.filters.city !== 'All' && attractionStore.filters.city !== 'All Cities') {
-    result = result.filter(attraction => attraction.city === attractionStore.filters.city);
-  }
-
-  return result;
+  return attractionStore.getFilteredAttractions;
 });
 
 const paginatedAttractions = computed(() => {
@@ -255,6 +229,14 @@ const paginatedAttractions = computed(() => {
 // Methods
 const selectCategory = (categoryId) => {
   selectedCategory.value = categoryId;
+  
+  if (categoryId === 'all') {
+    attractionStore.setCategoriesFilter([]);
+  } else {
+    // Pass as array to store
+    attractionStore.setCategoriesFilter([categoryId]);
+  }
+
   currentPage.value = 1;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
@@ -300,9 +282,7 @@ const resetFilters = () => {
   currentPage.value = 1;
 };
 
-const getRandomReviews = () => {
-  return Math.floor(Math.random() * 5000) + 100;
-};
+/* Random reviews removed to prevent hydration mismatch */
 
 // Get first image from images array or fallback to imageUrl
 const getAttractionImage = (attraction) => {
@@ -338,7 +318,5 @@ onMounted(async () => {
 }
 
 /* Smooth transitions */
-* {
-  transition: all 0.3s ease;
-}
+/* Smooth transitions removed for better performance */
 </style>

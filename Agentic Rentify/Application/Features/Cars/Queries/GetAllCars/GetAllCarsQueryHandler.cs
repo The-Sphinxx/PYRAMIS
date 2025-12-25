@@ -16,7 +16,12 @@ public class GetAllCarsQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
         Expression<Func<Car, bool>>? filter = null;
         if (!string.IsNullOrWhiteSpace(request.SearchTerm))
         {
-            filter = c => c.Name.Contains(request.SearchTerm);
+            var term = request.SearchTerm.Trim();
+            filter = c =>
+                (c.Name != null && c.Name.Contains(term)) ||
+                (c.City != null && c.City.Contains(term)) ||
+                (c.Brand != null && c.Brand.Contains(term)) ||
+                (c.Model != null && c.Model.Contains(term));
         }
 
         var (items, totalCount) = await unitOfWork.Repository<Car>()

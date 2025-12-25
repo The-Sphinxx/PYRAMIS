@@ -1,246 +1,260 @@
 <template>
   <div class="min-h-screen bg-base-200 space-y-2">
-    <!-- Analytics Preview Section -->
+    <!-- Stats Overview Section -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+      <!-- Hotels Stats -->
+      <div class="stats shadow bg-base-100 border border-base-300">
+        <div class="stat">
+          <div class="stat-figure text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+            </svg>
+          </div>
+          <div class="stat-title">Total Hotels</div>
+          <div class="stat-value text-primary">{{ hotels.length }}</div>
+          <div class="stat-desc">{{ activeHotelsCount }} active properties</div>
+        </div>
+      </div>
+
+      <!-- Cars Stats -->
+      <div class="stats shadow bg-base-100 border border-base-300">
+        <div class="stat">
+          <div class="stat-figure text-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <div class="stat-title">Cars Fleet</div>
+          <div class="stat-value text-secondary">{{ cars.length }}</div>
+          <div class="stat-desc">{{ availableCarsCount }} available now</div>
+        </div>
+      </div>
+
+      <!-- Attractions Stats -->
+      <div class="stats shadow bg-base-100 border border-base-300">
+        <div class="stat">
+          <div class="stat-figure text-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+          </div>
+          <div class="stat-title">Attractions</div>
+          <div class="stat-value text-accent">{{ attractions.length }}</div>
+          <div class="stat-desc">{{ availableAttractionsCount }} available</div>
+        </div>
+      </div>
+
+      <!-- Trips Stats -->
+      <div class="stats shadow bg-base-100 border border-base-300">
+        <div class="stat">
+          <div class="stat-figure text-info">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"></path>
+            </svg>
+          </div>
+          <div class="stat-title">Trips</div>
+          <div class="stat-value text-info">{{ trips.length }}</div>
+          <div class="stat-desc">{{ upcomingTripsCount }} upcoming</div>
+        </div>
+      </div>
+
+      <!-- Bookings Stats -->
+      <div class="stats shadow bg-base-100 border border-base-300">
+        <div class="stat">
+          <div class="stat-figure text-success">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+            </svg>
+          </div>
+          <div class="stat-title">Total Bookings</div>
+          <div class="stat-value text-success">{{ bookings.length }}</div>
+          <div class="stat-desc">{{ confirmedBookingsCount }} confirmed</div>
+        </div>
+      </div>
+
+      <!-- Users Stats -->
+      <div class="stats shadow bg-base-100 border border-base-300">
+        <div class="stat">
+          <div class="stat-figure text-warning">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+          </div>
+          <div class="stat-title">Total Users</div>
+          <div class="stat-value text-warning">{{ users.length }}</div>
+          <div class="stat-desc">{{ activeUsersCount }} active users</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analytics Section -->
     <div class="card bg-base-100 shadow-xl border border-base-300">
       <div class="card-body">
         <div class="flex items-center justify-between mb-4">
-          <h2 class="card-title text-xl">Analytics</h2>
+          <h2 class="card-title text-xl">Analytics Overview</h2>
           <router-link 
-            to="/dashboard/analytics" 
-            class="btn btn-sm btn-ghost gap-2"
+            :to="{ name: 'Analytics' }" 
+            class="btn btn-sm btn-primary gap-2"
           >
-            View All
+            Open Full Page
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
             </svg>
           </router-link>
         </div>
         
-        <!-- Charts from Analytics Page -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <!-- Monthly Bookings & Revenue Trend -->
-          <div class="card bg-base-100 border border-base-300">
-            <div class="card-body">
-              <h3 class="card-title text-lg">Monthly Bookings & Revenue Trend</h3>
-              <div class="h-80 mt-4">
-                <Bar :data="mixedChartData" :options="mixedChartOptions" />
-              </div>
+        <!-- Compact Charts -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <!-- Monthly Bookings & Revenue -->
+          <div class="bg-base-200/30 p-4 rounded-lg">
+            <h3 class="font-semibold text-sm mb-3">Monthly Bookings & Revenue</h3>
+            <div class="h-64">
+              <Bar :data="mixedChartData" :options="mixedChartOptions" />
             </div>
           </div>
 
           <!-- Booking Status Distribution -->
-          <div class="card bg-base-100 border border-base-300">
-            <div class="card-body">
-              <h3 class="card-title text-lg">Booking Status Distribution</h3>
-              <div class="h-80 mt-4 flex items-center justify-center">
-                <PolarArea :data="polarAreaChartData" :options="polarAreaChartOptions" />
-              </div>
+          <div class="bg-base-200/30 p-4 rounded-lg">
+            <h3 class="font-semibold text-sm mb-3">Booking Status</h3>
+            <div class="h-64 flex items-center justify-center">
+              <PolarArea :data="polarAreaChartData" :options="polarAreaChartOptions" />
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Hotels Preview Section -->
+    <!-- Hotels Section -->
     <div class="card bg-base-100 shadow-xl border border-base-300">
       <div class="card-body">
         <div class="flex items-center justify-between mb-4">
-          <h2 class="card-title text-xl">Hotels</h2>
+          <h2 class="card-title text-xl">Hotels Management</h2>
           <router-link 
-            to="/dashboard/hotels" 
-            class="btn btn-sm btn-ghost gap-2"
+            :to="{ name: 'HotelsManage' }" 
+            class="btn btn-sm btn-primary gap-2"
           >
-            View All
+            Open Full Page
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
             </svg>
           </router-link>
         </div>
-        <DataTable
-          title=""
-          :columns="hotelsColumns"
-          :data="hotelsPreview"
-          :show-filter="false"
-          :show-add-button="false"
-          :show-actions="{ edit: false, delete: false, view: true }"
-          :per-page="3"
-          resource="hotels"
-          @view="(row) => $router.push({ name: 'DashboardDetails', params: { type: 'hotels', id: row.id } })"
-        />
+        <HotelsManage :compact-mode="true" />
       </div>
     </div>
 
-    <!-- Cars Preview Section -->
+    <!-- Cars Section -->
     <div class="card bg-base-100 shadow-xl border border-base-300">
       <div class="card-body">
         <div class="flex items-center justify-between mb-4">
-          <h2 class="card-title text-xl">Cars Fleet</h2>
+          <h2 class="card-title text-xl">Cars Fleet Management</h2>
           <router-link 
-            to="/dashboard/cars" 
-            class="btn btn-sm btn-ghost gap-2"
+            :to="{ name: 'CarsManage' }" 
+            class="btn btn-sm btn-primary gap-2"
           >
-            View All
+            Open Full Page
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
             </svg>
           </router-link>
         </div>
-        <DataTable
-          title=""
-          :columns="carsColumns"
-          :data="carsPreview"
-          :show-filter="false"
-          :show-add-button="false"
-          :show-actions="{ edit: false, delete: false, view: true }"
-          :per-page="3"
-          resource="cars"
-          @view="(row) => $router.push({ name: 'DashboardDetails', params: { type: 'cars', id: row.id } })"
-        />
+        <CarsManage :compact-mode="true" />
       </div>
     </div>
 
-    <!-- Attractions Preview Section -->
+    <!-- Attractions Section -->
     <div class="card bg-base-100 shadow-xl border border-base-300">
       <div class="card-body">
         <div class="flex items-center justify-between mb-4">
-          <h2 class="card-title text-xl">Attractions</h2>
+          <h2 class="card-title text-xl">Attractions Management</h2>
           <router-link 
-            to="/dashboard/attractions" 
-            class="btn btn-sm btn-ghost gap-2"
+            :to="{ name: 'AttractionsManage' }" 
+            class="btn btn-sm btn-primary gap-2"
           >
-            View All
+            Open Full Page
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
             </svg>
           </router-link>
         </div>
-        <DataTable
-          title=""
-          :columns="attractionsColumns"
-          :data="attractionsPreview"
-          :show-filter="false"
-          :show-add-button="false"
-          :show-actions="{ edit: false, delete: false, view: true }"
-          :per-page="3"
-          resource="attractions"
-          @view="(row) => $router.push({ name: 'DashboardDetails', params: { type: 'attractions', id: row.id } })"
-        />
+        <AttractionsManage :compact-mode="true" />
       </div>
     </div>
 
-    <!-- Trips Preview Section -->
+    <!-- Trips Section -->
     <div class="card bg-base-100 shadow-xl border border-base-300">
       <div class="card-body">
         <div class="flex items-center justify-between mb-4">
-          <h2 class="card-title text-xl">Trips</h2>
+          <h2 class="card-title text-xl">Trips Management</h2>
           <router-link 
-            to="/dashboard/trips" 
-            class="btn btn-sm btn-ghost gap-2"
+            :to="{ name: 'TripsManage' }" 
+            class="btn btn-sm btn-primary gap-2"
           >
-            View All
+            Open Full Page
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
             </svg>
           </router-link>
         </div>
-        <DataTable
-          title=""
-          :columns="tripsColumns"
-          :data="tripsPreview"
-          :show-filter="false"
-          :show-add-button="false"
-          :show-actions="{ edit: false, delete: false, view: true }"
-          :per-page="3"
-          resource="trips"
-          @view="(row) => $router.push({ name: 'DashboardDetails', params: { type: 'trips', id: row.id } })"
-        />
+        <TripsManage :compact-mode="true" />
       </div>
     </div>
 
-    <!-- Bookings Preview Section -->
+    <!-- Bookings Section -->
     <div class="card bg-base-100 shadow-xl border border-base-300">
       <div class="card-body">
         <div class="flex items-center justify-between mb-4">
-          <h2 class="card-title text-xl">Bookings</h2>
+          <h2 class="card-title text-xl">Bookings Management</h2>
           <router-link 
-            to="/dashboard/bookings" 
-            class="btn btn-sm btn-ghost gap-2"
+            :to="{ name: 'Bookings' }" 
+            class="btn btn-sm btn-primary gap-2"
           >
-            View All
+            Open Full Page
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
             </svg>
           </router-link>
         </div>
-        <DataTable
-          title=""
-          :columns="bookingsColumns"
-          :data="bookingsPreview"
-          :show-filter="false"
-          :show-add-button="false"
-          :show-actions="{ edit: false, delete: false, view: true }"
-          :per-page="3"
-          resource="bookings"
-          @view="(row) => $router.push({ name: 'DashboardDetails', params: { type: 'bookings', id: row.id } })"
-        />
+        <Bookings :compact-mode="true" />
       </div>
     </div>
 
-    <!-- Users Preview Section -->
+    <!-- Users Section -->
     <div class="card bg-base-100 shadow-xl border border-base-300">
       <div class="card-body">
         <div class="flex items-center justify-between mb-4">
-          <h2 class="card-title text-xl">Users</h2>
+          <h2 class="card-title text-xl">Users Management</h2>
           <router-link 
-            to="/dashboard/users" 
-            class="btn btn-sm btn-ghost gap-2"
+            :to="{ name: 'UsersManage' }" 
+            class="btn btn-sm btn-primary gap-2"
           >
-            View All
+            Open Full Page
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
             </svg>
           </router-link>
         </div>
-        <DataTable
-          title=""
-          :columns="usersColumns"
-          :data="usersPreview"
-          :show-filter="false"
-          :show-add-button="false"
-          :show-actions="{ edit: false, delete: false, view: true }"
-          :per-page="3"
-          resource="users"
-          @view="(row) => $router.push({ name: 'DashboardDetails', params: { type: 'users', id: row.id } })"
-        />
+        <UsersManage :compact-mode="true" />
       </div>
     </div>
 
-    <!-- Admins Preview Section -->
+    <!-- Admins Section -->
     <div class="card bg-base-100 shadow-xl border border-base-300">
       <div class="card-body">
         <div class="flex items-center justify-between mb-4">
-          <h2 class="card-title text-xl">Admins</h2>
+          <h2 class="card-title text-xl">Admins Management</h2>
           <router-link 
-            to="/dashboard/admins" 
-            class="btn btn-sm btn-ghost gap-2"
+            :to="{ name: 'AdminsManage' }" 
+            class="btn btn-sm btn-primary gap-2"
           >
-            View All
+            Open Full Page
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
             </svg>
           </router-link>
         </div>
-        <DataTable
-          title=""
-          :columns="adminsColumns"
-          :data="adminsPreview"
-          :show-filter="false"
-          :show-add-button="false"
-          :show-actions="{ edit: false, delete: false, view: true }"
-          :per-page="3"
-          resource="admins"
-          @view="(row) => $router.push({ name: 'DashboardDetails', params: { type: 'users', id: row.id } })"
-        />
+        <AdminsManage :compact-mode="true" />
       </div>
     </div>
   </div>
@@ -249,7 +263,6 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useAuthStore } from '@/stores/authStore';
-import DataTable from '@/components/Dashboard/DataTable.vue';
 import { Bar, PolarArea } from 'vue-chartjs';
 import {
   Chart as ChartJS,
@@ -262,6 +275,16 @@ import {
   RadialLinearScale,
   ArcElement
 } from 'chart.js';
+
+// Import actual management components
+import HotelsManage from './HotelsManage.vue';
+import CarsManage from './CarsManage.vue';
+import AttractionsManage from './AttractionsManage.vue';
+import TripsManage from './TripsManage.vue';
+import Bookings from './Bookings.vue';
+import UsersManage from './UsersManage.vue';
+import AdminsManage from './AdminsManage.vue';
+
 import { 
   hotelsAPI, 
   carsAPI, 
@@ -307,12 +330,13 @@ const fetchAllData = async () => {
         usersAPI.getAll()
       ]);
 
-    hotels.value = hotelsRes.data || [];
-    cars.value = carsRes.data || [];
-    attractions.value = attractionsRes.data || [];
-    trips.value = tripsRes.data || [];
-    bookings.value = bookingsRes.data || [];
-    users.value = usersRes.data || [];
+    hotels.value = hotelsRes.data.data || [];
+    console.log(hotels.value);
+    cars.value = carsRes.data.data || [];
+    attractions.value = attractionsRes.data.data || [];
+    trips.value = tripsRes.data.data || [];
+    bookings.value = bookingsRes.data.data || [];
+    users.value = usersRes.data.data || [];
   } catch (error) {
     console.error('Error fetching overview data:', error);
   }
@@ -332,7 +356,7 @@ const carsPreview = computed(() =>
     images: Array.isArray(car.images) ? car.images[0] : car.images,
     location: car.city || 'Cairo',
     price: car.price || car.pricePerDay,
-    status: car.status || 'Available'
+    status: car.status || 'available'
   }))
 );
 
@@ -354,6 +378,31 @@ const bookingsPreview = computed(() => bookings.value.slice(0, 3));
 const usersPreview = computed(() => users.value.slice(0, 3));
 const adminsPreview = computed(() => 
   users.value.filter(u => u.role === 'admin').slice(0, 3)
+);
+
+// Stats calculations for badges
+const activeHotelsCount = computed(() => 
+  hotels.value.filter(h => h.status === 'Active').length
+);
+
+const availableCarsCount = computed(() => 
+  cars.value.filter(c => c.status === 'available' || c.available_now > 0).length
+);
+
+const availableAttractionsCount = computed(() => 
+  attractions.value.filter(a => a.availability === 'Available').length
+);
+
+const upcomingTripsCount = computed(() => 
+  trips.value.filter(t => t.status === 'Upcoming').length
+);
+
+const confirmedBookingsCount = computed(() => 
+  bookings.value.filter(b => b.status === 'confirmed' || b.status === 'Confirmed').length
+);
+
+const activeUsersCount = computed(() => 
+  users.value.filter(u => u.status === 'Active' && u.role !== 'admin').length
 );
 
 // Column configurations (same as management pages)
@@ -420,15 +469,15 @@ const mixedChartData = computed(() => ({
     {
       label: 'Bookings',
       data: [45, 52, 48, 65, 70, 68, 75, 80, 72, 85, 90, 95],
-      backgroundColor: 'rgba(59, 130, 246, 0.8)',
-      borderColor: 'rgb(59, 130, 246)',
+      backgroundColor: 'rgba(200, 106, 65, 0.8)', // primary color
+      borderColor: '#C86A41',
       borderWidth: 2
     },
     {
       label: 'Revenue (x1000 EGP)',
       data: [120, 145, 135, 180, 195, 185, 210, 225, 205, 240, 255, 270],
-      backgroundColor: 'rgba(16, 185, 129, 0.8)',
-      borderColor: 'rgb(16, 185, 129)',
+      backgroundColor: 'rgba(54, 179, 126, 0.8)', // success color
+      borderColor: '#36B37E',
       borderWidth: 2
     }
   ]
@@ -454,12 +503,13 @@ const polarAreaChartData = computed(() => ({
       bookings.value.filter(b => b.status === 'completed').length
     ],
     backgroundColor: [
-      'rgba(16, 185, 129, 0.7)',
-      'rgba(251, 191, 36, 0.7)',
-      'rgba(239, 68, 68, 0.7)',
-      'rgba(107, 114, 128, 0.7)'
+      'rgba(54, 179, 126, 0.7)',  // confirmed - success #36B37E
+      'rgba(242, 165, 64, 0.7)',  // pending - warning #F2A540
+      'rgba(228, 88, 88, 0.7)',   // cancelled - error #E45858
+      'rgba(200, 106, 65, 0.7)'   // completed - primary #C86A41
     ],
-    borderWidth: 2
+    borderWidth: 2,
+    borderColor: '#fff'
   }]
 }));
 

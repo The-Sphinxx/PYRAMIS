@@ -78,6 +78,14 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Availability")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Capacity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.PrimitiveCollection<string>("Categories")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -104,6 +112,9 @@ namespace Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsFeatured")
+                        .HasColumnType("bit");
+
                     b.Property<double>("Latitude")
                         .HasColumnType("float");
 
@@ -119,12 +130,20 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PaymentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<decimal>("Price")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<double>("Rating")
                         .HasColumnType("float");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UiHint")
                         .HasColumnType("nvarchar(max)");
@@ -204,6 +223,22 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("AvailableNow")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("BasePrice")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Brand")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -211,7 +246,14 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Featured")
+                        .HasColumnType("bit");
+
                     b.PrimitiveCollection<string>("Features")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FuelType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -222,10 +264,22 @@ namespace Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsFeatured")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Model")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("NextAvailability")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Overview")
                         .IsRequired()
@@ -238,7 +292,18 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Seats")
                         .HasColumnType("int");
 
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TotalFleet")
+                        .HasColumnType("int");
+
                     b.Property<string>("Transmission")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -248,9 +313,135 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Cars", (string)null);
+                });
+
+            modelBuilder.Entity("Agentic_Rentify.Core.Entities.ChatConversation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AssignedAdminId")
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AssignedAdminName")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("ClientEmail")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("ClientId")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ClientName")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastMessageAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Priority")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("UiHint")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("LastMessageAt");
+
+                    b.ToTable("ChatConversations", (string)null);
+                });
+
+            modelBuilder.Entity("Agentic_Rentify.Core.Entities.ChatMessage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<int>("ConversationId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SenderId")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SenderName")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("SenderRole")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("SentAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UiHint")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConversationId");
+
+                    b.ToTable("ChatMessages", (string)null);
                 });
 
             modelBuilder.Entity("Agentic_Rentify.Core.Entities.Hotel", b =>
@@ -260,6 +451,10 @@ namespace Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.PrimitiveCollection<string>("Amenities")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("BasePrice")
                         .HasPrecision(18, 2)
@@ -276,7 +471,10 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.PrimitiveCollection<string>("Facilities")
+                    b.Property<bool>("Featured")
+                        .HasColumnType("bit");
+
+                    b.PrimitiveCollection<string>("Highlights")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -285,6 +483,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsFeatured")
                         .HasColumnType("bit");
 
                     b.Property<double>("Latitude")
@@ -298,11 +499,31 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.PrimitiveCollection<string>("NearbyLocations")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Overview")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("PricePerNight")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<double>("Rating")
                         .HasColumnType("float");
 
                     b.Property<int>("ReviewsCount")
                         .HasColumnType("int");
+
+                    b.PrimitiveCollection<string>("RoomAmenities")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UiHint")
                         .HasColumnType("nvarchar(max)");
@@ -373,6 +594,9 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("AvailableSpots")
+                        .HasColumnType("int");
+
                     b.Property<string>("City")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -385,9 +609,17 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Destination")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
                     b.Property<string>("Duration")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Featured")
+                        .HasColumnType("bit");
 
                     b.PrimitiveCollection<string>("Highlights")
                         .IsRequired()
@@ -398,6 +630,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsFeatured")
                         .HasColumnType("bit");
 
                     b.Property<string>("MainImage")
@@ -414,8 +649,15 @@ namespace Infrastructure.Migrations
                     b.Property<double>("Rating")
                         .HasColumnType("float");
 
+                    b.Property<int>("Reviews")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -424,6 +666,11 @@ namespace Infrastructure.Migrations
 
                     b.Property<int>("TotalReviews")
                         .HasColumnType("int");
+
+                    b.Property<string>("TripType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("UiHint")
                         .HasColumnType("nvarchar(max)");
@@ -436,7 +683,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Trips", (string)null);
                 });
 
-            modelBuilder.Entity("Agentic_Rentify.Core.Entities.UserReview", b =>
+            modelBuilder.Entity("Agentic_Rentify.Core.Entities.WishlistItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -444,33 +691,50 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AttractionId")
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ImageUrl")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ItemId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ItemType")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Date")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Location")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
-                    b.Property<double>("Rating")
+                    b.Property<double?>("Rating")
                         .HasColumnType("float");
 
-                    b.Property<string>("UserImage")
+                    b.Property<string>("Title")
                         .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("UiHint")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserName")
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AttractionId");
+                    b.HasIndex("UserId", "ItemId", "ItemType")
+                        .IsUnique();
 
-                    b.ToTable("UserReview");
+                    b.ToTable("WishlistItems", (string)null);
                 });
 
             modelBuilder.Entity("ApplicationUser", b =>
@@ -725,6 +989,39 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Agentic_Rentify.Core.Entities.Attraction", b =>
                 {
+                    b.OwnsMany("Agentic_Rentify.Core.Entities.UserReview", "UserReviews", b1 =>
+                        {
+                            b1.Property<int>("AttractionId");
+
+                            b1.Property<int>("__synthesizedOrdinal")
+                                .ValueGeneratedOnAddOrUpdate();
+
+                            b1.Property<string>("Comment")
+                                .IsRequired();
+
+                            b1.Property<string>("Date")
+                                .IsRequired();
+
+                            b1.Property<int>("Id");
+
+                            b1.Property<double>("Rating");
+
+                            b1.Property<string>("UserImage")
+                                .IsRequired();
+
+                            b1.Property<string>("UserName")
+                                .IsRequired();
+
+                            b1.HasKey("AttractionId", "__synthesizedOrdinal");
+
+                            b1.ToTable("Attractions");
+
+                            b1.ToJson("UserReviews");
+
+                            b1.WithOwner()
+                                .HasForeignKey("AttractionId");
+                        });
+
                     b.OwnsMany("AttractionImage", "Images", b1 =>
                         {
                             b1.Property<int>("AttractionId");
@@ -792,10 +1089,201 @@ namespace Infrastructure.Migrations
 
                     b.Navigation("ReviewSummary")
                         .IsRequired();
+
+                    b.Navigation("UserReviews");
+                });
+
+            modelBuilder.Entity("Agentic_Rentify.Core.Entities.Car", b =>
+                {
+                    b.OwnsMany("Agentic_Rentify.Core.Entities.UserReview", "UserReviews", b1 =>
+                        {
+                            b1.Property<int>("CarId");
+
+                            b1.Property<int>("__synthesizedOrdinal")
+                                .ValueGeneratedOnAddOrUpdate();
+
+                            b1.Property<string>("Comment")
+                                .IsRequired();
+
+                            b1.Property<string>("Date")
+                                .IsRequired();
+
+                            b1.Property<int>("Id");
+
+                            b1.Property<double>("Rating");
+
+                            b1.Property<string>("UserImage")
+                                .IsRequired();
+
+                            b1.Property<string>("UserName")
+                                .IsRequired();
+
+                            b1.HasKey("CarId", "__synthesizedOrdinal");
+
+                            b1.ToTable("Cars");
+
+                            b1.ToJson("UserReviews");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CarId");
+                        });
+
+                    b.OwnsOne("Agentic_Rentify.Core.Entities.CarReviewSummary", "ReviewSummary", b1 =>
+                        {
+                            b1.Property<int>("CarId");
+
+                            b1.Property<double>("OverallRating");
+
+                            b1.Property<int>("TotalReviews");
+
+                            b1.HasKey("CarId");
+
+                            b1.ToTable("Cars");
+
+                            b1.ToJson("ReviewSummary");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CarId");
+
+                            b1.OwnsOne("Agentic_Rentify.Core.Entities.CarRatingCriteria", "RatingCriteria", b2 =>
+                                {
+                                    b2.Property<int>("CarReviewSummaryCarId");
+
+                                    b2.Property<double>("Comfort");
+
+                                    b2.Property<double>("Experience");
+
+                                    b2.Property<double>("Features");
+
+                                    b2.Property<double>("Reliability");
+
+                                    b2.Property<double>("ValueForMoney");
+
+                                    b2.HasKey("CarReviewSummaryCarId");
+
+                                    b2.ToTable("Cars");
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("CarReviewSummaryCarId");
+                                });
+
+                            b1.Navigation("RatingCriteria")
+                                .IsRequired();
+                        });
+
+                    b.Navigation("ReviewSummary")
+                        .IsRequired();
+
+                    b.Navigation("UserReviews");
+                });
+
+            modelBuilder.Entity("Agentic_Rentify.Core.Entities.ChatMessage", b =>
+                {
+                    b.HasOne("Agentic_Rentify.Core.Entities.ChatConversation", "Conversation")
+                        .WithMany("Messages")
+                        .HasForeignKey("ConversationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Conversation");
                 });
 
             modelBuilder.Entity("Agentic_Rentify.Core.Entities.Hotel", b =>
                 {
+                    b.OwnsMany("Agentic_Rentify.Core.Entities.UserReview", "UserReviews", b1 =>
+                        {
+                            b1.Property<int>("HotelId");
+
+                            b1.Property<int>("__synthesizedOrdinal")
+                                .ValueGeneratedOnAddOrUpdate();
+
+                            b1.Property<string>("Comment")
+                                .IsRequired();
+
+                            b1.Property<string>("Date")
+                                .IsRequired();
+
+                            b1.Property<int>("Id");
+
+                            b1.Property<double>("Rating");
+
+                            b1.Property<string>("UserImage")
+                                .IsRequired();
+
+                            b1.Property<string>("UserName")
+                                .IsRequired();
+
+                            b1.HasKey("HotelId", "__synthesizedOrdinal");
+
+                            b1.ToTable("Hotels");
+
+                            b1.ToJson("UserReviews");
+
+                            b1.WithOwner()
+                                .HasForeignKey("HotelId");
+                        });
+
+                    b.OwnsOne("Agentic_Rentify.Core.Entities.HotelAvailability", "Availability", b1 =>
+                        {
+                            b1.Property<int>("HotelId");
+
+                            b1.Property<int>("AvailableRooms");
+
+                            b1.Property<int>("TotalRooms");
+
+                            b1.HasKey("HotelId");
+
+                            b1.ToTable("Hotels");
+
+                            b1.ToJson("Availability");
+
+                            b1.WithOwner()
+                                .HasForeignKey("HotelId");
+                        });
+
+                    b.OwnsOne("Agentic_Rentify.Core.Entities.HotelReviewSummary", "ReviewSummary", b1 =>
+                        {
+                            b1.Property<int>("HotelId");
+
+                            b1.Property<double>("OverallRating");
+
+                            b1.Property<int>("TotalReviews");
+
+                            b1.HasKey("HotelId");
+
+                            b1.ToTable("Hotels");
+
+                            b1.ToJson("ReviewSummary");
+
+                            b1.WithOwner()
+                                .HasForeignKey("HotelId");
+
+                            b1.OwnsOne("RatingCriteria", "RatingCriteria", b2 =>
+                                {
+                                    b2.Property<int>("HotelReviewSummaryHotelId");
+
+                                    b2.Property<double>("Accessibility");
+
+                                    b2.Property<double>("Experience");
+
+                                    b2.Property<double>("Facilities");
+
+                                    b2.Property<double>("Staff");
+
+                                    b2.Property<double>("ValueForMoney");
+
+                                    b2.HasKey("HotelReviewSummaryHotelId");
+
+                                    b2.ToTable("Hotels");
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("HotelReviewSummaryHotelId");
+                                });
+
+                            b1.Navigation("RatingCriteria")
+                                .IsRequired();
+                        });
+
                     b.OwnsMany("Agentic_Rentify.Core.Entities.HotelRoom", "Rooms", b1 =>
                         {
                             b1.Property<int>("HotelId");
@@ -821,7 +1309,15 @@ namespace Infrastructure.Migrations
                                 .HasForeignKey("HotelId");
                         });
 
+                    b.Navigation("Availability")
+                        .IsRequired();
+
+                    b.Navigation("ReviewSummary")
+                        .IsRequired();
+
                     b.Navigation("Rooms");
+
+                    b.Navigation("UserReviews");
                 });
 
             modelBuilder.Entity("Agentic_Rentify.Core.Entities.Trip", b =>
@@ -879,6 +1375,59 @@ namespace Infrastructure.Migrations
                             b1.Navigation("Activities");
                         });
 
+                    b.OwnsMany("Agentic_Rentify.Core.Entities.UserReview", "UserReviews", b1 =>
+                        {
+                            b1.Property<int>("TripId");
+
+                            b1.Property<int>("__synthesizedOrdinal")
+                                .ValueGeneratedOnAddOrUpdate();
+
+                            b1.Property<string>("Comment")
+                                .IsRequired();
+
+                            b1.Property<string>("Date")
+                                .IsRequired();
+
+                            b1.Property<int>("Id");
+
+                            b1.Property<double>("Rating");
+
+                            b1.Property<string>("UserImage")
+                                .IsRequired();
+
+                            b1.Property<string>("UserName")
+                                .IsRequired();
+
+                            b1.HasKey("TripId", "__synthesizedOrdinal");
+
+                            b1.ToTable("Trips");
+
+                            b1.ToJson("UserReviews");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TripId");
+                        });
+
+                    b.OwnsOne("Agentic_Rentify.Core.Entities.TripAmenitiesInfo", "Amenities", b1 =>
+                        {
+                            b1.Property<int>("TripId");
+
+                            b1.Property<bool>("Accommodation");
+
+                            b1.Property<int>("Meals");
+
+                            b1.Property<bool>("Transport");
+
+                            b1.HasKey("TripId");
+
+                            b1.ToTable("Trips");
+
+                            b1.ToJson("Amenities");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TripId");
+                        });
+
                     b.OwnsOne("Agentic_Rentify.Core.Entities.TripHotelInfo", "HotelInfo", b1 =>
                         {
                             b1.Property<int>("TripId");
@@ -904,16 +1453,60 @@ namespace Infrastructure.Migrations
                                 .HasForeignKey("TripId");
                         });
 
+                    b.OwnsOne("Agentic_Rentify.Core.Entities.TripReviewSummary", "ReviewSummary", b1 =>
+                        {
+                            b1.Property<int>("TripId");
+
+                            b1.Property<double>("OverallRating");
+
+                            b1.Property<int>("TotalReviews");
+
+                            b1.HasKey("TripId");
+
+                            b1.ToTable("Trips");
+
+                            b1.ToJson("ReviewSummary");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TripId");
+
+                            b1.OwnsOne("RatingCriteria", "RatingCriteria", b2 =>
+                                {
+                                    b2.Property<int>("TripReviewSummaryTripId");
+
+                                    b2.Property<double>("Accessibility");
+
+                                    b2.Property<double>("Experience");
+
+                                    b2.Property<double>("Facilities");
+
+                                    b2.Property<double>("Staff");
+
+                                    b2.Property<double>("ValueForMoney");
+
+                                    b2.HasKey("TripReviewSummaryTripId");
+
+                                    b2.ToTable("Trips");
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("TripReviewSummaryTripId");
+                                });
+
+                            b1.Navigation("RatingCriteria")
+                                .IsRequired();
+                        });
+
+                    b.Navigation("Amenities")
+                        .IsRequired();
+
                     b.Navigation("HotelInfo");
 
                     b.Navigation("Itinerary");
-                });
 
-            modelBuilder.Entity("Agentic_Rentify.Core.Entities.UserReview", b =>
-                {
-                    b.HasOne("Agentic_Rentify.Core.Entities.Attraction", null)
-                        .WithMany("UserReviews")
-                        .HasForeignKey("AttractionId");
+                    b.Navigation("ReviewSummary")
+                        .IsRequired();
+
+                    b.Navigation("UserReviews");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -967,9 +1560,9 @@ namespace Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Agentic_Rentify.Core.Entities.Attraction", b =>
+            modelBuilder.Entity("Agentic_Rentify.Core.Entities.ChatConversation", b =>
                 {
-                    b.Navigation("UserReviews");
+                    b.Navigation("Messages");
                 });
 #pragma warning restore 612, 618
         }

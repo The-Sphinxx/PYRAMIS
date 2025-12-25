@@ -15,25 +15,49 @@
       "resetToken": null,
       "resetTokenExpiry": null,
       "createdAt": "2024-01-01T10:00:00.000Z",
-      "updatedAt": "2024-01-01T10:00:00.000Z"
+      "updatedAt": "2024-01-01T10:00:00.000Z",
+      "status": "Verified",
+      "role": "admin"
+    },
+    {
+      "id": "google_1766073359742",
+      "fullName": "Google User",
+      "email": "user@gmail.com",
+      "provider": "google",
+      "createdAt": "2025-12-18T15:55:59.742Z",
+      "status": "Verified",
+      "firstName": "Google",
+      "lastName": "User",
+      "phone": "",
+      "role": "user",
+      "dateOfBirth": null,
+      "nationality": null,
+      "gender": null,
+      "profileImage": null,
+      "isVerified": true,
+      "updatedAt": "2025-12-18T15:55:59.742Z"
     }
   ],
   "attractions": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Great Pyramids of Giza",
       "city": "Giza",
       "rating": 4.9,
+      "status": "Active",
+      "availability": "Available",
+      "isFeatured": true,
+      "capacity": "18 / 42 Ticket",
       "categories": [
         "TOP PICKS",
         "HISTORICAL",
         "CULTURE"
       ],
       "images": [
-        "/images/pyramids/main.jpg",
-        "/images/pyramids/view_2.jpg",
-        "/images/pyramids/view_3.jpg",
-        "/images/pyramids/view_4.jpg"
+        "/images/Attractions/pyramids-main.jpg",
+        "/images/Attractions/pyramids-view_2.jpg",
+        "/images/Attractions/pyramids-view_3.jpg",
+        "/images/Attractions/pyramids-view_4.jpg"
       ],
       "latitude": 29.9792,
       "longitude": 31.1342,
@@ -53,7 +77,7 @@
         "Entrance to select Pyramids (Paid)"
       ],
       "paymentId": "pay_0001",
-      "price": "120 $",
+      "price": "12$",
       "reviews": {
         "overallRating": 4.9,
         "totalReviews": 9875,
@@ -61,7 +85,7 @@
           "experience": 4.9,
           "staff": 4.5,
           "accessibility": 4.2,
-          "facilities": 4.0,
+          "facilities": 4,
           "valueForMoney": 4.6
         }
       },
@@ -85,10 +109,14 @@
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Karnak Temple",
       "city": "Luxor",
       "rating": 4.8,
+      "status": "Active",
+      "availability": "Available",
+      "isFeatured": true,
+      "capacity": "25 / 50 Ticket",
       "categories": [
         "TOP PICKS",
         "HISTORICAL",
@@ -96,10 +124,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/karnak/main.jpg",
-        "/images/karnak/view_2.jpg",
-        "/images/karnak/view_3.jpg",
-        "/images/karnak/view_4.jpg"
+        "/images/Attractions/Karnak-Temple-main.png",
+        "/images/Attractions/karnak-view_2.jpg",
+        "/images/Attractions/karnak-view_3.jpg",
+        "/images/Attractions/karnak-view_4.jpg"
       ],
       "latitude": 25.7197,
       "longitude": 32.6587,
@@ -119,7 +147,7 @@
         "Sound and Light Show (Paid)"
       ],
       "paymentId": "pay_0002",
-      "price": "492 $",
+      "price": "20$",
       "reviews": {
         "overallRating": 4.8,
         "totalReviews": 6543,
@@ -151,20 +179,24 @@
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Salah El-Din Citadel",
       "city": "Cairo",
       "rating": 4.7,
+      "status": "Pending",
+      "availability": "Sold Out",
+      "isFeatured": false,
+      "capacity": "42 / 42 Ticket",
       "categories": [
         "HISTORICAL",
         "CULTURE",
         "TOP PICKS"
       ],
       "images": [
-        "/images/citadel/main.jpg",
-        "/images/citadel/view_2.jpg",
-        "/images/citadel/view_3.jpg",
-        "/images/citadel/view_4.jpg"
+        "/images/Attractions/Salah-El-Din-Citadel-main.png",
+        "/images/Attractions/Salah-El-Din-Citadel-view_2.jpg",
+        "/images/Attractions/Salah-El-Din-Citadel-view_3.jpg",
+        "/images/Attractions/Salah-El-Din-Citadel-view_4.jpg"
       ],
       "latitude": 30.0289,
       "longitude": 31.2625,
@@ -183,7 +215,7 @@
         "Parking"
       ],
       "paymentId": "pay_0003",
-      "price": "28 $",
+      "price": "28$",
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 3210,
@@ -215,10 +247,14 @@
       ]
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Egyptian Museum",
       "city": "Cairo",
       "rating": 4.7,
+      "status": "Active",
+      "availability": "Available",
+      "isFeatured": true,
+      "capacity": "15 / 30 Ticket",
       "categories": [
         "MUSEUMS",
         "HISTORICAL",
@@ -226,10 +262,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/egyptian_museum/main.jpg",
-        "/images/egyptian_museum/view_2.jpg",
-        "Images of Egyptian Museum Tahrir interior showcasing artifacts",
-        "/images/egyptian_museum/view_4.jpg"
+        "/images/Attractions/Egyptian-Museum-main.png",
+        "/images/Attractions/Egyptian-Museum-view_2.jpg",
+        "/images/Attractions/Egyptian-Museum-view_3.jpg",
+        "/images/Attractions/Egyptian-Museum-view_4.jpg"
       ],
       "latitude": 30.0474,
       "longitude": 31.2365,
@@ -248,7 +284,7 @@
         "Guided Tours (Paid)"
       ],
       "paymentId": "pay_0004",
-      "price": "472 $",
+      "price": "45$",
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 5580,
@@ -280,20 +316,24 @@
       ]
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Marina Beach",
       "city": "Alexandria",
       "rating": 4.6,
+      "status": "Disabled",
+      "availability": "Sold Out",
+      "isFeatured": false,
+      "capacity": "0 / 20 Ticket",
       "categories": [
         "NATURE",
         "FAMILY",
         "BEACHES"
       ],
       "images": [
-        "/images/marina_beach/main.jpg",
-        "/images/marina_beach/view_2.jpg",
-        "/images/marina_beach/view_3.jpg",
-        "/images/marina_beach/view_4.jpg"
+        "/images/Attractions/Marina-Beach-main.png",
+        "/images/Attractions/Marina-Beach-view_2.jpg",
+        "/images/Attractions/Marina-Beach-view_3.jpg",
+        "/images/Attractions/Marina-Beach-view_4.jpg"
       ],
       "latitude": 31.2185,
       "longitude": 29.9079,
@@ -312,7 +352,7 @@
         "Parking (Limited)"
       ],
       "paymentId": "pay_0005",
-      "price": "Free to enter (Paid beach access varies)",
+      "price": "Free to enter",
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 2105,
@@ -344,20 +384,24 @@
       ]
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Valley of the Queens",
       "city": "Luxor",
       "rating": 4.7,
+      "status": "Active",
+      "availability": "Available",
+      "isFeatured": true,
+      "capacity": "10 / 25 Ticket",
       "categories": [
         "HISTORICAL",
         "CULTURE",
         "ANCIENT SITES"
       ],
       "images": [
-        "/images/queens_valley/main.jpg",
-        "/images/queens_valley/view_2.jpg",
-        "/images/queens_valley/view_3.jpg",
-        "/images/queens_valley/view_4.jpg"
+        "/images/Attractions/Valley-of-the-Queens-main.png",
+        "/images/Attractions/Valley-of-the-Queens-view_2.jpg",
+        "/images/Attractions/Valley-of-the-Queens-view_3.jpg",
+        "/images/Attractions/Valley-of-the-Queens-view_4.jpg"
       ],
       "latitude": 25.7262,
       "longitude": 32.5857,
@@ -376,7 +420,7 @@
         "Parking"
       ],
       "paymentId": "pay_0006",
-      "price": "146 $",
+      "price": "25$",
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 1890,
@@ -408,7 +452,7 @@
       ]
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Abu Simbel Temples",
       "city": "Aswan",
       "rating": 4.8,
@@ -419,10 +463,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/abu_simbel/main.jpg",
-        "/images/abu_simbel/view_2.jpg",
-        "/images/abu_simbel/view_3.jpg",
-        "/images/abu_simbel/view_4.jpg"
+        "/images/Attractions/AbuSimbel-Temples-main.png",
+        "/images/Attractions/AbuSimbel-Temples-view_2.png",
+        "/images/Attractions/AbuSimbel-Temples-view_3.png",
+        "/images/Attractions/AbuSimbel-Temples-view_4.png"
       ],
       "latitude": 22.3361,
       "longitude": 31.626,
@@ -441,7 +485,7 @@
         "Parking"
       ],
       "paymentId": "pay_0007",
-      "price": "430 $",
+      "price": "30$",
       "reviews": {
         "overallRating": 4.8,
         "totalReviews": 4120,
@@ -449,7 +493,7 @@
           "experience": 4.9,
           "staff": 4.7,
           "accessibility": 4.2,
-          "facilities": 4.0,
+          "facilities": 4,
           "valueForMoney": 4.6
         }
       },
@@ -473,7 +517,7 @@
       ]
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "Khan El Khalili Bazaar",
       "city": "Cairo",
       "rating": 4.6,
@@ -483,10 +527,10 @@
         "SHOPPING"
       ],
       "images": [
-        "/images/khan_el_khalili/main.jpg",
-        "/images/khan_el_khalili/view_2.jpg",
-        "/images/khan_el_khalili/view_3.jpg",
-        "/images/khan_el_khalili/view_4.jpg"
+        "/images/Attractions/Khan-ElKhalili-Bazaar-main.png",
+        "/images/Attractions/Khan-ElKhalili-Bazaar-view_2.jpg",
+        "/images/Attractions/Khan-ElKhalili-Bazaar-view_3.jpg",
+        "/images/Attractions/Khan-ElKhalili-Bazaar-view_4.jpg"
       ],
       "latitude": 30.0475,
       "longitude": 31.2644,
@@ -533,10 +577,11 @@
           "date": "September 2024",
           "comment": "Chaotic but charming! A true sensory overload with amazing spices and handicrafts. Practice your bargaining skills!"
         }
-      ]
+      ],
+      "availability": "Available"
     },
     {
-      "id": 9,
+      "id": "9",
       "name": "Valley of the Kings",
       "city": "Luxor",
       "rating": 4.7,
@@ -547,10 +592,10 @@
         "ANCIENT SITES"
       ],
       "images": [
-        "/images/kings_valley/main.jpg",
-        "/images/kings_valley/view_2.jpg",
-        "/images/kings_valley/view_3.jpg",
-        "/images/kings_valley/view_4.jpg"
+        "/images/Attractions/Valley-of-kings-main.png",
+        "/images/Attractions/Valley-of-kings-view_2.jpg",
+        "/images/Attractions/Valley-of-kings-view_3.jpg",
+        "/images/Attractions/Valley-of-kings-view_4.jpg"
       ],
       "latitude": 25.7408,
       "longitude": 32.601,
@@ -570,7 +615,7 @@
         "Parking"
       ],
       "paymentId": "pay_0009",
-      "price": "288 $",
+      "price": "28$",
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 7890,
@@ -578,7 +623,7 @@
           "experience": 4.8,
           "staff": 4.7,
           "accessibility": 4.3,
-          "facilities": 4.0,
+          "facilities": 4,
           "valueForMoney": 4.5
         }
       },
@@ -599,10 +644,11 @@
           "date": "November 2024",
           "comment": "The amount of history hidden here is indescribable! I greatly enjoyed the preserved colors."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
-      "id": 10,
+      "id": "10",
       "name": "Mortuary Temple of Hatshepsut",
       "city": "Luxor",
       "rating": 4.6,
@@ -612,10 +658,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/hatshepsut_temple/main.jpg",
-        "/images/hatshepsut_temple/view_2.jpg",
-        "/images/hatshepsut_temple/view_3.jpg",
-        "/images/hatshepsut_temple/view_4.jpg"
+        "/images/Attractions/Mortuary-Temple-of-Hatshepsut-main.png",
+        "/images/Attractions/Mortuary-Temple-of-Hatshepsut-view_2.jpg",
+        "/images/Attractions/Mortuary-Temple-of-Hatshepsut-view_3.jpg",
+        "/images/Attractions/Mortuary-Temple-of-Hatshepsut-view_4.jpg"
       ],
       "latitude": 25.7381,
       "longitude": 32.6074,
@@ -634,7 +680,7 @@
         "Parking"
       ],
       "paymentId": "pay_0010",
-      "price": "153 $",
+      "price": "15$",
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 3560,
@@ -666,8 +712,8 @@
       ]
     },
     {
-      "id": 11,
-      "name": "Temple of Philae (معبد فيلة)",
+      "id": "11",
+      "name": "Temple of Philae",
       "city": "Aswan",
       "rating": 4.6,
       "categories": [
@@ -677,10 +723,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/philae_temple/main.jpg",
-        "/images/philae_temple/view_2.jpg",
-        "/images/philae_temple/view_3.jpg",
-        "/images/philae_temple/view_4.jpg"
+        "/images/Attractions/Temple-of-Philae-main.png",
+        "/images/Attractions/Temple-of-Philae-view_2.png",
+        "/images/Attractions/Temple-of-Philae-view_3.png",
+        "/images/Attractions/Temple-of-Philae-view_4.png"
       ],
       "latitude": 24.0125,
       "longitude": 32.885,
@@ -698,7 +744,7 @@
         "Information Signage"
       ],
       "paymentId": "pay_0011",
-      "price": "312 $",
+      "price": "12$",
       "reviews": {
         "overallRating": 4.8,
         "totalReviews": 4900,
@@ -706,7 +752,7 @@
           "experience": 4.9,
           "staff": 4.6,
           "accessibility": 4.1,
-          "facilities": 4.0,
+          "facilities": 4,
           "valueForMoney": 4.5
         }
       },
@@ -727,10 +773,11 @@
           "date": "November 2024",
           "comment": "The setting is breathtaking, especially the transfer by boat. The Temple of Isis is beautifully preserved."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
-      "id": 12,
+      "id": "12",
       "name": "Temple of Kom Ombo",
       "city": "Aswan",
       "rating": 4.5,
@@ -740,10 +787,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/kom_ombo/main.jpg",
-        "/images/kom_ombo/view_2.jpg",
-        "/images/kom_ombo/view_3.jpg",
-        "/images/kom_ombo/view_4.jpg"
+        "/images/Attractions/Temple-of-KomOmbo-main.png",
+        "/images/Attractions/Temple-of-KomOmbo-view_2.png",
+        "/images/Attractions/Temple-of-KomOmbo-view_3.png",
+        "/images/Attractions/Temple-of-KomOmbo-view_4.png"
       ],
       "latitude": 24.4552,
       "longitude": 32.9555,
@@ -762,7 +809,7 @@
         "Parking"
       ],
       "paymentId": "pay_0012",
-      "price": "173 $",
+      "price": "17$",
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 2350,
@@ -794,7 +841,7 @@
       ]
     },
     {
-      "id": 13,
+      "id": "13",
       "name": "Nubian Museum",
       "city": "Aswan",
       "rating": 4.5,
@@ -804,10 +851,10 @@
         "HISTORICAL"
       ],
       "images": [
-        "/images/nubian_museum/main.jpg",
-        "/images/nubian_museum/view_2.jpg",
-        "/images/nubian_museum/view_3.jpg",
-        "/images/nubian_museum/view_4.jpg"
+        "/images/Attractions/Nubian-Museum-main.png",
+        "/images/Attractions/Nubian-Museum-view_2.png",
+        "/images/Attractions/Nubian-Museum-view_3.png",
+        "/images/Attractions/Nubian-Museum-view_4.png"
       ],
       "latitude": 24.0863,
       "longitude": 32.8863,
@@ -827,7 +874,7 @@
         "Garden Area"
       ],
       "paymentId": "pay_0013",
-      "price": "39 $",
+      "price": "39$",
       "reviews": {
         "overallRating": 4.5,
         "totalReviews": 1120,
@@ -856,10 +903,11 @@
           "date": "October 2024",
           "comment": "One of the best modern museums in Egypt. The artifacts are well displayed, and the story of Nubia is compelling."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
-      "id": 14,
+      "id": "14",
       "name": "Museum of Islamic Art",
       "city": "Cairo",
       "rating": 4.6,
@@ -869,10 +917,10 @@
         "HISTORICAL"
       ],
       "images": [
-        "/images/islamic_art_museum/main.jpg",
-        "/images/islamic_art_museum/view_2.jpg",
-        "/images/islamic_art_museum/view_3.jpg",
-        "/images/islamic_art_museum/view_4.jpg"
+        "/images/Attractions/Museum-of-Islamic-Art-main .png",
+        "/images/Attractions/Museum-of-Islamic-Art-view_2.png",
+        "/images/Attractions/Museum-of-Islamic-Art-view_3.png",
+        "/images/Attractions/Museum-of-Islamic-Art-view_4.png"
       ],
       "latitude": 30.0425,
       "longitude": 31.2592,
@@ -891,7 +939,7 @@
         "Conservation Workshop"
       ],
       "paymentId": "pay_0014",
-      "price": "205 $",
+      "price": "28$",
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 980,
@@ -920,10 +968,11 @@
           "date": "October 2024",
           "comment": "A true gem! The textiles, ceramics, and metalwork are incredibly detailed. Beautiful and peaceful atmosphere."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
-      "id": 15,
+      "id": "15",
       "name": "National Museum of Egyptian Civilization",
       "city": "Cairo",
       "rating": 4.5,
@@ -934,10 +983,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/nmec/main.jpg",
-        "/images/nmec/view_2.jpg",
-        "/images/nmec/view_3.jpg",
-        "/images/nmec/view_4.jpg"
+        "/images/Attractions/National-Museum-of-Egyptian-Civilization-main.png",
+        "/images/Attractions/National-Museum-of-Egyptian-Civilization-view_2.png",
+        "/images/Attractions/National-Museum-of-Egyptian-Civilization-view_3.png",
+        "/images/Attractions/National-Museum-of-Egyptian-Civilization-view_4.png"
       ],
       "latitude": 30.0191,
       "longitude": 31.2372,
@@ -958,7 +1007,7 @@
         "Parking"
       ],
       "paymentId": "pay_0015",
-      "price": "118 $",
+      "price": "35$",
       "reviews": {
         "overallRating": 4.8,
         "totalReviews": 3560,
@@ -990,7 +1039,7 @@
       ]
     },
     {
-      "id": 16,
+      "id": "16",
       "name": "Alexandria National Museum",
       "city": "Alexandria",
       "rating": 4.4,
@@ -1000,10 +1049,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/alexandria_museum/main.jpg",
-        "/images/alexandria_museum/view_2.jpg",
-        "/images/alexandria_museum/view_3.jpg",
-        "/images/alexandria_museum/view_4.jpg"
+        "/images/Attractions/National-Museum-main.png",
+        "/images/Attractions/National-Museum-view_2.png",
+        "/images/Attractions/National-Museum-view_3.png",
+        "/images/Attractions/National-Museum-view_4.png"
       ],
       "latitude": 31.2001,
       "longitude": 29.9187,
@@ -1022,7 +1071,7 @@
         "Information Panels"
       ],
       "paymentId": "pay_0016",
-      "price": "164 $",
+      "price": "27$",
       "reviews": {
         "overallRating": 4.4,
         "totalReviews": 750,
@@ -1054,7 +1103,7 @@
       ]
     },
     {
-      "id": 17,
+      "id": "17",
       "name": "Maspero Museum",
       "city": "Cairo",
       "rating": 4.3,
@@ -1063,10 +1112,10 @@
         "HISTORICAL"
       ],
       "images": [
-        "/images/maspero_museum/main.jpg",
-        "/images/maspero_museum/view_2.jpg",
-        "/images/maspero_museum/view_3.jpg",
-        "/images/maspero_museum/view_4.jpg"
+        "/images/Attractions/Maspero-Museum-main.png",
+        "/images/Attractions/Maspero-Museum-view_2.png",
+        "/images/Attractions/Maspero-Museum-view_3.png",
+        "/images/Attractions/Maspero-Museum-view_4.png"
       ],
       "latitude": 30.0543,
       "longitude": 31.2429,
@@ -1085,7 +1134,7 @@
         "Parking"
       ],
       "paymentId": "pay_0017",
-      "price": "349 $",
+      "price": "34$",
       "reviews": {
         "overallRating": 4.3,
         "totalReviews": 510,
@@ -1114,10 +1163,11 @@
           "date": "October 2024",
           "comment": "Smaller collection but some unique pieces. Less busy than the main museums, which is a plus."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
-      "id": 18,
+      "id": "18",
       "name": "Ras Mohammed National Park",
       "city": "Sharm El Sheikh",
       "rating": 4.8,
@@ -1127,10 +1177,10 @@
         "DIVING"
       ],
       "images": [
-        "/images/ras_mohamed/main.jpg",
-        "/images/ras_mohamed/view_2.jpg",
-        "/images/ras_mohamed/view_3.jpg",
-        "/images/ras_mohamed/view_4.jpg"
+        "/images/Attractions/Ras-Mohammed-National-Park-main.png",
+        "/images/Attractions/Ras-Mohammed-National-Park-view_2.png",
+        "/images/Attractions/Ras-Mohammed-National-Park-view_3.png",
+        "/images/Attractions/Ras-Mohammed-National-Park-view_4.png"
       ],
       "latitude": 27.75,
       "longitude": 34.25,
@@ -1149,7 +1199,7 @@
         "Entry Fee Checkpoints"
       ],
       "paymentId": "pay_0018",
-      "price": "402 $",
+      "price": "25$",
       "reviews": {
         "overallRating": 4.8,
         "totalReviews": 5100,
@@ -1181,7 +1231,7 @@
       ]
     },
     {
-      "id": 19,
+      "id": "19",
       "name": "Dahab Beach",
       "city": "Dahab",
       "rating": 4.7,
@@ -1191,10 +1241,10 @@
         "BEACHES"
       ],
       "images": [
-        "/images/dahab_beach/main.jpg",
-        "/images/dahab_beach/view_2.jpg",
-        "/images/dahab_beach/view_3.jpg",
-        "/images/dahab_beach/view_4.jpg"
+        "/images/Attractions/Dahab-Beach-main.png",
+        "/images/Attractions/Dahab-Beach-view_2.png",
+        "/images/Attractions/Dahab-Beach-view_3.png",
+        "/images/Attractions/Dahab-Beach-view_4.png"
       ],
       "latitude": 28.5,
       "longitude": 34.5167,
@@ -1220,7 +1270,7 @@
         "ratingCriteria": {
           "experience": 4.7,
           "staff": 4.5,
-          "accessibility": 4.0,
+          "accessibility": 4,
           "facilities": 3.7,
           "valueForMoney": 4.8
         }
@@ -1245,8 +1295,8 @@
       ]
     },
     {
-      "id": 20,
-      "name": "Red Sea (Hurghada)",
+      "id": "20",
+      "name": "Red Sea",
       "city": "Hurghada",
       "rating": 4.7,
       "categories": [
@@ -1256,10 +1306,10 @@
         "BEACHES"
       ],
       "images": [
-        "/images/hurghada_red_sea/main.jpg",
-        "/images/hurghada_red_sea/view_2.jpg",
-        "/images/hurghada_red_sea/view_3.jpg",
-        "/images/hurghada_red_sea/view_4.jpg"
+        "/images/Attractions/Red-Sea-main.png",
+        "/images/Attractions/Red-Sea-view_2.png",
+        "/images/Attractions/Red-Sea-view_3.png",
+        "/images/Attractions/Red-Sea-view_4.png"
       ],
       "latitude": 27.257,
       "longitude": 33.8123,
@@ -1279,7 +1329,7 @@
         "ATM"
       ],
       "paymentId": "pay_0020",
-      "price": "Free to enter (Paid beach access varies)",
+      "price": "Free to enter",
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 7560,
@@ -1311,7 +1361,7 @@
       ]
     },
     {
-      "id": 21,
+      "id": "21",
       "name": "Wadi El Rayan",
       "city": "Faiyum",
       "rating": 4.5,
@@ -1321,10 +1371,10 @@
         "ADVENTURE"
       ],
       "images": [
-        "/images/wadi_el_rayan/main.jpg",
-        "/images/wadi_el_rayan/view_2.jpg",
-        "/images/wadi_el_rayan/view_3.jpg",
-        "/images/wadi_el_rayan/view_4.jpg"
+        "/images/Attractions/Wadi-ElRayan-main.png",
+        "/images/Attractions/Wadi-ElRayan-view_2.png",
+        "/images/Attractions/Wadi-ElRayan-view_3.png",
+        "/images/Attractions/Wadi-ElRayan-view_4.png"
       ],
       "latitude": 29.1333,
       "longitude": 30.6333,
@@ -1343,7 +1393,7 @@
         "Parking (Designated Areas)"
       ],
       "paymentId": "pay_0021",
-      "price": "473 $",
+      "price": "73$",
       "reviews": {
         "overallRating": 4.5,
         "totalReviews": 1340,
@@ -1372,10 +1422,11 @@
           "date": "October 2024",
           "comment": "A great escape from the city. The contrast between the lakes and the desert is striking. Don't miss the sand dunes!"
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
-      "id": 22,
+      "id": "22",
       "name": "Ain Sokhna Beach",
       "city": "Ain Sokhna",
       "rating": 4.4,
@@ -1385,10 +1436,10 @@
         "BEACHES"
       ],
       "images": [
-        "/images/ain_sokhna_beach/main.jpg",
-        "/images/ain_sokhna_beach/view_2.jpg",
-        "/images/ain_sokhna_beach/view_3.jpg",
-        "/images/ain_sokhna_beach/view_4.jpg"
+        "/images/Attractions/AinSokhna-Beach-main.png",
+        "/images/Attractions/AinSokhna-Beach-view_2.png",
+        "/images/Attractions/AinSokhna-Beach-view_3.png",
+        "/images/Attractions/AinSokhna-Beach-view_4.png"
       ],
       "latitude": 29.623,
       "longitude": 32.32,
@@ -1436,10 +1487,11 @@
           "date": "June 2024",
           "comment": "Great place for a short break. Clean beaches, but you must stay at a resort for the best experience."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
-      "id": 23,
+      "id": "23",
       "name": "Siwa Oasis",
       "city": "Siwa",
       "rating": 4.7,
@@ -1449,10 +1501,10 @@
         "HISTORICAL"
       ],
       "images": [
-        "/images/siwa/main.jpg",
-        "/images/siwa/view_2.jpg",
-        "/images/siwa/view_3.jpg",
-        "/images/siwa/view_4.jpg"
+        "/images/Attractions/Siwa-Oasis-main.png",
+        "/images/Attractions/Siwa-Oasis-view_2.png",
+        "/images/Attractions/Siwa-Oasis-view_3.png",
+        "/images/Attractions/Siwa-Oasis-view_4.png"
       ],
       "latitude": 29.2045,
       "longitude": 25.5195,
@@ -1472,7 +1524,7 @@
         "Local Handicrafts Shops"
       ],
       "paymentId": "pay_0023",
-      "price": "Free to enter (Paid sites vary)",
+      "price": "Free to enter",
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 1670,
@@ -1504,7 +1556,7 @@
       ]
     },
     {
-      "id": 24,
+      "id": "24",
       "name": "Colossi of Memnon",
       "city": "Luxor",
       "rating": 4.5,
@@ -1513,10 +1565,10 @@
         "ANCIENT SITES"
       ],
       "images": [
-        "/images/memnon/main.jpg",
-        "/images/memnon/view_2.jpg",
-        "/images/memnon/view_3.jpg",
-        "/images/memnon/view_4.jpg"
+        "/images/Attractions/Colossi-Memnon-main.png",
+        "/images/Attractions/Colossi-Memnon-view_2.png",
+        "/images/Attractions/Colossi-Memnon-view_3.png",
+        "/images/Attractions/Colossi-Memnon-view_4.png"
       ],
       "latitude": 25.7208,
       "longitude": 32.6095,
@@ -1562,10 +1614,11 @@
           "date": "September 2024",
           "comment": "A great, free photo stop on the way to the Valley of the Kings. Impressive scale and history."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
-      "id": 25,
+      "id": "25",
       "name": "Temple of Edfu",
       "city": "Edfu",
       "rating": 4.6,
@@ -1575,10 +1628,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/edfu_temple/main.jpg",
-        "/images/edfu_temple/view_2.jpg",
-        "/images/edfu_temple/view_3.jpg",
-        "/images/edfu_temple/view_4.jpg"
+        "/images/Attractions/Temple-of-Edfu-main.png",
+        "/images/Attractions/Temple-of-Edfu-view_2.png",
+        "/images/Attractions/Temple-of-Edfu-view_3.png",
+        "/images/Attractions/Temple-of-Edfu-view_4.png"
       ],
       "latitude": 24.9818,
       "longitude": 32.8711,
@@ -1596,7 +1649,7 @@
         "Horse-drawn carriages (Kalesh) available from the Nile port"
       ],
       "paymentId": "pay_0025",
-      "price": "210 $",
+      "price": "21$",
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 2540,
@@ -1604,7 +1657,7 @@
           "experience": 4.7,
           "staff": 4.5,
           "accessibility": 4.3,
-          "facilities": 4.0,
+          "facilities": 4,
           "valueForMoney": 4.5
         }
       },
@@ -1625,10 +1678,11 @@
           "date": "October 2024",
           "comment": "Incredible temple. The reliefs are so clear and detailed. Getting there by Kalesh from the boat was fun."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
-      "id": 26,
+      "id": "26",
       "name": "Luxor Temple",
       "city": "Luxor",
       "rating": 4.7,
@@ -1639,10 +1693,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/luxor_temple/main.jpg",
-        "/images/luxor_temple/view_2.jpg",
-        "/images/luxor_temple/view_3.jpg",
-        "/images/luxor_temple/view_4.jpg"
+        "/images/Attractions/Luxor-Temple-main.png",
+        "/images/Attractions/Luxor-Temple-view_2.png",
+        "/images/Attractions/Luxor-Temple-view_3.png",
+        "/images/Attractions/Luxor-Temple-view_4.png"
       ],
       "latitude": 25.6989,
       "longitude": 32.6394,
@@ -1661,7 +1715,7 @@
         "Night Viewing (Recommended)"
       ],
       "paymentId": "pay_0026",
-      "price": "180 $",
+      "price": "18$",
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 4990,
@@ -1690,10 +1744,11 @@
           "date": "October 2024",
           "comment": "Walking through history in the middle of a modern city is surreal. Go at sunset or after dark for the best photos."
         }
-      ]
+      ],
+      "isFeatured": false
     },
     {
-      "id": 27,
+      "id": "27",
       "name": "The Great Sphinx of Giza",
       "city": "Giza",
       "rating": 4.9,
@@ -1703,10 +1758,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/sphinx/main.jpg",
-        "/images/sphinx/view_2.jpg",
-        "/images/sphinx/view_3.jpg",
-        "/images/sphinx/view_4.jpg"
+        "/images/Attractions/Great-Sphinx-main.png",
+        "/images/Attractions/Great-Sphinx-view_2.png",
+        "/images/Attractions/Great-Sphinx-view_3.png",
+        "/images/Attractions/Great-Sphinx-view_4.png"
       ],
       "latitude": 29.9752,
       "longitude": 31.1376,
@@ -1732,7 +1787,7 @@
           "experience": 4.9,
           "staff": 4.5,
           "accessibility": 4.2,
-          "facilities": 4.0,
+          "facilities": 4,
           "valueForMoney": 4.6
         }
       },
@@ -1741,7 +1796,7 @@
           "id": 53,
           "userName": "Ahmed Ezzat",
           "userImage": "/images/users/user_m_53.jpg",
-          "rating": 5.0,
+          "rating": 5,
           "date": "December 2024",
           "comment": "The Sphinx is absolutely majestic and huge! It’s incredible to see it up close next to the pyramids."
         },
@@ -1753,10 +1808,11 @@
           "date": "November 2024",
           "comment": "Iconic photo opportunity. The scale is massive and it perfectly complements the pyramids."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
-      "id": 28,
+      "id": "28",
       "name": "Dahshur Pyramids",
       "city": "Giza",
       "rating": 4.4,
@@ -1765,10 +1821,10 @@
         "ANCIENT SITES"
       ],
       "images": [
-        "/images/dahshur/main.jpg",
-        "/images/dahshur/view_2.jpg",
-        "/images/dahshur/view_3.jpg",
-        "/images/dahshur/view_4.jpg"
+        "/images/Attractions/Dahshur-Pyramids-main.png",
+        "/images/Attractions/Dahshur-Pyramids-view_2.png",
+        "/images/Attractions/Dahshur-Pyramids-view_3.png",
+        "/images/Attractions/Dahshur-Pyramids-view_4.png"
       ],
       "latitude": 29.8185,
       "longitude": 31.2003,
@@ -1785,14 +1841,14 @@
         "Limited Restrooms (Basic)"
       ],
       "paymentId": "pay_0028",
-      "price": "140 $",
+      "price": "14$",
       "reviews": {
         "overallRating": 4.4,
         "totalReviews": 950,
         "ratingCriteria": {
           "experience": 4.5,
           "staff": 4.3,
-          "accessibility": 4.0,
+          "accessibility": 4,
           "facilities": 3.7,
           "valueForMoney": 4.5
         }
@@ -1814,10 +1870,11 @@
           "date": "September 2024",
           "comment": "Great to be able to go inside the Red Pyramid without the Giza crowds. A bit of a drive, but worth it for history buffs."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
-      "id": 29,
+      "id": "29",
       "name": "White Desert National Park",
       "city": "Farafra Oasis",
       "rating": 4.9,
@@ -1827,10 +1884,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/white_desert/main.jpg",
-        "/images/white_desert/view_2.jpg",
-        "/images/white_desert/view_3.jpg",
-        "/images/white_desert/view_4.jpg"
+        "/images/Attractions/White-Desert-main.png",
+        "/images/Attractions/White-Desert-view_2.png",
+        "/images/Attractions/White-Desert-view_3.png",
+        "/images/Attractions/White-Desert-view_4.png"
       ],
       "latitude": 27.0333,
       "longitude": 27.9942,
@@ -1848,14 +1905,14 @@
         "Basic Ranger Stations"
       ],
       "paymentId": "pay_0029",
-      "price": "580 $ (Tour Price)",
+      "price": "120$ (Tour Price)",
       "reviews": {
         "overallRating": 4.9,
         "totalReviews": 1400,
         "ratingCriteria": {
-          "experience": 5.0,
+          "experience": 5,
           "staff": 4.9,
-          "accessibility": 3.0,
+          "accessibility": 3,
           "facilities": 2.5,
           "valueForMoney": 4.9
         }
@@ -1865,7 +1922,7 @@
           "id": 57,
           "userName": "Maha Sayed",
           "userImage": "/images/users/user_f_57.jpg",
-          "rating": 5.0,
+          "rating": 5,
           "date": "December 2024",
           "comment": "An indescribable and magical place! Camping under the stars among the white statues is an experience I will never forget. Excellent tour guides."
         },
@@ -1877,10 +1934,11 @@
           "date": "November 2024",
           "comment": "One of the most unique landscapes in the world. The overnight trip is a must. The quietness and the stars are phenomenal."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
-      "id": 30,
+      "id": "30",
       "name": "Bibliotheca Alexandrina",
       "city": "Alexandria",
       "rating": 4.6,
@@ -1890,10 +1948,10 @@
         "MUSEUMS"
       ],
       "images": [
-        "/images/bibliotheca_alexandrina/main.jpg",
-        "/images/bibliotheca_alexandrina/view_2.jpg",
-        "/images/bibliotheca_alexandrina/view_3.jpg",
-        "/images/bibliotheca_alexandrina/view_4.jpg"
+        "/images/Attractions/Bibliotheca-Alexandrina-main.png",
+        "/images/Attractions/Bibliotheca-Alexandrina-view_2.png",
+        "/images/Attractions/Bibliotheca-Alexandrina-view_3.png",
+        "/images/Attractions/Bibliotheca-Alexandrina-view_4.png"
       ],
       "latitude": 31.2084,
       "longitude": 29.9079,
@@ -1914,7 +1972,7 @@
         "Restrooms"
       ],
       "paymentId": "pay_0030",
-      "price": "50 $ (General Entry)",
+      "price": "50$ (General Entry)",
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 3500,
@@ -1943,10 +2001,11 @@
           "date": "September 2024",
           "comment": "A must-see in Alexandria. The sheer scale and modern design are impressive, a true revival of the ancient spirit."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
-      "id": 31,
+      "id": "31",
       "name": "St. Catherine's Monastery",
       "city": "Sinai Peninsula",
       "rating": 4.7,
@@ -1956,10 +2015,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/st_catherine/main.jpg",
-        "/images/st_catherine/view_2.jpg",
-        "/images/st_catherine/view_3.jpg",
-        "/images/st_catherine/view_4.jpg"
+        "/images/Attractions/Saint-Catherine's-Monastery-main.png",
+        "/images/Attractions/Saint-Catherine's-Monastery-view_2.png",
+        "/images/Attractions/Saint-Catherine's-Monastery-view_3.png",
+        "/images/Attractions/Saint-Catherine's-Monastery-view_4.png"
       ],
       "latitude": 28.5574,
       "longitude": 33.9754,
@@ -1977,7 +2036,7 @@
         "Parking"
       ],
       "paymentId": "pay_0031",
-      "price": "Free entry to Monastery (Museum paid)",
+      "price": "Free entry to Monastery",
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 1100,
@@ -2009,7 +2068,7 @@
       ]
     },
     {
-      "id": 32,
+      "id": "32",
       "name": "Montaza Palace Gardens",
       "city": "Alexandria",
       "rating": 4.5,
@@ -2019,10 +2078,10 @@
         "HISTORICAL"
       ],
       "images": [
-        "/images/montaza_gardens/main.jpg",
-        "/images/montaza_gardens/view_2.jpg",
-        "/images/montaza_gardens/view_3.jpg",
-        "/images/montaza_gardens/view_4.jpg"
+        "/images/Attractions/AlMontazah-Palace-main.png",
+        "/images/Attractions/AlMontazah-Palace-view_2.png",
+        "/images/Attractions/AlMontazah-Palace-view_3.png",
+        "/images/Attractions/AlMontazah-Palace-view_4.png"
       ],
       "latitude": 31.2828,
       "longitude": 30.0075,
@@ -2041,7 +2100,7 @@
         "Beach Access"
       ],
       "paymentId": "pay_0032",
-      "price": "Paid Entry (Garden)",
+      "price": "Paid Entry",
       "reviews": {
         "overallRating": 4.5,
         "totalReviews": 2100,
@@ -2070,10 +2129,11 @@
           "date": "June 2024",
           "comment": "Beautiful gardens for a leisurely walk. The palace is grand from the outside. Great for families and picnics."
         }
-      ]
+      ],
+      "isFeatured": true
     },
     {
-      "id": 33,
+      "id": "33",
       "name": "Qaitbay Citadel",
       "city": "Alexandria",
       "rating": 4.6,
@@ -2083,10 +2143,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/qaitbay/main.jpg",
-        "/images/qaitbay/view_2.jpg",
-        "/images/qaitbay/view_3.jpg",
-        "/images/qaitbay/view_4.jpg"
+        "/images/Attractions/Qaitbay-Citadel-main.png",
+        "/images/Attractions/Qaitbay-Citadel-view_2.png",
+        "/images/Attractions/Qaitbay-Citadel-view_3.png",
+        "/images/Attractions/Qaitbay-Citadel-view_4.png"
       ],
       "latitude": 31.2141,
       "longitude": 29.8856,
@@ -2105,7 +2165,7 @@
         "Parking (Limited)"
       ],
       "paymentId": "pay_0033",
-      "price": "180 $",
+      "price": "30$",
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 3900,
@@ -2113,7 +2173,7 @@
           "experience": 4.7,
           "staff": 4.5,
           "accessibility": 4.3,
-          "facilities": 4.0,
+          "facilities": 4,
           "valueForMoney": 4.6
         }
       },
@@ -2137,7 +2197,7 @@
       ]
     },
     {
-      "id": 34,
+      "id": "34",
       "name": "Catacombs of Kom El Shoqafa",
       "city": "Alexandria",
       "rating": 4.5,
@@ -2147,10 +2207,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/kom_el_shoqafa/main.jpg",
-        "/images/kom_el_shoqafa/view_2.jpg",
-        "/images/kom_el_shoqafa/view_3.jpg",
-        "/images/kom_el_shoqafa/view_4.jpg"
+        "/images/Attractions/Catacombs-of-Kom-ElShoqafa-main.png",
+        "/images/Attractions/Catacombs-of-Kom-ElShoqafa-view_2.png",
+        "/images/Attractions/Catacombs-of-Kom-ElShoqafa-view_3.png",
+        "/images/Attractions/Catacombs-of-Kom-ElShoqafa-view_4.png"
       ],
       "latitude": 31.1819,
       "longitude": 29.8973,
@@ -2168,7 +2228,7 @@
         "Information Signage"
       ],
       "paymentId": "pay_0034",
-      "price": "120 $",
+      "price": "50$",
       "reviews": {
         "overallRating": 4.5,
         "totalReviews": 1350,
@@ -2200,7 +2260,7 @@
       ]
     },
     {
-      "id": 35,
+      "id": "35",
       "name": "Ras El Barr",
       "city": "Damietta",
       "rating": 4.4,
@@ -2210,10 +2270,10 @@
         "BEACHES"
       ],
       "images": [
-        "/images/ras_el_barr/main.jpg",
-        "/images/ras_el_barr/view_2.jpg",
-        "/images/ras_el_barr/view_3.jpg",
-        "/images/ras_el_barr/view_4.jpg"
+        "/images/Attractions/Ras-ElBarr-main.png",
+        "/images/Attractions/Ras-ElBarr-view_2.png",
+        "/images/Attractions/Ras-ElBarr-view_3.png",
+        "/images/Attractions/Ras-ElBarr-view_4.png"
       ],
       "latitude": 31.503,
       "longitude": 31.839,
@@ -2264,7 +2324,7 @@
       ]
     },
     {
-      "id": 36,
+      "id": "36",
       "name": "Al-Azhar Park",
       "city": "Cairo",
       "rating": 4.6,
@@ -2274,10 +2334,10 @@
         "TOP PICKS"
       ],
       "images": [
-        "/images/al_azhar_park/main.jpg",
-        "/images/al_azhar_park/view_2.jpg",
-        "/images/al_azhar_park/view_3.jpg",
-        "/images/al_azhar_park/view_4.jpg"
+        "/images/Attractions/Al-Azhar-Park-main.png",
+        "/images/Attractions/Al-Azhar-Park-view_2.png",
+        "/images/Attractions/Al-Azhar-Park-view_3.png",
+        "/images/Attractions/Al-Azhar-Park-view_4.png"
       ],
       "latitude": 30.0402,
       "longitude": 31.2687,
@@ -2328,7 +2388,7 @@
       ]
     },
     {
-      "id": 37,
+      "id": "37",
       "name": "Hanging Church ",
       "city": "Cairo",
       "rating": 4.5,
@@ -2338,10 +2398,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/hanging_church/main.jpg",
-        "/images/hanging_church/view_2.jpg",
-        "/images/hanging_church/view_3.jpg",
-        "/images/hanging_church/view_4.jpg"
+        "/images/Attractions/the-Hanging-Church-main.png",
+        "/images/Attractions/the-Hanging-Church-view_2.png",
+        "/images/Attractions/the-Hanging-Church-view_3.png",
+        "/images/Attractions/the-Hanging-Church-view_4.png"
       ],
       "latitude": 30.006,
       "longitude": 31.2335,
@@ -2366,8 +2426,8 @@
         "ratingCriteria": {
           "experience": 4.6,
           "staff": 4.4,
-          "accessibility": 4.0,
-          "facilities": 4.0,
+          "accessibility": 4,
+          "facilities": 4,
           "valueForMoney": 4.5
         }
       },
@@ -2391,7 +2451,7 @@
       ]
     },
     {
-      "id": 38,
+      "id": "38",
       "name": "Mosque of Ibn Tulun",
       "city": "Cairo",
       "rating": 4.6,
@@ -2401,10 +2461,10 @@
         "CULTURE"
       ],
       "images": [
-        "/images/ibn_tulun/main.jpg",
-        "/images/ibn_tulun/view_2.jpg",
-        "/images/ibn_tulun/view_3.jpg",
-        "/images/ibn_tulun/view_4.jpg"
+        "/images/Attractions/Mosque-of-IbnTulun-main.png",
+        "/images/Attractions/Mosque-of-IbnTulun-view_2.png",
+        "/images/Attractions/Mosque-of-IbnTulun-view_3.png",
+        "/images/Attractions/Mosque-of-IbnTulun-view_4.png"
       ],
       "latitude": 30.0234,
       "longitude": 31.2372,
@@ -2430,7 +2490,7 @@
           "experience": 4.7,
           "staff": 4.5,
           "accessibility": 4.2,
-          "facilities": 4.0,
+          "facilities": 4,
           "valueForMoney": 4.5
         }
       },
@@ -2454,7 +2514,7 @@
       ]
     },
     {
-      "id": 39,
+      "id": "39",
       "name": "Wadi Degla Protectorate",
       "city": "Cairo (Maadi)",
       "rating": 4.5,
@@ -2463,10 +2523,10 @@
         "ADVENTURE"
       ],
       "images": [
-        "/images/wadi_degla/main.jpg",
-        "/images/wadi_degla/view_2.jpg",
-        "/images/wadi_degla/view_3.jpg",
-        "/images/wadi_degla/view_4.jpg"
+        "/images/Attractions/Wadi-Degla-Protectorate-main.png",
+        "/images/Attractions/Wadi-Degla-Protectorate-view_2.png",
+        "/images/Attractions/Wadi-Degla-Protectorate-view_3.png",
+        "/images/Attractions/Wadi-Degla-Protectorate-view_4.png"
       ],
       "latitude": 29.95,
       "longitude": 31.35,
@@ -2517,7 +2577,7 @@
       ]
     },
     {
-      "id": 40,
+      "id": "40",
       "name": "Al-Fustat Traditional Pottery",
       "city": "Cairo",
       "rating": 4.4,
@@ -2526,10 +2586,10 @@
         "SHOPPING"
       ],
       "images": [
-        "/images/fustat_pottery/main.jpg",
-        "/images/fustat_pottery/view_2.jpg",
-        "/images/fustat_pottery/view_3.jpg",
-        "/images/fustat_pottery/view_4.jpg"
+        "/images/Attractions/traditional-from-Al-Fustat-main.png",
+        "/images/Attractions/fustat_pottery/view_2.jpg",
+        "/images/Attractions/fustat_pottery/view_3.jpg",
+        "/images/Attractions/fustat_pottery/view_4.jpg"
       ],
       "latitude": 30.009,
       "longitude": 31.2335,
@@ -2554,7 +2614,7 @@
         "ratingCriteria": {
           "experience": 4.5,
           "staff": 4.3,
-          "accessibility": 4.0,
+          "accessibility": 4,
           "facilities": 3.8,
           "valueForMoney": 4.6
         }
@@ -2579,7 +2639,7 @@
       ]
     },
     {
-      "id": 41,
+      "id": "41",
       "name": "Cave Church (St. Simon the Tanner)",
       "city": "Cairo (Mokattam)",
       "rating": 4.7,
@@ -2642,7 +2702,7 @@
       ]
     },
     {
-      "id": 42,
+      "id": "42",
       "name": "Wadi Al-Hitan",
       "city": "Faiyum",
       "rating": 4.8,
@@ -2706,7 +2766,7 @@
       ]
     },
     {
-      "id": 43,
+      "id": "43",
       "name": "Djoser Step Pyramid",
       "city": "Giza",
       "rating": 4.6,
@@ -2769,7 +2829,7 @@
       ]
     },
     {
-      "id": 44,
+      "id": "44",
       "name": "Sharm El Sheikh Beaches",
       "city": "Sharm El Sheikh",
       "rating": 4.7,
@@ -2834,7 +2894,7 @@
       ]
     },
     {
-      "id": 45,
+      "id": "45",
       "name": "Temple of Seti I (Abydos)",
       "city": "Sohag",
       "rating": 4.5,
@@ -2897,7 +2957,7 @@
       ]
     },
     {
-      "id": 46,
+      "id": "46",
       "name": "White and Black Desert Safari",
       "city": "Bahariya Oasis",
       "rating": 4.8,
@@ -2936,7 +2996,7 @@
         "ratingCriteria": {
           "experience": 4.9,
           "staff": 4.8,
-          "accessibility": 3.0,
+          "accessibility": 3,
           "facilities": 2.8,
           "valueForMoney": 4.8
         }
@@ -2961,7 +3021,7 @@
       ]
     },
     {
-      "id": 47,
+      "id": "47",
       "name": "Dahab Blue Hole",
       "city": "Dahab",
       "rating": 4.7,
@@ -3000,7 +3060,7 @@
         "ratingCriteria": {
           "experience": 4.8,
           "staff": 4.6,
-          "accessibility": 4.0,
+          "accessibility": 4,
           "facilities": 3.5,
           "valueForMoney": 4.7
         }
@@ -3025,7 +3085,7 @@
       ]
     },
     {
-      "id": 48,
+      "id": "48",
       "name": "Hurghada Marina",
       "city": "Hurghada",
       "rating": 4.5,
@@ -3089,7 +3149,7 @@
       ]
     },
     {
-      "id": 49,
+      "id": "49",
       "name": "Mahmoud Said Museum",
       "city": "Alexandria",
       "rating": 4.4,
@@ -3127,7 +3187,7 @@
           "experience": 4.5,
           "staff": 4.4,
           "accessibility": 4.2,
-          "facilities": 4.0,
+          "facilities": 4,
           "valueForMoney": 4.4
         }
       },
@@ -3151,7 +3211,7 @@
       ]
     },
     {
-      "id": 50,
+      "id": "50",
       "name": "Wadi El Gemal National Park",
       "city": "Marsa Alam",
       "rating": 4.6,
@@ -3215,7 +3275,7 @@
       ]
     },
     {
-      "id": 51,
+      "id": "51",
       "name": "Aswan High Dam",
       "city": "Aswan",
       "rating": 4.3,
@@ -3277,7 +3337,7 @@
       ]
     },
     {
-      "id": 52,
+      "id": "52",
       "name": "Unfinished Obelisk (Aswan)",
       "city": "Aswan",
       "rating": 4.4,
@@ -3316,7 +3376,7 @@
           "experience": 4.5,
           "staff": 4.4,
           "accessibility": 4.3,
-          "facilities": 4.0,
+          "facilities": 4,
           "valueForMoney": 4.4
         }
       },
@@ -3340,7 +3400,7 @@
       ]
     },
     {
-      "id": 53,
+      "id": "53",
       "name": "Gabal Al-Dukhan",
       "city": "Red Sea Mountains",
       "rating": 4.2,
@@ -3377,7 +3437,7 @@
         "ratingCriteria": {
           "experience": 4.3,
           "staff": 4.1,
-          "accessibility": 3.0,
+          "accessibility": 3,
           "facilities": 2.5,
           "valueForMoney": 4.3
         }
@@ -3402,7 +3462,7 @@
       ]
     },
     {
-      "id": 54,
+      "id": "54",
       "name": "Gebel Silsila",
       "city": "Kom Ombo",
       "rating": 4.4,
@@ -3440,7 +3500,7 @@
           "experience": 4.5,
           "staff": 4.4,
           "accessibility": 3.5,
-          "facilities": 3.0,
+          "facilities": 3,
           "valueForMoney": 4.5
         }
       },
@@ -3464,7 +3524,7 @@
       ]
     },
     {
-      "id": 55,
+      "id": "55",
       "name": "Dendera Temple Complex",
       "city": "Qena",
       "rating": 4.7,
@@ -3504,7 +3564,7 @@
           "experience": 4.8,
           "staff": 4.6,
           "accessibility": 4.3,
-          "facilities": 4.0,
+          "facilities": 4,
           "valueForMoney": 4.7
         }
       },
@@ -3528,7 +3588,7 @@
       ]
     },
     {
-      "id": 56,
+      "id": "56",
       "name": "Bawiti (Bahariya Oasis)",
       "city": "Bahariya Oasis",
       "rating": 4.3,
@@ -3592,7 +3652,7 @@
       ]
     },
     {
-      "id": 57,
+      "id": "57",
       "name": "Marsa Matrouh Beach",
       "city": "Marsa Matrouh",
       "rating": 4.6,
@@ -3656,7 +3716,7 @@
       ]
     },
     {
-      "id": 58,
+      "id": "58",
       "name": "Abydos Temple Complex",
       "city": "Sohag",
       "rating": 4.5,
@@ -3719,7 +3779,7 @@
       ]
     },
     {
-      "id": 59,
+      "id": "59",
       "name": "Baron Empain Palace",
       "city": "Cairo (Heliopolis)",
       "rating": 4.5,
@@ -3783,7 +3843,7 @@
       ]
     },
     {
-      "id": 60,
+      "id": "60",
       "name": "El Gouna Beaches",
       "city": "El Gouna",
       "rating": 4.7,
@@ -3849,7 +3909,7 @@
       ]
     },
     {
-      "id": 61,
+      "id": "61",
       "name": "Al-Qa'id Ibrahim Mosque",
       "city": "Alexandria",
       "rating": 4.7,
@@ -3898,7 +3958,7 @@
           "id": 121,
           "userName": "Karim M.",
           "userImage": "/images/users/user_m_121.jpg",
-          "rating": 5.0,
+          "rating": 5,
           "date": "December 2024",
           "comment": "مسجد جميل جداً، وموقعه مثالي. الأجواء فيه روحانية خاصة في صلاة الجمعة. معلم مهم في الإسكندرية."
         },
@@ -3913,10 +3973,10 @@
       ]
     },
     {
-      "id": 62,
+      "id": "62",
       "name": "Ain Al-Sira Lake",
       "city": "Cairo",
-      "rating": 4.0,
+      "rating": 4,
       "categories": [
         "NATURE",
         "FAMILY"
@@ -3946,14 +4006,14 @@
       "paymentId": "pay_0062",
       "price": "Low Entry Fee",
       "reviews": {
-        "overallRating": 4.0,
+        "overallRating": 4,
         "totalReviews": 500,
         "ratingCriteria": {
           "experience": 4.1,
-          "staff": 4.0,
+          "staff": 4,
           "accessibility": 4.2,
           "facilities": 4.1,
-          "valueForMoney": 4.0
+          "valueForMoney": 4
         }
       },
       "userReviews": [
@@ -3969,14 +4029,14 @@
           "id": 124,
           "userName": "Peter G.",
           "userImage": "/images/users/user_m_124.jpg",
-          "rating": 4.0,
+          "rating": 4,
           "date": "September 2024",
           "comment": "Nice public space, clean and pleasant. Good place to sit down after visiting the NMEC. Still developing but shows promise."
         }
       ]
     },
     {
-      "id": 63,
+      "id": "63",
       "name": "The Great Museum",
       "city": "Giza",
       "rating": 4.9,
@@ -4027,7 +4087,7 @@
           "id": 125,
           "userName": "Amira N.",
           "userImage": "/images/users/user_f_125.jpg",
-          "rating": 5.0,
+          "rating": 5,
           "date": "December 2024",
           "comment": "The world has been waiting for this museum! The Ramesses II statue and the initial halls are amazing. A revolutionary experience for Egyptian history."
         },
@@ -4042,7 +4102,7 @@
       ]
     },
     {
-      "id": 64,
+      "id": "64",
       "name": "Abdeen Palace Museum",
       "city": "Cairo",
       "rating": 4.4,
@@ -4105,7 +4165,7 @@
       ]
     },
     {
-      "id": 65,
+      "id": "65",
       "name": "Tanis (San al-Hagar)",
       "city": "Sharqia",
       "rating": 4.2,
@@ -4166,7 +4226,7 @@
       ]
     },
     {
-      "id": 66,
+      "id": "66",
       "name": "Wadi Degla National Park (Sharm)",
       "city": "Sharm El Sheikh",
       "rating": 4.4,
@@ -4204,7 +4264,7 @@
           "experience": 4.5,
           "staff": 4.3,
           "accessibility": 3.5,
-          "facilities": 3.0,
+          "facilities": 3,
           "valueForMoney": 4.4
         }
       },
@@ -4228,7 +4288,7 @@
       ]
     },
     {
-      "id": 67,
+      "id": "67",
       "name": "Al-Bahr Al-A'zam (The Great Sea)",
       "city": "Giza",
       "rating": 4.1,
@@ -4264,7 +4324,7 @@
         "totalReviews": 1200,
         "ratingCriteria": {
           "experience": 4.2,
-          "staff": 4.0,
+          "staff": 4,
           "accessibility": 4.1,
           "facilities": 3.8,
           "valueForMoney": 4.2
@@ -4290,7 +4350,7 @@
       ]
     },
     {
-      "id": 68,
+      "id": "68",
       "name": "Manial Palace Museum",
       "city": "Cairo",
       "rating": 4.5,
@@ -4354,7 +4414,7 @@
       ]
     },
     {
-      "id": 69,
+      "id": "69",
       "name": "Barada",
       "city": "Alexandria",
       "rating": 4.3,
@@ -4416,7 +4476,7 @@
       ]
     },
     {
-      "id": 70,
+      "id": "70",
       "name": "Aboukir (Abu Qir)",
       "city": "Alexandria",
       "rating": 4.1,
@@ -4453,7 +4513,7 @@
         "ratingCriteria": {
           "experience": 4.2,
           "staff": 4.1,
-          "accessibility": 4.0,
+          "accessibility": 4,
           "facilities": 3.8,
           "valueForMoney": 4.2
         }
@@ -4478,7 +4538,7 @@
       ]
     },
     {
-      "id": 71,
+      "id": "71",
       "name": "Dahab Canyons",
       "city": "Dahab",
       "rating": 4.6,
@@ -4541,7 +4601,7 @@
       ]
     },
     {
-      "id": 72,
+      "id": "72",
       "name": "Ras Abu Galum Protectorate",
       "city": "Dahab",
       "rating": 4.6,
@@ -4579,7 +4639,7 @@
         "ratingCriteria": {
           "experience": 4.7,
           "staff": 4.6,
-          "accessibility": 3.0,
+          "accessibility": 3,
           "facilities": 2.8,
           "valueForMoney": 4.7
         }
@@ -4604,7 +4664,7 @@
       ]
     },
     {
-      "id": 73,
+      "id": "73",
       "name": "Monastery of Saint Anthony",
       "city": "Red Sea Governorate",
       "rating": 4.4,
@@ -4667,7 +4727,7 @@
       ]
     },
     {
-      "id": 74,
+      "id": "74",
       "name": "Deir el-Medina",
       "city": "Luxor",
       "rating": 4.5,
@@ -4730,7 +4790,7 @@
       ]
     },
     {
-      "id": 75,
+      "id": "75",
       "name": "Baron Empain Church",
       "city": "Cairo (Heliopolis)",
       "rating": 4.3,
@@ -4768,7 +4828,7 @@
           "experience": 4.4,
           "staff": 4.3,
           "accessibility": 4.2,
-          "facilities": 4.0,
+          "facilities": 4,
           "valueForMoney": 4.3
         }
       },
@@ -4792,7 +4852,7 @@
       ]
     },
     {
-      "id": 76,
+      "id": "76",
       "name": "Tiran Island",
       "city": "Sharm El Sheikh",
       "rating": 4.7,
@@ -4829,7 +4889,7 @@
         "ratingCriteria": {
           "experience": 4.8,
           "staff": 4.7,
-          "accessibility": 4.0,
+          "accessibility": 4,
           "facilities": 3.5,
           "valueForMoney": 4.7
         }
@@ -4854,7 +4914,7 @@
       ]
     },
     {
-      "id": 77,
+      "id": "77",
       "name": "Wadi Degla National Park (Hurghada)",
       "city": "Hurghada",
       "rating": 4.3,
@@ -4916,7 +4976,7 @@
       ]
     },
     {
-      "id": 78,
+      "id": "78",
       "name": "Saint Paul Monastery",
       "city": "Red Sea Governorate",
       "rating": 4.4,
@@ -4981,784 +5041,1513 @@
   ],
   "hotels": [
     {
-      "id": "h1",
-      "name": "Almasa Hotel",
-      "city": "Nasr City, Cairo",
+      "id": "1",
+      "name": "Marriott Mena House",
+      "city": "Giza",
       "rating": 4.8,
-      "reviews": 350,
-      "price": 120,
+      "overview": "Marriott Mena House is a historic luxury hotel located at the foot of the Great Pyramids of Giza. Built in 1869 as a royal hunting lodge, it offers unparalleled views of the ancient wonders, lush gardens, and world-class amenities. The hotel combines historic charm with modern luxury, featuring elegant rooms, multiple restaurants, a spa, and an outdoor pool.",
       "images": [
-        "/images/hotels/10.jpg",
-        "/images/hotels/almasa 1.jpg",
-        "/images/hotels/almasa 2.jpg",
-        "/images/hotels/almasa 3.jpg"
+        "/public/images/Hotels/marriott-mena-house-main.jpg",
+        "/public/images/Hotels/marriott-mena-house-view_2.jpg",
+        "/public/images/Hotels/marriott-mena-house-view_3.jpg",
+        "/public/images/Hotels/marriott-mena-house-view_4.jpg"
       ],
-      "description": "Al Masah Hotel and Spa features a terrace with a swimming pool. In the green area of Nasr City, it includes 5 restaurants and a spa center. All the elegant rooms have a balcony.",
-      "facilities": [
-        "Free Wifi",
-        "Restaurant",
-        "Swimming Pool",
-        "Parking",
-        "Spa",
-        "Gym"
+      "latitude": 29.9792,
+      "longitude": 31.1312,
+      "highlights": [
+        "Direct view of the Pyramids of Giza",
+        "Historic palace hotel dating back to 1869",
+        "Lush gardens and outdoor pool",
+        "Multiple dining options including Indian and Italian"
       ],
-      "location": {
-        "lat": 30.0733,
-        "lng": 31.3456
-      },
-      "rooms": [
+      "amenities": [
+        "Outdoor Swimming Pool",
+        "Spa and Wellness Center",
+        "Fitness Center",
+        "Multiple Restaurants and Bars",
+        "Free Wi-Fi",
+        "24-Hour Front Desk",
+        "Concierge Service",
+        "Airport Shuttle",
+        "Valet Parking"
+      ],
+      "roomAmenities": [
+        "Air Conditioning",
+        "Flat-screen TV",
+        "Mini Bar",
+        "Private Bathroom with Luxury Toiletries",
+        "Room Service",
+        "Safe",
+        "Work Desk",
+        "Balcony (select rooms)"
+      ],
+      "userReviews": [
         {
-          "type": "Standard Room",
-          "price": 120,
-          "available": 5
+          "id": 1,
+          "userName": "Sarah Mitchell",
+          "userImage": "/images/users/user_f_1.jpg",
+          "rating": 4.9,
+          "date": "December 2024",
+          "comment": "Waking up to the view of the pyramids was surreal! The hotel staff were exceptionally helpful and the breakfast buffet was outstanding."
         },
         {
-          "type": "Deluxe Suite",
-          "price": 180,
-          "available": 3
-        },
-        {
-          "type": "Presidential Suite",
-          "price": 350,
-          "available": 2
+          "id": 2,
+          "userName": "Ahmed Khalil",
+          "userImage": "/images/users/user_m_2.jpg",
+          "rating": 4.7,
+          "date": "November 2024",
+          "comment": "A wonderful historic hotel with an unforgettable view of the pyramids. The service is excellent and the gardens are very beautiful."
         }
-      ]
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 9875,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "staff": 4.5,
+          "accessibility": 4.2,
+          "facilities": 4,
+          "valueForMoney": 4.6
+        }
+      },
+      "nearbyLocations": [
+        "Great Pyramids of Giza - 0.5 km",
+        "The Great Sphinx - 1.2 km",
+        "Egyptian Museum - 12 km"
+      ],
+      "availability": {
+        "availableRooms": 28,
+        "totalRooms": 120
+      },
+      "pricePerNight": 185,
+      "featured": true,
+      "status": "Active",
+      "isFeatured": true
     },
     {
-      "id": "h2",
-      "name": "Hilton Hotel",
-      "city": "Heliopolis, Cairo",
-      "rating": 4.6,
-      "reviews": 320,
-      "price": 120,
-      "images": [
-        "/images/hotels/hilton main.jpg",
-        "/images/hotels/hilton 1.jpg",
-        "/images/hotels/hilton 2.jpg",
-        "/images/hotels/hilton 3.jpg"
-      ],
-      "description": "Enjoy a luxurious stay at the Hilton Heliopolis, featuring world-class amenities, multiple pools, and exquisite dining options in the heart of Cairo.",
-      "facilities": [
-        "Free Wifi",
-        "Restaurant",
-        "Pool",
-        "Spa",
-        "Bar"
-      ],
-      "location": {
-        "lat": 30.1123,
-        "lng": 31.3987
-      },
-      "rooms": [
-        {
-          "type": "Guest Room",
-          "price": 120,
-          "available": 10
-        },
-        {
-          "type": "Executive Room",
-          "price": 200,
-          "available": 4
-        }
-      ]
-    },
-    {
-      "id": "h3",
-      "name": "Cairo Marriott Hotel",
-      "city": "Zamalek, Cairo",
-      "rating": 4.5,
-      "reviews": 240,
-      "price": 120,
-      "images": [
-        "/images/hotels/marriott main.jpg",
-        "/images/hotels/marriott 1.jpg",
-        "/images/hotels/marriott 2.jpg",
-        "/images/hotels/marriott 3.jpg"
-      ],
-      "description": "Experience Royal courtesy at the Cairo Marriott Hotel & Omar Khayyam Casino. Located in the lively Zamalek district, surrounded by 6 acres of palace gardens.",
-      "facilities": [
-        "Free Wifi",
-        "Restaurant",
-        "Casino",
-        "Pool",
-        "Gym"
-      ],
-      "location": {
-        "lat": 30.0567,
-        "lng": 31.2256
-      },
-      "rooms": [
-        {
-          "type": "Deluxe Room",
-          "price": 120,
-          "available": 8
-        },
-        {
-          "type": "Garden Wing",
-          "price": 160,
-          "available": 5
-        }
-      ]
-    },
-    {
-      "id": "h4",
-      "name": "Sheraton Cairo",
-      "city": "Dokki, Cairo",
-      "rating": 4.3,
-      "reviews": 220,
-      "price": 120,
-      "images": [
-        "/images/hotels/sheraton main.jpg",
-        "/images/hotels/sheraton 1.jpg",
-        "/images/hotels/sheraton 2.jpg",
-        "/images/hotels/sheraton 3.jpg"
-      ],
-      "description": "Rising on the banks of the Nile, Sheraton Cairo Hotel & Casino offers effortless service and modern accommodations with stunning views of the river.",
-      "facilities": [
-        "Free Wifi",
-        "Restaurant",
-        "Pool",
-        "Spa",
-        "Gym"
-      ],
-      "location": {
-        "lat": 30.0389,
-        "lng": 31.2201
-      },
-      "rooms": [
-        {
-          "type": "Standard Room",
-          "price": 120,
-          "available": 12
-        },
-        {
-          "type": "Club Room",
-          "price": 190,
-          "available": 6
-        }
-      ]
-    },
-    {
-      "id": "h5",
-      "name": "Four Seasons at Nile Plaza",
-      "city": "Garden City, Cairo",
+      "id": "2",
+      "name": "Four Seasons Hotel Cairo at Nile Plaza",
+      "city": "Cairo",
       "rating": 4.9,
-      "reviews": 500,
-      "price": 350,
       "images": [
-        "/images/hotels/four season main.jpg",
-        "/images/hotels/four season 1.jpg",
-        "/images/hotels/four season 2.jpg",
-        "/images/hotels/four season 3.jpg"
+        "/public/images/Hotels/four-seasons-nile-main.jpg",
+        "/public/images/Hotels/four-seasons-nile-view_2.jpg",
+        "/public/images/Hotels/four-seasons-nile-view_3.jpg",
+        "/public/images/Hotels/four-seasons-nile-view_4.jpg"
       ],
-      "description": "In the heart of Cairo on the banks of the Nile, Four Seasons Hotel Cairo at Nile Plaza opens the door to discovering Egypt’s ancient mysteries and modern excitement.",
-      "facilities": [
-        "Free Wifi",
-        "Restaurant",
-        "Pool",
-        "Spa",
-        "Gym",
-        "Business Center"
+      "latitude": 30.0444,
+      "longitude": 31.2357,
+      "highlights": [
+        "Prime location on the Nile with panoramic river views",
+        "Rooftop pool and bar",
+        "Award-winning spa",
+        "Walking distance to Egyptian Museum"
       ],
-      "location": {
-        "lat": 30.0365,
-        "lng": 31.2312
-      },
-      "rooms": [
+      "amenities": [
+        "Rooftop Swimming Pool",
+        "Full-Service Spa",
+        "Fitness Center",
+        "7 Restaurants and Bars",
+        "Free Wi-Fi",
+        "Business Center",
+        "24-Hour Room Service",
+        "Concierge Service",
+        "Valet Parking"
+      ],
+      "roomAmenities": [
+        "Air Conditioning",
+        "Smart TV",
+        "Nespresso Machine",
+        "Marble Bathroom with Rain Shower",
+        "Luxury Linens",
+        "Mini Bar",
+        "Safe",
+        "Work Desk",
+        "Floor-to-Ceiling Windows"
+      ],
+      "userReviews": [
         {
-          "type": "Superior Room",
-          "price": 350,
-          "available": 5
+          "id": 3,
+          "userName": "Mohamed Elsayed",
+          "userImage": "/images/users/user_m_3.jpg",
+          "rating": 5,
+          "date": "December 2024",
+          "comment": "The best hotel in Cairo! The service is world-class and the Nile view is imaginary. The restaurants are diverse and excellent."
         },
         {
-          "type": "Nile View Suite",
-          "price": 600,
-          "available": 2
+          "id": 4,
+          "userName": "Emma Thompson",
+          "userImage": "/images/users/user_f_4.jpg",
+          "rating": 4.8,
+          "date": "November 2024",
+          "comment": "Absolutely luxurious! The rooftop pool has stunning Nile views. Perfect location for exploring Cairo."
         }
-      ]
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 9875,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "staff": 4.5,
+          "accessibility": 4.2,
+          "facilities": 4,
+          "valueForMoney": 4.6
+        }
+      },
+      "nearbyLocations": [
+        "Egyptian Museum - 1.5 km",
+        "Khan El Khalili Bazaar - 3 km",
+        "Tahrir Square - 1 km"
+      ],
+      "availability": {
+        "availableRooms": 42,
+        "totalRooms": 365
+      },
+      "pricePerNight": 295,
+      "featured": true,
+      "status": "Active"
     },
     {
-      "id": "h6",
-      "name": "Kempinski Nile Hotel",
-      "city": "Garden City, Cairo",
-      "rating": 4.7,
-      "reviews": 310,
-      "price": 180,
+      "id": "3",
+      "name": "Sofitel Legend Old Cataract Aswan",
+      "city": "Aswan",
+      "rating": 4.8,
       "images": [
-        "/images/hotels/kempinski_main.jpg",
-        "/images/hotels/kempinski_1.jpg"
+        "/public/images/Hotels/old-cataract-main.jpg",
+        "/public/images/Hotels/old-cataract-view_2.jpg",
+        "/public/images/Hotels/old-cataract-view_3.jpg",
+        "/public/images/Hotels/old-cataract-view_4.jpg"
       ],
-      "description": "Kempinski Nile Hotel Garden City Cairo offers guests a boutique five-star experience on the banks of the Nile River.",
-      "facilities": [
-        "Free Wifi",
-        "Restaurant",
-        "Pool",
-        "Spa",
-        "Rooftop Bar"
+      "latitude": 24.0875,
+      "longitude": 32.8842,
+      "highlights": [
+        "Historic Victorian hotel on the Nile",
+        "Featured in Agatha Christie's 'Death on the Nile'",
+        "Stunning views of Elephantine Island",
+        "Luxurious spa and infinity pool"
       ],
-      "location": {
-        "lat": 30.038,
-        "lng": 31.233
-      },
-      "rooms": [
+      "amenities": [
+        "Infinity Pool",
+        "Luxury Spa",
+        "Fitness Center",
+        "Multiple Restaurants",
+        "Afternoon Tea Service",
+        "Free Wi-Fi",
+        "24-Hour Room Service",
+        "Concierge Service",
+        "Nile Cruise Booking"
+      ],
+      "roomAmenities": [
+        "Air Conditioning",
+        "Flat-screen TV",
+        "Mini Bar",
+        "Luxury Bathroom with Bathtub",
+        "Premium Bedding",
+        "Safe",
+        "Work Desk",
+        "Nile View Balcony"
+      ],
+      "userReviews": [
         {
-          "type": "Madina Room",
-          "price": 180,
-          "available": 7
+          "id": 5,
+          "userName": "Layla Hassan",
+          "userImage": "/images/users/user_f_5.jpg",
+          "rating": 4.9,
+          "date": "December 2024",
+          "comment": "A legendary hotel in every sense of the word! History and luxury in one place. The Nile view from the room was charming."
         },
         {
-          "type": "Nile Deluxe",
-          "price": 250,
-          "available": 4
+          "id": 6,
+          "userName": "James Anderson",
+          "userImage": "/images/users/user_m_6.jpg",
+          "rating": 4.8,
+          "date": "November 2024",
+          "comment": "A true gem! The history, elegance, and service are unparalleled. Loved the afternoon tea overlooking the Nile."
         }
-      ]
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 9875,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "staff": 4.5,
+          "accessibility": 4.2,
+          "facilities": 4,
+          "valueForMoney": 4.6
+        }
+      },
+      "nearbyLocations": [
+        "Philae Temple - 8 km",
+        "Aswan High Dam - 12 km",
+        "Nubian Museum - 2 km"
+      ],
+      "availability": {
+        "availableRooms": 18,
+        "totalRooms": 138
+      },
+      "pricePerNight": 245,
+      "featured": true,
+      "status": "Active"
+    },
+    {
+      "id": "4",
+      "name": "Steigenberger Hotel El Tahrir",
+      "city": "Cairo",
+      "rating": 4.5,
+      "images": [
+        "/public/images/Hotels/steigenberger-tahrir-main.jpg",
+        "/public/images/Hotels/steigenberger-tahrir-view_2.jpg",
+        "/public/images/Hotels/steigenberger-tahrir-view_3.jpg",
+        "/public/images/Hotels/steigenberger-tahrir-view_4.jpg"
+      ],
+      "latitude": 30.0478,
+      "longitude": 31.2342,
+      "highlights": [
+        "Adjacent to the Egyptian Museum",
+        "Views of Tahrir Square",
+        "Rooftop restaurant with city views",
+        "Business-friendly amenities"
+      ],
+      "amenities": [
+        "Rooftop Pool",
+        "Fitness Center",
+        "3 Restaurants",
+        "Business Center",
+        "Free Wi-Fi",
+        "Meeting Rooms",
+        "24-Hour Front Desk",
+        "Laundry Service",
+        "Airport Shuttle"
+      ],
+      "roomAmenities": [
+        "Air Conditioning",
+        "LCD TV",
+        "Mini Bar",
+        "Private Bathroom",
+        "Room Service",
+        "Safe",
+        "Work Desk",
+        "City View Windows"
+      ],
+      "userReviews": [
+        {
+          "id": 7,
+          "userName": "Youssef Ibrahim",
+          "userImage": "/images/users/user_m_7.jpg",
+          "rating": 4.6,
+          "date": "December 2024",
+          "comment": "Excellent location next to the Egyptian Museum. The hotel is clean and the staff are very helpful. The price is reasonable compared to the services."
+        },
+        {
+          "id": 8,
+          "userName": "Lisa Chen",
+          "userImage": "/images/users/user_f_8.jpg",
+          "rating": 4.5,
+          "date": "November 2024",
+          "comment": "Perfect location for museum visits. Clean, comfortable rooms and helpful staff. Great value for money."
+        }
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 9875,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "staff": 4.5,
+          "accessibility": 4.2,
+          "facilities": 4,
+          "valueForMoney": 4.6
+        }
+      },
+      "nearbyLocations": [
+        "Egyptian Museum - 0.2 km",
+        "Tahrir Square - 0.1 km",
+        "Khan El Khalili - 2.5 km"
+      ],
+      "availability": {
+        "availableRooms": 35,
+        "totalRooms": 295
+      },
+      "pricePerNight": 95,
+      "featured": false,
+      "status": "Pending"
+    },
+    {
+      "id": "5",
+      "name": "Hilton Luxor Resort & Spa",
+      "city": "Luxor",
+      "rating": 4.6,
+      "images": [
+        "/public/images/Hotels/hilton-luxor-main.jpg",
+        "/public/images/Hotels/hilton-luxor-view_2.jpg",
+        "/public/images/Hotels/hilton-luxor-view_3.jpg",
+        "/public/images/Hotels/hilton-luxor-view_4.jpg"
+      ],
+      "latitude": 25.6984,
+      "longitude": 32.6353,
+      "highlights": [
+        "Direct Nile views from all rooms",
+        "Walking distance to Luxor Temple",
+        "Full-service spa",
+        "Multiple pools including infinity pool"
+      ],
+      "amenities": [
+        "3 Swimming Pools",
+        "Spa and Wellness Center",
+        "Fitness Center",
+        "5 Restaurants and Bars",
+        "Free Wi-Fi",
+        "Tennis Court",
+        "Kids Club",
+        "24-Hour Room Service",
+        "Free Parking"
+      ],
+      "roomAmenities": [
+        "Air Conditioning",
+        "Satellite TV",
+        "Mini Bar",
+        "Bathroom with Shower/Tub",
+        "Balcony with Nile View",
+        "Safe",
+        "Coffee Maker",
+        "Work Desk"
+      ],
+      "userReviews": [
+        {
+          "id": 9,
+          "userName": "Nadia Farouk",
+          "userImage": "/images/users/user_f_9.jpg",
+          "rating": 4.7,
+          "date": "December 2024",
+          "comment": "A wonderful hotel on the Nile! The rooms are spacious and the view is beautiful. Close to Luxor Temple and everything is easily accessible."
+        },
+        {
+          "id": 10,
+          "userName": "Robert Williams",
+          "userImage": "/images/users/user_m_10.jpg",
+          "rating": 4.6,
+          "date": "November 2024",
+          "comment": "Great resort with excellent facilities. The pool area is beautiful and the location is perfect for exploring Luxor."
+        }
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 9875,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "staff": 4.5,
+          "accessibility": 4.2,
+          "facilities": 4,
+          "valueForMoney": 4.6
+        }
+      },
+      "nearbyLocations": [
+        "Luxor Temple - 0.8 km",
+        "Karnak Temple - 3 km",
+        "Valley of the Kings - 6 km"
+      ],
+      "availability": {
+        "availableRooms": 52,
+        "totalRooms": 236
+      },
+      "pricePerNight": 125,
+      "featured": true,
+      "status": "Inactive"
+    },
+    {
+      "id": "6",
+      "name": "Rixos Sharm El Sheikh",
+      "city": "Sharm El Sheikh",
+      "rating": 4.7,
+      "images": [
+        "/public/images/Hotels/rixos-sharm-main.jpg",
+        "/public/images/Hotels/rixos-sharm-view_2.jpg",
+        "/public/images/Hotels/rixos-sharm-view_3.jpg",
+        "/public/images/Hotels/rixos-sharm-view_4.jpg"
+      ],
+      "latitude": 27.9158,
+      "longitude": 34.3298,
+      "highlights": [
+        "All-inclusive luxury resort",
+        "Private beach with coral reef",
+        "World-class diving center",
+        "Entertainment and kids activities"
+      ],
+      "amenities": [
+        "Private Beach",
+        "7 Swimming Pools",
+        "Aqua Park",
+        "Spa and Wellness Center",
+        "Diving Center",
+        "12 Restaurants and Bars",
+        "Kids Club",
+        "Entertainment Program",
+        "Free Wi-Fi",
+        "Free Parking"
+      ],
+      "roomAmenities": [
+        "Air Conditioning",
+        "LCD TV",
+        "Mini Bar (stocked daily)",
+        "Bathroom with Rain Shower",
+        "Balcony or Terrace",
+        "Safe",
+        "Coffee/Tea Facilities",
+        "Bathrobes and Slippers"
+      ],
+      "userReviews": [
+        {
+          "id": 11,
+          "userName": "Maha Salah",
+          "userImage": "/images/users/user_f_11.jpg",
+          "rating": 4.8,
+          "date": "December 2024",
+          "comment": "An integrated and excellent resort for families! The food is varied and delicious, and the beach is very clean. The children enjoyed the aqua park."
+        },
+        {
+          "id": 12,
+          "userName": "Thomas Mueller",
+          "userImage": "/images/users/user_m_12.jpg",
+          "rating": 4.7,
+          "date": "November 2024",
+          "comment": "Fantastic all-inclusive resort! Great food variety, beautiful beach, and plenty of activities. Perfect for families."
+        }
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 9875,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "staff": 4.5,
+          "accessibility": 4.2,
+          "facilities": 4,
+          "valueForMoney": 4.6
+        }
+      },
+      "nearbyLocations": [
+        "Naama Bay - 5 km",
+        "Ras Mohammed National Park - 18 km",
+        "Sharm El Sheikh Airport - 12 km"
+      ],
+      "availability": {
+        "availableRooms": 78,
+        "totalRooms": 420
+      },
+      "pricePerNight": 165,
+      "featured": true,
+      "status": "Active"
+    },
+    {
+      "id": "7",
+      "name": "Fairmont Nile City",
+      "city": "Cairo",
+      "rating": 4.7,
+      "images": [
+        "/public/images/Hotels/fairmont-nile-city-main.jpg",
+        "/public/images/Hotels/fairmont-nile-city-view_2.jpg",
+        "/public/images/Hotels/fairmont-nile-city-view_3.jpg",
+        "/public/images/Hotels/fairmont-nile-city-view_4.jpg"
+      ],
+      "latitude": 30.0556,
+      "longitude": 31.2239,
+      "highlights": [
+        "Modern luxury tower on the Nile",
+        "Connected to Nile City shopping mall",
+        "Rooftop restaurant and bar",
+        "Executive club lounge"
+      ],
+      "amenities": [
+        "Outdoor Pool",
+        "Spa and Wellness Center",
+        "Fitness Center",
+        "6 Restaurants and Bars",
+        "Connected Shopping Mall",
+        "Business Center",
+        "Free Wi-Fi",
+        "24-Hour Room Service",
+        "Valet Parking"
+      ],
+      "roomAmenities": [
+        "Air Conditioning",
+        "Smart TV",
+        "Mini Bar",
+        "Marble Bathroom with Separate Shower",
+        "Premium Bedding",
+        "Safe",
+        "Nespresso Machine",
+        "Work Desk",
+        "Panoramic Windows"
+      ],
+      "userReviews": [
+        {
+          "id": 13,
+          "userName": "Karim Nasser",
+          "userImage": "/images/users/user_m_13.jpg",
+          "rating": 4.8,
+          "date": "December 2024",
+          "comment": "A modern and elegant hotel in an excellent location. The mall is directly connected to the hotel, which is very convenient. The view is wonderful."
+        },
+        {
+          "id": 14,
+          "userName": "Anna Kowalski",
+          "userImage": "/images/users/user_f_14.jpg",
+          "rating": 4.7,
+          "date": "November 2024",
+          "comment": "Sleek and modern hotel with excellent service. Love the convenience of the attached mall. Great Nile views!"
+        }
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 9875,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "staff": 4.5,
+          "accessibility": 4.2,
+          "facilities": 4,
+          "valueForMoney": 4.6
+        }
+      },
+      "nearbyLocations": [
+        "Cairo Tower - 2 km",
+        "Egyptian Museum - 3.5 km",
+        "Zamalek Island - 1 km"
+      ],
+      "availability": {
+        "availableRooms": 45,
+        "totalRooms": 540
+      },
+      "pricePerNight": 215,
+      "featured": true,
+      "status": "Active"
+    },
+    {
+      "id": "8",
+      "name": "InterContinental Citystars Cairo",
+      "city": "Cairo",
+      "rating": 4.6,
+      "images": [
+        "/public/images/Hotels/intercontinental-citystars-main.jpg",
+        "/public/images/Hotels/intercontinental-citystars-view_2.jpg",
+        "/public/images/Hotels/intercontinental-citystars-view_3.jpg",
+        "/public/images/Hotels/intercontinental-citystars-view_4.jpg"
+      ],
+      "latitude": 30.0733,
+      "longitude": 31.3441,
+      "highlights": [
+        "Connected to Citystars mega mall",
+        "Near Cairo International Airport",
+        "Modern business facilities",
+        "Family-friendly amenities"
+      ],
+      "amenities": [
+        "Outdoor Pool",
+        "Fitness Center",
+        "4 Restaurants and Bars",
+        "Business Center",
+        "Meeting Rooms",
+        "Kids Club",
+        "Free Wi-Fi",
+        "24-Hour Front Desk",
+        "Free Parking"
+      ],
+      "roomAmenities": [
+        "Air Conditioning",
+        "LED TV",
+        "Mini Bar",
+        "Private Bathroom",
+        "Room Service",
+        "Safe",
+        "Work Desk",
+        "Blackout Curtains"
+      ],
+      "userReviews": [
+        {
+          "id": 15,
+          "userName": "Hala Mahmoud",
+          "userImage": "/images/users/user_f_15.jpg",
+          "rating": 4.6,
+          "date": "December 2024",
+          "comment": "A very practical and comfortable hotel, especially for travelers. Close to the airport and connected to Citystars Mall. The rooms are clean."
+        },
+        {
+          "id": 16,
+          "userName": "David Park",
+          "userImage": "/images/users/user_m_16.jpg",
+          "rating": 4.5,
+          "date": "November 2024",
+          "comment": "Convenient location near the airport. Great for business travelers. Mall access is a big plus!"
+        }
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 9875,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "staff": 4.5,
+          "accessibility": 4.2,
+          "facilities": 4,
+          "valueForMoney": 4.6
+        }
+      },
+      "nearbyLocations": [
+        "Cairo International Airport - 4 km",
+        "Citystars Mall - 0.1 km",
+        "Heliopolis - 2 km"
+      ],
+      "availability": {
+        "availableRooms": 68,
+        "totalRooms": 370
+      },
+      "pricePerNight": 135,
+      "featured": false,
+      "status": "Active"
+    },
+    {
+      "id": "9",
+      "name": "Kempinski Nile Hotel Cairo",
+      "city": "Cairo",
+      "rating": 4.8,
+      "images": [
+        "/public/images/Hotels/kempinski-nile-main.jpg",
+        "/public/images/Hotels/kempinski-nile-view_2.jpg",
+        "/public/images/Hotels/kempinski-nile-view_3.jpg",
+        "/public/images/Hotels/kempinski-nile-view_4.jpg"
+      ],
+      "latitude": 30.0311,
+      "longitude": 31.2258,
+      "highlights": [
+        "Garden City location on the Nile",
+        "European elegance and luxury",
+        "Award-winning restaurants",
+        "Exclusive spa treatments"
+      ],
+      "amenities": [
+        "Outdoor Pool",
+        "Luxury Spa",
+        "Fitness Center",
+        "5 Restaurants and Bars",
+        "Cigar Lounge",
+        "Business Center",
+        "Free Wi-Fi",
+        "24-Hour Concierge",
+        "Valet Parking"
+      ],
+      "roomAmenities": [
+        "Air Conditioning",
+        "Smart TV",
+        "Nespresso Machine",
+        "Marble Bathroom with Premium Toiletries",
+        "Luxury Bedding",
+        "Mini Bar",
+        "Safe",
+        "Work Desk",
+        "Nile View Balcony"
+      ],
+      "userReviews": [
+        {
+          "id": 17,
+          "userName": "Dina Shafik",
+          "userImage": "/images/users/user_f_17.jpg",
+          "rating": 4.9,
+          "date": "December 2024",
+          "comment": "A luxurious hotel with excellence! Every detail is thoughtful and the service is very sophisticated. The restaurants are excellent, especially the Italian one."
+        },
+        {
+          "id": 18,
+          "userName": "Michael Schmidt",
+          "userImage": "/images/users/user_m_18.jpg",
+          "rating": 4.8,
+          "date": "November 2024",
+          "comment": "Exceptional luxury hotel! Impeccable service, beautiful rooms, and outstanding dining options."
+        }
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 9875,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "staff": 4.5,
+          "accessibility": 4.2,
+          "facilities": 4,
+          "valueForMoney": 4.6
+        }
+      },
+      "nearbyLocations": [
+        "Egyptian Museum - 2 km",
+        "Tahrir Square - 1.5 km",
+        "Garden City - 0.5 km"
+      ],
+      "availability": {
+        "availableRooms": 32,
+        "totalRooms": 191
+      },
+      "pricePerNight": 285,
+      "featured": true,
+      "status": "Active"
+    },
+    {
+      "id": "10",
+      "name": "Movenpick Resort Hurghada",
+      "city": "Hurghada",
+      "rating": 4.5,
+      "images": [
+        "/public/images/Hotels/movenpick-hurghada-main.jpg",
+        "/public/images/Hotels/movenpick-hurghada-view_2.jpg",
+        "/public/images/Hotels/movenpick-hurghada-view_3.jpg",
+        "/public/images/Hotels/movenpick-hurghada-view_4.jpg"
+      ],
+      "latitude": 27.1783,
+      "longitude": 33.7681,
+      "highlights": [
+        "All-inclusive beachfront resort",
+        "House reef for snorkeling",
+        "Family-friendly facilities",
+        "Multiple dining options"
+      ],
+      "amenities": [
+        "Private Beach",
+        "5 Swimming Pools",
+        "Diving Center",
+        "Spa",
+        "Kids Club",
+        "7 Restaurants and Bars",
+        "Water Sports",
+        "Entertainment Program",
+        "Free Wi-Fi",
+        "Free Parking"
+      ],
+      "roomAmenities": [
+        "Air Conditioning",
+        "Satellite TV",
+        "Mini Bar",
+        "Bathroom with Shower",
+        "Balcony or Terrace",
+        "Safe",
+        "Coffee Maker",
+        "Sea or Pool View"
+      ],
+      "userReviews": [
+        {
+          "id": 19,
+          "userName": "Amira Hassan",
+          "userImage": "/images/users/user_f_19.jpg",
+          "rating": 4.6,
+          "date": "December 2024",
+          "comment": "Excellent family resort! The beach is beautiful and the coral reefs are close. The kids loved their club."
+        },
+        {
+          "id": 20,
+          "userName": "Peter Johnson",
+          "userImage": "/images/users/user_m_20.jpg",
+          "rating": 4.5,
+          "date": "November 2024",
+          "comment": "Great family resort with excellent house reef. Food variety is good and staff are very friendly."
+        }
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 9875,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "staff": 4.5,
+          "accessibility": 4.2,
+          "facilities": 4,
+          "valueForMoney": 4.6
+        }
+      },
+      "nearbyLocations": [
+        "Hurghada Marina - 8 km",
+        "Giftun Island - 12 km",
+        "Hurghada Airport - 15 km"
+      ],
+      "availability": {
+        "availableRooms": 95,
+        "totalRooms": 435
+      },
+      "pricePerNight": 115,
+      "featured": false,
+      "status": "Maintenance"
+    },
+    {
+      "id": "11",
+      "name": "Four Seasons Resort Sharm El Sheikh",
+      "city": "Sharm El Sheikh",
+      "rating": 4.9,
+      "images": [
+        "/public/images/Hotels/four-seasons-sharm-main.jpg",
+        "/public/images/Hotels/four-seasons-sharm-view_2.jpg",
+        "/public/images/Hotels/four-seasons-sharm-view_3.jpg",
+        "/public/images/Hotels/four-seasons-sharm-view_4.jpg"
+      ],
+      "latitude": 27.8944,
+      "longitude": 34.3389,
+      "highlights": [
+        "Luxury hillside resort",
+        "Private beach on Sharks Bay",
+        "Championship golf course nearby",
+        "Exceptional spa facilities"
+      ],
+      "amenities": [
+        "Private Beach",
+        "6 Swimming Pools",
+        "Full-Service Spa",
+        "Fitness Center",
+        "Diving Center",
+        "6 Restaurants and Bars",
+        "Kids For All Seasons",
+        "Tennis Courts",
+        "Free Wi-Fi",
+        "Valet Parking"
+      ],
+      "roomAmenities": [
+        "Air Conditioning",
+        "Smart TV",
+        "Nespresso Machine",
+        "Luxury Bathroom with Soaking Tub",
+        "Premium Linens",
+        "Mini Bar",
+        "Safe",
+        "Private Balcony",
+        "Sea or Garden View"
+      ],
+      "userReviews": [
+        {
+          "id": 21,
+          "userName": "Laila Kamel",
+          "userImage": "/images/users/user_f_21.jpg",
+          "rating": 5,
+          "date": "December 2024",
+          "comment": "Exceptional experience! Everything in this resort is at the highest level. The service, cleanliness, and food are all perfect."
+        },
+        {
+          "id": 22,
+          "userName": "Alexander Ross",
+          "userImage": "/images/users/user_m_22.jpg",
+          "rating": 4.9,
+          "date": "November 2024",
+          "comment": "The epitome of luxury! Stunning property, impeccable service, and the beach is absolutely pristine."
+        }
+      ],
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 9875,
+        "ratingCriteria": {
+          "experience": 4.9,
+          "staff": 4.5,
+          "accessibility": 4.2,
+          "facilities": 4,
+          "valueForMoney": 4.6
+        }
+      },
+      "status": "Maintenance"
     }
   ],
   "cars": [
-  {
-    "id": 1,
-    "name": "Toyota Corolla",
-    "description": "Reliable compact sedan suitable for 4 passengers.",
-    "seats": 4,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Bluetooth", "Backup Camera"],
-    "images":[
-      "/images-car/ToyotaCorolla.avif",
-      "/images-car/ToyotaCorolla2.jpg",
-      "/images-car/ToyotaCorolla3.jpg",
-      "/images-car/ToyotaCorolla4.jpg"
-    ],
-    "price": 120,
-    "basePrice": 120,
-    "overview": "The Toyota Corolla is a reliable compact sedan perfect for city driving and short family trips. It offers fuel efficiency, modern technology features, and smooth handling.",
-    "highlights": ["Fuel-efficient engine","Smooth city driving","Advanced safety features","Comfortable seating for 4 passengers"],
-    "amenities": ["Air Conditioning","GPS Navigation","Bluetooth Connectivity","Backup Camera","Cruise Control","USB Ports"],
-    "reviews": {
-      "overallRating": 4.8,
-      "totalReviews": 1523,
-      "ratingCriteria": {"experience": 4.8,"comfort": 4.6,"reliability": 4.9,"valueForMoney": 4.7,"features": 4.5}
+    {
+      "id": "1",
+      "name": "Toyota Corolla",
+      "brand": "Toyota",
+      "model": "Corolla",
+      "year": 2023,
+      "city": "Cairo",
+      "price": 100,
+      "basePrice": 100,
+      "type": "sedan",
+      "transmission": "automatic",
+      "seats": 4,
+      "total_fleet": 20,
+      "available_now": 5,
+      "fuelType": "hybrid",
+      "nextAvailability": "2025-12-23",
+      "description": "Reliable compact sedan suitable for 4 passengers.",
+      "overview": "A reliable and comfortable vehicle for your journey.",
+      "features": ["GPS", "A/C", "Bluetooth"],
+      "highlights": ["Reliable", "Fuel efficient", "Comfortable"],
+      "amenities": ["Air Conditioning", "GPS Navigation", "Bluetooth Connectivity", "USB Ports"],
+      "images": ["/images-car/placeholder.jpg", "/images-car/placeholder_2.jpg"],
+      "status": "Available",
+      "featured": true,
+      "isFeatured": true,
+      "reviews": {
+        "overallRating": 4.5,
+        "totalReviews": 120,
+        "ratingCriteria": { "experience": 4.5, "comfort": 4.6, "reliability": 4.7, "valueForMoney": 4.4, "features": 4.3 }
+      }
     },
-    "userReviews": [
-      {"id":1,"userName":"John Doe","userImage":"/images/users/user_m_1.jpg","rating":5,"date":"January 2025","comment":"Perfect car for city trips. Comfortable and compact."},
-      {"id":2,"userName":"Sarah Ahmed","userImage":"/images/users/user_f_2.jpg","rating":5,"date":"February 2025","comment":"Reliable and smooth ride."}
-    ]
-  },
-  {
-    "id": 2,
-    "name": "Kia Carens",
-    "description": "Family MPV suitable for 5-6 passengers.",
-    "seats": 6,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Bluetooth", "Cruise Control"],
-    "images":[
-      "/images-car/KiaCarens.avif",
-      "/images-car/KiaCarens2.webp",
-      "/images-car/KiaCarens3.jpg"
-    ],
-    "price": 150,
-    "basePrice": 150,
-    "overview": "Kia Carens is a spacious family MPV offering comfort, safety, and modern features for 5-6 passengers. Ideal for city drives and weekend trips.",
-    "highlights": ["Spacious interior","Comfortable seats","Smooth handling","Family-friendly amenities"],
-    "amenities": ["Air Conditioning","GPS Navigation","Bluetooth Connectivity","Cruise Control","Entertainment System","USB Ports"],
-    "reviews": {
-      "overallRating": 4.7,
-      "totalReviews": 987,
-      "ratingCriteria": {"experience":4.7,"comfort":4.8,"reliability":4.6,"valueForMoney":4.5,"features":4.6}
+    {
+      "id": "2",
+      "name": "Toyota Rush",
+      "brand": "Toyota",
+      "model": "Rush",
+      "year": 2023,
+      "city": "Alexandria",
+      "price": 160,
+      "basePrice": 160,
+      "type": "luxury",
+      "transmission": "automatic",
+      "seats": 6,
+      "total_fleet": 20,
+      "available_now": 5,
+      "fuelType": "Petrol",
+      "nextAvailability": "2025-12-18",
+      "description": "Compact SUV ideal for 5-6 passengers with flexibility for city and trips.",
+      "overview": "Toyota Rush is a compact SUV combining city practicality with weekend trip capabilities.",
+      "features": ["GPS", "A/C", "Bluetooth", "Sunroof"],
+      "highlights": ["Flexible seating", "Sunroof", "Modern infotainment"],
+      "amenities": ["Air Conditioning", "GPS Navigation", "Bluetooth Connectivity", "Sunroof", "Cruise Control", "USB Ports"],
+      "images": ["/images-car/ToyotaRush.jpg", "/images-car/placeholder_2.jpg"],
+      "status": "Available",
+      "featured": true,
+      "isFeatured": true,
+      "reviews": {
+        "overallRating": 4.6,
+        "totalReviews": 98,
+        "ratingCriteria": { "experience": 4.6, "comfort": 4.5, "reliability": 4.7, "valueForMoney": 4.6, "features": 4.4 }
+      }
     },
-    "userReviews": [
-      {"id":1,"userName":"Michael Chen","userImage":"/images/users/user_m_3.jpg","rating":5,"date":"March 2025","comment":"Spacious and comfortable for family trips."}
-    ]
-  },
-  {
-    "id": 3,
-    "name": "Toyota Rush",
-    "description": "Compact SUV ideal for 5-6 passengers with flexibility for city and trips.",
-    "seats": 6,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Bluetooth", "Sunroof"],
-    "images":[
-      "/images-car/ToyotaRush.jpg",
-      "/images-car/ToyotaRush2.webp",
-      "/images-car/ToyotaRush3.avif",
-      "/images-car/ToyotaRush4.jpg"
-    ],
-    "price": 160,
-    "basePrice": 160,
-    "overview": "Toyota Rush is a compact SUV combining city practicality with weekend trip capabilities. Flexible seating and modern features make it ideal for families.",
-    "highlights": ["Flexible seating","Sunroof","Modern infotainment","Reliable for trips"],
-    "amenities": ["Air Conditioning","GPS Navigation","Bluetooth Connectivity","Sunroof","Cruise Control","USB Ports"],
-    "reviews": {
-      "overallRating": 4.8,
-      "totalReviews": 1023,
-      "ratingCriteria": {"experience":4.8,"comfort":4.7,"reliability":4.8,"valueForMoney":4.6,"features":4.5}
+    {
+      "id": "3",
+      "name": "Mitsubishi Xpander",
+      "brand": "Mitsubishi",
+      "model": "Xpander",
+      "year": 2023,
+      "city": "Luxor",
+      "price": 155,
+      "basePrice": 155,
+      "type": "MPV",
+      "transmission": "automatic",
+      "seats": 6,
+      "total_fleet": 20,
+      "available_now": 1,
+      "fuelType": "Petrol",
+      "nextAvailability": "2025-12-26",
+      "description": "Modern MPV for 5-6 passengers with comfortable interior.",
+      "overview": "Mitsubishi Xpander offers a modern interior with comfort for 5-6 passengers.",
+      "features": ["GPS", "A/C", "Bluetooth", "Entertainment System"],
+      "highlights": ["Modern interior", "Entertainment system", "Spacious seating"],
+      "amenities": ["Air Conditioning", "GPS Navigation", "Bluetooth Connectivity", "Entertainment System", "USB Ports"],
+      "images": ["/images-car/MitsubishiXpander.jpg", "/images-car/MitsubishiXpander2.jpeg"],
+      "status": "Maintenance",
+      "featured": true,
+      "isFeatured": true,
+      "reviews": {
+        "overallRating": 4.7,
+        "totalReviews": 876,
+        "ratingCriteria": { "experience": 4.7, "comfort": 4.8, "reliability": 4.6, "valueForMoney": 4.5, "features": 4.7 }
+      }
     },
-    "userReviews": [
-      {"id":1,"userName":"Alex Johnson","userImage":"/images/users/user_m_4.jpg","rating":5,"date":"January 2025","comment":"Versatile and smooth ride. Great for road trips."}
-    ]
-  },
-  {
-    "id": 4,
-    "name": "Mitsubishi Xpander",
-    "description": "Modern MPV for 5-6 passengers with comfortable interior.",
-    "seats": 6,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Bluetooth", "Entertainment System"],
-    "images":[
-      "/images-car/MitsubishiXpander.jpg",
-      "/images-car/MitsubishiXpander2.jpeg",
-      "/images-car/MitsubishiXpander3.webp",
-      "/images-car/MitsubishiXpander4.webp"
-    ],
-    "price": 155,
-    "basePrice": 155,
-    "overview": "Mitsubishi Xpander offers a modern interior with comfort for 5-6 passengers. Suitable for both city rides and family trips with enhanced entertainment features.",
-    "highlights": ["Modern interior","Entertainment system","Spacious seating","Smooth ride"],
-    "amenities": ["Air Conditioning","GPS Navigation","Bluetooth Connectivity","Entertainment System","USB Ports","Cruise Control"],
-    "reviews": {
-      "overallRating": 4.7,
-      "totalReviews": 876,
-      "ratingCriteria": {"experience":4.7,"comfort":4.8,"reliability":4.6,"valueForMoney":4.5,"features":4.7}
+    {
+      "id": "5",
+      "name": "Toyota Land Cruiser",
+      "brand": "Toyota",
+      "model": "Land Cruiser",
+      "year": 2023,
+      "city": "Aswan",
+      "price": 150,
+      "basePrice": 150,
+      "type": "SUV",
+      "transmission": "automatic",
+      "seats": 7,
+      "total_fleet": 20,
+      "available_now": 5,
+      "fuelType": "Petrol",
+      "nextAvailability": "2025-12-18",
+      "description": "Great for families exploring Cairo, Giza, and Alexandria.",
+      "overview": "Toyota Land Cruiser is a full-size SUV ideal for family adventures.",
+      "features": ["GPS", "A/C", "Bluetooth", "Backup Camera"],
+      "highlights": ["Full-size SUV", "Spacious interior", "Advanced safety"],
+      "amenities": ["Air Conditioning", "GPS Navigation", "Bluetooth Connectivity", "Backup Camera", "Cruise Control"],
+      "images": ["/images-car/ToyotaLandCruiser.avif", "/images-car/ToyotaLandCruiser2.png"],
+      "status": "Rented",
+      "featured": true,
+      "isFeatured": true,
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 2543,
+        "ratingCriteria": { "experience": 4.9, "comfort": 4.8, "reliability": 4.9, "valueForMoney": 4.7, "features": 4.8 }
+      }
     },
-    "userReviews": [
-      {"id":1,"userName":"Fatima Hassan","userImage":"/images/users/user_f_5.jpg","rating":5,"date":"February 2025","comment":"Comfortable and roomy. Perfect for group trips."}
-    ]
-  },
-  {
-    "id": 5,
-    "name": "Toyota Land Cruiser",
-    "description": "Great for families exploring Cairo, Giza, and Alexandria.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Bluetooth", "Backup Camera"],
-    "images":[
-      "/images-car/ToyotaLandCruiser.avif",
-      "/images-car/ToyotaLandCruiser2.png",
-      "/images-car/ToyotaLandCruiser3.avif",
-      "/images-car/ToyotaLandCruiser4.jpg"
-    ],
-    "price": 150,
-    "basePrice": 150,
-    "overview": "Toyota Land Cruiser is a full-size SUV ideal for family adventures across major Egyptian cities. Offers comfort, space, and advanced safety features.",
-    "highlights": ["Full-size SUV","Spacious interior","Advanced safety features","Perfect for long trips"],
-    "amenities": ["Air Conditioning","GPS Navigation","Bluetooth Connectivity","Backup Camera","Cruise Control","USB Ports"],
-    "reviews": {
-      "overallRating": 4.9,
-      "totalReviews": 2543,
-      "ratingCriteria": {"experience":4.9,"comfort":4.8,"reliability":4.9,"valueForMoney":4.7,"features":4.8}
+    {
+      "id": "6",
+      "name": "Honda Pilot",
+      "brand": "Honda",
+      "model": "Pilot",
+      "year": 2023,
+      "city": "Sharm El Sheikh",
+      "price": 170,
+      "basePrice": 170,
+      "type": "SUV",
+      "transmission": "automatic",
+      "seats": 7,
+      "total_fleet": 20,
+      "available_now": 3,
+      "fuelType": "Petrol",
+      "nextAvailability": "2025-12-22",
+      "description": "Perfect for family trips across major Egyptian cities.",
+      "overview": "Honda Pilot is a reliable SUV with ample seating for 7 passengers.",
+      "features": ["GPS", "A/C", "Cruise Control", "USB Ports"],
+      "highlights": ["Spacious seating", "Comfortable ride", "Family-friendly"],
+      "amenities": ["Air Conditioning", "GPS Navigation", "Cruise Control", "USB Ports", "Bluetooth Connectivity"],
+      "images": ["/images-car/HondaPilot.webp", "/images-car/HondaPilot2.avif"],
+      "status": "Available",
+      "featured": true,
+      "isFeatured": true,
+      "reviews": {
+        "overallRating": 4.7,
+        "totalReviews": 1023,
+        "ratingCriteria": { "experience": 4.7, "comfort": 4.6, "reliability": 4.8, "valueForMoney": 4.6, "features": 4.5 }
+      }
     },
-    "userReviews": [
-      {"id":1,"userName":"John Doe","userImage":"/images/users/user_m_1.jpg","rating":5,"date":"March 2025","comment":"Perfect car for family trips! Very comfortable and spacious."},
-      {"id":2,"userName":"Sarah Ahmed","userImage":"/images/users/user_f_2.jpg","rating":5,"date":"March 2025","comment":"Excellent service and the car was in pristine condition."},
-      {"id":3,"userName":"Michael Chen","userImage":"/images/users/user_m_3.jpg","rating":4,"date":"March 2025","comment":"Great vehicle, smooth ride across the desert roads."},
-      {"id":4,"userName":"Fatima Hassan","userImage":"/images/users/user_f_5.jpg","rating":5,"date":"March 2025","comment":"Highly recommend for long family journeys!"}
-    ]
-  },
-  {
-    "id": 6,
-    "name": "Honda Pilot",
-    "description": "Perfect for family trips across major Egyptian cities.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Cruise Control", "USB Ports"],
-    "images":[
-      "/images-car/HondaPilot.webp",
-      "/images-car/HondaPilot2.avif",
-      "/images-car/HondaPilot3.avif"
-    ],
-    "price": 170,
-    "basePrice": 170,
-    "overview": "Honda Pilot is a reliable SUV with ample seating for 7 passengers, perfect for family excursions across Egypt. Modern features ensure comfort and convenience.",
-    "highlights": ["Spacious seating","Comfortable ride","Family-friendly","Advanced tech features"],
-    "amenities": ["Air Conditioning","GPS Navigation","Cruise Control","USB Ports","Bluetooth Connectivity","Entertainment System"],
-    "reviews": {
-      "overallRating": 4.7,
-      "totalReviews": 1023,
-      "ratingCriteria": {"experience":4.7,"comfort":4.6,"reliability":4.8,"valueForMoney":4.6,"features":4.5}
+    {
+      "id": "7",
+      "name": "Ford Explorer",
+      "brand": "Ford",
+      "model": "Explorer",
+      "year": 2023,
+      "city": "Hurghada",
+      "price": 180,
+      "basePrice": 180,
+      "type": "SUV",
+      "transmission": "automatic",
+      "seats": 7,
+      "total_fleet": 20,
+      "available_now": 2,
+      "fuelType": "Petrol",
+      "nextAvailability": "2025-12-28",
+      "description": "Spacious and comfortable SUV for family adventures.",
+      "overview": "Ford Explorer is a versatile SUV combining luxury, space, and performance.",
+      "features": ["GPS", "A/C", "Leather Seats", "Sunroof"],
+      "highlights": ["Spacious interior", "Leather seats", "Sunroof"],
+      "amenities": ["Air Conditioning", "GPS Navigation", "Leather Seats", "Sunroof", "Bluetooth Connectivity"],
+      "images": ["/images-car/FordExplorer.jpg", "/images-car/FordExplorer2.png"],
+      "status": "Available",
+      "featured": true,
+      "isFeatured": true,
+      "reviews": {
+        "overallRating": 4.8,
+        "totalReviews": 1356,
+        "ratingCriteria": { "experience": 4.8, "comfort": 4.9, "reliability": 4.7, "valueForMoney": 4.6, "features": 4.7 }
+      }
     },
-    "userReviews": [
-      {"id":1,"userName":"Jane Smith","userImage":"/images/users/user_f_6.jpg","rating":4,"date":"February 2025","comment":"Smooth ride and comfy seats. Perfect for our Cairo tour."}
-    ]
-  },
-  {
-    "id": 7,
-    "name": "Ford Explorer",
-    "description": "Spacious and comfortable SUV for family adventures.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Leather Seats", "Sunroof"],
-    "images":[
-       "/images-car/FordExplorer.jpg",
-      "/images-car/FordExplorer2.png",
-      "/images-car/FordExplorer3.avif"
-    ],
-    "price": 180,
-    "basePrice": 180,
-    "overview": "Ford Explorer is a versatile SUV combining luxury, space, and performance for family trips and adventures. Features leather seats and sunroof for premium comfort.",
-    "highlights": ["Spacious interior","Leather seats","Sunroof","Smooth handling"],
-    "amenities": ["Air Conditioning","GPS Navigation","Leather Seats","Sunroof","Bluetooth Connectivity","USB Ports"],
-    "reviews": {
-      "overallRating": 4.8,
-      "totalReviews": 1356,
-      "ratingCriteria": {"experience":4.8,"comfort":4.9,"reliability":4.7,"valueForMoney":4.6,"features":4.7}
+    {
+      "id": "8",
+      "name": "Chevrolet Tahoe",
+      "brand": "Chevrolet",
+      "model": "Tahoe",
+      "year": 2023,
+      "city": "Dahab",
+      "price": 185,
+      "basePrice": 185,
+      "type": "SUV",
+      "transmission": "automatic",
+      "seats": 7,
+      "total_fleet": 20,
+      "available_now": 0,
+      "fuelType": "Petrol",
+      "nextAvailability": "2025-12-29",
+      "description": "Full-size SUV perfect for family adventures.",
+      "overview": "Chevrolet Tahoe is a full-size SUV built for comfort, space, and performance.",
+      "features": ["GPS", "A/C", "4WD", "Premium Sound"],
+      "highlights": ["Full-size SUV", "4WD for off-road", "Premium sound"],
+      "amenities": ["Air Conditioning", "GPS Navigation", "4WD", "Premium Sound", "Bluetooth Connectivity"],
+      "images": ["/images-car/ChevroletTahoe.avif", "/images-car/ChevroletTahoe2.jpg"],
+      "status": "Rented",
+      "featured": true,
+      "isFeatured": true,
+      "reviews": {
+        "overallRating": 4.7,
+        "totalReviews": 1123,
+        "ratingCriteria": { "experience": 4.7, "comfort": 4.8, "reliability": 4.7, "valueForMoney": 4.6, "features": 4.7 }
+      }
     },
-    "userReviews": [
-      {"id":1,"userName":"Alex Johnson","userImage":"/images/users/user_m_4.jpg","rating":5,"date":"January 2025","comment":"Loved it! Will rent again for our next trip."}
-    ]
-  },
-  {
-    "id": 8,
-    "name": "Chevrolet Tahoe",
-    "description": "Full-size SUV perfect for family adventures.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "4WD", "Premium Sound"],
-    "images":[
-      "/images-car/ChevroletTahoe.avif",
-      "/images-car/ChevroletTahoe2.jpg",
-      "/images-car/ChevroletTahoe3.jpg",
-      "/images-car/ChevroletTahoe4.webp"
-    ],
-    "price": 185,
-    "basePrice": 185,
-    "overview": "Chevrolet Tahoe is a full-size SUV built for comfort, space, and performance. Excellent choice for family trips and off-road adventures with 4WD capability.",
-    "highlights": ["Full-size SUV","4WD for off-road","Premium sound system","Comfortable for 7 passengers"],
-    "amenities": ["Air Conditioning","GPS Navigation","4WD","Premium Sound","Bluetooth Connectivity","USB Ports"],
-    "reviews": {
-      "overallRating": 4.7,
-      "totalReviews": 1123,
-      "ratingCriteria": {"experience":4.7,"comfort":4.8,"reliability":4.7,"valueForMoney":4.6,"features":4.7}
+    {
+      "id": "9",
+      "name": "Chevrolet Suburban",
+      "brand": "Chevrolet",
+      "model": "Suburban",
+      "year": 2023,
+      "city": "Siwa",
+      "price": 250,
+      "basePrice": 250,
+      "type": "SUV",
+      "transmission": "automatic",
+      "seats": 7,
+      "total_fleet": 20,
+      "available_now": 5,
+      "fuelType": "Petrol",
+      "nextAvailability": "2025-12-26",
+      "description": "Iconic large SUV for family adventures across Egypt.",
+      "overview": "Chevrolet Suburban is a legendary full-size SUV offering unmatched space.",
+      "features": ["GPS", "A/C", "Entertainment System", "Power Liftgate"],
+      "highlights": ["Iconic SUV", "Spacious interior", "Luxury comfort"],
+      "amenities": ["Air Conditioning", "GPS Navigation", "Entertainment System", "Power Liftgate", "Bluetooth Connectivity"],
+      "images": ["/images-car/ChevroletSuburban.avif", "/images-car/ChevroletSuburban2.avif"],
+      "status": "available",
+      "featured": true,
+      "isFeatured": true,
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 1342,
+        "ratingCriteria": { "experience": 4.9, "comfort": 4.9, "reliability": 4.8, "valueForMoney": 4.7, "features": 4.8 }
+      }
     },
-    "userReviews": [
-      {"id":1,"userName":"Sarah Lee","userImage":"/images/users/user_f_7.jpg","rating":4,"date":"February 2025","comment":"Very spacious and comfortable for long drives."}
-    ]
-  }
-  ,{
-    "id": 9,
-    "name": "Chevrolet Suburban",
-    "description": "Iconic large SUV for family adventures across Egypt.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Entertainment System", "Power Liftgate"],
-    "images":[
-      "/images-car/ChevroletSuburban.avif",
-      "/images-car/ChevroletSuburban2.avif",
-      "/images-car/ChevroletSuburban3.avif",
-      "/images-car/ChevroletSuburban4.avif"
-    ],
-    "price": 250,
-    "basePrice": 250,
-    "overview": "Chevrolet Suburban is a legendary full-size SUV offering unmatched space and luxury for family trips across Egypt. Equipped with modern amenities and entertainment system.",
-    "highlights": ["Iconic SUV","Spacious interior","Luxury comfort","Entertainment system"],
-    "amenities": ["Air Conditioning","GPS Navigation","Entertainment System","Power Liftgate","Bluetooth Connectivity","USB Ports"],
-    "reviews": {
-      "overallRating": 4.9,
-      "totalReviews": 1342,
-      "ratingCriteria": {"experience":4.9,"comfort":4.9,"reliability":4.8,"valueForMoney":4.7,"features":4.8}
+    {
+      "id": "10",
+      "name": "GMC Yukon",
+      "brand": "GMC",
+      "model": "Yukon",
+      "year": 2023,
+      "city": "Marsa Alam",
+      "price": 110,
+      "basePrice": 110,
+      "type": "SUV",
+      "transmission": "automatic",
+      "seats": 7,
+      "total_fleet": 20,
+      "available_now": 7,
+      "fuelType": "Petrol",
+      "nextAvailability": "2025-12-20",
+      "description": "Large SUV with comfort and advanced tech.",
+      "overview": "GMC Yukon combines comfort, technology, and space in a full-size SUV.",
+      "features": ["GPS", "A/C", "Adaptive Cruise", "Lane Assist"],
+      "highlights": ["Advanced tech", "Comfortable seating", "Reliable performance"],
+      "amenities": ["Air Conditioning", "GPS Navigation", "Adaptive Cruise Control", "Lane Assist", "Bluetooth Connectivity"],
+      "images": ["/images-car/GMCYukon.avif", "/images-car/GMCYukon2.webp"],
+      "status": "available",
+      "featured": true,
+      "isFeatured": true,
+      "reviews": {
+        "overallRating": 4.8,
+        "totalReviews": 954,
+        "ratingCriteria": { "experience": 4.8, "comfort": 4.7, "reliability": 4.8, "valueForMoney": 4.6, "features": 4.7 }
+      }
     },
-    "userReviews": [
-      {"id":1,"userName":"Sophia Turner","userImage":"/images/users/user_f_8.jpg","rating":5,"date":"March 2025","comment":"Spacious and luxurious. Best choice for our family."}
-    ]
-  },
-  {
-    "id": 10,
-    "name": "GMC Yukon",
-    "description": "Large SUV with comfort and advanced tech.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Adaptive Cruise", "Lane Assist"],
-    "images":[
-       "/images-car/GMCYukon.avif",
-      "/images-car/GMCYukon2.webp",
-      "/images-car/GMCYukon3.webp",
-      "/images-car/GMCYukon4.avif"
-    ],
-    "price": 110,
-    "basePrice": 110,
-    "overview": "GMC Yukon combines comfort, technology, and space in a full-size SUV. Ideal for family trips, city rides, and long desert journeys.",
-    "highlights": ["Advanced tech features","Comfortable seating","Spacious interior","Reliable performance"],
-    "amenities": ["Air Conditioning","GPS Navigation","Adaptive Cruise Control","Lane Assist","Bluetooth Connectivity","USB Ports"],
-    "reviews": {
-      "overallRating": 4.8,
-      "totalReviews": 954,
-      "ratingCriteria": {"experience":4.8,"comfort":4.7,"reliability":4.8,"valueForMoney":4.6,"features":4.7}
+    {
+      "id": "11",
+      "name": "Hyundai Palisade",
+      "brand": "Hyundai",
+      "model": "Palisade",
+      "year": 2023,
+      "city": "Port Said",
+      "price": 135,
+      "basePrice": 135,
+      "type": "SUV",
+      "transmission": "automatic",
+      "seats": 7,
+      "total_fleet": 20,
+      "available_now": 1,
+      "fuelType": "Petrol",
+      "nextAvailability": "2025-12-26",
+      "description": "Comfortable family SUV with advanced features.",
+      "overview": "Hyundai Palisade is a family-friendly SUV with luxury and convenience.",
+      "features": ["GPS", "A/C", "Wireless Charging", "Smart Trunk"],
+      "highlights": ["Luxury SUV", "Advanced features", "Comfortable ride"],
+      "amenities": ["Air Conditioning", "GPS Navigation", "Wireless Charging", "Smart Trunk", "Bluetooth Connectivity"],
+      "images": ["/images-car/HyundaiPalisade.webp", "/images-car/HyundaiPalisade2.avif"],
+      "status": "pending",
+      "featured": true,
+      "isFeatured": true,
+      "reviews": {
+        "overallRating": 4.7,
+        "totalReviews": 1021,
+        "ratingCriteria": { "experience": 4.7, "comfort": 4.8, "reliability": 4.6, "valueForMoney": 4.6, "features": 4.7 }
+      }
     },
-    "userReviews": [
-      {"id":1,"userName":"Chris Martin","userImage":"/images/users/user_m_9.jpg","rating":5,"date":"January 2025","comment":"Very reliable and comfortable for desert trips."}
-    ]
-  },
-  {
-    "id": 11,
-    "name": "Hyundai Palisade",
-    "description": "Comfortable family SUV with advanced features.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Wireless Charging", "Smart Trunk"],
-    "images":[
-       "/images-car/HyundaiPalisade.webp",
-      "/images-car/HyundaiPalisade2.avif",
-      "/images-car/HyundaiPalisade3.avif",
-      "/images-car/HyundaiPalisade4.webp"
-    ],
-    "price": 135,
-    "basePrice": 135,
-    "overview": "Hyundai Palisade is a family-friendly SUV with luxury and convenience in mind. Equipped with wireless charging, smart trunk, and modern amenities.",
-    "highlights": ["Luxury SUV","Advanced features","Spacious seating","Comfortable ride"],
-    "amenities": ["Air Conditioning","GPS Navigation","Wireless Charging","Smart Trunk","Bluetooth Connectivity","USB Ports"],
-    "reviews": {
-      "overallRating": 4.7,
-      "totalReviews": 1021,
-      "ratingCriteria": {"experience":4.7,"comfort":4.8,"reliability":4.6,"valueForMoney":4.6,"features":4.7}
+    {
+      "id": "12",
+      "name": "Kia Telluride",
+      "brand": "Kia",
+      "model": "Telluride",
+      "year": 2023,
+      "city": "Nuweiba",
+      "price": 145,
+      "basePrice": 145,
+      "type": "SUV",
+      "transmission": "automatic",
+      "seats": 7,
+      "total_fleet": 20,
+      "available_now": 5,
+      "fuelType": "Petrol",
+      "nextAvailability": "2025-12-27",
+      "description": "Family-friendly SUV with modern amenities.",
+      "overview": "Kia Telluride is a modern SUV with family comfort in mind.",
+      "features": ["GPS", "A/C", "Heated Seats", "Panoramic Roof"],
+      "highlights": ["Modern family SUV", "Panoramic roof", "Heated seats"],
+      "amenities": ["Air Conditioning", "GPS Navigation", "Heated Seats", "Panoramic Roof", "Bluetooth Connectivity"],
+      "images": ["/images-car/KiaTelluride.avif", "/images-car/KiaTelluride2.avif"],
+      "status": "available",
+      "featured": true,
+      "isFeatured": true,
+      "reviews": {
+        "overallRating": 4.8,
+        "totalReviews": 1125,
+        "ratingCriteria": { "experience": 4.8, "comfort": 4.8, "reliability": 4.7, "valueForMoney": 4.6, "features": 4.8 }
+      }
     },
-    "userReviews": [
-      {"id":1,"userName":"Linda Green","userImage":"/images/users/user_f_10.jpg","rating":4,"date":"March 2025","comment":"Good car for long trips. Very comfortable."}
-    ]
-  },
-  {
-    "id": 12,
-    "name": "Kia Telluride",
-    "description": "Family-friendly SUV with modern amenities.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Heated Seats", "Panoramic Roof"],
-    "images":[
-      "/images-car/KiaTelluride.avif",
-      "/images-car/KiaTelluride2.avif",
-      "/images-car/KiaTelluride3.avif",
-      "/images-car/KiaTelluride4.avif"
-    ],
-    "price": 145,
-    "basePrice": 145,
-    "overview": "Kia Telluride is a modern SUV with family comfort in mind. Features panoramic roof, heated seats, and advanced safety and infotainment systems.",
-    "highlights": ["Modern family SUV","Panoramic roof","Heated seats","Comfortable for 7 passengers"],
-    "amenities": ["Air Conditioning","GPS Navigation","Heated Seats","Panoramic Roof","Bluetooth Connectivity","USB Ports"],
-    "reviews": {
-      "overallRating": 4.8,
-      "totalReviews": 1125,
-      "ratingCriteria": {"experience":4.8,"comfort":4.8,"reliability":4.7,"valueForMoney":4.6,"features":4.8}
+    {
+      "id": "13",
+      "name": "Mazda CX-9",
+      "brand": "Mazda",
+      "model": "CX-9",
+      "year": 2023,
+      "city": "Faiyum",
+      "price": 270,
+      "basePrice": 270,
+      "type": "SUV",
+      "transmission": "automatic",
+      "seats": 7,
+      "total_fleet": 20,
+      "available_now": 5,
+      "fuelType": "Petrol",
+      "nextAvailability": "2025-12-20",
+      "description": "Elegant and spacious SUV for family trips.",
+      "overview": "Mazda CX-9 is an elegant SUV with spacious interior and premium audio.",
+      "features": ["GPS", "A/C", "Head-Up Display", "Bose Audio"],
+      "highlights": ["Elegant design", "Premium audio", "Smooth ride"],
+      "amenities": ["Air Conditioning", "GPS Navigation", "Head-Up Display", "Bose Audio", "Bluetooth Connectivity"],
+      "images": ["/images-car/MazdaCX-9.png", "/images-car/MazdaCX-92.jpg"],
+      "status": "available",
+      "featured": true,
+      "isFeatured": true,
+      "reviews": {
+        "overallRating": 4.7,
+        "totalReviews": 981,
+        "ratingCriteria": { "experience": 4.7, "comfort": 4.8, "reliability": 4.7, "valueForMoney": 4.6, "features": 4.7 }
+      }
     },
-    "userReviews": [
-      {"id":1,"userName":"Tom White","userImage":"/images/users/user_m_11.jpg","rating":5,"date":"January 2025","comment":"Perfect for family trips! Highly recommended."}
-    ]
-  },
-  {
-    "id": 13,
-    "name": "Mazda CX-9",
-    "description": "Elegant and spacious SUV for family trips.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Head-Up Display", "Bose Audio"],
-    "images":[
-      "/images-car/MazdaCX-9.png",
-      "/images-car/MazdaCX-92.jpg",
-      "/images-car/MazdaCX-93.jpg",
-      "/images-car/MazdaCX-94.jpg"
-    ],
-    "price": 270,
-    "basePrice": 270,
-    "overview": "Mazda CX-9 is an elegant SUV with spacious interior and premium audio. Ideal for comfortable family trips with modern technology and safety features.",
-    "highlights": ["Elegant design","Spacious seating","Premium audio","Smooth ride"],
-    "amenities": ["Air Conditioning","GPS Navigation","Head-Up Display","Bose Audio","Bluetooth Connectivity","USB Ports"],
-    "reviews": {
-      "overallRating": 4.7,
-      "totalReviews": 981,
-      "ratingCriteria": {"experience":4.7,"comfort":4.8,"reliability":4.7,"valueForMoney":4.6,"features":4.7}
+    {
+      "id": "14",
+      "name": "Nissan Patrol",
+      "brand": "Nissan",
+      "model": "Patrol",
+      "year": 2023,
+      "city": "Ain Sokhna",
+      "price": 260,
+      "basePrice": 260,
+      "type": "SUV",
+      "transmission": "automatic",
+      "seats": 7,
+      "total_fleet": 20,
+      "available_now": 3,
+      "fuelType": "Petrol",
+      "nextAvailability": "2025-12-25",
+      "description": "Reliable SUV with comfort and space for the whole family.",
+      "overview": "Nissan Patrol is a rugged SUV with comfort and space for families.",
+      "features": ["GPS", "A/C", "Off-Road Mode", "Tow Package"],
+      "highlights": ["Reliable SUV", "Off-road capability", "Spacious interior"],
+      "amenities": ["Air Conditioning", "GPS Navigation", "Off-Road Mode", "Tow Package", "Bluetooth Connectivity"],
+      "images": ["/images-car/NissanPatrol.jpg", "/images-car/NissanPatrol2.jpg"],
+      "status": "available",
+      "featured": true,
+      "isFeatured": true,
+      "reviews": {
+        "overallRating": 4.8,
+        "totalReviews": 1102,
+        "ratingCriteria": { "experience": 4.8, "comfort": 4.7, "reliability": 4.9, "valueForMoney": 4.6, "features": 4.7 }
+      }
     },
-    "userReviews": [
-      {"id":1,"userName":"Emma Davis","userImage":"/images/users/user_f_12.jpg","rating":4,"date":"March 2025","comment":"Smooth ride, very spacious interior."}
-    ]
-  },
-  {
-    "id": 14,
-    "name": "Nissan Patrol",
-    "description": "Reliable SUV with comfort and space for the whole family.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Off-Road Mode", "Tow Package"],
-    "images":[
-      "/images-car/NissanPatrol.jpg",
-      "/images-car/NissanPatrol2.jpg",
-      "/images-car/NissanPatrol3.jpg",
-      "/images-car/NissanPatrol4.jpg"
-    ],
-    "price": 260,
-    "basePrice": 260,
-    "overview": "Nissan Patrol is a rugged SUV with comfort and space for families. Equipped with off-road mode and towing capacity, perfect for desert adventures.",
-    "highlights": ["Reliable SUV","Off-road capability","Spacious interior","Family-friendly"],
-    "amenities": ["Air Conditioning","GPS Navigation","Off-Road Mode","Tow Package","Bluetooth Connectivity","USB Ports"],
-    "reviews": {
-      "overallRating": 4.8,
-      "totalReviews": 1102,
-      "ratingCriteria": {"experience":4.8,"comfort":4.7,"reliability":4.9,"valueForMoney":4.6,"features":4.7}
+    {
+      "id": "15",
+      "name": "Subaru Ascent",
+      "brand": "Subaru",
+      "model": "Ascent",
+      "year": 2023,
+      "city": "Cairo",
+      "price": 300,
+      "basePrice": 300,
+      "type": "SUV",
+      "transmission": "automatic",
+      "seats": 7,
+      "total_fleet": 20,
+      "available_now": 4,
+      "fuelType": "Petrol",
+      "nextAvailability": "2025-12-18",
+      "description": "Family SUV with safety and comfort in mind.",
+      "overview": "Subaru Ascent is a safety-focused family SUV offering comfortable seating.",
+      "features": ["GPS", "A/C", "EyeSight Safety", "All-Wheel Drive"],
+      "highlights": ["All-wheel drive", "EyeSight safety", "Spacious interior"],
+      "amenities": ["Air Conditioning", "GPS Navigation", "EyeSight Safety", "All-Wheel Drive", "Bluetooth Connectivity"],
+      "images": ["/images-car/SubaruAscent.webp", "/images-car/SubaruAscent2.avif"],
+      "status": "available",
+      "featured": true,
+      "isFeatured": true,
+      "reviews": {
+        "overallRating": 4.9,
+        "totalReviews": 1243,
+        "ratingCriteria": { "experience": 4.9, "comfort": 4.8, "reliability": 4.9, "valueForMoney": 4.7, "features": 4.8 }
+      }
     },
-    "userReviews": [
-      {"id":1,"userName":"Mike Brown","userImage":"/images/users/user_m_13.jpg","rating":5,"date":"February 2025","comment":"Comfortable ride and powerful engine. Perfect!"}
-    ]
-  },
-  {
-    "id": 15,
-    "name": "Subaru Ascent",
-    "description": "Family SUV with safety and comfort in mind.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "EyeSight Safety", "All-Wheel Drive"],
-    "images":[
-       "/images-car/SubaruAscent.webp",
-      "/images-car/SubaruAscent2.avif",
-      "/images-car/SubaruAscent3.avif",
-      "/images-car/SubaruAscent4.avif"
-    ],
-    "price": 300,
-    "basePrice": 300,
-    "overview": "Subaru Ascent is a safety-focused family SUV offering comfortable seating and all-wheel drive. Ideal for city and off-road family trips.",
-    "highlights": ["All-wheel drive","EyeSight safety system","Comfortable for family","Spacious interior"],
-    "amenities": ["Air Conditioning","GPS Navigation","EyeSight Safety","All-Wheel Drive","Bluetooth Connectivity","USB Ports"],
-    "reviews": {
-      "overallRating": 4.9,
-      "totalReviews": 1243,
-      "ratingCriteria": {"experience":4.9,"comfort":4.8,"reliability":4.9,"valueForMoney":4.7,"features":4.8}
+    {
+      "id": "16",
+      "name": "Volkswagen Atlas",
+      "brand": "Volkswagen",
+      "model": "Atlas",
+      "year": 2024,
+      "city": "Giza",
+      "price": 275,
+      "basePrice": 275,
+      "type": "SUV",
+      "transmission": "automatic",
+      "seats": 7,
+      "total_fleet": 20,
+      "available_now": 5,
+      "fuelType": "Petrol",
+      "nextAvailability": "2025-12-26",
+      "description": "Spacious SUV perfect for family road trips.",
+      "overview": "Volkswagen Atlas is a modern SUV with ample space and digital cockpit.",
+      "features": ["GPS", "A/C", "Digital Cockpit", "Ambient Lighting"],
+      "highlights": ["Digital cockpit", "Spacious interior", "Ambient lighting"],
+      "amenities": ["Air Conditioning", "GPS Navigation", "Digital Cockpit", "Ambient Lighting", "Bluetooth Connectivity"],
+      "images": ["/images-car/VolkswagenAtlas.webp", "/images-car/VolkswagenAtlas2.jpg"],
+      "status": "available",
+      "featured": true,
+      "isFeatured": true,
+      "reviews": {
+        "overallRating": 4.8,
+        "totalReviews": 1025,
+        "ratingCriteria": { "experience": 4.8, "comfort": 4.8, "reliability": 4.7, "valueForMoney": 4.6, "features": 4.7 }
+      }
     },
-    "userReviews": [
-      {"id":1,"userName":"David Wilson","userImage":"/images/users/user_m_14.jpg","rating":5,"date":"March 2025","comment":"Comfortable for the whole family. Great safety features."}
-    ]
-  },
-  {
-    "id": 16,
-    "name": "Volkswagen Atlas",
-    "description": "Spacious SUV perfect for family road trips.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Digital Cockpit", "Ambient Lighting"],
-    "images":[
-       "/images-car/VolkswagenAtlas.webp",
-      "/images-car/VolkswagenAtlas2.jpg",
-      "/images-car/VolkswagenAtlas3.avif",
-      "/images-car/VolkswagenAtlas4.avif"
-    ],
-    "price": 275,
-    "basePrice": 275,
-    "overview": "Volkswagen Atlas is a modern SUV with ample space, digital cockpit, and ambient lighting. Comfortable for family trips and long journeys.",
-    "highlights": ["Digital cockpit","Spacious interior","Ambient lighting","Smooth ride"],
-    "amenities": ["Air Conditioning","GPS Navigation","Digital Cockpit","Ambient Lighting","Bluetooth Connectivity","USB Ports"],
-    "reviews": {
-      "overallRating": 4.8,
-      "totalReviews": 1025,
-      "ratingCriteria": {"experience":4.8,"comfort":4.8,"reliability":4.7,"valueForMoney":4.6,"features":4.7}
+    {
+      "id": "17",
+      "name": "Toyota RAV4",
+      "brand": "Toyota",
+      "model": "RAV4",
+      "year": 2023,
+      "city": "Alexandria",
+      "price": 120,
+      "basePrice": 120,
+      "type": "SUV",
+      "transmission": "automatic",
+      "seats": 4,
+      "total_fleet": 20,
+      "available_now": 3,
+      "fuelType": "Hybrid",
+      "nextAvailability": "2025-12-26",
+      "description": "Compact SUV ideal for city and weekend trips.",
+      "overview": "Toyota RAV4 is a compact SUV that is fuel-efficient and perfect for city commuting.",
+      "features": ["GPS", "A/C", "Bluetooth", "Rear Camera"],
+      "highlights": ["Compact and efficient", "Easy city driving", "Comfortable interior"],
+      "amenities": ["Air Conditioning", "GPS Navigation", "Bluetooth Connectivity", "Rear Camera", "Cruise Control"],
+      "images": ["/images-car/ToyotaRAV4.avif", "/images-car/ToyotaRAV42.jpg"],
+      "status": "available",
+      "featured": true,
+      "isFeatured": true,
+      "reviews": {
+        "overallRating": 4.7,
+        "totalReviews": 954,
+        "ratingCriteria": { "experience": 4.7, "comfort": 4.6, "reliability": 4.7, "valueForMoney": 4.5, "features": 4.6 }
+      }
     },
-    "userReviews": [
-      {"id":1,"userName":"Anna Scott","userImage":"/images/users/user_f_15.jpg","rating":4,"date":"March 2025","comment":"Spacious and smooth ride. Family loved it!"}
-    ]
-  },
-  {
-    "id": 17,
-    "name": "Toyota RAV4",
-    "description": "Compact SUV ideal for city and weekend trips.",
-    "seats": 4,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Bluetooth", "Rear Camera"],
-    "images":[
-      "/images-car/ToyotaRAV4.avif",
-      "/images-car/ToyotaRAV42.jpg",
-      "/images-car/ToyotaRAV43.jpg"
-    ],
-    "price": 120,
-    "basePrice": 120,
-    "overview": "Toyota RAV4 is a compact SUV that is fuel-efficient and perfect for city commuting and weekend trips. Comfortable seating for 4 passengers.",
-    "highlights": ["Compact and efficient","Easy to drive in city","Bluetooth connectivity","Comfortable interior"],
-    "amenities": ["Air Conditioning","GPS Navigation","Bluetooth Connectivity","Rear Camera","Cruise Control","USB Ports"],
-    "reviews": {
-      "overallRating": 4.7,
-      "totalReviews": 954,
-      "ratingCriteria": {"experience":4.7,"comfort":4.6,"reliability":4.7,"valueForMoney":4.5,"features":4.6}
+    {
+      "id": "18",
+      "name": "Honda CR‑V",
+      "brand": "Honda",
+      "model": "CR-V",
+      "year": 2023,
+      "city": "Luxor",
+      "price": 130,
+      "basePrice": 130,
+      "type": "SUV",
+      "transmission": "automatic",
+      "seats": 4,
+      "total_fleet": 20,
+      "available_now": 5,
+      "fuelType": "Hybrid",
+      "nextAvailability": "2025-12-16",
+      "description": "Reliable SUV with excellent fuel efficiency for families.",
+      "overview": "Honda CR-V is a reliable, fuel-efficient SUV for small families.",
+      "features": ["GPS", "A/C", "Sunroof", "Lane Assist"],
+      "highlights": ["Fuel-efficient", "Sunroof", "Lane assist tech"],
+      "amenities": ["Air Conditioning", "GPS Navigation", "Sunroof", "Lane Assist", "Bluetooth Connectivity"],
+      "images": ["/images-car/HondaCR‑V.webp", "/images-car/HondaCR‑V2.jpg"],
+      "status": "available",
+      "featured": true,
+      "isFeatured": true,
+      "reviews": {
+        "overallRating": 4.6,
+        "totalReviews": 876,
+        "ratingCriteria": { "experience": 4.6, "comfort": 4.5, "reliability": 4.7, "valueForMoney": 4.5, "features": 4.6 }
+      }
     },
-    "userReviews": [
-      {"id":1,"userName":"Liam Brown","userImage":"/images/users/user_m_16.jpg","rating":5,"date":"January 2025","comment":"Perfect for a small family. Easy to drive in Cairo."}
-    ]
-  },
-  {
-    "id": 18,
-    "name": "Honda CR‑V",
-    "description": "Reliable SUV with excellent fuel efficiency for families.",
-    "seats": 4,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Sunroof", "Lane Assist"],
-    "images":[
-      "/images-car/HondaCR‑V.webp",
-      "/images-car/HondaCR‑V2.jpg",
-      "/images-car/HondaCR‑V3.jpg"
-    ],
-    "price": 130,
-    "basePrice": 130,
-    "overview": "Honda CR-V is a reliable, fuel-efficient SUV for small families. Features sunroof, lane assist, and comfortable interior for city and weekend trips.",
-    "highlights": ["Fuel-efficient","Compact SUV","Sunroof","Lane assist technology"],
-    "amenities": ["Air Conditioning","GPS Navigation","Sunroof","Lane Assist","Bluetooth Connectivity","USB Ports"],
-    "reviews": {
-      "overallRating": 4.6,
-      "totalReviews": 876,
-      "ratingCriteria": {"experience":4.6,"comfort":4.5,"reliability":4.7,"valueForMoney":4.5,"features":4.6}
+    {
+      "id": "19",
+      "name": "Mazda CX‑5",
+      "brand": "Mazda",
+      "model": "CX-5",
+      "year": 2024,
+      "city": "Aswan",
+      "price": 140,
+      "basePrice": 140,
+      "type": "SUV",
+      "transmission": "automatic",
+      "seats": 4,
+      "total_fleet": 20,
+      "available_now": 6,
+      "fuelType": "Petrol",
+      "nextAvailability": "2025-12-26",
+      "description": "Stylish and comfortable SUV for smaller families.",
+      "overview": "Mazda CX-5 is a stylish, compact SUV with premium interior and audio system. Perfect for small families and weekend trips.",
+      "features": ["GPS", "A/C", "Heated Seats", "Premium Audio"],
+      "highlights": ["Stylish design", "Heated seats", "Premium audio system", "Compact and comfortable"],
+      "amenities": ["Air Conditioning", "GPS Navigation", "Heated Seats", "Premium Audio", "Bluetooth Connectivity", "USB Ports"],
+      "images": ["/images-car/MazdaCX‑5.webp", "/images-car/MazdaCX‑52.jpg", "/images-car/MazdaCX‑53.avif", "/images-car/MazdaCX‑54.webp"],
+      "status": "available",
+      "featured": true,
+      "isFeatured": true,
+      "reviews": {
+        "overallRating": 4.7,
+        "totalReviews": 934,
+        "ratingCriteria": { "experience": 4.7, "comfort": 4.8, "reliability": 4.6, "valueForMoney": 4.6, "features": 4.7 }
+      },
+      "userReviews": [
+        { "id": 1, "userName": "Ethan Davis", "userImage": "/images/users/user_m_18.jpg", "rating": 5, "date": "March 2025", "comment": "Very comfortable and smooth." }
+      ]
     },
-    "userReviews": [
-      {"id":1,"userName":"Olivia Smith","userImage":"/images/users/user_f_17.jpg","rating":4,"date":"February 2025","comment":"Compact and smooth ride. Great for family trips."}
-    ]
-  },
-  {
-    "id": 19,
-    "name": "Mazda CX‑5",
-    "description": "Stylish and comfortable SUV for smaller families.",
-    "seats": 4,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Heated Seats", "Premium Audio"],
-    "images":[
-      "/images-car/MazdaCX‑5.webp",
-      "/images-car/MazdaCX‑52.jpg",
-      "/images-car/MazdaCX‑53.avif",
-      "/images-car/MazdaCX‑54.webp"
-    ],
-    "price": 140,
-    "basePrice": 140,
-    "overview": "Mazda CX-5 is a stylish, compact SUV with premium interior and audio system. Perfect for small families and weekend trips with comfortable seating.",
-    "highlights": ["Stylish design","Heated seats","Premium audio system","Compact and comfortable"],
-    "amenities": ["Air Conditioning","GPS Navigation","Heated Seats","Premium Audio","Bluetooth Connectivity","USB Ports"],
-    "reviews": {
-      "overallRating": 4.7,
-      "totalReviews": 934,
-      "ratingCriteria": {"experience":4.7,"comfort":4.8,"reliability":4.6,"valueForMoney":4.6,"features":4.7}
-    },
-    "userReviews": [
-      {"id":1,"userName":"Ethan Davis","userImage":"/images/users/user_m_18.jpg","rating":5,"date":"March 2025","comment":"Very comfortable and smooth. Perfect for weekend trips."}
-    ]
-  },
-  {
-    "id": 20,
-    "name": "Toyota Avanza",
-    "description": "Compact MPV ideal for 5–7 passengers, perfect for city rides and family trips.",
-    "seats": 7,
-    "transmission": "Auto",
-    "features": ["GPS", "A/C", "Bluetooth", "Rear Camera"],
-    "images":[
-      "/images-car/ToyotaAvanza.avif",
-      "/images-car/ToyotaAvanza2.avif",
-      "/images-car/ToyotaAvanza3.avif",
-      "/images-car/ToyotaAvanza4.png"
-    ],
-    "price": 140,
-    "basePrice": 140,
-    "overview": "Toyota Avanza is a compact MPV suitable for city rides and family trips. Flexible seating and practical features make it ideal for 5-7 passengers.",
-    "highlights": ["Compact MPV","Flexible seating","Family-friendly","Fuel-efficient"],
-    "amenities": ["Air Conditioning","GPS Navigation","Bluetooth Connectivity","Rear Camera","Cruise Control","USB Ports"],
-    "reviews": {
-      "overallRating": 4.6,
-      "totalReviews": 854,
-      "ratingCriteria": {"experience":4.6,"comfort":4.5,"reliability":4.7,"valueForMoney":4.5,"features":4.6}
-    },
-    "userReviews": [
-      {"id":1,"userName":"Sophia Lee","userImage":"/images/users/user_f_19.jpg","rating":4,"date":"March 2025","comment":"Practical and easy to drive. Good for family use."}
-    ]
-  }
-],
+    {
+      "id": "20",
+      "name": "Toyota Avanza",
+      "brand": "Toyota",
+      "model": "Avanza",
+      "year": 2022,
+      "city": "Sharm El Sheikh",
+      "price": 140,
+      "basePrice": 140,
+      "type": "Van",
+      "transmission": "automatic",
+      "seats": 7,
+      "total_fleet": 20,
+      "available_now": 2,
+      "fuelType": "Diesel",
+      "nextAvailability": "2025-12-28",
+      "description": "Compact MPV ideal for 5–7 passengers, perfect for city rides and family trips.",
+      "overview": "Toyota Avanza is a compact MPV suitable for city rides and family trips.",
+      "features": ["GPS", "A/C", "Bluetooth", "Rear Camera"],
+      "highlights": ["Compact MPV", "Flexible seating", "Family-friendly", "Fuel-efficient"],
+      "amenities": ["Air Conditioning", "GPS Navigation", "Bluetooth Connectivity", "Rear Camera", "Cruise Control", "USB Ports"],
+      "images": ["/images-car/ToyotaAvanza.avif", "/images-car/ToyotaAvanza2.avif", "/images-car/ToyotaAvanza3.avif", "/images-car/ToyotaAvanza4.png"],
+      "status": "pending",
+      "featured": true,
+      "isFeatured": true,
+      "reviews": {
+        "overallRating": 4.6,
+        "totalReviews": 854,
+        "ratingCriteria": { "experience": 4.6, "comfort": 4.5, "reliability": 4.7, "valueForMoney": 4.5, "features": 4.6 }
+      },
+      "userReviews": [
+        { "id": 1, "userName": "Sophia Lee", "userImage": "/images/users/user_f_19.jpg", "rating": 4, "date": "March 2025", "comment": "Practical and easy to drive." }
+      ]
+    }
+  ],
   "trips": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Siwa Oasis Camping",
+      "city": "Siwa Oasis",
+      "destination": "Siwa Oasis",
+      "tripType": "Desert Safari",
+      "featured": true,
+      "status": "Ongoing",
+      "availableSpots": 8,
       "description": "Explore the remote Siwa Oasis, salt lakes, and spend nights under the stars. Perfect for those seeking tranquility and a connection with nature.",
       "price": 13700,
       "rating": 4.8,
@@ -5788,9 +6577,12 @@
         {
           "day": 1,
           "title": "Arrival & Shali Fortress",
-          "time": "08:00 AM",
-          "description": "Departure from Cairo. Arrive in Siwa, check into the eco-lodge, and visit the ancient Shali Fortress for sunset.",
           "activities": [
+            {
+              "time": "08:00 AM",
+              "title": "Departure & Arrival",
+              "desc": "Departure from Cairo. Arrive in Siwa, check into the eco-lodge, and visit the ancient Shali Fortress for sunset."
+            },
             {
               "time": "06:00 PM",
               "title": "Sunset at Shali",
@@ -5801,9 +6593,12 @@
         {
           "day": 2,
           "title": "Salt Lakes & Cleopatra Spring",
-          "time": "09:00 AM",
-          "description": "Visit the famous salt lakes for a float, followed by a refreshing dip in Cleopatra's Spring.",
           "activities": [
+            {
+              "time": "09:00 AM",
+              "title": "Morning Tour",
+              "desc": "Visit the famous salt lakes for a float, followed by a refreshing dip in Cleopatra's Spring."
+            },
             {
               "time": "10:00 AM",
               "title": "Salt Lakes Swimming",
@@ -5819,9 +6614,12 @@
         {
           "day": 3,
           "title": "Great Sand Sea Safari",
-          "time": "02:00 PM",
-          "description": " thrilling 4x4 jeep safari into the dunes, sandboarding, and camping under the stars.",
           "activities": [
+            {
+              "time": "02:00 PM",
+              "title": "Safari Start",
+              "desc": "Thrilling 4x4 jeep safari into the dunes, sandboarding, and camping under the stars."
+            },
             {
               "time": "04:00 PM",
               "title": "Sandboarding",
@@ -5837,9 +6635,13 @@
         {
           "day": 4,
           "title": "Return to Cairo",
-          "time": "08:00 AM",
-          "description": "Breakfast at camp and departure back to Cairo.",
-          "activities": []
+          "activities": [
+            {
+              "time": "08:00 AM",
+              "title": "Departure",
+              "desc": "Breakfast at camp and departure back to Cairo."
+            }
+          ]
         }
       ],
       "hotel": {
@@ -5866,11 +6668,16 @@
         "transport": true,
         "accommodation": true,
         "meals": 3
-      }
+      },
+      "availability": "Available"
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Luxor & Aswan Nile Cruise",
+      "city": "Luxor & Aswan",
+      "destination": "Luxor & Aswan",
+      "tripType": "Nile Cruise",
+      "availableSpots": 12,
       "description": "Experience ancient Egypt with visits to Valley of the Kings, Karnak Temple, and Abu Simbel. A journey through history on a luxury cruise.",
       "price": 28500,
       "rating": 4.9,
@@ -5900,42 +6707,62 @@
         {
           "day": 1,
           "title": "Boarding in Luxor",
-          "time": "11:00 AM",
-          "description": "Check-in to your cruise ship. Lunch on board followed by a visit to Karnak and Luxor Temples.",
-          "activities": []
+          "activities": [
+            {
+              "time": "11:00 AM",
+              "title": "Boarding & Lunch",
+              "desc": "Check-in to your cruise ship. Lunch on board followed by a visit to Karnak and Luxor Temples."
+            }
+          ]
         },
         {
           "day": 2,
           "title": "West Bank Tour",
-          "time": "08:00 AM",
-          "description": "Visit Valley of the Kings, Hatshepsut Temple, and Colossi of Memnon. Sail to Edfu.",
-          "activities": []
+          "activities": [
+            {
+              "time": "08:00 AM",
+              "title": "West Bank Visits",
+              "desc": "Visit Valley of the Kings, Hatshepsut Temple, and Colossi of Memnon. Sail to Edfu."
+            }
+          ]
         },
         {
           "day": 3,
           "title": "Edfu & Kom Ombo",
-          "time": "09:00 AM",
-          "description": "Visit Edfu Temple by horse carriage, then sail to Kom Ombo to visit the double temple.",
-          "activities": []
+          "activities": [
+            {
+              "time": "09:00 AM",
+              "title": "Edfu Temple",
+              "desc": "Visit Edfu Temple by horse carriage, then sail to Kom Ombo to visit the double temple."
+            }
+          ]
         },
         {
           "day": 4,
           "title": "Aswan Highlights",
-          "time": "09:00 AM",
-          "description": "Visit Philae Temple and the High Dam. Optional trip to Abu Simbel.",
-          "activities": []
+          "activities": [
+            {
+              "time": "09:00 AM",
+              "title": "Aswan Tour",
+              "desc": "Visit Philae Temple and the High Dam. Optional trip to Abu Simbel."
+            }
+          ]
         },
         {
           "day": 5,
           "title": "Disembarkation",
-          "time": "08:00 AM",
-          "description": "Breakfast and checkout in Aswan.",
-          "activities": []
+          "activities": [
+            {
+              "time": "08:00 AM",
+              "title": "Checkout",
+              "desc": "Breakfast and checkout in Aswan."
+            }
+          ]
         }
       ],
       "hotel": {
         "name": "Royal Nile Cruise",
-        "rating": 5.0,
+        "rating": 5,
         "image": "/images/7.png",
         "features": [
           "Pool",
@@ -5958,11 +6785,13 @@
         "transport": true,
         "accommodation": true,
         "meals": 3
-      }
+      },
+      "status": "Completed"
     },
     {
-      "id": 3,
-      "title": "Sharm El Sheikh Trip",
+      "id": "3",
+      "title": "Sharm El Sheikh ",
+      "city": "Sharm El Sheikh",
       "description": "Escape to the perfect beach getaway in Sharm El Sheikh, one of Egypt's most stunning Red Sea destinations. This all-inclusive package combines relaxation on pristine beaches, world-class snorkeling and diving, and luxurious resort amenities.",
       "price": 12600,
       "rating": 4.8,
@@ -5995,9 +6824,12 @@
         {
           "day": 1,
           "title": "Arrival & Beach Relaxation",
-          "time": "10:00 AM",
-          "description": "Airport Pickup & Resort Check-in. Our representative will greet you at Sharm El Sheikh International Airport and transfer you to your luxury resort. Check-in and receive your welcome drink.",
           "activities": [
+            {
+              "time": "10:00 AM",
+              "title": "Arrival",
+              "desc": "Airport Pickup & Resort Check-in. Our representative will greet you at Sharm El Sheikh International Airport and transfer you to your luxury resort. Check-in and receive your welcome drink."
+            },
             {
               "time": "12:00 PM",
               "title": "Welcome Lunch at Resort",
@@ -6018,9 +6850,12 @@
         {
           "day": 2,
           "title": "Snorkeling Adventure & Beach Activities",
-          "time": "09:00 AM",
-          "description": "Breakfast & Preparation. Start your day with a hearty breakfast buffet. Pick up your snorkeling equipment from the water center.",
           "activities": [
+            {
+              "time": "09:00 AM",
+              "title": "Breakfast & Preparation",
+              "desc": "Breakfast & Preparation. Start your day with a hearty breakfast buffet. Pick up your snorkeling equipment from the water center."
+            },
             {
               "time": "11:00 AM",
               "title": "Guided Snorkeling Tour",
@@ -6046,9 +6881,12 @@
         {
           "day": 3,
           "title": "Leisure Morning & Departure",
-          "time": "09:00 AM",
-          "description": "Farewell Breakfast. Start your day with a final breakfast. Soak up remaining sun rays before check-out.",
           "activities": [
+            {
+              "time": "09:00 AM",
+              "title": "Farewell Breakfast",
+              "desc": "Farewell Breakfast. Start your day with a final breakfast. Soak up remaining sun rays before check-out."
+            },
             {
               "time": "11:00 AM",
               "title": "Final Beach Time",
@@ -6105,8 +6943,8 @@
       }
     },
     {
-      "id": 4,
-      "title": "Hurghada Beach & Desert Safari",
+      "id": "4",
+      "title": "Hurghada Beach & Safari",
       "description": "Combine beach relaxation with thrilling quad biking and Bedouin culture experience.",
       "price": 8400,
       "rating": 4.7,
@@ -6174,7 +7012,7 @@
       }
     },
     {
-      "id": 5,
+      "id": "5",
       "title": "Dahab",
       "description": "Perfect for adventure seekers - world-class diving spots and peaceful yoga retreats.",
       "price": 9000,
@@ -6245,7 +7083,7 @@
       }
     },
     {
-      "id": 6,
+      "id": "6",
       "title": "Nuweibaa & Ras Shaitain",
       "description": "A peaceful seaside retreat in eco-friendly huts with campfires lights.",
       "price": 5900,
@@ -6307,7 +7145,7 @@
       }
     },
     {
-      "id": 7,
+      "id": "7",
       "title": "Fayoum",
       "description": "A quick adventure: lakes, waterfalls, deserts, and sandboarding.",
       "price": 900,
@@ -6348,7 +7186,7 @@
       }
     },
     {
-      "id": 8,
+      "id": "8",
       "title": "Alexandria",
       "description": "A charming getaway to the Mediterranean bride: history and sea food.",
       "price": 3800,
@@ -6402,7 +7240,7 @@
       }
     },
     {
-      "id": 9,
+      "id": "9",
       "title": "White Desert",
       "description": "Unearthly landscapes with white chalk rock formations.",
       "price": 4500,
@@ -6457,7 +7295,34 @@
       }
     },
     {
-      "id": 10,
+      "id": "10",
+      "title": "Alexandria",
+      "description": "A charming getaway to the Mediterranean bride: history and sea food.",
+      "price": 3800,
+      "rating": 4.5,
+      "reviews": 112,
+      "duration": "2 Days / 1 Night",
+      "image": "/images/5.jpg",
+      "images": [
+        "/images/5.jpg",
+        "/images/7.png"
+      ],
+      "maxPeople": 30,
+      "availableDates": [
+        "Daily"
+      ],
+      "highlights": [],
+      "itinerary": [],
+      "hotel": null,
+      "reviewsList": [],
+      "amenities": {
+        "transport": true,
+        "accommodation": true,
+        "meals": 4
+      }
+    },
+    {
+      "id": "11",
       "title": "Alexandria",
       "description": "A charming getaway to the Mediterranean bride: history and sea food.",
       "price": 3800,
@@ -6484,7 +7349,664 @@
       }
     }
   ],
+  "bookings": [
+    {
+      "id": "2e6a",
+      "userId": null,
+      "type": "trip",
+      "itemId": 3,
+      "itemName": "Sharm El Sheikh ",
+      "itemData": {
+        "id": 3,
+        "title": "Sharm El Sheikh ",
+        "city": "Sharm El Sheikh",
+        "description": "Escape to the perfect beach getaway in Sharm El Sheikh, one of Egypt's most stunning Red Sea destinations. This all-inclusive package combines relaxation on pristine beaches, world-class snorkeling and diving, and luxurious resort amenities.",
+        "price": 12600,
+        "rating": 4.8,
+        "reviews": 15,
+        "duration": "5 Days / 4 Nights",
+        "image": "/images/4.jpg",
+        "images": [
+          "/images/4.jpg",
+          "/images/3.png",
+          "/images/8.png",
+          "/images/5.jpg"
+        ],
+        "maxPeople": 40,
+        "availableDates": [
+          "1 Dec - 5 Dec 2024",
+          "12 Dec - 16 Dec 2024",
+          "22 Dec - 26 Dec 2024"
+        ],
+        "highlights": [
+          "5 nights accommodation in 5 stars resort",
+          "Unlimited soft drinks, mineral waters, and alcoholic beverages",
+          "Snorkeling equipment",
+          "Daily entertainment program",
+          "All meals (Breakfast, Lunch, Dinner)",
+          "Round trip airport transfers",
+          "Access to resort facilities (pools, gym, spa)",
+          "Free Wi-Fi throughout resort"
+        ],
+        "itinerary": [
+          {
+            "day": 1,
+            "title": "Arrival & Beach Relaxation",
+            "activities": [
+              {
+                "time": "10:00 AM",
+                "title": "Arrival",
+                "desc": "Airport Pickup & Resort Check-in. Our representative will greet you at Sharm El Sheikh International Airport and transfer you to your luxury resort. Check-in and receive your welcome drink."
+              },
+              {
+                "time": "12:00 PM",
+                "title": "Welcome Lunch at Resort",
+                "desc": "Savor a delicious buffet lunch featuring international and local Egyptian cuisine at the resort's main restaurant."
+              },
+              {
+                "time": "02:00 PM",
+                "title": "Beach Time & Pool Relaxation",
+                "desc": "Spend the afternoon relaxing on the resort's private beach or by the pool. Take your first dip in the crystal-clear Red Sea waters."
+              },
+              {
+                "time": "07:00 PM",
+                "title": "Dinner & Evening Entertainment",
+                "desc": "Enjoy a gourmet dinner followed by live entertainment at the resort's theater. Shows include traditional folklore shows or international performances."
+              }
+            ]
+          },
+          {
+            "day": 2,
+            "title": "Snorkeling Adventure & Beach Activities",
+            "activities": [
+              {
+                "time": "09:00 AM",
+                "title": "Breakfast & Preparation",
+                "desc": "Breakfast & Preparation. Start your day with a hearty breakfast buffet. Pick up your snorkeling equipment from the water center."
+              },
+              {
+                "time": "11:00 AM",
+                "title": "Guided Snorkeling Tour",
+                "desc": "Join our experienced guide for an unforgettable snorkeling experience at Ras Mohammed National Park or nearby coral reefs. Explore vibrant marine life."
+              },
+              {
+                "time": "01:00 PM",
+                "title": "Beachside Lunch",
+                "desc": "Enjoy lunch at the beach restaurant with stunning sea views. Fresh seafood and salads are our picks."
+              },
+              {
+                "time": "03:00 PM",
+                "title": "Free Time & Water Sports",
+                "desc": "Relax on the beach or try optional activities like diving, parasailing, or banana boat rides (additional cost)."
+              },
+              {
+                "time": "08:00 PM",
+                "title": "Themed Dinner Night",
+                "desc": "Experience a special themed dinner (Italian, Asian, or Egyptian Night depending on the day). Dance the night away at the resort bar."
+              }
+            ]
+          },
+          {
+            "day": 3,
+            "title": "Leisure Morning & Departure",
+            "activities": [
+              {
+                "time": "09:00 AM",
+                "title": "Farewell Breakfast",
+                "desc": "Farewell Breakfast. Start your day with a final breakfast. Soak up remaining sun rays before check-out."
+              },
+              {
+                "time": "11:00 AM",
+                "title": "Final Beach Time",
+                "desc": "Savor the last moments on the beach."
+              },
+              {
+                "time": "12:00 PM",
+                "title": "Check-out & Airport Transfer",
+                "desc": "Check out from the resort. Our driver will transfer you to the airport for your flight home."
+              }
+            ]
+          }
+        ],
+        "hotel": {
+          "name": "Sharm Grand Plaza Resort",
+          "rating": 4.8,
+          "image": "/images/4.jpg",
+          "features": [
+            "5 Stars",
+            "Private Beach",
+            "3 Pools",
+            "Spa & Wellness",
+            "5 Restaurants",
+            "Kids Club"
+          ]
+        },
+        "reviewsList": [
+          {
+            "id": 1,
+            "user": "Ahmed Ali",
+            "rating": 5,
+            "date": "2 days ago",
+            "text": "Absolutely amazing experience! The resort was beautiful, the food was delicious, and the snorkeling was breathtaking. Highly recommend!"
+          },
+          {
+            "id": 2,
+            "user": "Monica Bellucci",
+            "rating": 5,
+            "date": "1 week ago",
+            "text": "A perfect vacation. Everything was organized perfectly, from the airport transfer to the daily activities. Will definitely come back."
+          },
+          {
+            "id": 3,
+            "user": "John Doe",
+            "rating": 4,
+            "date": "2 weeks ago",
+            "text": "Great trip overall. The hotel is fantastic. The only downside was the flight delay, but that's not the agency's fault."
+          }
+        ],
+        "amenities": {
+          "transport": true,
+          "accommodation": true,
+          "meals": 3
+        }
+      },
+      "bookingData": {
+        "date": "22 Dec - 26 Dec 2024",
+        "guests": {
+          "adults": 3,
+          "children": 2
+        }
+      },
+      "pricing": {
+        "basePrice": 12600,
+        "subtotal": 50400,
+        "serviceFee": 2520,
+        "taxes": 7056,
+        "total": 59976,
+        "duration": 5
+      },
+      "status": "confirmed",
+      "guestInfo": {
+        "firstName": "ahmed",
+        "lastName": "roby",
+        "email": "ahmed@gmail.com",
+        "phone": "01096580123",
+        "specialRequests": ""
+      },
+      "paymentInfo": {
+        "method": "arrival",
+        "cardLastFour": null,
+        "cardType": null,
+        "paidAt": null
+      },
+      "paymentStatus": "pending",
+      "bookingNumber": "BK1766081669982953",
+      "bookingDate": "2025-12-18T18:14:29.982Z"
+    },
+    {
+      "id": "3be8",
+      "userId": null,
+      "type": "trip",
+      "itemId": "3",
+      "itemName": "Sharm El Sheikh ",
+      "itemData": {
+        "id": "3",
+        "title": "Sharm El Sheikh ",
+        "city": "Sharm El Sheikh",
+        "description": "Escape to the perfect beach getaway in Sharm El Sheikh, one of Egypt's most stunning Red Sea destinations. This all-inclusive package combines relaxation on pristine beaches, world-class snorkeling and diving, and luxurious resort amenities.",
+        "price": 12600,
+        "rating": 4.8,
+        "reviews": 15,
+        "duration": "5 Days / 4 Nights",
+        "image": "/images/4.jpg",
+        "images": [
+          "/images/4.jpg",
+          "/images/3.png",
+          "/images/8.png",
+          "/images/5.jpg"
+        ],
+        "maxPeople": 40,
+        "availableDates": [
+          "1 Dec - 5 Dec 2024",
+          "12 Dec - 16 Dec 2024",
+          "22 Dec - 26 Dec 2024"
+        ],
+        "highlights": [
+          "5 nights accommodation in 5 stars resort",
+          "Unlimited soft drinks, mineral waters, and alcoholic beverages",
+          "Snorkeling equipment",
+          "Daily entertainment program",
+          "All meals (Breakfast, Lunch, Dinner)",
+          "Round trip airport transfers",
+          "Access to resort facilities (pools, gym, spa)",
+          "Free Wi-Fi throughout resort"
+        ],
+        "itinerary": [
+          {
+            "day": 1,
+            "title": "Arrival & Beach Relaxation",
+            "activities": [
+              {
+                "time": "10:00 AM",
+                "title": "Arrival",
+                "desc": "Airport Pickup & Resort Check-in. Our representative will greet you at Sharm El Sheikh International Airport and transfer you to your luxury resort. Check-in and receive your welcome drink."
+              },
+              {
+                "time": "12:00 PM",
+                "title": "Welcome Lunch at Resort",
+                "desc": "Savor a delicious buffet lunch featuring international and local Egyptian cuisine at the resort's main restaurant."
+              },
+              {
+                "time": "02:00 PM",
+                "title": "Beach Time & Pool Relaxation",
+                "desc": "Spend the afternoon relaxing on the resort's private beach or by the pool. Take your first dip in the crystal-clear Red Sea waters."
+              },
+              {
+                "time": "07:00 PM",
+                "title": "Dinner & Evening Entertainment",
+                "desc": "Enjoy a gourmet dinner followed by live entertainment at the resort's theater. Shows include traditional folklore shows or international performances."
+              }
+            ]
+          },
+          {
+            "day": 2,
+            "title": "Snorkeling Adventure & Beach Activities",
+            "activities": [
+              {
+                "time": "09:00 AM",
+                "title": "Breakfast & Preparation",
+                "desc": "Breakfast & Preparation. Start your day with a hearty breakfast buffet. Pick up your snorkeling equipment from the water center."
+              },
+              {
+                "time": "11:00 AM",
+                "title": "Guided Snorkeling Tour",
+                "desc": "Join our experienced guide for an unforgettable snorkeling experience at Ras Mohammed National Park or nearby coral reefs. Explore vibrant marine life."
+              },
+              {
+                "time": "01:00 PM",
+                "title": "Beachside Lunch",
+                "desc": "Enjoy lunch at the beach restaurant with stunning sea views. Fresh seafood and salads are our picks."
+              },
+              {
+                "time": "03:00 PM",
+                "title": "Free Time & Water Sports",
+                "desc": "Relax on the beach or try optional activities like diving, parasailing, or banana boat rides (additional cost)."
+              },
+              {
+                "time": "08:00 PM",
+                "title": "Themed Dinner Night",
+                "desc": "Experience a special themed dinner (Italian, Asian, or Egyptian Night depending on the day). Dance the night away at the resort bar."
+              }
+            ]
+          },
+          {
+            "day": 3,
+            "title": "Leisure Morning & Departure",
+            "activities": [
+              {
+                "time": "09:00 AM",
+                "title": "Farewell Breakfast",
+                "desc": "Farewell Breakfast. Start your day with a final breakfast. Soak up remaining sun rays before check-out."
+              },
+              {
+                "time": "11:00 AM",
+                "title": "Final Beach Time",
+                "desc": "Savor the last moments on the beach."
+              },
+              {
+                "time": "12:00 PM",
+                "title": "Check-out & Airport Transfer",
+                "desc": "Check out from the resort. Our driver will transfer you to the airport for your flight home."
+              }
+            ]
+          }
+        ],
+        "hotel": {
+          "name": "Sharm Grand Plaza Resort",
+          "rating": 4.8,
+          "image": "/images/4.jpg",
+          "features": [
+            "5 Stars",
+            "Private Beach",
+            "3 Pools",
+            "Spa & Wellness",
+            "5 Restaurants",
+            "Kids Club"
+          ]
+        },
+        "reviewsList": [
+          {
+            "id": 1,
+            "user": "Ahmed Ali",
+            "rating": 5,
+            "date": "2 days ago",
+            "text": "Absolutely amazing experience! The resort was beautiful, the food was delicious, and the snorkeling was breathtaking. Highly recommend!"
+          },
+          {
+            "id": 2,
+            "user": "Monica Bellucci",
+            "rating": 5,
+            "date": "1 week ago",
+            "text": "A perfect vacation. Everything was organized perfectly, from the airport transfer to the daily activities. Will definitely come back."
+          },
+          {
+            "id": 3,
+            "user": "John Doe",
+            "rating": 4,
+            "date": "2 weeks ago",
+            "text": "Great trip overall. The hotel is fantastic. The only downside was the flight delay, but that's not the agency's fault."
+          }
+        ],
+        "amenities": {
+          "transport": true,
+          "accommodation": true,
+          "meals": 3
+        }
+      },
+      "bookingData": {
+        "date": "1 Dec - 5 Dec 2024",
+        "guests": {
+          "adults": 3,
+          "children": 1
+        }
+      },
+      "pricing": {
+        "basePrice": 12600,
+        "subtotal": 44100,
+        "serviceFee": 2205,
+        "taxes": 6174,
+        "total": 52479,
+        "duration": 4
+      },
+      "status": "confirmed",
+      "guestInfo": {
+        "firstName": "ahmed",
+        "lastName": "roby",
+        "email": "ahmeeed@gmail.com",
+        "phone": "01096580123",
+        "specialRequests": ""
+      },
+      "paymentInfo": {
+        "method": "arrival",
+        "cardLastFour": null,
+        "cardType": null,
+        "paidAt": null
+      },
+      "paymentStatus": "pending",
+      "bookingNumber": "BK1766226171667340",
+      "bookingDate": "2025-12-20T10:22:51.667Z"
+    },
+    {
+      "id": "sample_booking_1",
+      "userId": "1",
+      "title": "Sofitel Legend Old Cataract",
+      "location": "Aswan, Egypt",
+      "date": "Oct 15 - Oct 20, 2025",
+      "time": "14:00",
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400",
+      "status": "confirmed",
+      "type": "hotel",
+      "reference": "H-8842",
+      "price": 1200,
+      "paymentStatus": "paid"
+    },
+    {
+      "id": "sample_booking_2",
+      "userId": "1",
+      "title": "Private Tour: Valley of the Kings",
+      "location": "Luxor, Egypt",
+      "date": "Oct 22, 2025",
+      "time": "08:00 AM",
+      "image": "https://images.unsplash.com/photo-1553913861-c0fddf2619ee?w=400",
+      "status": "cancelled",
+      "type": "trip",
+      "reference": "T-9921",
+      "price": 200
+    },
+    {
+      "id": "b495",
+      "userId": "google_1766087268401",
+      "type": "car",
+      "itemId": "3",
+      "itemName": "Toyota Rush",
+      "itemData": {
+        "id": "3",
+        "name": "Toyota Rush",
+        "description": "Compact SUV ideal for 5-6 passengers with flexibility for city and trips.",
+        "seats": 6,
+        "transmission": "Auto",
+        "total_fleet": 20,
+        "available_now": 6,
+        "booked_today": 4,
+        "in_maintenance": 11,
+        "status": "available",
+        "nextAvailability": "2025-12-19",
+        "featured": true,
+        "features": [
+          "GPS",
+          "A/C",
+          "Bluetooth",
+          "Sunroof"
+        ],
+        "images": [
+          "/images-car/ToyotaRush.jpg",
+          "/images-car/ToyotaRush2.webp",
+          "/images-car/ToyotaRush3.avif",
+          "/images-car/ToyotaRush4.jpg"
+        ],
+        "price": 160,
+        "basePrice": 160,
+        "overview": "Toyota Rush is a compact SUV combining city practicality with weekend trip capabilities. Flexible seating and modern features make it ideal for families.",
+        "highlights": [
+          "Flexible seating",
+          "Sunroof",
+          "Modern infotainment",
+          "Reliable for trips"
+        ],
+        "amenities": [
+          "Air Conditioning",
+          "GPS Navigation",
+          "Bluetooth Connectivity",
+          "Sunroof",
+          "Cruise Control",
+          "USB Ports"
+        ],
+        "reviews": {
+          "overallRating": 4.8,
+          "totalReviews": 1023,
+          "ratingCriteria": {
+            "experience": 4.8,
+            "comfort": 4.7,
+            "reliability": 4.8,
+            "valueForMoney": 4.6,
+            "features": 4.5
+          }
+        },
+        "userReviews": [
+          {
+            "id": 1,
+            "userName": "Alex Johnson",
+            "userImage": "/images/users/user_m_4.jpg",
+            "rating": 5,
+            "date": "January 2025",
+            "comment": "Versatile and smooth ride. Great for road trips."
+          }
+        ]
+      },
+      "bookingData": {
+        "pickupDate": "2025-12-22",
+        "returnDate": "2025-12-23",
+        "pickupTime": "00:00",
+        "passengers": 3,
+        "days": 1
+      },
+      "pricing": {
+        "basePrice": 160,
+        "subtotal": 160,
+        "serviceFee": 8,
+        "taxes": 22.4,
+        "total": 190.4,
+        "duration": 1
+      },
+      "status": "pending",
+      "guestInfo": {
+        "firstName": "as",
+        "lastName": "sad",
+        "email": "asd.@gmail.com",
+        "phone": "01147296027",
+        "specialRequests": "aaaaa"
+      },
+      "paymentInfo": {
+        "method": "arrival",
+        "cardLastFour": null,
+        "cardType": null,
+        "paidAt": null
+      },
+      "paymentStatus": "pending",
+      "bookingNumber": "BK1766272785124819",
+      "bookingDate": "2025-12-20T23:19:45.124Z"
+    }
+  ],
   "reviews": [],
   "wishlist": [],
-  "bookings": []
+  "savedItems": [
+    {
+      "id": "saved_1",
+      "userId": "1",
+      "itemId": "1",
+      "type": "attraction",
+      "title": "Great Pyramids of Giza",
+      "image": "https://images.unsplash.com/photo-1572252009286-268acec5ca0a?w=800",
+      "location": "Giza",
+      "rating": 4.9
+    }
+  ],
+  "recentActivity": [
+    {
+      "id": "act_1",
+      "userId": "1",
+      "title": "Booked Sofitel Legend Old Cataract",
+      "type": "hotel",
+      "date": "2024-12-15",
+      "status": "completed",
+      "icon": "🏨"
+    },
+    {
+      "id": "act_2",
+      "userId": "1",
+      "title": "Cairo Airport Premium Transfer",
+      "type": "car",
+      "date": "2024-09-12",
+      "status": "completed",
+      "icon": "🚗"
+    }
+  ],
+  "tickets": [
+    {
+      "id": "TK-001",
+      "userId": "1",
+      "userName": "Hassan Sabry",
+      "userEmail": "hassan@example.com",
+      "subject": "Refund request for cancelled booking",
+      "status": "Pending",
+      "priority": "High",
+      "createdAt": "2024-12-23T09:00:00.000Z",
+      "updatedAt": "2025-12-23T09:23:42.922Z",
+      "assignedTo": null,
+      "messages": [
+        {
+          "id": 1,
+          "senderId": "1",
+          "senderName": "Hassan Sabry",
+          "content": "I need to request a refund for my booking BK-001234. The hotel cancelled my reservation without notice.",
+          "timestamp": "2024-12-23T09:00:00.000Z",
+          "isSupport": false
+        },
+        {
+          "id": 2,
+          "senderId": "admin_1",
+          "senderName": "Support Team",
+          "content": "I'm sorry to hear about this issue. I'm looking into your booking now and will process the refund immediately.",
+          "timestamp": "2024-12-23T09:30:00.000Z",
+          "isSupport": true
+        },
+        {
+          "id": 1766481799731,
+          "content": "i have a problem with reservation",
+          "senderName": "Hassan Sabry",
+          "senderId": "1",
+          "isSupport": false,
+          "timestamp": "2025-12-23T09:23:19.731Z"
+        },
+        {
+          "id": 1766481822922,
+          "content": "tell me the issue",
+          "senderName": "Support Team",
+          "senderId": "admin_1",
+          "isSupport": true,
+          "timestamp": "2025-12-23T09:23:42.922Z"
+        }
+      ]
+    },
+    {
+      "id": "TK-002",
+      "userId": "google_1766073359742",
+      "userName": "Google User",
+      "userEmail": "user@gmail.com",
+      "subject": "Unable to complete payment",
+      "status": "Pending",
+      "priority": "Medium",
+      "createdAt": "2024-12-22T14:00:00.000Z",
+      "updatedAt": "2025-12-23T14:01:06.920Z",
+      "assignedTo": null,
+      "messages": [
+        {
+          "id": 1,
+          "senderId": "google_1766073359742",
+          "senderName": "Google User",
+          "content": "I keep getting an error when I try to pay with my credit card. Error code: ERR_PAY_01",
+          "timestamp": "2024-12-22T14:00:00.000Z",
+          "isSupport": false
+        },
+        {
+          "id": 1766498466920,
+          "content": "i will check",
+          "senderName": "Support Team",
+          "senderId": "admin_1",
+          "isSupport": true,
+          "timestamp": "2025-12-23T14:01:06.920Z"
+        }
+      ]
+    },
+    {
+      "id": "TK-003",
+      "userId": "3",
+      "userName": "Emma Wilson",
+      "userEmail": "emma@test.com",
+      "subject": "Question about AI trip suggestions",
+      "status": "Resolved",
+      "priority": "Low",
+      "createdAt": "2024-12-20T10:00:00.000Z",
+      "updatedAt": "2024-12-21T11:00:00.000Z",
+      "assignedTo": "1",
+      "messages": [
+        {
+          "id": 1,
+          "senderId": "3",
+          "senderName": "Emma Wilson",
+          "content": "How accurate are the AI suggestions?",
+          "timestamp": "2024-12-20T10:00:00.000Z",
+          "isSupport": false
+        },
+        {
+          "id": 2,
+          "senderId": "1",
+          "senderName": "Hassan Sabry",
+          "content": "They are based on your preferences and popular ratings. They are usually very helpful!",
+          "timestamp": "2024-12-21T11:00:00.000Z",
+          "isSupport": true
+        }
+      ]
+    }
+  ]
 }

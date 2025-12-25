@@ -1,8 +1,10 @@
 ﻿using Serilog;
 using Scalar.AspNetCore;
+using System.Text.Json;
 using Hangfire;
 using Hangfire.Common;
 using Agentic_Rentify.Infragentic;
+using Agentic_Rentify.Infrastructure.Services;
 
 // 1. إعداد الـ Logger المبدئي
 Log.Logger = new LoggerConfiguration()
@@ -28,7 +30,12 @@ try
 
     // builder.Services.AddTransient<Agentic_Rentify.Api.Middleware.GlobalExceptionHandlerMiddleware>(); // Middleware registered via UseMiddleware does not need DI registration if strictly conventional.
     // Removed to fix RequestDelegate resolution error.
-    builder.Services.AddControllers();
+    builder.Services.AddControllers()
+        .AddJsonOptions(options =>
+        {
+            options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+            options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+        });
 
     // 3. دعم الـ Swagger/Swashbuckle للـ API Documentation
     // For MVC controllers with Swashbuckle, we don't need AddEndpointsApiExplorer()
@@ -115,11 +122,15 @@ Comprehensive REST API for an AI-powered travel booking platform with intelligen
     {
         options.AddPolicy("AllowAll", policy => 
         {
-            policy.AllowAnyOrigin()
+            policy.WithOrigins("http://localhost:5173", "http://localhost:3000")
                   .AllowAnyMethod()
-                  .AllowAnyHeader();
+                  .AllowAnyHeader()
+                  .AllowCredentials();
         });
     });
+
+    // SignalR
+    builder.Services.AddSignalR();
 
     var app = builder.Build();
 
@@ -144,12 +155,36 @@ Comprehensive REST API for an AI-powered travel booking platform with intelligen
         logger.LogInformation("Hangfire recurring job 'image-cleanup-hourly' scheduled to run every hour (UTC).");
     }
 
+    // Seed default roles and users on startup
+    try
+    {
+        using var seedScope = app.Services.CreateScope();
+        var dbInitializer = seedScope.ServiceProvider.GetRequiredService<DbInitializer>();
+        dbInitializer.SeedAsync().GetAwaiter().GetResult();
+        Log.Information("Database seeding executed successfully.");
+        
+        // Seed data from db.json
+        var dataSeeder = seedScope.ServiceProvider.GetRequiredService<DataSeeder>();
+        var jsonPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "db.json");
+        dataSeeder.SeedDataFromJsonAsync(jsonPath).GetAwaiter().GetResult();
+        Log.Information("Data import from db.json completed successfully.");
+    }
+    catch (Exception seedEx)
+    {
+        Log.Error(seedEx, "Database seeding failed during startup.");
+    }
+
     app.UseSerilogRequestLogging();
     app.UseMiddleware<Agentic_Rentify.Api.Middleware.GlobalExceptionHandlerMiddleware>(); // Use Middleware
     app.UseHangfireDashboard();
-    app.UseHttpsRedirection();
+    // In development, don't force HTTPS redirection since we're only listening on HTTP
+    if (!app.Environment.IsDevelopment())
+    {
+        app.UseHttpsRedirection();
+    }
     app.UseStaticFiles();
     app.UseCors("AllowAll");
+    app.UseAuthentication();
     app.UseAuthorization();
 
     // 4. Enable Swagger/Swashbuckle in Development
@@ -172,6 +207,7 @@ Comprehensive REST API for an AI-powered travel booking platform with intelligen
     }
 
     app.MapControllers();
+    app.MapHub<Agentic_Rentify.Infragentic.Hubs.ChatHub>("/hubs/chat");
 
     app.Run();
 }

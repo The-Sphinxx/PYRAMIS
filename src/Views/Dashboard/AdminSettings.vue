@@ -1,5 +1,5 @@
 <template>
-  <div class=" mx-auto">
+  <div v-if="isValidRole" class=" mx-auto">
  
     <!-- Top Navigation Tabs -->
     <div class="tabs tabs-boxed mb-6 bg-base-100 p-1 border border-base-200">
@@ -90,15 +90,29 @@
     
     </div>
   </div>
+  <div v-else class="flex flex-col items-center justify-center h-96 space-y-4">
+    <div class="alert alert-error max-w-lg">
+      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      <span>Unauthorized Access. This page is restricted to Administrators only.</span>
+    </div>
+    <button @click="router.push('/dashboard/overview')" class="btn btn-primary">Go to Overview</button>
+  </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useAuthStore } from '@/stores/authStore';
 import { useToast } from '@/composables/useToast';
+import { computed } from 'vue';
+import { useRouter } from 'vue-router';
 import dayjs from 'dayjs';
 
 const authStore = useAuthStore();
+const router = useRouter();
+const isValidRole = computed(() => {
+  const role = authStore.user?.role?.toLowerCase();
+  return role === 'admin';
+});
 const { toast } = useToast();
 
 const activeTab = ref('general');
@@ -124,6 +138,10 @@ const formatDate = (date) => {
 
 // Initialize form with current user data
 onMounted(() => {
+  if (!isValidRole.value) {
+    toast.error('Access restricted to Administrators');
+    return;
+  }
   if (authStore.user) {
     profileForm.value.firstName = authStore.user.firstName || '';
     profileForm.value.lastName = authStore.user.lastName || '';

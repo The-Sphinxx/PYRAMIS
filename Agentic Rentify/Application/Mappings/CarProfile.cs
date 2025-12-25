@@ -9,7 +9,12 @@ public class CarProfile : Profile
     public CarProfile()
     {
         CreateMap<Car, CarResponseDTO>()
-            .ForMember(dest => dest.Price, opt => opt.MapFrom(src => $"{src.Price} $"));
+            .ForMember(dest => dest.Price, opt => opt.MapFrom(src => $"{src.Price} $"))
+            .ForMember(dest => dest.RawPrice, opt => opt.MapFrom(src => src.Price));
+
+        CreateMap<CarReviewSummary, CarReviewSummaryDTO>();
+        CreateMap<CarRatingCriteria, CarRatingCriteriaDTO>();
+        CreateMap<UserReview, UserReviewDTO>();
 
         CreateMap<CreateCarDTO, Car>();
         CreateMap<UpdateCarDTO, Car>();

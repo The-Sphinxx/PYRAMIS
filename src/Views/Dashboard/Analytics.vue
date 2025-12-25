@@ -1,5 +1,27 @@
 <template>
-  <div class="min-h-screen bg-base-200 space-y-2">
+  <div class="min-h-screen bg-base-200 space-y-4 md:space-y-6">
+    <!-- Page Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div>
+        <h1 class="text-2xl md:text-3xl font-bold text-base-content">Analytics Dashboard</h1>
+        <p class="text-base-content/60 mt-1 text-sm md:text-base">Comprehensive insights and performance metrics</p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+        <select class="select select-bordered select-sm w-full sm:w-auto">
+          <option>Last 12 Months</option>
+          <option>Last 6 Months</option>
+          <option>Last 3 Months</option>
+          <option>This Month</option>
+        </select>
+        <button class="btn btn-sm btn-primary gap-2 w-full sm:w-auto">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+          </svg>
+          <span class="hidden sm:inline">Export Report</span>
+          <span class="sm:hidden">Export</span>
+        </button>
+      </div>
+    </div>
  
     <!-- Stats Cards -->
     <StatsCard :stats="stats" />
@@ -10,13 +32,18 @@
     </div>
 
     <!-- Charts Grid -->
-    <div v-else class="space-y-6 mt-6">
+    <div v-else class="space-y-6">
       <!-- Row 1: Mixed Chart - Full Width -->
-      <div class="card bg-base-100 shadow-xl border border-base-300">
+      <div class="card bg-base-100 shadow-xl border border-base-300 hover-lift">
         <div class="card-body">
-          <h3 class="card-title text-lg">Monthly Bookings & Revenue Trend</h3>
-          <p class="text-sm text-base-content/60">Combined view of booking volume and revenue performance</p>
-          <div class="h-96 mt-4">
+          <div class="flex items-start justify-between mb-2">
+            <div>
+              <h3 class="card-title text-lg">Monthly Bookings & Revenue Trend</h3>
+              <p class="text-sm text-base-content/60 mt-1">Combined view of booking volume and revenue performance</p>
+            </div>
+            <div class="badge badge-primary badge-outline">Last 12 Months</div>
+          </div>
+          <div class="h-64 md:h-80 lg:h-96 mt-4 w-full max-w-full overflow-hidden">
             <Bar :data="mixedChartData" :options="mixedChartOptions" />
           </div>
         </div>
@@ -25,22 +52,32 @@
       <!-- Row 2: Area Chart + Radar Chart -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Area Chart - Revenue Analysis -->
-        <div class="card bg-base-100 shadow-xl border border-base-300">
+        <div class="card bg-base-100 shadow-xl border border-base-300 hover-lift">
           <div class="card-body">
-            <h3 class="card-title text-lg">Revenue vs Costs Analysis</h3>
-            <p class="text-sm text-base-content/60">Breakdown of revenue, service fees, and taxes</p>
-            <div class="h-80 mt-4">
+            <div class="flex items-start justify-between mb-2">
+              <div>
+                <h3 class="card-title text-lg">Revenue vs Costs Analysis</h3>
+                <p class="text-sm text-base-content/60 mt-1">Breakdown of revenue, service fees, and taxes</p>
+              </div>
+              <div class="badge badge-success badge-outline">Trending Up</div>
+            </div>
+            <div class="h-64 md:h-80 mt-4 w-full max-w-full overflow-hidden">
               <Line :data="areaChartData" :options="areaChartOptions" />
             </div>
           </div>
         </div>
 
         <!-- Radar Chart - Service Performance -->
-        <div class="card bg-base-100 shadow-xl border border-base-300">
+        <div class="card bg-base-100 shadow-xl border border-base-300 hover-lift">
           <div class="card-body">
-            <h3 class="card-title text-lg">Service Performance Metrics</h3>
-            <p class="text-sm text-base-content/60">Multi-dimensional comparison across services</p>
-            <div class="h-80 mt-4 flex items-center justify-center">
+            <div class="flex items-start justify-between mb-2">
+              <div>
+                <h3 class="card-title text-lg">Service Performance Metrics</h3>
+                <p class="text-sm text-base-content/60 mt-1">Multi-dimensional comparison across services</p>
+              </div>
+              <div class="badge badge-info badge-outline">Normalized</div>
+            </div>
+            <div class="h-64 md:h-80 mt-4 flex items-center justify-center w-full max-w-full overflow-hidden">
               <Radar :data="radarChartData" :options="radarChartOptions" />
             </div>
           </div>
@@ -50,22 +87,32 @@
       <!-- Row 3: Bubble Chart + Polar Area Chart -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Bubble Chart - Revenue per Type -->
-        <div class="card bg-base-100 shadow-xl border border-base-300">
+        <div class="card bg-base-100 shadow-xl border border-base-300 hover-lift">
           <div class="card-body">
-            <h3 class="card-title text-lg">Revenue Distribution by Service</h3>
-            <p class="text-sm text-base-content/60">Bubble size represents total revenue</p>
-            <div class="h-80 mt-4">
+            <div class="flex items-start justify-between mb-2">
+              <div>
+                <h3 class="card-title text-lg">Revenue Distribution by Service</h3>
+                <p class="text-sm text-base-content/60 mt-1">Bubble size represents total revenue</p>
+              </div>
+              <div class="badge badge-secondary badge-outline">Interactive</div>
+            </div>
+            <div class="h-64 md:h-80 mt-4 w-full max-w-full overflow-hidden">
               <Bubble :data="bubbleChartData" :options="bubbleChartOptions" />
             </div>
           </div>
         </div>
 
         <!-- Polar Area Chart - Booking Status -->
-        <div class="card bg-base-100 shadow-xl border border-base-300">
+        <div class="card bg-base-100 shadow-xl border border-base-300 hover-lift">
           <div class="card-body">
-            <h3 class="card-title text-lg">Booking Status Distribution</h3>
-            <p class="text-sm text-base-content/60">Current status of all bookings</p>
-            <div class="h-80 mt-4 flex items-center justify-center">
+            <div class="flex items-start justify-between mb-2">
+              <div>
+                <h3 class="card-title text-lg">Booking Status Distribution</h3>
+                <p class="text-sm text-base-content/60 mt-1">Current status of all bookings</p>
+              </div>
+              <div class="badge badge-accent badge-outline">Real-time</div>
+            </div>
+            <div class="h-64 md:h-80 mt-4 flex items-center justify-center w-full max-w-full overflow-hidden">
               <PolarArea :data="polarAreaChartData" :options="polarAreaChartOptions" />
             </div>
           </div>
@@ -75,10 +122,15 @@
       <!-- Row 4: Stacked Bar Chart + Doughnut Chart -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Stacked Bar Chart - Revenue Breakdown -->
-        <div class="card bg-base-100 shadow-xl border border-base-300">
+        <div class="card bg-base-100 shadow-xl border border-base-300 hover-lift">
           <div class="card-body">
-            <h3 class="card-title text-lg">Revenue Breakdown by Component</h3>
-            <p class="text-sm text-base-content/60">Base price, fees, and taxes per service type</p>
+            <div class="flex items-start justify-between mb-2">
+              <div>
+                <h3 class="card-title text-lg">Revenue Breakdown by Component</h3>
+                <p class="text-sm text-base-content/60 mt-1">Base price, fees, and taxes per service type</p>
+              </div>
+              <div class="badge badge-warning badge-outline">Stacked</div>
+            </div>
             <div class="h-80 mt-4">
               <Bar :data="stackedBarChartData" :options="stackedBarChartOptions" />
             </div>
@@ -86,10 +138,15 @@
         </div>
 
         <!-- Doughnut Chart - Payment Methods -->
-        <div class="card bg-base-100 shadow-xl border border-base-300">
+        <div class="card bg-base-100 shadow-xl border border-base-300 hover-lift">
           <div class="card-body">
-            <h3 class="card-title text-lg">Payment Methods Distribution</h3>
-            <p class="text-sm text-base-content/60">Preferred payment options by customers</p>
+            <div class="flex items-start justify-between mb-2">
+              <div>
+                <h3 class="card-title text-lg">Payment Methods Distribution</h3>
+                <p class="text-sm text-base-content/60 mt-1">Preferred payment options by customers</p>
+              </div>
+              <div class="badge badge-primary badge-outline">Popular</div>
+            </div>
             <div class="h-80 mt-4 flex items-center justify-center">
               <Doughnut :data="paymentMethodsData" :options="doughnutChartOptions" />
             </div>
@@ -98,15 +155,18 @@
       </div>
 
       <!-- Recent Bookings Table -->
-      <div class="card bg-base-100 shadow-xl border border-base-300">
+      <div class="card bg-base-100 shadow-xl border border-base-300 hover-lift">
         <div class="card-body">
           <div class="flex justify-between items-center mb-4">
             <div>
               <h3 class="card-title text-lg">Recent Bookings</h3>
-              <p class="text-sm text-base-content/60">Latest transactions and reservations</p>
+              <p class="text-sm text-base-content/60 mt-1">Latest transactions and reservations</p>
             </div>
-            <router-link to="/dashboard/bookings" class="btn btn-sm btn-primary">
+            <router-link :to="{ name: 'Bookings' }" class="btn btn-sm btn-primary gap-2">
               View All
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
             </router-link>
           </div>
           <div class="overflow-x-auto">
@@ -201,65 +261,27 @@ const bookings = ref([]);
 const users = ref([]);
 const loading = ref(false);
 
-// Helper function to convert HSL to RGB
-const hslToRgb = (hslString) => {
-  if (!hslString) return 'rgba(0, 0, 0, 0.8)';
-  
-  const [h, s, l] = hslString.trim().split(' ').map(v => parseFloat(v));
-  const sDecimal = s / 100;
-  const lDecimal = l / 100;
-  
-  const c = (1 - Math.abs(2 * lDecimal - 1)) * sDecimal;
-  const x = c * (1 - Math.abs((h / 60) % 2 - 1));
-  const m = lDecimal - c / 2;
-  
-  let r = 0, g = 0, b = 0;
-  if (h < 60) { r = c; g = x; b = 0; }
-  else if (h < 120) { r = x; g = c; b = 0; }
-  else if (h < 180) { r = 0; g = c; b = x; }
-  else if (h < 240) { r = 0; g = x; b = c; }
-  else if (h < 300) { r = x; g = 0; b = c; }
-  else { r = c; g = 0; b = x; }
-  
-  r = Math.round((r + m) * 255);
-  g = Math.round((g + m) * 255);
-  b = Math.round((b + m) * 255);
-  
-  return `rgb(${r}, ${g}, ${b})`;
+// Theme colors from tailwind.config.js
+const chartColors = {
+  primary: '#C86A41',
+  secondary: '#2A6F7A',
+  accent: '#D5B77A',
+  success: '#36B37E',
+  warning: '#F2A540',
+  error: '#E45858',
+  info: '#3ABFF8',
+  neutral: '#3F3F41',
 };
 
-// Get theme colors
-const getThemeColor = (colorName) => {
-  if (typeof window === 'undefined') return 'rgba(0, 0, 0, 0.8)';
-  const root = document.documentElement;
-  const hsl = getComputedStyle(root).getPropertyValue(`--${colorName}`).trim();
-  return hslToRgb(hsl);
-};
-
-// Color palettes
-const chartColors = computed(() => ({
-  primary: getThemeColor('p'),
-  secondary: getThemeColor('s'),
-  accent: getThemeColor('a'),
-  success: getThemeColor('su'),
-  warning: getThemeColor('wa'),
-  error: getThemeColor('er'),
-  info: getThemeColor('in'),
-  neutral: getThemeColor('n'),
-}));
-
-const colorPalette = computed(() => {
-  const colors = chartColors.value;
-  return [
-    colors.primary.replace('rgb', 'rgba').replace(')', ', 0.8)'),
-    colors.warning.replace('rgb', 'rgba').replace(')', ', 0.8)'),
-    colors.success.replace('rgb', 'rgba').replace(')', ', 0.8)'),
-    colors.error.replace('rgb', 'rgba').replace(')', ', 0.8)'),
-    colors.info.replace('rgb', 'rgba').replace(')', ', 0.8)'),
-    colors.secondary.replace('rgb', 'rgba').replace(')', ', 0.8)'),
-    colors.accent.replace('rgb', 'rgba').replace(')', ', 0.8)'),
-  ];
-});
+const colorPalette = [
+  'rgba(200, 106, 65, 0.8)',   // primary
+  'rgba(242, 165, 64, 0.8)',   // warning
+  'rgba(54, 179, 126, 0.8)',   // success
+  'rgba(228, 88, 88, 0.8)',    // error
+  'rgba(59, 191, 248, 0.8)',   // info
+  'rgba(42, 111, 122, 0.8)',   // secondary
+  'rgba(213, 183, 122, 0.8)',  // accent
+];
 
 // Fetch Data
 const fetchData = async () => {
@@ -369,8 +391,8 @@ const mixedChartData = computed(() => {
         type: 'bar',
         label: 'Number of Bookings',
         data: Object.values(monthlyData).map(d => d.count),
-        backgroundColor: colorPalette.value[0],
-        borderColor: chartColors.value.primary,
+        backgroundColor: colorPalette[0],
+        borderColor: chartColors.primary,
         borderWidth: 2,
         yAxisID: 'y',
         order: 2
@@ -379,8 +401,8 @@ const mixedChartData = computed(() => {
         type: 'line',
         label: 'Revenue ($)',
         data: Object.values(monthlyData).map(d => d.revenue),
-        borderColor: chartColors.value.success,
-        backgroundColor: chartColors.value.success.replace('rgb', 'rgba').replace(')', ', 0.1)'),
+        borderColor: chartColors.success,
+        backgroundColor: 'rgba(54, 179, 126, 0.1)',
         borderWidth: 3,
         tension: 0.4,
         fill: false,
@@ -484,24 +506,24 @@ const areaChartData = computed(() => {
       {
         label: 'Base Revenue',
         data: Object.values(monthlyData).map(d => d.revenue),
-        borderColor: chartColors.value.primary,
-        backgroundColor: colorPalette.value[0],
+        borderColor: chartColors.primary,
+        backgroundColor: colorPalette[0],
         fill: true,
         tension: 0.4
       },
       {
         label: 'Service Fees',
         data: Object.values(monthlyData).map(d => d.fees),
-        borderColor: chartColors.value.warning,
-        backgroundColor: colorPalette.value[1],
+        borderColor: chartColors.warning,
+        backgroundColor: colorPalette[1],
         fill: true,
         tension: 0.4
       },
       {
         label: 'Taxes',
         data: Object.values(monthlyData).map(d => d.taxes),
-        borderColor: chartColors.value.info,
-        backgroundColor: colorPalette.value[4],
+        borderColor: chartColors.info,
+        backgroundColor: colorPalette[4],
         fill: true,
         tension: 0.4
       }
@@ -585,12 +607,12 @@ const radarChartData = computed(() => {
           normalize(serviceMetrics.car.count, maxCount),
           normalize(serviceMetrics.attraction.count, maxCount)
         ],
-        borderColor: chartColors.value.primary,
-        backgroundColor: colorPalette.value[0],
-        pointBackgroundColor: chartColors.value.primary,
+        borderColor: chartColors.primary,
+        backgroundColor: colorPalette[0],
+        pointBackgroundColor: chartColors.primary,
         pointBorderColor: '#fff',
         pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: chartColors.value.primary
+        pointHoverBorderColor: chartColors.primary
       },
       {
         label: 'Revenue Performance',
@@ -600,12 +622,12 @@ const radarChartData = computed(() => {
           normalize(serviceMetrics.car.revenue, maxRevenue),
           normalize(serviceMetrics.attraction.revenue, maxRevenue)
         ],
-        borderColor: chartColors.value.success,
-        backgroundColor: colorPalette.value[2],
-        pointBackgroundColor: chartColors.value.success,
+        borderColor: chartColors.success,
+        backgroundColor: colorPalette[2],
+        pointBackgroundColor: chartColors.success,
         pointBorderColor: '#fff',
         pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: chartColors.value.success
+        pointHoverBorderColor: chartColors.success
       }
     ]
   };
@@ -664,7 +686,7 @@ const bubbleChartData = computed(() => {
     y: data.totalRevenue / data.count, // Average revenue
     r: Math.sqrt(data.totalRevenue) / 20, // Bubble size based on total revenue
     label: type.charAt(0).toUpperCase() + type.slice(1),
-    color: colorPalette.value[index % colorPalette.value.length]
+    color: colorPalette[index % colorPalette.length]
   }));
 
   return {
@@ -749,9 +771,9 @@ const polarAreaChartData = computed(() => {
       label: 'Bookings',
       data,
       backgroundColor: [
-        colorPalette.value[2], // confirmed - success
-        colorPalette.value[1], // pending - warning
-        colorPalette.value[3], // cancelled - error
+        colorPalette[2], // confirmed - success
+        colorPalette[1], // pending - warning
+        colorPalette[3], // cancelled - error
         'rgba(156, 163, 175, 0.8)' // unknown - gray
       ],
       borderColor: '#fff',
@@ -811,22 +833,22 @@ const stackedBarChartData = computed(() => {
       {
         label: 'Base Price',
         data: Object.values(revenueByType).map(r => r.base),
-        backgroundColor: colorPalette.value[0],
-        borderColor: chartColors.value.primary,
+        backgroundColor: colorPalette[0],
+        borderColor: chartColors.primary,
         borderWidth: 2
       },
       {
         label: 'Service Fees',
         data: Object.values(revenueByType).map(r => r.fees),
-        backgroundColor: colorPalette.value[1],
-        borderColor: chartColors.value.warning,
+        backgroundColor: colorPalette[1],
+        borderColor: chartColors.warning,
         borderWidth: 2
       },
       {
         label: 'Taxes',
         data: Object.values(revenueByType).map(r => r.taxes),
-        backgroundColor: colorPalette.value[4],
-        borderColor: chartColors.value.info,
+        backgroundColor: colorPalette[4],
+        borderColor: chartColors.info,
         borderWidth: 2
       }
     ]
@@ -893,7 +915,7 @@ const paymentMethodsData = computed(() => {
     datasets: [{
       label: 'Bookings',
       data: Object.values(methods),
-      backgroundColor: colorPalette.value,
+      backgroundColor: colorPalette,
       borderColor: '#fff',
       borderWidth: 3
     }]
@@ -951,12 +973,21 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.card {
-  transition: all 0.3s ease;
+.hover-lift {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.08);
+}
+
+.card-body {
+  position: relative;
+}
+
+.badge {
+  font-weight: 600;
+  font-size: 0.75rem;
 }
 </style>

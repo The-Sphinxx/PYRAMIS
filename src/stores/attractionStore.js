@@ -113,8 +113,34 @@ export const useAttractionStore = defineStore('attraction', {
       this.error = null;
       try {
         const data = await attractionApi.getAllAttractions();
-        this.attractions = data;
-        this.filteredAttractions = data;
+        
+        // Handle both paginated response and direct array
+        const attractionsArray = Array.isArray(data) ? data : (data.items || data.data || []);
+
+        // Transform attractions data - map PascalCase API response to camelCase
+        this.attractions = attractionsArray.map(attr => ({
+          id: attr.id,
+          name: attr.name,
+          description: attr.description,
+          city: attr.city,
+          country: attr.country,
+          category: attr.category,
+          categories: attr.categories || [],
+          price: attr.price,
+          rating: attr.rating || 0,
+          images: attr.images || [],
+          image: attr.images?.[0],
+          imageUrl: attr.images?.[0] || '/images/placeholder-attraction.jpg',
+          reviews: attr.reviews || { totalReviews: 0 },
+          totalReviews: attr.reviews?.totalReviews || 0,
+          highlights: attr.highlights || [],
+          openingHours: attr.openingHours,
+          address: attr.address,
+          // Include original data for flexibility
+          ...attr
+        }));
+        
+        this.filteredAttractions = this.attractions;
         this.cities = this.uniqueCities;
       } catch (error) {
         this.error = error.message || 'Failed to fetch attractions';

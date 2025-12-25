@@ -9,4 +9,9 @@ public class GetAllHotelsQuery : IRequest<PagedResponse<HotelResponseDTO>>
     public int PageNumber { get; set; } = 1;
     public int PageSize { get; set; } = 10;
     public string? SearchTerm { get; set; }
+    public string? City { get; set; }
+    public string? Status { get; set; }
+    public bool? Featured { get; set; }
+    public double? MinRating { get; set; }
+    public decimal? MaxPrice { get; set; }
 }

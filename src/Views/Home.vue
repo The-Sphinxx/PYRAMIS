@@ -2,98 +2,75 @@
   <div>
     <Navbar />
 
-    <div class="relative w-full h-screen overflow-hidden">
+    <div class="relative w-full h-[100dvh] overflow-hidden">
       <div class="absolute inset-0 bg-cover bg-center" :style="{ backgroundImage: `url(${heroSection.backgroundImage || defaultHero.backgroundImage})` }">
         <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50"></div>
       </div>
       
-      <div class="relative z-10 flex flex-col items-center justify-center h-full page-container text-center">
-        <h1 class="font-cairo text-5xl md:text-7xl font-bold text-white mb-4 animate-fade-in" v-html="heroDisplayTitle"></h1>
+      <div class="relative z-10 flex flex-col items-center justify-start pt-32 lg:justify-center lg:pt-20 h-full page-container text-center">
+        <h1 class="font-cairo text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 animate-fade-in" v-html="heroDisplayTitle"></h1>
         <p class="font-cairo text-xl md:text-2xl text-white/90 mb-12 animate-fade-in-delay">
           {{ heroSection.subtitle || defaultHero.subtitle }}
         </p>
 
-        <div class="w-full max-w-5xl bg-base-100 rounded-lg shadow-2xl p-6 animate-slide-up">
-          <div class="flex justify-center gap-4 mb-6 flex-wrap">
-            <button v-for="tab in tabs" :key="tab.id" @click="activeTab = tab.id" 
-              :class="['btn font-cairo font-semibold transition-all', activeTab === tab.id ? 'btn-primary' : 'btn-ghost hover:bg-base-200']">
-              <i :class="[tab.icon, 'mr-2']"></i>{{ tab.name }}
+        <div class="w-full max-w-6xl bg-base-100 rounded-2xl shadow-2xl p-4 md:p-6 animate-slide-up ">
+          <!-- Tab Headers -->
+          <div role="tablist" class="tabs bg-base-200 p-2 mb-4 md:mb-6 gap-2 flex-wrap md:flex-nowrap rounded-t-lg">
+            <button
+              role="tab"
+              v-for="tab in tabs"
+              :key="tab.id"
+              @click="activeTab = tab.id"
+              :class="[
+                'tab font-cairo font-semibold text-sm md:text-base transition-all duration-300 flex-1 md:flex-initial rounded-lg flex items-center justify-center min-h-[48px]',
+                activeTab === tab.id 
+                  ? 'text-primary bg-base-100 shadow-sm' 
+                  : 'text-base-content/60 hover:text-base-content hover:bg-base-300/50'
+              ]"
+            >
+              <i :class="[tab.icon, 'mr-1 md:mr-2']"></i>
+              <span class="hidden sm:inline">{{ tab.name }}</span>
+              <span class="sm:hidden">{{ tab.name.split(' ')[0] }}</span>
             </button>
           </div>
 
-          <div class="bg-base-100 rounded-lg p-4">
-            <div v-if="activeTab === 'attractions'" class="flex flex-col md:flex-row gap-4">
-              <div class="flex-1">
-                <label class="block text-sm text-base-content/70 mb-2 font-cairo">City</label>
-                <select class="select select-bordered w-full">
-                  <option>All Cities</option>
-                  <option>Cairo</option>
-                  <option>Luxor</option>
-                  <option>Aswan</option>
-                  <option>Alexandria</option>
-                </select>
-              </div>
-              <div class="flex-1">
-                <label class="block text-sm text-base-content/70 mb-2 font-cairo">Search</label>
-                <input type="text" placeholder="Pyramids, Museums..." class="input input-bordered w-full"/>
-              </div>
-              <button class="btn btn-primary self-end font-cairo font-semibold">
-                <i class="fas fa-search mr-2"></i>Search
-              </button>
+          <!-- Tab Content -->
+          <div>
+            <!-- Attractions -->
+            <div v-show="activeTab === 'attractions'">
+              <Search 
+                type="attractions"
+                :show-ai-planner="true"
+                :cities="egyptianCities"
+                @search="handleAttractionSearch"
+                @ai-planner="handleAiPlanner"
+              />
             </div>
 
-            <div v-if="activeTab === 'hotels'" class="flex flex-col md:flex-row gap-4">
-              <div class="flex-1">
-                <label class="block text-sm text-base-content/70 mb-2 font-cairo">Destination</label>
-                <input type="text" placeholder="City or hotel name" class="input input-bordered w-full"/>
-              </div>
-              <div class="flex-1">
-                <label class="block text-sm text-base-content/70 mb-2 font-cairo">Check-in</label>
-                <input type="date" class="input input-bordered w-full"/>
-              </div>
-              <div class="flex-1">
-                <label class="block text-sm text-base-content/70 mb-2 font-cairo">Check-out</label>
-                <input type="date" class="input input-bordered w-full"/>
-              </div>
-              <button class="btn btn-primary self-end font-cairo font-semibold">
-                <i class="fas fa-search mr-2"></i>Search
-              </button>
+            <!-- Hotels -->
+            <div v-show="activeTab === 'hotels'">
+              <Search
+                type="hotels"
+                @search="handleHotelSearch"
+              />
             </div>
 
-            <div v-if="activeTab === 'trips'" class="flex flex-col md:flex-row gap-4">
-              <div class="flex-1">
-                <label class="block text-sm text-base-content/70 mb-2 font-cairo">Pick-up Location</label>
-                <input type="text" placeholder="City or station" class="input input-bordered w-full"/>
-              </div>
-              <div class="flex-1">
-                <label class="block text-sm text-base-content/70 mb-2 font-cairo">Pick-up Date</label>
-                <input type="date" class="input input-bordered w-full"/>
-              </div>
-              <div class="flex-1">
-                <label class="block text-sm text-base-content/70 mb-2 font-cairo">Drop-off Date</label>
-                <input type="date" class="input input-bordered w-full"/>
-              </div>
-              <button class="btn btn-primary self-end font-cairo font-semibold">
-                <i class="fas fa-search mr-2"></i>Search
-              </button>
+            <!-- Trips -->
+            <div v-show="activeTab === 'trips'">
+              <Search
+                type="trips"
+                :show-ai-planner="true"
+                @search="handleTripSearch"
+                @ai-planner="handleAiPlanner"
+              />
             </div>
 
-            <div v-if="activeTab === 'car-rental'" class="flex flex-col md:flex-row gap-4">
-              <div class="flex-1">
-                <label class="block text-sm text-base-content/70 mb-2 font-cairo">Pick-up Location</label>
-                <input type="text" placeholder="City or station" class="input input-bordered w-full"/>
-              </div>
-              <div class="flex-1">
-                <label class="block text-sm text-base-content/70 mb-2 font-cairo">Pick-up Date</label>
-                <input type="date" class="input input-bordered w-full"/>
-              </div>
-              <div class="flex-1">
-                <label class="block text-sm text-base-content/70 mb-2 font-cairo">Time</label>
-                <input type="time" value="10:00" class="input input-bordered w-full"/>
-              </div>
-              <button class="btn btn-primary self-end font-cairo font-semibold">
-                <i class="fas fa-search mr-2"></i>Search
-              </button>
+            <!-- Car Rental -->
+            <div v-show="activeTab === 'car-rental'">
+              <Search
+                type="cars"
+                @search="handleCarSearch"
+              />
             </div>
           </div>
         </div>
@@ -106,30 +83,18 @@
           <h2 class="font-cairo text-4xl md:text-5xl font-bold text-base-content mb-4">Explore Egypt's Wonders</h2>
           <p class="font-cairo text-lg text-base-content/70 max-w-3xl mx-auto">Discover ancient treasures and timeless beauty across Egypt's most iconic attractions</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-          <div v-for="item in attractions" :key="item.id" class="group card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden">
-            <figure class="relative h-64 overflow-hidden">
-              <img :src="item.image" :alt="item.name" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"/>
-              <div v-if="item.featured" class="absolute top-4 right-4 bg-base-100/90 backdrop-blur-sm rounded-full p-2">
-                <i class="fas fa-sparkles text-primary"></i>
-              </div>
-            </figure>
-            <div class="card-body p-5">
-              <div class="flex justify-between items-start mb-3">
-                <h3 class="font-cairo text-xl font-bold text-base-content">{{item.name}}</h3>
-                <span class="font-cairo text-xl font-bold text-primary">{{item.price}}$</span>
-              </div>
-              <div class="flex items-center text-base-content/70 mb-3">
-                <i class="fas fa-map-marker-alt text-primary mr-2"></i>
-                <span class="font-cairo text-sm">{{item.location}}</span>
-              </div>
-              <div class="flex items-center">
-                <i class="fas fa-star text-warning mr-1"></i>
-                <span class="font-cairo font-semibold text-base-content mr-1">{{item.rating}}</span>
-                <span class="font-cairo text-sm text-base-content/60">({{item.reviews}} reviews)</span>
-              </div>
-            </div>
-          </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-10">
+          <AttractionCard
+            v-for="item in attractions.slice(0, 4)"
+            :key="item.id"
+            :id="item.id"
+            :image="item.image"
+            :title="item.name"
+            :price="`${item.price}$`"
+            :location="item.location"
+            :rating="item.rating"
+            :reviews="parseReviews(item.reviews)"
+          />
         </div>
         <div class="text-center">
           <button class="btn btn-primary font-cairo font-semibold w-64 h-12 min-h-0 text-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all">View All</button>
@@ -143,38 +108,21 @@
           <h2 class="font-cairo text-4xl md:text-5xl font-bold text-base-content mb-4">Luxury Hotels & Resorts</h2>
           <p class="font-cairo text-lg text-base-content/70 max-w-3xl mx-auto">Experience Egyptian hospitality at its finest in our handpicked selection of premium hotels</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-          <div v-for="item in hotels" :key="item.id" class="group card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-base-300">
-            <figure class="relative h-64 overflow-hidden">
-              <img :src="item.image" :alt="item.name" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"/>
-            </figure>
-            <div class="card-body p-5">
-              <div class="flex justify-between items-start mb-3">
-                <h3 class="font-cairo text-xl font-bold text-base-content">{{item.name}}</h3>
-                <span class="font-cairo text-xl font-bold text-primary">${{item.price}}</span>
-              </div>
-              <div class="flex items-center text-base-content/70 mb-3">
-                <i class="fas fa-map-marker-alt text-primary mr-2"></i>
-                <span class="font-cairo text-sm">{{item.location}}</span>
-              </div>
-              <div class="flex items-center mb-3">
-                <i class="fas fa-star text-warning mr-1"></i>
-                <span class="font-cairo font-semibold text-base-content mr-1">{{item.rating}}</span>
-                <span class="font-cairo text-sm text-base-content/60">({{item.reviews}})</span>
-              </div>
-              <div class="flex flex-wrap gap-3 text-sm">
-                <div class="flex items-center text-accent">
-                  <i class="fas fa-wifi mr-1"></i><span class="font-cairo">Wifi</span>
-                </div>
-                <div class="flex items-center text-accent">
-                  <i class="fas fa-swimming-pool mr-1"></i><span class="font-cairo">Pool</span>
-                </div>
-                <div class="flex items-center text-accent">
-                  <i class="fas fa-dumbbell mr-1"></i><span class="font-cairo">Gym</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-10">
+          <HotelCard
+            v-for="item in hotels.slice(0, 4)"
+            :key="item.id"
+            :hotel="{
+              id: item.id,
+              name: item.name,
+              image: item.image,
+              price: item.price,
+              location: item.location,
+              rating: item.rating,
+              reviews: item.reviews,
+              amenities: item.amenities || ['Wifi', 'Pool', 'Gym']
+            }"
+          />
         </div>
         <div class="text-center">
           <button class="btn btn-primary font-cairo font-semibold w-64 h-12 min-h-0 text-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all">View All</button>
@@ -188,32 +136,27 @@
           <h2 class="font-cairo text-4xl md:text-5xl font-bold text-base-content mb-4">Featured Trips & Tours</h2>
           <p class="font-cairo text-lg text-base-content/70 max-w-3xl mx-auto">All-inclusive packages designed for unforgettable Egyptian adventures</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-          <div v-for="item in trips" :key="item.id" class="group card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden">
-            <figure class="relative h-64 overflow-hidden">
-              <img :src="item.image" :alt="item.name" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"/>
-            </figure>
-            <div class="card-body p-5">
-              <div class="flex justify-between items-start mb-3">
-                <h3 class="font-cairo text-xl font-bold text-base-content">{{item.name}}</h3>
-                <span class="font-cairo text-xl font-bold text-primary">${{item.price}}</span>
-              </div>
-              <p class="font-cairo text-sm text-base-content/70 mb-3">{{item.description}}</p>
-              <div class="flex items-center text-base-content/70 mb-2">
-                <i class="fas fa-map-marker-alt text-primary mr-2"></i>
-                <span class="font-cairo text-sm">{{item.location}}</span>
-              </div>
-              <div class="flex items-center text-base-content/70 mb-3">
-                <i class="fas fa-clock text-primary mr-2"></i>
-                <span class="font-cairo text-sm">{{item.duration}}</span>
-              </div>
-              <div class="flex items-center">
-                <i class="fas fa-star text-warning mr-1"></i>
-                <span class="font-cairo font-semibold text-base-content mr-1">{{item.rating}}</span>
-                <span class="font-cairo text-sm text-base-content/60">({{item.reviews}})</span>
-              </div>
-            </div>
-          </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-10">
+          <TripCard
+            v-for="item in trips.slice(0, 4)"
+            :key="item.id"
+            :trip="{
+              id: item.id,
+              title: item.name,
+              image: item.image,
+              price: item.price,
+              description: item.description,
+              location: item.location,
+              duration: item.duration,
+              rating: item.rating,
+              reviews: item.reviews,
+              amenities: {
+                transport: true,
+                accommodation: true,
+                meals: 'All'
+              }
+            }"
+          />
         </div>
         <div class="text-center">
           <button class="btn btn-primary font-cairo font-semibold w-64 h-12 min-h-0 text-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all">View All</button>
@@ -227,33 +170,22 @@
           <h2 class="font-cairo text-4xl md:text-5xl font-bold text-base-content mb-4">Rent Your Perfect Ride</h2>
           <p class="font-cairo text-lg text-base-content/70 max-w-3xl mx-auto">Explore Egypt at your own pace with our diverse fleet of quality vehicles</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-          <div v-for="item in cars" :key="item.id" class="group card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-base-300">
-            <figure class="relative h-64 overflow-hidden bg-neutral">
-              <img :src="item.image" :alt="item.name" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"/>
-            </figure>
-            <div class="card-body p-5">
-              <div class="flex justify-between items-start mb-3">
-                <h3 class="font-cairo text-xl font-bold text-base-content">{{item.name}}</h3>
-                <span class="font-cairo text-xl font-bold text-primary">${{item.price}}</span>
-              </div>
-              <p class="font-cairo text-sm text-base-content/70 mb-3">{{item.description}}</p>
-              <div class="flex flex-wrap gap-3 text-sm">
-                <div class="flex items-center text-accent">
-                  <i class="fas fa-cog mr-1"></i><span class="font-cairo">Auto</span>
-                </div>
-                <div class="flex items-center text-accent">
-                  <i class="fas fa-users mr-1"></i><span class="font-cairo">7 Seats</span>
-                </div>
-                <div class="flex items-center text-accent">
-                  <i class="fas fa-compass mr-1"></i><span class="font-cairo">GPS</span>
-                </div>
-                <div class="flex items-center text-accent">
-                  <i class="fas fa-snowflake mr-1"></i><span class="font-cairo">A/C</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-10">
+          <CarCard
+            v-for="item in cars.slice(0, 4)"
+            :key="item.id"
+            :car="{
+              id: item.id,
+              name: item.name,
+              images: [item.image],
+              price: item.price,
+              overview: item.description,
+              reviews: {
+                overallRating: 4.5,
+                totalReviews: 120
+              }
+            }"
+          />
         </div>
         <div class="text-center">
           <button class="btn btn-primary font-cairo font-semibold w-64 h-12 min-h-0 text-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all">View All</button>
@@ -274,7 +206,7 @@
           <p class="font-cairo text-xl text-base-content/80 max-w-3xl mx-auto mb-10">
             Tell our smart assistant what you want, and it builds a full personalized itinerary.
           </p>
-          <button class="btn btn-lg bg-base-100 hover:bg-base-200 border-accent/30 text-base-content font-cairo font-semibold px-8 shadow-lg">
+          <button @click="handleAiPlanner" class="btn btn-lg bg-base-100 hover:bg-base-200 border-accent/30 text-base-content font-cairo font-semibold px-8 shadow-lg">
             <i class="fas fa-magic mr-2 text-primary"></i>
             Start <span class="text-primary">AI Planning</span>
           </button>
@@ -314,7 +246,7 @@
           </h2>
           <div class="w-24 h-1 bg-primary mx-auto"></div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           <div v-for="item in whyChooseUs" :key="item.id" class="flex flex-col items-center text-center">
             <i :class="[item.icon, 'text-6xl text-primary mb-4']"></i>
             <h3 class="font-cairo text-xl font-bold text-base-content mb-2">{{item.title}}</h3>
@@ -346,10 +278,18 @@
 
 <script setup>
 import { computed, onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { getHomePageData } from '@/Services/homeService';
+import { getBackgrounds } from '@/Services/systemService';
 import Navbar from '@/components/Common/Navbar.vue';
 import Footer from '@/components/Common/Footer.vue';
+import Search from '@/components/Common/Search.vue';
+import AttractionCard from '@/components/Attractions/AttractionCard.vue';
+import HotelCard from '@/components/Hotels/HotelCard.vue';
+import TripCard from '@/components/Trips/TripCard.vue';
+import CarCard from '@/components/Cars/CarCard.vue';
 
+const router = useRouter();
 const activeTab = ref('attractions');
 const isHomeLoading = ref(false);
 
@@ -360,12 +300,31 @@ const tabs = [
   { id: 'car-rental', name: 'Car Rental', icon: 'fas fa-car' }
 ];
 
+// Egyptian cities
+const egyptianCities = ref([
+  'All Cities',
+  'Cairo',
+  'Giza',
+  'Alexandria',
+  'Luxor',
+  'Aswan',
+  'Sharm El Sheikh',
+  'Dahab',
+  'Hurghada',
+  'Faiyum',
+  'Ain Sokhna',
+  'El Gouna',
+  'Marsa Alam',
+  'Port Said',
+  'Suez',
+  'Ismailia'
+]);
+
 const defaultHero = {
   title: 'Discover Egypt — Your Journey Starts Here',
   subtitle: 'Explore ancient wonders, luxury stays, and unforgettable experiences',
   backgroundImage: ''
 };
-  import { getBackgrounds } from '@/Services/systemService';
 
 const defaultMetadata = {
   siteName: 'PYRAMIS',
@@ -451,6 +410,63 @@ const applyHomeData = (payload) => {
   whyChooseUs.value = payload?.whyChooseUs?.length ? payload.whyChooseUs : defaultWhyChooseUs;
 };
 
+// Search handlers
+const handleAttractionSearch = (searchData) => {
+  console.log('Attraction Search:', searchData);
+  router.push({
+    name: 'Attractions',
+    query: {
+      city: searchData.city,
+      query: searchData.query
+    }
+  });
+};
+
+const handleHotelSearch = (searchData) => {
+  console.log('Hotel Search:', searchData);
+  router.push({
+    name: 'Hotels',
+    query: {
+      destination: searchData.destination,
+      checkIn: searchData.checkIn,
+      checkOut: searchData.checkOut,
+      guests: searchData.guests,
+      rooms: searchData.rooms
+    }
+  });
+};
+
+const handleTripSearch = (searchData) => {
+  console.log('Trip Search:', searchData);
+  router.push({
+    name: 'Trips',
+    query: {
+      from: searchData.pickupLocation,
+      pickupDate: searchData.pickupDate,
+      dropoffDate: searchData.dropoffDate
+    }
+  });
+};
+
+const handleCarSearch = (searchData) => {
+  console.log('Car Search:', searchData);
+  router.push({
+    name: 'Cars',
+    query: {
+      location: searchData.pickupLocation,
+      pickupDate: searchData.pickupDate,
+      pickupTime: searchData.pickupTime,
+      dropoffDate: searchData.dropoffDate,
+      dropoffTime: searchData.dropoffTime
+    }
+  });
+};
+
+const handleAiPlanner = () => {
+  console.log('Opening AI Trip Planner...');
+  alert('AI Trip Planner - Coming Soon! 🤖✨');
+};
+
 onMounted(async () => {
   isHomeLoading.value = true;
   try {
@@ -474,6 +490,13 @@ onMounted(async () => {
     isHomeLoading.value = false;
   }
 });
+
+const parseReviews = (reviewsStr) => {
+  if (typeof reviewsStr === 'number') return reviewsStr;
+  if (!reviewsStr) return 0;
+  const cleaned = reviewsStr.replace(/,/g, '').replace(/reviews?/i, '').trim();
+  return parseInt(cleaned) || 0;
+};
 </script>
 
 <style scoped>
@@ -481,6 +504,16 @@ onMounted(async () => {
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
 
 .font-cairo { font-family: 'Cairo', sans-serif; }
+
+/* Tab styling */
+.tabs-boxed {
+  border-radius: 1rem;
+}
+
+.tab {
+  border-radius: 0.75rem;
+  padding: 0.75rem 1.5rem;
+}
 
 @keyframes fade-in {
   from { opacity: 0; transform: translateY(-20px); }
@@ -495,4 +528,11 @@ onMounted(async () => {
 .animate-fade-in { animation: fade-in 1s ease-out; }
 .animate-fade-in-delay { animation: fade-in 1s ease-out 0.3s both; }
 .animate-slide-up { animation: slide-up 1s ease-out 0.6s both; }
+
+/* Smooth transitions */
+* {
+  transition-property: color, background-color, border-color, transform, box-shadow;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+}
 </style>

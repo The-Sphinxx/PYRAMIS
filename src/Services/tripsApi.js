@@ -1,131 +1,140 @@
 // Services/tripsApi.js
-import axios from 'axios';
-
-// Base URL - adjust according to your json-server configuration
-const API_BASE_URL = 'http://localhost:3000';
+import { api } from './api';
 
 const tripsApi = {
-    // Get all trips
-    async getAllTrips() {
+    /**
+     * Get all trips with optional filtering via Specification Pattern
+     * @param {Object} params - Query parameters for filtering
+     * @param {number} params.pageIndex - Page number (0-based)
+     * @param {number} params.pageSize - Items per page
+     * @param {string} params.city - Filter by city
+     * @param {string} params.category - Filter by category
+     * @param {number} params.minPrice - Minimum price filter
+     * @param {number} params.maxPrice - Maximum price filter
+     * @param {number} params.minRating - Minimum rating filter
+     * @param {string} params.searchQuery - Search text
+     * @returns {Promise<Array|Object>} Trips data or paginated result
+     */
+    async getAllTrips(params = {}) {
         try {
-            const response = await axios.get(`${API_BASE_URL}/trips`);
+            const response = await api.get('/Trips', { params });
             return response.data;
         } catch (error) {
             console.error('Error fetching trips:', error);
-            throw new Error('Failed to fetch trips');
+            throw error;
         }
     },
 
-    // Get trip by ID
+    /**
+     * Get trip by ID
+     * @param {number} id - Trip ID
+     * @returns {Promise<Object>} Trip details
+     */
     async getTripById(id) {
         try {
-            const response = await axios.get(`${API_BASE_URL}/trips/${id}`);
+            const response = await api.get(`/Trips/${id}`);
             return response.data;
         } catch (error) {
             console.error(`Error fetching trip ${id}:`, error);
-            throw new Error('Failed to fetch trip details');
+            throw error;
         }
     },
 
-    // Get trips by category
-    async getTripsByCategory(category) {
+    /**
+     * Get filtered trips using Specification Pattern
+     * @param {Object} filters - Filter object
+     * @param {number} filters.pageIndex - Page number (0-based)
+     * @param {number} filters.pageSize - Items per page
+     * @param {string} filters.city - City name
+     * @param {string} filters.category - Category type
+     * @param {number} filters.minPrice - Minimum price
+     * @param {number} filters.maxPrice - Maximum price
+     * @param {number} filters.minRating - Minimum rating
+     * @param {string} filters.searchQuery - Search text
+     * @returns {Promise<Array|Object>} Filtered trips
+     */
+    async getFilteredTrips(filters = {}) {
         try {
-            const response = await axios.get(`${API_BASE_URL}/trips`, {
-                params: { category }
-            });
-            return response.data;
-        } catch (error) {
-            console.error('Error fetching trips by category:', error);
-            throw new Error('Failed to fetch trips by category');
-        }
-    },
+            const params = {
+                ...(filters.pageIndex !== undefined && { pageIndex: filters.pageIndex }),
+                ...(filters.pageSize !== undefined && { pageSize: filters.pageSize }),
+                ...(filters.city && filters.city !== 'All' && filters.city !== 'All Cities' && { city: filters.city }),
+                ...(filters.category && filters.category !== 'all' && { category: filters.category }),
+                ...(filters.minPrice !== undefined && { minPrice: filters.minPrice }),
+                ...(filters.maxPrice !== undefined && { maxPrice: filters.maxPrice }),
+                ...(filters.minRating !== undefined && { minRating: filters.minRating }),
+                ...(filters.searchQuery && { searchQuery: filters.searchQuery })
+            };
 
-    // Get trips by city/destination
-    async getTripsByCity(city) {
-        try {
-            const response = await axios.get(`${API_BASE_URL}/trips`, {
-                params: { city }
-            });
-            return response.data;
-        } catch (error) {
-            console.error('Error fetching trips by city:', error);
-            throw new Error('Failed to fetch trips by city');
-        }
-    },
-
-    // Search trips
-    async searchTrips(query) {
-        try {
-            const response = await axios.get(`${API_BASE_URL}/trips`, {
-                params: { q: query }
-            });
-            return response.data;
-        } catch (error) {
-            console.error('Error searching trips:', error);
-            throw new Error('Failed to search trips');
-        }
-    },
-
-    // Get filtered trips
-    async getFilteredTrips(filters) {
-        try {
-            const params = {};
-
-            if (filters.category && filters.category !== 'All') {
-                params.category = filters.category;
-            }
-
-            if (filters.city && filters.city !== 'All') {
-                params.city = filters.city;
-            }
-
-            if (filters.minRating) {
-                params.rating_gte = filters.minRating;
-            }
-
-            if (filters.maxPrice) {
-                params.price_lte = filters.maxPrice; // Assuming simple number, might need custom filtering if string
-            }
-
-            const response = await axios.get(`${API_BASE_URL}/trips`, { params });
+            const response = await api.get('/Trips', { params });
             return response.data;
         } catch (error) {
             console.error('Error fetching filtered trips:', error);
-            throw new Error('Failed to fetch filtered trips');
+            throw error;
         }
     },
 
-    // Get top rated trips
+    /**
+     * Get trips by category
+     * @param {string} category - Category name
+     * @returns {Promise<Array>} Trips in the category
+     */
+    async getTripsByCategory(category) {
+        return this.getFilteredTrips({ category });
+    },
+
+    /**
+     * Get trips by city/destination
+     * @param {string} city - City name
+     * @returns {Promise<Array>} Trips in the city
+     */
+    async getTripsByCity(city) {
+        return this.getFilteredTrips({ city });
+    },
+
+    /**
+     * Search trips
+     * @param {string} query - Search query
+     * @returns {Promise<Array>} Trips matching search
+     */
+    async searchTrips(query) {
+        if (!query) return this.getAllTrips();
+        return this.getFilteredTrips({ searchQuery: query });
+    },
+
+    /**
+     * Get top rated trips
+     * @param {number} limit - Number of results
+     * @returns {Promise<Array>} Top rated trips
+     */
     async getTopRatedTrips(limit = 8) {
         try {
-            const response = await axios.get(`${API_BASE_URL}/trips`, {
-                params: {
-                    _sort: 'rating',
-                    _order: 'desc',
-                    _limit: limit
-                }
+            const response = await api.get('/Trips', {
+                params: { pageSize: limit, minRating: 4.5 }
             });
             return response.data;
         } catch (error) {
             console.error('Error fetching top rated trips:', error);
-            throw new Error('Failed to fetch top rated trips');
+            throw error;
         }
     },
 
-    // Book trip (POST to bookings endpoint)
+    /**
+     * Book a trip
+     * @param {Object} bookingData - Booking information
+     * @returns {Promise<Object>} Booking confirmation
+     */
     async bookTrip(tripId, bookingData) {
         try {
-            const response = await axios.post(`${API_BASE_URL}/bookings`, {
-                tripId, // or itemId generically
+            const response = await api.post('/Bookings', {
+                tripId,
                 type: 'trip',
                 ...bookingData,
-                bookingDate: new Date().toISOString(),
-                status: 'pending'
             });
             return response.data;
         } catch (error) {
             console.error('Error booking trip:', error);
-            throw new Error('Failed to book trip');
+            throw error;
         }
     }
 };

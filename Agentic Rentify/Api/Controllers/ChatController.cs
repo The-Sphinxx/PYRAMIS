@@ -83,9 +83,9 @@ public class ChatController(IChatAiService chatAiService) : ControllerBase
         var response = await chatAiService.GetResponseAsync(request.Message, userId, request.Conversation);
         
         // Build updated conversation history
-        var updatedConversation = new List<ChatMessage>(request.Conversation ?? new List<ChatMessage>());
-        updatedConversation.Add(new ChatMessage { Role = "user", Content = request.Message });
-        updatedConversation.Add(new ChatMessage { Role = "assistant", Content = response });
+        var updatedConversation = new List<AiChatMessage>(request.Conversation ?? new List<AiChatMessage>());
+        updatedConversation.Add(new AiChatMessage { Role = "user", Content = request.Message });
+        updatedConversation.Add(new AiChatMessage { Role = "assistant", Content = response });
 
         return Ok(new 
         { 
@@ -101,7 +101,7 @@ public class ChatRequest
     public string Message { get; set; } = string.Empty;
     
     /// <summary>Conversation history for context maintenance</summary>
-    public List<ChatMessage>? Conversation { get; set; }
+    public List<AiChatMessage>? Conversation { get; set; }
 }
 
 /// <summary>
@@ -113,5 +113,5 @@ public class ChatResponse
     public string Message { get; set; } = string.Empty;
     
     /// <summary>Updated conversation history including this exchange</summary>
-    public List<ChatMessage> Conversation { get; set; } = new();
+    public List<AiChatMessage> Conversation { get; set; } = new();
 }

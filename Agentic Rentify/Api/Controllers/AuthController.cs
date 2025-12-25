@@ -53,7 +53,7 @@ public class AuthController : ControllerBase
     [HttpPost("register")]
     [ProducesResponseType(typeof(AuthResponseDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<AuthResponseDto>> Register([FromBody] RegisterCommand command)
+    public async Task<ActionResult<AuthResponseDto>> Register([FromBody] RegisterClientCommand command)
     {
         return Ok(await _mediator.Send(command));
     }
@@ -260,5 +260,24 @@ public class AuthController : ControllerBase
     {
         await _mediator.Send(command);
         return Ok(new { Message = "OTP resent successfully" });
+    }
+
+    /// <summary>
+    /// Creates a new Admin user. Requires Admin role.
+    /// </summary>
+    /// <param name="command">Admin details.</param>
+    /// <returns>Created admin id and email.</returns>
+    /// <response code="200">Admin created.</response>
+    /// <response code="401">Unauthorized.</response>
+    /// <response code="403">Forbidden.</response>
+    [Authorize(Roles = "Admin")]
+    [HttpPost("create-admin")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> CreateAdmin([FromBody] CreateAdminCommand command)
+    {
+        var result = await _mediator.Send(command);
+        return Ok(result);
     }
 }

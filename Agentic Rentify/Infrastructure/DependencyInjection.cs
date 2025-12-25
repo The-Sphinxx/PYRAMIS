@@ -11,6 +11,7 @@ using Agentic_Rentify.Infrastructure.Repositories;
 using Agentic_Rentify.Infrastructure.Persistence;
 using Agentic_Rentify.Infrastructure.Services;
 using Agentic_Rentify.Infrastructure.Settings;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 public static class InfrastructureExtensions
 {
@@ -60,6 +61,22 @@ public static class InfrastructureExtensions
                 IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(configuration["JwtSettings:Secret"]!)),
                 ClockSkew = TimeSpan.Zero
             };
+
+            // Allow SignalR WebSocket connections to pass JWT via 'access_token' query string
+            o.Events = new JwtBearerEvents
+            {
+                OnMessageReceived = context =>
+                {
+                    var accessToken = context.Request.Query["access_token"];
+                    var path = context.HttpContext.Request.Path;
+
+                    if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/hubs/chat"))
+                    {
+                        context.Token = accessToken!;
+                    }
+                    return Task.CompletedTask;
+                }
+            };
         });
 
         // Register Services
@@ -69,10 +86,15 @@ public static class InfrastructureExtensions
         services.AddScoped<EmailTemplateService>();
         services.AddScoped<IPaymentService, StripePaymentService>();
         services.AddScoped<IAgentLogRepository, AgentLogRepository>();
+        services.AddScoped<IChatRepository, ChatRepository>();
         
         // Photo & Image Management Services
         services.AddScoped<IPhotoService, PhotoService>();
         services.AddScoped<IImageCleanupService, ImageCleanupService>();
+        
+        // Seeder
+        services.AddScoped<DbInitializer>();
+        services.AddScoped<DataSeeder>();
 
         // Repositories & UnitOfWork
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));

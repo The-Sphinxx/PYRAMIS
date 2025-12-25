@@ -7,7 +7,7 @@ namespace Agentic_Rentify.Infragentic.Services;
 
 public class ChatAiService(Kernel kernel) : IChatAiService
 {
-    public async Task<string> GetResponseAsync(string userMessage, string? userId = null, List<ChatMessage>? conversationHistory = null)
+    public async Task<string> GetResponseAsync(string userMessage, string? userId = null, List<AiChatMessage>? conversationHistory = null)
     {
         var executionSettings = new OpenAIPromptExecutionSettings
         {

@@ -67,9 +67,37 @@ export const useTripsStore = defineStore('trips', {
             this.loading = true;
             this.error = null;
             try {
-                this.trips = await tripsApi.getAllTrips();
+                const data = await tripsApi.getAllTrips();
+                
+                // Handle both paginated response and direct array
+                const tripsArray = Array.isArray(data) ? data : (data.items || data.data || []);
+
+                // Transform trips data - map PascalCase API response to camelCase
+                this.trips = tripsArray.map(trip => ({
+                    id: trip.id,
+                    title: trip.title,
+                    description: trip.description,
+                    city: trip.city,
+                    country: trip.country,
+                    category: trip.category,
+                    categories: trip.categories || [],
+                    pricePerDay: trip.pricePerDay,
+                    totalPrice: trip.totalPrice,
+                    images: trip.images || [],
+                    image: trip.images?.[0],
+                    imageUrl: trip.images?.[0] || '/images/placeholder-trip.jpg',
+                    duration: trip.duration,
+                    rating: trip.rating || 0,
+                    reviews: trip.reviews || { totalReviews: 0 },
+                    totalReviews: trip.reviews?.totalReviews || 0,
+                    highlights: trip.highlights || [],
+                    itinerary: trip.itinerary || [],
+                    // Include original data for flexibility
+                    ...trip
+                }));
             } catch (err) {
                 this.error = err.message || 'Failed to fetch trips';
+                console.error('Error fetching trips:', err);
             } finally {
                 this.loading = false;
             }

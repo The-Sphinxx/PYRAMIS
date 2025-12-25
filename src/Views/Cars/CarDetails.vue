@@ -13,8 +13,18 @@
       </button>
     </div>
 
-    <div v-else-if="car" class="bg-base-200 pb-16 !overflow-visible">
-      <div class="page-container mb-8">
+    <div v-else-if="car" class="bg-base-200 pb-8 md:pb-16 !overflow-visible">
+      <div class="page-container py-4">
+        <div class="flex items-center gap-2 text-sm text-base-content/70">
+          <router-link to="/" class="hover:text-primary">Home</router-link>
+          <i class="fas fa-chevron-right text-xs"></i>
+          <router-link to="/cars" class="hover:text-primary">Cars</router-link>
+          <i class="fas fa-chevron-right text-xs"></i>
+          <span class="text-primary font-medium">{{ car.name }}</span>
+        </div>
+      </div>
+
+      <div class="page-container mb-4 md:mb-8">
         <Carousel
           :images="images"
           :auto-play="false"
@@ -23,15 +33,15 @@
       </div>
 
       <div class="page-container !overflow-visible">
-        <div class="mb-8">
-          <h1 class="text-3xl lg:text-4xl font-bold text-primary font-cairo mb-4">
+        <div class="mb-6 md:mb-8">
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary font-cairo mb-3 md:mb-4">
             {{ car.name }}
           </h1>
-          <p class="text-lg text-base-content/70 mb-4">
+          <p class="text-base md:text-lg text-base-content/70 mb-3 md:mb-4">
             {{ car.description }}
           </p>
           
-          <div class="flex flex-wrap items-center gap-4 text-base-content/70">
+          <div class="flex flex-wrap items-center gap-2 sm:gap-3 md:gap-4 text-sm md:text-base text-base-content/70">
             <div class="flex items-center gap-2">
               <i class="fas fa-users text-primary"></i>
               <span>{{ car.seats }} Passengers</span>
@@ -45,70 +55,70 @@
               <span class="font-bold text-base-content">{{ overallReviews.overallRating }}</span>
               <span>({{ overallReviews.totalReviews }} reviews)</span>
             </div>
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 w-full sm:w-auto">
               <i class="fas fa-dollar-sign text-primary"></i>
-              <span class="text-2xl font-bold text-accent">${{ car.price }}/day</span>
+              <span class="text-xl md:text-2xl font-bold text-accent">${{ car.price }}/day</span>
             </div>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div ref="contentColumn" class="lg:col-span-2 space-y-8">
-            <div class="bg-base-100 rounded-lg shadow-lg p-8">
-              <div class="flex items-center gap-3 mb-6">
-                <div class="w-1 h-8 bg-primary rounded-full"></div>
-                <h2 class="text-2xl font-bold text-base-content font-cairo">Overview</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8">
+          <div ref="contentColumn" class="lg:col-span-2 space-y-4 md:space-y-8 order-1">
+            <div class="bg-base-100 rounded-lg shadow-lg p-4 sm:p-6 md:p-8">
+              <div class="flex items-center gap-3 mb-4 md:mb-6">
+                <div class="w-1 h-6 md:h-8 bg-primary rounded-full"></div>
+                <h2 class="text-xl md:text-2xl font-bold text-base-content font-cairo">Overview</h2>
               </div>
               <p 
-                class="text-base-content/80 leading-relaxed mb-4"
+                class="text-sm md:text-base text-base-content/80 leading-relaxed mb-3 md:mb-4"
                 :class="{ 'line-clamp-3': !showFullOverview }"
               >
                 {{ car.overview || car.description }}
               </p>
               <button 
                 @click="showFullOverview = !showFullOverview"
-                class="text-primary font-semibold hover:underline"
+                class="text-sm md:text-base text-primary font-semibold hover:underline"
               >
                 {{ showFullOverview ? 'Read Less' : 'Read More' }}
               </button>
 
-              <div class="flex items-center gap-3 my-6">
-                <div class="w-1 h-8 bg-primary rounded-full"></div>
-                <h2 class="text-2xl font-bold text-base-content font-cairo">Specifications</h2>
+              <div class="flex items-center gap-3 my-4 md:my-6">
+                <div class="w-1 h-6 md:h-8 bg-primary rounded-full"></div>
+                <h2 class="text-xl md:text-2xl font-bold text-base-content font-cairo">Specifications</h2>
               </div>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                 <div class="flex items-start gap-3">
-                  <i class="fas fa-check text-primary mt-1"></i>
-                  <span class="text-base-content/80">{{ car.seats }} Passengers</span>
+                  <i class="fas fa-check text-primary mt-1 text-sm md:text-base"></i>
+                  <span class="text-sm md:text-base text-base-content/80">{{ car.seats }} Passengers</span>
                 </div>
                 <div class="flex items-start gap-3">
-                  <i class="fas fa-check text-primary mt-1"></i>
-                  <span class="text-base-content/80">{{ car.transmission }} Transmission</span>
+                  <i class="fas fa-check text-primary mt-1 text-sm md:text-base"></i>
+                  <span class="text-sm md:text-base text-base-content/80">{{ car.transmission }} Transmission</span>
                 </div>
                 <div v-if="car.fuelType" class="flex items-start gap-3">
-                  <i class="fas fa-check text-primary mt-1"></i>
-                  <span class="text-base-content/80">{{ car.fuelType }}</span>
+                  <i class="fas fa-check text-primary mt-1 text-sm md:text-base"></i>
+                  <span class="text-sm md:text-base text-base-content/80">{{ car.fuelType }}</span>
                 </div>
                 <div v-if="car.year" class="flex items-start gap-3">
-                  <i class="fas fa-check text-primary mt-1"></i>
-                  <span class="text-base-content/80">Year: {{ car.year }}</span>
+                  <i class="fas fa-check text-primary mt-1 text-sm md:text-base"></i>
+                  <span class="text-sm md:text-base text-base-content/80">Year: {{ car.year }}</span>
                 </div>
               </div>
 
-              <div v-if="car.features && car.features.length > 0" class="flex items-center gap-3 my-6">
-                <div class="w-1 h-8 bg-primary rounded-full"></div>
-                <h2 class="text-2xl font-bold text-base-content font-cairo">Features</h2>
+              <div v-if="car.features && car.features.length > 0" class="flex items-center gap-3 my-4 md:my-6">
+                <div class="w-1 h-6 md:h-8 bg-primary rounded-full"></div>
+                <h2 class="text-xl md:text-2xl font-bold text-base-content font-cairo">Features</h2>
               </div>
-              <div v-if="car.features && car.features.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div v-if="car.features && car.features.length > 0" class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                 <div 
                   v-for="(feature, index) in car.features" 
                   :key="index"
-                  class="flex items-center gap-3 p-4 bg-base-200 rounded-lg"
+                  class="flex items-center gap-3 p-3 md:p-4 bg-base-200 rounded-lg"
                 >
-                  <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <i class="fas fa-car text-primary"></i>
+                  <div class="w-8 h-8 md:w-10 md:h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-car text-primary text-sm md:text-base"></i>
                   </div>
-                  <span class="text-base-content/80">{{ feature }}</span>
+                  <span class="text-sm md:text-base text-base-content/80">{{ feature }}</span>
                 </div>
               </div>
 
@@ -130,13 +140,13 @@
           </div>
 
           <!-- Right Column: Booking Form (Sticky) -->
-          <div ref="bookingColumn" class="lg:col-span-1 h-full min-h-[450px] relative">
+          <div ref="bookingColumn" class="lg:col-span-1 h-full min-h-[400px] md:min-h-[450px] relative order-2">
             <div ref="bookingWrapper" :style="{ minHeight: isSticky ? '1px' : 'auto' }"></div>
             
             <div 
               ref="stickyForm"
               :style="stickyStyle"
-              :class="{ 'fixed top-24 z-50': isSticky }"
+              :class="stickyClasses"
             >
               <BookingForm
                 type="car"
@@ -148,9 +158,9 @@
           </div>
         </div>
 
-        <div v-if="suggestedCars.length > 0" class="mt-16">
-          <h2 class="text-3xl font-bold mb-8 font-cairo text-center text-primary">You may also like</h2>
-          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div v-if="suggestedCars.length > 0" class="mt-8 md:mt-16">
+          <h2 class="text-2xl md:text-3xl font-bold mb-6 md:mb-8 font-cairo text-center text-primary">You may also like</h2>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
             <div 
               v-for="suggestedCar in suggestedCars" 
               :key="suggestedCar.id" 
@@ -160,12 +170,12 @@
               <img 
                 :src="getSimilarImage(suggestedCar)" 
                 :alt="suggestedCar.name" 
-                class="w-full h-36 object-cover" 
+                class="w-full h-28 sm:h-32 md:h-36 object-cover" 
               />
-              <div class="p-3">
-                <p class="font-bold text-sm">{{ suggestedCar.name }}</p>
-                <p class="text-xs text-base-content/60">{{ suggestedCar.description.slice(0, 30) }}...</p>
-                <span class="text-lg font-bold text-accent">${{ suggestedCar.price }}/day</span>
+              <div class="p-2 sm:p-3">
+                <p class="font-bold text-xs sm:text-sm line-clamp-1">{{ suggestedCar.name }}</p>
+                <p class="text-xs text-base-content/60 line-clamp-1">{{ suggestedCar.description.slice(0, 30) }}...</p>
+                <span class="text-base sm:text-lg font-bold text-accent">${{ suggestedCar.price }}/day</span>
               </div>
             </div>
           </div>
@@ -225,6 +235,18 @@ const suggestedCars = computed(() => {
   return getRandomCars(filtered, 5);
 });
 
+// Responsive window width
+const windowWidth = ref(window.innerWidth);
+const isLargeScreen = computed(() => windowWidth.value >= 1024);
+
+// Dynamic sticky classes
+const stickyClasses = computed(() => {
+  if (!isLargeScreen.value) {
+    return '';
+  }
+  return { 'fixed z-50': isSticky.value };
+});
+
 // Methods
 const fetchCar = async () => {
   loading.value = true;
@@ -282,7 +304,7 @@ const scrollToReviews = async () => {
   reviewsSection.value?.$el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
 
-// Sticky Logic
+// Sticky Logic - Enhanced for responsive behavior
 const bookingWrapper = ref(null);
 const stickyForm = ref(null);
 const isSticky = ref(false);
@@ -291,17 +313,41 @@ const bookingColumn = ref(null);
 const contentColumn = ref(null);
 
 const handleScroll = () => {
+  // Only apply sticky on large screens
+  if (!isLargeScreen.value) {
+    isSticky.value = false;
+    stickyStyle.value = {};
+    return;
+  }
+
   if (!bookingWrapper.value || !bookingColumn.value || !contentColumn.value) return;
+  
   const rect = bookingWrapper.value.getBoundingClientRect();
   const contentRect = contentColumn.value.getBoundingClientRect();
-  const formHeight = stickyForm.value.offsetHeight;
-  const offsetTop = 100;
-  if (contentRect.bottom <= offsetTop + formHeight) {
+  const formHeight = stickyForm.value?.offsetHeight || 0;
+  
+  const offsetTop = 0.5;
+  
+  const remainingSpace = contentRect.bottom - (offsetTop + formHeight);
+  
+  if (remainingSpace <= 0) {
     isSticky.value = false;
-    stickyStyle.value = { position: 'absolute', bottom: '0', left: '0', width: '100%', zIndex: 40 };
+    stickyStyle.value = { 
+      position: 'absolute', 
+      bottom: '0', 
+      left: '0', 
+      width: '100%', 
+      zIndex: 40 
+    };
   } else if (rect.top <= offsetTop) {
     isSticky.value = true;
-    stickyStyle.value = { position: 'fixed', top: `${offsetTop}px`, width: `${bookingWrapper.value.getBoundingClientRect().width}px`, zIndex: 50 };
+    const wrapperWidth = bookingWrapper.value.getBoundingClientRect().width;
+    stickyStyle.value = { 
+      position: 'fixed', 
+      top: `${offsetTop}px`, 
+      width: `${wrapperWidth}px`, 
+      zIndex: 50 
+    };
   } else {
     isSticky.value = false;
     stickyStyle.value = {};
@@ -309,6 +355,14 @@ const handleScroll = () => {
 };
 
 const handleResize = () => {
+  windowWidth.value = window.innerWidth;
+  
+  if (!isLargeScreen.value) {
+    isSticky.value = false;
+    stickyStyle.value = {};
+    return;
+  }
+  
   if (isSticky.value && bookingWrapper.value) {
     const rect = bookingWrapper.value.getBoundingClientRect();
     stickyStyle.value.width = `${rect.width}px`;
@@ -335,7 +389,28 @@ watch(() => route.params.id, () => {
 </script>
 
 <style scoped>
-.font-cairo { font-family: 'Cairo', sans-serif; }
-.line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; line-clamp: 3; }
-@media (min-width: 1024px) { .lg\:sticky { position: -webkit-sticky !important; position: sticky !important; } }
+.font-cairo { 
+  font-family: 'Cairo', sans-serif; 
+}
+
+.line-clamp-1 { 
+  display: -webkit-box; 
+  -webkit-line-clamp: 1; 
+  -webkit-box-orient: vertical; 
+  overflow: hidden; 
+}
+
+.line-clamp-3 { 
+  display: -webkit-box; 
+  -webkit-line-clamp: 3; 
+  -webkit-box-orient: vertical; 
+  overflow: hidden; 
+}
+
+@media (min-width: 1024px) { 
+  .lg\:sticky { 
+    position: -webkit-sticky !important; 
+    position: sticky !important; 
+  } 
+}
 </style>

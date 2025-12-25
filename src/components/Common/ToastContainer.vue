@@ -34,5 +34,6 @@ const { toasts, removeToast } = useToast();
   top: 1rem;
   right: 1rem;
   max-width: 24rem;
+  z-index: 9999;
 }
 </style>

@@ -16,6 +16,10 @@ export function useToast() {
     toasts.value = toasts.value.filter(t => t.id !== id);
   };
 
+  const showToast = (message, type = 'info', duration = 3000) => {
+    addToast(message, type, duration);
+  };
+
   const toast = {
     success: (message, duration) => addToast(message, 'success', duration),
     error: (message, duration) => addToast(message, 'error', duration),
@@ -26,6 +30,7 @@ export function useToast() {
   return {
     toasts,
     toast,
+    showToast,
     removeToast
   };
 }

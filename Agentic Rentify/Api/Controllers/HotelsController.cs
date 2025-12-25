@@ -1,6 +1,7 @@
 using Agentic_Rentify.Application.Features.Hotels.Commands.CreateHotel;
 using Agentic_Rentify.Application.Features.Hotels.Commands.UpdateHotel;
 using Agentic_Rentify.Application.Features.Hotels.Commands.DeleteHotel;
+using Agentic_Rentify.Application.Features.Hotels.Commands.PatchHotel;
 using Agentic_Rentify.Application.Features.Hotels.Queries.GetAllHotels;
 using Agentic_Rentify.Application.Features.Hotels.Queries.GetHotelById;
 using Agentic_Rentify.Application.Wrappers;
@@ -23,18 +24,41 @@ namespace Agentic_Rentify.Api.Controllers;
 public class HotelsController(IMediator mediator) : ControllerBase
 {
     /// <summary>
-    /// Get all hotels with pagination and optional search.
+    /// Get all hotels with pagination and optional search/filters.
     /// </summary>
     /// <param name="pageNumber">Page number (1-based)</param>
     /// <param name="pageSize">Number of items per page</param>
     /// <param name="searchTerm">Optional search query across name, description, city</param>
+    /// <param name="city">Optional city filter</param>
+    /// <param name="status">Optional status filter</param>
+    /// <param name="featured">Optional featured filter</param>
+    /// <param name="minRating">Optional minimum rating filter</param>
+    /// <param name="maxPrice">Optional maximum price filter</param>
     /// <returns>Paginated list of hotels</returns>
     /// <response code="200">Returns paginated hotel list</response>
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10, [FromQuery] string? searchTerm = null)
+    public async Task<IActionResult> GetAll(
+        [FromQuery] int pageNumber = 1, 
+        [FromQuery] int pageSize = 10, 
+        [FromQuery] string? searchTerm = null,
+        [FromQuery] string? city = null,
+        [FromQuery] string? status = null,
+        [FromQuery] bool? featured = null,
+        [FromQuery] double? minRating = null,
+        [FromQuery] decimal? maxPrice = null)
     {
-        var query = new GetAllHotelsQuery { PageNumber = pageNumber, PageSize = pageSize, SearchTerm = searchTerm };
+        var query = new GetAllHotelsQuery 
+        { 
+            PageNumber = pageNumber, 
+            PageSize = pageSize, 
+            SearchTerm = searchTerm,
+            City = city,
+            Status = status,
+            Featured = featured,
+            MinRating = minRating,
+            MaxPrice = maxPrice
+        };
         var result = await mediator.Send(query);
         return Ok(result);
     }
@@ -94,6 +118,26 @@ public class HotelsController(IMediator mediator) : ControllerBase
         {
             return BadRequest("ID mismatch");
         }
+        var result = await mediator.Send(command);
+        return Ok(result);
+    }
+
+    /// <summary>
+    /// Partially update hotel properties (status, featured flag).
+    /// </summary>
+    /// <param name="id">Hotel ID to patch</param>
+    /// <param name="command">Partial update data</param>
+    /// <returns>Updated hotel ID</returns>
+    /// <response code="200">Hotel patched successfully</response>
+    /// <response code="400">Validation error</response>
+    /// <response code="404">Hotel not found</response>
+    [HttpPatch("{id}")]
+    [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Patch(int id, [FromBody] PatchHotelCommand command)
+    {
+        command.Id = id;
         var result = await mediator.Send(command);
         return Ok(result);
     }

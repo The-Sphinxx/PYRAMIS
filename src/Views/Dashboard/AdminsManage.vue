@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="isValidRole">
     <!-- Stats Cards (Optional, can just show total admins) -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
       <div class="stats shadow bg-base-100">
@@ -21,7 +21,7 @@
       :data="admins"
       :loading="loading"
       :show-add-button="true"
-      :show-filter-button="false" 
+      :show-filter="false" 
       add-button-text="Add New Admin"
       @add="openAddModal"
       @edit="openEditModal"
@@ -32,12 +32,20 @@
     <!-- Add/Edit Modal -->
     <FormModal
       :isOpen="isModalOpen"
+      :mode="editingAdmin ? 'edit' : 'add'"
       :title="editingAdmin ? 'Edit Admin' : 'Add New Admin'"
       :config="adminFormConfig"
       :initialData="editingAdmin"
       @close="closeModal"
       @submit="handleSubmit"
     />
+  </div>
+  <div v-else class="flex flex-col items-center justify-center h-96 space-y-4">
+    <div class="alert alert-error max-w-lg">
+      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      <span>Unauthorized Access. This page is restricted to Administrators only.</span>
+    </div>
+    <button @click="router.push('/dashboard/overview')" class="btn btn-primary">Go to Overview</button>
   </div>
 </template>
 
@@ -48,6 +56,14 @@ import DataTable from '@/components/Dashboard/DataTable.vue';
 import FormModal from '@/components/Dashboard/FormModal.vue';
 import { usersAPI } from '@/Services/dashboardApi';
 import { useToast } from '@/composables/useToast';
+import { useAuthStore } from '@/stores/authStore';
+import { computed } from 'vue';
+
+const authStore = useAuthStore();
+const isValidRole = computed(() => {
+  const role = authStore.user?.role?.toLowerCase();
+  return role === 'superadmin';
+});
 
 const { toast } = useToast();
 const router = useRouter();
@@ -65,12 +81,23 @@ const columns = [
 ];
 
 const adminFormConfig = {
+  title: 'Admin',
   fields: [
-    { name: 'firstName', label: 'First Name', type: 'text', required: true, placeholder: 'Enter first name' },
-    { name: 'lastName', label: 'Last Name', type: 'text', required: true, placeholder: 'Enter last name' },
-    { name: 'email', label: 'Email', type: 'email', required: true, placeholder: 'Enter email' },
-    { name: 'password', label: 'Password', type: 'password', required: true, placeholder: 'Enter password' }, // Only for new admins usually
-    { name: 'phone', label: 'Phone', type: 'tel', placeholder: 'Enter phone number' }
+    { key: 'firstName', label: 'First Name', type: 'text', required: true, placeholder: 'Enter first name' },
+    { key: 'lastName', label: 'Last Name', type: 'text', required: true, placeholder: 'Enter last name' },
+    { key: 'email', label: 'Email', type: 'email', required: true, placeholder: 'Enter email' },
+    { key: 'password', label: 'Password', type: 'password', required: true, placeholder: 'Enter password' },
+    { key: 'phone', label: 'Phone', type: 'tel', placeholder: 'Enter phone number' },
+    { 
+      key: 'role', 
+      label: 'Role', 
+      type: 'select', 
+      required: true,
+      options: [
+        { label: 'Admin', value: 'Admin' },
+        { label: 'Super Admin', value: 'SuperAdmin' }
+      ]
+    }
   ]
 };
 
@@ -78,9 +105,11 @@ const fetchAdmins = async () => {
   loading.value = true;
   try {
     const response = await usersAPI.getAll();
-    const allUsers = response.data;
+    const allUsers = response.data.data;
     // Filter for admins only
-    admins.value = allUsers.filter(user => user.role === 'admin');
+    admins.value = allUsers.filter(user => 
+      user.role?.toLowerCase() === 'admin'
+    );
   } catch (error) {
     console.error('Error fetching admins:', error);
     toast.error('Failed to load admins');
@@ -93,7 +122,7 @@ const openAddModal = () => {
   editingAdmin.value = null;
   
   // Ensure password field is required/visible for creating
-  const pwdField = adminFormConfig.fields.find(f => f.name === 'password');
+  const pwdField = adminFormConfig.fields.find(f => f.key === 'password');
   if(pwdField) pwdField.type = 'password';
 
   isModalOpen.value = true;
@@ -113,13 +142,13 @@ const closeModal = () => {
   editingAdmin.value = null;
 };
 
-const handleSubmit = async (formData) => {
+const handleSubmit = async ({ data: formData }) => {
   try {
     // Construct payload
     const payload = {
       ...formData,
       fullName: `${formData.firstName} ${formData.lastName}`,
-      role: 'admin', // Force role
+      role: formData.role || 'Admin', // Use selected role or default to 'Admin'
       profileImage: editingAdmin.value?.profileImage || '/images/users/user_m_1.jpg',
       status: editingAdmin.value?.status || 'Active',
       updatedAt: new Date().toISOString()
@@ -162,6 +191,10 @@ const handleView = (row) => {
 };
 
 onMounted(() => {
+  if (!isValidRole.value) {
+    toast.error('Access restricted to Administrators');
+    return;
+  }
   fetchAdmins();
 });
 </script>
