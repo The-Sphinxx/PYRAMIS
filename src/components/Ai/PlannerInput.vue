@@ -1,5 +1,44 @@
 <template>
   <div class="min-h-screen bg-base-100">
+    <!-- Loading Skeleton Overlay -->
+    <div v-if="isGeneratingPlan" class="fixed inset-0 z-50 bg-base-100/95 backdrop-blur-sm flex items-center justify-center">
+      <div class="page-container py-8 w-full">
+        <div class="glass-morphism rounded-xl p-8 mb-6 text-center shadow-xl border border-base-300 animate-pulse">
+          <div class="h-10 bg-base-200 rounded w-3/4 mx-auto mb-4"></div>
+          <div class="h-6 bg-base-200 rounded w-1/2 mx-auto"></div>
+        </div>
+        
+        <div class="flex justify-center items-center mb-8 bg-base-100 rounded-xl p-6 shadow-lg border border-base-300 animate-pulse">
+          <div class="flex items-center gap-4">
+            <div v-for="step in [1, 2, 3]" :key="step" class="flex items-center">
+              <div class="w-12 h-12 bg-base-200 rounded-full"></div>
+              <div v-if="step < 3" class="w-16 h-1 mx-2 bg-base-200"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-morphism rounded-xl p-8 shadow-xl border border-base-300 animate-pulse">
+          <div class="space-y-6">
+            <div class="h-8 bg-base-200 rounded w-1/3 mb-6"></div>
+            <div class="h-12 bg-base-200 rounded w-full"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="h-12 bg-base-200 rounded"></div>
+              <div class="h-12 bg-base-200 rounded"></div>
+            </div>
+            <div class="h-16 bg-base-200 rounded w-full"></div>
+          </div>
+          
+          <div class="mt-8 text-center">
+            <div class="flex items-center justify-center gap-3 mb-4">
+              <i class="fas fa-spinner fa-spin text-4xl text-primary"></i>
+            </div>
+            <p class="text-xl font-bold text-primary font-cairo mb-2">Planning Your Perfect Trip...</p>
+            <p class="text-base-content opacity-70 font-cairo">Our AI is crafting a personalized itinerary just for you</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Main Content -->
     <div class="page-container py-8">
       <!-- Hero Section -->
@@ -496,21 +535,19 @@ export default {
       
       this.isGeneratingPlan = true;
       
-      // Navigate to result page immediately - it will show skeleton
-      this.$router.push({ name: 'AiPlannerResult' });
-      
       try {
-        // Call the AI planner service
+        // Call the AI planner service and wait for response
         const result = await aiPlannerService.generateTripPlan(tripCriteria);
         console.log('AI Trip Plan Result:', result);
         
         // Store in sessionStorage for retrieval in result page
         sessionStorage.setItem('tripPlanData', JSON.stringify(result));
+        
+        // Navigate to result page only after data is ready
+        this.$router.push({ name: 'AiPlannerResult' });
       } catch (error) {
         console.error('Error generating trip plan:', error);
         alert('❌ Failed to generate trip plan. Please try again.');
-        // Navigate back to planner on error
-        this.$router.push({ name: 'AiPlanner' });
       } finally {
         this.isGeneratingPlan = false;
       }
