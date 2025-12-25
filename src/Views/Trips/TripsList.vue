@@ -24,7 +24,10 @@
           <Search 
             type="trips"
             :initial-data="searchParams"
+            :client-side-mode="true"
+            :data-to-filter="tripsStore.trips"
             @search="handleSearch"
+            @filtered-results="handleFilteredResults"
             :show-ai-planner="true"
             @ai-planner="handleAiPlanner"
           />
@@ -93,14 +96,15 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import { useTripsStore } from '@/stores/tripsStore';
 import Search from '@/components/Common/Search.vue';
 import TripCard from '@/components/Trips/TripCard.vue';
 import Pagination from '@/components/Common/Pagination.vue';
 
 const router = useRouter();
+const route = useRoute();
 const tripsStore = useTripsStore();
 
 // State
@@ -108,8 +112,24 @@ const currentPage = ref(1);
 const itemsPerPage = 8;
 const searchParams = ref({});
 const fetchKey = ref(0);
-const totalPages = computed(() => tripsStore.pagination.totalPages);
-const totalCount = computed(() => tripsStore.pagination.totalCount);
+
+// Client-side filtering state
+const filteredTrips = ref([]);
+const isFiltering = ref(false);
+
+const totalPages = computed(() => {
+  if (isFiltering.value) {
+    return Math.ceil(filteredTrips.value.length / itemsPerPage);
+  }
+  return tripsStore.pagination.totalPages;
+});
+
+const totalCount = computed(() => {
+  if (isFiltering.value) {
+    return filteredTrips.value.length;
+  }
+  return tripsStore.pagination.totalCount;
+});
 
 const fetchTripsData = async (page = 1) => {
   const params = {
@@ -129,6 +149,11 @@ const fetchTripsData = async (page = 1) => {
 const loading = computed(() => tripsStore.loading);
 const error = computed(() => tripsStore.error);
 const paginatedTrips = computed(() => {
+  if (isFiltering.value) {
+    const start = (currentPage.value - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    return filteredTrips.value.slice(start, end);
+  }
   const trips = tripsStore.trips;
   console.log('🎨 RENDER TripsList - Total Trips:', trips?.length);
   console.log('🎨 RENDER TripsList - Trip IDs:', trips?.map(t => t.id));
@@ -139,6 +164,15 @@ const paginatedTrips = computed(() => {
 // Load Data
 onMounted(async () => {
   try {
+    // Read query parameters from route (from Home page navigation)
+    if (route.query.from || route.query.pickupDate || route.query.dropoffDate) {
+      searchParams.value = {
+        pickupLocation: route.query.from || '',
+        pickupDate: route.query.pickupDate || null,
+        dropoffDate: route.query.dropoffDate || null
+      };
+    }
+    
     await fetchTripsData(currentPage.value);
   } catch (error) {
     console.error('Failed to load trips from API', error);
@@ -146,10 +180,15 @@ onMounted(async () => {
 });
 
 // Handlers
+const handleFilteredResults = (results) => {
+  filteredTrips.value = results;
+  isFiltering.value = results.length < tripsStore.trips.length || searchParams.value.pickupLocation;
+  currentPage.value = 1;
+};
+
 const handleSearch = async (params) => {
   searchParams.value = params;
-  currentPage.value = 1;
-  await fetchTripsData(1);
+  // Client-side filtering is handled automatically
   console.log('Search params:', params);
 };
 
@@ -160,9 +199,11 @@ const handlePageChange = async (page) => {
 };
 
 const resetSearch = async () => {
-    searchParams.value = {};
-    currentPage.value = 1;
-    await fetchTripsData(1);
+  searchParams.value = {};
+  isFiltering.value = false;
+  filteredTrips.value = [];
+  currentPage.value = 1;
+  await fetchTripsData(1);
 };
 
 const handleAiPlanner = () => {
@@ -171,6 +212,8 @@ const handleAiPlanner = () => {
 
 onUnmounted(() => {
   searchParams.value = {};
+  isFiltering.value = false;
+  filteredTrips.value = [];
   tripsStore.resetFilters();
 });
 

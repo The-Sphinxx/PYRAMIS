@@ -17,7 +17,11 @@
           type="attractions"
           :show-ai-planner="true"
           :cities="availableCities"
+          :client-side-mode="true"
+          :data-to-filter="attractionStore.attractions"
+          :initial-data="initialSearchData"
           @search="handleSearch"
+          @filtered-results="handleFilteredResults"
           @ai-planner="openAiPlanner"
         />
       </div>
@@ -132,14 +136,15 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import { useAttractionStore } from '@/stores/attractionStore';
 import AttractionCard from '@/components/Attractions/AttractionCard.vue';
 import Search from '@/components/Common/Search.vue';
 import Pagination from '@/components/Common/Pagination.vue';
 
 const router = useRouter();
+const route = useRoute();
 const attractionStore = useAttractionStore();
 
 // State
@@ -147,8 +152,25 @@ const selectedCategory = ref('all');
 const currentPage = ref(1);
 const itemsPerPage = ref(12);
 const loading = ref(true);
-const totalPages = computed(() => attractionStore.pagination.totalPages);
-const totalCount = computed(() => attractionStore.pagination.totalCount);
+
+// Client-side filtering state
+const filteredAttractions = ref([]);
+const isFiltering = ref(false);
+const initialSearchData = ref({});
+
+const totalPages = computed(() => {
+  if (isFiltering.value) {
+    return Math.ceil(filteredAttractions.value.length / itemsPerPage.value);
+  }
+  return attractionStore.pagination.totalPages;
+});
+
+const totalCount = computed(() => {
+  if (isFiltering.value) {
+    return filteredAttractions.value.length;
+  }
+  return attractionStore.pagination.totalCount;
+});
 
 const fetchAttractionsData = async (page = 1) => {
   const params = {
@@ -233,8 +255,15 @@ const currentCategoryDescription = computed(() => {
   return category ? category.description : 'The best attractions recommended for you';
 });
 
-// Computed
-const paginatedAttractions = computed(() => attractionStore.attractions);
+// Computed - handle both filtered and unfiltered data
+const paginatedAttractions = computed(() => {
+  if (isFiltering.value) {
+    const start = (currentPage.value - 1) * itemsPerPage.value;
+    const end = start + itemsPerPage.value;
+    return filteredAttractions.value.slice(start, end);
+  }
+  return attractionStore.attractions;
+});
 
 // Methods
 const selectCategory = async (categoryId) => {
@@ -252,19 +281,18 @@ const selectCategory = async (categoryId) => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
-const handleSearch = async (searchData) => {
-  // Update store filters
-  if (searchData.query) {
-    attractionStore.setFilter('searchQuery', searchData.query);
-  }
-  
-  if (searchData.city && searchData.city !== 'All Cities') {
-    attractionStore.setFilter('city', searchData.city);
-  }
-  
+// Handle filtered results from Search component
+const handleFilteredResults = (results) => {
+  filteredAttractions.value = results;
+  isFiltering.value = results.length < attractionStore.attractions.length || 
+                      (initialSearchData.value.query || initialSearchData.value.city);
   currentPage.value = 1;
-  await fetchAttractionsData(1);
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+const handleSearch = async (searchData) => {
+  // Client-side filtering is handled automatically by the Search component
+  // This is just for backward compatibility
+  console.log('Search triggered:', searchData);
 };
 
 const handlePageChange = async (page) => {
@@ -292,6 +320,9 @@ const openAiPlanner = () => {
 
 const resetFilters = async () => {
   selectedCategory.value = 'all';
+  isFiltering.value = false;
+  filteredAttractions.value = [];
+  initialSearchData.value = {};
   attractionStore.resetFilters();
   currentPage.value = 1;
   await fetchAttractionsData(1);
@@ -318,6 +349,14 @@ const getAttractionReviews = (attraction) => {
 // Lifecycle
 onMounted(async () => {
   try {
+    // Read query parameters from route (from Home page navigation)
+    if (route.query.city || route.query.query) {
+      initialSearchData.value = {
+        city: route.query.city || '',
+        query: route.query.query || ''
+      };
+    }
+    
     await fetchAttractionsData(currentPage.value);
   } catch (error) {
     console.error('Error loading attractions:', error);
@@ -329,6 +368,8 @@ onMounted(async () => {
 onUnmounted(() => {
   attractionStore.resetFilters();
   selectedCategory.value = 'all';
+  isFiltering.value = false;
+  filteredAttractions.value = [];
 });
 </script>
 

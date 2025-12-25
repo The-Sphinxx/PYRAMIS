@@ -254,10 +254,19 @@ const props = defineProps({
   initialData: {
     type: Object,
     default: () => ({})
+  },
+  // Client-side filtering props
+  clientSideMode: {
+    type: Boolean,
+    default: false
+  },
+  dataToFilter: {
+    type: Array,
+    default: () => []
   }
 });
 
-const emit = defineEmits(['search', 'ai-planner']);
+const emit = defineEmits(['search', 'ai-planner', 'filtered-results']);
 
 // Search data state
 const searchData = ref({
@@ -282,10 +291,110 @@ const searchData = ref({
   dropoffTime: '10:00'
 });
 
+// Debounce timer
+let debounceTimer = null;
+
 // Initialize with any provided data
 watch(() => props.initialData, (newData) => {
   searchData.value = { ...searchData.value, ...newData };
 }, { immediate: true });
+
+// Client-side filtering logic
+const filteredResults = computed(() => {
+  if (!props.clientSideMode || !props.dataToFilter || props.dataToFilter.length === 0) {
+    return props.dataToFilter;
+  }
+
+  let results = [...props.dataToFilter];
+
+  if (props.type === 'hotels') {
+    // Filter by destination
+    if (searchData.value.destination && searchData.value.destination.trim() !== '') {
+      const searchTerm = searchData.value.destination.toLowerCase();
+      results = results.filter(hotel => 
+        hotel.name?.toLowerCase().includes(searchTerm) ||
+        hotel.city?.toLowerCase().includes(searchTerm) ||
+        hotel.location?.toLowerCase().includes(searchTerm)
+      );
+    }
+
+    // Filter by guests
+    if (searchData.value.guests) {
+      results = results.filter(hotel => 
+        !hotel.maxGuests || hotel.maxGuests >= searchData.value.guests
+      );
+    }
+
+    // Filter by rooms
+    if (searchData.value.rooms) {
+      results = results.filter(hotel => 
+        !hotel.availableRooms || hotel.availableRooms >= searchData.value.rooms
+      );
+    }
+
+    // Note: Date filtering would require availability data from the hotel object
+  } else if (props.type === 'attractions') {
+    // Filter by city
+    if (searchData.value.city && searchData.value.city !== '' && searchData.value.city !== 'All Cities') {
+      results = results.filter(attraction => 
+        attraction.city?.toLowerCase() === searchData.value.city.toLowerCase()
+      );
+    }
+
+    // Filter by search query
+    if (searchData.value.query && searchData.value.query.trim() !== '') {
+      const searchTerm = searchData.value.query.toLowerCase();
+      results = results.filter(attraction => 
+        attraction.name?.toLowerCase().includes(searchTerm) ||
+        attraction.description?.toLowerCase().includes(searchTerm) ||
+        attraction.category?.toLowerCase().includes(searchTerm) ||
+        attraction.city?.toLowerCase().includes(searchTerm)
+      );
+    }
+  } else if (props.type === 'trips') {
+    // Filter by pickup location
+    if (searchData.value.pickupLocation && searchData.value.pickupLocation.trim() !== '') {
+      const searchTerm = searchData.value.pickupLocation.toLowerCase();
+      results = results.filter(trip => 
+        trip.pickupLocation?.toLowerCase().includes(searchTerm) ||
+        trip.destination?.toLowerCase().includes(searchTerm) ||
+        trip.city?.toLowerCase().includes(searchTerm) ||
+        trip.name?.toLowerCase().includes(searchTerm)
+      );
+    }
+
+    // Note: Date filtering would require availability data from the trip object
+  } else if (props.type === 'cars') {
+    // Filter by pickup location
+    if (searchData.value.pickupLocation && searchData.value.pickupLocation.trim() !== '') {
+      const searchTerm = searchData.value.pickupLocation.toLowerCase();
+      results = results.filter(car => 
+        car.pickupLocation?.toLowerCase().includes(searchTerm) ||
+        car.location?.toLowerCase().includes(searchTerm) ||
+        car.city?.toLowerCase().includes(searchTerm) ||
+        car.name?.toLowerCase().includes(searchTerm)
+      );
+    }
+
+    // Note: Date and time filtering would require availability data from the car object
+  }
+
+  return results;
+});
+
+// Watch for changes in search data and emit filtered results in client-side mode
+watch([searchData, () => props.dataToFilter], () => {
+  if (props.clientSideMode) {
+    // Debounce the filtering to improve performance
+    if (debounceTimer) {
+      clearTimeout(debounceTimer);
+    }
+    
+    debounceTimer = setTimeout(() => {
+      emit('filtered-results', filteredResults.value);
+    }, 300);
+  }
+}, { deep: true });
 
 // Labels based on type
 const labels = computed(() => {
@@ -349,6 +458,11 @@ const placeholders = computed(() => {
 });
 
 const handleSearch = () => {
+  if (props.clientSideMode) {
+    // In client-side mode, emit the filtered results immediately
+    emit('filtered-results', filteredResults.value);
+  }
+  // Always emit the search event for backward compatibility
   emit('search', searchData.value);
 };
 

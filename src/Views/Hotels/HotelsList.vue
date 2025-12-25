@@ -17,7 +17,11 @@
           type="hotels"
           :show-ai-planner="false"
           :cities="availableCities"
+          :client-side-mode="true"
+          :data-to-filter="paginatedHotels"
+          :initial-data="initialSearchData"
           @search="handleSearch"
+          @filtered-results="handleFilteredResults"
         />
       </div>
     </div>
@@ -77,14 +81,15 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import { useHotelsStore } from '@/stores/hotelsStore';
 import HotelCard from '@/components/Hotels/HotelCard.vue';
 import Search from '@/components/Common/Search.vue';
 import Pagination from '@/components/Common/Pagination.vue';
 
 const router = useRouter();
+const route = useRoute();
 const hotelStore = useHotelsStore();
 
 // State
@@ -93,8 +98,25 @@ const currentPage = ref(1);
 const itemsPerPage = ref(16);
 const loading = ref(true);
 const fetchKey = ref(0);
-const totalPages = computed(() => hotelStore.pagination.totalPages);
-const totalCount = computed(() => hotelStore.pagination.totalCount);
+
+// Client-side filtering state
+const filteredHotels = ref([]);
+const isFiltering = ref(false);
+const initialSearchData = ref({});
+
+const totalPages = computed(() => {
+  if (isFiltering.value) {
+    return Math.ceil(filteredHotels.value.length / itemsPerPage.value);
+  }
+  return hotelStore.pagination.totalPages;
+});
+
+const totalCount = computed(() => {
+  if (isFiltering.value) {
+    return filteredHotels.value.length;
+  }
+  return hotelStore.pagination.totalCount;
+});
 
 const fetchHotelsData = async (page = 1) => {
   const params = {
@@ -180,9 +202,10 @@ const currentCategoryDescription = computed(() => {
 });
 
 const paginatedHotels = computed(() => {
-  // No client-side slicing - hotels are already paginated and filtered from API
   // Map hotels to match HotelCard's expected prop structure
-  return hotelStore.hotels.map(hotel => {
+  const sourceData = isFiltering.value ? filteredHotels.value : hotelStore.hotels;
+  
+  return sourceData.map(hotel => {
     // Extract top 3 amenities from hotel data
     let amenities = ['Wifi', 'Pool', 'Gym']; // Default fallback
     
@@ -248,18 +271,17 @@ const selectCategory = async (categoryId) => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
+// Handle filtered results from Search component
+const handleFilteredResults = (results) => {
+  filteredHotels.value = results;
+  isFiltering.value = results.length < hotelStore.hotels.length || 
+                      (initialSearchData.value.destination || initialSearchData.value.guests || initialSearchData.value.rooms);
+  currentPage.value = 1;
+};
+
 const handleSearch = (searchData) => {
-  // Update store filters
-  if (searchData.query) {
-    hotelStore.setFilter('searchQuery', searchData.query);
-  }
-  
-  if (searchData.city && searchData.city !== 'All Cities') {
-    hotelStore.setFilter('city', searchData.city);
-  }
-  
-  // Navigate to filter page with search results
-  router.push({ name: 'HotelFilter' });
+  // Client-side filtering is handled automatically by the Search component
+  console.log('Search triggered:', searchData);
 };
 
 const handlePageChange = async (page) => {
@@ -284,6 +306,9 @@ const handleBookNow = (hotel) => {
 
 const resetFilters = async () => {
   selectedCategory.value = 'all';
+  isFiltering.value = false;
+  filteredHotels.value = [];
+  initialSearchData.value = {};
   hotelStore.resetFilters();
   currentPage.value = 1;
   await fetchHotelsData(1);
@@ -292,6 +317,17 @@ const resetFilters = async () => {
 // Lifecycle
 onMounted(async () => {
   try {
+    // Read query parameters from route (from Home page navigation)
+    if (route.query.destination || route.query.guests || route.query.rooms) {
+      initialSearchData.value = {
+        destination: route.query.destination || '',
+        guests: route.query.guests ? parseInt(route.query.guests) : 2,
+        rooms: route.query.rooms ? parseInt(route.query.rooms) : 1,
+        checkIn: route.query.checkIn || null,
+        checkOut: route.query.checkOut || null
+      };
+    }
+    
     await fetchHotelsData(currentPage.value);
   } catch (error) {
     console.error('Error loading hotels:', error);
@@ -303,6 +339,8 @@ onMounted(async () => {
 onUnmounted(() => {
   hotelStore.resetFilters();
   selectedCategory.value = 'all';
+  isFiltering.value = false;
+  filteredHotels.value = [];
 });
 </script>
 

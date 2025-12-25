@@ -21,7 +21,14 @@
 
         <!-- Search Bar -->
         <div class="w-full max-w-6xl">
-          <Search type="cars" @search="handleSearch" />
+          <Search 
+            type="cars" 
+            :client-side-mode="true"
+            :data-to-filter="store.cars"
+            :initial-data="searchParams"
+            @search="handleSearch"
+            @filtered-results="handleFilteredResults"
+          />
         </div>
       </div>
     </div>
@@ -91,7 +98,7 @@
 
 <script setup>
 import { onMounted, onUnmounted, computed, ref } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { useCarsStore } from "@/stores/carsStore";
 
 import Search from "@/components/Common/Search.vue";
@@ -102,15 +109,33 @@ import heroImage from "@/assets/images/CarHeroSection.jpg";
 
 const store = useCarsStore();
 const router = useRouter();
+const route = useRoute();
 
 const currentPage = ref(1);
 const itemsPerPage = ref(12);
 const fetchKey = ref(0);
 
+// Client-side filtering state
+const filteredCars = ref([]);
+const isFiltering = ref(false);
+const searchParams = ref({});
+
 const loading = computed(() => store.loading);
 const error = computed(() => store.error);
-const totalPages = computed(() => store.pagination.totalPages);
-const totalCount = computed(() => store.pagination.totalCount);
+
+const totalPages = computed(() => {
+  if (isFiltering.value) {
+    return Math.ceil(filteredCars.value.length / itemsPerPage.value);
+  }
+  return store.pagination.totalPages;
+});
+
+const totalCount = computed(() => {
+  if (isFiltering.value) {
+    return filteredCars.value.length;
+  }
+  return store.pagination.totalCount;
+});
 
 const fetchCarsData = async (page = 1) => {
   await store.fetchCars({
@@ -120,10 +145,26 @@ const fetchCarsData = async (page = 1) => {
 };
 
 onMounted(async () => {
+  // Read query parameters from route (from Home page navigation)
+  if (route.query.location || route.query.pickupDate || route.query.pickupTime) {
+    searchParams.value = {
+      pickupLocation: route.query.location || '',
+      pickupDate: route.query.pickupDate || null,
+      pickupTime: route.query.pickupTime || '10:00',
+      dropoffDate: route.query.dropoffDate || null,
+      dropoffTime: route.query.dropoffTime || '10:00'
+    };
+  }
+  
   await fetchCarsData(currentPage.value);
 });
 
 const paginatedCars = computed(() => {
+  if (isFiltering.value) {
+    const start = (currentPage.value - 1) * itemsPerPage.value;
+    const end = start + itemsPerPage.value;
+    return filteredCars.value.slice(start, end);
+  }
   const cars = store.cars;
   console.log('🎨 RENDER Carslist - Total Cars:', cars?.length);
   console.log('🎨 RENDER Carslist - Car IDs:', cars?.map(c => c.id));
@@ -146,12 +187,15 @@ function goToCategory(category) {
   });
 }
 
+function handleFilteredResults(results) {
+  filteredCars.value = results;
+  isFiltering.value = results.length < store.cars.length || searchParams.value.pickupLocation;
+  currentPage.value = 1;
+}
+
 function handleSearch(payload) {
-  const queryParams = {};
-  if (payload.query) {
-    queryParams.query = payload.query; 
-  }
-  router.push({ name: "CarBooking", query: queryParams });
+  // Client-side filtering is handled automatically
+  console.log('Search triggered:', payload);
 }
 
 async function handlePageChange(page) {
@@ -161,12 +205,17 @@ async function handlePageChange(page) {
 }
 
 async function resetFilters() {
+  isFiltering.value = false;
+  filteredCars.value = [];
+  searchParams.value = {};
   currentPage.value = 1;
   await fetchCarsData(1);
 }
 
 onUnmounted(() => {
   currentPage.value = 1;
+  isFiltering.value = false;
+  filteredCars.value = [];
 });
 </script>
 
