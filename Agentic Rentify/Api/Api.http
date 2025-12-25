@@ -1,6 +1,84 @@
-@Api_HostAddress = http://localhost:5173
+@Api_HostAddress = http://localhost:5137
 
 GET {{Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+# Get all hotels with filters
+GET {{Api_HostAddress}}/api/hotels?pageSize=10&city=Cairo&status=Active
+Accept: application/json
+
+###
+
+# Get hotel by ID
+GET {{Api_HostAddress}}/api/hotels/1
+Accept: application/json
+
+###
+
+# Create new hotel
+POST {{Api_HostAddress}}/api/hotels
+Content-Type: application/json
+
+{
+  "name": "Test Hotel",
+  "city": "Cairo",
+  "basePrice": 150.00,
+  "description": "A beautiful hotel in Cairo",
+  "images": ["https://example.com/image1.jpg"],
+  "facilities": ["pool", "wifi"],
+  "rooms": [
+    {
+      "type": "Standard",
+      "price": 150.00,
+      "available": true
+    }
+  ],
+  "latitude": 30.0444,
+  "longitude": 31.2357
+}
+
+###
+
+# Update hotel
+PUT {{Api_HostAddress}}/api/hotels/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Updated Test Hotel",
+  "city": "Cairo",
+  "basePrice": 160.00,
+  "description": "An updated beautiful hotel in Cairo",
+  "images": ["https://example.com/image1.jpg"],
+  "facilities": ["pool", "wifi", "gym"],
+  "rooms": [
+    {
+      "type": "Standard",
+      "price": 160.00,
+      "available": true
+    }
+  ],
+  "latitude": 30.0444,
+  "longitude": 31.2357
+}
+
+###
+
+# Patch hotel (update status)
+PATCH {{Api_HostAddress}}/api/hotels/1
+Content-Type: application/json
+
+{
+  "status": "Active",
+  "featured": true
+}
+
+###
+
+# Delete hotel
+DELETE {{Api_HostAddress}}/api/hotels/1
 Accept: application/json
 
 ###

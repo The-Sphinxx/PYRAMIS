@@ -10,7 +10,9 @@ public class HotelResponseDTO
     public double Rating { get; set; }
     public int ReviewsCount { get; set; }
     public string BasePrice { get; set; } = string.Empty; // Formatted
+    public decimal RawBasePrice { get; set; }
     public string PricePerNight { get; set; } = string.Empty;
+    public decimal RawPricePerNight { get; set; }
     public string Description { get; set; } = string.Empty;
     public string Overview { get; set; } = string.Empty;
     public string Status { get; set; } = "Active";
@@ -74,6 +76,7 @@ public class CreateHotelDTO
     public string Name { get; set; } = string.Empty;
     public string City { get; set; } = string.Empty;
     public decimal BasePrice { get; set; }
+    public decimal PricePerNight { get; set; }
     public string Description { get; set; } = string.Empty;
     public List<string> Images { get; set; } = new();
     public List<string> Facilities { get; set; } = new();
@@ -85,4 +88,11 @@ public class CreateHotelDTO
 public class UpdateHotelDTO : CreateHotelDTO
 {
     public int Id { get; set; }
+}
+
+public class PatchHotelDTO
+{
+    public string? Status { get; set; }
+    public bool? Featured { get; set; }
+    public bool? IsFeatured { get; set; }
 }

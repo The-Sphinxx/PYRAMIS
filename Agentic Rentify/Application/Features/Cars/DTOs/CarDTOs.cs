@@ -15,6 +15,7 @@ public class CarResponseDTO
     public string Transmission { get; set; } = "automatic";
     public string FuelType { get; set; } = "Petrol";
     public string Price { get; set; } = string.Empty; // Formatted
+    public decimal RawPrice { get; set; }
     public int TotalFleet { get; set; }
     public int AvailableNow { get; set; }
     public string NextAvailability { get; set; } = string.Empty;
@@ -68,6 +69,8 @@ public class CreateCarDTO
     public string FuelType { get; set; } = "Petrol";
     public decimal Price { get; set; }
     public string Overview { get; set; } = string.Empty;
+    public int TotalFleet { get; set; } = 20;
+    public int AvailableNow { get; set; }
     public List<string> Features { get; set; } = new();
     public List<string> Images { get; set; } = new();
     public List<string> Amenities { get; set; } = new();
@@ -76,4 +79,14 @@ public class CreateCarDTO
 public class UpdateCarDTO : CreateCarDTO
 {
     public int Id { get; set; }
+    public string Status { get; set; } = "Available";
+    public bool Featured { get; set; } = false;
+    public bool IsFeatured { get; set; } = false;
+}
+
+public class PatchCarDTO
+{
+    public string? Status { get; set; }
+    public bool? Featured { get; set; }
+    public bool? IsFeatured { get; set; }
 }

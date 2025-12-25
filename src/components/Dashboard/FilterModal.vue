@@ -93,7 +93,7 @@
               <!-- For single selection filters like transmission -->
               <select 
                 v-if="customFilter.type === 'single'"
-                v-model="tempFilters[customFilter.key + 'Selected']"
+                v-model="tempFilters[customFilter.key]"
                 class="select select-bordered w-full font-cairo text-base-content/60"
               >
                 <option value="">Select {{ customFilter.title.toLowerCase() }}</option>
@@ -179,7 +179,7 @@ const props = defineProps({
   },
   priceRange: {
     type: Object,
-    default: () => ({ min: 100, max: 1000 })
+    default: () => ({ min: 5, max: 1000 })
   },
   priceLabel: {
     type: String,
@@ -214,7 +214,7 @@ const tempFilters = ref({
 // Initialize custom filter fields
 props.customFilters.forEach(filter => {
   if (filter.type === 'single') {
-    tempFilters.value[filter.key + 'Selected'] = '';
+    tempFilters.value[filter.key] = '';
   } else if (filter.inputType) {
     tempFilters.value[filter.key] = '';
   } else {
@@ -234,7 +234,7 @@ const activeFiltersCount = computed(() => {
   // Check custom filters
   props.customFilters.forEach(filter => {
     if (filter.type === 'single') {
-      if (tempFilters.value[filter.key + 'Selected']) {
+      if (tempFilters.value[filter.key]) {
         count++;
       }
     } else if (filter.inputType) {
@@ -255,21 +255,27 @@ const closeModal = () => {
 };
 
 const applyFilters = () => {
+  closeModal();
   const filtersToApply = { ...tempFilters.value };
+  
+  // Convert maxPrice to number
+  if (filtersToApply.maxPrice) {
+    filtersToApply.maxPrice = Number(filtersToApply.maxPrice);
+  }
   
   // Convert single selections to arrays for consistency
   if (filtersToApply.categorySelected) {
     filtersToApply.categories = [filtersToApply.categorySelected];
   }
   
-  props.customFilters.forEach(filter => {
-    if (filter.type === 'single' && filtersToApply[filter.key + 'Selected']) {
-      filtersToApply[filter.key] = [filtersToApply[filter.key + 'Selected']];
-    }
-  });
+  // Note: Custom filters keep their original keys for compatibility
+  // props.customFilters.forEach(filter => {
+  //   if (filter.type === 'single' && filtersToApply[filter.key + 'Selected']) {
+  //     filtersToApply[filter.key] = [filtersToApply[filter.key + 'Selected']];
+  //   }
+  // });
   
   emit('filter-change', filtersToApply);
-  closeModal();
 };
 
 const clearFilters = () => {
@@ -280,7 +286,7 @@ const clearFilters = () => {
   
   props.customFilters.forEach(filter => {
     if (filter.type === 'single') {
-      tempFilters.value[filter.key + 'Selected'] = '';
+      tempFilters.value[filter.key] = '';
     } else if (filter.inputType) {
       tempFilters.value[filter.key] = '';
     } else {
@@ -288,15 +294,34 @@ const clearFilters = () => {
     }
   });
   
-  emit('filter-change', { ...tempFilters.value });
+  emit('filter-change', { maxPrice: props.priceRange.max, categorySelected: '', ...Object.fromEntries(props.customFilters.map(f => [f.key, f.type === 'single' || f.inputType ? '' : []])) });
 };
 
 // Sync with external filter changes
 watch(() => props.initialFilters, (newFilters) => {
+  const filteredNewFilters = {};
+  Object.keys(newFilters || {}).forEach(key => {
+    if (newFilters[key] != null && newFilters[key] !== '') {
+      filteredNewFilters[key] = newFilters[key];
+    }
+  });
   tempFilters.value = {
-    ...tempFilters.value,
-    ...newFilters
+    maxPrice: props.priceRange.max,
+    categorySelected: '',
+    ...filteredNewFilters
   };
+  // Initialize custom filters if not present
+  props.customFilters.forEach(filter => {
+    if (!(filter.key in tempFilters.value)) {
+      if (filter.type === 'single') {
+        tempFilters.value[filter.key] = '';
+      } else if (filter.inputType) {
+        tempFilters.value[filter.key] = '';
+      } else {
+        tempFilters.value[filter.key] = [];
+      }
+    }
+  });
 }, { deep: true });
 
 // Handle body overflow when modal opens/closes

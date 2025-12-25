@@ -10,6 +10,9 @@ public class HotelProfile : Profile
     {
         CreateMap<Hotel, HotelResponseDTO>()
             .ForMember(dest => dest.BasePrice, opt => opt.MapFrom(src => $"{src.BasePrice} $"))
+            .ForMember(dest => dest.RawBasePrice, opt => opt.MapFrom(src => src.BasePrice))
+            .ForMember(dest => dest.PricePerNight, opt => opt.MapFrom(src => $"{src.PricePerNight} $"))
+            .ForMember(dest => dest.RawPricePerNight, opt => opt.MapFrom(src => src.PricePerNight))
             .ForMember(dest => dest.ReviewsCount, opt => opt.MapFrom(src => src.ReviewSummary.TotalReviews));
 
         CreateMap<HotelRoom, HotelRoomDTO>().ReverseMap();

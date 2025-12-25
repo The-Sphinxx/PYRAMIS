@@ -31,7 +31,7 @@
     <!-- Navigation Menu -->
     <nav class="flex-1 p-4 space-y-1 overflow-y-auto">
       <router-link
-        v-for="item in menuItems"
+        v-for="item in filteredMenuItems"
         :key="item.name"
         :to="item.path"
         class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 hover:bg-base-200"
@@ -126,6 +126,25 @@ const handleSearch = () => {
     });
   }, 300);
 };
+
+const filteredMenuItems = computed(() => {
+  return menuItems.filter(item => {
+    const role = user.value?.role?.toLowerCase();
+    
+    // Admins page is for SuperAdmins only
+    if (item.name === 'Admins') {
+      return role === 'superadmin';
+    }
+    
+    // Settings is for Admins and SuperAdmins
+    if (item.name === 'Settings') {
+      return role === 'admin';
+    }
+    
+    // All other items are visible to any authorized user (usually we assume dashboard is admin-only anyway)
+    return true;
+  });
+});
 
 // Clear search when changing main routes (optional, but good UX if context changes completely)
 watch(() => route.path, () => {

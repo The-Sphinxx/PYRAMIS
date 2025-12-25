@@ -12,7 +12,7 @@ public class DbInitializer(
         try
         {
             // 1) Ensure roles exist
-            string[] roles = ["Admin", "Client"];
+            string[] roles = ["Admin", "Client", "SuperAdmin"];
             foreach (var role in roles)
             {
                 if (!await roleManager.RoleExistsAsync(role))
@@ -62,7 +62,7 @@ public class DbInitializer(
             // Ensure Admin is in role
             if (!await userManager.IsInRoleAsync(adminUser, "Admin"))
             {
-                var addRoleResult = await userManager.AddToRoleAsync(adminUser, "Admin");
+                var addRoleResult = await userManager.AddToRoleAsync(adminUser, "Super Admin");
                 if (!addRoleResult.Succeeded)
                 {
                     var errors = string.Join(", ", addRoleResult.Errors.Select(e => e.Description));

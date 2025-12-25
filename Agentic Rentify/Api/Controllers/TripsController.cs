@@ -4,6 +4,7 @@ using Agentic_Rentify.Application.Features.Trips.Commands.UpdateTrip;
 using Agentic_Rentify.Application.Features.Trips.Queries.GetAllTrips;
 using Agentic_Rentify.Application.Features.Trips.Queries.GetTripById;
 using Agentic_Rentify.Application.Wrappers;
+using Agentic_Rentify.Application.Features.Trips.Commands.PatchTrip;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -131,9 +132,17 @@ public class TripsController(IMediator mediator) : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create([FromBody] CreateTripCommand command)
     {
-        var result = await mediator.Send(command);
-        return CreatedAtAction(nameof(GetById), new { id = result }, result);
+        try 
+        {
+            var result = await mediator.Send(command);
+            return CreatedAtAction(nameof(GetById), new { id = result }, result);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = ex.Message, detail = ex.InnerException?.Message, stackTrace = ex.StackTrace });
+        }
     }
+
 
     /// <summary>
     /// Update an existing trip's details, itinerary, or hotel options.
@@ -158,8 +167,15 @@ public class TripsController(IMediator mediator) : ControllerBase
         {
             return BadRequest("ID mismatch");
         }
-        var result = await mediator.Send(command);
-        return Ok(result);
+        try 
+        {
+            var result = await mediator.Send(command);
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+             return StatusCode(500, new { message = ex.Message, detail = ex.InnerException?.Message, stackTrace = ex.StackTrace });
+        }
     }
 
     /// <summary>
@@ -179,6 +195,25 @@ public class TripsController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> Delete(int id)
     {
         var command = new DeleteTripCommand(id);
+        var result = await mediator.Send(command);
+        return Ok(result);
+    }
+
+    /// <summary>
+    /// Patch a trip (partial update).
+    /// </summary>
+    /// <param name="id">Trip ID to update</param>
+    /// <param name="command">Patch data (e.g., status, featured)</param>
+    /// <returns>Updated trip ID</returns>
+    [HttpPatch("{id}")]
+    [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Patch(int id, [FromBody] PatchTripCommand command)
+    {
+        if (id != command.Id)
+        {
+            command.Id = id;
+        }
         var result = await mediator.Send(command);
         return Ok(result);
     }
