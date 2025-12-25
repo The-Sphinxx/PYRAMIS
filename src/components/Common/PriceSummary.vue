@@ -22,7 +22,7 @@
           <span class="font-semibold">{{ formatPrice(costs.taxes) }}</span>
         </div>
 
-        <!-- Add-ons (if provided) -->
+        <!-- Add-ons  -->
         <div v-if="addOns > 0" class="flex justify-between text-base">
           <span class="text-base-content/70">Add-Ons</span>
           <span class="font-semibold">{{ formatPrice(addOns) }}</span>

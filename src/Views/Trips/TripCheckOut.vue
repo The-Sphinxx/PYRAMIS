@@ -77,6 +77,7 @@ import { useRouter } from 'vue-router';
 import { useBookingStore } from '@/stores/bookingStore';
 import { useTripsStore } from '@/stores/tripsStore';
 import { useAuthStore } from '@/stores/authStore';
+import { useToast } from '@/composables/useToast';
 import StepIndicator from '@/components/Common/StepIndicator.vue';
 import PriceSummary from '@/components/Common/PriceSummary.vue';
 import GuestInfoForm from '@/components/Common/GuestInfoForm.vue';
@@ -85,7 +86,8 @@ import tripsApi from '@/Services/tripsApi';
 const router = useRouter();
 const bookingStore = useBookingStore();
 const tripsStore = useTripsStore();
-const authStore = useAuthStore(); 
+const authStore = useAuthStore();
+const { toast } = useToast(); 
 
 const guestFormRef = ref(null);
 const guestData = ref({
@@ -239,12 +241,14 @@ const handlePlaceOrder = async () => {
 
     if (result.error) {
       paymentError.value = result.error.message || 'Payment could not be processed.';
+      toast.error(result.error.message || 'Payment could not be processed.');
       return;
     }
 
     const status = result.paymentIntent?.status;
     if (status === 'succeeded') {
       paymentMessage.value = 'Payment succeeded! Redirecting...';
+      toast.success('Payment successful! Redirecting to confirmation...');
       
       // Enrich booking with guest info and pricing for confirmation page
       bookingStore.enrichBookingWithDetails(
@@ -272,10 +276,12 @@ const handlePlaceOrder = async () => {
       });
     } else if (status === 'processing') {
       paymentMessage.value = 'Payment is processing. We will email you once confirmed.';
+      toast.info('Payment is processing. We will email you once confirmed.');
     }
   } catch (err) {
     error.value = err.message || 'Failed to place order';
     paymentError.value = error.value;
+    toast.error(err.message || 'Failed to place order');
     console.error('Order error:', err);
   } finally {
     submitting.value = false;
@@ -289,6 +295,7 @@ const goBack = () => {
 onMounted(() => {
   if (!bookingStore.bookingInProgress) {
     error.value = 'No booking in progress';
+    toast.error('No booking in progress. Redirecting to home...');
     setTimeout(() => {
       router.push({ name: 'Home' });
     }, 2000);
@@ -305,6 +312,7 @@ onMounted(() => {
   initializePaymentIntent().catch((err) => {
     console.error('Failed to initialize payment intent:', err);
     paymentError.value = err.message || 'Unable to start payment. Please try again later.';
+    toast.error(err.message || 'Unable to start payment. Please try again later.');
   });
 });
 </script>

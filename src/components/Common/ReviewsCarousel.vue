@@ -123,11 +123,11 @@ const dragOffset = ref(0);
 
 // Responsive visible cards
 const visibleCards = computed(() => {
-  if (screenWidth.value >= 1536) return 3; // 2xl: 3 cards (very large)
-  if (screenWidth.value >= 1280) return 2; // xl: 2 cards (inside lg:col-span-2)
-  if (screenWidth.value >= 1024) return 2; // lg: 2 cards
-  if (screenWidth.value >= 768) return 2; // md: 2 cards
-  return 1; // mobile: 1 card
+  if (screenWidth.value >= 1536) return 3; 
+  if (screenWidth.value >= 1280) return 2; 
+  if (screenWidth.value >= 1024) return 2; 
+  if (screenWidth.value >= 768) return 2; 
+  return 1; 
 });
 
 // Calculate max index
@@ -182,7 +182,7 @@ const next = () => {
   if (currentIndex.value < maxIndex.value) {
     currentIndex.value++;
   } else if (props.autoPlay) {
-    currentIndex.value = 0; // Loop back to start
+    currentIndex.value = 0; 
   }
 };
 
@@ -234,12 +234,10 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* Smooth transitions */
+
 .transition-transform {
   transition: transform 0.5s ease-in-out;
 }
-
-/* Cursor styles */
 .cursor-grab {
   cursor: grab;
 }
@@ -248,7 +246,6 @@ onUnmounted(() => {
   cursor: grabbing;
 }
 
-/* Prevent text selection while dragging */
 .select-none {
   user-select: none;
   -webkit-user-select: none;

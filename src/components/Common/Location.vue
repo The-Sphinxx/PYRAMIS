@@ -119,7 +119,7 @@ import { useHotelsStore } from '@/stores/hotelsStore';
 import { useTripsStore } from '@/stores/tripsStore';
 import { useCarsStore } from '@/stores/carsStore';
 
-// ==================== SVG ICONS ====================
+
 const PyramidIcon = {
   template: `<svg viewBox="0 0 24 24" fill="currentColor">
     <path d="M12 2L1 21h22L12 2zm0 3.84L19.5 19h-15L12 5.84z"/>
@@ -192,7 +192,7 @@ const BuildingIcon = {
   </svg>`
 };
 
-// ==================== PROPS ====================
+
 const props = defineProps({
   name: { type: String, required: true },
   city: { type: String, required: true },
@@ -207,7 +207,6 @@ const props = defineProps({
   showNearby: { type: Boolean, default: true }
 });
 
-// ==================== STATE & STORES ====================
 const router = useRouter();
 const attractionStore = useAttractionStore();
 const hotelStore = useHotelsStore();
@@ -218,7 +217,6 @@ const mapLoaded = ref(false);
 const nearbyLandmarks = ref([]);
 const loadingNearby = ref(false);
 
-// ==================== COMPUTED ====================
 const osmMapUrl = computed(() => {
   const zoom = 14;
   const bbox = `${props.longitude - 0.015},${props.latitude - 0.01},${props.longitude + 0.015},${props.latitude + 0.01}`;
@@ -235,7 +233,6 @@ const nearbyTitle = computed(() => {
   return titles[props.type] || 'Places';
 });
 
-// ==================== METHODS ====================
 const openInMaps = () => {
   window.open(`https://www.google.com/maps?q=${props.latitude},${props.longitude}`, '_blank');
 };
@@ -259,22 +256,22 @@ const formatDistance = (distance) => {
 };
 
 const getIconForItem = (item) => {
-  // للـ Hotels
+  
   if (props.type === 'hotel' || item.type === 'hotel') {
     return HotelIcon;
   }
   
-  // للـ Cars
+  
   if (props.type === 'car' || item.type === 'car') {
     return CarIcon;
   }
   
-  // للـ Trips
+ 
   if (props.type === 'trip' || item.type === 'trip') {
     return TripIcon;
   }
   
-  // للـ Attractions - حسب الـ category
+ 
   if (item.categories) {
     if (item.categories.includes('HISTORICAL')) return PyramidIcon;
     if (item.categories.includes('MUSEUMS')) return MuseumIcon;
@@ -294,7 +291,7 @@ const fetchNearbyLandmarks = async () => {
   try {
     let allItems = [];
     
-    // جلب البيانات حسب النوع
+    
     switch (props.type) {
       case 'attraction':
         if (attractionStore.attractions.length === 0) {
@@ -325,7 +322,7 @@ const fetchNearbyLandmarks = async () => {
         break;
     }
     
-    // حساب المسافات
+    
     const itemsWithDistance = allItems
       .filter(item => item.id !== parseInt(props.currentId))
       .filter(item => item.latitude && item.longitude)
@@ -354,7 +351,7 @@ const fetchNearbyLandmarks = async () => {
   }
 };
 
-// ==================== LIFECYCLE ====================
+
 onMounted(() => {
   if (props.showNearby) {
     fetchNearbyLandmarks();

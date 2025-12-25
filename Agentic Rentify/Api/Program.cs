@@ -1,5 +1,6 @@
 ﻿using Serilog;
 using Scalar.AspNetCore;
+using System.Text.Json;
 using Hangfire;
 using Hangfire.Common;
 using Agentic_Rentify.Infragentic;
@@ -34,7 +35,12 @@ try
 
     // builder.Services.AddTransient<Agentic_Rentify.Api.Middleware.GlobalExceptionHandlerMiddleware>(); // Middleware registered via UseMiddleware does not need DI registration if strictly conventional.
     // Removed to fix RequestDelegate resolution error.
-    builder.Services.AddControllers();
+    builder.Services.AddControllers()
+        .AddJsonOptions(options =>
+        {
+            options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+            options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+        });
 
     // 3. دعم الـ Swagger/Swashbuckle للـ API Documentation
     // For MVC controllers with Swashbuckle, we don't need AddEndpointsApiExplorer()

@@ -4,6 +4,7 @@ using Agentic_Rentify.Application.Features.Cars.Commands.DeleteCar;
 using Agentic_Rentify.Application.Features.Cars.Queries.GetAllCars;
 using Agentic_Rentify.Application.Features.Cars.Queries.GetCarById;
 using Agentic_Rentify.Application.Wrappers;
+using Agentic_Rentify.Application.Features.Cars.Commands.PatchCar;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -75,6 +76,7 @@ public class CarsController(IMediator mediator) : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = result }, result);
     }
 
+
     /// <summary>
     /// Update car details or pricing.
     /// </summary>
@@ -113,6 +115,24 @@ public class CarsController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> Delete(int id)
     {
         var command = new DeleteCarCommand(id);
+        var result = await mediator.Send(command);
+        return Ok(result);
+    }
+    /// <summary>
+    /// Patch a car (partial update).
+    /// </summary>
+    /// <param name="id">Car ID to update</param>
+    /// <param name="command">Patch data (e.g., status, featured)</param>
+    /// <returns>Updated car ID</returns>
+    [HttpPatch("{id}")]
+    [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Patch(int id, [FromBody] PatchCarCommand command)
+    {
+        if (id != command.Id)
+        {
+            command.Id = id;
+        }
         var result = await mediator.Send(command);
         return Ok(result);
     }

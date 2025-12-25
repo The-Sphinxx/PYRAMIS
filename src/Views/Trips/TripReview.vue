@@ -70,17 +70,7 @@
                 </div>
              </div>
 
-             <!-- Total Price -->
-             <!-- <div class="flex items-center gap-4 border-l-4 border-primary pl-4 bg-base-200/50 p-4 rounded-r-lg">
-                <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary text-xl">
-                  <i class="fas fa-tag"></i>
-                </div>
-                <div>
-                  <p class="text-sm text-base-content/60">Total Price</p>
-                  <p class="font-bold text-xl text-primary">{{ formatPrice(bookingStore.bookingCosts?.total || 0) }}</p>
-                </div>
-             </div>
-              -->
+          
              
              <!-- Dynamic Amenities -->
               <div v-if="bookingStore.bookingInProgress?.itemData?.amenities?.transport" class="flex items-center gap-4 border-l-4 border-primary pl-4 bg-base-200/50 p-4 rounded-r-lg">
@@ -116,8 +106,7 @@
         
         </div>
 
-        <!-- Right Side - Price Summary (Sticky JS) -->
-        <!-- Right Side - Price Summary (CSS Sticky) -->
+        
         <div class="lg:col-span-1 h-full min-h-[500px] relative hidden lg:block">
           <div class="sticky top-24 z-40 transition-all duration-300">
              <PriceSummary

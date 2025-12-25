@@ -1,8 +1,3 @@
-// utils/bookingCalculator.js
-
-/**
- * Extract numeric price from string (e.g., "472 $" -> 472)
- */
 export const extractPrice = (priceString) => {
   if (typeof priceString === 'number') return priceString;
   if (!priceString) return 0;
@@ -11,9 +6,6 @@ export const extractPrice = (priceString) => {
   return parseFloat(numericPrice) || 0;
 };
 
-/**
- * Calculate booking costs based on type and data
- */
 export const calculateBookingCosts = (bookingType, basePrice, bookingData) => {
   const price = extractPrice(basePrice);
   let subtotal = 0;
@@ -71,9 +63,7 @@ export const calculateBookingCosts = (bookingType, basePrice, bookingData) => {
   };
 };
 
-/**
- * Calculate number of nights between two dates
- */
+
 export const calculateNights = (checkIn, checkOut) => {
   if (!checkIn || !checkOut) return 0;
 
@@ -85,24 +75,18 @@ export const calculateNights = (checkIn, checkOut) => {
   return diffDays;
 };
 
-/**
- * Calculate number of days for car rental
- */
+
 export const calculateDays = (pickupDate, returnDate) => {
   return calculateNights(pickupDate, returnDate);
 };
 
-/**
- * Format price with currency
- */
+
 export const formatPrice = (price, currency = '$') => {
   if (typeof price !== 'number') return `0${currency}`;
   return `${price.toFixed(2)}${currency}`;
 };
 
-/**
- * Validate booking data based on type
- */
+
 export const validateBookingData = (bookingType, bookingData) => {
   const errors = [];
   const today = new Date();

@@ -503,7 +503,7 @@ const handleCarSearch = (searchData) => {
 
 const handleAiPlanner = () => {
   console.log('Opening AI Trip Planner...');
-  alert('AI Trip Planner - Coming Soon! 🤖✨');
+  router.push({ name: 'AiPlanner' });
 };
 
 onMounted(async () => {

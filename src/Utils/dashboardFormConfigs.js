@@ -302,25 +302,25 @@ export const hotelFormConfig = {
       maxSize: 2 * 1024 * 1024 // 2MB per image
     },
     {
-        key: 'highlights',
-        label: 'Highlights',
-        type: 'tags',
-        placeholder: 'Add highlight',
-        required: false
+      key: 'highlights',
+      label: 'Highlights',
+      type: 'tags',
+      placeholder: 'Add highlight',
+      required: false
     },
     {
-        key: 'roomAmenities',
-        label: 'Room Amenities',
-        type: 'tags',
-        placeholder: 'Add amenity',
-        required: false
+      key: 'roomAmenities',
+      label: 'Room Amenities',
+      type: 'tags',
+      placeholder: 'Add amenity',
+      required: false
     },
     {
-        key: 'nearbyLocations',
-        label: 'Nearby Locations',
-        type: 'tags',
-        placeholder: 'Add location',
-        required: false
+      key: 'nearbyLocations',
+      label: 'Nearby Locations',
+      type: 'tags',
+      placeholder: 'Add location',
+      required: false
     }
   ]
 };
@@ -407,7 +407,7 @@ export const carFormConfig = {
       required: true
     },
     {
-      key: 'total_fleet',
+      key: 'totalFleet',
       label: 'Total Fleet',
       type: 'number',
       placeholder: 'Total number of this car',
@@ -415,7 +415,7 @@ export const carFormConfig = {
       required: true
     },
     {
-      key: 'available_now',
+      key: 'availableNow',
       label: 'Available Now',
       type: 'number',
       placeholder: 'Currently available',
@@ -435,10 +435,10 @@ export const carFormConfig = {
       required: false
     },
     {
-        key: 'nextAvailability',
-        label: 'Next Availability',
-        type: 'date',
-        required: false
+      key: 'nextAvailability',
+      label: 'Next Availability',
+      type: 'date',
+      required: false
     },
     {
       key: 'description',
@@ -595,11 +595,11 @@ export const tripFormConfig = {
       required: false
     },
     {
-        key: 'amenities',
-        label: 'Amenities',
-        type: 'tags', // Assumes data is array of strings or handled
-        required: false
-    },,
+      key: 'amenities',
+      label: 'Amenities',
+      type: 'tags', // Assumes data is array of strings or handled
+      required: false
+    },
     {
       key: 'images',
       label: 'Images',

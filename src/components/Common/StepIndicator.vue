@@ -88,14 +88,14 @@ const props = defineProps({
 });
 
 const getStepCircleClass = (step) => {
-  if (props.currentStep > step) return 'bg-success text-white'; // Completed
-  if (props.currentStep === step) return 'bg-primary text-white'; // Current
-  return 'bg-base-300 text-base-content/50'; // Future
+  if (props.currentStep > step) return 'bg-success text-white'; 
+  if (props.currentStep === step) return 'bg-primary text-white'; 
+  return 'bg-base-300 text-base-content/50'; 
 };
 
 const getLabelClass = (step) => {
-  if (props.currentStep > step) return 'text-success'; // Completed
-  if (props.currentStep === step) return 'text-primary'; // Current
-  return 'text-base-content/50'; // Future
+  if (props.currentStep > step) return 'text-success'; 
+  if (props.currentStep === step) return 'text-primary'; 
+  return 'text-base-content/50'; 
 };
 </script>

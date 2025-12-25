@@ -236,6 +236,7 @@
 import { ref, watch, onMounted } from 'vue';
 import { useFormValidation } from '@/composables/useFormValidation';
 import { useAuthStore } from '@/stores/authStore';
+import { useToast } from '@/composables/useToast';
 import {
   validateRequired,
   validateEmail,
@@ -273,6 +274,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'validate', 'submit']);
 const authStore = useAuthStore();
+const { toast } = useToast();
 
 const localData = ref({ ...props.modelValue });
 
@@ -379,6 +381,12 @@ const validate = () => {
 const handlePlaceOrder = () => {
   if (validate()) {
     emit('submit');
+  } else {
+    // Show toast notification for validation errors
+    const errorMessages = Object.values(errors.value);
+    if (errorMessages.length > 0) {
+      toast.error(errorMessages[0] || 'Please fill in all required fields correctly');
+    }
   }
 };
 

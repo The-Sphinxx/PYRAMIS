@@ -175,23 +175,19 @@ const updatePosition = () => {
   if (!inputRef.value) return;
   const rect = inputRef.value.getBoundingClientRect();
   
-  // Default position: bottom-left aligned
   let top = rect.bottom + 8;
   let left = rect.left;
   
-  // Viewport boundaries
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
-  const pickerWidth = 240; // w-[240px]
-  const pickerHeight = 300; // Approximate height
+  const pickerWidth = 240; 
+  const pickerHeight = 300; 
 
-  // Check right overflow
   if (left + pickerWidth > viewportWidth) {
     left = rect.right - pickerWidth;
   }
   if (left < 0) left = 10;
 
-  // Check bottom overflow
   if (top + pickerHeight > viewportHeight) {
     top = rect.top - pickerHeight - 8;
   }

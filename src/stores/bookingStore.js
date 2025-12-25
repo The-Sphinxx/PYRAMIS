@@ -63,9 +63,7 @@ export const useBookingStore = defineStore('booking', {
     },
 
     actions: {
-        /**
-         * Initialize a new booking
-         */
+        
         initializeBooking(type, itemId, itemData) {
             this.bookingInProgress = {
                 type,
@@ -79,9 +77,7 @@ export const useBookingStore = defineStore('booking', {
             this.persistState();
         },
 
-        /**
-         * Get default booking data structure based on type
-         */
+        
         getDefaultBookingData(type) {
             const baseData = {
                 date: null
@@ -123,15 +119,13 @@ export const useBookingStore = defineStore('booking', {
             }
         },
 
-        /**
-         * Update booking data
-         */
+        
         updateBookingData(field, value) {
             if (!this.bookingInProgress) return;
 
             this.bookingInProgress.bookingData[field] = value;
 
-            // Auto-calculate nights/days if date fields change
+            
             if (this.bookingInProgress.type === 'hotel') {
                 const { checkIn, checkOut } = this.bookingInProgress.bookingData;
                 if (checkIn && checkOut) {
@@ -154,9 +148,7 @@ export const useBookingStore = defineStore('booking', {
             this.persistState();
         },
 
-        /**
-         * Increment guest/passenger count
-         */
+        
         incrementCount(field) {
             if (!this.bookingInProgress) return;
 
@@ -165,9 +157,7 @@ export const useBookingStore = defineStore('booking', {
             this.persistState();
         },
 
-        /**
-         * Decrement guest/passenger count
-         */
+        
         decrementCount(field) {
             if (!this.bookingInProgress) return;
 
@@ -178,9 +168,7 @@ export const useBookingStore = defineStore('booking', {
             this.persistState();
         },
 
-        /**
-         * Validate current booking
-         */
+        
         validateCurrentBooking() {
             if (!this.bookingInProgress) {
                 this.validationErrors = ['No booking in progress'];
@@ -196,9 +184,7 @@ export const useBookingStore = defineStore('booking', {
             return validation.isValid;
         },
 
-        /**
-         * Submit booking
-         */
+        
         async submitBooking(userId = null, checkoutData = {}) {
             if (!this.validateCurrentBooking()) {
                 throw new Error('Invalid booking data');
@@ -210,7 +196,7 @@ export const useBookingStore = defineStore('booking', {
             try {
                 const costs = this.bookingCosts;
 
-                // Structure guest info from flat checkout data if needed
+                
                 const guestInfo = {
                     firstName: checkoutData.firstName,
                     lastName: checkoutData.lastName,
@@ -252,17 +238,13 @@ export const useBookingStore = defineStore('booking', {
             }
         },
 
-        /**
-         * Clear booking in progress
-         */
+        
         clearBookingInProgress() {
             this.bookingInProgress = null;
             this.validationErrors = [];
         },
 
-        /**
-         * Fetch all bookings
-         */
+        
         async fetchBookings() {
             this.loading = true;
             this.error = null;
@@ -278,9 +260,7 @@ export const useBookingStore = defineStore('booking', {
             }
         },
 
-        /**
-         * Fetch booking by ID
-         */
+        
         async fetchBookingById(id) {
             this.loading = true;
             this.error = null;
@@ -298,9 +278,7 @@ export const useBookingStore = defineStore('booking', {
             }
         },
 
-        /**
-         * Cancel booking
-         */
+        
         async cancelBooking(bookingId) {
             this.loading = true;
             this.error = null;
@@ -324,9 +302,7 @@ export const useBookingStore = defineStore('booking', {
             }
         },
 
-        /**
-         * Confirm payment
-         */
+        
         async confirmPayment(bookingId, paymentData) {
             this.loading = true;
             this.error = null;
@@ -350,9 +326,7 @@ export const useBookingStore = defineStore('booking', {
             }
         },
 
-        /**
-         * Enrich booking in progress with guest info and pricing for confirmation page
-         */
+        
         enrichBookingWithDetails(guestInfo, paymentInfo) {
             if (!this.bookingInProgress) return;
 
@@ -393,9 +367,7 @@ export const useBookingStore = defineStore('booking', {
             this.persistState();
         },
 
-        /**
-         * Persist state to localStorage
-         */
+        
         persistState() {
             localStorage.setItem('bookingInProgress', JSON.stringify(this.bookingInProgress));
             localStorage.setItem('currentBooking', JSON.stringify(this.currentBooking));

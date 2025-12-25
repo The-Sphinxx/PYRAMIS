@@ -8,9 +8,6 @@ export const useUsersStore = defineStore('users', () => {
     const isLoading = ref(false);
     const error = ref(null);
 
-    // Actions
-
-    // جلب جميع المستخدمين
     const fetchUsers = async () => {
         isLoading.value = true;
         error.value = null;
@@ -27,7 +24,6 @@ export const useUsersStore = defineStore('users', () => {
         }
     };
 
-    // جلب مستخدم محدد
     const fetchUserById = async (userId) => {
         isLoading.value = true;
         error.value = null;
@@ -43,7 +39,6 @@ export const useUsersStore = defineStore('users', () => {
         }
     };
 
-    // تحديث بيانات مستخدم
     const updateUser = async (userId, updates) => {
         isLoading.value = true;
         error.value = null;
@@ -54,7 +49,6 @@ export const useUsersStore = defineStore('users', () => {
                 updatedAt: new Date().toISOString()
             });
 
-            // تحديث المستخدم في القائمة
             const index = users.value.findIndex(u => u.id === userId);
             if (index !== -1) {
                 users.value[index] = response.data;
@@ -69,7 +63,6 @@ export const useUsersStore = defineStore('users', () => {
         }
     };
 
-    // حذف مستخدم
     const deleteUser = async (userId) => {
         isLoading.value = true;
         error.value = null;
@@ -77,7 +70,6 @@ export const useUsersStore = defineStore('users', () => {
         try {
             await api.delete(`/users/${userId}`);
 
-            // إزالة المستخدم من القائمة
             users.value = users.value.filter(u => u.id !== userId);
 
             return { success: true };
@@ -89,7 +81,6 @@ export const useUsersStore = defineStore('users', () => {
         }
     };
 
-    // البحث عن مستخدمين
     const searchUsers = async (query) => {
         isLoading.value = true;
         error.value = null;
@@ -107,7 +98,6 @@ export const useUsersStore = defineStore('users', () => {
         }
     };
 
-    // التحقق من وجود بريد إلكتروني
     const checkEmailExists = async (email) => {
         try {
             const response = await api.get('/users', {
@@ -119,28 +109,21 @@ export const useUsersStore = defineStore('users', () => {
         }
     };
 
-    // تحديث صورة البروفايل
     const updateProfileImage = async (userId, imageUrl) => {
         return await updateUser(userId, { profileImage: imageUrl });
     };
-
-    // تفعيل حساب المستخدم
     const verifyUser = async (userId) => {
         return await updateUser(userId, { isVerified: true });
     };
 
-    // مسح الأخطاء
     const clearError = () => {
         error.value = null;
     };
 
     return {
-        // State
         users,
         isLoading,
         error,
-
-        // Actions
         fetchUsers,
         fetchUserById,
         updateUser,

@@ -13,12 +13,12 @@ export const useAuthStore = defineStore('auth', () => {
   const setSession = (authResponse, rememberMe) => {
     const shapedUser = authResponse?.role
       ? {
-          id: authResponse.id,
-          email: authResponse.email,
-          firstName: authResponse.firstName,
-          lastName: authResponse.lastName,
-          role: authResponse.role || '',
-        }
+        id: authResponse.id,
+        email: authResponse.email,
+        firstName: authResponse.firstName,
+        lastName: authResponse.lastName,
+        role: authResponse.role || '',
+      }
       : buildUserFromToken(authResponse.token);
 
     user.value = shapedUser;
@@ -138,10 +138,10 @@ export const useAuthStore = defineStore('auth', () => {
 
       // Refresh user data from profile endpoint to get updated info
       const profileResponse = await api.get('/Profile');
-      
+
       // Update local user state with new data
       user.value = buildUserFromToken(token.value);
-      
+
       return { success: true, data: profileResponse.data };
     } catch (error) {
       console.error('Update profile error:', error);

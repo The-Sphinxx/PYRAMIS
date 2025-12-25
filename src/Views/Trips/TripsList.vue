@@ -26,6 +26,7 @@
             :initial-data="searchParams"
             @search="handleSearch"
             :show-ai-planner="true"
+            @ai-planner="handleAiPlanner"
           />
         </div>
       </div>
@@ -93,11 +94,13 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { useRouter } from 'vue-router';
 import { useTripsStore } from '@/stores/tripsStore';
 import Search from '@/components/Common/Search.vue';
 import TripCard from '@/components/Trips/TripCard.vue';
 import Pagination from '@/components/Common/Pagination.vue';
 
+const router = useRouter();
 const tripsStore = useTripsStore();
 
 // State
@@ -160,6 +163,10 @@ const resetSearch = async () => {
     searchParams.value = {};
     currentPage.value = 1;
     await fetchTripsData(1);
+};
+
+const handleAiPlanner = () => {
+  router.push({ name: 'AiPlanner' });
 };
 
 onUnmounted(() => {

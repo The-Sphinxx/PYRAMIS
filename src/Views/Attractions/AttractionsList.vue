@@ -287,7 +287,7 @@ const handleViewDetails = (attraction) => {
 };
 
 const openAiPlanner = () => {
-  router.push({ name: 'AiTripPlanner' });
+  router.push({ name: 'AiPlanner' });
 };
 
 const resetFilters = async () => {

@@ -82,7 +82,7 @@ const props = defineProps({
   },
   autoPlayInterval: {
     type: Number,
-    default: 3000 // 6 seconds
+    default: 3000 
   },
   autoPlay: {
     type: Boolean,

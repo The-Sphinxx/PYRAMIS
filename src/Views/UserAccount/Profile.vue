@@ -14,7 +14,7 @@
       
       <!-- Overview Tab -->
       <div v-if="activeTab === 'overview'" class="space-y-12">
-        <!-- Upcoming Bookings (Preview) -->
+        <!-- Upcoming Bookings -->
         <div>
           <div class="flex items-center gap-3 mb-6">
             <h2 class="text-2xl font-bold text-base-content">Upcoming Bookings</h2>

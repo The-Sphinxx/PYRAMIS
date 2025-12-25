@@ -1,5 +1,5 @@
 <template>
-  <div class="toast toast-end toast-top z-50">
+  <div class="toast toast-center toast-top z-50 py-8">
     <div 
       v-for="toast in toasts" 
       :key="toast.id" 
@@ -34,5 +34,6 @@ const { toasts, removeToast } = useToast();
   top: 1rem;
   right: 1rem;
   max-width: 24rem;
+  z-index: 9999;
 }
 </style>

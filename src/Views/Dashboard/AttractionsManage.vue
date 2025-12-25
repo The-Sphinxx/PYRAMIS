@@ -30,6 +30,7 @@
     <FilterModal 
       :is-open="showFilterModal"
       v-bind="filterConfig"
+      :initial-filters="activeFilters"
       @filter-change="applyFilters"
       @close="showFilterModal = false"
     />
@@ -43,6 +44,20 @@
       @close="closeFormModal"
       @submit="handleFormSubmit"
     />
+    <!-- Delete Confirmation Modal -->
+    <div v-if="showDeleteModal" class="modal modal-open">
+      <div class="modal-box">
+        <h3 class="font-bold text-lg text-error">Confirm Delete</h3>
+        <p class="py-4">Are you sure you want to delete this attraction? This action cannot be undone.</p>
+        <div class="modal-action">
+          <button @click="showDeleteModal = false" class="btn">Cancel</button>
+          <button @click="confirmDelete" class="btn btn-error text-white" :disabled="loading">
+            <span v-if="loading" class="loading loading-spinner loading-sm"></span>
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -68,12 +83,17 @@ const props = defineProps({
 const attractions = ref([]);
 const router = useRouter();
 const route = useRoute(); // Added missing route definition
+import { useToast } from '@/composables/useToast.js';
+
 const loading = ref(false);
 const showFilterModal = ref(false);
 const showFormModal = ref(false);
+const showDeleteModal = ref(false);
+const attractionToDelete = ref(null);
 const formMode = ref('add');
 const selectedAttraction = ref({});
 const activeFilters = ref({});
+const { toast } = useToast();
 
 // Configs
 const filterConfig = dashboardAttractionFilterConfig;
@@ -198,24 +218,24 @@ const filteredAttractions = computed(() => {
   }
 
   // Apply status filter
-  if (activeFilters.value.statusSelected) {
-    result = result.filter(a => a.status === activeFilters.value.statusSelected);
+  if (activeFilters.value.status) {
+    result = result.filter(a => a.status === activeFilters.value.status);
   }
 
   // Apply availability filter
-  if (activeFilters.value.availabilitySelected) {
-    result = result.filter(a => a.availability === activeFilters.value.availabilitySelected);
+  if (activeFilters.value.availability) {
+    result = result.filter(a => a.availability === activeFilters.value.availability);
   }
 
   // Apply featured filter
-  if (activeFilters.value.featuredSelected) {
-    const isFeatured = activeFilters.value.featuredSelected === 'true';
+  if (activeFilters.value.featured) {
+    const isFeatured = activeFilters.value.featured === 'true';
     result = result.filter(a => a.isFeatured === isFeatured);
   }
 
   // Apply rating filter
-  if (activeFilters.value.ratingSelected) {
-    const minRating = parseFloat(activeFilters.value.ratingSelected);
+  if (activeFilters.value.rating) {
+    const minRating = parseFloat(activeFilters.value.rating);
     result = result.filter(a => a.rating >= minRating);
   }
 
@@ -229,19 +249,18 @@ const fetchAttractions = async () => {
     const response = await attractionsAPI.getAll();
     
     // Transform data to match table requirements
-    attractions.value = response.data.map(attraction => ({
-      id: attraction.id,
-      name: attraction.name,
+    attractions.value = response.data.data.map(attraction => ({
+      ...attraction,
       location: `${attraction.city}, Egypt`,
-      year: attraction.year || '',
-      images: attraction.images?.[0] || '/placeholder-attraction.jpg',
-      price: attraction.price || 'Free',
-      capacity: attraction.capacity || '18 / 42 Ticket',
+      // Map images to string URLs for DataTable
+      images: Array.isArray(attraction.images) 
+        ? attraction.images.map(img => typeof img === 'string' ? img : img.url)
+        : [attraction.images?.url || attraction.images || '/placeholder-attraction.jpg'],
+      price: attraction.rawPrice || attraction.price || 0,
+      capacity: attraction.capacity || 'N/A',
       isFeatured: attraction.isFeatured || false,
-      availability: attraction.availability || (Math.random() > 0.5 ? 'Available' : 'Sold Out'),
-      status: attraction.status || (Math.random() > 0.7 ? 'Active' : Math.random() > 0.5 ? 'Pending' : 'Disabled'),
-      rating: attraction.rating,
-      reviewsCount: attraction.reviews?.totalReviews || 0
+      status: attraction.status || 'Active',
+      availability: attraction.availability || 'Available'
     }));
   } catch (error) {
     console.error('Error fetching attractions:', error);
@@ -264,16 +283,29 @@ const handleEdit = (row) => {
   showFormModal.value = true;
 };
 
-const handleDelete = async (row) => {
-  if (confirm(`Are you sure you want to delete "${row.name}"?`)) {
-    try {
-      await attractionsAPI.delete(row.id);
-      await fetchAttractions(); // Refresh data
-      console.log('Deleted attraction:', row);
-    } catch (error) {
-      console.error('Error deleting attraction:', error);
-      alert('Failed to delete attraction');
-    }
+const handleDelete = (row) => {
+  attractionToDelete.value = row;
+  showDeleteModal.value = true;
+};
+
+const confirmDelete = async () => {
+  if (!attractionToDelete.value) return;
+  
+  loading.value = true;
+  try {
+    await attractionsAPI.delete(attractionToDelete.value.id);
+    
+    // Optimistic update
+    attractions.value = attractions.value.filter(a => a.id !== attractionToDelete.value.id);
+    toast.success('Attraction deleted successfully');
+    showDeleteModal.value = false;
+  } catch (error) {
+    console.error('Error deleting attraction:', error);
+    toast.error('Failed to delete attraction');
+    await fetchAttractions();
+  } finally {
+    loading.value = false;
+    attractionToDelete.value = null;
   }
 };
 
@@ -283,13 +315,29 @@ const handleView = (row) => {
 
 const handleToggle = async ({ row, field, newValue }) => {
   try {
+    // Optimistic update
+    const idx = attractions.value.findIndex(a => a.id === row.id);
+    if (idx !== -1) {
+      if (field === 'isFeatured') {
+        attractions.value[idx].isFeatured = newValue;
+      }
+    }
+
     // Update the featured status
-    await attractionsAPI.toggleFeatured(row.id, newValue);
-    console.log(`Toggled ${field} for ${row.name} to ${newValue}`);
+    if (field === 'isFeatured') {
+      await attractionsAPI.toggleFeatured(row.id, newValue);
+      toast.success(`${newValue ? 'Added to' : 'Removed from'} featured attractions`);
+    }
   } catch (error) {
     console.error('Error toggling featured:', error);
-    // Revert the change
-    await fetchAttractions();
+    toast.error('Failed to update featured status');
+    // Revert without global loading if possible, or just refresh silently
+    const response = await attractionsAPI.getAll();
+    attractions.value = response.data.data.map(a => ({
+       ...a,
+       images: Array.isArray(a.images) ? a.images.map(img => typeof img === 'string' ? img : img.url) : [a.images?.url || a.images || '/placeholder-attraction.jpg'],
+       price: a.rawPrice || a.price || 0
+    }));
   }
 };
 
@@ -305,30 +353,36 @@ const handleStatusClick = async ({ row, field, value }) => {
 
     try {
       await attractionsAPI.updateAvailability(row.id, newAvailability);
-      console.log(`Updated availability for ${row.name} to ${newAvailability}`);
+      toast.success(`Availability updated to ${newAvailability}`);
     } catch (error) {
       console.error('Error updating availability:', error);
       // Revert on error
       if (rowIndex !== -1) {
         attractions.value[rowIndex].availability = value;
       }
-      alert('Failed to update availability');
+      toast.error('Failed to update availability');
     }
   }
 };
 
 const handleStatusChange = async ({ row, field, newValue }) => {
   try {
-    // Update the status
     if (field === 'status') {
       await attractionsAPI.updateStatus(row.id, newValue);
+      // Optimistic
+      const idx = attractions.value.findIndex(a => a.id === row.id);
+      if (idx !== -1) attractions.value[idx].status = newValue;
+      toast.success('Status updated successfully');
     } else if (field === 'availability') {
       await attractionsAPI.updateAvailability(row.id, newValue);
+      // Optimistic
+      const idx = attractions.value.findIndex(a => a.id === row.id);
+      if (idx !== -1) attractions.value[idx].availability = newValue;
+      toast.success('Availability updated successfully');
     }
-    console.log(`Changed ${field} for ${row.name} to ${newValue}`);
   } catch (error) {
     console.error('Error updating status:', error);
-    // Revert the change
+    toast.error('Failed to update status');
     await fetchAttractions();
   }
 };
@@ -350,16 +404,55 @@ const closeFormModal = () => {
 const handleFormSubmit = async ({ mode, data }) => {
   loading.value = true;
   try {
-    if (mode === 'add') {
-      await attractionsAPI.create(data);
-    } else {
-      await attractionsAPI.update(selectedAttraction.value.id, data);
+    // Basic Validation
+    if (!data.name?.trim()) {
+      toast.error('Attraction name is required');
+      return;
     }
-    await fetchAttractions();
+    if (!data.price || data.price <= 0) {
+      toast.error('Valid price is required');
+      return;
+    }
+    if (!data.location?.trim() && !data.city?.trim()) {
+      toast.error('Location is required');
+      return;
+    }
+    
+    // Transform
+    const payload = {
+      ...data,
+      name: data.name?.trim(),
+      city: data.city?.trim() || data.location?.trim(),
+      location: data.location?.trim() || data.city?.trim(),
+      price: Number(data.price),
+      capacity: data.capacity?.toString(),
+      images: Array.isArray(data.images) ? data.images.filter(img => typeof img === 'string') : []
+    };
+
+    if (mode === 'add') {
+      const response = await attractionsAPI.create(payload);
+      const newItem = {
+        ...payload,
+        id: response.data.id || response.data,
+        isFeatured: payload.isFeatured || false,
+        status: payload.status || 'Active'
+      };
+      attractions.value.unshift(newItem);
+      toast.success('Attraction created successfully');
+    } else {
+      await attractionsAPI.update(selectedAttraction.value.id, { ...payload, Id: selectedAttraction.value.id });
+      // Optimistic update
+      const index = attractions.value.findIndex(a => a.id === selectedAttraction.value.id);
+      if (index !== -1) {
+        attractions.value[index] = { ...attractions.value[index], ...payload };
+      }
+      toast.success('Attraction updated successfully');
+    }
     closeFormModal();
   } catch (error) {
     console.error('Error submitting form:', error);
-    alert('Failed to save attraction');
+    const msg = error.response?.data?.message || 'Failed to save attraction';
+    toast.error(msg);
   } finally {
     loading.value = false;
   }

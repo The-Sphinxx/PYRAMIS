@@ -330,12 +330,13 @@ const fetchAllData = async () => {
         usersAPI.getAll()
       ]);
 
-    hotels.value = hotelsRes.data || [];
-    cars.value = carsRes.data || [];
-    attractions.value = attractionsRes.data || [];
-    trips.value = tripsRes.data || [];
-    bookings.value = bookingsRes.data || [];
-    users.value = usersRes.data || [];
+    hotels.value = hotelsRes.data.data || [];
+    console.log(hotels.value);
+    cars.value = carsRes.data.data || [];
+    attractions.value = attractionsRes.data.data || [];
+    trips.value = tripsRes.data.data || [];
+    bookings.value = bookingsRes.data.data || [];
+    users.value = usersRes.data.data || [];
   } catch (error) {
     console.error('Error fetching overview data:', error);
   }
@@ -355,7 +356,7 @@ const carsPreview = computed(() =>
     images: Array.isArray(car.images) ? car.images[0] : car.images,
     location: car.city || 'Cairo',
     price: car.price || car.pricePerDay,
-    status: car.status || 'Available'
+    status: car.status || 'available'
   }))
 );
 
@@ -385,7 +386,7 @@ const activeHotelsCount = computed(() =>
 );
 
 const availableCarsCount = computed(() => 
-  cars.value.filter(c => c.status === 'Available' || c.available_now > 0).length
+  cars.value.filter(c => c.status === 'available' || c.available_now > 0).length
 );
 
 const availableAttractionsCount = computed(() => 
