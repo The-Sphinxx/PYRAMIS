@@ -100,7 +100,7 @@
         <!-- Pagination Component -->
         <Pagination
           :current-page="currentPage"
-          :total="filteredAttractions.length"
+          :total="totalCount"
           :per-page="itemsPerPage"
           :show-info="true"
           :show-per-page-selector="true"
@@ -147,6 +147,23 @@ const selectedCategory = ref('all');
 const currentPage = ref(1);
 const itemsPerPage = ref(12);
 const loading = ref(true);
+const totalPages = computed(() => attractionStore.pagination.totalPages);
+const totalCount = computed(() => attractionStore.pagination.totalCount);
+
+const fetchAttractionsData = async (page = 1) => {
+  const params = {
+    pageIndex: page - 1, // API uses 0-based indexing
+    pageSize: itemsPerPage.value
+  };
+  
+  // Add filters if any
+  if (selectedCategory.value !== 'all') {
+    params.category = selectedCategory.value;
+  }
+  // Don't check store filters here - they should be passed via search/category selection only
+  
+  await attractionStore.fetchAttractions(params);
+};
 
 // Categories with icons and descriptions
 const categories = ref([
@@ -216,18 +233,11 @@ const currentCategoryDescription = computed(() => {
   return category ? category.description : 'The best attractions recommended for you';
 });
 
-const filteredAttractions = computed(() => {
-  return attractionStore.getFilteredAttractions;
-});
-
-const paginatedAttractions = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage.value;
-  const end = start + itemsPerPage.value;
-  return filteredAttractions.value.slice(start, end);
-});
+// Computed
+const paginatedAttractions = computed(() => attractionStore.attractions);
 
 // Methods
-const selectCategory = (categoryId) => {
+const selectCategory = async (categoryId) => {
   selectedCategory.value = categoryId;
   
   if (categoryId === 'all') {
@@ -238,10 +248,11 @@ const selectCategory = (categoryId) => {
   }
 
   currentPage.value = 1;
+  await fetchAttractionsData(1);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
-const handleSearch = (searchData) => {
+const handleSearch = async (searchData) => {
   // Update store filters
   if (searchData.query) {
     attractionStore.setFilter('searchQuery', searchData.query);
@@ -252,17 +263,20 @@ const handleSearch = (searchData) => {
   }
   
   currentPage.value = 1;
+  await fetchAttractionsData(1);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
-const handlePageChange = (page) => {
+const handlePageChange = async (page) => {
   currentPage.value = page;
+  await fetchAttractionsData(page);
   window.scrollTo({ top: 400, behavior: 'smooth' });
 };
 
-const handlePerPageChange = (perPage) => {
+const handlePerPageChange = async (perPage) => {
   itemsPerPage.value = perPage;
   currentPage.value = 1;
+  await fetchAttractionsData(1);
 };
 
 const handleViewDetails = (attraction) => {
@@ -276,10 +290,11 @@ const openAiPlanner = () => {
   router.push({ name: 'AiPlanner' });
 };
 
-const resetFilters = () => {
+const resetFilters = async () => {
   selectedCategory.value = 'all';
   attractionStore.resetFilters();
   currentPage.value = 1;
+  await fetchAttractionsData(1);
 };
 
 /* Random reviews removed to prevent hydration mismatch */
@@ -303,7 +318,7 @@ const getAttractionReviews = (attraction) => {
 // Lifecycle
 onMounted(async () => {
   try {
-    await attractionStore.fetchAttractions();
+    await fetchAttractionsData(currentPage.value);
   } catch (error) {
     console.error('Error loading attractions:', error);
   } finally {

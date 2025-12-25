@@ -389,17 +389,17 @@ const defaultHotels = [
 ];
 
 const defaultTrips = [
-  { id: 1, name: 'Pyramids', price: 200, description: 'A full guided tour covering the Pyramids, Sphinx, and Valley Temple.', location: 'Cairo', duration: '4 Days / 3 Nights', rating: 4.8, reviews: '5,205 reviews', image: 'https://images.unsplash.com/photo-1568322445389-f64ac2515020?w=800' },
-  { id: 2, name: 'Pyramids', price: 200, description: 'A full guided tour covering the Pyramids, Sphinx, and Valley Temple.', location: 'Cairo', duration: '4 Days / 3 Nights', rating: 4.8, reviews: '5,205 reviews', image: 'https://images.unsplash.com/photo-1568322445389-f64ac2515020?w=800' },
-  { id: 3, name: 'Pyramids', price: 200, description: 'A full guided tour covering the Pyramids, Sphinx, and Valley Temple.', location: 'Cairo', duration: '4 Days / 3 Nights', rating: 4.8, reviews: '5,205 reviews', image: 'https://images.unsplash.com/photo-1568322445389-f64ac2515020?w=800' },
-  { id: 4, name: 'Pyramids', price: 200, description: 'A full guided tour covering the Pyramids, Sphinx, and Valley Temple.', location: 'Cairo', duration: '4 Days / 3 Nights', rating: 4.8, reviews: '5,205 reviews', image: 'https://images.unsplash.com/photo-1568322445389-f64ac2515020?w=800' }
+  { id: 1, name: 'Pyramids of Giza', price: 200, description: 'A full guided tour covering the Pyramids, Sphinx, and Valley Temple.', location: 'Cairo', duration: '4 Days / 3 Nights', rating: 4.8, reviews: '5,205 reviews', image: 'https://images.unsplash.com/photo-1568322445389-f64ac2515020?w=800' },
+  { id: 2, name: 'Luxor Temple Tour', price: 250, description: 'Explore the magnificent temples of Luxor and Karnak.', location: 'Luxor', duration: '3 Days / 2 Nights', rating: 4.7, reviews: '3,420 reviews', image: 'https://images.unsplash.com/photo-1553913861-c0fddf2619ee?w=800' },
+  { id: 3, name: 'Red Sea Diving', price: 180, description: 'Dive into crystal clear waters and explore vibrant coral reefs.', location: 'Hurghada', duration: '2 Days / 1 Night', rating: 4.9, reviews: '2,150 reviews', image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800' },
+  { id: 4, name: 'Desert Safari Adventure', price: 300, description: 'Experience the beauty of the Western Desert with Bedouin guides.', location: 'Siwa', duration: '5 Days / 4 Nights', rating: 4.6, reviews: '1,890 reviews', image: 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800' }
 ];
 
 const defaultCars = [
-  { id: 1, name: 'Family SUV', price: 200, description: 'Great for families exploring Cairo, Giza, and Alexandria.', image: 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=800' },
+  { id: 1, name: 'Luxury Sedan', price: 150, description: 'Comfortable and elegant travel through the streets of Cairo.', image: 'https://images.unsplash.com/photo-1563720360172-67b8f3dce741?w=800' },
   { id: 2, name: 'Family SUV', price: 200, description: 'Great for families exploring Cairo, Giza, and Alexandria.', image: 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=800' },
-  { id: 3, name: 'Family SUV', price: 200, description: 'Great for families exploring Cairo, Giza, and Alexandria.', image: 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=800' },
-  { id: 4, name: 'Family SUV', price: 200, description: 'Great for families exploring Cairo, Giza, and Alexandria.', image: 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=800' }
+  { id: 3, name: 'Convertible Sports', price: 350, description: 'Experience the thrill of driving along the Red Sea coast.', image: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=800' },
+  { id: 4, name: 'Economy Compact', price: 100, description: 'Affordable and fuel-efficient for city exploration.', image: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800' }
 ];
 
 const defaultTestimonials = [

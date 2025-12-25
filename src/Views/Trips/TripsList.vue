@@ -57,10 +57,10 @@
         </div>
 
         <!-- Pagination -->
-        <div v-if="filteredTrips.length > itemsPerPage" class="flex justify-center mt-8">
+        <div v-if="totalCount > itemsPerPage" class="flex justify-center mt-8">
           <Pagination 
             :current-page="currentPage" 
-            :total="filteredTrips.length"
+            :total="totalCount"
             :per-page="itemsPerPage"
             @update:current-page="handlePageChange"
           />
@@ -107,64 +107,62 @@ const tripsStore = useTripsStore();
 const currentPage = ref(1);
 const itemsPerPage = 8;
 const searchParams = ref({});
+const fetchKey = ref(0);
+const totalPages = computed(() => tripsStore.pagination.totalPages);
+const totalCount = computed(() => tripsStore.pagination.totalCount);
+
+const fetchTripsData = async (page = 1) => {
+  const params = {
+    pageIndex: page - 1, // API uses 0-based indexing
+    pageSize: itemsPerPage
+  };
+  
+  // Add search parameter only if explicitly set
+  if (searchParams.value.pickupLocation && searchParams.value.pickupLocation !== 'All Cities') {
+    params.searchQuery = searchParams.value.pickupLocation;
+  }
+  
+  await tripsStore.fetchTrips(params);
+};
 
 // Computed
 const loading = computed(() => tripsStore.loading);
 const error = computed(() => tripsStore.error);
-const trips = computed(() => tripsStore.trips);
+const paginatedTrips = computed(() => {
+  const trips = tripsStore.trips;
+  console.log('🎨 RENDER TripsList - Total Trips:', trips?.length);
+  console.log('🎨 RENDER TripsList - Trip IDs:', trips?.map(t => t.id));
+  console.log('🎨 RENDER TripsList - Has Duplicates?', new Set(trips?.map(t => t.id)).size !== trips?.length);
+  return trips;
+});
 
 // Load Data
 onMounted(async () => {
   try {
-    await tripsStore.fetchTrips();
+    await fetchTripsData(currentPage.value);
   } catch (error) {
     console.error('Failed to load trips from API', error);
   }
 });
 
-// Computed Filters
-const filteredTrips = computed(() => {
-  let result = trips.value;
-
-  // Filter by Location
-  if (searchParams.value.pickupLocation && searchParams.value.pickupLocation !== 'All Cities') {
-     const location = searchParams.value.pickupLocation.toLowerCase();
-     const titleMatch = result.some(trip => trip.title?.toLowerCase().includes(location));
-     const descMatch = result.some(trip => trip.description?.toLowerCase().includes(location));
-     
-     if (titleMatch || descMatch) {
-       result = result.filter(trip => 
-         trip.title?.toLowerCase().includes(location) || 
-         trip.description?.toLowerCase().includes(location)
-       );
-     }
-  }
-
-  return result;
-});
-
-// Pagination Logic
-const paginatedTrips = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage;
-  const end = start + itemsPerPage;
-  return filteredTrips.value.slice(start, end);
-});
-
 // Handlers
-const handleSearch = (params) => {
+const handleSearch = async (params) => {
   searchParams.value = params;
   currentPage.value = 1;
+  await fetchTripsData(1);
   console.log('Search params:', params);
 };
 
-const handlePageChange = (page) => {
+const handlePageChange = async (page) => {
   currentPage.value = page;
+  await fetchTripsData(page);
   window.scrollTo({ top: 400, behavior: 'smooth' });
 };
 
-const resetSearch = () => {
+const resetSearch = async () => {
     searchParams.value = {};
     currentPage.value = 1;
+    await fetchTripsData(1);
 };
 
 const handleAiPlanner = () => {

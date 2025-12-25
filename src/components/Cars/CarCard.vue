@@ -110,9 +110,19 @@
 </template>
 
 <script setup>
-defineProps({
+import { onMounted } from 'vue';
+
+const props = defineProps({
   car: Object
 });
+
+const componentId = Math.random().toString(36).substr(2, 9);
+
+onMounted(() => {
+  console.log('🎴 CarCard MOUNTED - ComponentID:', componentId, 'CarID:', props.car?.id, 'Name:', props.car?.name);
+  console.trace('CarCard mount stack trace');
+});
+
 defineEmits(['view']);
 
 const getImage = (images) => {

@@ -307,16 +307,17 @@ const loadRecommendedHotels = () => {
 // Lifecycle
 onMounted(async () => {
   try {
-    // Fetch hotels if not already loaded
-    if (hotelStore.hotels.length === 0) {
-      await hotelStore.fetchHotels();
-    }
-    
-    // Get hotel by ID
     const hotelId = route.params.id;
-    hotel.value = hotelStore.getHotelById(hotelId);
+    
+    // Fetch hotel by ID from API
+    await hotelStore.fetchHotelById(hotelId);
+    hotel.value = hotelStore.selectedHotel;
     
     if (hotel.value) {
+      // Fetch all hotels for recommendations if not already loaded
+      if (hotelStore.hotels.length === 0) {
+        await hotelStore.fetchHotels();
+      }
       loadRecommendedHotels();
     }
   } catch (error) {

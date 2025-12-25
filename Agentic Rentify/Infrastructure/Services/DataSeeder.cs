@@ -88,7 +88,9 @@ public class DataSeeder
             }
 
             // Seed Attractions
-            if (!await _context.Set<Attraction>().AnyAsync())
+            var attractionCount = await _context.Set<Attraction>().CountAsync();
+            _logger.LogInformation("Found {Count} existing attractions in database", attractionCount);
+            if (attractionCount == 0)
             {
                 _logger.LogInformation("Seeding {Count} attractions...", mockData.Attractions?.Count ?? 0);
                 if (mockData.Attractions != null && mockData.Attractions.Count > 0)
@@ -196,7 +198,7 @@ public class DataSeeder
                             continue;
                         }
 
-                        var hotelEntity = new Hotel
+                        var entity = new Hotel
                         {
                             Name = hotel.Name,
                             City = hotel.City,
@@ -250,61 +252,6 @@ public class DataSeeder
                             }
                         };
 
-                        _context.Set<Hotel>().Add(hotelEntity);
-                        var entity = new Hotel
-                        {
-                            Name = hotel.Name ?? string.Empty,
-                            City = hotel.City ?? string.Empty,
-                            Rating = hotel.Rating,
-                            ReviewsCount = hotel.ReviewsCount ?? 0,
-                            BasePrice = ParsePrice(hotel.BasePrice),
-                            PricePerNight = ParsePrice(hotel.PricePerNight),
-                            Description = hotel.Description ?? string.Empty,
-                            Overview = hotel.Overview ?? string.Empty,
-                            Status = hotel.Status ?? "Active",
-                            Featured = hotel.Featured ?? false,
-                            IsFeatured = hotel.IsFeatured ?? false,
-                            Latitude = hotel.Latitude ?? 0,
-                            Longitude = hotel.Longitude ?? 0,
-                            Images = hotel.Images ?? new List<string>(),
-                            Amenities = hotel.Amenities ?? new List<string>(),
-                            RoomAmenities = hotel.RoomAmenities ?? new List<string>(),
-                            Highlights = hotel.Highlights ?? new List<string>(),
-                            NearbyLocations = hotel.NearbyLocations ?? new List<string>(),
-                            Rooms = (hotel.Rooms ?? new List<MockHotelRoom>()).Select(r => new HotelRoom
-                            {
-                                Type = r.Type ?? string.Empty,
-                                Price = ParsePrice(r.Price),
-                                Available = r.Available ?? 0
-                            }).ToList(),
-                            ReviewSummary = new HotelReviewSummary
-                            {
-                                OverallRating = hotel.ReviewSummary?.OverallRating ?? 0,
-                                TotalReviews = hotel.ReviewSummary?.TotalReviews ?? 0,
-                                RatingCriteria = new RatingCriteria
-                                {
-                                    Experience = hotel.ReviewSummary?.RatingCriteria?.Experience ?? 0,
-                                    Staff = hotel.ReviewSummary?.RatingCriteria?.Staff ?? 0,
-                                    Accessibility = hotel.ReviewSummary?.RatingCriteria?.Accessibility ?? 0,
-                                    Facilities = hotel.ReviewSummary?.RatingCriteria?.Facilities ?? 0,
-                                    ValueForMoney = hotel.ReviewSummary?.RatingCriteria?.ValueForMoney ?? 0
-                                }
-                            },
-                            UserReviews = (hotel.UserReviews ?? new List<MockUserReview>()).Select(r => new UserReview
-                            {
-                                UserName = r.UserName ?? string.Empty,
-                                UserImage = r.UserImage ?? string.Empty,
-                                Rating = r.Rating,
-                                Date = r.Date ?? string.Empty,
-                                Comment = r.Comment ?? string.Empty
-                            }).ToList(),
-                            Availability = new HotelAvailability
-                            {
-                                AvailableRooms = hotel.Availability?.AvailableRooms ?? 0,
-                                TotalRooms = hotel.Availability?.TotalRooms ?? 0
-                            }
-                        };
-
                         _context.Set<Hotel>().Add(entity);
                     }
                     await _context.SaveChangesAsync();
@@ -334,54 +281,7 @@ public class DataSeeder
                             continue;
                         }
 
-                        var carEntity = new Car
-                        {
-                            Name = car.Name,
-                            Brand = car.Brand ?? string.Empty,
-                            Model = car.Model ?? string.Empty,
-                            Year = car.Year ?? DateTime.Now.Year,
-                            City = car.City,
-                            Description = car.Description ?? string.Empty,
-                            Overview = car.Overview ?? string.Empty,
-                            Type = car.Type ?? "sedan",
-                            Price = price,
-                            BasePrice = basePrice,
-                            Seats = car.Seats ?? 4,
-                            Transmission = car.Transmission ?? "automatic",
-                            FuelType = car.FuelType ?? "Petrol",
-                            TotalFleet = car.TotalFleet ?? car.Total_fleet ?? 20,
-                            AvailableNow = car.AvailableNow ?? car.Available_now ?? 0,
-                            NextAvailability = car.NextAvailability ?? string.Empty,
-                            Status = car.Status ?? "Available",
-                            Featured = car.Featured ?? car.IsFeatured ?? false,
-                            IsFeatured = car.IsFeatured ?? car.Featured ?? false,
-                            Features = car.Features ?? new List<string>(),
-                            Images = car.Images ?? new List<string>(),
-                            Amenities = car.Amenities ?? new List<string>(),
-                            ReviewSummary = new CarReviewSummary
-                            {
-                                OverallRating = (car.ReviewSummary ?? car.Reviews)?.OverallRating ?? 0,
-                                TotalReviews = (car.ReviewSummary ?? car.Reviews)?.TotalReviews ?? 0,
-                                RatingCriteria = new CarRatingCriteria
-                                {
-                                    Experience = (car.ReviewSummary ?? car.Reviews)?.RatingCriteria?.Experience ?? 0,
-                                    Comfort = (car.ReviewSummary ?? car.Reviews)?.RatingCriteria?.Comfort ?? 0,
-                                    Reliability = (car.ReviewSummary ?? car.Reviews)?.RatingCriteria?.Reliability ?? 0,
-                                    ValueForMoney = (car.ReviewSummary ?? car.Reviews)?.RatingCriteria?.ValueForMoney ?? 0,
-                                    Features = (car.ReviewSummary ?? car.Reviews)?.RatingCriteria?.Features ?? 0
-                                }
-                            },
-                            UserReviews = (car.UserReviews ?? new List<MockUserReview>()).Select(r => new UserReview
-                            {
-                                UserName = r.UserName ?? string.Empty,
-                                UserImage = r.UserImage ?? string.Empty,
-                                Rating = r.Rating,
-                                Date = r.Date ?? string.Empty,
-                                Comment = r.Comment ?? string.Empty
-                            }).ToList()
-                        };
 
-                        _context.Set<Car>().Add(carEntity);
                         var entity = new Car
                         {
                             Name = car.Name ?? string.Empty,
@@ -527,76 +427,6 @@ public class DataSeeder
                         };
 
                         _context.Set<Trip>().Add(tripEntity);
-                        var entity = new Trip
-                        {
-                            Title = trip.Title ?? string.Empty,
-                            Description = trip.Description ?? string.Empty,
-                            City = trip.City ?? string.Empty,
-                            Destination = trip.Destination ?? string.Empty,
-                            TripType = trip.TripType ?? string.Empty,
-                            Price = ParsePrice(trip.Price),
-                            Rating = trip.Rating,
-                            TotalReviews = trip.TotalReviews ?? 0,
-                            Reviews = trip.Reviews ?? 0,
-                            Duration = trip.Duration ?? string.Empty,
-                            MainImage = trip.MainImage ?? string.Empty,
-                            MaxPeople = trip.MaxPeople ?? 0,
-                            AvailableSpots = trip.AvailableSpots ?? 0,
-                            Status = trip.Status ?? "Ongoing",
-                            Featured = trip.Featured ?? false,
-                            IsFeatured = trip.IsFeatured ?? false,
-                            Images = trip.Images ?? new List<string>(),
-                            AvailableDates = trip.AvailableDates ?? new List<string>(),
-                            Highlights = trip.Highlights ?? new List<string>(),
-                            Itinerary = (trip.Itinerary ?? new List<MockItineraryDay>()).Select(day => new ItineraryDay
-                            {
-                                Day = day.Day,
-                                Title = day.Title ?? string.Empty,
-                                Description = day.Description ?? string.Empty,
-                                Activities = (day.Activities ?? new List<MockActivity>()).Select(a => new Activity
-                                {
-                                    Time = a.Time ?? string.Empty,
-                                    Title = a.Title ?? string.Empty,
-                                    Desc = a.Description ?? string.Empty
-                                }).ToList()
-                            }).ToList(),
-                            ReviewSummary = new TripReviewSummary
-                            {
-                                OverallRating = trip.ReviewSummary?.OverallRating ?? 0,
-                                TotalReviews = trip.ReviewSummary?.TotalReviews ?? 0,
-                                RatingCriteria = new RatingCriteria
-                                {
-                                    Experience = trip.ReviewSummary?.RatingCriteria?.Experience ?? 0,
-                                    Staff = trip.ReviewSummary?.RatingCriteria?.Staff ?? 0,
-                                    Accessibility = trip.ReviewSummary?.RatingCriteria?.Accessibility ?? 0,
-                                    Facilities = trip.ReviewSummary?.RatingCriteria?.Facilities ?? 0,
-                                    ValueForMoney = trip.ReviewSummary?.RatingCriteria?.ValueForMoney ?? 0
-                                }
-                            },
-                            UserReviews = (trip.UserReviews ?? new List<MockUserReview>()).Select(r => new UserReview
-                            {
-                                UserName = r.UserName ?? string.Empty,
-                                UserImage = r.UserImage ?? string.Empty,
-                                Rating = r.Rating,
-                                Date = r.Date ?? string.Empty,
-                                Comment = r.Comment ?? string.Empty
-                            }).ToList(),
-                            Amenities = new TripAmenitiesInfo
-                            {
-                                Transport = trip.Amenities?.Transport ?? false,
-                                Accommodation = trip.Amenities?.Accommodation ?? false,
-                                Meals = trip.Amenities?.Meals ?? 0
-                            },
-                            HotelInfo = trip.HotelInfo != null ? new TripHotelInfo
-                            {
-                                Name = trip.HotelInfo.Name ?? string.Empty,
-                                Rating = trip.HotelInfo.Rating,
-                                Image = trip.HotelInfo.Image ?? string.Empty,
-                                Features = trip.HotelInfo.Features ?? new List<string>()
-                            } : null
-                        };
-
-                        _context.Set<Trip>().Add(entity);
                     }
                     await _context.SaveChangesAsync();
                     _logger.LogInformation("Trips seeded successfully");

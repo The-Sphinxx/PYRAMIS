@@ -114,6 +114,8 @@ Comprehensive REST API for an AI-powered travel booking platform with intelligen
 
         // Include all ApiExplorer groups in the single v1 document so grouped controllers still appear
         options.DocInclusionPredicate((_, __) => true);
+
+        options.CustomSchemaIds(type => type.FullName);
     });
     
     // Configure JSON serializer

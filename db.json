@@ -77,7 +77,7 @@
         "Entrance to select Pyramids (Paid)"
       ],
       "paymentId": "pay_0001",
-      "price": "12$",
+      "price": 12,
       "reviews": {
         "overallRating": 4.9,
         "totalReviews": 9875,
@@ -132,7 +132,7 @@
       "latitude": 25.7197,
       "longitude": 32.6587,
       "description": "Large complex of ancient temples and monuments dedicated to Amun-Ra.",
-      "overview": "Karnak is the largest religious building ever constructed. It was the main place of worship of the Theban Triad (Amun, Mut, and Khonsu) and a powerful symbol of Egyptian influence. Highlights include the massive Hypostyle Hall with 134 towering columns, the Sacred Lake, and the Avenue of Sphinxes. A night-time Sound and Light show is often available, offering a dramatic view of the monumental structures.",
+      "overview": "Karnak is the largest religious building ever constructed. It was the main place of worship of the Theban Triad (Amun, Mut, and Khonsu) and a powerful symbol of Egyptian influence. Highlights include the massive Hypostyle Hall with 134 towering columns, the Sacred Lake, and the Avenue of Sphinxes. A night-time Sound and Light show is often Available, offering a dramatic view of the monumental structures.",
       "highlights": [
         "The Great Hypostyle Hall",
         "The Sacred Lake",
@@ -147,7 +147,7 @@
         "Sound and Light Show (Paid)"
       ],
       "paymentId": "pay_0002",
-      "price": "20$",
+      "price": 20,
       "reviews": {
         "overallRating": 4.8,
         "totalReviews": 6543,
@@ -208,14 +208,14 @@
         "Al-Nasser Mohammad Mosque"
       ],
       "amenities": [
-        "Mosques (Restrooms available)",
+        "Mosques (Restrooms Available)",
         "Museums (Police & Military)",
         "Panoramic Viewpoints",
         "Gift Shops/Vendors",
         "Parking"
       ],
       "paymentId": "pay_0003",
-      "price": "28$",
+      "price": 28,
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 3210,
@@ -284,7 +284,7 @@
         "Guided Tours (Paid)"
       ],
       "paymentId": "pay_0004",
-      "price": "45$",
+      "price": 45,
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 5580,
@@ -352,7 +352,7 @@
         "Parking (Limited)"
       ],
       "paymentId": "pay_0005",
-      "price": "Free to enter",
+      "price": 10,
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 2105,
@@ -420,7 +420,7 @@
         "Parking"
       ],
       "paymentId": "pay_0006",
-      "price": "25$",
+      "price": 25,
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 1890,
@@ -485,7 +485,7 @@
         "Parking"
       ],
       "paymentId": "pay_0007",
-      "price": "30$",
+      "price": 30,
       "reviews": {
         "overallRating": 4.8,
         "totalReviews": 4120,
@@ -548,7 +548,7 @@
         "ATM Access (Nearby)"
       ],
       "paymentId": "pay_0008",
-      "price": "Free to browse",
+      "price": 15,
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 5012,
@@ -615,7 +615,7 @@
         "Parking"
       ],
       "paymentId": "pay_0009",
-      "price": "28$",
+      "price": 28,
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 7890,
@@ -680,7 +680,7 @@
         "Parking"
       ],
       "paymentId": "pay_0010",
-      "price": "15$",
+      "price": 15,
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 3560,
@@ -744,7 +744,7 @@
         "Information Signage"
       ],
       "paymentId": "pay_0011",
-      "price": "12$",
+      "price": 12,
       "reviews": {
         "overallRating": 4.8,
         "totalReviews": 4900,
@@ -809,7 +809,7 @@
         "Parking"
       ],
       "paymentId": "pay_0012",
-      "price": "17$",
+      "price": 17,
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 2350,
@@ -874,7 +874,7 @@
         "Garden Area"
       ],
       "paymentId": "pay_0013",
-      "price": "39$",
+      "price": 39,
       "reviews": {
         "overallRating": 4.5,
         "totalReviews": 1120,
@@ -939,7 +939,7 @@
         "Conservation Workshop"
       ],
       "paymentId": "pay_0014",
-      "price": "28$",
+      "price": 28,
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 980,
@@ -1007,7 +1007,7 @@
         "Parking"
       ],
       "paymentId": "pay_0015",
-      "price": "35$",
+      "price": 35,
       "reviews": {
         "overallRating": 4.8,
         "totalReviews": 3560,
@@ -1071,7 +1071,7 @@
         "Information Panels"
       ],
       "paymentId": "pay_0016",
-      "price": "27$",
+      "price": 27,
       "reviews": {
         "overallRating": 4.4,
         "totalReviews": 750,
@@ -1134,7 +1134,7 @@
         "Parking"
       ],
       "paymentId": "pay_0017",
-      "price": "34$",
+      "price": 34,
       "reviews": {
         "overallRating": 4.3,
         "totalReviews": 510,
@@ -1199,7 +1199,7 @@
         "Entry Fee Checkpoints"
       ],
       "paymentId": "pay_0018",
-      "price": "25$",
+      "price": 25,
       "reviews": {
         "overallRating": 4.8,
         "totalReviews": 5100,
@@ -1263,7 +1263,7 @@
         "Wi-Fi (in Cafes)"
       ],
       "paymentId": "pay_0019",
-      "price": "Free to enter",
+      "price": 10,
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 2980,
@@ -1329,7 +1329,7 @@
         "ATM"
       ],
       "paymentId": "pay_0020",
-      "price": "Free to enter",
+      "price": 10,
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 7560,
@@ -1393,7 +1393,7 @@
         "Parking (Designated Areas)"
       ],
       "paymentId": "pay_0021",
-      "price": "73$",
+      "price": 73,
       "reviews": {
         "overallRating": 4.5,
         "totalReviews": 1340,
@@ -1458,7 +1458,7 @@
         "Parking"
       ],
       "paymentId": "pay_0022",
-      "price": "Paid beach access varies",
+      "price": 50,
       "reviews": {
         "overallRating": 4.4,
         "totalReviews": 1850,
@@ -1524,7 +1524,7 @@
         "Local Handicrafts Shops"
       ],
       "paymentId": "pay_0023",
-      "price": "Free to enter",
+      "price": 25,
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 1670,
@@ -1585,7 +1585,7 @@
         "Parking"
       ],
       "paymentId": "pay_0024",
-      "price": "Free to view",
+      "price": 15,
       "reviews": {
         "overallRating": 4.5,
         "totalReviews": 3120,
@@ -1646,10 +1646,10 @@
         "Visitor Facilities",
         "Restrooms",
         "Parking",
-        "Horse-drawn carriages (Kalesh) available from the Nile port"
+        "Horse-drawn carriages (Kalesh) Available from the Nile port"
       ],
       "paymentId": "pay_0025",
-      "price": "21$",
+      "price": 21,
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 2540,
@@ -1715,7 +1715,7 @@
         "Night Viewing (Recommended)"
       ],
       "paymentId": "pay_0026",
-      "price": "18$",
+      "price": 18,
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 4990,
@@ -1779,7 +1779,7 @@
         "Souvenir Vendors"
       ],
       "paymentId": "pay_0027",
-      "price": "Included in Giza Pyramids ticket",
+      "price": 15,
       "reviews": {
         "overallRating": 4.9,
         "totalReviews": 8900,
@@ -1841,7 +1841,7 @@
         "Limited Restrooms (Basic)"
       ],
       "paymentId": "pay_0028",
-      "price": "14$",
+      "price": 14,
       "reviews": {
         "overallRating": 4.4,
         "totalReviews": 950,
@@ -1905,7 +1905,7 @@
         "Basic Ranger Stations"
       ],
       "paymentId": "pay_0029",
-      "price": "120$ (Tour Price)",
+      "price": 120,
       "reviews": {
         "overallRating": 4.9,
         "totalReviews": 1400,
@@ -1972,7 +1972,7 @@
         "Restrooms"
       ],
       "paymentId": "pay_0030",
-      "price": "50$ (General Entry)",
+      "price": 50,
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 3500,
@@ -2036,7 +2036,7 @@
         "Parking"
       ],
       "paymentId": "pay_0031",
-      "price": "Free entry to Monastery",
+      "price": 15,
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 1100,
@@ -2100,7 +2100,7 @@
         "Beach Access"
       ],
       "paymentId": "pay_0032",
-      "price": "Paid Entry",
+      "price": 10,
       "reviews": {
         "overallRating": 4.5,
         "totalReviews": 2100,
@@ -2165,7 +2165,7 @@
         "Parking (Limited)"
       ],
       "paymentId": "pay_0033",
-      "price": "30$",
+      "price": 30,
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 3900,
@@ -2228,7 +2228,7 @@
         "Information Signage"
       ],
       "paymentId": "pay_0034",
-      "price": "50$",
+      "price": 50,
       "reviews": {
         "overallRating": 4.5,
         "totalReviews": 1350,
@@ -2292,7 +2292,7 @@
         "Resort Accommodations"
       ],
       "paymentId": "pay_0035",
-      "price": "Free to enter",
+      "price": 10,
       "reviews": {
         "overallRating": 4.4,
         "totalReviews": 1500,
@@ -2356,7 +2356,7 @@
         "Parking (Limited)"
       ],
       "paymentId": "pay_0036",
-      "price": "Paid Entry",
+      "price": 10,
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 3800,
@@ -2419,7 +2419,7 @@
         "Security Checkpoint"
       ],
       "paymentId": "pay_0037",
-      "price": "Free Entry",
+      "price": 12,
       "reviews": {
         "overallRating": 4.5,
         "totalReviews": 1900,
@@ -2482,7 +2482,7 @@
         "Shoe Covering required"
       ],
       "paymentId": "pay_0038",
-      "price": "Paid Entry",
+      "price": 10,
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 1550,
@@ -2545,7 +2545,7 @@
         "No permanent restrooms or shops"
       ],
       "paymentId": "pay_0039",
-      "price": "Low Entry Fee",
+      "price": 5,
       "reviews": {
         "overallRating": 4.5,
         "totalReviews": 1150,
@@ -2607,7 +2607,7 @@
         "Local Cafes (Nearby)"
       ],
       "paymentId": "pay_0040",
-      "price": "Free to browse",
+      "price": 8,
       "reviews": {
         "overallRating": 4.4,
         "totalReviews": 780,
@@ -2670,7 +2670,7 @@
         "Religious Gift Shops"
       ],
       "paymentId": "pay_0041",
-      "price": "Free Entry",
+      "price": 12,
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 1800,
@@ -2734,7 +2734,7 @@
         "4x4 Vehicle Access (Required)"
       ],
       "paymentId": "pay_0042",
-      "price": "610 $ (Tour Price)",
+      "price": 610,
       "reviews": {
         "overallRating": 4.8,
         "totalReviews": 850,
@@ -2797,7 +2797,7 @@
         "Parking"
       ],
       "paymentId": "pay_0043",
-      "price": "160 $",
+      "price": 160,
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 1780,
@@ -2862,7 +2862,7 @@
         "ATMs and Currency Exchange"
       ],
       "paymentId": "pay_0044",
-      "price": "Paid beach access (via resorts)",
+      "price": 10,
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 6800,
@@ -2925,7 +2925,7 @@
         "Information Signage"
       ],
       "paymentId": "pay_0045",
-      "price": "350 $",
+      "price": 350,
       "reviews": {
         "overallRating": 4.5,
         "totalReviews": 890,
@@ -2989,7 +2989,7 @@
         "Limited Facilities"
       ],
       "paymentId": "pay_0046",
-      "price": "650 $ (Tour Price)",
+      "price": 650,
       "reviews": {
         "overallRating": 4.8,
         "totalReviews": 1800,
@@ -3053,7 +3053,7 @@
         "Diving Guides/Instructors"
       ],
       "paymentId": "pay_0047",
-      "price": "Free to visit (Equipment/Guides Paid)",
+      "price": 15,
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 2100,
@@ -3117,7 +3117,7 @@
         "Parking"
       ],
       "paymentId": "pay_0048",
-      "price": "Free to walk (Dining/Shopping Paid)",
+      "price": 10,
       "reviews": {
         "overallRating": 4.5,
         "totalReviews": 3200,
@@ -3179,7 +3179,7 @@
         "Information Panels"
       ],
       "paymentId": "pay_0049",
-      "price": "Low Entry Fee",
+      "price": 5,
       "reviews": {
         "overallRating": 4.4,
         "totalReviews": 450,
@@ -3243,7 +3243,7 @@
         "Limited Facilities"
       ],
       "paymentId": "pay_0050",
-      "price": "Paid Entry/Tour Fees",
+      "price": 10,
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 950,
@@ -3305,7 +3305,7 @@
         "Parking"
       ],
       "paymentId": "pay_0051",
-      "price": "30 $",
+      "price": 30,
       "reviews": {
         "overallRating": 4.3,
         "totalReviews": 1550,
@@ -3368,7 +3368,7 @@
         "Ticket Office"
       ],
       "paymentId": "pay_0052",
-      "price": "100 $",
+      "price": 100,
       "reviews": {
         "overallRating": 4.4,
         "totalReviews": 1100,
@@ -3430,7 +3430,7 @@
         "No Visitor Facilities (Bring supplies)"
       ],
       "paymentId": "pay_0053",
-      "price": "Tour Price Varies",
+      "price": 50,
       "reviews": {
         "overallRating": 4.2,
         "totalReviews": 210,
@@ -3492,7 +3492,7 @@
         "Limited Facilities"
       ],
       "paymentId": "pay_0054",
-      "price": "Tour Price Varies",
+      "price": 50,
       "reviews": {
         "overallRating": 4.4,
         "totalReviews": 500,
@@ -3556,7 +3556,7 @@
         "Parking"
       ],
       "paymentId": "pay_0055",
-      "price": "380 $",
+      "price": 380,
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 1300,
@@ -3620,7 +3620,7 @@
         "Desert Tour Operators"
       ],
       "paymentId": "pay_0056",
-      "price": "Free to visit (Sites paid)",
+      "price": 25,
       "reviews": {
         "overallRating": 4.3,
         "totalReviews": 750,
@@ -3684,7 +3684,7 @@
         "Hotels and Apartments"
       ],
       "paymentId": "pay_0057",
-      "price": "Free to enter (Paid beach access varies)",
+      "price": 10,
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 2500,
@@ -3747,7 +3747,7 @@
         "Information Signage"
       ],
       "paymentId": "pay_0058",
-      "price": "400 $",
+      "price": 400,
       "reviews": {
         "overallRating": 4.5,
         "totalReviews": 890,
@@ -3793,7 +3793,7 @@
         "/images/Baron-Empain-Church-view_2.png",
         "/images/Baron-Empain-Church-view_3.png",
         "/images/Baron-Empain-Church-view_4.png"
-      ],  
+      ],
       "latitude": 30.0898,
       "longitude": 31.334,
       "description": "A magnificent, unusual Hindu-Khmer style palace in Heliopolis, recently restored.",
@@ -3811,7 +3811,7 @@
         "Parking (Limited)"
       ],
       "paymentId": "pay_0059",
-      "price": "100 $",
+      "price": 100,
       "reviews": {
         "overallRating": 4.5,
         "totalReviews": 1500,
@@ -3877,7 +3877,7 @@
         "Restrooms"
       ],
       "paymentId": "pay_0060",
-      "price": "Paid access to resorts/beaches",
+      "price": 10,
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 3500,
@@ -3941,7 +3941,7 @@
         "Accessibility (Ground Floor)"
       ],
       "paymentId": "pay_0061",
-      "price": "Free Entry (Donations Welcome)",
+      "price": 8,
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 3200,
@@ -4004,7 +4004,7 @@
         "Parking"
       ],
       "paymentId": "pay_0062",
-      "price": "Low Entry Fee",
+      "price": 5,
       "reviews": {
         "overallRating": 4,
         "totalReviews": 500,
@@ -4070,7 +4070,7 @@
         "Ample Parking"
       ],
       "paymentId": "pay_0063",
-      "price": "200 $ (Expected)",
+      "price": 200,
       "reviews": {
         "overallRating": 4.9,
         "totalReviews": 1500,
@@ -4133,7 +4133,7 @@
         "Parking"
       ],
       "paymentId": "pay_0064",
-      "price": "160 $",
+      "price": 160,
       "reviews": {
         "overallRating": 4.4,
         "totalReviews": 950,
@@ -4194,7 +4194,7 @@
         "Limited Facilities"
       ],
       "paymentId": "pay_0065",
-      "price": "280 $",
+      "price": 280,
       "reviews": {
         "overallRating": 4.2,
         "totalReviews": 350,
@@ -4256,7 +4256,7 @@
         "No permanent facilities"
       ],
       "paymentId": "pay_0066",
-      "price": "Tour Price Varies",
+      "price": 50,
       "reviews": {
         "overallRating": 4.4,
         "totalReviews": 650,
@@ -4318,7 +4318,7 @@
         "Public Transport Access"
       ],
       "paymentId": "pay_0067",
-      "price": "Free to walk",
+      "price": 15,
       "reviews": {
         "overallRating": 4.1,
         "totalReviews": 1200,
@@ -4382,7 +4382,7 @@
         "Parking"
       ],
       "paymentId": "pay_0068",
-      "price": "180 $",
+      "price": 180,
       "reviews": {
         "overallRating": 4.5,
         "totalReviews": 1100,
@@ -4444,7 +4444,7 @@
         "Local Cafes and Vendors"
       ],
       "paymentId": "pay_0069",
-      "price": "Low Entry Fee (Public beach)",
+      "price": 5,
       "reviews": {
         "overallRating": 4.3,
         "totalReviews": 1300,
@@ -4506,7 +4506,7 @@
         "Limited Facilities"
       ],
       "paymentId": "pay_0070",
-      "price": "Free to visit",
+      "price": 10,
       "reviews": {
         "overallRating": 4.1,
         "totalReviews": 650,
@@ -4569,7 +4569,7 @@
         "Basic Restrooms"
       ],
       "paymentId": "pay_0071",
-      "price": "Dive Tour Price Varies",
+      "price": 50,
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 1500,
@@ -4632,7 +4632,7 @@
         "Limited Facilities"
       ],
       "paymentId": "pay_0072",
-      "price": "Tour Price Varies",
+      "price": 50,
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 750,
@@ -4695,7 +4695,7 @@
         "Dress Code Enforced"
       ],
       "paymentId": "pay_0073",
-      "price": "Free Entry (Donations welcome)",
+      "price": 12,
       "reviews": {
         "overallRating": 4.4,
         "totalReviews": 900,
@@ -4758,7 +4758,7 @@
         "Information Signage"
       ],
       "paymentId": "pay_0074",
-      "price": "140 $",
+      "price": 140,
       "reviews": {
         "overallRating": 4.5,
         "totalReviews": 850,
@@ -4820,7 +4820,7 @@
         "Limited Facilities"
       ],
       "paymentId": "pay_0075",
-      "price": "Free Entry",
+      "price": 12,
       "reviews": {
         "overallRating": 4.3,
         "totalReviews": 700,
@@ -4882,7 +4882,7 @@
         "Limited Facilities on the boat"
       ],
       "paymentId": "pay_0076",
-      "price": "450 $ (Tour Price)",
+      "price": 450,
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 3200,
@@ -4943,7 +4943,7 @@
         "Limited Facilities"
       ],
       "paymentId": "pay_0077",
-      "price": "Tour Price Varies",
+      "price": 50,
       "reviews": {
         "overallRating": 4.3,
         "totalReviews": 1500,
@@ -5006,7 +5006,7 @@
         "Dress Code Enforced"
       ],
       "paymentId": "pay_0078",
-      "price": "Free Entry (Donations welcome)",
+      "price": 12,
       "reviews": {
         "overallRating": 4.4,
         "totalReviews": 550,
@@ -5115,7 +5115,7 @@
         "Egyptian Museum - 12 km"
       ],
       "availability": {
-        "availableRooms": 28,
+        "AvailableRooms": 28,
         "totalRooms": 120
       },
       "pricePerNight": "185 $",
@@ -5199,7 +5199,7 @@
         "Tahrir Square - 1 km"
       ],
       "availability": {
-        "availableRooms": 42,
+        "AvailableRooms": 42,
         "totalRooms": 365
       },
       "pricePerNight": "295 $",
@@ -5281,7 +5281,7 @@
         "Nubian Museum - 2 km"
       ],
       "availability": {
-        "availableRooms": 18,
+        "AvailableRooms": 18,
         "totalRooms": 138
       },
       "pricePerNight": "245 $",
@@ -5363,7 +5363,7 @@
         "Khan El Khalili - 2.5 km"
       ],
       "availability": {
-        "availableRooms": 35,
+        "AvailableRooms": 35,
         "totalRooms": 295
       },
       "pricePerNight": "95 $",
@@ -5445,7 +5445,7 @@
         "Valley of the Kings - 6 km"
       ],
       "availability": {
-        "availableRooms": 52,
+        "AvailableRooms": 52,
         "totalRooms": 236
       },
       "pricePerNight": "125 $",
@@ -5528,7 +5528,7 @@
         "Sharm El Sheikh Airport - 12 km"
       ],
       "availability": {
-        "availableRooms": 78,
+        "AvailableRooms": 78,
         "totalRooms": 420
       },
       "pricePerNight": "165 $",
@@ -5611,7 +5611,7 @@
         "Zamalek Island - 1 km"
       ],
       "availability": {
-        "availableRooms": 45,
+        "AvailableRooms": 45,
         "totalRooms": 540
       },
       "pricePerNight": "215 $",
@@ -5693,7 +5693,7 @@
         "Heliopolis - 2 km"
       ],
       "availability": {
-        "availableRooms": 68,
+        "AvailableRooms": 68,
         "totalRooms": 370
       },
       "pricePerNight": "135 $",
@@ -5776,7 +5776,7 @@
         "Garden City - 0.5 km"
       ],
       "availability": {
-        "availableRooms": 32,
+        "AvailableRooms": 32,
         "totalRooms": 191
       },
       "pricePerNight": "285 $",
@@ -5859,7 +5859,7 @@
         "Hurghada Airport - 15 km"
       ],
       "availability": {
-        "availableRooms": 95,
+        "AvailableRooms": 95,
         "totalRooms": 435
       },
       "pricePerNight": "115 $",
@@ -5948,28 +5948,52 @@
       "model": "Corolla",
       "year": 2023,
       "city": "Cairo",
-      "price": "100 $",
+      "price": 100,
       "basePrice": "100 $",
       "type": "sedan",
       "transmission": "automatic",
       "seats": 4,
       "total_fleet": 20,
-      "available_now": 5,
+      "Available_now": 5,
       "fuelType": "hybrid",
       "nextAvailability": "2025-12-23",
       "description": "Reliable compact sedan suitable for 4 passengers.",
       "overview": "A reliable and comfortable vehicle for your journey.",
-      "features": ["GPS", "A/C", "Bluetooth"],
-      "highlights": ["Reliable", "Fuel efficient", "Comfortable"],
-      "amenities": ["Air Conditioning", "GPS Navigation", "Bluetooth Connectivity", "USB Ports"],
-      "images": ["/images/ToyotaCorolla.avif", "/images/ToyotaCorolla2.jpg","/images/ToyotaCorolla3.jpg","/images/ToyotaCorolla4.jpg"],
+      "features": [
+        "GPS",
+        "A/C",
+        "Bluetooth"
+      ],
+      "highlights": [
+        "Reliable",
+        "Fuel efficient",
+        "Comfortable"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Bluetooth Connectivity",
+        "USB Ports"
+      ],
+      "images": [
+        "/images/ToyotaCorolla.avif",
+        "/images/ToyotaCorolla2.jpg",
+        "/images/ToyotaCorolla3.jpg",
+        "/images/ToyotaCorolla4.jpg"
+      ],
       "status": "Available",
       "featured": true,
       "isFeatured": true,
       "reviews": {
         "overallRating": 4.5,
         "totalReviews": 120,
-        "ratingCriteria": { "experience": 4.5, "comfort": 4.6, "reliability": 4.7, "valueForMoney": 4.4, "features": 4.3 }
+        "ratingCriteria": {
+          "experience": 4.5,
+          "comfort": 4.6,
+          "reliability": 4.7,
+          "valueForMoney": 4.4,
+          "features": 4.3
+        }
       }
     },
     {
@@ -5979,28 +6003,53 @@
       "model": "Rush",
       "year": 2023,
       "city": "Alexandria",
-      "price": "160 $",
+      "price": 160,
       "basePrice": "160 $",
       "type": "luxury",
       "transmission": "automatic",
       "seats": 6,
       "total_fleet": 20,
-      "available_now": 5,
+      "Available_now": 5,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-18",
       "description": "Compact SUV ideal for 5-6 passengers with flexibility for city and trips.",
       "overview": "Toyota Rush is a compact SUV combining city practicality with weekend trip capabilities.",
-      "features": ["GPS", "A/C", "Bluetooth", "Sunroof"],
-      "highlights": ["Flexible seating", "Sunroof", "Modern infotainment"],
-      "amenities": ["Air Conditioning", "GPS Navigation", "Bluetooth Connectivity", "Sunroof", "Cruise Control", "USB Ports"],
-      "images": ["/images/ToyotaRush.jpg", "/images/placeholder_2.jpg"],
+      "features": [
+        "GPS",
+        "A/C",
+        "Bluetooth",
+        "Sunroof"
+      ],
+      "highlights": [
+        "Flexible seating",
+        "Sunroof",
+        "Modern infotainment"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Bluetooth Connectivity",
+        "Sunroof",
+        "Cruise Control",
+        "USB Ports"
+      ],
+      "images": [
+        "/images/ToyotaRush.jpg",
+        "/images/placeholder_2.jpg"
+      ],
       "status": "Available",
       "featured": true,
       "isFeatured": true,
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 98,
-        "ratingCriteria": { "experience": 4.6, "comfort": 4.5, "reliability": 4.7, "valueForMoney": 4.6, "features": 4.4 }
+        "ratingCriteria": {
+          "experience": 4.6,
+          "comfort": 4.5,
+          "reliability": 4.7,
+          "valueForMoney": 4.6,
+          "features": 4.4
+        }
       }
     },
     {
@@ -6010,28 +6059,52 @@
       "model": "Xpander",
       "year": 2023,
       "city": "Luxor",
-      "price": "155 $",
+      "price": 155,
       "basePrice": "155 $",
       "type": "MPV",
       "transmission": "automatic",
       "seats": 6,
       "total_fleet": 20,
-      "available_now": 1,
+      "Available_now": 1,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-26",
       "description": "Modern MPV for 5-6 passengers with comfortable interior.",
       "overview": "Mitsubishi Xpander offers a modern interior with comfort for 5-6 passengers.",
-      "features": ["GPS", "A/C", "Bluetooth", "Entertainment System"],
-      "highlights": ["Modern interior", "Entertainment system", "Spacious seating"],
-      "amenities": ["Air Conditioning", "GPS Navigation", "Bluetooth Connectivity", "Entertainment System", "USB Ports"],
-      "images": ["/images/MitsubishiXpander.jpg", "/images/MitsubishiXpander2.jpeg"],
+      "features": [
+        "GPS",
+        "A/C",
+        "Bluetooth",
+        "Entertainment System"
+      ],
+      "highlights": [
+        "Modern interior",
+        "Entertainment system",
+        "Spacious seating"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Bluetooth Connectivity",
+        "Entertainment System",
+        "USB Ports"
+      ],
+      "images": [
+        "/images/MitsubishiXpander.jpg",
+        "/images/MitsubishiXpander2.jpeg"
+      ],
       "status": "Maintenance",
       "featured": true,
       "isFeatured": true,
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 876,
-        "ratingCriteria": { "experience": 4.7, "comfort": 4.8, "reliability": 4.6, "valueForMoney": 4.5, "features": 4.7 }
+        "ratingCriteria": {
+          "experience": 4.7,
+          "comfort": 4.8,
+          "reliability": 4.6,
+          "valueForMoney": 4.5,
+          "features": 4.7
+        }
       }
     },
     {
@@ -6041,28 +6114,52 @@
       "model": "Land Cruiser",
       "year": 2023,
       "city": "Aswan",
-      "price": "150 $",
+      "price": 150,
       "basePrice": "150 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 5,
+      "Available_now": 5,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-18",
       "description": "Great for families exploring Cairo, Giza, and Alexandria.",
       "overview": "Toyota Land Cruiser is a full-size SUV ideal for family adventures.",
-      "features": ["GPS", "A/C", "Bluetooth", "Backup Camera"],
-      "highlights": ["Full-size SUV", "Spacious interior", "Advanced safety"],
-      "amenities": ["Air Conditioning", "GPS Navigation", "Bluetooth Connectivity", "Backup Camera", "Cruise Control"],
-      "images": ["/images/ToyotaLandCruiser.avif", "/images/ToyotaLandCruiser2.png"],
+      "features": [
+        "GPS",
+        "A/C",
+        "Bluetooth",
+        "Backup Camera"
+      ],
+      "highlights": [
+        "Full-size SUV",
+        "Spacious interior",
+        "Advanced safety"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Bluetooth Connectivity",
+        "Backup Camera",
+        "Cruise Control"
+      ],
+      "images": [
+        "/images/ToyotaLandCruiser.avif",
+        "/images/ToyotaLandCruiser2.png"
+      ],
       "status": "Rented",
       "featured": true,
       "isFeatured": true,
       "reviews": {
         "overallRating": 4.9,
         "totalReviews": 2543,
-        "ratingCriteria": { "experience": 4.9, "comfort": 4.8, "reliability": 4.9, "valueForMoney": 4.7, "features": 4.8 }
+        "ratingCriteria": {
+          "experience": 4.9,
+          "comfort": 4.8,
+          "reliability": 4.9,
+          "valueForMoney": 4.7,
+          "features": 4.8
+        }
       }
     },
     {
@@ -6072,28 +6169,52 @@
       "model": "Pilot",
       "year": 2023,
       "city": "Sharm El Sheikh",
-      "price": "170 $",
+      "price": 170,
       "basePrice": "170 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 3,
+      "Available_now": 3,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-22",
       "description": "Perfect for family trips across major Egyptian cities.",
       "overview": "Honda Pilot is a reliable SUV with ample seating for 7 passengers.",
-      "features": ["GPS", "A/C", "Cruise Control", "USB Ports"],
-      "highlights": ["Spacious seating", "Comfortable ride", "Family-friendly"],
-      "amenities": ["Air Conditioning", "GPS Navigation", "Cruise Control", "USB Ports", "Bluetooth Connectivity"],
-      "images": ["/images/HondaPilot.webp", "/images/HondaPilot2.avif"],
+      "features": [
+        "GPS",
+        "A/C",
+        "Cruise Control",
+        "USB Ports"
+      ],
+      "highlights": [
+        "Spacious seating",
+        "Comfortable ride",
+        "Family-friendly"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Cruise Control",
+        "USB Ports",
+        "Bluetooth Connectivity"
+      ],
+      "images": [
+        "/images/HondaPilot.webp",
+        "/images/HondaPilot2.avif"
+      ],
       "status": "Available",
       "featured": true,
       "isFeatured": true,
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 1023,
-        "ratingCriteria": { "experience": 4.7, "comfort": 4.6, "reliability": 4.8, "valueForMoney": 4.6, "features": 4.5 }
+        "ratingCriteria": {
+          "experience": 4.7,
+          "comfort": 4.6,
+          "reliability": 4.8,
+          "valueForMoney": 4.6,
+          "features": 4.5
+        }
       }
     },
     {
@@ -6103,28 +6224,52 @@
       "model": "Explorer",
       "year": 2023,
       "city": "Hurghada",
-      "price": "180 $",
+      "price": 180,
       "basePrice": "180 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 2,
+      "Available_now": 2,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-28",
       "description": "Spacious and comfortable SUV for family adventures.",
       "overview": "Ford Explorer is a versatile SUV combining luxury, space, and performance.",
-      "features": ["GPS", "A/C", "Leather Seats", "Sunroof"],
-      "highlights": ["Spacious interior", "Leather seats", "Sunroof"],
-      "amenities": ["Air Conditioning", "GPS Navigation", "Leather Seats", "Sunroof", "Bluetooth Connectivity"],
-      "images": ["/images/FordExplorer.jpg", "/images/FordExplorer2.png"],
+      "features": [
+        "GPS",
+        "A/C",
+        "Leather Seats",
+        "Sunroof"
+      ],
+      "highlights": [
+        "Spacious interior",
+        "Leather seats",
+        "Sunroof"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Leather Seats",
+        "Sunroof",
+        "Bluetooth Connectivity"
+      ],
+      "images": [
+        "/images/FordExplorer.jpg",
+        "/images/FordExplorer2.png"
+      ],
       "status": "Available",
       "featured": true,
       "isFeatured": true,
       "reviews": {
         "overallRating": 4.8,
         "totalReviews": 1356,
-        "ratingCriteria": { "experience": 4.8, "comfort": 4.9, "reliability": 4.7, "valueForMoney": 4.6, "features": 4.7 }
+        "ratingCriteria": {
+          "experience": 4.8,
+          "comfort": 4.9,
+          "reliability": 4.7,
+          "valueForMoney": 4.6,
+          "features": 4.7
+        }
       }
     },
     {
@@ -6134,28 +6279,52 @@
       "model": "Tahoe",
       "year": 2023,
       "city": "Dahab",
-      "price": "185 $",
+      "price": 185,
       "basePrice": "185 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 0,
+      "Available_now": 0,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-29",
       "description": "Full-size SUV perfect for family adventures.",
       "overview": "Chevrolet Tahoe is a full-size SUV built for comfort, space, and performance.",
-      "features": ["GPS", "A/C", "4WD", "Premium Sound"],
-      "highlights": ["Full-size SUV", "4WD for off-road", "Premium sound"],
-      "amenities": ["Air Conditioning", "GPS Navigation", "4WD", "Premium Sound", "Bluetooth Connectivity"],
-      "images": ["/images/ChevroletTahoe.avif", "/images/ChevroletTahoe2.jpg"],
+      "features": [
+        "GPS",
+        "A/C",
+        "4WD",
+        "Premium Sound"
+      ],
+      "highlights": [
+        "Full-size SUV",
+        "4WD for off-road",
+        "Premium sound"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "4WD",
+        "Premium Sound",
+        "Bluetooth Connectivity"
+      ],
+      "images": [
+        "/images/ChevroletTahoe.avif",
+        "/images/ChevroletTahoe2.jpg"
+      ],
       "status": "Rented",
       "featured": true,
       "isFeatured": true,
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 1123,
-        "ratingCriteria": { "experience": 4.7, "comfort": 4.8, "reliability": 4.7, "valueForMoney": 4.6, "features": 4.7 }
+        "ratingCriteria": {
+          "experience": 4.7,
+          "comfort": 4.8,
+          "reliability": 4.7,
+          "valueForMoney": 4.6,
+          "features": 4.7
+        }
       }
     },
     {
@@ -6165,28 +6334,52 @@
       "model": "Suburban",
       "year": 2023,
       "city": "Siwa",
-      "price": "250 $",
+      "price": 250,
       "basePrice": "250 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 5,
+      "Available_now": 5,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-26",
       "description": "Iconic large SUV for family adventures across Egypt.",
       "overview": "Chevrolet Suburban is a legendary full-size SUV offering unmatched space.",
-      "features": ["GPS", "A/C", "Entertainment System", "Power Liftgate"],
-      "highlights": ["Iconic SUV", "Spacious interior", "Luxury comfort"],
-      "amenities": ["Air Conditioning", "GPS Navigation", "Entertainment System", "Power Liftgate", "Bluetooth Connectivity"],
-      "images": ["/images/ChevroletSuburban.avif", "/images/ChevroletSuburban2.avif"],
-      "status": "available",
+      "features": [
+        "GPS",
+        "A/C",
+        "Entertainment System",
+        "Power Liftgate"
+      ],
+      "highlights": [
+        "Iconic SUV",
+        "Spacious interior",
+        "Luxury comfort"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Entertainment System",
+        "Power Liftgate",
+        "Bluetooth Connectivity"
+      ],
+      "images": [
+        "/images/ChevroletSuburban.avif",
+        "/images/ChevroletSuburban2.avif"
+      ],
+      "status": "Available",
       "featured": true,
       "isFeatured": true,
       "reviews": {
         "overallRating": 4.9,
         "totalReviews": 1342,
-        "ratingCriteria": { "experience": 4.9, "comfort": 4.9, "reliability": 4.8, "valueForMoney": 4.7, "features": 4.8 }
+        "ratingCriteria": {
+          "experience": 4.9,
+          "comfort": 4.9,
+          "reliability": 4.8,
+          "valueForMoney": 4.7,
+          "features": 4.8
+        }
       }
     },
     {
@@ -6196,28 +6389,52 @@
       "model": "Yukon",
       "year": 2023,
       "city": "Marsa Alam",
-      "price": "110 $",
+      "price": 110,
       "basePrice": "110 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 7,
+      "Available_now": 7,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-20",
       "description": "Large SUV with comfort and advanced tech.",
       "overview": "GMC Yukon combines comfort, technology, and space in a full-size SUV.",
-      "features": ["GPS", "A/C", "Adaptive Cruise", "Lane Assist"],
-      "highlights": ["Advanced tech", "Comfortable seating", "Reliable performance"],
-      "amenities": ["Air Conditioning", "GPS Navigation", "Adaptive Cruise Control", "Lane Assist", "Bluetooth Connectivity"],
-      "images": ["/images/GMCYukon.avif", "/images/GMCYukon2.webp"],
-      "status": "available",
+      "features": [
+        "GPS",
+        "A/C",
+        "Adaptive Cruise",
+        "Lane Assist"
+      ],
+      "highlights": [
+        "Advanced tech",
+        "Comfortable seating",
+        "Reliable performance"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Adaptive Cruise Control",
+        "Lane Assist",
+        "Bluetooth Connectivity"
+      ],
+      "images": [
+        "/images/GMCYukon.avif",
+        "/images/GMCYukon2.webp"
+      ],
+      "status": "Available",
       "featured": true,
       "isFeatured": true,
       "reviews": {
         "overallRating": 4.8,
         "totalReviews": 954,
-        "ratingCriteria": { "experience": 4.8, "comfort": 4.7, "reliability": 4.8, "valueForMoney": 4.6, "features": 4.7 }
+        "ratingCriteria": {
+          "experience": 4.8,
+          "comfort": 4.7,
+          "reliability": 4.8,
+          "valueForMoney": 4.6,
+          "features": 4.7
+        }
       }
     },
     {
@@ -6227,28 +6444,52 @@
       "model": "Palisade",
       "year": 2023,
       "city": "Port Said",
-      "price": "135 $",
+      "price": 135,
       "basePrice": "135 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 1,
+      "Available_now": 1,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-26",
       "description": "Comfortable family SUV with advanced features.",
       "overview": "Hyundai Palisade is a family-friendly SUV with luxury and convenience.",
-      "features": ["GPS", "A/C", "Wireless Charging", "Smart Trunk"],
-      "highlights": ["Luxury SUV", "Advanced features", "Comfortable ride"],
-      "amenities": ["Air Conditioning", "GPS Navigation", "Wireless Charging", "Smart Trunk", "Bluetooth Connectivity"],
-      "images": ["/images/HyundaiPalisade.webp", "/images/HyundaiPalisade2.avif"],
+      "features": [
+        "GPS",
+        "A/C",
+        "Wireless Charging",
+        "Smart Trunk"
+      ],
+      "highlights": [
+        "Luxury SUV",
+        "Advanced features",
+        "Comfortable ride"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Wireless Charging",
+        "Smart Trunk",
+        "Bluetooth Connectivity"
+      ],
+      "images": [
+        "/images/HyundaiPalisade.webp",
+        "/images/HyundaiPalisade2.avif"
+      ],
       "status": "pending",
       "featured": true,
       "isFeatured": true,
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 1021,
-        "ratingCriteria": { "experience": 4.7, "comfort": 4.8, "reliability": 4.6, "valueForMoney": 4.6, "features": 4.7 }
+        "ratingCriteria": {
+          "experience": 4.7,
+          "comfort": 4.8,
+          "reliability": 4.6,
+          "valueForMoney": 4.6,
+          "features": 4.7
+        }
       }
     },
     {
@@ -6258,28 +6499,52 @@
       "model": "Telluride",
       "year": 2023,
       "city": "Nuweiba",
-      "price": "145 $",
+      "price": 145,
       "basePrice": "145 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 5,
+      "Available_now": 5,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-27",
       "description": "Family-friendly SUV with modern amenities.",
       "overview": "Kia Telluride is a modern SUV with family comfort in mind.",
-      "features": ["GPS", "A/C", "Heated Seats", "Panoramic Roof"],
-      "highlights": ["Modern family SUV", "Panoramic roof", "Heated seats"],
-      "amenities": ["Air Conditioning", "GPS Navigation", "Heated Seats", "Panoramic Roof", "Bluetooth Connectivity"],
-      "images": ["/images/KiaTelluride.avif", "/images/KiaTelluride2.avif"],
-      "status": "available",
+      "features": [
+        "GPS",
+        "A/C",
+        "Heated Seats",
+        "Panoramic Roof"
+      ],
+      "highlights": [
+        "Modern family SUV",
+        "Panoramic roof",
+        "Heated seats"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Heated Seats",
+        "Panoramic Roof",
+        "Bluetooth Connectivity"
+      ],
+      "images": [
+        "/images/KiaTelluride.avif",
+        "/images/KiaTelluride2.avif"
+      ],
+      "status": "Available",
       "featured": true,
       "isFeatured": true,
       "reviews": {
         "overallRating": 4.8,
         "totalReviews": 1125,
-        "ratingCriteria": { "experience": 4.8, "comfort": 4.8, "reliability": 4.7, "valueForMoney": 4.6, "features": 4.8 }
+        "ratingCriteria": {
+          "experience": 4.8,
+          "comfort": 4.8,
+          "reliability": 4.7,
+          "valueForMoney": 4.6,
+          "features": 4.8
+        }
       }
     },
     {
@@ -6289,28 +6554,52 @@
       "model": "CX-9",
       "year": 2023,
       "city": "Faiyum",
-      "price": "270 $",
+      "price": 270,
       "basePrice": "270 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 5,
+      "Available_now": 5,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-20",
       "description": "Elegant and spacious SUV for family trips.",
       "overview": "Mazda CX-9 is an elegant SUV with spacious interior and premium audio.",
-      "features": ["GPS", "A/C", "Head-Up Display", "Bose Audio"],
-      "highlights": ["Elegant design", "Premium audio", "Smooth ride"],
-      "amenities": ["Air Conditioning", "GPS Navigation", "Head-Up Display", "Bose Audio", "Bluetooth Connectivity"],
-      "images": ["/images/MazdaCX-9.png", "/images/MazdaCX-92.jpg"],
-      "status": "available",
+      "features": [
+        "GPS",
+        "A/C",
+        "Head-Up Display",
+        "Bose Audio"
+      ],
+      "highlights": [
+        "Elegant design",
+        "Premium audio",
+        "Smooth ride"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Head-Up Display",
+        "Bose Audio",
+        "Bluetooth Connectivity"
+      ],
+      "images": [
+        "/images/MazdaCX-9.png",
+        "/images/MazdaCX-92.jpg"
+      ],
+      "status": "Available",
       "featured": true,
       "isFeatured": true,
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 981,
-        "ratingCriteria": { "experience": 4.7, "comfort": 4.8, "reliability": 4.7, "valueForMoney": 4.6, "features": 4.7 }
+        "ratingCriteria": {
+          "experience": 4.7,
+          "comfort": 4.8,
+          "reliability": 4.7,
+          "valueForMoney": 4.6,
+          "features": 4.7
+        }
       }
     },
     {
@@ -6320,28 +6609,52 @@
       "model": "Patrol",
       "year": 2023,
       "city": "Ain Sokhna",
-      "price": "260 $",
+      "price": 260,
       "basePrice": "260 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 3,
+      "Available_now": 3,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-25",
       "description": "Reliable SUV with comfort and space for the whole family.",
       "overview": "Nissan Patrol is a rugged SUV with comfort and space for families.",
-      "features": ["GPS", "A/C", "Off-Road Mode", "Tow Package"],
-      "highlights": ["Reliable SUV", "Off-road capability", "Spacious interior"],
-      "amenities": ["Air Conditioning", "GPS Navigation", "Off-Road Mode", "Tow Package", "Bluetooth Connectivity"],
-      "images": ["/images/NissanPatrol.jpg", "/images/NissanPatrol2.jpg"],
-      "status": "available",
+      "features": [
+        "GPS",
+        "A/C",
+        "Off-Road Mode",
+        "Tow Package"
+      ],
+      "highlights": [
+        "Reliable SUV",
+        "Off-road capability",
+        "Spacious interior"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Off-Road Mode",
+        "Tow Package",
+        "Bluetooth Connectivity"
+      ],
+      "images": [
+        "/images/NissanPatrol.jpg",
+        "/images/NissanPatrol2.jpg"
+      ],
+      "status": "Available",
       "featured": true,
       "isFeatured": true,
       "reviews": {
         "overallRating": 4.8,
         "totalReviews": 1102,
-        "ratingCriteria": { "experience": 4.8, "comfort": 4.7, "reliability": 4.9, "valueForMoney": 4.6, "features": 4.7 }
+        "ratingCriteria": {
+          "experience": 4.8,
+          "comfort": 4.7,
+          "reliability": 4.9,
+          "valueForMoney": 4.6,
+          "features": 4.7
+        }
       }
     },
     {
@@ -6351,28 +6664,52 @@
       "model": "Ascent",
       "year": 2023,
       "city": "Cairo",
-      "price": "300 $",
+      "price": 300,
       "basePrice": "300 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 4,
+      "Available_now": 4,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-18",
       "description": "Family SUV with safety and comfort in mind.",
       "overview": "Subaru Ascent is a safety-focused family SUV offering comfortable seating.",
-      "features": ["GPS", "A/C", "EyeSight Safety", "All-Wheel Drive"],
-      "highlights": ["All-wheel drive", "EyeSight safety", "Spacious interior"],
-      "amenities": ["Air Conditioning", "GPS Navigation", "EyeSight Safety", "All-Wheel Drive", "Bluetooth Connectivity"],
-      "images": ["/images/SubaruAscent.webp", "/images/SubaruAscent2.avif"],
-      "status": "available",
+      "features": [
+        "GPS",
+        "A/C",
+        "EyeSight Safety",
+        "All-Wheel Drive"
+      ],
+      "highlights": [
+        "All-wheel drive",
+        "EyeSight safety",
+        "Spacious interior"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "EyeSight Safety",
+        "All-Wheel Drive",
+        "Bluetooth Connectivity"
+      ],
+      "images": [
+        "/images/SubaruAscent.webp",
+        "/images/SubaruAscent2.avif"
+      ],
+      "status": "Available",
       "featured": true,
       "isFeatured": true,
       "reviews": {
         "overallRating": 4.9,
         "totalReviews": 1243,
-        "ratingCriteria": { "experience": 4.9, "comfort": 4.8, "reliability": 4.9, "valueForMoney": 4.7, "features": 4.8 }
+        "ratingCriteria": {
+          "experience": 4.9,
+          "comfort": 4.8,
+          "reliability": 4.9,
+          "valueForMoney": 4.7,
+          "features": 4.8
+        }
       }
     },
     {
@@ -6382,28 +6719,52 @@
       "model": "Atlas",
       "year": 2024,
       "city": "Giza",
-      "price": "275 $",
+      "price": 275,
       "basePrice": "275 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 5,
+      "Available_now": 5,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-26",
       "description": "Spacious SUV perfect for family road trips.",
       "overview": "Volkswagen Atlas is a modern SUV with ample space and digital cockpit.",
-      "features": ["GPS", "A/C", "Digital Cockpit", "Ambient Lighting"],
-      "highlights": ["Digital cockpit", "Spacious interior", "Ambient lighting"],
-      "amenities": ["Air Conditioning", "GPS Navigation", "Digital Cockpit", "Ambient Lighting", "Bluetooth Connectivity"],
-      "images": ["/images/VolkswagenAtlas.webp", "/images/VolkswagenAtlas2.jpg"],
-      "status": "available",
+      "features": [
+        "GPS",
+        "A/C",
+        "Digital Cockpit",
+        "Ambient Lighting"
+      ],
+      "highlights": [
+        "Digital cockpit",
+        "Spacious interior",
+        "Ambient lighting"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Digital Cockpit",
+        "Ambient Lighting",
+        "Bluetooth Connectivity"
+      ],
+      "images": [
+        "/images/VolkswagenAtlas.webp",
+        "/images/VolkswagenAtlas2.jpg"
+      ],
+      "status": "Available",
       "featured": true,
       "isFeatured": true,
       "reviews": {
         "overallRating": 4.8,
         "totalReviews": 1025,
-        "ratingCriteria": { "experience": 4.8, "comfort": 4.8, "reliability": 4.7, "valueForMoney": 4.6, "features": 4.7 }
+        "ratingCriteria": {
+          "experience": 4.8,
+          "comfort": 4.8,
+          "reliability": 4.7,
+          "valueForMoney": 4.6,
+          "features": 4.7
+        }
       }
     },
     {
@@ -6413,28 +6774,52 @@
       "model": "RAV4",
       "year": 2023,
       "city": "Alexandria",
-      "price": "120 $",
+      "price": 120,
       "basePrice": "120 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 4,
       "total_fleet": 20,
-      "available_now": 3,
+      "Available_now": 3,
       "fuelType": "Hybrid",
       "nextAvailability": "2025-12-26",
       "description": "Compact SUV ideal for city and weekend trips.",
       "overview": "Toyota RAV4 is a compact SUV that is fuel-efficient and perfect for city commuting.",
-      "features": ["GPS", "A/C", "Bluetooth", "Rear Camera"],
-      "highlights": ["Compact and efficient", "Easy city driving", "Comfortable interior"],
-      "amenities": ["Air Conditioning", "GPS Navigation", "Bluetooth Connectivity", "Rear Camera", "Cruise Control"],
-      "images": ["/images/ToyotaRAV4.avif", "/images/ToyotaRAV42.jpg"],
-      "status": "available",
+      "features": [
+        "GPS",
+        "A/C",
+        "Bluetooth",
+        "Rear Camera"
+      ],
+      "highlights": [
+        "Compact and efficient",
+        "Easy city driving",
+        "Comfortable interior"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Bluetooth Connectivity",
+        "Rear Camera",
+        "Cruise Control"
+      ],
+      "images": [
+        "/images/ToyotaRAV4.avif",
+        "/images/ToyotaRAV42.jpg"
+      ],
+      "status": "Available",
       "featured": true,
       "isFeatured": true,
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 954,
-        "ratingCriteria": { "experience": 4.7, "comfort": 4.6, "reliability": 4.7, "valueForMoney": 4.5, "features": 4.6 }
+        "ratingCriteria": {
+          "experience": 4.7,
+          "comfort": 4.6,
+          "reliability": 4.7,
+          "valueForMoney": 4.5,
+          "features": 4.6
+        }
       }
     },
     {
@@ -6444,28 +6829,52 @@
       "model": "CR-V",
       "year": 2023,
       "city": "Luxor",
-      "price": "130 $",
+      "price": 130,
       "basePrice": "130 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 4,
       "total_fleet": 20,
-      "available_now": 5,
+      "Available_now": 5,
       "fuelType": "Hybrid",
       "nextAvailability": "2025-12-16",
       "description": "Reliable SUV with excellent fuel efficiency for families.",
       "overview": "Honda CR-V is a reliable, fuel-efficient SUV for small families.",
-      "features": ["GPS", "A/C", "Sunroof", "Lane Assist"],
-      "highlights": ["Fuel-efficient", "Sunroof", "Lane assist tech"],
-      "amenities": ["Air Conditioning", "GPS Navigation", "Sunroof", "Lane Assist", "Bluetooth Connectivity"],
-      "images": ["/images/HondaCR‑V.webp", "/images/HondaCR‑V2.jpg"],
-      "status": "available",
+      "features": [
+        "GPS",
+        "A/C",
+        "Sunroof",
+        "Lane Assist"
+      ],
+      "highlights": [
+        "Fuel-efficient",
+        "Sunroof",
+        "Lane assist tech"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Sunroof",
+        "Lane Assist",
+        "Bluetooth Connectivity"
+      ],
+      "images": [
+        "/images/HondaCR‑V.webp",
+        "/images/HondaCR‑V2.jpg"
+      ],
+      "status": "Available",
       "featured": true,
       "isFeatured": true,
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 876,
-        "ratingCriteria": { "experience": 4.6, "comfort": 4.5, "reliability": 4.7, "valueForMoney": 4.5, "features": 4.6 }
+        "ratingCriteria": {
+          "experience": 4.6,
+          "comfort": 4.5,
+          "reliability": 4.7,
+          "valueForMoney": 4.5,
+          "features": 4.6
+        }
       }
     },
     {
@@ -6475,31 +6884,66 @@
       "model": "CX-5",
       "year": 2024,
       "city": "Aswan",
-      "price": "140 $",
+      "price": 140,
       "basePrice": "140 $",
       "type": "SUV",
       "transmission": "automatic",
       "seats": 4,
       "total_fleet": 20,
-      "available_now": 6,
+      "Available_now": 6,
       "fuelType": "Petrol",
       "nextAvailability": "2025-12-26",
       "description": "Stylish and comfortable SUV for smaller families.",
       "overview": "Mazda CX-5 is a stylish, compact SUV with premium interior and audio system. Perfect for small families and weekend trips.",
-      "features": ["GPS", "A/C", "Heated Seats", "Premium Audio"],
-      "highlights": ["Stylish design", "Heated seats", "Premium audio system", "Compact and comfortable"],
-      "amenities": ["Air Conditioning", "GPS Navigation", "Heated Seats", "Premium Audio", "Bluetooth Connectivity", "USB Ports"],
-      "images": ["/images/MazdaCX‑5.webp", "/images/MazdaCX‑52.jpg", "/images/MazdaCX‑53.avif", "/images/MazdaCX‑54.webp"],
-      "status": "available",
+      "features": [
+        "GPS",
+        "A/C",
+        "Heated Seats",
+        "Premium Audio"
+      ],
+      "highlights": [
+        "Stylish design",
+        "Heated seats",
+        "Premium audio system",
+        "Compact and comfortable"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Heated Seats",
+        "Premium Audio",
+        "Bluetooth Connectivity",
+        "USB Ports"
+      ],
+      "images": [
+        "/images/MazdaCX‑5.webp",
+        "/images/MazdaCX‑52.jpg",
+        "/images/MazdaCX‑53.avif",
+        "/images/MazdaCX‑54.webp"
+      ],
+      "status": "Available",
       "featured": true,
       "isFeatured": true,
       "reviews": {
         "overallRating": 4.7,
         "totalReviews": 934,
-        "ratingCriteria": { "experience": 4.7, "comfort": 4.8, "reliability": 4.6, "valueForMoney": 4.6, "features": 4.7 }
+        "ratingCriteria": {
+          "experience": 4.7,
+          "comfort": 4.8,
+          "reliability": 4.6,
+          "valueForMoney": 4.6,
+          "features": 4.7
+        }
       },
       "userReviews": [
-        { "id": 1, "userName": "Ethan Davis", "userImage": "/images/users/user_m_18.jpg", "rating": 5, "date": "March 2025", "comment": "Very comfortable and smooth." }
+        {
+          "id": 1,
+          "userName": "Ethan Davis",
+          "userImage": "/images/users/user_m_18.jpg",
+          "rating": 5,
+          "date": "March 2025",
+          "comment": "Very comfortable and smooth."
+        }
       ]
     },
     {
@@ -6509,31 +6953,66 @@
       "model": "Avanza",
       "year": 2022,
       "city": "Sharm El Sheikh",
-      "price": "140 $",
+      "price": 140,
       "basePrice": "140 $",
       "type": "Van",
       "transmission": "automatic",
       "seats": 7,
       "total_fleet": 20,
-      "available_now": 2,
+      "Available_now": 2,
       "fuelType": "Diesel",
       "nextAvailability": "2025-12-28",
       "description": "Compact MPV ideal for 5–7 passengers, perfect for city rides and family trips.",
       "overview": "Toyota Avanza is a compact MPV suitable for city rides and family trips.",
-      "features": ["GPS", "A/C", "Bluetooth", "Rear Camera"],
-      "highlights": ["Compact MPV", "Flexible seating", "Family-friendly", "Fuel-efficient"],
-      "amenities": ["Air Conditioning", "GPS Navigation", "Bluetooth Connectivity", "Rear Camera", "Cruise Control", "USB Ports"],
-      "images": ["/images/ToyotaAvanza.avif", "/images/ToyotaAvanza2.avif", "/images/ToyotaAvanza3.avif", "/images/ToyotaAvanza4.png"],
+      "features": [
+        "GPS",
+        "A/C",
+        "Bluetooth",
+        "Rear Camera"
+      ],
+      "highlights": [
+        "Compact MPV",
+        "Flexible seating",
+        "Family-friendly",
+        "Fuel-efficient"
+      ],
+      "amenities": [
+        "Air Conditioning",
+        "GPS Navigation",
+        "Bluetooth Connectivity",
+        "Rear Camera",
+        "Cruise Control",
+        "USB Ports"
+      ],
+      "images": [
+        "/images/ToyotaAvanza.avif",
+        "/images/ToyotaAvanza2.avif",
+        "/images/ToyotaAvanza3.avif",
+        "/images/ToyotaAvanza4.png"
+      ],
       "status": "pending",
       "featured": true,
       "isFeatured": true,
       "reviews": {
         "overallRating": 4.6,
         "totalReviews": 854,
-        "ratingCriteria": { "experience": 4.6, "comfort": 4.5, "reliability": 4.7, "valueForMoney": 4.5, "features": 4.6 }
+        "ratingCriteria": {
+          "experience": 4.6,
+          "comfort": 4.5,
+          "reliability": 4.7,
+          "valueForMoney": 4.5,
+          "features": 4.6
+        }
       },
       "userReviews": [
-        { "id": 1, "userName": "Sophia Lee", "userImage": "/images/users/user_f_19.jpg", "rating": 4, "date": "March 2025", "comment": "Practical and easy to drive." }
+        {
+          "id": 1,
+          "userName": "Sophia Lee",
+          "userImage": "/images/users/user_f_19.jpg",
+          "rating": 4,
+          "date": "March 2025",
+          "comment": "Practical and easy to drive."
+        }
       ]
     }
   ],
@@ -6546,9 +7025,9 @@
       "tripType": "Desert Safari",
       "featured": true,
       "status": "Ongoing",
-      "availableSpots": 8,
+      "AvailableSpots": 8,
       "description": "Explore the remote Siwa Oasis, salt lakes, and spend nights under the stars. Perfect for those seeking tranquility and a connection with nature.",
-      "price": "500 $",
+      "price": 500,
       "rating": 4.8,
       "reviews": 124,
       "duration": "4 Days / 3 Nights",
@@ -6560,7 +7039,7 @@
         "/images/3.png"
       ],
       "maxPeople": 20,
-      "availableDates": [
+      "AvailableDates": [
         "10 Dec - 13 Dec 2024",
         "20 Dec - 23 Dec 2024"
       ],
@@ -6676,9 +7155,9 @@
       "city": "Luxor & Aswan",
       "destination": "Luxor & Aswan",
       "tripType": "Nile Cruise",
-      "availableSpots": 12,
+      "AvailableSpots": 12,
       "description": "Experience ancient Egypt with visits to Valley of the Kings, Karnak Temple, and Abu Simbel. A journey through history on a luxury cruise.",
-      "price": "285 $",
+      "price": 285,
       "rating": 4.9,
       "reviews": 85,
       "duration": "5 Days / 4 Nights",
@@ -6690,7 +7169,7 @@
         "/images/Aswan-High-Dam-main.png"
       ],
       "maxPeople": 50,
-      "availableDates": [
+      "AvailableDates": [
         "15 Dec - 19 Dec 2024",
         "25 Dec - 29 Dec 2024"
       ],
@@ -6792,7 +7271,7 @@
       "title": "Sharm El Sheikh ",
       "city": "Sharm El Sheikh",
       "description": "Escape to the perfect beach getaway in Sharm El Sheikh, one of Egypt's most stunning Red Sea destinations. This all-inclusive package combines relaxation on pristine beaches, world-class snorkeling and diving, and luxurious resort amenities.",
-      "price": "126 $",
+      "price": 126,
       "rating": 4.8,
       "reviews": 15,
       "duration": "5 Days / 4 Nights",
@@ -6804,7 +7283,7 @@
         "/images/5.jpg"
       ],
       "maxPeople": 40,
-      "availableDates": [
+      "AvailableDates": [
         "1 Dec - 5 Dec 2024",
         "12 Dec - 16 Dec 2024",
         "22 Dec - 26 Dec 2024"
@@ -6945,7 +7424,7 @@
       "id": "4",
       "title": "Hurghada Beach & Safari",
       "description": "Combine beach relaxation with thrilling quad biking and Bedouin culture experience.",
-      "price": "840 $",
+      "price": 840,
       "rating": 4.7,
       "reviews": 156,
       "duration": "2 Days / 1 Night",
@@ -6957,7 +7436,7 @@
         "/images/4.jpg"
       ],
       "maxPeople": 30,
-      "availableDates": [
+      "AvailableDates": [
         "5 Jan - 6 Jan 2025",
         "10 Jan - 11 Jan 2025"
       ],
@@ -6972,16 +7451,26 @@
         {
           "day": 1,
           "title": "Desert Adventure",
-          "time": "02:00 PM",
-          "description": "Afternoon quad bike safari into the desert. Visit a Bedouin village, drink tea, and enjoy a BBQ dinner.",
-          "activities": []
+          "description": "",
+          "activities": [
+            {
+              "time": "02:00 PM",
+              "title": "Quad Bike Safari",
+              "desc": "Afternoon quad bike safari into the desert. Visit a Bedouin village, drink tea, and enjoy a BBQ dinner."
+            }
+          ]
         },
         {
           "day": 2,
           "title": "Red Sea Relaxation",
-          "time": "10:00 AM",
-          "description": "Relax on the beach or go for a snorkeling trip before departure.",
-          "activities": []
+          "description": "",
+          "activities": [
+            {
+              "time": "10:00 AM",
+              "title": "Beach & Snorkeling",
+              "desc": "Relax on the beach or go for a snorkeling trip before departure."
+            }
+          ]
         }
       ],
       "hotel": {
@@ -7014,7 +7503,7 @@
       "id": "5",
       "title": "Dahab",
       "description": "Perfect for adventure seekers - world-class diving spots and peaceful yoga retreats.",
-      "price": "900 $",
+      "price": 900,
       "rating": 4.6,
       "reviews": 98,
       "duration": "4 Days / 3 Nights",
@@ -7026,7 +7515,7 @@
         "/images/7.png"
       ],
       "maxPeople": 25,
-      "availableDates": [
+      "AvailableDates": [
         "14 Feb - 17 Feb 2025"
       ],
       "highlights": [
@@ -7038,30 +7527,50 @@
         {
           "day": 1,
           "title": "Arrival",
-          "time": "12:00 PM",
-          "description": "Arrival in Dahab.",
-          "activities": []
+          "description": "",
+          "activities": [
+            {
+              "time": "12:00 PM",
+              "title": "Check-in",
+              "desc": "Arrival in Dahab and check into your beachfront hotel."
+            }
+          ]
         },
         {
           "day": 2,
           "title": "Blue Hole",
-          "time": "09:00 AM",
-          "description": "Snorkeling at the Blue Hole.",
-          "activities": []
+          "description": "",
+          "activities": [
+            {
+              "time": "09:00 AM",
+              "title": "Blue Hole Snorkeling",
+              "desc": "Snorkeling at the famous Blue Hole, one of the world's most renowned dive sites."
+            }
+          ]
         },
         {
           "day": 3,
           "title": "Blue Lagoon",
-          "time": "10:00 AM",
-          "description": "Relaxing day at Blue Lagoon.",
-          "activities": []
+          "description": "",
+          "activities": [
+            {
+              "time": "10:00 AM",
+              "title": "Lagoon Relaxation",
+              "desc": "Relaxing day at Blue Lagoon with calm waters perfect for swimming."
+            }
+          ]
         },
         {
           "day": 4,
           "title": "Departure",
-          "time": "11:00 AM",
-          "description": "Check out.",
-          "activities": []
+          "description": "",
+          "activities": [
+            {
+              "time": "11:00 AM",
+              "title": "Check-out & Transfer",
+              "desc": "Check out from hotel and transfer to airport."
+            }
+          ]
         }
       ],
       "hotel": {
@@ -7085,7 +7594,7 @@
       "id": "6",
       "title": "Nuweibaa & Ras Shaitain",
       "description": "A peaceful seaside retreat in eco-friendly huts with campfires lights.",
-      "price": "590 $",
+      "price": 590,
       "rating": 4.2,
       "reviews": 45,
       "duration": "3 Days / 2 Nights",
@@ -7096,7 +7605,7 @@
         "/images/Wadi-Degla-main.png"
       ],
       "maxPeople": 15,
-      "availableDates": [
+      "AvailableDates": [
         "20 Mar - 22 Mar 2025"
       ],
       "highlights": [
@@ -7108,23 +7617,38 @@
         {
           "day": 1,
           "title": "Arrival to Camp",
-          "time": "02:00 PM",
-          "description": "Check into your beach hut.",
-          "activities": []
+          "description": "",
+          "activities": [
+            {
+              "time": "02:00 PM",
+              "title": "Beach Hut Check-in",
+              "desc": "Check into your eco-friendly beach hut and settle in."
+            }
+          ]
         },
         {
           "day": 2,
           "title": "Hiking Colored Canyon",
-          "time": "08:00 AM",
-          "description": "Hike through the colorful rock formations.",
-          "activities": []
+          "description": "",
+          "activities": [
+            {
+              "time": "08:00 AM",
+              "title": "Canyon Hike",
+              "desc": "Hike through the stunning colorful rock formations of Colored Canyon."
+            }
+          ]
         },
         {
           "day": 3,
           "title": "Departure",
-          "time": "12:00 PM",
-          "description": "Head back home.",
-          "activities": []
+          "description": "",
+          "activities": [
+            {
+              "time": "12:00 PM",
+              "title": "Return Journey",
+              "desc": "Check out and head back home."
+            }
+          ]
         }
       ],
       "hotel": {
@@ -7147,7 +7671,7 @@
       "id": "7",
       "title": "Fayoum",
       "description": "A quick adventure: lakes, waterfalls, deserts, and sandboarding.",
-      "price": "900 $",
+      "price": 900,
       "rating": 4.3,
       "reviews": 320,
       "duration": "1 Day",
@@ -7157,7 +7681,7 @@
         "/images/Wadi-ElRayan-main.png"
       ],
       "maxPeople": 50,
-      "availableDates": [
+      "AvailableDates": [
         "Every Friday",
         "Every Saturday"
       ],
@@ -7171,9 +7695,14 @@
         {
           "day": 1,
           "title": "Full Day Tour",
-          "time": "07:00 AM",
-          "description": "Drive to Fayoum, visit waterfalls, sandboard at Magic Lake, lunch at Tunis Village, return to Cairo.",
-          "activities": []
+          "description": "",
+          "activities": [
+            {
+              "time": "07:00 AM",
+              "title": "Departure to Fayoum",
+              "desc": "Drive to Fayoum, visit Wadi El Rayan waterfalls, sandboard at Magic Lake, lunch at Tunis Village, and return to Cairo."
+            }
+          ]
         }
       ],
       "hotel": null,
@@ -7188,7 +7717,7 @@
       "id": "8",
       "title": "Alexandria",
       "description": "A charming getaway to the Mediterranean bride: history and sea food.",
-      "price": "380 $",
+      "price": 380,
       "rating": 4.5,
       "reviews": 112,
       "duration": "2 Days / 1 Night",
@@ -7198,7 +7727,7 @@
         "/images/7.png"
       ],
       "maxPeople": 30,
-      "availableDates": [
+      "AvailableDates": [
         "Daily"
       ],
       "highlights": [
@@ -7210,16 +7739,26 @@
         {
           "day": 1,
           "title": "City Tour",
-          "time": "09:00 AM",
-          "description": "Visit the Library and Citadel.",
-          "activities": []
+          "description": "",
+          "activities": [
+            {
+              "time": "09:00 AM",
+              "title": "Historical Sites",
+              "desc": "Visit the Bibliotheca Alexandria (Library of Alexandria) and the historic Citadel of Qaitbay."
+            }
+          ]
         },
         {
           "day": 2,
           "title": "Montaza & Departure",
-          "time": "10:00 AM",
-          "description": "Walk in Montaza gardens.",
-          "activities": []
+          "description": "",
+          "activities": [
+            {
+              "time": "10:00 AM",
+              "title": "Montaza Palace Gardens",
+              "desc": "Enjoy a peaceful walk in the beautiful Montaza Palace gardens before departure."
+            }
+          ]
         }
       ],
       "hotel": {
@@ -7242,7 +7781,7 @@
       "id": "9",
       "title": "White Desert",
       "description": "Unearthly landscapes with white chalk rock formations.",
-      "price": "450 $",
+      "price": 450,
       "rating": 4.9,
       "reviews": 56,
       "duration": "2 Days / 1 Night",
@@ -7253,7 +7792,7 @@
         "/images/White-Black-Deserts-view_3.png"
       ],
       "maxPeople": 12,
-      "availableDates": [
+      "AvailableDates": [
         "15 Nov 2024",
         "15 Dec 2024"
       ],
@@ -7266,16 +7805,26 @@
         {
           "day": 1,
           "title": "Safari",
-          "time": "07:00 AM",
-          "description": "Drive to Bahariya, transfer to 4x4, camping in White Desert.",
-          "activities": []
+          "description": "",
+          "activities": [
+            {
+              "time": "07:00 AM",
+              "title": "White Desert Safari",
+              "desc": "Drive to Bahariya Oasis, transfer to 4x4 vehicle, explore the surreal White Desert landscape, and camp under the stars."
+            }
+          ]
         },
         {
           "day": 2,
           "title": "Return",
-          "time": "08:00 AM",
-          "description": "Breakfast and return to Cairo.",
-          "activities": []
+          "description": "",
+          "activities": [
+            {
+              "time": "08:00 AM",
+              "title": "Breakfast & Departure",
+              "desc": "Enjoy breakfast at camp and begin the return journey to Cairo."
+            }
+          ]
         }
       ],
       "hotel": {
@@ -7295,63 +7844,125 @@
       }
     },
     {
-      "id": "10",
-      "title": "Alexandria",
-      "description": "A charming getaway to the Mediterranean bride: history and sea food.",
-      "price": "380 $",
-      "rating": 4.5,
-      "reviews": 112,
-      "duration": "2 Days / 1 Night",
-      "image": "/images/5.jpg",
-      "images": [
-        "/images/5.jpg",
-        "/images/7.png"
-      ],
-      "maxPeople": 30,
-      "availableDates": [
-        "Daily"
-      ],
-      "highlights": [],
-      "itinerary": [],
-      "hotel": null,
-      "userReviews": [],
-      "amenities": {
-        "transport": true,
-        "accommodation": true,
-        "meals": 4
-      }
+  "id": "10",
+  "title": "Cairo Historical & Cultural Explorer",
+  "city": "Cairo",
+  "destination": "Cairo & Giza",
+  "tripType": "City Sightseeing",
+  "featured": true,
+  "status": "Ongoing",
+  "AvailableSpots": 15,
+  "description": "Immerse yourself in the heart of Egypt. Witness the majesty of the Giza Pyramids, explore the treasures of the Egyptian Museum, and lose yourself in the vibrant alleys of Old Cairo.",
+  "price": 350,
+  "rating": 4.9,
+  "reviews": 210,
+  "duration": "3 Days / 2 Nights",
+  "image": "/images/Siwa-Oasis-main.png",
+  "images": [
+    "/images/Siwa-Oasis-main.png",
+    "/images/2.jpg",
+    "/images/6.jpg",
+    "/images/3.png"
+  ],
+  "maxPeople": 30,
+  "AvailableDates": [
+    "15 Jan - 17 Jan 2026",
+    "25 Jan - 27 Jan 2026"
+  ],
+  "highlights": [
+    "Private tour of Giza Pyramids & Sphinx",
+    "Egyptian Museum & Royal Mummies",
+    "Khan el-Khalili Bazaar shopping",
+    "Nile River Sunset Felucca ride",
+    "Islamic Cairo & Citadel tour",
+    "Traditional Egyptian culinary experience"
+  ],
+  "itinerary": [
+    {
+      "day": 1,
+      "title": "The Wonders of Giza",
+      "activities": [
+        {
+          "time": "09:00 AM",
+          "title": "Pyramids & Sphinx",
+          "desc": "Visit the Great Pyramids of Khufu, Khafre, and Menkaure, followed by a close-up encounter with the enigmatic Sphinx."
+        },
+        {
+          "time": "07:00 PM",
+          "title": "Nile Dinner Cruise",
+          "desc": "Enjoy a buffet dinner on a cruising restaurant with live Tanoura and belly dance performances."
+        }
+      ]
     },
     {
-      "id": "11",
-      "title": "Alexandria",
-      "description": "A charming getaway to the Mediterranean bride: history and sea food.",
-      "price": "380 $",
-      "rating": 4.5,
-      "reviews": 112,
-      "duration": "2 Days / 1 Night",
-      "image": "/images/5.jpg",
-      "images": [
-        "/images/5.jpg",
-        "/images/7.png"
-      ],
-      "maxPeople": 30,
-      "availableDates": [
-        "Daily"
-      ],
-      "highlights": [],
-      "itinerary": [],
-      "hotel": null,
-      "userReviews": [],
-      "amenities": {
-        "transport": true,
-        "accommodation": true,
-        "meals": 4
-      }
+      "day": 2,
+      "title": "Ancient Treasures & Old Cairo",
+      "activities": [
+        {
+          "time": "10:00 AM",
+          "title": "Grand Egyptian Museum",
+          "desc": "Explore thousands of artifacts, including the complete collection of King Tutankhamun’s treasures."
+        },
+        {
+          "time": "03:00 PM",
+          "title": "Saladin Citadel",
+          "desc": "Visit the beautiful Alabaster Mosque of Muhammad Ali and enjoy panoramic views of the entire city."
+        },
+        {
+          "time": "06:00 PM",
+          "title": "Khan el-Khalili",
+          "desc": "Wander through the historic 14th-century market for authentic souvenirs and traditional tea at El Fishawy."
+        }
+      ]
+    },
+    {
+      "day": 3,
+      "title": "Coptic Cairo & Departure",
+      "activities": [
+        {
+          "time": "09:00 AM",
+          "title": "Religious Complex",
+          "desc": "Tour the Hanging Church, the Cavern Church where the Holy Family rested, and the Ben Ezra Synagogue."
+        },
+        {
+          "time": "02:00 PM",
+          "title": "Final Departure",
+          "desc": "Transfer to Cairo International Airport for your departure."
+        }
+      ]
     }
+  ],
+  "hotel": {
+    "name": "Marriott Mena House",
+    "rating": 5.0,
+    "image": "/images/HiltonLuxorResort&Spa–Luxor1.png",
+    "features": [
+      "Pyramid Views",
+      "Luxury Spa",
+      "Outdoor Pool",
+      "Historic Gardens"
+    ]
+  },
+  "userReviews": [
+    {
+      "id": 1,
+      "user": "Michael R.",
+      "rating": 5,
+      "date": "2 weeks ago",
+      "text": "Absolutely breathtaking. Standing in front of the Great Pyramid is a life-changing experience. Highly recommended guide!"
+    }
+  ],
+  "amenities": {
+    "transport": true,
+    "accommodation": true,
+    "meals": 2
+  },
+  "availability": "Available"
+}
   ],
   "bookings": [
     {
-      "id": "2e6a",
+      "id": "8",
       "userId": null,
       "type": "trip",
       "itemId": 3,
@@ -7373,7 +7984,7 @@
           "/images/5.jpg"
         ],
         "maxPeople": 40,
-        "availableDates": [
+        "AvailableDates": [
           "1 Dec - 5 Dec 2024",
           "12 Dec - 16 Dec 2024",
           "22 Dec - 26 Dec 2024"
@@ -7544,7 +8155,7 @@
       "bookingDate": "2025-12-18T18:14:29.982Z"
     },
     {
-      "id": "3be8",
+      "id": "9",
       "userId": null,
       "type": "trip",
       "itemId": "3",
@@ -7566,7 +8177,7 @@
           "/images/5.jpg"
         ],
         "maxPeople": 40,
-        "availableDates": [
+        "AvailableDates": [
           "1 Dec - 5 Dec 2024",
           "12 Dec - 16 Dec 2024",
           "22 Dec - 26 Dec 2024"
@@ -7776,10 +8387,10 @@
         "seats": 6,
         "transmission": "Auto",
         "total_fleet": 20,
-        "available_now": 6,
+        "Available_now": 6,
         "booked_today": 4,
         "in_maintenance": 11,
-        "status": "available",
+        "status": "Available",
         "nextAvailability": "2025-12-19",
         "featured": true,
         "features": [

@@ -53,7 +53,7 @@
         <!-- Pagination Component -->
         <Pagination
           :current-page="currentPage"
-          :total="filteredHotels.length"
+          :total="totalCount"
           :per-page="itemsPerPage"
           :show-info="true"
           :show-per-page-selector="true"
@@ -92,6 +92,24 @@ const selectedCategory = ref('all');
 const currentPage = ref(1);
 const itemsPerPage = ref(16);
 const loading = ref(true);
+const fetchKey = ref(0);
+const totalPages = computed(() => hotelStore.pagination.totalPages);
+const totalCount = computed(() => hotelStore.pagination.totalCount);
+
+const fetchHotelsData = async (page = 1) => {
+  const params = {
+    pageIndex: page - 1, // API uses 0-based indexing
+    pageSize: itemsPerPage.value
+  };
+  
+  // Add filters if any
+  if (selectedCategory.value !== 'all') {
+    params.category = selectedCategory.value;
+  }
+  // Don't check store filters here - they cause conflicts
+  
+  await hotelStore.fetchHotels(params);
+};
 
 // Categories with icons and descriptions
 const categories = ref([
@@ -161,41 +179,10 @@ const currentCategoryDescription = computed(() => {
   return category ? category.description : 'Experience Egyptian hospitality at its finest';
 });
 
-const filteredHotels = computed(() => {
-  let result = hotelStore.hotels;
-
-  // Filter by category
-  if (selectedCategory.value !== 'all') {
-    result = result.filter(hotel => {
-      if (!hotel.category) return false;
-      return hotel.category === selectedCategory.value;
-    });
-  }
-
-  // Filter by store filters (search query from SearchBar)
-  if (hotelStore.filters.searchQuery) {
-    const query = hotelStore.filters.searchQuery.toLowerCase();
-    result = result.filter(hotel =>
-      hotel.name.toLowerCase().includes(query) ||
-      hotel.city.toLowerCase().includes(query) ||
-      (hotel.highlights && hotel.highlights.some(h => h.toLowerCase().includes(query)))
-    );
-  }
-
-  // Filter by city from store
-  if (hotelStore.filters.city && hotelStore.filters.city !== 'All' && hotelStore.filters.city !== 'All Cities') {
-    result = result.filter(hotel => hotel.city === hotelStore.filters.city);
-  }
-
-  return result;
-});
-
 const paginatedHotels = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage.value;
-  const end = start + itemsPerPage.value;
-  
+  // No client-side slicing - hotels are already paginated and filtered from API
   // Map hotels to match HotelCard's expected prop structure
-  return filteredHotels.value.slice(start, end).map(hotel => {
+  return hotelStore.hotels.map(hotel => {
     // Extract top 3 amenities from hotel data
     let amenities = ['Wifi', 'Pool', 'Gym']; // Default fallback
     
@@ -254,9 +241,10 @@ const paginatedHotels = computed(() => {
 });
 
 // Methods
-const selectCategory = (categoryId) => {
+const selectCategory = async (categoryId) => {
   selectedCategory.value = categoryId;
   currentPage.value = 1;
+  await fetchHotelsData(1);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
@@ -274,14 +262,16 @@ const handleSearch = (searchData) => {
   router.push({ name: 'HotelFilter' });
 };
 
-const handlePageChange = (page) => {
+const handlePageChange = async (page) => {
   currentPage.value = page;
+  await fetchHotelsData(page);
   window.scrollTo({ top: 400, behavior: 'smooth' });
 };
 
-const handlePerPageChange = (perPage) => {
+const handlePerPageChange = async (perPage) => {
   itemsPerPage.value = perPage;
   currentPage.value = 1;
+  await fetchHotelsData(1);
 };
 
 const handleBookNow = (hotel) => {
@@ -292,16 +282,17 @@ const handleBookNow = (hotel) => {
   });
 };
 
-const resetFilters = () => {
+const resetFilters = async () => {
   selectedCategory.value = 'all';
   hotelStore.resetFilters();
   currentPage.value = 1;
+  await fetchHotelsData(1);
 };
 
 // Lifecycle
 onMounted(async () => {
   try {
-    await hotelStore.fetchHotels();
+    await fetchHotelsData(currentPage.value);
   } catch (error) {
     console.error('Error loading hotels:', error);
   } finally {

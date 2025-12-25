@@ -56,13 +56,13 @@
       <div class="mt-8 flex justify-center">
         <Pagination
           :current-page="currentPage"
-          :total="cars.length"
+          :total="totalCount"
           :per-page="itemsPerPage"
           :show-info="true"
           :show-per-page-selector="true"
           :per-page-options="[10, 20, 30]"
           @update:current-page="handlePageChange"
-          @update:per-page="val => { itemsPerPage = val; currentPage = 1 }"
+          @update:per-page="async (val) => { itemsPerPage.value = val; currentPage.value = 1; await fetchCarsData(1); }"
         />
       </div>
     </div>
@@ -105,20 +105,30 @@ const router = useRouter();
 
 const currentPage = ref(1);
 const itemsPerPage = ref(12);
+const fetchKey = ref(0);
 
 const loading = computed(() => store.loading);
 const error = computed(() => store.error);
+const totalPages = computed(() => store.pagination.totalPages);
+const totalCount = computed(() => store.pagination.totalCount);
+
+const fetchCarsData = async (page = 1) => {
+  await store.fetchCars({
+    pageIndex: page - 1, // API uses 0-based indexing
+    pageSize: itemsPerPage.value
+  });
+};
 
 onMounted(async () => {
-  await store.fetchCars();
+  await fetchCarsData(currentPage.value);
 });
 
-const cars = computed(() => store.cars);
-
 const paginatedCars = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage.value;
-  const end = start + itemsPerPage.value;
-  return cars.value.slice(start, end);
+  const cars = store.cars;
+  console.log('🎨 RENDER Carslist - Total Cars:', cars?.length);
+  console.log('🎨 RENDER Carslist - Car IDs:', cars?.map(c => c.id));
+  console.log('🎨 RENDER Carslist - Has Duplicates?', new Set(cars?.map(c => c.id)).size !== cars?.length);
+  return cars;
 });
 
 function handleViewCar(car) {
@@ -144,13 +154,15 @@ function handleSearch(payload) {
   router.push({ name: "CarBooking", query: queryParams });
 }
 
-function handlePageChange(page) {
+async function handlePageChange(page) {
   currentPage.value = page;
+  await fetchCarsData(page);
   window.scrollTo({ top: 400, behavior: 'smooth' });
 }
 
-function resetFilters() {
+async function resetFilters() {
   currentPage.value = 1;
+  await fetchCarsData(1);
 }
 
 onUnmounted(() => {

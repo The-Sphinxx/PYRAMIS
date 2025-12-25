@@ -193,10 +193,12 @@ import Rating from '@/components/Common/Rating.vue';
 import ReviewsCarousel from '@/components/Common/ReviewsCarousel.vue';
 import BookingForm from '@/components/Common/BookingForm.vue';
 import { useBookingStore } from '@/stores/bookingStore';
+import { useCarsStore } from '@/stores/carsStore';
 
 const route = useRoute();
 const router = useRouter();
 const bookingStore = useBookingStore();
+const carStore = useCarsStore();
 
 // State
 const loading = ref(true);
@@ -252,14 +254,29 @@ const fetchCar = async () => {
   loading.value = true;
   error.value = null;
   try {
-    const response = await fetch('/db.json'); 
-    if (!response.ok) throw new Error('Failed to load data');
-    const data = await response.json();
-    allCars.value = data.cars || [];
     const carId = route.params.id;
-    const foundCar = allCars.value.find(c => c.id == carId); 
-    if (foundCar) car.value = foundCar;
-    else error.value = 'Car not found';
+    
+    // Fetch car by ID from API
+    await carStore.fetchCarById(carId);
+    car.value = carStore.selectedCar;
+    
+    if (!car.value) {
+      error.value = 'Car not found';
+    } else {
+      // Fetch all cars for suggestions if not already loaded
+      if (carStore.cars.length === 0) {
+        await carStore.fetchCars();
+      }
+      allCars.value = carStore.cars;
+      
+      // Update reviews from car data if available
+      if (car.value.reviewSummary) {
+        overallReviews.value = car.value.reviewSummary;
+      }
+      if (car.value.userReviews && car.value.userReviews.length > 0) {
+        carReviews.value = car.value.userReviews;
+      }
+    }
   } catch (err) {
     error.value = err.message || 'Failed to load car';
     console.error('Error loading car:', err);
