@@ -2,6 +2,14 @@
   <div class="w-full max-w-[570px] bg-base-100 border border-base-300/50 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 rounded-2xl overflow-hidden font-sans group">
     <!-- Hotel Image -->
     <div class="relative h-[200px] overflow-hidden">
+      <button
+        class="btn btn-circle btn-sm absolute right-3 top-3 z-10 bg-base-100/80"
+        :class="{ 'text-error': isWishlisted }"
+        @click.stop="toggleWishlist"
+        title="Save to wishlist"
+      >
+        <i :class="isWishlisted ? 'fas fa-bookmark' : 'far fa-bookmark'"></i>
+      </button>
       <img 
         :src="hotel.image" 
         :alt="hotel.name" 
@@ -103,6 +111,10 @@
 </template>
 
 <script>
+import { computed } from 'vue';
+import { useAuthStore } from '@/stores/authStore';
+import { useWishlistStore } from '@/stores/wishlistStore';
+
 export default {
   name: 'HotelCard',
   props: {
@@ -120,14 +132,44 @@ export default {
       })
     }
   },
-  data() {
-    return {
-      componentId: Math.random().toString(36).substr(2, 9)
+  setup(props) {
+    const authStore = useAuthStore();
+    const wishlistStore = useWishlistStore();
+
+    const isWishlisted = computed(() => wishlistStore.isWishlisted('Hotel', props.hotel?.id));
+    const isSaving = computed(() => wishlistStore.isLoading);
+
+    const toggleWishlist = async () => {
+      if (isSaving.value) return;
+      if (!authStore.user?.id) {
+        // Future: redirect to login or show toast
+        return;
+      }
+
+      try {
+        const payload = {
+          itemId: props.hotel.id,
+          itemType: 'Hotel',
+          title: props.hotel.name,
+          imageUrl: props.hotel.image,
+          location: props.hotel.location || '',
+          rating: props.hotel.rating || null
+        };
+
+        if (isWishlisted.value) {
+          await wishlistStore.removeFromWishlist('Hotel', props.hotel.id);
+        } else {
+          await wishlistStore.addToWishlist(payload);
+        }
+      } catch (error) {
+        console.error('Wishlist toggle error:', error);
+      }
     };
-  },
-  mounted() {
-    console.log('🎴 HotelCard MOUNTED - ComponentID:', this.componentId, 'HotelID:', this.hotel?.id, 'Name:', this.hotel?.name);
-    console.trace('HotelCard mount stack trace');
+
+    return {
+      isWishlisted,
+      toggleWishlist
+    };
   },
   methods: {
     handleBooking() {

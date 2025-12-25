@@ -10,7 +10,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   const isAuthenticated = computed(() => !!token.value);
 
-  const setSession = (authResponse, rememberMe) => {
+  const setSession = async (authResponse, rememberMe) => {
     const shapedUser = authResponse?.role
       ? {
         id: authResponse.id,
@@ -30,18 +30,36 @@ export const useAuthStore = defineStore('auth', () => {
     // Persist tokens for refresh handling; rememberMe still controls UX choices elsewhere if needed
     localStorage.setItem('token', authResponse.token);
     localStorage.setItem('refreshToken', authResponse.refreshToken);
+
+    // Load wishlist after successful login
+    try {
+      const { useWishlistStore } = await import('./wishlistStore');
+      const wishlistStore = useWishlistStore();
+      await wishlistStore.loadWishlist();
+    } catch (error) {
+      console.error('Failed to load wishlist:', error);
+    }
   };
 
-  const clearSession = () => {
+  const clearSession = async () => {
     user.value = null;
     token.value = null;
     refreshToken.value = null;
     localStorage.removeItem('token');
     localStorage.removeItem('refreshToken');
     delete api.defaults.headers.common.Authorization;
+
+    // Clear wishlist on logout
+    try {
+      const { useWishlistStore } = await import('./wishlistStore');
+      const wishlistStore = useWishlistStore();
+      wishlistStore.clearWishlist();
+    } catch (error) {
+      console.error('Failed to clear wishlist:', error);
+    }
   };
 
-  const initAuth = () => {
+  const initAuth = async () => {
     const savedToken = localStorage.getItem('token');
     const savedRefresh = localStorage.getItem('refreshToken');
 
@@ -51,7 +69,7 @@ export const useAuthStore = defineStore('auth', () => {
       const isExpired = decoded?.exp && decoded.exp < nowSeconds;
 
       if (isExpired) {
-        clearSession();
+        await clearSession();
         return;
       }
 
@@ -59,6 +77,15 @@ export const useAuthStore = defineStore('auth', () => {
       token.value = savedToken;
       refreshToken.value = savedRefresh;
       api.defaults.headers.common.Authorization = `Bearer ${savedToken}`;
+
+      // Load wishlist after restoring session
+      try {
+        const { useWishlistStore } = await import('./wishlistStore');
+        const wishlistStore = useWishlistStore();
+        await wishlistStore.loadWishlist();
+      } catch (error) {
+        console.error('Failed to load wishlist:', error);
+      }
     }
   };
 
@@ -91,7 +118,7 @@ export const useAuthStore = defineStore('auth', () => {
   const login = async (credentials) => {
     try {
       const authResponse = await authApi.login(credentials.email, credentials.password);
-      setSession(authResponse, credentials.rememberMe);
+      await setSession(authResponse, credentials.rememberMe);
       return { success: true };
     } catch (error) {
       const message = error.response?.data?.message || 'Invalid email or password';
@@ -102,7 +129,7 @@ export const useAuthStore = defineStore('auth', () => {
   const loginWithGoogle = async (idToken) => {
     try {
       const authResponse = await authApi.googleLogin(idToken);
-      setSession(authResponse, true);
+      await setSession(authResponse, true);
       return { success: true };
     } catch (error) {
       const message = error.response?.data?.message || 'Google sign-in failed';
@@ -173,8 +200,8 @@ export const useAuthStore = defineStore('auth', () => {
   };
 
   // Logout
-  const logout = () => {
-    clearSession();
+  const logout = async () => {
+    await clearSession();
   };
 
   return {

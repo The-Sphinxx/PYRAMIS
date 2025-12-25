@@ -22,6 +22,14 @@
   >
     <!-- Image Section -->
     <div class="relative h-64 sm:h-64 overflow-hidden">
+      <button
+        class="btn btn-circle btn-sm absolute right-3 top-3 z-10 bg-base-100/80"
+        :class="{ 'text-error': isWishlisted }"
+        @click.stop="toggleWishlist"
+        title="Save to wishlist"
+      >
+        <i :class="isWishlisted ? 'fas fa-bookmark' : 'far fa-bookmark'"></i>
+      </button>
       <img 
         :src="getImage(car.images)"
         :alt="car.name"
@@ -110,20 +118,48 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+import { computed } from 'vue';
+import { useAuthStore } from '@/stores/authStore';
+import { useWishlistStore } from '@/stores/wishlistStore';
 
 const props = defineProps({
   car: Object
 });
 
-const componentId = Math.random().toString(36).substr(2, 9);
-
-onMounted(() => {
-  console.log('🎴 CarCard MOUNTED - ComponentID:', componentId, 'CarID:', props.car?.id, 'Name:', props.car?.name);
-  console.trace('CarCard mount stack trace');
-});
-
 defineEmits(['view']);
+
+const authStore = useAuthStore();
+const wishlistStore = useWishlistStore();
+
+const isWishlisted = computed(() => wishlistStore.isWishlisted('Car', props.car?.id));
+const isSaving = computed(() => wishlistStore.isLoading);
+
+const toggleWishlist = async () => {
+  if (isSaving.value) return;
+  if (!authStore.user?.id) {
+    // Future: redirect to login or show toast
+    return;
+  }
+
+  try {
+    const payload = {
+      itemId: props.car.id,
+      itemType: 'Car',
+      title: props.car.name,
+      imageUrl: getImage(props.car.images),
+      location: props.car.location || props.car.city || '',
+      rating: props.car.reviews?.overallRating || null
+    };
+
+    if (isWishlisted.value) {
+      await wishlistStore.removeFromWishlist('Car', props.car.id);
+    } else {
+      await wishlistStore.addToWishlist(payload);
+    }
+  } catch (error) {
+    console.error('Wishlist toggle error:', error);
+  }
+};
 
 const getImage = (images) => {
   if (!images) return '/images-car/placeholder.jpg';
