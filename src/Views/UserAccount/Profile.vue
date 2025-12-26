@@ -181,7 +181,8 @@ const upcomingBookings = computed(() => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   return bookings.value.filter(b => {
-      const bookingDate = new Date(b.date || b.startDate); // Adjust based on your booking validation
+      // Parse the date string from API (format: "MMM dd, yyyy")
+      const bookingDate = new Date(b.date);
       return bookingDate >= today;
   });
 });

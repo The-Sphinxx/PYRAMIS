@@ -4,13 +4,13 @@
       <!-- Image -->
       <div class="relative w-full md:w-48 h-48 md:h-auto flex-shrink-0">
         <img
-          :src="booking.image"
+          :src="booking.image || 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400'"
           :alt="booking.title"
           class="w-full h-full object-cover"
         />
         <div class="absolute top-3 right-3 badge badge-lg bg-white/90 backdrop-blur-sm gap-2">
-          <i :class="booking.type?.toLowerCase() === 'hotel' ? 'fas fa-hotel' : 'fas fa-map-marked-alt'" class="text-primary"></i>
-          <span class="font-semibold capitalize">{{ booking.type }}</span>
+          <i :class="getTypeIcon(booking.type)" class="text-primary"></i>
+          <span class="font-semibold capitalize">{{ formatType(booking.type) }}</span>
         </div>
       </div>
 
@@ -58,7 +58,21 @@ export default {
       required: true
     }
   },
-  emits: ['view-details']
+  emits: ['view-details'],
+  methods: {
+    getTypeIcon(type) {
+      const typeMap = {
+        'trip': 'fas fa-map-marked-alt',
+        'hotel': 'fas fa-hotel',
+        'car': 'fas fa-car',
+        'attraction': 'fas fa-landmark'
+      };
+      return typeMap[type?.toLowerCase()] || 'fas fa-map-marked-alt';
+    },
+    formatType(type) {
+      return type?.charAt(0).toUpperCase() + type?.slice(1).toLowerCase() || 'Booking';
+    }
+  }
 }
 </script>
 
