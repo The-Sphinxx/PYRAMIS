@@ -3,7 +3,7 @@
     <Navbar />
 
     <div class="relative w-full h-[100dvh] overflow-hidden">
-      <div class="absolute inset-0 bg-cover bg-center" :style="{ backgroundImage: `url(/public/images/ground6.png)` }">
+      <div class="absolute inset-0 bg-cover bg-center" :style="{ backgroundImage: `url(/public/images/HeroSection.png)` }">
         <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50"></div>
       </div>
       

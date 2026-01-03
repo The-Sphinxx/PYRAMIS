@@ -8,7 +8,7 @@
           :key="image"
           v-show="currentImageIndex === index"
           class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000"
-          :style="{ backgroundImage: `url(${image})` }"
+          :style="{ backgroundImage: `url(/public/images/ground6.png)` }"
         ></div>
       </transition-group>
       <!-- Overlay -->
